@@ -1,0 +1,816 @@
+---
+title: "Consequences and causal models"
+author: "Joshua Loftus"
+format:
+  revealjs:
+    theme: [default, ../../theme/st313.scss]
+    slide-number: false
+    auto-stretch: false
+    filters: [../../_build_env/strip_notes.lua]
+    fig-width: 8
+    fig-height: 4.5
+    fig-align: center
+execute:
+  echo: false
+  message: false
+  warning: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+# ---- instructor-side front matter (CONTRACT.md), nested under st313: so that Quarto
+# ---- ignores it (Quarto reserves top-level keys such as `history`); stripped from output
+st313:
+  week: 03
+  session: lecture
+  register: 1                      # the two register-2 slides in part 4 each declare it in their first line; the collision table sets both registers side by side (spine section 5 allows the glossary level)
+  segments:                        # sums to 80: 75 of material and 5 of slack; production 24 (30%)
+    # part 1, four ways to judge an action: 19
+    - {label: "plan", minutes: 1, mode: exposition}
+    - {label: "four frameworks: what each judges and its difficulty", minutes: 3, mode: exposition}
+    - {label: "pairs: which framework is each of four arguments about one decision using; which would need data", minutes: 3, mode: production}
+    - {label: "Tuskegee, the National Research Act, Belmont and Menlo; beneficence as the consequentialist clause", minutes: 2, mode: exposition}
+    - {label: "consequentialism as a comparison between actions; ms4ds 3.4", minutes: 2, mode: exposition}
+    - {label: "dark: observational studies that recommend a practice (Prasad and colleagues 2013)", minutes: 1, mode: exposition}
+    - {label: "hormone therapy 1996: the observational estimate and its causal conclusion", minutes: 1, mode: exposition}
+    - {label: "written commitment: the ratio a randomized trial would find", minutes: 2, mode: production}
+    - {label: "the trial and the emulation: four estimates", minutes: 2, mode: exposition}
+    - {label: "two explanations: confounding (the reading, Humphrey) and the comparison (Hernan)", minutes: 2, mode: exposition}
+    # part 2, causal models: 15
+    - {label: "structural causal models; fork, chain, collider", minutes: 2, mode: exposition}
+    - {label: "the reading's first program: students compute P(H = 1) and P(H = 1 | W = 1)", minutes: 3, mode: production}
+    - {label: "conditioning and intervening: do(W := 1); confounded", minutes: 2, mode: exposition,
+       introduces: [CC-10], core: CC-10, results: [R13]}
+    - {label: "the average treatment effect", minutes: 2, mode: exposition, results: [R13]}
+    - {label: "prediction and intervention: three graphs (Loftus 2024, Figure 1)", minutes: 2, mode: exposition}
+    - {label: "pairs: draw the graph for hormone use and heart disease; one graph from the room", minutes: 3, mode: production,
+       introduces: [CC-08], core: CC-08}
+    - {label: "one graph for hormone use on the screen", minutes: 1, mode: exposition}
+    # part 3, confounding and adjustment: 26
+    - {label: "a job-search course: written commitment from the totals", minutes: 2, mode: production}
+    - {label: "the rows and the graph", minutes: 2, mode: exposition,
+       introduces: [CC-09], core: CC-09}
+    - {label: "the adjustment formula on the table", minutes: 3, mode: exposition, results: [R14]}
+    - {label: "the observed comparison's weights: the extra 18 points", minutes: 1, mode: exposition}
+    - {label: "compute: referral at random", minutes: 3, mode: production}
+    - {label: "randomization deletes the arrow into X", minutes: 1, mode: exposition}
+    - {label: "the backdoor criterion; what not to adjust for", minutes: 3, mode: exposition, results: [R14]}
+    - {label: "dark: Berkeley 1973, Simpson's paradox as one figure", minutes: 2, mode: exposition}
+    - {label: "omitted-variable bias in covariances", minutes: 4, mode: exposition, results: [R15]}
+    - {label: "dark: omitted-variable bias simulated", minutes: 1, mode: exposition}
+    - {label: "unobserved confounding: two graphs, the same data", minutes: 2, mode: exposition}
+    - {label: "dark: inverse probability weighting gives the same 0.55", minutes: 2, mode: exposition, results: [R16]}
+    # part 4, two registers and close: 15
+    - {label: "the sequential-decision register declared; the consequentialist as an agent; R and U", minutes: 3, mode: exposition, register: 2}
+    - {label: "the collisions, at the level of the glossary (spine section 5 allows both registers there)", minutes: 1, mode: exposition, register: 2}
+    - {label: "transfer item, individually in writing: the graph a council's argument presupposes", minutes: 5, mode: production, item: W03-I1}
+    - {label: "one graph for the council's argument", minutes: 1, mode: exposition}
+    - {label: "lenses this week", minutes: 2, mode: exposition}
+    - {label: "the question that splits the room: hands, and one reason from each side; the task for next time on the same slide", minutes: 3, mode: production}
+    # slack: 5 (as in week 2: plan 75 in the 80)
+    - {label: "slack: questions and overrun; no next-week slide (the task is on the last slide and the class sheet)", minutes: 5, mode: exposition}
+  history: [{minutes: 2, buys: "the Tuskegee study, the National Research Act and the Belmont Report: where the applied principles came from, and why beneficence is a consequentialist clause"}]
+  complications: []
+  retrieves: [S4]
+  lenses: [C, E]
+  readings: [fairmlbook-ch5a, ms4ds-ch3-normative, wiki-consequentialism, wiki-belmont-report]
+  results: [R13, R14, R15, R16]
+  assumes: [ST102]
+  figures: []
+# ---------------------------------------------------------------------------------
+---
+
+```{r setup}
+library(ggplot2)
+library(dplyr)
+theme_set(theme_minimal(base_size = 18))
+# cividis: navy, slate, gray, khaki, gold, yellow (viridisLite::cividis(9)[c(1, 3, 5, 6, 7, 9)])
+navy <- "#00204D"; slate <- "#414D6B"; cgray <- "#7C7B78"; khaki <- "#9B9477"; gold <- "#BCAF6F"; yellow <- "#FFEA46"
+two <- c(navy, gold)               # the two groups, wherever there are two
+# charts on dark (.inverse) slides: white text on the navy background, yellow and gold for the two groups
+dark <- theme(text = element_text(color = "white"), axis.text = element_text(color = "white"),
+              legend.text = element_text(color = "white"), plot.title = element_text(color = "white"),
+              panel.grid.major = element_line(color = slate), panel.grid.minor = element_blank(),
+              plot.background = element_rect(fill = navy, color = NA),
+              panel.background = element_rect(fill = navy, color = NA),
+              legend.background = element_rect(fill = navy, color = NA),
+              legend.key = element_rect(fill = navy, color = NA))
+two_dark <- c(yellow, gold)
+
+# Causal graphs. Nodes are letters in circles, or words in boxes (boxes = TRUE).
+# Arrows are drawn last, so a slightly short estimate of a node's size cannot hide
+# an arrowhead. r is the circle radius in data units; k the width of one character
+# per unit of text size. One panel per value of `panel`.
+draw_dag <- function(nodes, edges, dashed = character(0), highlight = character(0), boxes = FALSE,
+                     text_size = 7, r = 0.36, k = 0.0165, xlim = c(-0.5, 2.5), ylim = c(-0.4, 1.4),
+                     strip_size = 18) {
+  if (!"panel" %in% names(nodes)) { nodes$panel <- ""; edges$panel <- "" }
+  nodes$hw <- if (boxes) 0.5 * k * nchar(as.character(nodes$name)) * text_size + 0.06 else r
+  nodes$hh <- if (boxes) 0.17 else r
+  e <- edges |>
+    left_join(nodes, by = c("panel", "from" = "name")) |>
+    rename(x0 = x, y0 = y, hw0 = hw, hh0 = hh) |>
+    left_join(nodes, by = c("panel", "to" = "name")) |>
+    mutate(dx = x - x0, dy = y - y0, len = sqrt(dx^2 + dy^2), ux = dx / len, uy = dy / len,
+           # distance from a node's center to the edge of its box (or circle) along the arrow
+           s0 = if (boxes) pmin(hw0 / pmax(abs(ux), 1e-9), hh0 / pmax(abs(uy), 1e-9)) else hw0,
+           s1 = if (boxes) pmin(hw / pmax(abs(ux), 1e-9), hh / pmax(abs(uy), 1e-9)) else hw,
+           xs = x0 + (s0 + 0.02) * ux, ys = y0 + (s0 + 0.02) * uy,
+           xe = x - (s1 + 0.02) * ux, ye = y - (s1 + 0.02) * uy,
+           style = ifelse(paste(from, to) %in% dashed, "dashed", "solid"),
+           col = ifelse(paste(from, to) %in% highlight, "#BCAF6F", "black"))
+  p <- ggplot()
+  p <- if (boxes) {
+    p + geom_label(data = nodes, aes(x, y, label = name), size = text_size, label.size = 0.5,
+                   label.padding = unit(0.35, "lines"))
+  } else {
+    p + geom_point(data = nodes, aes(x, y), size = 16, shape = 21, fill = "white", stroke = 0.8) +
+      geom_text(data = nodes, aes(x, y, label = name), size = text_size, parse = TRUE)
+  }
+  p + geom_segment(data = e, aes(x = xs, y = ys, xend = xe, yend = ye, linetype = style, color = col),
+                   arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+                   linewidth = ifelse(e$col == "black", 0.7, 1.5), show.legend = FALSE) +
+    scale_linetype_identity() + scale_color_identity() +
+    facet_wrap(~ panel, nrow = 1) +
+    coord_fixed(xlim = xlim, ylim = ylim) +
+    theme_void() +
+    theme(strip.text = element_text(size = strip_size), panel.spacing = unit(1.5, "lines"))
+}
+```
+
+## {.inverse}
+
+::: {.notes}
+Compress: the four parts. Plan 75 in the 80: part 1 19, part 2 15, part 3 26, part 4 15, then 5 of slack. Dark = rush or skip.
+
+Cut order: (1) weighting, (2) the simulation of omitted-variable bias, (3) Berkeley, (4) the observational studies that recommend a practice. Do not cut the transfer item or the question at the end.
+
+Pace: 0:19 structural causal models, 0:34 the job-search course, 1:00 two registers, 1:15 end.
+:::
+
+### Week 3
+
+Part 1: Four ways to judge an action
+
+Part 2: Causal models
+
+Part 3: Confounding and adjustment
+
+Part 4: Two registers
+
+# Part 1: Four ways to judge an action
+
+## Four frameworks
+
+::: {.notes}
+They read these: one line each. The consequentialist's difficulty is the one this course can help with.
+:::
+
+| | judges an action by | a difficulty |
+|:---|:---|:---|
+| Consequentialism | its effects | "predicting consequences" |
+| Deontology | whether it follows a rule or a duty | a rule kept where it leads somewhere terrible |
+| Virtue ethics | the character it expresses | virtues conflict |
+| Pragmatic ethics | norms held like hypotheses, revised by inquiry | how people judge, or how they should? |
+
+> "These approaches are not mutually exclusive or exhaustive, so we do not have to choose one of them or limit our thinking to using only these ideas."
+
+::: {.source}
+ms4ds, section 3.2.2 (the quotation) and sections 3.2.2.1 to 3.2.2.3 (the first three rows); Wikipedia, Deontology and Pragmatic ethics.
+:::
+
+## Which framework?
+
+::: {.notes}
+Pairs, two minutes, then hands for each argument. Then ask which of the four would need data to settle, and what kind of data.
+:::
+
+A hospital is deciding whether to use a model to choose which patients get a follow-up call after discharge.
+
+1. "Use it. In the pilot, readmissions fell."
+2. "Don't. Patients never agreed to their records being used this way."
+3. "A good doctor would not hand that judgment to a score."
+4. "Try it on one ward, watch what happens, and change the rules as we learn."
+
+::: {.ask}
+Which framework is each argument using? Which of them would you need data to settle?
+:::
+
+## The Belmont and Menlo principles
+
+::: {.notes}
+The history in one breath: Tuskegee, 1932 to 1972; the National Research Act, 1974; the report, 1978. Beneficence is the consequentialist clause.
+:::
+
+- 1932 to 1972: the Tuskegee study. Men with syphilis were never told they had it and were kept from treatment after penicillin was known to work.
+- 1974: the National Research Act creates a national commission for the protection of research subjects.
+- 1978: the Belmont Report. Respect for persons, beneficence, justice.
+- 2012: the Menlo Report adds respect for law and the public interest.
+
+> Beneficence, in the Menlo Report's words: "Do not harm; Maximize probable benefits and minimize probable harms; Systematically assess both risk of harm and benefit."
+
+::: {.source}
+ms4ds, section 3.3.1, which quotes the Menlo Report (2012); Wikipedia, Belmont Report.
+:::
+
+## Consequentialism
+
+::: {.notes}
+"Than any available alternative": a comparison between actions, only one of which is taken.
+:::
+
+> An act is right "if and only if the act (or in some views, the rule under which it falls) will produce, will probably produce, or is intended to produce, a greater balance of good over evil than any available alternative."
+
+::: {.source}
+Wikipedia, Consequentialism.
+:::
+
+> "Causal understanding is necessary to apply consequentialism. An observational model of the world does not tell us what consequences we can expect to result from any action which is an intervention."
+
+::: {.source}
+ms4ds, section 3.4.
+:::
+
+## Observational studies that recommend a practice {.inverse}
+
+::: {.notes}
+Compress: most observational studies that recommend a practice do not ask for a trial first.
+:::
+
+The 631 original articles in four leading medical journals in 2010 included 298 eligible observational studies.
+
+The authors recommended a medical practice in 167 (56%).
+
+Of those 167, 24 said a randomized trial should be done first.
+
+::: {.source style="color: #BCAF6F"}
+Prasad, Jorgenson, Ioannidis and Cifu (2013), *Journal of Clinical Epidemiology* 66, 361--366. The journals: *New England Journal of Medicine*, *Lancet*, *JAMA*, *Annals of Internal Medicine*.
+:::
+
+## Hormone therapy, 1996
+
+::: {.notes}
+Read the conclusion aloud: "cardioprotective effects" is a causal claim. Then everyone writes a number before the next slide.
+:::
+
+Nurses' Health Study: 59,337 women, followed for up to 16 years. Women taking estrogen with progestin after the menopause, against women not using hormones:
+
+relative risk of major coronary heart disease 0.39 (95% interval 0.19 to 0.78), adjusted for the confounders the authors measured.
+
+> "The addition of progestin does not appear to attenuate the cardioprotective effects of postmenopausal estrogen therapy."
+
+::: {.source}
+Grodstein and colleagues (1996), *New England Journal of Medicine* 335, 453--461.
+:::
+
+::: {.ask}
+A trial randomizes women to estrogen with progestin or to a placebo. Write down the ratio you expect for coronary heart disease.
+:::
+
+## Hormone therapy, 2002 and 2008
+
+::: {.notes}
+The trial was stopped for breast cancer and the overall balance of harms. About 7 more coronary cases per 10,000 person-years. Hernán and colleagues reanalyzed the same cohort the way the trial was analyzed.
+:::
+
+```{r hrt, fig.height=3.3}
+hrt <- data.frame(
+  label = c("Nurses' Health Study, 1996\nestrogen with progestin against no hormones",
+            "Women's Health Initiative trial, 2002\nassigned to treatment against placebo",
+            "Nurses' Health Study analyzed like the trial, 2008\nstarters against non-starters, first two years",
+            "the same, whole follow-up"),
+  est = c(0.39, 1.29, 1.42, 0.96), lo = c(0.19, 1.02, 0.92, 0.78), hi = c(0.78, 1.63, 2.20, 1.18),
+  design = c("observational", "randomized", "observational", "observational"))
+hrt$label <- factor(hrt$label, levels = rev(hrt$label))
+ggplot(hrt, aes(est, label, color = design)) +
+  geom_vline(xintercept = 1, linetype = "dashed", color = cgray) +
+  geom_linerange(aes(xmin = lo, xmax = hi), linewidth = 1.2) +
+  geom_point(size = 4) +
+  scale_color_manual(values = c(observational = gold, randomized = navy)) +
+  scale_x_log10(breaks = c(0.2, 0.5, 1, 2), limits = c(0.18, 2.4)) +
+  labs(x = "relative risk or hazard ratio (log scale)", y = NULL, color = NULL) +
+  theme(legend.position = "top", axis.text.y = element_text(size = 12))
+```
+
+> Estrogen with progestin "should not be initiated or continued for primary prevention of CHD."
+
+::: {.source}
+Writing Group for the Women's Health Initiative Investigators (2002), *JAMA* 288, 321--333. Hernán and colleagues (2008), *Epidemiology* 19, 766--779.
+:::
+
+## Two explanations
+
+::: {.notes}
+Both can be true. The reading uses this case as its example of confounding. Hernán: same cohort, a different comparison.
+:::
+
+Confounding:
+
+> "a suspected beneficial effect of hormone replacement therapy in reducing cardiovascular disease disappeared after identifying socioeconomic status as a confounding variable."
+
+::: {.source}
+fairmlbook, chapter 5, citing Humphrey, Chan and Sox (2002): in studies adjusted for socioeconomic status and the major coronary risk factors, relative risk 1.07 (credible interval 0.79 to 1.48).
+:::
+
+The comparison: starters against non-starters, followed from the same point, gave estimates "similar to those from the Women's Health Initiative."
+
+::: {.source}
+Hernán and colleagues (2008).
+:::
+
+::: {.leave}
+Which comparison gets reported? Women who took hormones against women who did not, or starters against non-starters.
+:::
+
+# Part 2: Causal models
+
+## Structural causal models
+
+::: {.notes}
+The reading's definition. Three shapes; a common cause is the usual source of confounding.
+:::
+
+> "a sequence of assignments for generating a joint distribution starting from independent noise variables."
+
+```{r three_shapes, fig.height=2.6}
+shapes <- c("fork", "chain", "collider")
+nodes <- data.frame(panel = rep(shapes, each = 3),
+                    name = c("Z", "X", "Y", "M", "X", "Y", "C", "X", "Y"),
+                    x = rep(c(1, 0, 2), 3), y = rep(c(1, 0, 0), 3))
+edges <- data.frame(panel = rep(shapes, each = 2),
+                    from = c("Z", "Z", "X", "M", "X", "Y"),
+                    to = c("X", "Y", "M", "Y", "C", "C"))
+nodes$panel <- factor(nodes$panel, levels = shapes); edges$panel <- factor(edges$panel, levels = shapes)
+draw_dag(nodes, edges)
+```
+
+$Z$ a common cause, $M$ a mediator, $C$ a common effect.
+
+::: {.source}
+fairmlbook, chapter 5, "Causal models" and "Causal graphs."
+:::
+
+## The reading's first program
+
+::: {.notes}
+Alone, then compare with a neighbor. Both numbers from the room before the next slide.
+:::
+
+$U_1 \sim B(1/2)$, $\;U_2, U_3 \sim B(1/3)$, independent; $B(q)$ is 1 with probability $q$.
+
+1. $X := U_1$ $\quad$ (exercise)
+2. $W :=$ if $X = 1$ then $0$ else $U_2$ $\quad$ (overweight)
+3. $H :=$ if $X = 1$ then $0$ else $U_3$ $\quad$ (heart disease)
+
+::: {.ask}
+Compute $P(H = 1)$ and $P(H = 1 \mid W = 1)$.
+:::
+
+::: {.source}
+fairmlbook, chapter 5, "A first example."
+:::
+
+## Conditioning and intervening
+
+::: {.notes}
+Overweight people have twice the population's rate. Replacing the line for W changes nothing for H. Definition of confounded from the reading.
+:::
+
+$P(H = 1) = \tfrac12 \cdot \tfrac13 = \tfrac16$, $\qquad P(H = 1 \mid W = 1) = \tfrac13$.
+
+Replace line 2 by $W := 1$ and keep the others: $\quad P(H = 1 \mid do(W := 1)) = \tfrac16$.
+
+> "The substitution $W := 1$ does not correspond to a conditioning on $W = 1$. One is an action, albeit inconsequential in this case. The other is an observation from which we can draw inferences."
+
+$X$ and $Y$ are **confounded** when $P(Y = y \mid do(X := x)) \ne P(Y = y \mid X = x)$.
+
+::: {.source}
+fairmlbook, chapter 5, "A first example" and "Confounding."
+:::
+
+## The average treatment effect
+
+::: {.notes}
+A population quantity. "This policy causes better outcomes" is a claim about something like it.
+:::
+
+$$
+\text{ATE} = E[Y \mid do(X := 1)] - E[Y \mid do(X := 0)]
+$$
+
+> "Causal effects are population quantities. They refer to effects averaged over the whole population. Often the effect of treatment varies greatly from one individual or group of individuals to another."
+
+The observed difference $E[Y \mid X = 1] - E[Y \mid X = 0]$ compares the people who happened to be treated with the people who were not.
+
+::: {.source}
+fairmlbook, chapter 5, "Causal effects."
+:::
+
+## Prediction and intervention
+
+::: {.notes}
+A model predicting Y from X can be equally accurate under all three. Acting on X changes Y only in the first.
+:::
+
+```{r three_dags, fig.height=2.9}
+pics <- c("X causes Y", "Y causes X", "Z causes both")
+nodes <- data.frame(panel = c(pics[1], pics[1], pics[2], pics[2], pics[3], pics[3], pics[3]),
+                    name = c("X", "Y", "X", "Y", "Z", "X", "Y"),
+                    x = c(0, 2, 0, 2, 1, 0, 2), y = c(0, 0, 0, 0, 1, 0, 0))
+edges <- data.frame(panel = c(pics[1], pics[2], pics[3], pics[3]),
+                    from = c("X", "Y", "Z", "Z"), to = c("Y", "X", "X", "Y"))
+nodes$panel <- factor(nodes$panel, levels = pics); edges$panel <- factor(edges$panel, levels = pics)
+draw_dag(nodes, edges)
+```
+
+> "If we expect a model to also tell us what happens when we intervene on variables, then these models with equal predictive accuracy are no longer equivalent. We become responsible to choose one of them."
+
+::: {.source}
+After Figure 1 of Loftus (2024), "Position: The Causal Revolution Needs Scientific Pragmatism," ICML.
+:::
+
+## Draw the graph
+
+::: {.notes}
+Pairs, two minutes. Take one graph from the room before the next slide. Ask which arrow "cardioprotective" needs.
+:::
+
+::: {.ask}
+Use hormone use, heart disease, socioeconomic status and age. Draw the graph the 1996 conclusion needs, then add arrows that would make women taking hormones look healthier even if the hormones did nothing.
+:::
+
+## Hormone therapy: one graph
+
+::: {.notes}
+One answer among several. The arrows from socioeconomic status and age into both hormone use and heart disease are what make users look healthier.
+:::
+
+```{r hrt_dag, fig.height=2.6}
+draw_dag(data.frame(name = c("socioeconomic status", "age", "hormone use", "heart disease"),
+                    x = c(0, 2.7, 0, 2.7), y = c(1, 1, 0, 0)),
+         data.frame(from = c("socioeconomic status", "socioeconomic status", "age", "age", "hormone use"),
+                    to = c("hormone use", "heart disease", "hormone use", "heart disease", "heart disease")),
+         highlight = "hormone use heart disease", boxes = TRUE, text_size = 6, k = 0.021,
+         xlim = c(-1.2, 3.9), ylim = c(-0.25, 1.25))
+```
+
+The gold arrow is the claim that the hormones protect the heart. The four black arrows can produce a difference between users and non-users without it.
+
+# Part 3: Confounding and adjustment
+
+## A job-search course
+
+::: {.notes}
+Everyone writes a number before the next slide. A press release would say 28 points.
+:::
+
+A job center refers some of the 1,000 people registered with it to a job-search course. Six months later:
+
+| | attended | did not attend |
+|:---|:---|:---|
+| 1,000 people | 500, of whom 320 in work (64%) | 500, of whom 180 in work (36%) |
+
+::: {.ask}
+How much does the course raise the chance of being in work? Write down a number.
+:::
+
+## The rows
+
+::: {.notes}
+The center refers people who worked last year more readily: 80% against 20%. Within each row, 10 points.
+:::
+
+:::: {.columns}
+::: {.column width="68%"}
+::: {.small}
+| | attended ($X = 1$) | did not ($X = 0$) |
+|:---|:---|:---|
+| worked last year ($Z = 1$), 500 | 400, of whom 280 in work (70%) | 100, of whom 60 (60%) |
+| did not ($Z = 0$), 500 | 100, of whom 40 in work (40%) | 400, of whom 120 (30%) |
+| total, 1,000 | 500, of whom 320 in work (64%) | 500, of whom 180 (36%) |
+:::
+:::
+::: {.column width="32%"}
+```{r course_dag, fig.width=3.2, fig.height=2.6}
+draw_dag(data.frame(name = c("Z", "X", "Y"), x = c(1, 0, 2), y = c(1, 0, 0)),
+         data.frame(from = c("Z", "Z", "X"), to = c("X", "Y", "Y")), r = 0.26)
+```
+:::
+::::
+
+$Z$ = worked last year, $X$ = attended the course, $Y$ = in work six months later.
+
+## The adjustment formula
+
+::: {.notes}
+Intervening deletes the arrow from Z to X; Z keeps its distribution. Ten points.
+:::
+
+$Z$ worked last year, $X$ attended, $Y$ in work. $do(X := 1)$ deletes the arrow $Z \to X$, and $Z$ keeps its distribution:
+
+$$
+\begin{aligned}
+E[Y \mid do(X := 1)] &= \sum_z E[Y \mid X = 1, Z = z]\,P(Z = z) \\
+&= 0.7 \times 0.5 + 0.4 \times 0.5 = 0.55 \\
+E[Y \mid do(X := 0)] &= 0.6 \times 0.5 + 0.3 \times 0.5 = 0.45
+\end{aligned}
+$$
+
+The average treatment effect is $0.10$.
+
+::: {.leave}
+$P(Y = y \mid do(X := x)) = \sum_z P(Y = y \mid X = x, Z = z)\,P(Z = z)$ when $Z$ satisfies the backdoor criterion (later in the lecture), and every value of $Z$ includes people with $X = x$.
+:::
+
+## The observed comparison
+
+::: {.notes}
+The same rows, weighted by who attended. The extra 18 points: the referral sends people who would more often find work anyway.
+:::
+
+$Z$ worked last year, $X$ attended, $Y$ in work. Each row is weighted by its share of attenders, or of non-attenders:
+
+$$
+\begin{aligned}
+P(Y = 1 \mid X = 1) &= \frac{0.7 \times 400 + 0.4 \times 100}{500} = 0.64 \\
+P(Y = 1 \mid X = 0) &= \frac{0.6 \times 100 + 0.3 \times 400}{500} = 0.36
+\end{aligned}
+$$
+
+Attenders come mostly from the $Z = 1$ row, where more people find work whether or not they attend.
+
+## Referral at random
+
+::: {.notes}
+Alone, two minutes. The answer is on the next slide.
+:::
+
+Same people, same rows. The center now refers half of each row, chosen at random.
+
+::: {.ask}
+Compute the share in work among those who attended, and among those who did not. Compare the difference with the average treatment effect.
+:::
+
+## Randomization
+
+::: {.notes}
+Randomizing deletes the arrow into X in the world, including arrows from variables nobody measured.
+:::
+
+Half of each row attends, chosen at random:
+
+$$
+\begin{aligned}
+P(Y = 1 \mid X = 1) &= 0.5 \times 0.7 + 0.5 \times 0.4 = 0.55 \\
+P(Y = 1 \mid X = 0) &= 0.5 \times 0.6 + 0.5 \times 0.3 = 0.45
+\end{aligned}
+$$
+
+The observed difference is the effect.
+
+> "The goal of a randomized controlled trial is to break natural inclination."
+
+::: {.source}
+fairmlbook, chapter 5, "Randomization."
+:::
+
+## The backdoor criterion
+
+::: {.notes}
+Pearl's two conditions; the reading cites him. Blocking is defined here for forks and chains; the reading says how colliders behave. The mediator is the first condition's case.
+:::
+
+A backdoor path from $X$ to $Y$ starts with an arrow into $X$: here, $X \leftarrow Z \to Y$.
+
+$Z$ satisfies the **backdoor criterion** if
+
+1. no variable in $Z$ is a descendant of $X$, and
+2. $Z$ blocks every backdoor path from $X$ to $Y$.
+
+A path through a fork or a chain is blocked by conditioning on the variable in the middle.
+
+> Controlling for a mediator "will eliminate some of the causal influence of $X$ on $Y$."
+
+::: {.source}
+The criterion: Pearl (2009), *Causality*, as cited in fairmlbook, chapter 5. The quotation: fairmlbook, chapter 5, "Confounding."
+:::
+
+## Berkeley, 1973 {.inverse}
+
+::: {.notes}
+Compress: overall, men were admitted more often; in four of the six largest departments, women were. The overall rates weight departments by who applied. Which comparison answers which question depends on the graph.
+:::
+
+```{r berkeley, fig.height=2.6}
+ucb <- as.data.frame(UCBAdmissions) |>
+  group_by(Dept, Gender) |>
+  summarize(applied = sum(Freq), admitted = sum(Freq[Admit == "Admitted"]), .groups = "drop") |>
+  mutate(rate = admitted / applied, Dept = as.character(Dept))
+overall <- as.data.frame(UCBAdmissions) |>
+  group_by(Gender) |>
+  summarize(applied = sum(Freq), admitted = sum(Freq[Admit == "Admitted"]), .groups = "drop") |>
+  mutate(rate = admitted / applied, Dept = "all six")
+bind_rows(ucb, overall) |>
+  mutate(Dept = factor(Dept, levels = c("all six", LETTERS[1:6]))) |>
+  ggplot(aes(Dept, rate, color = Gender, size = applied)) +
+  geom_point() +
+  scale_color_manual(values = two_dark, labels = c("men", "women")) +
+  scale_size_area(max_size = 12, guide = "none") +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 0.9)) +
+  labs(x = "department", y = "admitted", color = NULL) +
+  dark + theme(legend.position = "top")
+```
+
+With $d$ running over the six departments,
+
+$$
+P(\text{admit} \mid \text{woman}) = \sum_d P(d \mid \text{woman})\,P(\text{admit} \mid d, \text{woman})
+$$
+
+::: {.source style="color: #BCAF6F"}
+R's `UCBAdmissions`, from Bickel, Hammel and O'Connell (1975), *Science* 187. Point size: applicants. The reading's Table 5.1 has 520 men and 60% admitted in department B, where R has 560 and 63%.
+:::
+
+## Omitted-variable bias
+
+::: {.notes}
+The course graph with straight lines. The slope's limit is not beta; more data, the same wrong answer.
+:::
+
+$Z := U_Z$, $\;X := \alpha Z + U_X$, $\;Y := \beta X + \gamma Z + U_Y$, with independent mean-zero noise. Then $E[Y \mid do(X := x)] = \beta x$, and the slope of $Y$ on $X$ alone is
+
+$$
+\begin{aligned}
+\frac{\operatorname{Cov}(X, Y)}{\operatorname{Var}(X)} &= \frac{\beta \operatorname{Var}(X) + \gamma \operatorname{Cov}(X, Z)}{\operatorname{Var}(X)} \\
+&= \beta + \gamma\alpha\,\frac{\operatorname{Var}(Z)}{\alpha^2\operatorname{Var}(Z) + \operatorname{Var}(U_X)}
+\end{aligned}
+$$
+
+With $\alpha = \gamma = 1$, $\beta = 0.5$ and unit variances, the slope is $1.0$ and the effect $0.5$.
+
+::: {.leave}
+A bias: as $n$ grows the slope converges to the wrong number.
+:::
+
+## Omitted-variable bias, simulated {.inverse}
+
+::: {.notes}
+Skip if behind. 200 samples at each size: the spread shrinks around 1.0 for Y on X alone, around 0.5 with Z.
+:::
+
+```{r ovb_sizes, fig.height=3.9}
+set.seed(3)
+one_sample <- function(n) {
+  Z <- rnorm(n); X <- Z + rnorm(n); Y <- 0.5 * X + Z + rnorm(n)
+  c(alone = unname(coef(lm(Y ~ X))[2]), with_Z = unname(coef(lm(Y ~ X + Z))[2]))
+}
+sizes <- c(50, 200, 1000, 5000)
+sims <- do.call(rbind, lapply(sizes, function(n) {
+  est <- t(replicate(200, one_sample(n)))
+  data.frame(n = n, fit = rep(c("Y on X alone", "Y on X and Z"), each = 200), slope = c(est[, 1], est[, 2]))
+}))
+ggplot(sims, aes(factor(n), slope, color = fit)) +
+  geom_hline(yintercept = c(0.5, 1), linetype = "dotted", color = "white") +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.4, size = 1.2) +
+  scale_color_manual(values = two_dark, name = NULL) +
+  guides(color = guide_legend(override.aes = list(size = 5, alpha = 1))) +
+  labs(x = "sample size", y = "coefficient on X") +
+  dark + theme(legend.position = "top")
+```
+
+::: {.source style="color: #BCAF6F"}
+$\alpha = \gamma = 1$, $\beta = 0.5$, unit variances. The code is in the notes.
+:::
+
+## Unobserved confounding
+
+::: {.notes}
+My graph against a colleague's. Same data, both fit. The choice of adjustment set is a claim about the world.
+:::
+
+:::: {.columns}
+::: {.column width="40%"}
+```{r unobs_dag, fig.width=3.6, fig.height=3}
+draw_dag(data.frame(name = c("Z", "U", "X", "Y"), x = c(0.4, 1.6, 0, 2), y = c(1.1, 1.1, 0, 0)),
+         data.frame(from = c("Z", "Z", "U", "U", "X"), to = c("X", "Y", "X", "Y", "Y")),
+         dashed = c("U X", "U Y"), r = 0.26)
+```
+:::
+::: {.column width="60%"}
+$U$: something unmeasured, such as motivation, that pushes people onto the course and into work.
+
+Under the graph without $U$, adjusting for $Z$ gives the effect. Under this one, the back door through $U$ stays open, and the 10 points probably overstates the effect.
+
+The data on $X$, $Y$ and $Z$ fit both graphs.
+:::
+::::
+
+## Weighting {.inverse}
+
+::: {.notes}
+Compress: weighting each attender by one over their chance of being referred gives the same 0.55; the derivation is in the notes.
+:::
+
+$e(Z) = P(X = 1 \mid Z)$: here $e(1) = 0.8$, $e(0) = 0.2$. If $Z$ satisfies the backdoor criterion,
+
+$$
+E\!\left[\frac{XY}{e(Z)}\right] = E\big[E[Y \mid X = 1, Z]\big] = E[Y \mid do(X := 1)]
+$$
+
+$$
+0.5 \times 0.8 \times \frac{0.7}{0.8} + 0.5 \times 0.2 \times \frac{0.4}{0.2} = 0.35 + 0.20 = 0.55
+$$
+
+An attender from the $Z = 0$ row counts for $1/0.2 = 5$ people. The price is variance.
+
+# Part 4: Two registers
+
+## The sequential-decision register
+
+::: {.notes}
+Declared in the first line. The consequentialist as an agent; R is what the agent can see, U what we care about.
+:::
+
+**Notation:** this slide uses the sequential-decision register: $S$ state, $A$ action, $R$ reward, $\pi$ policy, $U$ utility.
+
+An agent observes a state $S$ and takes an action $A = \pi(S)$, then receives a reward $R$.
+
+A consequentialist: of the available policies, choose one with the largest expected utility, $E_\pi[U]$.
+
+$E_\pi$ is an expectation when the actions are set by $\pi$. That is a causal quantity.
+
+An agent that learns a policy is given $R$ and learns to make $R$ large. $R$ is not $U$.
+
+## Collisions
+
+::: {.notes}
+Taught once. Two rules: declare in one line at the top; never mix inside one diagram or derivation.
+:::
+
+**Notation:** the prediction register and the sequential-decision register, side by side.
+
+| | prediction register | sequential-decision register |
+|:---|:---|:---|
+| $A$ | sensitive attribute: something a person *is* | action: something an agent *does* |
+| $R$ | risk score; the prediction is $\hat Y = 1\{R \ge t\}$ at threshold $t$ | reward |
+| $U$ | unobserved variable | utility |
+| $S$, $\pi$ | not used | state, policy |
+
+1. Material that uses the decision register says so in one line at the top.
+2. The two are never mixed inside one diagram or derivation.
+
+## An argument in prose
+
+::: {.notes}
+Alone, in writing, four minutes. Collect two or three graphs before the next slide.
+:::
+
+A council says:
+
+> "Pupils who go to their school's breakfast club have better attendance and better exam results. We will fund a breakfast club in each of our schools, because breakfast clubs improve results."
+
+::: {.ask}
+1. Draw the causal graph the argument presupposes. Mark the action.
+2. Add one variable that would make the observed difference larger than the effect, with its arrows.
+3. What comparison would support the council's claim?
+:::
+
+## One graph
+
+::: {.notes}
+One answer among several. The action is funding, which changes whether a club exists, not who goes.
+:::
+
+```{r club_dag, fig.height=3.2}
+draw_dag(data.frame(name = c("funding", "goes to the club", "attendance", "exam results", "family circumstances"),
+                    x = c(-0.9, 0.5, 1.45, 2.45, 1.45), y = c(0.6, 0.6, -0.05, 0.6, 1.3)),
+         data.frame(from = c("funding", "goes to the club", "goes to the club", "attendance",
+                             "family circumstances", "family circumstances"),
+                    to = c("goes to the club", "attendance", "exam results", "exam results",
+                           "goes to the club", "exam results")),
+         boxes = TRUE, text_size = 5.5, xlim = c(-1.5, 3.2), ylim = c(-0.3, 1.55))
+```
+
+The council observed pupils who go against pupils who don't. Its action changes which schools have a club.
+
+## Lenses this week
+
+::: {.notes}
+Each lens, what it referred to this week. Then the question on the next slide.
+:::
+
+- **Which comparison gets reported?** Attenders against non-attenders, overall or within rows. Women who took hormones against women who did not, or starters against non-starters. $P(Y \mid X = 1)$ against $P(Y \mid X = 0)$, or $P(Y \mid do(X := 1))$ against $P(Y \mid do(X := 0))$.
+- **You have to choose, so choose, and defend it.** The adjustment set follows from a graph you drew. The backdoor criterion says which sets are valid given the graph; it does not draw the graph. "Pretending it was forced is its own failure."
+
+...and why?
+
+##
+
+::: {.notes}
+Hands for "more" and for "less", then one reason from each side. No house answer. The task below is also on the class sheet.
+:::
+
+::: {.ask}
+Does consequentialism become more or less defensible once you have to write the causal model down?
+:::
+
+For next time: bring one score or algorithm used to make decisions about people, with what it measures and what it stands in for.

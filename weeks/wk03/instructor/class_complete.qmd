@@ -1,0 +1,681 @@
+---
+title: "Consequences and causal models"
+subtitle: "Class"
+author: "Joshua Loftus"
+format:
+  html:
+    toc: true
+execute:
+  message: false
+  warning: false
+# ---- instructor-side front matter (CONTRACT.md), nested under st313: so that Quarto
+# ---- ignores it (Quarto reserves top-level keys such as `history`); stripped from output
+st313:
+  week: 03
+  session: class
+  register: 1                      # optional problem 6 declares register 2 for its part (b) only
+  segments:                        # sums to 80: 75 of material and 5 of slack; production 64 (80%); discussion 35
+    - {label: "discussion 1: the arguments brought from the news; the graph each needs and a rival graph; every group's two graphs on the screen", minutes: 14, mode: production,
+       core: CC-08}
+    - {label: "the recall question on the adjustment formula, from memory; problem 1: conditioning and intervening, by hand", minutes: 8, mode: production,
+       core: CC-10, results: [R13]}
+    - {label: "feedback on problem 1", minutes: 3, mode: exposition}
+    - {label: "problem 2: adjusting for a confounder in a 2x2x2 table, effects that differ between rows, by hand", minutes: 9, mode: production,
+       core: CC-09, results: [R14]}
+    - {label: "feedback on problem 2", minutes: 3, mode: exposition}
+    - {label: "discussion 2: can 'correlation is not causation' be misused (2024 prompt)", minutes: 6, mode: production}
+    - {label: "simulation in R, starter code supplied: naive, adjusted and interventional differences; a new referral policy", minutes: 10, mode: production,
+       results: [R13, R14]}
+    - {label: "feedback on the simulation", minutes: 3, mode: exposition}
+    - {label: "discussion 3: causality and reproducibility (2024 prompt)", minutes: 7, mode: production}
+    - {label: "discussion 4: does consequentialism become more or less defensible once you write the causal model down", minutes: 8, mode: production}
+    - {label: "close: one written sentence on conditioning and intervening", minutes: 2, mode: production}
+    - {label: "prep task for next class", minutes: 2, mode: exposition}
+    # slack: 5 (as in week 2: plan 75 in the 80)
+    - {label: "slack: overrun", minutes: 5, mode: exposition}
+  history: []
+  complications: []
+  retrieves: [S4]
+  lenses: [C, E]
+  readings: [fairmlbook-ch5a, ms4ds-ch3-normative]
+  results: [R13, R14, R15, R16]
+  assumes: [ST102]
+  solutions: complete             # this file carries answers; the student file is generated
+# ---------------------------------------------------------------------------------
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+theme_set(theme_minimal())
+set.seed(313)
+
+# Causal graphs: letters in circles, one panel per value of `panel`.
+draw_dag <- function(nodes, edges, r = 0.22, xlim = c(-0.5, 2.5), ylim = c(-0.4, 1.4)) {
+  if (!"panel" %in% names(nodes)) { nodes$panel <- ""; edges$panel <- "" }
+  e <- edges |>
+    left_join(nodes, by = c("panel", "from" = "name")) |> rename(x0 = x, y0 = y) |>
+    left_join(nodes, by = c("panel", "to" = "name")) |>
+    mutate(len = sqrt((x - x0)^2 + (y - y0)^2), ux = (x - x0) / len, uy = (y - y0) / len,
+           xs = x0 + (r + 0.02) * ux, ys = y0 + (r + 0.02) * uy,
+           xe = x - (r + 0.02) * ux, ye = y - (r + 0.02) * uy)
+  ggplot() +
+    geom_point(data = nodes, aes(x, y), size = 10, shape = 21, fill = "white") +
+    geom_text(data = nodes, aes(x, y, label = name), size = 4.5) +
+    geom_segment(data = e, aes(x = xs, y = ys, xend = xe, yend = ye),
+                 arrow = arrow(length = unit(0.18, "cm"), type = "closed"), linewidth = 0.5) +
+    facet_wrap(~ panel, nrow = 1) +
+    coord_fixed(xlim = xlim, ylim = ylim) +
+    theme_void()
+}
+```
+
+## In class
+
+1. A discussion of the arguments you brought.
+2. Problem 1, by hand.
+3. Problem 2, by hand, then a discussion.
+4. One simulation in R, then a discussion.
+5. One more discussion.
+
+Discussions are in groups of three or four, then with the room. Each
+problem, and the simulation, is gone through as soon as the room has
+tried it. Everything under "Optional, can be done at home" is practice
+for afterward.
+
+## Discussion 1: the arguments you brought
+
+Put your arguments side by side and choose one.
+
+1. What is the action, and which outcome does the argument count?
+2. Draw the causal graph the argument needs, with an arrow for each
+   cause-and-effect claim you listed. Mark the action.
+3. Draw a second graph that fits the same evidence and under which the
+   action does nothing.
+4. How could the analysis go wrong if the first graph is wrong? What
+   would the consequences of the wrong conclusion be, and for whom?
+
+Each group's two graphs go on the screen.
+
+::: {.callout-note .answer title="Rival graphs" collapse="true"}
+Most arguments have a rival graph of one of two kinds: a common cause
+of the action and the outcome, or an arrow that points the other way.
+A rival graph does not show that your argument is wrong. It shows what
+evidence would tell the two graphs apart, which is usually a comparison
+in which the action was not chosen by the people, or the places, that
+also determine the outcome.
+:::
+
+## Problems
+
+Before you start, from memory: what does the adjustment formula
+average, and with what weights?
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+It averages the outcome among people with $X = x$ within each value of
+$Z$, with weights $P(Z = z)$: how common each value of $Z$ is in the
+whole population, not among the people with $X = x$.
+:::
+
+### 1. Conditioning and intervening
+
+A program in the style of the reading's. $U_1, \dots, U_5$ are
+independent, with $U_1 \sim B(0.5)$, $U_2 \sim B(0.6)$,
+$U_3 \sim B(0.2)$, $U_4 \sim B(0.4)$ and $U_5 \sim B(0.1)$, where
+$B(0.6)$ is 1 with probability 0.6 and 0 otherwise.
+
+1. $X := U_1$ (exercise)
+2. $W :=$ if $X = 1$ then $U_3$ else $U_2$ (overweight)
+3. $H :=$ if $X = 1$ then $U_5$ else $U_4$ (heart disease)
+
+(a) Draw the graph.
+
+(b) Compute $P(W = 1)$ and $P(X = 0 \mid W = 1)$.
+
+(c) Compute $P(H = 1)$, $P(H = 1 \mid W = 1)$ and $P(H = 1 \mid W = 0)$.
+
+(d) A program changes everyone's weight to normal: $W := 0$. Compute
+$P(H = 1 \mid do(W := 0))$. What does the program do to heart disease?
+
+(e) Compute the average treatment effect of exercise on heart disease,
+and compare it with $P(H = 1 \mid X = 1) - P(H = 1 \mid X = 0)$. Are
+they equal? Why?
+
+::: {.callout-tip .answer collapse="true" title="Hint 1"}
+For (b), use Bayes' rule: $P(X = 0 \mid W = 1) = P(W = 1 \mid X = 0)\,P(X = 0)/P(W = 1)$.
+:::
+
+::: {.callout-tip .answer collapse="true" title="Hint 2"}
+For (c), condition on $X$ first. Given $X$, $W$ and $H$ come from different coins, so they are independent.
+:::
+
+::: {.callout-tip .answer collapse="true" title="Hint 3"}
+For (d), replace line 2 by $W := 0$ and keep the other two lines. Which variables does $H$ depend on now?
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $W \leftarrow X \to H$, a fork.
+
+(b) $P(W = 1) = 0.5 \times 0.2 + 0.5 \times 0.6 = 0.4$, and
+$P(X = 0 \mid W = 1) = 0.5 \times 0.6 / 0.4 = 0.75$.
+
+(c) $P(H = 1) = 0.5 \times 0.1 + 0.5 \times 0.4 = 0.25$. Given $X$, $H$
+does not depend on $W$, so
+$P(H = 1 \mid W = 1) = 0.75 \times 0.4 + 0.25 \times 0.1 = 0.325$.
+For $W = 0$: $P(W = 0) = 0.6$ and
+$P(X = 0 \mid W = 0) = 0.5 \times 0.4/0.6 = 1/3$, so
+$P(H = 1 \mid W = 0) = \tfrac13 \times 0.4 + \tfrac23 \times 0.1 = 0.2$.
+Overweight people have heart disease at 0.325, the others at 0.2.
+
+(d) The line for $H$ is unchanged and $X$ keeps its distribution, so
+$P(H = 1 \mid do(W := 0)) = P(H = 1) = 0.25$, and the same for
+$do(W := 1)$. The weight program does nothing to heart disease, although
+overweight people had 12.5 points more of it.
+
+(e) $E[H \mid do(X := 1)] - E[H \mid do(X := 0)] = 0.1 - 0.4 = -0.3$,
+and $P(H = 1 \mid X = 1) - P(H = 1 \mid X = 0) = 0.1 - 0.4 = -0.3$.
+They are equal because no arrow points into $X$: it is set by a coin, as
+in a randomized trial, so there is no backdoor path from $X$ to $H$.
+Overweight people exercise less often (25% of them, against 50% of
+everyone), and that is where their extra heart disease comes from.
+:::
+
+### 2. Adjusting for a confounder
+
+A school offers a revision app before an exam. Students who passed the
+previous year's exam ($Z = 1$) are more likely to use it ($X = 1$). The
+outcome is passing this year ($Y = 1$).
+
+| | used the app ($X = 1$) | did not ($X = 0$) |
+|:---|:---|:---|
+| passed last year ($Z = 1$), 500 students | 400, of whom 320 passed (80%) | 100, of whom 70 passed (70%) |
+| did not ($Z = 0$), 500 students | 100, of whom 50 passed (50%) | 400, of whom 120 passed (30%) |
+
+(a) Compute the pass rates of users and non-users, and the difference.
+
+(b) Draw the graph you would assume, and compute the average treatment
+effect of the app with the adjustment formula.
+
+(c) Compute the difference within each row. How does the average
+treatment effect combine the two?
+
+(d) A second school has the same pass rates within each cell of the
+table, but only 20% of its students passed last year. What is the
+average treatment effect of the app there?
+
+(e) A head teacher asks whether to buy the app for every student. Which
+of your numbers would you report, and what would you say about it?
+
+::: {.callout-tip .answer collapse="true" title="Hint 1"}
+For (a), count the users who passed in both rows, and divide by all users.
+:::
+
+::: {.callout-tip .answer collapse="true" title="Hint 2"}
+For (b), the adjustment formula weights each row by its share of all students, not by its share of users.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) Users: $(320 + 50)/500 = 0.74$. Non-users: $(70 + 120)/500 = 0.38$.
+The difference is $0.36$.
+
+(b) $Z \to X$, $Z \to Y$, $X \to Y$.
+$E[Y \mid do(X := 1)] = 0.8 \times 0.5 + 0.5 \times 0.5 = 0.65$ and
+$E[Y \mid do(X := 0)] = 0.7 \times 0.5 + 0.3 \times 0.5 = 0.50$, so the
+average treatment effect is $0.15$.
+
+(c) $0.80 - 0.70 = 0.10$ among students who passed last year, and
+$0.50 - 0.30 = 0.20$ among those who did not. The average treatment
+effect is their average weighted by $P(Z = z)$:
+$0.10 \times 0.5 + 0.20 \times 0.5 = 0.15$.
+
+(d) $0.10 \times 0.2 + 0.20 \times 0.8 = 0.18$.
+
+(e) The average treatment effect, 0.15, compares everyone using the app
+with nobody using it, in this school's mix of students. The head
+teacher's decision is different in two ways. Half the students already
+use the app, so the comparison is with today's pass rate,
+$560/1000 = 0.56$. If everyone used it the rate would be 0.65, an
+increase of 0.09. And buying the app gives access, not use, so the
+increase would be smaller if some students did not use it. The effect
+among today's non-users is $(100 \times 0.10 + 400 \times 0.20)/500 = 0.18$,
+the same as in (d), because the non-users have the second school's mix:
+20% of them passed last year. All of it rests on the graph. If something
+unmeasured, such as motivation, pushed students both to use the app and
+to pass, adjusting for $Z$ would not give the effect.
+:::
+
+## Discussion 2: correlation and causation
+
+"Correlation (more generally, association) is not causation." This is
+true and important, but can it be misused?
+
+## Simulation: intervening in a program
+
+The job center from the lecture, as a program. Each line generates one
+variable from the ones above it.
+
+```{r course_starter, eval=FALSE}
+n <- 10000
+Z <- rbinom(n, 1, 0.5)                        # worked last year
+X <- rbinom(n, 1, ifelse(Z == 1, 0.8, 0.2))   # attended the course
+Y <- rbinom(n, 1, 0.3 + 0.1 * X + 0.3 * Z)    # in work six months later
+mean(Y[X == 1]) - mean(Y[X == 0])             # attenders against the others
+```
+
+1. Run it. Compare the difference with the lecture's table.
+2. Compute the adjusted difference: the difference between attenders
+   and non-attenders within $Z = 1$ and within $Z = 0$, averaged with
+   weights `mean(Z == 1)` and `mean(Z == 0)`.
+3. Intervene. Replace the line for `X` by `X <- rep(1, n)`, run the
+   line for `Y` again, and record `mean(Y)`. Do the same with
+   `X <- rep(0, n)`. Compare the difference with your answer to 2.
+4. The center changes its referrals to 0.95 for $Z = 1$ and 0.05 for
+   $Z = 0$. Before you run anything, write down what you expect for the
+   differences in 1 and in 3. Then run it.
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+```{r course_solution}
+n <- 10000
+Z <- rbinom(n, 1, 0.5)
+X <- rbinom(n, 1, ifelse(Z == 1, 0.8, 0.2))
+Y <- rbinom(n, 1, 0.3 + 0.1 * X + 0.3 * Z)
+observed <- mean(Y[X == 1]) - mean(Y[X == 0])
+d1 <- mean(Y[X == 1 & Z == 1]) - mean(Y[X == 0 & Z == 1])   # within Z = 1
+d0 <- mean(Y[X == 1 & Z == 0]) - mean(Y[X == 0 & Z == 0])   # within Z = 0
+adjusted <- d1 * mean(Z == 1) + d0 * mean(Z == 0)
+Y1 <- rbinom(n, 1, 0.3 + 0.1 * 1 + 0.3 * Z)    # everyone attends
+Y0 <- rbinom(n, 1, 0.3 + 0.1 * 0 + 0.3 * Z)    # nobody attends
+c(observed = observed, adjusted = adjusted, intervened = mean(Y1) - mean(Y0))
+
+X95 <- rbinom(n, 1, ifelse(Z == 1, 0.95, 0.05))
+Y95 <- rbinom(n, 1, 0.3 + 0.1 * X95 + 0.3 * Z)
+mean(Y95[X95 == 1]) - mean(Y95[X95 == 0])      # observed, new referrals
+```
+1. About $0.28$, the table's $0.64 - 0.36$.
+
+2. About $0.10$.
+
+3. About $0.10$: intervening deletes the arrow $Z \to X$, and the
+adjusted difference estimates the same quantity.
+
+4. The observed difference grows to about
+$(0.95 \times 0.7 + 0.05 \times 0.4) - (0.05 \times 0.6 + 0.95 \times 0.3) = 0.685 - 0.315 = 0.37$.
+The effect of the course stays at $0.10$: the referral policy changes
+who attends, not what the course does. Each run differs from these
+numbers by a few hundredths.
+:::
+
+## Discussion 3: causality and reproducibility
+
+Can causality be useful in the context of reproducibility?
+
+## Discussion 4: writing the model down
+
+Does consequentialism become more or less defensible once you have to
+write the causal model down? Answer it first for the argument your group
+drew at the start.
+
+## If there is time
+
+- Can causality be useful for designing and communicating studies?
+- A company tests two versions of its app on its users, without telling
+  them, to see which version keeps them using the app longer. Which of
+  the Belmont--Menlo principles does this touch? How would each of the
+  four frameworks judge it?
+- Find a sentence in a news report of an observational study that
+  avoids saying "causes" but implies a cause. What graph does it
+  assume?
+
+## To finish
+
+One sentence, individually: what is the difference between
+$P(Y = 1 \mid X = 1)$ and $P(Y = 1 \mid do(X := 1))$?
+
+## For next time
+
+Bring one score or algorithm used to make decisions about people. Write
+down what it measures and what it stands in for. Every group's examples
+will go on the screen.
+
+## Optional, can be done at home
+
+Practice for afterward: problems 3 to 8, then coding A and B. The
+problems can be done by hand. Attempt each part before you open a hint.
+
+::: {.callout-warning title="Hints"}
+Do not open a hint unless you have been stuck for at least a few
+minutes, and open them in order.
+:::
+
+### 3. Omitted-variable bias
+
+In the linear model of the notes,
+$Z := U_Z$, $X := \alpha Z + U_X$, $Y := \beta X + \gamma Z + U_Y$, with
+independent mean-zero noise, take $\alpha = 2$, $\gamma = 1$,
+$\beta = 0.5$ and $\operatorname{Var}(Z) = \operatorname{Var}(U_X) = 1$.
+
+(a) Compute $\operatorname{Var}(X)$, $\operatorname{Cov}(X, Z)$ and the
+slope of $Y$ on $X$ alone.
+
+(b) Repeat with $\gamma = -1$.
+
+(c) Repeat with $\gamma = 1$ and $\beta = 0$. What would someone with data
+on $X$ and $Y$ alone conclude?
+
+(d) Is the error in (a) a bias or a variance? What happens to it as the
+sample grows?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+$Z$ and $U_X$ are independent, so $\operatorname{Var}(X) = \alpha^2 \operatorname{Var}(Z) + \operatorname{Var}(U_X)$.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $\operatorname{Var}(X) = 4 + 1 = 5$ and
+$\operatorname{Cov}(X, Z) = \alpha \operatorname{Var}(Z) = 2$. The slope
+is $\beta + \gamma \operatorname{Cov}(X, Z)/\operatorname{Var}(X) = 0.5 + 2/5 = 0.9$.
+
+(b) $0.5 - 2/5 = 0.1$: the bias has the sign of $\gamma\alpha$, and here
+it almost hides the effect.
+
+(c) $0 + 2/5 = 0.4$. They would see a positive slope and could conclude
+that raising $X$ raises $Y$, when intervening on $X$ does nothing.
+
+(d) A bias. The slope converges to $0.9$ as the sample grows: the
+estimates concentrate around $0.9$, not around the effect, $0.5$.
+:::
+
+### 4. Choosing an adjustment set
+
+```{r five_nodes, echo=FALSE, fig.height=2.6, fig.width=5}
+draw_dag(data.frame(name = c("Z", "X", "M", "Y", "W"),
+                    x = c(1, 0, 1, 2, 2.9), y = c(1.1, 0, -0.3, 0, 1.1)),
+         data.frame(from = c("Z", "Z", "X", "M", "X", "W"),
+                    to = c("X", "Y", "M", "Y", "Y", "Y")),
+         r = 0.17, xlim = c(-0.5, 3.4), ylim = c(-0.6, 1.4))
+```
+
+(a) List the backdoor paths from $X$ to $Y$.
+
+(b) Which of these sets satisfy the backdoor criterion: the empty set,
+$\{Z\}$, $\{M\}$, $\{Z, M\}$, $\{W\}$, $\{Z, W\}$?
+
+(c) In a linear model, what does the coefficient on $X$ estimate if you
+adjust for $\{Z, M\}$?
+
+(d) If more than one of the sets in (b) satisfies the criterion, which
+would you use, and why?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+A backdoor path starts with an arrow into $X$. How many arrows point into $X$?
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) One: $X \leftarrow Z \to Y$.
+
+(b) $\{Z\}$ and $\{Z, W\}$. The empty set and $\{W\}$ leave the back
+door open. $\{M\}$ and $\{Z, M\}$ contain a descendant of $X$.
+
+(c) Only the arrow $X \to Y$: the part of the effect of $X$ that does
+not go through $M$. It is not the effect of $X$.
+
+(d) $\{Z\}$ and $\{Z, W\}$ both satisfy it. Use $\{Z, W\}$: $W$ is not
+a confounder, so leaving it out causes no bias, but it explains some of
+the variation in $Y$, and the estimate that uses it is usually less
+variable.
+:::
+
+### 5. The graph behind an argument
+
+A university says: "Students who use the library more get better
+grades. We will extend the library's opening hours, because using the
+library improves grades."
+
+(a) Draw the causal graph the argument presupposes, and mark the action.
+
+(b) Add one variable that would make the observed difference larger
+than the effect, with its arrows.
+
+(c) What comparison would support the university's claim?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+The university's evidence compares students. Its action changes opening hours. Are those the same thing?
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) Opening hours (the action) $\to$ library use $\to$ grades. The
+argument needs the arrow from library use to grades, and an arrow from
+opening hours to library use.
+
+(b) For example motivation, or how well a student was already doing,
+with arrows into library use and into grades. If it raises both, the
+students who use the library more would have had better grades anyway,
+so the observed difference is larger than the effect.
+
+(c) Grades before and after the hours were extended, against a
+comparable university or set of courses where they were not; or terms,
+or sites, chosen at random to have longer hours. The comparison of
+students who use the library more with those who use it less answers a
+question about those students.
+:::
+
+### 6. Two registers
+
+The decision whether to prescribe hormone therapy to prevent heart
+disease can be written in either register.
+
+(a) Write it in the prediction register. Say what the treatment, the
+outcome and a confounder are, and write the quantity a doctor needs
+with $do(\cdot)$.
+
+(b) Write it in the sequential-decision register, with the one-line
+declaration at the top. Say what the state, the action, the reward,
+the policy and the utility are.
+
+(c) Which letters would mean different things if you used them in both
+answers?
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $X = 1$ if a woman starts hormone therapy, $Y = 1$ if she has
+coronary heart disease within five years, $Z$ her socioeconomic status.
+A doctor needs $P(Y = 1 \mid do(X := 1))$ against
+$P(Y = 1 \mid do(X := 0))$, not $P(Y = 1 \mid X = 1)$ against
+$P(Y = 1 \mid X = 0)$.
+
+(b) **Notation:** this answer uses the sequential-decision register,
+$S$ state, $A$ action, $R$ reward, $\pi$ policy, $U$ utility. $S$ is
+the patient's state: age, time since the menopause, risk factors. $A$ is
+prescribe or do not. $\pi$ is the prescribing rule from state to
+action. $R$ is a measured reward, such as no heart attack recorded in
+five years. $U$ is what we care about: her health, including breast
+cancer, stroke and fractures as well as the heart.
+
+(c) $A$, $R$ and $U$. In the prediction register they are a sensitive
+attribute, a risk score and an unobserved variable.
+:::
+
+### 7. Inverse probability weighting (harder)
+
+Let $e(Z) = P(X = 1 \mid Z)$, strictly between 0 and 1, and suppose $Z$
+satisfies the backdoor criterion.
+
+(a) Show that
+$E[XY/e(Z)] = \sum_z E[Y \mid X = 1, Z = z]\,P(Z = z)$ by conditioning
+on $Z$ first.
+
+(b) Write the matching expression for $E[Y \mid do(X := 0)]$, and check
+both on the table in problem 2.
+
+(c) How many students does each app user stand for, in each row, and
+why?
+
+(d) Why are values of $e(Z)$ near zero a problem in a sample?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+$XY$ is zero unless $X = 1$, so $E[XY \mid Z] = E[Y \mid X = 1, Z]\,P(X = 1 \mid Z)$.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $E[XY/e(Z)] = E\big[E[XY \mid Z]/e(Z)\big]$, and
+$E[XY \mid Z] = E[Y \mid X = 1, Z]\,e(Z)$, so the $e(Z)$ cancels and
+$E[XY/e(Z)] = E\big[E[Y \mid X = 1, Z]\big] = \sum_z E[Y \mid X = 1, Z = z]\,P(Z = z)$,
+the adjustment formula.
+
+(b) $E[(1 - X)Y/(1 - e(Z))] = \sum_z E[Y \mid X = 0, Z = z]\,P(Z = z)$.
+In the table $e(1) = 0.8$ and $e(0) = 0.2$:
+$0.5 \times 0.8 \times 0.8/0.8 + 0.5 \times 0.2 \times 0.5/0.2 = 0.40 + 0.25 = 0.65$, and
+$0.5 \times 0.2 \times 0.7/0.2 + 0.5 \times 0.8 \times 0.3/0.8 = 0.35 + 0.15 = 0.50$,
+as in problem 2.
+
+(c) Only 20% of the students who did not pass last year used the app,
+so each user among them stands for $1/0.2 = 5$ students like them;
+among those who passed, 80% used it, so each stands for $1/0.8 = 1.25$.
+Weighted, the users have the whole school's mix of $Z$.
+
+(d) The weights are large, and a few heavily weighted students can
+move the estimate a long way: the estimator's variance is large. If
+$e(z) = 0$ for some $z$, nobody with that $Z$ was treated, and the data
+say nothing about the treated outcome there.
+:::
+
+### 8. Hormone therapy
+
+(a) The 1996 estimate (0.39) and the 2008 estimates (1.42 over the first
+two years, 0.96 over the whole follow-up) come from the same cohort.
+Which comparison did each make?
+
+(b) Draw a graph under which the 1996 estimate is confounded.
+
+(c) Which comparison matches the decision a doctor makes, and why?
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) 1996: women who took estrogen with progestin against women who did
+not use hormones, adjusted for measured confounders. 2008: women who
+started against women who did not start, both followed from the same
+point, analyzed as the trial was.
+
+(b) Socioeconomic status $\to$ hormone use, socioeconomic status $\to$
+heart disease, with or without an arrow from hormone use to heart
+disease.
+
+(c) The 2008 comparison. The doctor's decision is whether to start,
+and that comparison follows women from the point at which they started
+or did not.
+:::
+
+### Coding
+
+Open a fresh R script. You will need the tidyverse.
+
+#### A. Prediction and intervention
+
+```{r coding_a_setup}
+n <- 10000
+# program 1: X causes Y
+X1 <- rnorm(n); Y1 <- 2 * X1 + rnorm(n)
+# program 2: Z causes both
+Z2 <- rnorm(n); X2 <- Z2 + rnorm(n); Y2 <- Z2 + rnorm(n)
+# program 3: X causes Y through M
+X3 <- sqrt(2) * rnorm(n); M3 <- X3 + sqrt(2) * rnorm(n); Y3 <- 0.5 * M3 + rnorm(n)
+```
+
+1. Write down the slope of $Y$ on $X$ you expect in each program. Then
+   fit `lm` and compare.
+2. For each program, intervene: set $X$ to 1 for everyone and run the
+   statements after the one for $X$ again, then the same with $X$ set
+   to 0. Compute the difference in the means of $Y$.
+3. In program 2, fit `lm(Y2 ~ X2 + Z2)`. In program 3, fit
+   `lm(Y3 ~ X3 + M3)`. Compare the coefficients on $X$ with your
+   answers to 2.
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+In each program, which statements after the one for $X$ use $X$, directly or through a variable computed from it? Those are the ones whose values change when you set $X$.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+```{r coding_a_solution}
+slopes <- c(coef(lm(Y1 ~ X1))[2], coef(lm(Y2 ~ X2))[2], coef(lm(Y3 ~ X3))[2])
+do1 <- c(mean(2 * 1 + rnorm(n)),                    # X set to 1, later statements re-run
+         mean(Z2 + rnorm(n)),
+         mean(0.5 * (1 + sqrt(2) * rnorm(n)) + rnorm(n)))
+do0 <- c(mean(2 * 0 + rnorm(n)),                    # X set to 0
+         mean(Z2 + rnorm(n)),
+         mean(0.5 * (0 + sqrt(2) * rnorm(n)) + rnorm(n)))
+round(rbind(slope = slopes, effect = do1 - do0), 2)
+round(coef(lm(Y2 ~ X2 + Z2))[2], 2)    # program 2, adjusting for Z
+round(coef(lm(Y3 ~ X3 + M3))[2], 2)    # program 3, adjusting for M
+```
+The slopes are about 2, 0.5 and 0.5. The effects are about 2, 0 and
+0.5. In programs 2 and 3, $X$ and $Y$ have the same joint distribution
+(jointly normal, with means 0, variances 2 and 2 and covariance 1), so $X$ predicts
+$Y$ equally well in both, and intervening on $X$ changes $Y$ only in
+program 3. Adjusting for $Z$ in program 2 gives a coefficient near 0,
+the effect. Adjusting for $M$ in program 3 also gives a coefficient
+near 0, which is not the effect: $M$ is a mediator.
+:::
+
+#### B. Adjustment and weighting on data
+
+```{r coding_b_setup}
+cells <- data.frame(Z = c(1, 1, 0, 0), X = c(1, 0, 1, 0),
+                    n = c(400, 100, 100, 400), passed = c(320, 70, 50, 120))
+students <- bind_rows(
+  cells |> mutate(Y = 1, count = passed),
+  cells |> mutate(Y = 0, count = n - passed)
+) |>
+  select(Z, X, Y, count) |>
+  tidyr::uncount(count)
+nrow(students)
+```
+
+1. Compute the pass rates of users and non-users from `students`, and
+   their difference.
+2. Compute the adjusted difference: the difference in pass rates within
+   each value of $Z$, averaged with weights $P(Z = z)$.
+3. Compute $e(Z)$, the share of users within each value of $Z$, attach
+   it to each student, and compute `mean(X * Y / e)` and
+   `mean((1 - X) * Y / (1 - e))`.
+4. A randomized version: give each of 1,000 students the app with
+   probability 0.5, whatever their $Z$, and draw whether they pass from
+   the table's rates. Compute the difference in pass rates. Repeat 200
+   times. What is the average difference, and how much does it vary?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For 3: `students |> group_by(Z) |> mutate(e = mean(X)) |> ungroup()`.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+```{r coding_b_solution}
+students |> group_by(X) |> summarize(rate = mean(Y))
+
+rows <- students |>
+  group_by(Z) |>
+  summarize(diff = mean(Y[X == 1]) - mean(Y[X == 0]),
+            share = n() / nrow(students))
+sum(rows$diff * rows$share)
+
+students |> group_by(Z) |> mutate(e = mean(X)) |> ungroup() |>
+  summarize(do1 = mean(X * Y / e), do0 = mean((1 - X) * Y / (1 - e)))
+
+rate <- function(z, x) {
+  ifelse(z == 1, ifelse(x == 1, 0.8, 0.7), ifelse(x == 1, 0.5, 0.3))
+}
+one_trial <- function() {
+  Z <- rep(c(1, 0), each = 500)
+  X <- rbinom(1000, 1, 0.5)
+  Y <- rbinom(1000, 1, rate(Z, X))
+  mean(Y[X == 1]) - mean(Y[X == 0])
+}
+trials <- replicate(200, one_trial())
+c(mean = mean(trials), sd = sd(trials))
+```
+1. 0.74 and 0.38, a difference of 0.36.
+
+2. 0.15.
+
+3. 0.65 and 0.50, the adjustment formula's numbers.
+
+4. The average is close to 0.15, and the differences vary from trial to
+trial with a standard deviation of about 0.03. Randomization removes
+the bias without any model of $Z$, and the price is that a single trial
+can miss by a few points.
+:::
