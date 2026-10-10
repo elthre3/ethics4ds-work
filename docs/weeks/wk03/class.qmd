@@ -60,12 +60,13 @@ Put your arguments side by side and choose one.
 1. What is the action, and which outcome does the argument count?
 2. Draw the causal graph the argument needs, with an arrow for each
    cause-and-effect claim you listed. Mark the action.
-3. Draw a second graph that fits the same evidence and under which the
-   action does nothing.
+3. Try to draw a second graph that fits the same evidence and under
+   which the action does nothing. If the evidence makes every such
+   graph hard to believe, say what in the evidence does that.
 4. How could the analysis go wrong if the first graph is wrong? What
    would the consequences of the wrong conclusion be, and for whom?
 
-Each group's two graphs go on the screen.
+Each group's graphs, or what rules a rival out, go on the screen.
 
 ## Problems
 
@@ -98,8 +99,8 @@ they equal? Why?
 
 ### 2. Adjusting for a confounder
 
-A school offers a revision app before an exam. Students who passed the
-previous year's exam ($Z = 1$) are more likely to use it ($X = 1$). The
+A school offers a revision app before a test. Students who passed the
+previous year's test ($Z = 1$) are more likely to use it ($X = 1$). The
 outcome is passing this year ($Y = 1$).
 
 | | used the app ($X = 1$) | did not ($X = 0$) |
@@ -129,7 +130,8 @@ true and important, but can it be misused?
 
 ## Simulation: intervening in a program
 
-The job center from the lecture, as a program. Each line generates one
+The job center from the lecture, as a program. As in the lecture,
+everyone referred attends and nobody else does. Each line generates one
 variable from the ones above it.
 
 ```{r course_starter, eval=FALSE}
@@ -273,6 +275,10 @@ the policy and the utility are.
 (c) Which letters would mean different things if you used them in both
 answers?
 
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a), what does the doctor choose, and what could affect both that choice and heart disease? For (b), what does the doctor know when choosing?
+:::
+
 ### 7. Inverse probability weighting (harder)
 
 Let $e(Z) = P(X = 1 \mid Z)$, strictly between 0 and 1, and suppose $Z$
@@ -303,6 +309,10 @@ Which comparison did each make?
 (b) Draw a graph under which the 1996 estimate is confounded.
 
 (c) Which comparison matches the decision a doctor makes, and why?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a), ask who is compared with whom in each analysis.
+:::
 
 ### Coding
 

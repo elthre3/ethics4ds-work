@@ -13,7 +13,7 @@ In class order. Planned total about 75 of the 80 minutes.
 
 | Item | Min | | If short |
 |---|---:|---|---|
-| Discussion 1: the arguments they brought, the graph each needs and a rival graph | 14 | Keep | Two groups' graphs on the screen instead of every group's |
+| Discussion 1: the arguments they brought, the graph each needs, and a rival graph or what rules one out | 14 | Keep | Two groups' graphs on the screen instead of every group's |
 | Problem 1: conditioning and intervening, with feedback | 11 | Keep | Work (b) to (d) together; say (e): nothing points into $X$, so observing $X$ and setting it agree |
 | Problem 2: adjusting for a confounder, with feedback | 12 | Keep | (a) and (b) only; give (d), 0.18 |
 | Discussion 2: can "correlation is not causation" be misused | 6 | Rush; cut first | One answer from the room |

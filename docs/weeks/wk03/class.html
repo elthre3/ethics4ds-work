@@ -303,10 +303,10 @@ Note
 <ol type="1">
 <li>What is the action, and which outcome does the argument count?</li>
 <li>Draw the causal graph the argument needs, with an arrow for each cause-and-effect claim you listed. Mark the action.</li>
-<li>Draw a second graph that fits the same evidence and under which the action does nothing.</li>
+<li>Try to draw a second graph that fits the same evidence and under which the action does nothing. If the evidence makes every such graph hard to believe, say what in the evidence does that.</li>
 <li>How could the analysis go wrong if the first graph is wrong? What would the consequences of the wrong conclusion be, and for whom?</li>
 </ol>
-<p>Each group’s two graphs go on the screen.</p>
+<p>Each group’s graphs, or what rules a rival out, go on the screen.</p>
 </section>
 <section id="problems" class="level2">
 <h2 class="anchored" data-anchor-id="problems">Problems</h2>
@@ -329,7 +329,7 @@ Note
 </section>
 <section id="adjusting-for-a-confounder" class="level3">
 <h3 class="anchored" data-anchor-id="adjusting-for-a-confounder">2. Adjusting for a confounder</h3>
-<p>A school offers a revision app before an exam. Students who passed the previous year’s exam (<span class="math inline">\(Z = 1\)</span>) are more likely to use it (<span class="math inline">\(X = 1\)</span>). The outcome is passing this year (<span class="math inline">\(Y = 1\)</span>).</p>
+<p>A school offers a revision app before a test. Students who passed the previous year’s test (<span class="math inline">\(Z = 1\)</span>) are more likely to use it (<span class="math inline">\(X = 1\)</span>). The outcome is passing this year (<span class="math inline">\(Y = 1\)</span>).</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -371,7 +371,7 @@ Note
 </section>
 <section id="simulation-intervening-in-a-program" class="level2">
 <h2 class="anchored" data-anchor-id="simulation-intervening-in-a-program">Simulation: intervening in a program</h2>
-<p>The job center from the lecture, as a program. Each line generates one variable from the ones above it.</p>
+<p>The job center from the lecture, as a program. As in the lecture, everyone referred attends and nobody else does. Each line generates one variable from the ones above it.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>)                        <span class="co"># worked last year</span></span>
@@ -519,16 +519,6 @@ Note
 <li><p>Write it in the sequential-decision register, with the one-line declaration at the top. Say what the state, the action, the reward, the policy and the utility are.</p></li>
 <li><p>Which letters would mean different things if you used them in both answers?</p></li>
 </ol>
-</section>
-<section id="inverse-probability-weighting-harder" class="level3">
-<h3 class="anchored" data-anchor-id="inverse-probability-weighting-harder">7. Inverse probability weighting (harder)</h3>
-<p>Let <span class="math inline">\(e(Z) = P(X = 1 \mid Z)\)</span>, strictly between 0 and 1, and suppose <span class="math inline">\(Z\)</span> satisfies the backdoor criterion.</p>
-<ol type="a">
-<li><p>Show that <span class="math inline">\(E[XY/e(Z)] = \sum_z E[Y \mid X = 1, Z = z]\,P(Z = z)\)</span> by conditioning on <span class="math inline">\(Z\)</span> first.</p></li>
-<li><p>Write the matching expression for <span class="math inline">\(E[Y \mid do(X := 0)]\)</span>, and check both on the table in problem 2.</p></li>
-<li><p>How many students does each app user stand for, in each row, and why?</p></li>
-<li><p>Why are values of <span class="math inline">\(e(Z)\)</span> near zero a problem in a sample?</p></li>
-</ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -540,6 +530,32 @@ Note
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (a), what does the doctor choose, and what could affect both that choice and heart disease? For (b), what does the doctor know when choosing?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="inverse-probability-weighting-harder" class="level3">
+<h3 class="anchored" data-anchor-id="inverse-probability-weighting-harder">7. Inverse probability weighting (harder)</h3>
+<p>Let <span class="math inline">\(e(Z) = P(X = 1 \mid Z)\)</span>, strictly between 0 and 1, and suppose <span class="math inline">\(Z\)</span> satisfies the backdoor criterion.</p>
+<ol type="a">
+<li><p>Show that <span class="math inline">\(E[XY/e(Z)] = \sum_z E[Y \mid X = 1, Z = z]\,P(Z = z)\)</span> by conditioning on <span class="math inline">\(Z\)</span> first.</p></li>
+<li><p>Write the matching expression for <span class="math inline">\(E[Y \mid do(X := 0)]\)</span>, and check both on the table in problem 2.</p></li>
+<li><p>How many students does each app user stand for, in each row, and why?</p></li>
+<li><p>Why are values of <span class="math inline">\(e(Z)\)</span> near zero a problem in a sample?</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\(XY\)</span> is zero unless <span class="math inline">\(X = 1\)</span>, so <span class="math inline">\(E[XY \mid Z] = E[Y \mid X = 1, Z]\,P(X = 1 \mid Z)\)</span>.</p>
 </div>
@@ -553,6 +569,22 @@ Note
 <li><p>Draw a graph under which the 1996 estimate is confounded.</p></li>
 <li><p>Which comparison matches the decision a doctor makes, and why?</p></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (a), ask who is compared with whom in each analysis.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="coding" class="level3">
 <h3 class="anchored" data-anchor-id="coding">Coding</h3>
@@ -574,7 +606,7 @@ Note
 <li>In program 2, fit <code>lm(Y2 ~ X2 + Z2)</code>. In program 3, fit <code>lm(Y3 ~ X3 + M3)</code>. Compare the coefficients on <span class="math inline">\(X\)</span> with your answers to 2.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -583,7 +615,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In each program, which statements after the one for <span class="math inline">\(X\)</span> use <span class="math inline">\(X\)</span>, directly or through a variable computed from it? Those are the ones whose values change when you set <span class="math inline">\(X\)</span>.</p>
 </div>
@@ -613,7 +645,7 @@ Note
 <li>A randomized version: give each of 1,000 students the app with probability 0.5, whatever their <span class="math inline">\(Z\)</span>, and draw whether they pass from the table’s rates. Compute the difference in pass rates. Repeat 200 times. What is the average difference, and how much does it vary?</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -622,7 +654,7 @@ Note
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For 3: <code>students |&gt; group_by(Z) |&gt; mutate(e = mean(X)) |&gt; ungroup()</code>.</p>
 </div>

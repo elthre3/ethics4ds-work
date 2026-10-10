@@ -22,8 +22,9 @@ st313:
 # ---------------------------------------------------------------------------------
 ---
 
-**Important note:** this week compares four ways of judging whether an
-action is right. Of these, ms4ds describes three, and says that they
+**Important note:** consequentialism, deontology, virtue ethics and
+pragmatic ethics are four ways of judging whether an action is right.
+Of these, ms4ds describes the first three, and says that they
 "are not mutually exclusive or exhaustive, so we do not have to choose
 one of them or limit our thinking to using only these ideas." Where I write
 "I", the view is mine. You are not expected to share
@@ -163,7 +164,7 @@ tells the story of the Tuskegee study. It ended in 1972, after a
 whistleblower came forward and newspapers took up the story. Prompted
 in part by it, the National Research Act of 1974 created a national
 commission for the protection of research subjects. The commission's
-report, released on 30 September 1978, is the
+report, released in 1978, is the
 [Belmont Report](https://en.wikipedia.org/wiki/Belmont_Report), named
 after the conference center in Elkridge, Maryland, where part of it was
 drafted. It sets out three principles: respect for persons, beneficence
@@ -423,8 +424,9 @@ draw_dag(nodes, edges)
 
 Its caption ends: "It is possible that the accuracy of some function
 $f(X)$ in predicting $Y$ is equal in all cases." A policy that changes $X$ in order to
-change $Y$ works only in the first. To change $Y$ under the second
-graph you would have to act on $Y$ itself, and under the third on $Z$.
+change $Y$ works only in the first. Under the other two, setting $X$
+leaves $Y$ alone; to change $Y$ you would act on $Y$ or on its causes,
+which in the third include $Z$.
 "If we expect a model to also tell us what happens when we intervene on
 variables, then these models with equal predictive accuracy are no
 longer equivalent. We become responsible to choose one of them."
@@ -436,9 +438,11 @@ should be expanded, because the people who took it were more often in
 work six months later. In a version with numbers chosen to work by
 hand, a thousand people are registered with a job center, which refers
 some of them to the course. It refers people who worked in the previous
-year more readily, because it judges them ready. Write $Z = 1$ for
-worked in the previous year, $X = 1$ for attended the course, and
-$Y = 1$ for in work six months later.
+year more readily, because it judges them ready. In this version
+everyone referred attends and nobody else does, so referral and
+attendance are the same. Write $Z = 1$ for worked in the previous year,
+$X = 1$ for attended the course, and $Y = 1$ for in work six months
+later.
 
 | | attended ($X = 1$) | did not attend ($X = 0$) |
 |:---|:---|:---|
@@ -509,20 +513,30 @@ anyway.
 
 ### Randomization
 
-Suppose the center had referred people at random, half of each row.
-Then attenders would come half from each row, and so would the others:
+Suppose the center had referred people at random, half of each row,
+and as before everyone referred had attended. Then attenders would
+come half from each row, and so would the others. The shares in work
+to expect are
 $$
 \begin{aligned}
 P(Y = 1 \mid X = 1) &= 0.5 \times 0.7 + 0.5 \times 0.4 = 0.55, \\
 P(Y = 1 \mid X = 0) &= 0.5 \times 0.6 + 0.5 \times 0.3 = 0.45 .
 \end{aligned}
 $$
-The observed difference is now the effect. Randomizing deletes the
-arrow into $X$ in the world itself, so the observed comparison and the
-interventional one coincide. In the reading's words,
-"the goal of a randomized controlled trial is to break natural
-inclination." Randomization also deletes arrows from variables nobody
-measured, which adjustment cannot do.
+The observed difference is now the effect, apart from the chance
+variation of one random draw. Randomizing deletes the arrow into $X$ in
+the world itself, so the observed comparison and the interventional one
+coincide. In the reading's words, "the goal of a randomized controlled
+trial is to break natural inclination." Randomization also deletes
+arrows from variables nobody measured, which adjustment cannot do.
+
+In practice some people offered a course do not take it, and some
+people not offered it find one elsewhere. Randomizing the offer then
+gives the effect of the offer, not of attending. A trial's *arms* are
+the groups people were assigned to, and a comparison by arm, whatever
+each person then did, is an **intention-to-treat analysis**. The
+hormone trial's main analysis was of this kind, and it is the analysis
+Hernán and colleagues emulated.
 
 ### The backdoor criterion
 
@@ -543,8 +557,11 @@ gives $P(Y = y \mid do(X := x))$.
 
 The first condition says what not to adjust for. A mediator $M$ on
 $X \to M \to Y$ is a descendant of $X$. Adjusting for it removes the
-part of the effect that runs through $M$, and what is left is no longer
-the effect of $X$. The reading lists three cases: controlling for a
+part of the effect that runs through $M$. What is left is not the
+total effect, which is what a decision to change $X$ needs. If nothing
+else affects both $M$ and $Y$, it is the direct effect, the part that
+does not pass through $M$. The reading lists three cases: controlling
+for a
 confounder removes confounding, and controlling for a mediator "will
 eliminate some of the causal influence of $X$ on $Y$." Its third case
 is the collider. So "control for everything you measured" is not a
@@ -719,9 +736,10 @@ graphs, and fit both. To decide between them you need arguments about
 what sends people onto the course and what helps them find work, and
 regression output will not supply them.
 
-A randomized trial is the case where the analyst knows the graph,
-because the analyst built it: the arrow into $X$ comes from a coin, so
-there is no back door, measured or not. That is why the hormone trial
+A randomized trial is the case where the analyst knows what decided
+who was assigned the treatment, because the analyst decided it: the
+arrow into the assignment comes from a coin, so the comparison of the
+arms has no back door, measured or not. That is why the hormone trial
 was taken to settle a question that many adjusted observational
 estimates had not. Most policies cannot be tried that way first. Then
 the graph is an argument, and a consequentialist's case for the policy
@@ -730,18 +748,18 @@ stands or falls with it.
 ## An argument in prose
 
 A council says: "Pupils who go to their school's breakfast club have
-better attendance and better exam results. We will fund a breakfast
+better attendance and better test results. We will fund a breakfast
 club in each of our schools, because breakfast clubs improve results."
 The argument assumes a graph, and drawing it shows what evidence the
 council would need.
 
 ```{r club_dag, echo=FALSE, fig.height=2.4, fig.width=7}
-draw_dag(data.frame(name = c("funding", "goes to the club", "attendance", "exam results", "family circumstances"),
+draw_dag(data.frame(name = c("funding", "goes to the club", "attendance", "test results", "family circumstances"),
                     x = c(-0.9, 0.5, 1.45, 2.45, 1.45), y = c(0.6, 0.6, -0.05, 0.6, 1.3)),
          data.frame(from = c("funding", "goes to the club", "goes to the club", "attendance",
                              "family circumstances", "family circumstances"),
-                    to = c("goes to the club", "attendance", "exam results", "exam results",
-                           "goes to the club", "exam results")),
+                    to = c("goes to the club", "attendance", "test results", "test results",
+                           "goes to the club", "test results")),
          boxes = TRUE, xlim = c(-1.6, 3.3), ylim = c(-0.3, 1.55))
 ```
 
@@ -906,8 +924,9 @@ $X$ only for the 500 people who did not attend, 100 with $Z = 1$ and
 by $(100 \times 0.06 + 400 \times 0.26)/1000 = 0.11$. That is the
 effect among the people who did not attend, $0.22$, times their share,
 one half. The average treatment effect, $0.16$, compares everyone
-attending with nobody attending, which is a different question. And
-offering the course to everyone would not make everyone attend.
+attending with nobody attending, which is a different question.
+Outside this example, offering the course to everyone would not make
+everyone attend.
 
 ### More than one adjustment set
 
@@ -922,8 +941,8 @@ $\{Z, W\}$ is usually less variable.
 
 ## Readings
 
-As announced. Skim the Wikipedia articles, and read the fairmlbook
-pages closely enough to follow their examples.
+Skim the Wikipedia articles, and read the fairmlbook pages closely
+enough to follow their examples.
 
 ### Required
 

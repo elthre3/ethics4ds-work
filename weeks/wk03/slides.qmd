@@ -460,17 +460,17 @@ The gold arrow is the claim that the hormones protect the heart. The four black 
 ## A job-search course
 
 ::: {.notes}
-Everyone writes a number before the next slide. A press release would say 28 points.
+Everyone writes something before the next slide. A press release would say 28 points.
 :::
 
-A job center refers some of the 1,000 people registered with it to a job-search course. Six months later:
+A job center refers some of the 1,000 people registered with it to a job-search course. Everyone referred attends, and nobody else does. Six months later:
 
 | | attended | did not attend |
 |:---|:---|:---|
 | 1,000 people | 500, of whom 320 in work (64%) | 500, of whom 180 in work (36%) |
 
 ::: {.ask}
-How much does the course raise the chance of being in work? Write down a number.
+How much does the course raise the chance of being in work? Write down a number, or what else you would need to know.
 :::
 
 ## The rows
@@ -544,19 +544,20 @@ Attenders come mostly from the $Z = 1$ row, where more people find work whether 
 Alone, two minutes. The answer is on the next slide.
 :::
 
-Same people, same rows. The center now refers half of each row, chosen at random.
+Same people, same rows. The center now refers half of each row, chosen at random; everyone referred attends, and nobody else does.
 
 ::: {.ask}
-Compute the share in work among those who attended, and among those who did not. Compare the difference with the average treatment effect.
+Compute the share in work you would expect among those who attended, and among those who did not. Compare the difference with the average treatment effect.
 :::
 
 ## Randomization
 
 ::: {.notes}
 Randomizing deletes the arrow into X in the world, including arrows from variables nobody measured.
+If some refuse what they are offered, comparing the arms as assigned gives the effect of the offer.
 :::
 
-Half of each row attends, chosen at random:
+Half of each row attends, chosen at random. The shares to expect:
 
 $$
 \begin{aligned}
@@ -565,7 +566,7 @@ P(Y = 1 \mid X = 0) &= 0.5 \times 0.6 + 0.5 \times 0.3 = 0.45
 \end{aligned}
 $$
 
-The observed difference is the effect.
+The observed difference is the effect, apart from the chance variation of one draw.
 
 > "The goal of a randomized controlled trial is to break natural inclination."
 
@@ -766,7 +767,7 @@ Alone, in writing, four minutes. Collect two or three graphs before the next sli
 
 A council says:
 
-> "Pupils who go to their school's breakfast club have better attendance and better exam results. We will fund a breakfast club in each of our schools, because breakfast clubs improve results."
+> "Pupils who go to their school's breakfast club have better attendance and better test results. We will fund a breakfast club in each of our schools, because breakfast clubs improve results."
 
 ::: {.ask}
 1. Draw the causal graph the argument presupposes. Mark the action.
@@ -781,12 +782,12 @@ One answer among several. The action is funding, which changes whether a club ex
 :::
 
 ```{r club_dag, fig.height=3.2}
-draw_dag(data.frame(name = c("funding", "goes to the club", "attendance", "exam results", "family circumstances"),
+draw_dag(data.frame(name = c("funding", "goes to the club", "attendance", "test results", "family circumstances"),
                     x = c(-0.9, 0.5, 1.45, 2.45, 1.45), y = c(0.6, 0.6, -0.05, 0.6, 1.3)),
          data.frame(from = c("funding", "goes to the club", "goes to the club", "attendance",
                              "family circumstances", "family circumstances"),
-                    to = c("goes to the club", "attendance", "exam results", "exam results",
-                           "goes to the club", "exam results")),
+                    to = c("goes to the club", "attendance", "test results", "test results",
+                           "goes to the club", "test results")),
          boxes = TRUE, text_size = 5.5, xlim = c(-1.5, 3.2), ylim = c(-0.3, 1.55))
 ```
 

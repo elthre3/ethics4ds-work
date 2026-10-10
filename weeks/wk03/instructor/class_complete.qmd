@@ -15,7 +15,7 @@ st313:
   session: class
   register: 1                      # optional problem 6 declares register 2 for its part (b) only
   segments:                        # sums to 80: 75 of material and 5 of slack; production 64 (80%); discussion 35
-    - {label: "discussion 1: the arguments brought from the news; the graph each needs and a rival graph; every group's two graphs on the screen", minutes: 14, mode: production,
+    - {label: "discussion 1: the arguments brought from the news; the graph each needs and a rival graph, or what in the evidence rules one out; every group's answer on the screen", minutes: 14, mode: production,
        core: CC-08}
     - {label: "the recall question on the adjustment formula, from memory; problem 1: conditioning and intervening, by hand", minutes: 8, mode: production,
        core: CC-10, results: [R13]}
@@ -90,12 +90,13 @@ Put your arguments side by side and choose one.
 1. What is the action, and which outcome does the argument count?
 2. Draw the causal graph the argument needs, with an arrow for each
    cause-and-effect claim you listed. Mark the action.
-3. Draw a second graph that fits the same evidence and under which the
-   action does nothing.
+3. Try to draw a second graph that fits the same evidence and under
+   which the action does nothing. If the evidence makes every such
+   graph hard to believe, say what in the evidence does that.
 4. How could the analysis go wrong if the first graph is wrong? What
    would the consequences of the wrong conclusion be, and for whom?
 
-Each group's two graphs go on the screen.
+Each group's graphs, or what rules a rival out, go on the screen.
 
 ::: {.callout-note .answer title="Rival graphs" collapse="true"}
 Most arguments have a rival graph of one of two kinds: a common cause
@@ -103,7 +104,13 @@ of the action and the outcome, or an arrow that points the other way.
 A rival graph does not show that your argument is wrong. It shows what
 evidence would tell the two graphs apart, which is usually a comparison
 in which the action was not chosen by the people, or the places, that
-also determine the outcome.
+also determine the outcome. If the argument rests on a randomized
+trial, no common cause of the assignment and the outcome can explain
+its result, because a coin decided who was assigned the action. What
+is left to question includes chance, whether what the coin assigned is
+the action the argument is about (some people do not take what they
+are assigned), and whether the people in the trial are like the people
+the policy is for.
 :::
 
 ## Problems
@@ -182,8 +189,8 @@ everyone), and that is where their extra heart disease comes from.
 
 ### 2. Adjusting for a confounder
 
-A school offers a revision app before an exam. Students who passed the
-previous year's exam ($Z = 1$) are more likely to use it ($X = 1$). The
+A school offers a revision app before a test. Students who passed the
+previous year's test ($Z = 1$) are more likely to use it ($X = 1$). The
 outcome is passing this year ($Y = 1$).
 
 | | used the app ($X = 1$) | did not ($X = 0$) |
@@ -251,7 +258,8 @@ true and important, but can it be misused?
 
 ## Simulation: intervening in a program
 
-The job center from the lecture, as a program. Each line generates one
+The job center from the lecture, as a program. As in the lecture,
+everyone referred attends and nobody else does. Each line generates one
 variable from the ones above it.
 
 ```{r course_starter, eval=FALSE}
@@ -272,6 +280,10 @@ mean(Y[X == 1]) - mean(Y[X == 0])             # attenders against the others
 4. The center changes its referrals to 0.95 for $Z = 1$ and 0.05 for
    $Z = 0$. Before you run anything, write down what you expect for the
    differences in 1 and in 3. Then run it.
+
+::: {.callout-tip .answer collapse="true" title="Hint 1"}
+For step 3, replace the line for `X` and leave the line for `Z` alone. Then run the line for `Y` again, so that it uses the new `X`.
+:::
 
 ::: {.callout-note .answer title="Solution" collapse="true"}
 ```{r course_solution}
@@ -415,8 +427,10 @@ A backdoor path starts with an arrow into $X$. How many arrows point into $X$?
 (b) $\{Z\}$ and $\{Z, W\}$. The empty set and $\{W\}$ leave the back
 door open. $\{M\}$ and $\{Z, M\}$ contain a descendant of $X$.
 
-(c) Only the arrow $X \to Y$: the part of the effect of $X$ that does
-not go through $M$. It is not the effect of $X$.
+(c) The direct effect of $X$, along the arrow $X \to Y$: the part that
+does not go through $M$. It is not the total effect of $X$. (It is the
+direct effect because in this graph nothing else affects both $M$ and
+$Y$.)
 
 (d) $\{Z\}$ and $\{Z, W\}$ both satisfy it. Use $\{Z, W\}$: $W$ is not
 a confounder, so leaving it out causes no bias, but it explains some of
@@ -474,9 +488,14 @@ the policy and the utility are.
 (c) Which letters would mean different things if you used them in both
 answers?
 
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a), what does the doctor choose, and what could affect both that choice and heart disease? For (b), what does the doctor know when choosing?
+:::
+
 ::: {.callout-note .answer title="Solution" collapse="true"}
-(a) $X = 1$ if a woman starts hormone therapy, $Y = 1$ if she has
-coronary heart disease within five years, $Z$ her socioeconomic status.
+(a) $X = 1$ if the doctor prescribes hormone therapy, $Y = 1$ if the
+woman has coronary heart disease within five years, $Z$ her
+socioeconomic status.
 A doctor needs $P(Y = 1 \mid do(X := 1))$ against
 $P(Y = 1 \mid do(X := 0))$, not $P(Y = 1 \mid X = 1)$ against
 $P(Y = 1 \mid X = 0)$.
@@ -547,6 +566,10 @@ Which comparison did each make?
 
 (c) Which comparison matches the decision a doctor makes, and why?
 
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a), ask who is compared with whom in each analysis.
+:::
+
 ::: {.callout-note .answer title="Solution" collapse="true"}
 (a) 1996: women who took estrogen with progestin against women who did
 not use hormones, adjusted for measured confounders. 2008: women who
@@ -610,7 +633,8 @@ The slopes are about 2, 0.5 and 0.5. The effects are about 2, 0 and
 $Y$ equally well in both, and intervening on $X$ changes $Y$ only in
 program 3. Adjusting for $Z$ in program 2 gives a coefficient near 0,
 the effect. Adjusting for $M$ in program 3 also gives a coefficient
-near 0, which is not the effect: $M$ is a mediator.
+near 0. That is the direct effect, zero here because $X$ reaches $Y$
+only through the mediator $M$; the total effect is 0.5.
 :::
 
 #### B. Adjustment and weighting on data
