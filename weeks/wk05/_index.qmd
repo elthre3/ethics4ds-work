@@ -10,4 +10,4 @@ Every dataset has a rule for who gets into it: who was born small, who was hired
 
 **Lecture:** [notes](weeks/wk05/notes.html) · [slides](weeks/wk05/slides.html)
 
-**Class:** [class sheet](weeks/wk05/class.html) ([.qmd](https://ethics4ds.com/weeks/wk05/class.qmd){download="class.qmd"})
+**Class:** [class sheet](weeks/wk05/class.html) ([.qmd](https://ethics4ds.com/weeks/wk05/class.qmd){download="class.qmd"}) · [class sheet with solutions](https://ethics4ds.com/solutions/wk05/class_solutions.html)
