@@ -1,39 +1,48 @@
 ---
-week: 01
-session: class
-register: 1
-audience: class teacher (instructor-side; not for students)
-segments: see class_complete.qmd front matter (sums to 80; production 70 min, 88%)
-lenses: [C, B]
-results: [R4, R5, R6, R7]
-assumes: [ST102]
+title: "Teacher note: week 1 class"
+subtitle: "For class teachers"
+format:
+  html:
+    toc: false
+    embed-resources: true
 ---
 
-# Teacher note -- Selection and the replication crisis (class)
+## Keep or rush
 
-## Timing
+In class order. Planned total 80 of the 80 minutes, with no slack, so
+time comes from the last discussion.
 
-| min | block |
-|---|---|
-| 0--6 | Opener: one concern each on the shared doc; two sentences from memory |
-| 6--18 | Problem 1: what a field's literature looks like. Do not reveal answers. The sticking point is (c), what the formula shows and what it does not |
-| 18--28 | Discussion break: causes of the crisis, cultural and statistical. Groups, then the room |
-| 28--52 | Coding A.1--A.3, B.1--B.3. Part A is ten minutes at most; push everyone to B.2 and B.3 |
-| 52--59 | Reveal the solution to problem 1 and the code; show the two survivor histograms (null, and $\theta = 1$) side by side |
-| 59--74 | Discussion prompts 1 and 2 with the room; 3 only if there is time; 4 as a fallback |
-| 74--77 | Close: one written sentence on p-hacking, cause and fix |
-| 77--80 | Prep task |
+| Item | Min | | If short |
+|---|---:|---|---|
+| To start: one ethical issue in data science that concerns you; from memory, what power depends on and which way selection pushes an estimate | 6 | Rush | The recall question only, three answers from the room |
+| Problem 1: what a field's literature looks like (Ioannidis 2005); answers not revealed yet | 12 | Keep | (a) and (b); take (c), what the formula shows and what it does not, with the room at the reveal |
+| Discussion break: causes of the replication crisis, cultural and statistical | 10 | Keep | One cultural and one statistical cause from two groups |
+| Coding A.1 to A.3 and B.1 to B.3 | 24 | Keep | Part A in ten minutes at most; push everyone to B.2 and B.3 |
+| Reveal: problem 1 and the code; the two survivor histograms side by side | 7 | Keep | The two histograms, and B.2's 0.16 against 0.19 said aloud |
+| Discussion: ethical impacts; what data scientists can do; the settings | 15 | Rush; cut first | Prompts 1 and 2 with the room; prompt 3 only if there is time; prompt 4 as a fallback |
+| To finish: one written sentence on p-hacking, cause and fix | 3 | Keep | |
+| The task for next time | 3 | Keep | Read the task aloud |
 
-If coding runs over, take the time from discussion prompt 3, not from the
-break or from prompts 1 and 2.
+: {tbl-colwidths="[32,6,16,46]"}
 
-The exercises at the top of the sheet (1 to 3) are for students' own
-time, and coding A.4 and B.4 are practice. Say so. No marks are attached
-to any of it. (Until 19 October the in-class problems were 1(a), 2(a)
-and 3(a)--(b); the convenor's convention of that day made problems 1 to
-3 exercises and the old problem 4 the class's problem.)
+Minimum class, about 60 minutes: problem 1, the break, coding A.1 to
+A.3 and B.1 to B.3 with the reveal, the closing sentence and the task
+for next time. If coding runs over, take the time from discussion
+prompt 3, not from the break or from prompts 1 and 2.
 
-## What the class works that the lecture only stated
+## If you read on
+
+How it runs
+
+- The exercises at the top of the sheet (1 to 3) are for students' own
+  time, and coding A.4 and B.4 are practice. Say so. No marks are
+  attached to any of it. (Until 19 October the in-class problems were
+  1(a), 2(a) and 3(a)--(b); the convenor's convention of that day made
+  problems 1 to 3 exercises and the old problem 4 the class's problem.)
+- Problem 1 is attempted before anything is revealed; its solution and
+  the code are revealed together, after the coding.
+
+What the class works that the lecture only stated
 
 All three are in the notes, so a student who misses the class has a
 reference.
@@ -49,7 +58,7 @@ reference.
   what the formula shows and does not show, and which ingredient is about
   who is in the data. The calculation is Ioannidis's (2005).
 
-## Expected misconceptions
+Where they get stuck
 
 1. **"Reproducibility" and "replication" used interchangeably.** The notes
    define replication in one sentence. Do not spend time on it unless a
@@ -75,15 +84,15 @@ reference.
    is set by the variance, through the power. The sentence to get out of
    them: "the file-drawer effect turns variance into bias."
 
-## On the screen
+On the screen
 
 - During problem 1: its three ingredients ($p$, $\alpha$ and the power) and nothing else.
 - During coding: the `generate_data()` / `one_experiment()` block.
-- At 52 min: the two survivor histograms side by side. The $\theta = 1$
-  survivors look like the null survivors.
-- During discussion: the shared document. Do not tidy it.
+- At the reveal: the two survivor histograms side by side. The
+  $\theta = 1$ survivors look like the null survivors.
+- During discussion: if the room uses a shared document, do not tidy it.
 
-## Discussion prompt 3, if reached
+Discussion prompt 3, if reached
 
 - Closed funds: survivorship; advertised returns biased upward; the
   platform benefits.
@@ -99,7 +108,7 @@ reference.
   says more about the size and variance of the group's output than about
   its center.
 
-## Notation
+Notation
 
 $\mu$ is the effect, $\theta = \mu/\mathrm{se}$ the standardized effect.
 $p$ in problem 1 is the prevalence of true hypotheses among those tested;

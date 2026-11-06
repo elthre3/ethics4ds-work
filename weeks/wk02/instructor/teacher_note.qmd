@@ -1,70 +1,63 @@
 ---
-week: 02
-session: class
-register: 1
-audience: class teacher (instructor-side; not for students)
-segments: see class_complete.qmd front matter (75 minutes of material and 5 of slack; production 60 min, 75%; discussion 38 min)
-lenses: [A, B, E]
-results: [R8, R9, R10, R11, R12]
-assumes: [ST102]
+title: "Teacher note: week 2 class"
+subtitle: "For class teachers"
+format:
+  html:
+    toc: false
+    embed-resources: true
 ---
 
-# Teacher note: Mindless statistics and sophisticated bigotry (class)
+## Keep or rush
 
-## Timing
+In class order. Planned total 75 of the 80 minutes (week 1 ran over, so
+the plan leaves 5 of slack). Discussion has 38 of the 75 minutes and the
+convenor's deck 3 more; the two problems and the simulation have 30,
+feedback included.
 
-| min | block |
-|------|--------------------------------------------------|
-| 0--9 | Discussion 1: the two studies of infants. Groups by study for five minutes, then the room. No verdict |
-| 9--15 | The recall question, from memory, one minute and its answer. Then problem 1, the table of boroughs |
-| 15--18 | Feedback on problem 1: open its Solution box and go through it |
-| 18--25 | Problem 2: spreads and tails |
-| 25--29 | Feedback on problem 2 |
-| 29--37 | Discussion 2: decisions and groups. Put the people-and-areas plot on the screen |
-| 37--44 | Simulation: the most extreme post. The starter code is on the sheet and runs as given |
-| 44--47 | Feedback on the simulation |
-| 47--53 | Discussion 3: reading a feed |
-| 53--61 | Discussion 4: a disagreement |
-| 61--71 | Discussion 5: AI and cargo-cult statistics. The convenor's separate deck for about three minutes, then groups, then the room |
-| 71--73 | Close: one written sentence on an aggregate $R^2$ of 0.9 |
-| 73--75 | Prep task |
-| 75--80 | Slack. Week 1 ran over, so the plan is 75 minutes of material in the 80 |
+| Item | Min | | If short |
+|---|---:|---|---|
+| Discussion 1: the two studies of infants; groups by study for five minutes, then the room; no verdict | 9 | Keep | One reason for "convincing" and one for "not convincing" from each study, and leave it there |
+| The recall question from memory, then problem 1: a newspaper's table of boroughs, with feedback | 9 | Keep | (a) to (c); give (d) in its feedback |
+| Problem 2: spreads and tails, with feedback | 11 | Keep | (a) and (c); give (b) in its feedback |
+| Discussion 2: when it is reasonable to use someone's group to decide about them; the people-and-areas plot on screen | 8 | Keep | One case from the list below, then the room |
+| Simulation: the most extreme post, with feedback | 10 | Keep | Give the feedback at its time whether or not every pair has finished; the Solution box is the feedback |
+| Discussion 3: reading a feed | 6 | Rush; cut first | Fold it into the simulation's feedback |
+| Discussion 4: a disagreement | 8 | Keep | Two groups to the room |
+| Discussion 5: AI and cargo-cult statistics; the convenor's deck for about three minutes, then groups, then the room | 10 | Keep | The deck, then the room without groups |
+| Close: one written sentence on an aggregate $R^2$ of 0.9 | 2 | Rush; cut second | Read the question; students write the sentence at home |
+| The task for next time | 2 | Keep | Read the task aloud |
 
-Discussion has 38 of the 75 minutes, and the deck 3 more. The two
-problems and the simulation have 30, feedback included.
+: {tbl-colwidths="[32,6,16,46]"}
 
-**If the room is slow.** Give each activity's feedback at its time
-even if some groups have not finished: the Solution box is the
-feedback. Take time from discussion 3 first (it can be folded into
-the simulation's feedback), then from the close. Keep discussions 2, 4
+Minimum class, about 65 minutes: everything except discussion 3 (folded
+into the simulation's feedback) and the close. Keep discussions 2, 4
 and 5. The two problems are longer than the two they replaced on 19
-October. If short, take (a) to (c) of problem 1 and give (d) in its
-feedback, and (a) and (c) of problem 2 and give (b) in its feedback.
+October; give each activity's feedback at its time even if some groups
+have not finished.
 
-The exercises at the top of the sheet (1 to 13; 11 to 13 in R) are
-for students' own time and outside the 80 minutes. Say so. No marks
-are attached to any of them. The three prompts and "Three claims"
-under "If there is time" are reserves. (Until 19 October the class's
-problems were the false rejections and group membership and $R^2$; the
-convenor's convention of that day, exercises before problems with the
-class working the problems, made them exercises 1 and 2 and made the
-old problems 12 and 11 the class's problems 1 and 2.)
+## If you read on
 
-## Feedback, hints and solutions
+### How it runs
 
-The complete sheet is the one on the screen. Each of the three
-in-class activities is followed at once by its feedback: open the
-Solution box and go through it, three or four minutes each. There is
-no separate block of solutions later.
+- The exercises at the top of the sheet (1 to 13; 11 to 13 in R) are
+  for students' own time and outside the 80 minutes. Say so. No marks
+  are attached to any of them. The three prompts and "Three claims"
+  under "If there is time" are reserves. (Until 19 October the class's
+  problems were the false rejections and group membership and $R^2$;
+  the convenor's convention of that day, exercises before problems with
+  the class working the problems, made them exercises 1 and 2 and made
+  the old problems 12 and 11 the class's problems 1 and 2.)
+- The complete sheet is the one on the screen. Each of the three
+  in-class activities is followed at once by its feedback: open the
+  Solution box and go through it, three or four minutes each. There is
+  no separate block of solutions later.
+- The hints for problems 1 and 2 are in the complete sheet and not in
+  the student sheet: open them in order when a group has been stuck for
+  a few minutes. The simulation has no hint, because its starter code
+  runs as given. The hints for the exercises are in the student sheet.
+  Students get the class sheet with solutions the week after the class.
 
-The hints for problems 1 and 2 are in the complete sheet and not in
-the student sheet: open them in order when a group has been stuck for
-a few minutes. The simulation has no hint, because its starter code
-runs as given. The hints for the exercises are in the student
-sheet. Solutions are in the complete sheet only and are not released
-afterward.
-
-## Discussion 1: the two studies of infants
+### Discussion 1: the two studies of infants
 
 The two studies were set as reading and are not in the lecture, so
 this is the only place they are discussed. Five minutes in groups,
@@ -94,7 +87,7 @@ claim?" and the sheet has no subquestions.
   let them report what they found as their own finding, with its
   source, and move on.
 
-## What the class works that the lecture only stated
+### What the class works that the lecture only stated
 
 The lecture has three parts and a five-minute close, planned at 75
 minutes with 5 of slack: mindless statistics (34 minutes: cargo-cult
@@ -163,7 +156,7 @@ time in discussion.
   time," sorts three claims from the week by averages, spreads and
   tails, and by people and places.
 
-## Expected misconceptions
+### Expected misconceptions
 
 In class:
 
@@ -243,7 +236,7 @@ In the exercises, if students raise them:
     two agree to two decimals; at $n = 1$ their formula gives 0.05
     where the answer must be 0.20, which is the quick way to show them.
 
-## On the screen
+### On the screen
 
 - For the last two minutes of discussion 1: the notes' section "Two
   studies of infants."
@@ -259,7 +252,7 @@ In the exercises, if students raise them:
 - During the other discussions: the prompt, and the shared document if
   the class is using one. Do not tidy it.
 
-## Discussion prompts
+### Discussion prompts
 
 The sheet gives one question for each discussion and no subquestions.
 The examples and follow-up questions below are for the teacher, to use
@@ -339,7 +332,7 @@ if a group is stuck. None of the five has a house answer.
   hurry skips. Possible follow-up: who checks the output, and what
   would they need to see?
 
-### If there is time
+#### If there is time
 
 - **A good critic.** From the 2024 class. No house answer.
 - **What was selected.** Each group takes one setting. The prompt does
@@ -376,7 +369,7 @@ if a group is stuck. None of the five has a house answer.
   outside the range between the two estimates, and inside the bounds,
   which contain the truth by construction.
 
-## Notation
+### Notation
 
 In exercise 5 and the exercises that continue it, areas are
 indexed by $i$, as in Freedman: $p_i$ is the rate in the group of

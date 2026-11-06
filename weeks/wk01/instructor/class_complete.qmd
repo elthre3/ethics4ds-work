@@ -15,7 +15,7 @@ st313:
   session: class
   register: 1
   segments:                        # sums to 80; production 70 (88%)
-    - {label: "opener: one concern each on the shared doc; two sentences from memory", minutes: 6, mode: production}
+    - {label: "opener: one concern each; two sentences from memory", minutes: 6, mode: production}
     # retrofit, 19 October (convenor: exercises before problems): problems 1 to 3 became exercises for students' own time; their in-class parts (1a, 2a, 3a-b) gave way to the old problem 4, now problem 1
     - {label: "problem 1: what a field's literature looks like; Bayes' rule for the share of published rejections that are false (Ioannidis 2005); what the formula shows and does not; which ingredient is about who is in the data", minutes: 12, mode: production}
     - {label: "discussion break: causes of the replication crisis, cultural and statistical", minutes: 10, mode: production}
@@ -151,7 +151,7 @@ unbiased.
 
 ### To start
 
-Two things, on the shared document.
+Two things.
 
 1. One ethical issue in data science that concerns you. A sentence is
    enough.
@@ -339,7 +339,7 @@ mean(results$estimate[results$p_value < 0.05])      # the reported ones
 ### Discussion
 
 More prompts than we will get through. Groups of three or four, then to
-the room; every group's answer goes on the shared document.
+the room.
 
 1. What are the ethical impacts of the replication crisis? Consider both
    general impacts and impacts specific to a field you know.
@@ -375,7 +375,6 @@ One sentence, individually: what causes p-hacking, and what would fix it?
 Bring one published claim about a difference between two groups of
 people, from any source. Write down the comparison that was reported, and
 one comparison that could have been reported instead. One sentence each.
-Every group's examples will go on the screen.
 
 ## References
 

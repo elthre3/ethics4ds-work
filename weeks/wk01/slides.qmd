@@ -57,6 +57,14 @@ set.seed(313)
 
 ## Two numbers
 
+::: {.notes}
+Plan 80 in the 80, from the segments: the crisis and the commitment 11; rejection rate and power 14; the simulation and the prediction 9; the significance filter and the computation 16; exaggeration 5; pairs 3; Ioannidis, forking paths, 208 or 20,000, pre-specification 6; the A/B item 8; the standing question with de Berk and Ofqual 5; ASA B.3, the lenses and next week 3. No slack.
+
+Cut order: (1) 208 or 20,000 (the plan marks it skippable); (2) exaggeration to its last row. Do not cut the written commitment, the filter's derivation, the A/B item or the standing question with both cases.
+
+Pace: 0:11 a million z-values; 0:25 a world of studies; 0:46 2.3 standard errors; 0:58 Ioannidis; 1:04 A/B testing; 1:12 the standing question; 1:20 end.
+:::
+
 - Open Science Collaboration (2015): 100 psychology experiments replicated.
   97 originals significant; **36%** of replications significant; effect sizes
   about **half**.
@@ -167,7 +175,11 @@ zero.
 
 Not because anyone cheated, but because you only saw it when it was large.
 
-## Exaggeration
+## Exaggeration {.inverse}
+
+::: {.notes}
+Compress: the lower the power, the more the published estimate exaggerates; at power 0.17 the published average is 2.5 times the truth.
+:::
 
 | $\theta$ | 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 4 |
 |---|---|---|---|---|---|---|---|
@@ -205,7 +217,11 @@ $p$ = share of tested hypotheses that are true; $1-\beta$ = power.
 
 Best of $k$ null tests: $\;P(\text{some } p<0.05) = 1 - 0.95^k$, $\;=0.64$ at $k=20$.
 
-## 208 or 20,000?
+## 208 or 20,000? {.inverse}
+
+::: {.notes}
+Skip if behind.
+:::
 
 Stessman et al. (2017), *Nature Genetics*: 208 genes sequenced in 11,730 cases;
 91 risk genes, 38 new.
@@ -302,45 +318,3 @@ used.
 **Prepare and bring:** one published claim about a difference between two
 groups. Write down the comparison that was reported, and one that could have
 been reported instead.
-
-# Backup {minutes="0"}
-
-## Power of the $z$-test {minutes="0"}
-
-$Z \sim N(\theta,1)$, reject if $|Z| > c$.
-
-$$
-\begin{aligned}
-P(|Z|>c) &= P(Z > c) + P(Z < -c)\\
-&= P(Z-\theta > c-\theta) + P(Z-\theta < -c-\theta)\\
-&= 1 - \Phi(c-\theta) + \Phi(-c-\theta).
-\end{aligned}
-$$
-
-At $\theta = 0$: $2(1-\Phi(c)) = \alpha$.
-
-## The truncated normal mean {minutes="0"}
-
-$$E[Z\mid Z>c] = \frac{\int_c^\infty z\,\phi(z-\theta)\,dz}{1-\Phi(c-\theta)}$$
-
-Substitute $u = z-\theta$:
-
-$$\int_{c-\theta}^\infty (u+\theta)\,\phi(u)\,du = \theta\,(1-\Phi(c-\theta)) + \int_{c-\theta}^\infty u\,\phi(u)\,du$$
-
-Since $\phi'(u) = -u\,\phi(u)$: $\;\int_{c-\theta}^\infty u\,\phi(u)\,du = \phi(c-\theta)$.
-
-$$\Rightarrow\quad E[Z\mid Z>c] = \theta + \frac{\phi(c-\theta)}{1-\Phi(c-\theta)}$$
-
-## The false discovery proportion {minutes="0"}
-
-Share $p$ of tested hypotheses true; level $\alpha$; power $1-\beta$.
-
-$$P(\text{reject}) = (1-p)\,\alpha + p\,(1-\beta)$$
-
-$$P(H_0\mid \text{reject}) = \frac{(1-p)\,\alpha}{(1-p)\,\alpha + p\,(1-\beta)}$$
-
-| $p$ | power | $P(H_0\mid\text{reject})$ |
-|---|---|---|
-| 0.5 | 0.8 | 0.06 |
-| 0.1 | 0.8 | 0.36 |
-| 0.1 | 0.2 | 0.69 |

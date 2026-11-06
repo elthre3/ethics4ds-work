@@ -403,8 +403,6 @@ media feed, a university league table, the $h$-index.
    from the lecture. Were its cost data wrong? Where did the problem
    come from?
 
-Every group's examples go on the screen.
-
 ::: {.callout-note .answer title="Some examples" collapse="true"}
 - A credit score measures how a person has repaid credit before and is
   taken to stand for whether they will repay a new loan. Someone who
@@ -789,7 +787,7 @@ the applicant's own circumstances.
 
 Bring one dataset or study where some people who should be in it are
 not. Write down who is missing, and in which direction their absence
-pushes the result. Every group's examples will go on the screen.
+pushes the result.
 
 ## References
 

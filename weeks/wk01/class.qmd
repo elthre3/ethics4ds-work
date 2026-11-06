@@ -80,7 +80,7 @@ applies to which quantity.
 
 ### To start
 
-Two things, on the shared document.
+Two things.
 
 1. One ethical issue in data science that concerns you. A sentence is
    enough.
@@ -183,7 +183,7 @@ one_experiment <- function(beta0 = 0, betaX = 0, betaA = 0, betaXA = 0,
 ### Discussion
 
 More prompts than we will get through. Groups of three or four, then to
-the room; every group's answer goes on the shared document.
+the room.
 
 1. What are the ethical impacts of the replication crisis? Consider both
    general impacts and impacts specific to a field you know.
@@ -219,7 +219,6 @@ One sentence, individually: what causes p-hacking, and what would fix it?
 Bring one published claim about a difference between two groups of
 people, from any source. Write down the comparison that was reported, and
 one comparison that could have been reported instead. One sentence each.
-Every group's examples will go on the screen.
 
 ## References
 
