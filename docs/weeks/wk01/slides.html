@@ -213,7 +213,7 @@ Joshua Loftus
 <p>A true null that got published is, on average, 2.3 standard errors from zero.</p>
 <p>Not because anyone cheated, but because you only saw it when it was large.</p>
 </section>
-<section id="exaggeration" class="slide level2">
+<section id="exaggeration" class="slide level2 inverse">
 <h2>Exaggeration</h2>
 <table class="caption-top">
 <thead>
@@ -283,7 +283,7 @@ Joshua Loftus
 <p><span class="math inline">\(p\)</span> = share of tested hypotheses that are true; <span class="math inline">\(1-\beta\)</span> = power.</p>
 <p>Best of <span class="math inline">\(k\)</span> null tests: <span class="math inline">\(\;P(\text{some } p&lt;0.05) = 1 - 0.95^k\)</span>, <span class="math inline">\(\;=0.64\)</span> at <span class="math inline">\(k=20\)</span>.</p>
 </section>
-<section id="or-20000" class="slide level2">
+<section id="or-20000" class="slide level2 inverse">
 <h2>208 or 20,000?</h2>
 <p>Stessman et al.&nbsp;(2017), <em>Nature Genetics</em>: 208 genes sequenced in 11,730 cases; 91 risk genes, 38 new.</p>
 <p>Threshold corrected for 208 tests. Mutation counts drew on exome studies of about 20,000 genes.</p>
@@ -344,66 +344,9 @@ Joshua Loftus
 <p>Groups and averages: what an average of a group says about a member of it, and what a feed that shows you the most extreme items does to your picture of a group.</p>
 <p>Required reading: David Freedman on ecological inference – the ecological fallacy, Goodman’s regression, and the voting-rights cases where it was used.</p>
 <p><strong>Prepare and bring:</strong> one published claim about a difference between two groups. Write down the comparison that was reported, and one that could have been reported instead.</p>
-</section>
-<section>
-<section id="backup" class="title-slide slide level1 center" data-minutes="0">
-<h1>Backup</h1>
-
-</section>
-<section id="power-of-the-z-test" class="slide level2" data-minutes="0">
-<h2>Power of the <span class="math inline">\(z\)</span>-test</h2>
-<p><span class="math inline">\(Z \sim N(\theta,1)\)</span>, reject if <span class="math inline">\(|Z| &gt; c\)</span>.</p>
-<p><span class="math display">\[
-\begin{aligned}
-P(|Z|&gt;c) &amp;= P(Z &gt; c) + P(Z &lt; -c)\\
-&amp;= P(Z-\theta &gt; c-\theta) + P(Z-\theta &lt; -c-\theta)\\
-&amp;= 1 - \Phi(c-\theta) + \Phi(-c-\theta).
-\end{aligned}
-\]</span></p>
-<p>At <span class="math inline">\(\theta = 0\)</span>: <span class="math inline">\(2(1-\Phi(c)) = \alpha\)</span>.</p>
-</section>
-<section id="the-truncated-normal-mean" class="slide level2" data-minutes="0">
-<h2>The truncated normal mean</h2>
-<p><span class="math display">\[E[Z\mid Z&gt;c] = \frac{\int_c^\infty z\,\phi(z-\theta)\,dz}{1-\Phi(c-\theta)}\]</span></p>
-<p>Substitute <span class="math inline">\(u = z-\theta\)</span>:</p>
-<p><span class="math display">\[\int_{c-\theta}^\infty (u+\theta)\,\phi(u)\,du = \theta\,(1-\Phi(c-\theta)) + \int_{c-\theta}^\infty u\,\phi(u)\,du\]</span></p>
-<p>Since <span class="math inline">\(\phi'(u) = -u\,\phi(u)\)</span>: <span class="math inline">\(\;\int_{c-\theta}^\infty u\,\phi(u)\,du = \phi(c-\theta)\)</span>.</p>
-<p><span class="math display">\[\Rightarrow\quad E[Z\mid Z&gt;c] = \theta + \frac{\phi(c-\theta)}{1-\Phi(c-\theta)}\]</span></p>
-</section>
-<section id="the-false-discovery-proportion" class="slide level2" data-minutes="0">
-<h2>The false discovery proportion</h2>
-<p>Share <span class="math inline">\(p\)</span> of tested hypotheses true; level <span class="math inline">\(\alpha\)</span>; power <span class="math inline">\(1-\beta\)</span>.</p>
-<p><span class="math display">\[P(\text{reject}) = (1-p)\,\alpha + p\,(1-\beta)\]</span></p>
-<p><span class="math display">\[P(H_0\mid \text{reject}) = \frac{(1-p)\,\alpha}{(1-p)\,\alpha + p\,(1-\beta)}\]</span></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><span class="math inline">\(p\)</span></th>
-<th>power</th>
-<th><span class="math inline">\(P(H_0\mid\text{reject})\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0.5</td>
-<td>0.8</td>
-<td>0.06</td>
-</tr>
-<tr class="even">
-<td>0.1</td>
-<td>0.8</td>
-<td>0.36</td>
-</tr>
-<tr class="odd">
-<td>0.1</td>
-<td>0.2</td>
-<td>0.69</td>
-</tr>
-</tbody>
-</table>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -421,8 +421,7 @@ or none of them?
 ## For next time
 
 Bring one score or algorithm used to make decisions about people. Write
-down what it measures and what it stands in for. Every group's examples
-will go on the screen.
+down what it measures and what it stands in for.
 
 ## References
 
