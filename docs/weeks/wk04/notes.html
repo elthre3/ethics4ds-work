@@ -511,6 +511,11 @@ E[Y^\star \mid Y &gt; t] = E\big[E[Y^\star \mid Y] \,\big|\, Y &gt; t\big]
 </div>
 <p>Amodei and colleagues (2016) use a cleaning robot as a running example. In these letters, the state is what the robot’s camera shows, the actions are where to move and whether to clean, and the utility is a clean room. If the reward is for not seeing any mess, the robot can earn it by closing its eyes, or by covering the mess with something it cannot see through.</p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_rect(data = room, aes(xmin = 0, xmax = 10, ymin = 0, ymax = 8), : All aesthetics have length 1, but the data has 3 rows.
+i Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -582,6 +587,10 @@ Y = Y^\star + \varepsilon ,
 Y = Y^\star + \varepsilon + g .
 \]</span></p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `label.size` argument of `geom_label()` is deprecated as of ggplot2 3.5.0.
+i Please use the `linewidth` argument instead.</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
