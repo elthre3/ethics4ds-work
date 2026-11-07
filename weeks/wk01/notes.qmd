@@ -102,7 +102,7 @@ collecting data. After that, 2 of 25 (8%).
 Same funder, same kind of trial, same statistics. What changed is that the
 comparison had to be chosen before the data could influence it.
 
-Here is a second picture, a histogram. Van Zwet and Cator (2020)
+Van Zwet and Cator (2020)
 collected over a million $z$-values from Medline abstracts published
 between 1976 and 2019. A $z$-value is an estimate divided by its standard
 error.
@@ -118,8 +118,7 @@ incompetence, and there is plenty of both; see the hall of shame in the
 optional readings. The second is that nobody has to behave badly for the
 picture to look like that. A journal preferring significant results, a
 researcher writing up the study that worked, a reader citing the surprising
-finding: each one is a filter. Let's take the second explanation seriously
-enough to build it.
+finding: each one is a filter.
 
 ## Rejection rates and power
 
@@ -225,7 +224,7 @@ both.
 
 ## Simulating publication bias
 
-Now the filter. Simulate a world of many studies. Some test hypotheses that
+Simulate a world of many studies. Some test hypotheses that
 are true nulls; the rest test real effects of modest size. Every test is
 done honestly. The only thing that goes wrong is that most results are
 written up only if they are significant. The rest stay in the file
@@ -293,8 +292,7 @@ simulated_publications |>
 
 ## The significance filter
 
-That number is not an accident of the simulation. It is a property of the
-normal distribution.
+That number is a property of the normal distribution.
 
 Suppose $Z \sim N(\theta, 1)$ and we only get to see $Z$ when $Z > c$.
 What is the expected value of what we see? Write $u = z - \theta$, so that
@@ -370,12 +368,12 @@ result does not reach its nominal coverage. (Their formula is for the
 two-sided filter on $|Z|$; for $\theta \ge 1$ it gives the same numbers as
 the one-sided version in the table, to two decimals.)
 
-Put the two halves together. The power of a study is about how much its
+The power of a study is about how much its
 estimate varies. The exaggeration of a published estimate is a bias. The
 file-drawer effect turns variance into bias. So when you are shown an
 estimate, ask whether the problem is bias, variance, or both.
 
-### What the model leaves out
+### Limitations of the model
 
 Two things, both of which make matters worse. A two-sided filter also lets
 through estimates of the wrong sign, so a low-powered study can produce a
@@ -419,16 +417,15 @@ Then marginally $Z \sim N(0, 1 + \tau^2)$, and
 $$
 \theta \mid Z = z \;\sim\; N\!\left( \frac{\tau^2}{1 + \tau^2}\, z,\; \frac{\tau^2}{1 + \tau^2} \right).
 $$
-The posterior mean shrinks $z$ towards zero by the factor
+The posterior mean shrinks $z$ toward zero by the factor
 $\tau^2/(1+\tau^2)$. With $\tau = 1$, a field where the typical study has
 power under 20%, a just-significant $z = 1.96$ is best read as about
 $0.98$. The frequentist calculation from the other direction gave
-$1.96/2.5 \approx 0.8$ at $\theta = 1$. Different questions, similar
-answers.
+$1.96/2.5 \approx 0.8$ at $\theta = 1$.
 
 Two things follow. First, the selection rule does not appear in the
-posterior. The filter acts on $z$, and once you condition on $z$ it has
-nothing more to say. The bias in the frequentist calculation comes from
+posterior. The filter acts on $z$, and once you condition on $z$ it adds
+no further information. The bias in the frequentist calculation comes from
 averaging over what was selected; the Bayesian conditions on what was
 seen. You can check this by simulation:
 
@@ -480,7 +477,7 @@ not. The researcher who "just looked at the data first" is in a similar
 position to the one who ran twenty tests, and it is harder to count the
 paths.
 
-Here is a recent example from genetics. In 2017 a large team reported 91
+In 2017 a large team reported 91
 genes linked to neurodevelopmental disorders, 38 of them new (Stessman et
 al., *Nature Genetics*). They had sequenced 208 candidate genes in more
 than 11,000 cases. To decide which genes had more mutations than chance
@@ -544,9 +541,9 @@ claim about the range of $p$ and power he considered plausible, and you can
 disagree with the range without disagreeing with the arithmetic.
 
 The same arithmetic, with a risk score in place of a $p$-value, describes a
-classifier that flags people rather than hypotheses. We will do it again.
+classifier that flags people rather than hypotheses. We will do it again later in the course.
 
-## Two lenses
+## Lenses
 
 Which comparison gets reported? Inside a study: the best of $k$ tests,
 the forking paths, the 208 genes.
@@ -563,8 +560,7 @@ prefers a story.
 
 ## Two cases
 
-*Would a more competent analyst have chosen differently?* One case where
-the answer is yes and one where it is no.
+*Would a more competent analyst have chosen differently?*
 
 **Lucia de Berk.** A Dutch nurse was convicted in 2003, and again on appeal
 in 2004, of murders and attempted murders. Part of the evidence was a
