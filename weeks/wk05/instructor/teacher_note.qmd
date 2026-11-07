@@ -59,8 +59,8 @@ How it runs
   `C == 1`.
 - Every item ends with a question about who the mistake falls on, who
   gains from it going unnoticed, or who the choice could be justified
-  to. A group that has the number and skips the question has not
-  finished; ask it.
+  to. Those questions are the point of the week, not a coda. A group
+  that has the number and skips the question has not finished; ask it.
   The answers in the sheet are directions, and the room may have
   better ones.
 

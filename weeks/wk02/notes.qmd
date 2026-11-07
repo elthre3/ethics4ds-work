@@ -220,8 +220,9 @@ exist in statistics proper." Fisher's significance tests and Neyman
 and Pearson's hypothesis tests are different theories whose authors
 disagreed, and in Gigerenzer's account the ritual is a hybrid that
 neither would have accepted. Step 1 leaves out the alternative
-hypothesis, and without one there is no power to compute. The
-arithmetic of the replication crisis needed the power of a test.
+hypothesis. The arithmetic of the replication crisis needed the power
+of a test, and without an alternative hypothesis there is no power to
+compute.
 
 Gigerenzer argues that the ritual survives on illusions about what a
 significant result means. Try this question, which has been put to
@@ -1259,7 +1260,8 @@ The dashed line is the regression on everyone. The simulation was
 built with $\lambda = 0.14$, a slope between the three state averages
 of $-0.6$ and a slope within states of $0.4$, so the slope for
 everyone should be about $0.14(-0.6) + 0.86(0.4) = 0.26$, and the
-dashed line's slope is $0.26$.
+dashed line's slope is $0.26$. One slope describes states and the
+other describes voters.
 
 ### Ecological regression and the constancy assumption
 

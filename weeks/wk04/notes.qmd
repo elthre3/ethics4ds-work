@@ -985,7 +985,7 @@ nobody inside has to decide to leave the gap open; the reward decides
 for them. The post describes one change of reward, not the incentives
 behind it; that reading is mine.
 
-The largest of $n$ is the selection half of this story: a feed shows the
+Selecting the largest of $n$ is the selection half of this story: a feed shows the
 most extreme of $n$ items. This is the optimization half: a feed that
 ranks by $R$ changes what gets made, because the people who make it
 write for the score.

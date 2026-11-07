@@ -705,7 +705,7 @@ Retrieval first: the four difficulties from last week, from the room, before the
 An agent judges a policy only by the reward it expects. That is consequentialism, with the good defined by whoever chose $R$.
 
 ::: {.retrieval}
-What are the four difficulties of utilitarianism?
+We listed four difficulties of utilitarianism. Which are they?
 :::
 
 . . .

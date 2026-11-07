@@ -205,7 +205,8 @@ The two mistakes fall on different groups. The unaware model's gap
 favors the coached group and costs the uncoached one, by $4/9$ of a
 standard deviation in the average prediction. The causal
 reading of the coefficient says the coached group is worse at the job,
-which is false.
+which is false. Neither is a fact about the people; both are facts
+about what was done with the data.
 :::
 
 ### Exercise 3. Inverse probability weighting
@@ -276,8 +277,8 @@ the silent earn more or less than the rest. Checking either would mean
 asking some of the people who did not answer, that is, collecting what
 was not collected. The weights still rest on an assumption, and it is
 written down. The complete-case mean rests on an assumption too, and
-nobody wrote it down: it had to be worked out, as above, before anyone
-could challenge it.
+nobody wrote it down: it had to be worked out, as above, before the
+people it is about could challenge it.
 :::
 
 ## In class
