@@ -45,7 +45,8 @@ score it keeps is a collider, and it is the same model whatever the
 reason the column went. A column with holes forces one of three
 choices, drop the column, drop the rows, or fill the holes, and each
 makes an assumption about the values nobody observed. Writing that
-assumption down does not make it true, but it gives it an owner.
+assumption down does not make it true. It means someone can argue with
+it, and whoever wrote it can be asked to defend it.
 
 ```{r setup, echo=FALSE, message=FALSE}
 library(ggplot2)
@@ -228,7 +229,7 @@ on grades or school; a program offers places on a cost that has four
 causes. Whoever analyzes the people let in has conditioned on the rule,
 whether or not they meant to.
 
-### Why conditioning creates an association
+### The collider covariance
 
 Take $A$ and $Y$ independent, and first the case with no noise:
 $C = Y + A$. Among people with the same $C$, $A = C - Y$, so
@@ -275,8 +276,7 @@ What this leaves out: outside the linear model, the size and even the
 sign of the association depend on how the causes combine, and cannot
 be read off the graph. Elwert and Winship (2014, page 2.7 of their
 copy) say that the sign and magnitude "cannot generally be predicted
-without additional assumptions." The graph says an association
-appears; the model says which way.
+without additional assumptions."
 
 ## Leaving a column out
 
@@ -290,8 +290,8 @@ collected one. Or a column was recorded for some people and not for
 others, and whoever cleaned the data dropped it, because half of it
 was empty and the software would otherwise have dropped the rows.
 
-A column with holes, then, forces one of three choices, drawn below,
-and the rest of these notes takes them in turn: drop the column (this part), drop
+A column with holes, then, forces one of three choices, drawn below:
+drop the column (this part), drop
 the rows that have holes (the complete-case analysis of the next
 part), or fill the holes in (the part after). The model that results
 from dropping a column is the same model whatever the reason the
@@ -341,10 +341,10 @@ draw_dag(cw, data.frame(from = c("A", "Y"), to = c("X", "X")), xlim = c(-0.4, 2.
 ```
 
 $X$ is a collider between $A$ and $Y$. Fit two models for $Y$: one
-that uses $X$ only, as someone might because using $A$ feels like
-discrimination, or because $A$ was recorded for some applicants only
-and the column was dropped (the first is sometimes called an *unaware*
-model), and one that uses $X$ and $A$. The setting is a coursework problem from this course in
+that uses $X$ only (sometimes called an *unaware* model), as someone
+might because using $A$ feels like discrimination, or because $A$ was
+recorded for some applicants only and the column was dropped, and one
+that uses $X$ and $A$. The setting is a coursework problem from this course in
 2024, with the numbers of its worked solution.
 
 ```{r coursework_sim, message=FALSE}
@@ -393,7 +393,7 @@ ggplot(show, aes(X, Y, color = A)) +
 At any given score, the people in group 1 have lower $Y$: two points of
 their score came from $A$. The model that uses $A$ subtracts them. The
 model on $X$ alone fits one line through both clouds, flatter than
-either group's, so it reads the coaching as ability: it predicts too
+either group's, so it treats the coaching as ability: it predicts too
 high for group 1 and too low for group 0.
 
 ### The same numbers by hand
@@ -459,9 +459,8 @@ proportionate means of achieving a legitimate aim. The model on $X$ alone
 applies one rule whatever the group and puts group 0 at a disadvantage. Which
 of these, if either, would be unlawful in a given setting depends on
 facts, and for indirect discrimination on whether the rule is a
-proportionate means to a legitimate aim, which I am not going to
-adjudicate, and the
-arithmetic does not answer it. What the arithmetic does answer is
+proportionate means to a legitimate aim. I am not going to adjudicate
+that, and the arithmetic does not answer it. What the arithmetic does answer is
 whether "the model does not use $A$" and "the model does not treat the
 groups differently" are the same claim. They are not.
 
@@ -482,8 +481,8 @@ characteristic is a choice someone made for a reason that can be
 argued with, in court if necessary, and dropping a half-empty column is
 a default that nobody argued for and that the next person to open the
 file will not know was made. The model cannot tell the two apart. The
-analyst can, and that is the point of asking why a column is missing
-before deciding what to do about it.
+analyst can, by asking why a column is missing before deciding what to
+do about it.
 
 ### Adjusting for a collider
 
@@ -494,8 +493,7 @@ people with the same score, those in group 1 do worse. As a statement
 about prediction at a fixed score, that is true. As a statement about
 what would happen to someone's $Y$ if their $A$ were changed, it is
 false. Adjusting for $X$ made the estimate of the effect worse, because
-$X$ is a collider. Adjusting for a confounder removes bias; adjusting
-for a collider adds it.
+$X$ is a collider.
 
 So the same graph gives opposite advice for two questions. To predict
 $Y$ well, condition on $X$ and $A$. To estimate the effect of $A$ on
@@ -505,8 +503,7 @@ $Y$, do not condition on $X$.
 
 ### Missing data
 
-Now the cases themselves. Suppose $Y$ is sometimes missing and $X$ is
-always recorded. Write $C = 1$ if $Y$ is observed and $C = 0$ if it is
+Suppose $Y$ is sometimes missing and $X$ is always recorded. Write $C = 1$ if $Y$ is observed and $C = 0$ if it is
 missing. The letter is the one from the first part on purpose: whether
 someone is in the data is something the analysis conditions on, and
 when two things both cause it, it is a collider. Hernán and Robins
@@ -614,7 +611,7 @@ is unbiased when missingness depends on $X$ only, even though the
 complete-case mean of $Y$ is biased. Van Buuren's section 2.7 states the
 general version: when the probability of being missing does not depend
 on $Y$, and the model for $Y$ given $X$ is correct, the complete-case
-regression coefficients are "free of bias." Two warnings. If the line is
+regression coefficients are "free of bias." If the line is
 only an approximation, changing the mix of $x$ changes which line fits
 best. And if missingness depends on $Y$ given $X$, removing points can
 change the average of $Y$ at each $x$, and then the line moves. It
@@ -667,7 +664,7 @@ probability of answering. Hernán and Robins (section 8.5) use the
 same weights for people lost to follow-up in a trial, written
 $1/\Pr[C = 0 \mid L, A]$ in their notation.
 
-Weighting removes the bias and pays for it in variance: a person with a
+Weighting removes the bias and increases the variance: a person with a
 small $e(X)$ gets a large weight, and a few large weights make the
 estimate noisy. In practice $e(X)$ is not known and is estimated
 from who answered at each $X$. If whether someone answers depends on $Y$
@@ -752,12 +749,12 @@ observed, usually MAR given the variables put into it. It cannot be
 checked against the missing values, because they are missing. Writing
 the model down is better than letting `na.omit()` make an unstated
 assumption, because a written assumption can be argued with. But it is
-still an assumption. Imputing is not observing.
+still an assumption.
 
-## Three choices, one table
+## The three choices compared
 
-Back to the coursework data, with the column $A$ now recorded for half
-the rows, chosen at random, and missing for the other half. Take the
+In the coursework data, let the column $A$ be recorded for half the
+rows, chosen at random, and missing for the other half. Take the
 three choices in turn and ask, for each, how well it predicts $Y$ on
 rows where $A$ is recorded, how well on rows where it is missing, and
 how big a gap it predicts between the groups. The gap is the mean
@@ -810,15 +807,14 @@ knitr::kable(tab, caption = "5,000 training and 5,000 test rows; A recorded for 
 ```
 
 Read the table by column. Where $A$ is recorded, the two methods that
-use it predict equally well and with no gap; filling in has bought
-nothing there that dropping the rows did not already have, except that
-the fit used all the rows. Where $A$ is missing, nothing does better
+use it predict equally well and with no gap; filling in does no better
+there than dropping the rows, except that the fit used all the rows. Where $A$ is missing, nothing does better
 than $X$ alone, and the gap is back at $0.65$. Filling in recovered
 the fit, not the missing information: for a row whose $A$ was never
 recorded, an imputed $A$ is a function of that row's $X$, and the
 prediction is a prediction from $X$.
 
-The "no prediction" entries are a choice of pipeline, not a law. The
+The "no prediction" entries are a choice of pipeline. The
 complete-case fit could be given the same prediction-time step as
 filling in, averaging its prediction over $P(A \mid X)$ for a row
 without $A$, and its row would then match the fill-in row. With the
@@ -839,10 +835,9 @@ line was giving away almost nothing. The gap it predicts is
 $1 - \big(E[p(X) \mid A = 1] - E[p(X) \mid A = 0]\big) \approx 0.65$,
 not $0$, because $X$ holds only part of the information about $A$.
 
-One more thing the table says. Filling $A$ in from $X$ so that the
-model can use it is using a proxy for $A$. If the reason $A$ was left
-out was the law, the proxy raises the same question the law asked,
-which is week 8's subject.
+Filling $A$ in from $X$ so that the model can use it is using a proxy
+for $A$. If the reason $A$ was left out was the law, the proxy raises
+the same question the law asked, which comes back later in the course.
 
 ## Lenses
 

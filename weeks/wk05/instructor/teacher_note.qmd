@@ -59,8 +59,8 @@ How it runs
   `C == 1`.
 - Every item ends with a question about who the mistake falls on, who
   gains from it going unnoticed, or who the choice could be justified
-  to. Those questions are the point of the week, not a coda. A group
-  that has the number and skips the question has not finished; ask it.
+  to. A group that has the number and skips the question has not
+  finished; ask it.
   The answers in the sheet are directions, and the room may have
   better ones.
 
@@ -90,11 +90,11 @@ What the class adds to the lecture
   flips it.
 - Discussion 3 is the lecture's selective-labels slide on a case
   without judges: a bank with one policy has no lenient decision-maker
-  to compare with, and the honest fix, approving some rejected
-  applicants at random, costs money. Question 3 asks who pays for it
-  and whether it is justified; the point to land is that the two costs
-  are not symmetric, one visible and on the bank, one invisible and on
-  the people wrongly rejected.
+  to compare with, and the fix, approving some rejected applicants at
+  random, costs money. Question 3 asks who pays for it and whether it
+  is justified; bring out that the two costs are not symmetric: one
+  visible and on the bank, one invisible and on the people wrongly
+  rejected.
 - Coding 2's step 5 (who should choose the imputation model when the
   survey sets benefit levels) is the lecture's closing line, that an
   imputation model is an assumption about the unseen, asked about
@@ -142,7 +142,7 @@ Where they get stuck
   imputation an improvement. Ask what the filled points' correlation
   with $X$ is (exactly 1) and whether that is a fact about anyone.
 - Coding 2 step 3: concluding that regression imputation is "fine under
-  MAR" from its estimate alone. Its standard error is the point.
+  MAR" from its estimate alone. Ask about its standard error.
 - Coding 2 step 3: concluding that multiple imputation handles MNAR
   because its estimate moved toward $1$ (it moved from $0.1$ to $0.4$).
   It moved because $X$ carries some information about $Y$; it is still

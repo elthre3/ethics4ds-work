@@ -69,8 +69,8 @@ not there. Someone made that decision, usually not the people left
 out, and every way of handling what is missing is an assumption about
 people nobody asked. So each item ends by asking who the mistake falls
 on, who gains from it going unnoticed, or who the choice could be
-justified to. The arithmetic is how you earn an answer to that
-question; it is not the answer.
+justified to. The arithmetic supports an answer to that question but
+does not settle it.
 
 Notation as in the lecture: $C = 1$ if a person's $Y$ is recorded and
 $C = 0$ if it is missing; $e(X) = P(C = 1 \mid X)$; $A$ is a group. A
@@ -131,8 +131,7 @@ association among hires was created by the hiring rule: a referred hire
 did not need a good interview to get in, and an unreferred hire did.
 Nothing about referrals and the quality of candidates follows. The
 people who pay are the next referred applicants, held to a higher bar
-because of a pattern the company's own rule produced. The records
-describe the rule, not the candidates.
+because of a pattern the company's own rule produced.
 
 (d) With a referral: $q$. Without: $1$. The gap is $1 - q$, so it depends
 on $q$, and it is zero only if everyone does well at the interview.
@@ -141,8 +140,9 @@ on $q$, and it is zero only if everyone does well at the interview.
 ### Exercise 2. The unaware model, with a smaller coaching effect
 
 Leaving a protected characteristic out of a model is often done in the
-name of fairness. This exercise computes what it buys, in the lecture's
-model with a smaller coaching effect.
+name of fairness. This exercise computes what that does to accuracy
+and to the gap between groups, in the lecture's model with a smaller
+coaching effect.
 
 Job performance $Y \sim N(0, 1)$, larger is better. A group $A \in
 \{0, 1\}$, half the population each, independent of $Y$. A test score
@@ -205,8 +205,7 @@ The two mistakes fall on different groups. The unaware model's gap
 favors the coached group and costs the uncoached one, by $4/9$ of a
 standard deviation in the average prediction. The causal
 reading of the coefficient says the coached group is worse at the job,
-which is false. Neither is a fact about the people; both are facts
-about what was done with the data.
+which is false.
 :::
 
 ### Exercise 3. Inverse probability weighting
@@ -275,10 +274,10 @@ The weights assume MAR given age, which the recorded data can neither
 confirm nor refute: within an age group, nothing recorded says whether
 the silent earn more or less than the rest. Checking either would mean
 asking some of the people who did not answer, that is, collecting what
-was not collected. The weights do not escape the assumption; they
-write it down. The complete-case mean rests on an assumption too, and
-nobody wrote it down. A written assumption can be challenged by the
-people it is about, and an unwritten one cannot.
+was not collected. The weights still rest on an assumption, and it is
+written down. The complete-case mean rests on an assumption too, and
+nobody wrote it down: it had to be worked out, as above, before anyone
+could challenge it.
 :::
 
 ## In class
@@ -381,8 +380,8 @@ lost at random; without that clause (if the post lost the sack from
 one school) it need not be. The mean is unbiased, just based on fewer
 students; nobody is misled by it, though the students whose scripts
 were lost have a different problem. Hours by region: MAR given region,
-and the clause "within each region ... unrelated to their hours" is
-doing the work. The overall mean is biased toward the region that
+and the answer depends on the clause "within each region ... unrelated
+to their hours". The overall mean is biased toward the region that
 responds more, in the direction of that region's mean, so the standard
 is set closer to the hours of the region that answered more, and the
 other region works to a number that is mostly not its own.
@@ -434,7 +433,7 @@ groups whose $Y$ has the same distribution.
    would learn and repeat that; this assumes a graph with an arrow from
    $A$ into $Y$ or into how $Y$ was measured. Against: in the lecture's
    graph $A$ affects the score and not the outcome, so leaving it out
-   makes the model read coaching as ability, less accurate for
+   makes the model treat coaching as ability, less accurate for
    everyone and worse for the group without coaching; a rule applied
    to all that disadvantages one group is the shape of indirect
    discrimination (section 19), unless justified. Neither argument
@@ -447,8 +446,7 @@ groups whose $Y$ has the same distribution.
    and keeps the gap. The question is who the model is for. The
    justification goes to whoever is scored by it, and to whoever asks
    later why a column is absent; "the software dropped it" is not an
-   answer anyone can defend, and the point of the exercise is that it
-   is the most common one.
+   answer anyone can defend, and it is the most common one.
 :::
 
 ### Coding 1: what a single fill-in does
@@ -691,7 +689,7 @@ pool(with(imp, lm(Y ~ 1)))$pooled[, c("estimate", "ubar", "b", "t", "m")]
    a prediction. `b` is the variance of the 20 estimates across
    completions, and it is what a single fill-in throws away;
    `t = ubar + (1 + 1/20) b`.
-5. Directions, not an answer. The model decides what the people who
+5. Directions, not an answer. The model determines what the people who
    did not answer are taken to earn, and the benefit level follows, so
    the choice is about them and is made without them. Whoever chooses
    should be able to say which recorded variables the imputation uses,
@@ -700,8 +698,8 @@ pool(with(imp, lm(Y ~ 1)))$pooled[, c("estimate", "ubar", "b", "t", "m")]
    published, in a form the people whose benefits depend on it, and
    those who speak for them, can read; the usual answer, a line in a
    technical appendix nobody opens, is a choice made in private about
-   people who were not asked. Note what the table showed: none of the
-   four methods can tell you from the data which column you are in.
+   people who were not asked. None of the four methods can tell you
+   from the data which column you are in.
 6. In June 70% of ozone readings are missing, in September 3%, so the
    data are not MCAR. Mean imputation's standard error is the smallest
    and is wrong, for the reason in step 3. The multiple imputation
@@ -779,7 +777,7 @@ if it approved them.
 1. Who is missing from the evaluation, and by what mechanism? Which
    way are the new model's measured error rates likely to be wrong?
 2. Who benefits from the problem going unnoticed?
-3. The honest fix is to approve some applicants the current model
+3. One fix is to approve some applicants the current model
    rejects, chosen at random, and record what happens. Who pays for
    that, and is it justified?
 
@@ -805,8 +803,8 @@ if it approved them.
 3. The bank pays, in the defaults among the randomly approved, and so
    do the randomly approved who default, since a loan one cannot repay
    is not a gift. The people who gain are the rejected applicants who
-   would have repaid, who are exactly the people the current records
-   cannot see, and every future applicant scored by a model whose
+   would have repaid, whose outcomes are missing from the current
+   records, and every future applicant scored by a model whose
    errors were measured on everyone. Whether that is justified is a
    choice, and the two sides are not symmetric: the cost of the fix is
    visible and falls on the bank, the cost of not fixing it is
