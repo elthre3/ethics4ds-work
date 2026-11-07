@@ -420,8 +420,9 @@ $$
 The posterior mean shrinks $z$ toward zero by the factor
 $\tau^2/(1+\tau^2)$. With $\tau = 1$, a field where the typical study has
 power under 20%, a just-significant $z = 1.96$ is best read as about
-$0.98$. The frequentist calculation from the other direction gave
-$1.96/2.5 \approx 0.8$ at $\theta = 1$.
+$0.98$. For comparison, at $\theta = 1$ a significant $z$ is about $2.5$
+on average (the exaggeration ratio above): an average over the estimates
+that pass the filter, at a fixed effect.
 
 Two things follow. First, the selection rule does not appear in the
 posterior. The filter acts on $z$, and once you condition on $z$ it adds

@@ -778,9 +778,9 @@ actions do, which is a causal model.
 
 Is $E_\pi[U]$ a causal quantity? It can be read as one, the expected
 utility if the agent's actions were set by $\pi$, but that reading
-needs assumptions beyond those of a structural causal model. An intervention in a
-structural causal model sets a variable for everyone in a population. Here one agent
-follows a rule. The people and systems it acts on may respond to what
+needs assumptions beyond those of the interventions met so far, which
+set a variable to the same value for everyone in a population. Here one
+agent follows a rule. The people and systems it acts on may respond to what
 it does, sometimes adversarially, and what happens to one of them can
 depend on what was done to others. Causal reinforcement learning, a
 subfield surveyed by Deng, Jiang, Long and Zhang (2023), brings causal
