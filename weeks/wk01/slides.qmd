@@ -55,7 +55,7 @@ theme_set(theme_minimal(base_size = 18))
 set.seed(313)
 ```
 
-## Two numbers
+## The replication crisis
 
 ::: {.notes}
 Plan 80 in the 80, from the segments: the crisis and the commitment 11; rejection rate and power 14; the simulation and the prediction 9; the significance filter and the computation 16; exaggeration 5; pairs 3; Ioannidis, forking paths, 208 or 20,000, pre-specification 6; the A/B item 8; the standing question with de Berk and Ofqual 5; ASA B.3, the lenses and next week 3. No slack.
@@ -66,10 +66,10 @@ Pace: 0:11 a million z-values; 0:25 a world of studies; 0:46 2.3 standard errors
 :::
 
 - Open Science Collaboration (2015): 100 psychology experiments replicated.
-  97 originals significant; **36%** of replications significant; effect sizes
-  about **half**.
-- *Nature* survey (2016), 1,576 researchers: **over 70%** had failed to
-  reproduce someone else's result, **over half** their own.
+  97 originals significant; 36% of replications significant; effect sizes
+  about half.
+- *Nature* survey (2016), 1,576 researchers: over 70% had failed to
+  reproduce someone else's result, over half their own.
 
 ## Pre-registration
 
@@ -261,8 +261,6 @@ Individually, written.
 > **Who benefited from that choice being invisible?**
 > **And would a more competent analyst have chosen differently?**
 
-The next two examples illustrate the second part of the standing question.
-
 ::: {.notes}
 After both cases, repeat the question and take a show of hands on each.
 :::
@@ -293,10 +291,10 @@ school's predicted distribution, built from its 2017--19 results.
 The student's work enters only through $r$. Cohorts under 15: teachers'
 grades used.
 
-13 August: about **36%** of A-level grades one grade below the teacher's,
-**3%** two below. 17 August: withdrawn.
+13 August: about 36% of A-level grades one grade below the teacher's,
+3% two below. 17 August: withdrawn.
 
-## Two lenses this week
+## Lenses this week
 
 - **Which comparison gets reported?** Inside a study: the best of $k$, the
   forking paths, 208 or 20,000.

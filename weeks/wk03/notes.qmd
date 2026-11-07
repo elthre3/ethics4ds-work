@@ -985,7 +985,7 @@ You have to choose, so choose, and defend it. "Pretending it was forced
 is its own failure." Which variables to adjust for follows from a graph,
 and you drew the graph. A colleague can draw another that fits the same
 numbers. The backdoor criterion narrows the choice. Given a graph, it
-tells you which sets are valid. Drawing the graph is up to you.
+tells you which sets are valid.
 Declining to draw one does not remove the choice. The argument you are
 reading has usually drawn it already, as "$X$ causes $Y$", without
 saying so.
@@ -1001,7 +1001,7 @@ women who did not, as if everything else about them were held fixed. A
 randomized trial makes "held fixed" true by design: the coin decides
 who is treated, and nothing else does.
 
-And why? The observational comparison comes free with the data. The
+And why? The observational comparison comes with the data. The
 interventional one needs a graph, and a graph is an argument that
 someone can attack. Whoever is making the case for a policy has a reason
 to prefer the first.
