@@ -165,7 +165,7 @@ contribution."
 > "The first principle is that you must not fool yourself--and you are
 > the easiest person to fool."
 
-One of his examples is last week's file drawer, in 1974:
+One of his examples is the file-drawer effect, in 1974:
 
 > "If we only publish results of a certain kind, we can make the
 > argument look good. We must publish both kinds of result. ... In
@@ -219,9 +219,9 @@ They call it the null ritual, and add: "Yet the null ritual does not
 exist in statistics proper." Fisher's significance tests and Neyman
 and Pearson's hypothesis tests are different theories whose authors
 disagreed, and in Gigerenzer's account the ritual is a hybrid that
-neither would have accepted. Step 1 matters most for us. Last week's
-arithmetic needed the power of a test, and without an alternative
-hypothesis there is no power to compute.
+neither would have accepted. Step 1 leaves out the alternative
+hypothesis, and without one there is no power to compute. The
+arithmetic of the replication crisis needed the power of a test.
 
 Gigerenzer argues that the ritual survives on illusions about what a
 significant result means. Try this question, which has been put to
@@ -252,11 +252,11 @@ quantity. Statement 5 is statement 2
 again: a rejection is the wrong decision only when the null hypothesis
 is true. Nor is the probability in statement 5 the level of the test.
 The level is $P(\text{reject} \mid H_0)$, and the statement is about
-$P(H_0 \mid \text{reject})$, last week's share of rejections that are
+$P(H_0 \mid \text{reject})$, the share of rejections that are
 false. That share depends on how many of the effects being tested are
-real and on the power of the tests, and in last week's examples with
-$\alpha = 0.05$ it ran from 0.06 to 0.69. Statement 6 is known as the
-replication fallacy. The
+real and on the power of the tests, and with $\alpha = 0.05$ it ran
+from 0.06 to 0.69 in the examples given for the replication crisis.
+Statement 6 is known as the replication fallacy. The
 probability that a repeat of the experiment is significant is the
 power of the test at the true effect, and a $p$-value does not tell
 you that.
@@ -282,7 +282,7 @@ ggplot(hk, aes(pct, who)) +
   theme(plot.title.position = "plot", axis.text.x = element_blank(), panel.grid = element_blank())
 ```
 
-Every one of the 44 students, all of whom had passed a statistics
+Every one of the 44 students, who had all passed a statistics
 course, marked at least one statement true. So did 90% of the 39
 professors and lecturers who did not teach statistics, and 80% of the
 30 people who taught it. Statement 5 was the most often believed, by
@@ -1007,8 +1007,8 @@ ggplot(feed, aes(x, group)) +
 ```
 
 Selecting the most extreme is the significance filter with the
-threshold replaced by a maximum. Last week you saw $Z$ only when it
-passed $c$; here you see the item only when it beat the other $n - 1$.
+threshold replaced by a maximum. Under the filter you see $Z$ only when
+it passes $c$; here you see the item only when it beats the other $n - 1$.
 Both produce a sample whose mean is far from the population's.
 
 Rathje, Van Bavel and van der Linden (2021) analyzed 2.7 million
@@ -1259,8 +1259,7 @@ The dashed line is the regression on everyone. The simulation was
 built with $\lambda = 0.14$, a slope between the three state averages
 of $-0.6$ and a slope within states of $0.4$, so the slope for
 everyone should be about $0.14(-0.6) + 0.86(0.4) = 0.26$, and the
-dashed line's slope is $0.26$. One slope describes states and the
-other describes voters.
+dashed line's slope is $0.26$.
 
 ### Ecological regression and the constancy assumption
 
