@@ -147,7 +147,7 @@ Joshua Loftus
 <section id="section" class="slide level2 inverse">
 <h2></h2>
 <h3 id="week-7">Week 7</h3>
-<p>Part 1: One table, two readings</p>
+<p>Part 1: The COMPAS dispute</p>
 <p>Part 2: Rates</p>
 <p>Part 3: Three criteria</p>
 <p>Part 4: The identity</p>
@@ -160,14 +160,14 @@ Joshua Loftus
 </div>
 </section>
 <section>
-<section id="part-1-one-table-two-readings" class="title-slide slide level1 center">
-<h1>Part 1: One table, two readings</h1>
+<section id="part-1-the-compas-dispute" class="title-slide slide level1 center">
+<h1>Part 1: The COMPAS dispute</h1>
 
 </section>
 <section id="compas" class="slide level2">
 <h2>COMPAS</h2>
 <p>COMPAS: a risk score from 137 questions, sold by Northpointe; a decile from 1 to 10. Broward County, Florida, used it in pretrial decisions. ProPublica (May 2016): the scores of more than 7,000 people assessed in 2013 and 2014, and whether each was arrested again within two years.</p>
-<p>This week: <span class="math inline">\(Y = 1\)</span> is a new arrest within two years; <span class="math inline">\(\hat Y = 1\)</span> is decile 5 or above, the county’s “medium” and “high”; <span class="math inline">\(A\)</span> is race as recorded, Black or white.</p>
+<p>Convention: <span class="math inline">\(Y = 1\)</span> is a new arrest within two years; <span class="math inline">\(\hat Y = 1\)</span> is decile 5 or above, the county’s “medium” and “high”; <span class="math inline">\(A\)</span> is race as recorded, Black or white.</p>
 <p><span class="math inline">\(1\)</span> is the bad outcome and the flag. The book’s examples run the other way.</p>
 <div class="source">
 <p>Angwin, Larson, Mattu and Kirchner (2016), “Machine Bias,” <em>ProPublica</em>, 23 May 2016, https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing; Larson, Mattu, Kirchner and Angwin (2016), “How We Analyzed the COMPAS Recidivism Algorithm,” <em>ProPublica</em>, 23 May 2016, https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm.</p>
@@ -285,14 +285,14 @@ Joshua Loftus
 <p>Barocas, Hardt and Narayanan (2023), <em>Fairness and Machine Learning: Limitations and Opportunities</em>, MIT Press, chapter 3, Tables 3.1 and 3.2, page 47 of the fairmlbook.org PDF.</p>
 </div>
 </section>
-<section id="the-rate-propublica-reported-and-the-rate-a-judge-sees" class="slide level2">
-<h2>The rate ProPublica reported, and the rate a judge sees</h2>
+<section id="conditioning-on-the-truth-or-on-the-flag" class="slide level2">
+<h2>Conditioning on the truth, or on the flag</h2>
 <p>FPR asks: of the people who did not reoffend, how many did the score flag? You can only compute it after two years.</p>
-<p>PPV asks: of the people the score flagged, how many reoffended? It is what a decision-maker who sees only the flag lives with.</p>
-<p>ProPublica sorted people by what happened and reported how the score had treated each kind. The replies sorted people by what the score said and reported what happened to each kind. Same table.</p>
+<p>PPV asks: of the people the score flagged, how many reoffended? It is the rate at which the flag a judge sees is right.</p>
+<p>ProPublica sorted people by what happened and reported how the score had treated each kind. The replies sorted people by what the score said and reported what happened to each kind. Both read the same table.</p>
 </section>
-<section id="from-the-publication-filter" class="slide level2">
-<h2>From the publication filter</h2>
+<section id="from-the-significance-filter" class="slide level2">
+<h2>From the significance filter</h2>
 <div class="retrieval">
 <p>Among hypotheses tested, a share <span class="math inline">\(p\)</span> are true. Tests have level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1 - \beta\)</span>. What is the probability that a rejected hypothesis is true?</p>
 </div>
@@ -359,8 +359,8 @@ P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) +
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, “Statistical non-discrimination criteria” through “Sufficiency,” pages 54 to 61.</p>
 </div>
 </section>
-<section id="what-compas-satisfies" class="slide level2">
-<h2>What COMPAS satisfies</h2>
+<section id="the-criteria-on-the-compas-table" class="slide level2">
+<h2>The criteria on the COMPAS table</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -383,13 +383,13 @@ P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) +
 </div>
 </div>
 </div>
-<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; the optimal score <span class="math inline">\(E[Y \mid X]\)</span> has it for free; and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
+<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; the optimal score <span class="math inline">\(E[Y \mid X]\)</span> has it already; and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, “Calibration and sufficiency” (Facts 2 and 3, Proposition 1), pages 61 to 63, and “Calibration values,” page 71.</p>
 </div>
 </section>
-<section id="calibrated-is-not-fair" class="slide level2 inverse">
-<h2>Calibrated is not fair</h2>
+<section id="two-calibrated-scores" class="slide level2 inverse">
+<h2>Two calibrated scores</h2>
 <p>A score that gives everyone the population’s base rate is calibrated.</p>
 <p>A score that is perfect in one group and gives the other group its base rate is calibrated by group.</p>
 <p>Calibration checks that the score means what it says. It does not say the score is any good, or that it treats the groups alike.</p>
@@ -434,10 +434,10 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <li><p>Put in <span class="math inline">\(p_a = 0.514\)</span> and <span class="math inline">\(p_b = 0.394\)</span>.</p></li>
 </ol>
 </section>
-<section id="what-the-identity-forces" class="slide level2">
-<h2>What the identity forces</h2>
+<section id="unequal-base-rates" class="slide level2">
+<h2>Unequal base rates</h2>
 <div class="leave">
-<p>When two groups differ in prevalence, a flag with the same positive predictive value in both cannot also have the same false positive rate and the same false negative rate in both, unless it makes no false positives at all.</p>
+<p>When two groups differ in prevalence, a flag with the same positive predictive value in both, strictly between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, has a different false positive rate or a different false negative rate in the two groups.</p>
 </div>
 <p>With equal PPV and equal FNR:</p>
 <p><span class="math display">\[
@@ -482,7 +482,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <tr class="header">
 <th style="text-align: left;">view</th>
 <th style="text-align: left;">the rule</th>
-<th style="text-align: left;">the criterion it reaches for</th>
+<th style="text-align: left;">the criterion the book ties to it</th>
 </tr>
 </thead>
 <tbody>
@@ -494,7 +494,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <tr class="even">
 <td style="text-align: left;">middle</td>
 <td style="text-align: left;">treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount</td>
-<td style="text-align: left;">error rate parity: one group should not carry more of the mistakes</td>
+<td style="text-align: left;">error rate parity: one group should not bear more of the mistakes</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">broad</td>
@@ -511,12 +511,12 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <section id="which-would-you-give-up" class="slide level2" data-minutes="3">
 <h2>Which would you give up?</h2>
 <div class="ask">
-<p>The criteria cannot all hold. Which one would you give up, and to whom do you owe the explanation?</p>
+<p>The criteria cannot all hold. Which one would you give up, and who do you owe the explanation to?</p>
 <p>Who pays for your choice: which group, and which error?</p>
 </div>
 </section>
-<section id="back-to-compas" class="slide level2" data-minutes="3">
-<h2>Back to COMPAS</h2>
+<section id="a-cutoff-per-group" class="slide level2" data-minutes="3">
+<h2>A cutoff per group</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -527,7 +527,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </div>
 </div>
 <div class="leave">
-<p>The number by each point is the cutoff. Moving it moves the errors; it cannot equalize the groups’ rates while their base rates differ. A cutoff per group can, and then the same score means different treatment.</p>
+<p>The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates. A cutoff per group does, and then the same score means different treatment.</p>
 </div>
 </section>
 <section id="a-screening-test" class="slide level2" data-minutes="6">
@@ -538,7 +538,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <li>In each region, what share of positive results are correct?</li>
 <li>In which region is a positive result wrong more often, and who bears that error?</li>
 <li>The laboratory wants the two shares equal. What has to change in one region, and what happens to that region’s error rates?</li>
-<li>Which criterion did the laboratory give up, and to whom does it owe the explanation?</li>
+<li>Which criterion did the laboratory give up, and who does it owe the explanation to?</li>
 </ol>
 </div>
 </section>

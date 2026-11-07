@@ -21,7 +21,7 @@ st313:
 ---
 
 **Important note:** this week is about whether a risk score used on
-real defendants was fair, and to whom. The arithmetic below is not
+real defendants was fair, and who it was fair to. The arithmetic below is not
 contested; it holds for any table of counts. Which fairness criterion
 should matter, and who should bear the errors a score makes, are
 contested, and my view is one view. A well-argued position I think is
@@ -46,8 +46,9 @@ families of statistical fairness criteria ask for one or another of
 these to be equal across groups. A four-line identity ties a group's
 prevalence, its predictive value and its two error rates together, so
 that when two groups differ in prevalence, a classifier with the same
-predictive value in both cannot also have the same error rates in
-both, unless it is perfect. The general version of that result, for
+positive predictive value in both (neither $0$ nor $1$) has a
+different false positive rate or a different false negative rate in
+the two. The general version of that result, for
 scores rather than flags, is stated and not proved. What remains is a
 choice among criteria, and the reading's three views of equality of
 opportunity say which criterion each kind of fairness reaches for. The
@@ -106,7 +107,7 @@ people on one side of a rule are, on average, more or less likely than
 the people on the other side to have the thing the rule is looking
 for.
 
-## One table, two readings
+## The COMPAS dispute
 
 ### COMPAS
 
@@ -180,11 +181,12 @@ The replies' numbers are the PPV column (of those flagged,
 calibration picture further down (the same decile, about the same
 rate in both groups). Both sides read the same 6,150 rows.
 
-One more number matters for everything that follows: the share
-re-arrested within two years was `r pct1(at5$p[1])` among Black
-defendants and `r pct1(at5$p[2])` among white defendants. That is the
-prevalence of $Y = 1$ in each group, and it is a fact about arrests in
-one county in two years, not about anything deeper.
+The share re-arrested within two years was `r pct1(at5$p[1])` among
+Black defendants and `r pct1(at5$p[2])` among white defendants. That
+is the prevalence of $Y = 1$ in each group, the base rate, and every
+result below depends on the two base rates being different. It is a
+fact about arrests in one county in two years, not about anything
+deeper.
 
 ### What is being predicted?
 
@@ -194,9 +196,10 @@ is whether the person reoffended, which nobody observes. Arrest is a
 proxy for it, and the gap between the two is not the same for
 everyone: who gets arrested depends on who gets stopped, searched and
 charged, and policing is not spread evenly across neighborhoods or
-groups. There is a second gap, from the missing-data week: a defendant
-held in jail before trial cannot be arrested on the street, so the
-outcome is observed under conditions the score itself helped set.
+groups. There is a second gap, of the kind that arises when the
+decision changes what can be observed: a defendant held in jail before
+trial cannot be arrested on the street, so the outcome is observed
+under conditions the score itself helped set.
 
 Every rate in this week, the two groups' prevalences included, is a
 rate of the proxy. If arrests overstate reoffending more in one group
@@ -231,10 +234,9 @@ Read down a column and you condition on the flag:
 - the positive predictive value, $\text{PPV} = P(Y = 1 \mid \hat Y = 1)$;
 - the negative predictive value, $\text{NPV} = P(Y = 0 \mid \hat Y = 0)$.
 
-The textbook has these as Tables 3.1 and 3.2 (page 47), and says it is
-not important to memorize the names. It is important to know which way
-each conditions, because that is what the whole dispute was about.
-The error rates ask how the score behaved on each kind of person,
+The textbook has these as Tables 3.1 and 3.2 (page 47), and says the
+names need not be memorized. Which way each conditions does need to be
+known, because the dispute turned on it. The error rates ask how the score behaved on each kind of person,
 which you can only know after the two years have passed. The
 predictive values ask what happened to each kind of flag, which is
 what a judge who sees the flag and nothing else experiences. ProPublica
@@ -261,11 +263,11 @@ $$
 \text{PPV} = \frac{p\,(1 - \text{FNR})}{p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}}.
 $$
 
-You have seen this formula. In the first week it was the probability
-that a published finding is true: a share $p$ of the hypotheses tested
-are true, tests have level $\alpha$ and power $1 - \beta$, and the
-probability that a rejection is a true discovery is
-$p(1-\beta) / [p(1-\beta) + (1-p)\alpha]$. Replace $\alpha$ by FPR,
+You have seen this formula with the significance filter, as the
+probability that a published finding is true: a share $p$ of the
+hypotheses tested are true, tests have level $\alpha$ and
+power $1 - \beta$, and the probability that a rejection is a true
+discovery is $p(1-\beta) / [p(1-\beta) + (1-p)\alpha]$. Replace $\alpha$ by FPR,
 $\beta$ by FNR and "true hypothesis" by "reoffended" and it is the
 same computation. In both settings the quantity that nobody designing
 the procedure controls is $p$, and in both it is the quantity that
@@ -309,7 +311,7 @@ sufficiency. The public may want the shares flagged to be equal, or
 may want the misses equal; those are independence and the other half
 of separation.
 
-### What COMPAS satisfies
+### The criteria on the COMPAS table
 
 Independence fails: `r pct(at5$flagged[1])` of Black defendants were
 flagged against `r pct(at5$flagged[2])` of white defendants. Separation
@@ -363,7 +365,7 @@ The white defendants' line wobbles at the top because few of them had
 high deciles (64 had decile 10, against 286 Black defendants). That is
 sampling variation, and it is the one place in this week where
 variance rather than bias is the issue: every rate in the tables is an
-estimate from a finite group, and Chouldechova's figures carry
+estimate from a finite group, and Chouldechova's figures show
 confidence intervals that the lecture's do not.
 
 ### Calibration and calibration by group
@@ -381,17 +383,18 @@ $r \mapsto P(Y = 1 \mid R = r)$, into one that is calibrated by group.
 Sufficiency and calibration by group are the same idea up to a
 renaming of the score's values.
 
-Two facts about calibration change how one should read the replies.
+Calibration by group says less than the replies implied.
 
-First, it comes free. The optimal score, $r(x) = E[Y \mid X = x]$, is
-calibrated within any group that the features $X$ can identify (Fact 3,
-page 62). A model fitted well on rich features will be approximately
-calibrated by group without anyone asking for it, and the textbook
-shows this on census income data with an off-the-shelf random forest
-(pages 62 and 63). So demanding calibration by group is not much of a
-demand; it mostly certifies that the model was fitted properly.
+Nothing has to be imposed to get it. The optimal score,
+$r(x) = E[Y \mid X = x]$, is calibrated within any group that the
+features $X$ can identify (Fact 3, page 62). A model fitted well on
+rich features will be approximately calibrated by group without anyone
+asking for it, and the textbook shows this on census income data with
+an off-the-shelf random forest (pages 62 and 63). So demanding
+calibration by group is not much of a demand; it mostly certifies that
+the model was fitted properly.
 
-Second, it is lost when a score is turned into a flag. If $R$ is
+It is also lost when a score is turned into a flag. If $R$ is
 calibrated by group and the flag is $\hat Y = 1\{R \geq t\}$, then the
 positive predictive value in group $a$ is
 $E[R \mid R \geq t, A = a]$, the average score above the cutoff in that
@@ -402,15 +405,14 @@ PPVs in the table differ by four points although the deciles are
 roughly calibrated. It also means that "calibrated" and "predictive
 parity" are two different claims; the replies made both.
 
-Calibration is a sanity check on a fit, and that is all it is. A score
+Calibration checks that the score's values mean what they say. A score
 that gives everyone the population's base rate is perfectly
 calibrated. A score that is perfect in one group and gives the other
 group its base rate is perfectly calibrated by group (textbook, page
 94). Neither is a score anyone would call fair, and the second is
-exactly a score that does all its work for one group. The value
-judgment hidden in "it is calibrated, so it is fair" is that a score
-is fair when it means what it says, whatever it does with that
-meaning.
+informative in one group only. The value judgment hidden in "it is
+calibrated, so it is fair" is that a score is fair when it means what
+it says, whatever it does with that meaning.
 
 ## The identity
 
@@ -440,20 +442,22 @@ $$
 \text{FNR} \;=\; 1 - \text{FPR}\cdot\frac{1 - p}{p}\cdot\frac{\text{PPV}}{1 - \text{PPV}}.
 $$
 
-### What it forces
+### Unequal base rates
 
 Take two groups $a$ and $b$ with prevalences $p_a \neq p_b$, and a flag
-with the same PPV in both (predictive parity) and the same FNR in both.
-Write the identity in each group and divide:
+with the same PPV in both (predictive parity), strictly between $0$ and
+$1$, and the same FNR in both. Write the identity in each group and
+divide:
 $$
 \frac{\text{FPR}_a}{\text{FPR}_b} \;=\; \frac{p_a / (1 - p_a)}{p_b / (1 - p_b)},
 $$
 the ratio of the groups' odds of the outcome. If the prevalences
-differ, this ratio is not $1$, so the false positive rates differ,
-unless both are $0$ (the flag makes no false positives at all, in
-which case the ratio is undefined and the PPV is $1$). The same
-argument with FNR and FPR swapped in the roles of "held equal" and
-"forced apart" gives the mirror statement.
+differ, this ratio is not $1$, so the false positive rates differ. (The
+condition on the PPV is what makes the division legitimate: a flag
+whose every positive is right has no false positives, one whose every
+positive is wrong has no true positives, and the identity has a $0$ in
+it either way.) The same argument with FNR and FPR swapped in the roles of "held
+equal" and "forced apart" gives the mirror statement.
 
 With COMPAS's two prevalences, `r pct1(at5$p[1])` and `r pct1(at5$p[2])`,
 the odds are `r sprintf("%.3f", odds(at5$p[1]))` and
@@ -473,15 +477,15 @@ This is the binary-classifier version of the week's main result, and
 the one you are expected to be able to derive:
 
 > When two groups differ in prevalence, a classifier with the same
-> positive predictive value in both groups cannot also have the same
-> false positive rate and the same false negative rate in both, unless
-> it makes no false positives at all.
+> positive predictive value in both groups, strictly between $0$ and
+> $1$, has a different false positive rate or a different false
+> negative rate in the two groups.
 
-The ProPublica gap, in other words, was not a defect that better
-tuning could have removed at that cutoff. Given the two groups' arrest
-rates and a score with predictive parity, some gap in the error rates
-had to be there. Which is not the same as saying the gap was
-acceptable; see below.
+Given the two groups' arrest rates and a score with predictive parity,
+some gap in the error rates had to be there; tuning the score better
+at that cutoff could not have removed it. Whether the gap was
+acceptable is a separate question, taken up under "Limits of the
+identity" below.
 
 ### Proposition 5
 
@@ -520,10 +524,10 @@ about.
 
 Kleinberg, Mullainathan and Raghavan (2017) prove the version for
 scores, not flags, and it is the one usually cited. I state it and do
-not prove it; the binary case above is its shadow. Their setting: each
+not prove it; the binary case above is the version for flags. Their setting: each
 person has a feature vector $\sigma$, a fraction $p_\sigma$ of the
 people with that feature vector are positives, and a *risk assignment*
-puts people into bins, each bin carrying a score $v$ meant as a
+puts people into bins, each bin labeled with a score $v$ meant as a
 probability. Two groups. Three conditions:
 
 - **(A) calibration within groups.** In each group, of the people
@@ -599,28 +603,28 @@ those in place:
   one ProPublica's finding tapped into. The book's own account ties it
   to the middle view: if one group's higher error rate comes from
   historical and present conditions that account for differences in
-  qualifications, then letting that group carry more of the mistakes
+  qualifications, then letting that group bear more of the mistakes
   perpetuates the disadvantage.
 
-So the first table is two views reading one table. The error rates are
-a middle-view complaint; the predictive values are a narrow-view
-defense. Neither is a mistake. They disagree about what a fair score
-owes to whom.
+The dispute over the first table is a dispute between two of these
+views. The error rates are a middle-view complaint; the predictive
+values are a narrow-view defense. Neither is a mistake. They disagree about what a fair score
+owes, and who it owes it to.
 
-One more thing the book says (page 97), which the lecture's splitting
-question needs: the two errors do not weigh the same. A false
+The book also says (page 97) that the two errors do not weigh the
+same. A false
 positive, in bail or sentencing, is an unjust denial of liberty to a
 person who would not have reoffended. A false negative is a release
 that turned out badly, and its cost falls on the public, and depends
 on the total number of such errors rather than on how they are split
-between groups. In most domains the first kind matters more as a
-normative matter, which is why the book's argument for caring about
-error rates at all starts from the false positives.
+between groups. In most domains, the book says, the first kind is the
+more significant as a normative matter, which is why its argument for
+caring about error rates at all starts from the false positives.
 
-### The question that splits the room
+### Which criterion to give up
 
-The criteria cannot all hold. Which one would you give up, and to whom
-do you owe the explanation? And who pays for your choice: which group,
+The criteria cannot all hold. Which one would you give up, and who do
+you owe the explanation to? And who pays for your choice: which group,
 and which kind of error?
 
 There is no house answer. A defensible position gives up predictive
@@ -635,12 +639,12 @@ whoever bears the errors of the human judgment that replaces it. What
 is not defensible is to treat the question as settled by the
 arithmetic. The arithmetic settles that a choice has to be made.
 
-## Back to COMPAS
+## Cutoffs and limits
 
 ### Thresholds
 
-A cutoff is the lever everyone reaches for. Move it up and fewer
-people are flagged: the false positive rate falls and the false
+A county can move the cutoff without touching the score. Move it up
+and fewer people are flagged: the false positive rate falls and the false
 negative rate rises, in both groups. The figure plots each group's
 (FPR, TPR) pair at every cutoff.
 
@@ -660,42 +664,44 @@ sweep |>
   theme(legend.position = "bottom", plot.caption = element_text(color = cgray))
 ```
 
-Two things to read off it. First, the same cutoff puts the two groups
-at different points: at the county's cutoff of 5, Black defendants are
+The same cutoff puts the two groups at different points: at the county's cutoff of 5, Black defendants are
 at (`r pct(at5$FPR[1])`, `r pct(at5$TPR[1])`) and white defendants at
 (`r pct(at5$FPR[2])`, `r pct(at5$TPR[2])`). There is no single cutoff
-at which the two groups have the same error rates. Second, the two
-curves run close to each other, which is the textbook's "visualizing
+at which the two groups have the same error rates. The two curves run
+close to each other, which is the textbook's "visualizing
 separation" picture (pages 58 to 60): the trade-offs achievable in
 both groups are the points under both curves, and reaching the same
 point in both groups means a different cutoff for each group, say
 decile 6 for one group and decile 4 or 5 for the other. That is
 post-processing (textbook, pages 63 and 64): take the score as given
-and set group-specific cutoffs so that one criterion holds. Its price
-is that the same decile now means different treatment depending on
-the group, and the score is no longer sufficient for the flag.
+and set group-specific cutoffs so that one criterion holds. Then the
+same decile means different treatment depending on the group, and the
+score is no longer sufficient for the flag.
 
 The identity holds at every cutoff, in every group. Moving the cutoff
 changes all three of FPR, FNR and PPV; it does not change the
 constraint between them, and it does not change $p$. What a false
 positive costs relative to a false negative, and the cutoff that
-follows from those costs, is a different question and a later
-lecture.
+follows from those costs, is a different question, taken up later in
+the course.
 
-### What the identity does not say
+### Limits of the identity
 
-It does not say the error-rate gap is acceptable. It says that at
-these base rates it is the price of predictive parity, and prices can
-be refused. It does not say which criterion is right. It does not say
-the base rates are what they appear to be: they are rates of arrest,
-and the lens-A question about who gets arrested is also a question
-about $p$. And it does not say nothing can be done. The two quantities
-it leaves free are the two places where there is leverage:
-the cutoff (and so the costs that should set it), and the base rate
-itself, which no score can change and a policy can. The pessimistic
-reading, that every score can be criticized on some fairness ground
-so none can be criticized on any, is one that the authors of the
-general result explicitly decline to draw, and so do I.
+The identity says that at these base rates an error-rate gap is what
+predictive parity costs. It does not say the gap is acceptable: a
+county that finds it unacceptable can give up predictive parity
+instead. It does not say which criterion is right. It takes the base
+rates as given, and they are rates of arrest, so the lens-A question
+about who gets arrested is also a question about $p$. And it leaves
+two quantities free: the cutoff, and so the costs that should set it,
+and the base rate itself, which no score can change and a policy can.
+The pessimistic reading, that every score can be criticized on some
+fairness ground so none can be criticized on any, does not follow.
+Kleinberg, Mullainathan and Raghavan end their paper (section 5) by
+suggesting, for settings where one kind of error costs more than the
+other, a search for scores that are calibrated and satisfy the one
+balance condition for the class whose errors cost more. That is a
+choice between the criteria, made in the open.
 
 ### Bias and variation
 
@@ -706,7 +712,8 @@ deciles are few, so the white defendants' calibration curve wobbles
 at the top, and a PPV computed in a small group has a wide interval.
 Chouldechova's Figure 1 shows 95 percent intervals on every bar;
 when you compare two groups' rates, look at whether the intervals
-overlap before reading a gap as real.
+overlap before reading a gap as a difference between the groups rather
+than sampling variation.
 
 ## Lenses
 
@@ -763,8 +770,9 @@ different one?
   opportunity" with its three subsections, the narrow, broad and
   middle views (pages 81 to 85).
 - A skim of chapter 3, "Groups in the population" and "No fairness
-  through unawareness" (pages 52 to 54), which is the point the
-  missing-data week made about leaving a column out.
+  through unawareness" (pages 52 to 54): leaving the group column out
+  of a model does not stop the model from using it through other
+  columns.
 
 If time is short, the pages to keep are 54 to 67 and 81 to 85. Pages
 46 to 50 are the vocabulary of true and false positive rates, risk
@@ -790,9 +798,9 @@ lecture.
   Equation (2.6) is the identity above; section 3, not assigned, is
   about what unequal error rates do under a sentencing policy.
 - Chapter 3's case study on credit scoring (pages 67 to 71), and its
-  chapter notes (pages 73 to 75), which record that these criteria
-  were known in educational testing in the 1960s and 1970s, under the
-  names of Cleary, Thorndike and Darlington, and rediscovered.
+  chapter notes (pages 73 to 75), which record that criteria like
+  these were already known in educational testing in the 1960s and
+  1970s (Cleary, Thorndike, Darlington).
 - Chapter 4, "Connecting statistical and moral notions of fairness"
   through "The normative underpinnings of error rate parity" (pages 92
   to 101): the book's own mapping of the three views to the three
