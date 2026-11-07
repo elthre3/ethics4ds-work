@@ -273,7 +273,7 @@ routes.
    sickest or to those it would help most. Where do resources and
    care-seeking come in? Someone who seeks care readily may also be the
    most likely to use the program.
-3. Last week's closing question, for everyone this time: does
+3. The closing question on consequentialism, for everyone this time: does
    consequentialism become more or less defensible once you have to
    write the causal model down?
 

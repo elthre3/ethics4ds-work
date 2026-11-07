@@ -42,12 +42,12 @@ minutes, and open them in order.
 
 ### Exercise 1. False rejections
 
-From last week. Of the effects a field tests for, 10% are real. Tests
+Of the effects a field tests for, 10% are real. Tests
 are run at level $0.01$ with power $0.5$. Compute the share of
 rejections that are false.
 
 ::: {.callout-tip collapse="true" title="Hint 1"}
-Use last week's formula. Of all the tests the field runs, what fraction reject when there is no effect, and what fraction reject when there is one?
+Of all the tests the field runs, what fraction reject when there is no effect, and what fraction reject when there is one?
 :::
 
 ### Exercise 2. Group membership and $R^2$

@@ -80,8 +80,6 @@ applies to which quantity.
 
 ### To start
 
-Two things.
-
 1. One ethical issue in data science that concerns you. A sentence is
    enough.
 2. From memory: what does the power of a test depend on? And which way does

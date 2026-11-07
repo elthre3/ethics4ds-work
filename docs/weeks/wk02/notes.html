@@ -319,7 +319,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>“The first principle is that you must not fool yourself–and you are the easiest person to fool.”</p>
 </blockquote>
-<p>One of his examples is last week’s file drawer, in 1974:</p>
+<p>One of his examples is the file-drawer effect, in 1974:</p>
 <blockquote class="blockquote">
 <p>“If we only publish results of a certain kind, we can make the argument look good. We must publish both kinds of result. … In other words, publication probability depends upon the answer. That should not be done.”</p>
 </blockquote>
@@ -340,7 +340,7 @@ window.Quarto = {
 <li>Always perform this procedure.</li>
 </ol>
 </blockquote>
-<p>They call it the null ritual, and add: “Yet the null ritual does not exist in statistics proper.” Fisher’s significance tests and Neyman and Pearson’s hypothesis tests are different theories whose authors disagreed, and in Gigerenzer’s account the ritual is a hybrid that neither would have accepted. Step 1 matters most for us. Last week’s arithmetic needed the power of a test, and without an alternative hypothesis there is no power to compute.</p>
+<p>They call it the null ritual, and add: “Yet the null ritual does not exist in statistics proper.” Fisher’s significance tests and Neyman and Pearson’s hypothesis tests are different theories whose authors disagreed, and in Gigerenzer’s account the ritual is a hybrid that neither would have accepted. Step 1 leaves out the alternative hypothesis. The arithmetic of the replication crisis needed the power of a test, and without an alternative hypothesis there is no power to compute.</p>
 <p>Gigerenzer argues that the ritual survives on illusions about what a significant result means. Try this question, which has been put to students and to their teachers (Oakes 1986; Haller and Krauss 2002; the wording here is shortened from Gigerenzer 2004). A treatment group and a control group have 20 people each, and a <span class="math inline">\(t\)</span> test on the difference in means gives <span class="math inline">\(t = 2.7\)</span>, <span class="math inline">\(p = 0.01\)</span>. Which of these statements are true?</p>
 <ol type="1">
 <li>The null hypothesis has been disproved.</li>
@@ -350,7 +350,7 @@ window.Quarto = {
 <li>If you reject the null hypothesis, you know the probability that you are making the wrong decision.</li>
 <li>If the experiment were repeated many times, 99% of the repetitions would give a significant result.</li>
 </ol>
-<p>None of them is true. A <span class="math inline">\(p\)</span>-value is the probability, computed on the assumption that the null hypothesis is true, of a test statistic at least as extreme as the one observed: here <span class="math inline">\(p = P(|T| \ge 2.7 \mid H_0) = 0.01\)</span>, where <span class="math inline">\(T\)</span> is the <span class="math inline">\(t\)</span> statistic. A significance test proves and disproves nothing, so 1 and 3 are false. Statements 2, 4 and 5 are about <span class="math inline">\(P(H_0 \mid \text{data})\)</span>, the probability of a hypothesis given the data, which is a different quantity. Statement 5 is statement 2 again: a rejection is the wrong decision only when the null hypothesis is true. Nor is the probability in statement 5 the level of the test. The level is <span class="math inline">\(P(\text{reject} \mid H_0)\)</span>, and the statement is about <span class="math inline">\(P(H_0 \mid \text{reject})\)</span>, last week’s share of rejections that are false. That share depends on how many of the effects being tested are real and on the power of the tests, and in last week’s examples with <span class="math inline">\(\alpha = 0.05\)</span> it ran from 0.06 to 0.69. Statement 6 is known as the replication fallacy. The probability that a repeat of the experiment is significant is the power of the test at the true effect, and a <span class="math inline">\(p\)</span>-value does not tell you that.</p>
+<p>None of them is true. A <span class="math inline">\(p\)</span>-value is the probability, computed on the assumption that the null hypothesis is true, of a test statistic at least as extreme as the one observed: here <span class="math inline">\(p = P(|T| \ge 2.7 \mid H_0) = 0.01\)</span>, where <span class="math inline">\(T\)</span> is the <span class="math inline">\(t\)</span> statistic. A significance test proves and disproves nothing, so 1 and 3 are false. Statements 2, 4 and 5 are about <span class="math inline">\(P(H_0 \mid \text{data})\)</span>, the probability of a hypothesis given the data, which is a different quantity. Statement 5 is statement 2 again: a rejection is the wrong decision only when the null hypothesis is true. Nor is the probability in statement 5 the level of the test. The level is <span class="math inline">\(P(\text{reject} \mid H_0)\)</span>, and the statement is about <span class="math inline">\(P(H_0 \mid \text{reject})\)</span>, the share of rejections that are false. That share depends on how many of the effects being tested are real and on the power of the tests, and with <span class="math inline">\(\alpha = 0.05\)</span> it ran from 0.06 to 0.69 in the examples given for the replication crisis. Statement 6 is known as the replication fallacy. The probability that a repeat of the experiment is significant is the power of the test at the true effect, and a <span class="math inline">\(p\)</span>-value does not tell you that.</p>
 <p>Haller and Krauss put the question to students and staff in the psychology departments of six German universities.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -361,7 +361,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Every one of the 44 students, all of whom had passed a statistics course, marked at least one statement true. So did 90% of the 39 professors and lecturers who did not teach statistics, and 80% of the 30 people who taught it. Statement 5 was the most often believed, by about 70% of each group. All six, Gigerenzer notes, “err in the same direction of wishful thinking: They make a <em>p</em>-value look more informative than it is.”</p>
+<p>Every one of the 44 students, who had all passed a statistics course, marked at least one statement true. So did 90% of the 39 professors and lecturers who did not teach statistics, and 80% of the 30 people who taught it. Statement 5 was the most often believed, by about 70% of each group. All six, Gigerenzer notes, “err in the same direction of wishful thinking: They make a <em>p</em>-value look more informative than it is.”</p>
 <p>Gigerenzer and Marewski collect cases of the ritual performed where nothing called for it. An Internet study asked “Do you feel there is a difference between altruism and heroism?” and 2,347 people said yes and 58 said no.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -746,7 +746,7 @@ P(M_{1000} &gt; 3) = 1 - (1 - 0.00135)^{1000} \approx 1 - e^{-1.35} = 0.74 .
 </div>
 </div>
 </div>
-<p>Selecting the most extreme is the significance filter with the threshold replaced by a maximum. Last week you saw <span class="math inline">\(Z\)</span> only when it passed <span class="math inline">\(c\)</span>; here you see the item only when it beat the other <span class="math inline">\(n - 1\)</span>. Both produce a sample whose mean is far from the population’s.</p>
+<p>Selecting the most extreme is the significance filter with the threshold replaced by a maximum. Under the filter you see <span class="math inline">\(Z\)</span> only when it passes <span class="math inline">\(c\)</span>; here you see the item only when it beats the other <span class="math inline">\(n - 1\)</span>. Both produce a sample whose mean is far from the population’s.</p>
 <p>Rathje, Van Bavel and van der Linden (2021) analyzed 2.7 million Facebook and Twitter posts from news media and members of Congress. Posts about the political out-group “were shared or retweeted about twice as often as posts about the in-group,” and each additional out-group term was associated with a 67% increase in the odds of a share. So the items that reach you from the other side have been selected before a feed ranks anything, by the people who chose to share them.</p>
 </section>
 <section id="calculation-and-interpretation" class="level2">
