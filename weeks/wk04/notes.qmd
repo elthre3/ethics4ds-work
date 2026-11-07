@@ -159,7 +159,7 @@ if (requireNamespace("systemfonts", quietly = TRUE) &&
 
 ### Citation counts
 
-Week 1 followed studies through one filter: of the tests that were run,
+The significance filter is one selection: of the tests that were run,
 the ones with $p < 0.05$ were the ones that reached print. The same
 filter operates further down the pipeline. De Vries and colleagues
 (2018) took 105 trials of antidepressants that drug companies had
@@ -188,15 +188,15 @@ selections; it says nothing about anyone's intentions.
 
 The citation count also does something to the people it measures. A
 researcher who knows that positive results are published and cited has
-a reason to find one, and week 1's p-hacking loop is a way of finding
-one. Last week's lecture put it in one sentence: what a score does to
+a reason to find one, and p-hacking is a way of finding
+one. What a score does to
 the people who write for it is a different mechanism from selection.
 
 The usual name for this is **Goodhart's law**. Charles Goodhart, in a
 1975 paper on monetary management in the United Kingdom, wrote that
 "Any observed statistical regularity will tend to collapse once
 pressure is placed upon it for control purposes." The quotation is the
-one the [Wikipedia article](https://en.wikipedia.org/w/index.php?title=Goodhart%27s_law&oldid=1379318143) you were asked to skim
+one the [Wikipedia article](https://en.wikipedia.org/w/index.php?title=Goodhart%27s_law&oldid=1379318143)
 gives, from the paper's 1981 reprint, page 116; the paper itself was
 not available to check. The wording most people know is Marilyn
 Strathern's, from a 1997 paper on auditing British universities: "When
@@ -229,8 +229,7 @@ reward signal it is the number the agent is given.
 | a patient's medical cost | how ill the patient is |
 | a video's views | a viewer informed, or entertained, on their own terms |
 
-The two differ by three routes, and the rest of these notes take them
-in turn.
+The two differ by three routes.
 
 1. **Noise.** $Y = Y^\star + \varepsilon$, with $\varepsilon$
    unrelated to anything else. A noisy measure is still right on
@@ -260,7 +259,7 @@ automatically; patients above the 55th were flagged to their doctor.
 Whether an identified patient was then enrolled was a decision for
 clinicians, so the paper's numbers are about identification, and these
 notes say "selected" for it. The score was a
-prediction of each patient's **medical costs** in the coming year, and
+prediction of each patient's medical costs in the coming year, and
 race was not one of its inputs. By industry estimates, the authors
 write, tools of this class are applied to roughly 200 million people in
 the United States each year.
@@ -337,8 +336,8 @@ Y = Y^\star + \beta_A A ,
 $$
 and the program selects everyone with $Y > t$. For group $0$ that is
 $Y^\star > t$. For group $1$ it is $Y^\star + \beta_A > t$, or
-$Y^\star > t - \beta_A$. **An offset of $\beta_A$ in the measure is a threshold
-moved by $-\beta_A$ for that group.** With $\beta_A < 0$, as in the paper, group
+$Y^\star > t - \beta_A$. An offset of $\beta_A$ in the measure is a threshold
+moved by $-\beta_A$ for that group. With $\beta_A < 0$, as in the paper, group
 $1$ has to be iller to be selected.
 
 ```{r offset_densities, echo=FALSE, fig.height=2.4, fig.width=6, fig.alt="Two normal curves of the measure Y, the group-1 curve shifted left by half a standard deviation, with the threshold t drawn as a dashed line and the two tails above it shaded."}
@@ -387,7 +386,7 @@ given that it exceeds $z$ is
 $$
 E[Y^\star \mid Y^\star > z] = \frac{\phi(z)}{1 - \Phi(z)} ,
 $$
-the inverse Mills ratio from week 1, where it gave the expected size of
+the inverse Mills ratio, which also gave the expected size of
 an estimate that survived the significance filter. Here it gives the
 mean need of the selected in each group: $z = t$ for group $0$ and
 $z = t - \beta_A$ for group $1$. Since the ratio increases in $z$, the
@@ -432,7 +431,7 @@ fix it too.
 The offset moves the second error onto one group. For a Black patient
 at the enrollment threshold, the score says "not ill enough" at a level
 of illness at which it says "selected" for a White patient. The price
-of an error is paid by the person it falls on, and the offset decides
+of an error is paid by the person it falls on, and the offset determines
 who that is. The fourth lens asks who bears the error; here the answer
 is the group whose costs were lower at the same need.
 
@@ -493,7 +492,7 @@ their measure says, by the factor $\lambda$. Manheim and Garrabrant
 call this the regressional version of Goodhart's law: pick the largest
 values of a proxy and you have picked its noise along with its signal.
 The slope is **attenuated** toward zero by $\lambda$, however large the
-sample. This is week 2's sentence again, more data, the same wrong
+sample. As with ecological regression, more data gives the same wrong
 answer, with variance in the measure turned into bias in the slope.
 
 ### Noise and an omitted variable
@@ -521,8 +520,8 @@ $$
 $$
 where $\lambda$ is the reliability of the report and $\delta$ is the
 slope of illness on visits. With $\gamma = 0$ this is $\beta\lambda$,
-attenuation alone. With no noise, $\lambda = 1$, it is last week's slope
-with a variable left out, $\beta + \gamma\delta$, whose bias is
+attenuation alone. With no noise, $\lambda = 1$, it is the slope
+with a variable left out, $\beta + \gamma\delta$, whose omitted-variable bias is
 $\gamma\delta$.
 
 The two biases work differently. Noise multiplies the slope by
@@ -620,7 +619,7 @@ The selected are a mixture: some are there mostly because they are
 ill, some because they could turn need into care, some because they
 seek care readily.
 
-Two more things follow. Among the selected the parts are negatively
+Among the selected the parts are negatively
 related, although they are independent in the population: to clear the
 threshold with less need, a person needed more of something else. And
 when the parts are related in the population, the mixture changes. If
@@ -701,10 +700,10 @@ ggplot() +
   theme_void() + theme(strip.text = element_text(size = 11), panel.spacing = unit(1.2, "lines"))
 ```
 
-Now a variant of week 3's job center, with 100 places on the course,
+Now a variant of the job center and its job-search course, with 100 places on the course,
 which helps some people more than others. Take the rates that follow as
 what would happen under assignment to the course or to no course, so
-that the differences are effects and not last week's confounded
+that the differences are effects and not a confounded
 comparison. Of people who worked last year, 70% are in work six months
 later if they take the course and 64% if they do not; of people who
 did not work last year, 40% and 14%. The
@@ -754,15 +753,15 @@ same choice. Its program, the paper says, mostly prevents acute
 episodes in people with chronic illness. One candidate for $U$ is how
 ill a patient is; another is how much the extra care would help them.
 They pick out different people whenever the care helps some patients
-more than others, which is the heterogeneity last week's average
-treatment effect averaged over. Telling the two apart needs an
+more than others, which is the heterogeneity an average
+treatment effect averages over. Telling the two apart needs an
 estimate of the program's effect on each kind of patient, a causal
 claim that the hospital's data, on patients it chose to enroll, do not
 give by themselves. Choosing between them is not an estimate at all:
 it is a judgment about whose good the program is for, and no label
 makes it for you.
 
-Each of the four difficulties of utilitarianism from week 3 becomes a
+Each of the four difficulties of utilitarianism becomes a
 choice someone makes in building such an agent. Defining utility
 becomes choosing $R$, a measurable stand-in for $U$, and in both
 examples the two come apart. Trading off between people becomes adding
@@ -779,8 +778,8 @@ actions do, which is a causal model.
 
 Is $E_\pi[U]$ a causal quantity? It can be read as one, the expected
 utility if the agent's actions were set by $\pi$, but that reading
-needs assumptions beyond last week's. An intervention in last week's
-sense sets a variable for everyone in a population. Here one agent
+needs assumptions beyond those of a structural causal model. An intervention in a
+structural causal model sets a variable for everyone in a population. Here one agent
 follows a rule. The people and systems it acts on may respond to what
 it does, sometimes adversarially, and what happens to one of them can
 depend on what was done to others. Causal reinforcement learning, a
@@ -837,13 +836,13 @@ nodes$panel <- factor(nodes$panel, levels = pn); edges$panel <- factor(edges$pan
 draw_dag(nodes, edges, boxes = TRUE, text_size = 3.6, xlim = c(-0.9, 3.5), ylim = c(-0.3, 1.45))
 ```
 
-Replacing the equation that generates $Y$ is what week 3 called an
+Replacing the equation that generates $Y$ is an
 **intervention**: a new assignment for one variable, every other line
 left alone. The relation between $Y$ and $Y^\star$ that held before
 the rule need not hold after it. Which people it fails for depends on
 who can pay for $g$.
 
-Who can respond decides what the response does. Compare two cases
+Who can respond determines what the response does. Compare two cases
 with the same 300 places for the highest $Y$. If everyone adds the
 same $1$ to their $Y$, every ranking is unchanged, the same 300 people
 are selected, and nothing about them has changed: a rewarded measure
@@ -962,8 +961,8 @@ raises it, and by how much, needs the model's equations too. A rule meant
 to reward improvement has to know which, and that is a causal inference
 problem; the authors show that any procedure for designing such rules
 has to solve one. Conditioning is not intervening, a third time: the
-rule intervenes on the people it is applied to, and what they do in
-response is decided by the graph, not by the rule's intentions.
+rule intervenes on the people it is applied to, and what their
+response does depends on the graph, not on what the rule's designer intended.
 
 ### Engagement
 
@@ -984,11 +983,9 @@ serve them too. Where they do conflict, where raising $U$ would lower
 $R$, a platform whose revenue rises with $R$ has a reason not to, and
 nobody inside has to decide to leave the gap open; the reward decides
 for them. The post describes one change of reward, not the incentives
-behind it; that reading is mine. Last week's lens
-asked which comparison gets reported; this week's asks what is being
-optimized, and for whom.
+behind it; that reading is mine.
 
-Week 2 showed the selection half of this story: a feed surfaces the
+The largest of $n$ is the selection half of this story: a feed shows the
 most extreme of $n$ items. This is the optimization half: a feed that
 ranks by $R$ changes what gets made, because the people who make it
 write for the score.
@@ -1014,7 +1011,7 @@ placement rate and the jobs the course would have created.
 
 What can be changed, and how? What things are considered "controlled
 for" or "held fixed," and is that realistic? This lens is new this
-week, and it is last week's method put as a question. Benefit is an
+week, and it is causal modeling put as a question. Benefit is an
 effect: it compares the same patient with the extra care and without
 it, holding the patient fixed. A slope of health on reported visits
 is read as the effect of a visit with illness held fixed; illness is not

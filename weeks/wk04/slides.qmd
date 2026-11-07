@@ -277,7 +277,7 @@ $Y$ is the outcome we measure. $Y^\star$ is the outcome we intend: the one we wo
 |:---|:---|
 | citations | contribution to knowledge |
 | $p < 0.05$ | a true effect |
-| last week's job center: its placement rate | people in work because of the course |
+| a job center's placement rate | people in work because of its job-search course |
 | a patient's medical cost | how ill the patient is |
 | a video's views | a viewer informed, or entertained, on their own terms |
 
@@ -295,7 +295,7 @@ Obermeyer and colleagues studied one tool at one academic hospital: 6,079 Black 
 
 A hospital uses a commercial risk score to decide who is offered extra care. Patients above the 97th percentile are identified for a care program automatically; those above the 55th are flagged to their doctor.
 
-The score predicts **next year's medical cost**. Race is not one of its inputs.
+The score predicts next year's medical cost. Race is not one of its inputs.
 
 By industry estimates, tools of this class are applied to roughly 200 million people in the United States each year.
 
@@ -414,7 +414,7 @@ The mean of a standard normal above $z$ is $\phi(z)/(1 - \Phi(z))$. Where did th
 The authors simulate: with the gap removed, Black patients would be 46.5% of those identified automatically instead of 17.7%. Separately, Table 2: models trained on three labels. Chronic conditions as the label nearly doubles the Black share of the highest-risk group. Then hands for each label, and one reason: who is worse off under the label you chose?
 :::
 
-Removing the gap between the groups, in a simulation: the share of Black patients among those identified automatically rises from **17.7% to 46.5%**.
+Removing the gap between the groups, in a simulation: the share of Black patients among those identified automatically rises from 17.7% to 46.5%.
 
 Training a new model on each of three labels (the paper's Table 2), the Black share of patients above the 97th percentile:
 
@@ -438,7 +438,7 @@ Obermeyer and colleagues (2019), body text and Table 2. The abstract states the 
 At the same number of chronic conditions, Black patients generated about $1,801 less a year. Everyone in the sample was insured. Access: poverty, geography, transport, work, knowing when to seek care. And direct effects of race on care. The label was a reasonable choice for a program meant to cut costs; it was still a choice.
 :::
 
-At the same number of chronic conditions, Black patients in the sample generated about **$1,801 less** in medical costs a year. Everyone in the sample was insured.
+At the same number of chronic conditions, Black patients in the sample generated about $1,801 less in medical costs a year. Everyone in the sample was insured.
 
 Two routes the authors name: barriers to care (poverty, geography, transport, work and child care, knowing when to seek care), and the effect of race on the care a patient receives.
 
@@ -619,7 +619,7 @@ Pairs, one minute, then hands for each question. A variant of week 3's table in 
 
 **Notation:** reinforcement learning ($S$, $A$, $R$, $\pi$, $U$).
 
-A variant of week 3's job center: 100 places on the course, which helps some people more than others. Take the rates below as what would happen if the course were assigned, or withheld.
+A variant of the job center and its job-search course: 100 places on the course, which helps some people more than others. Take the rates below as what would happen if the course were assigned, or withheld.
 
 | | in work six months later, with the course | without it |
 |:---|:---|:---|
@@ -705,7 +705,7 @@ Retrieval first: the four difficulties from last week, from the room, before the
 An agent judges a policy only by the reward it expects. That is consequentialism, with the good defined by whoever chose $R$.
 
 ::: {.retrieval}
-Last week listed four difficulties of utilitarianism. Which are they?
+What are the four difficulties of utilitarianism?
 :::
 
 . . .
