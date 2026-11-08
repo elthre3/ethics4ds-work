@@ -378,9 +378,10 @@ estimate, ask whether the problem is bias, variance, or both.
 Two departures from the model. A two-sided filter also lets through
 estimates of the wrong sign, so a low-powered study can produce a
 significant result pointing the wrong way, which makes matters worse.
-Real filters are softer than a hard threshold, which on its own selects
-less and so exaggerates less, but they act at several stages, and each
-stage selects again. Neither changes the direction of anything above.
+Real filters are softer than a hard threshold. A filter that also lets
+through some results short of the threshold, as the simulation's did for
+one study in ten, selects less and so exaggerates less. But real filters
+act at several stages, and each stage selects again. Neither changes the direction of anything above.
 
 ### Optional: sign and magnitude errors
 
