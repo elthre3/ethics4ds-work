@@ -763,8 +763,8 @@ and policing can be changed; the base rate is the one input to the
 identity that a policy, rather than a score, controls.
 
 And why? COMPAS is a commercial product. "Equally accurate in both
-groups" is a true statement about it, and it was the statement its
-vendor wanted in the headline. Who benefited from that being the
+groups" was the statement its vendor wanted in the headline, and in the
+sense it meant, equal predictive value, it is about right. Who benefited from that being the
 number reported, and would a more competent analyst have chosen a
 different one?
 
