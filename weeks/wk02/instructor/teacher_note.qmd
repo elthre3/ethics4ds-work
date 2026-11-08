@@ -260,8 +260,9 @@ if a group is stuck. None of the five has a house answer.
 
 - **Discussion 2: "When is it reasonable to use information about
   someone's group to make a decision about them?"** It follows problem
-  2, where membership of a group accounted for 1% of the variance at
-  $d = 0.2$ and 20% at $d = 1$, and it is close to the question the
+  2. Exercise 2 has the numbers to bring in: membership of a group
+  accounts for 1% of the variance at $d = 0.2$ and 20% at $d = 1$. It
+  is close to the question the
   lecture put to pairs
   ("Is an aggregate claim about a group ever a claim about a member of
   it?"). The plot on the screen has the area averages in a line and

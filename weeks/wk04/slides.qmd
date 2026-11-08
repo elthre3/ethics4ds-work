@@ -248,7 +248,7 @@ de Vries, Roest, de Jonge, Cuijpers, Munafò and Bastiaansen (2018), *Psychologi
 ## What a score does to the people it is applied to
 
 ::: {.notes}
-Week 2's sentence. Goodhart was writing about monetary policy; Strathern about university audits. The p-hacking loop is the first case: the score was p < 0.05, and the people measured responded.
+Goodhart was writing about monetary policy; Strathern about university audits. The p-hacking loop is the first case: the score was p < 0.05, and the people measured responded.
 :::
 
 > "Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes." Goodhart (1975)
@@ -349,7 +349,7 @@ ggplot(curves, aes(pct, cond, color = group)) +
         axis.title.y = element_text(size = 15), plot.caption = element_text(size = 12, color = cgray))
 ```
 
-At every level of the score, the Black patients it selects are sicker.
+At every level of the score, Black patients are sicker.
 
 ::: {.source}
 Obermeyer and colleagues (2019), Figure 1A and text: 4.8 against 3.8 conditions at the 97th percentile ($P < 0.001$).
@@ -388,7 +388,7 @@ With $\beta_A = -0.5$: is group $1$ selected more or less often?
 ## Who is selected, and how ill {minutes="3"}
 
 ::: {.notes}
-Standard normal need, t at the 97th percentile. Share selected, the ratio, and the mean need of the selected: the inverse Mills ratio, which in week 1 gave the expected size of an estimate that survived the significance filter. A half-standard-deviation offset cuts group 1's chance of selection to a third and makes its selected members sicker. The paper's Figure 1A compares at the same score, not above a threshold; in this model that gap is exactly -b.
+Standard normal need, t at the 97th percentile. Share selected, the ratio, and the mean need of the selected: the inverse Mills ratio, which in week 1 gave the expected size of an estimate that survived the significance filter. A half-standard-deviation offset cuts group 1's chance of selection to a third and makes its selected members sicker. The paper's Figure 1A compares at the same score, not above a threshold; in this model that gap is exactly -beta_A.
 :::
 
 $Y^\star \sim N(0, 1)$ in both groups; $t$ is the 97th percentile.

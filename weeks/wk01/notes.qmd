@@ -375,11 +375,12 @@ estimate, ask whether the problem is bias, variance, or both.
 
 ### Limitations of the model
 
-Two things, both of which make matters worse. A two-sided filter also lets
-through estimates of the wrong sign, so a low-powered study can produce a
-significant result pointing the wrong way. And real filters are softer
-than a hard threshold and act at several stages. Neither changes the
-direction of anything above.
+Two departures from the model. A two-sided filter also lets through
+estimates of the wrong sign, so a low-powered study can produce a
+significant result pointing the wrong way, which makes matters worse.
+Real filters are softer than a hard threshold, which on its own selects
+less and so exaggerates less, but they act at several stages, and each
+stage selects again. Neither changes the direction of anything above.
 
 ### Optional: sign and magnitude errors
 
@@ -454,8 +455,9 @@ $z$-values from trials in the Cochrane database, which records trials
 whatever their outcome, using a mixture of normals rather than a single
 one. They estimate the median achieved power of a trial to be 0.13, and
 that an estimate just significant at the 5% level overstates the true
-effect by a factor of about 1.7. Their conclusion is in the title of the
-paper that gave us the Medline histogram: the need to shrink.
+effect by a factor of about 1.7. Their title ends in "a proposal for
+shrinkage", the conclusion van Zwet and Cator's title states as "the need
+to shrink".
 
 ## Many comparisons
 

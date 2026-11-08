@@ -289,7 +289,7 @@ Student at rank $r$ of $n$ gets the grade at the $r/n$ point of the
 school's predicted distribution, built from its 2017--19 results.
 
 The student's work enters only through $r$. Cohorts under 15: teachers'
-grades used.
+grades used, wholly or in part.
 
 13 August: about 36% of A-level grades one grade below the teacher's,
 3% two below. 17 August: withdrawn.

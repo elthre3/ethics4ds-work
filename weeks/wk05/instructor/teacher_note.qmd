@@ -96,9 +96,9 @@ What the class adds to the lecture
   visible and on the bank, one invisible and on the people wrongly
   rejected.
 - Coding 2's step 5 (who should choose the imputation model when the
-  survey sets benefit levels) is the lecture's closing line, that an
-  imputation model is an assumption about the unseen, asked about
-  people who will feel the answer.
+  survey sets benefit levels) picks up the lecture's "Filling in"
+  slide: an imputation model is an assumption about the values nobody
+  observed, asked here about people who will feel the answer.
 
 What students should see
 

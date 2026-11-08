@@ -282,7 +282,7 @@ without additional assumptions."
 
 ### Rows and columns
 
-Part 1 was about rows: which people a dataset contains. Datasets also
+Selection is about rows: which people a dataset contains. Datasets also
 follow rules for what is recorded about those people, and columns go
 missing for reasons as different as the rows do. The law may forbid using one
 (a protected characteristic in a hiring model). Nobody may have
@@ -420,8 +420,8 @@ $$
 The mean prediction is $0$ in each group, and the mean squared error is
 $1 - 1/2 = 1/2$ in each group.
 
-The coefficient on $A$ is $-1$. That is the collider. In the formula
-of the previous section, with $\beta_Y = 1$, $\beta_A = 2$,
+The coefficient on $A$ is $-1$. That is the collider. In the collider
+covariance formula, with $\beta_Y = 1$, $\beta_A = 2$,
 $\operatorname{Var}(Y) = 1$, $\operatorname{Var}(A) = 1/4$ and
 $\operatorname{Var}(X) = 3$, the covariance of $Y$ and $A$ left over
 after removing what $X$ predicts is $-(2 \cdot \tfrac14)/3 = -1/6$:

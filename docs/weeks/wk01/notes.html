@@ -585,7 +585,7 @@ E[Z \mid Z &gt; 1.96] = \frac{0.0584}{0.025} \approx 2.34 .
 </section>
 <section id="limitations-of-the-model" class="level3">
 <h3 class="anchored" data-anchor-id="limitations-of-the-model">Limitations of the model</h3>
-<p>Two things, both of which make matters worse. A two-sided filter also lets through estimates of the wrong sign, so a low-powered study can produce a significant result pointing the wrong way. And real filters are softer than a hard threshold and act at several stages. Neither changes the direction of anything above.</p>
+<p>Two departures from the model. A two-sided filter also lets through estimates of the wrong sign, so a low-powered study can produce a significant result pointing the wrong way, which makes matters worse. Real filters are softer than a hard threshold, which on its own selects less and so exaggerates less, but they act at several stages, and each stage selects again. Neither changes the direction of anything above.</p>
 </section>
 <section id="optional-sign-and-magnitude-errors" class="level3">
 <h3 class="anchored" data-anchor-id="optional-sign-and-magnitude-errors">Optional: sign and magnitude errors</h3>
@@ -649,7 +649,7 @@ P(Z &lt; -c \mid |Z| &gt; c) = \frac{\Phi(-c-\theta)}{1 - \Phi(c-\theta) + \Phi(
 </div>
 <p>The raw estimate overshoots by more than one standard error on average among the significant results; the shrunk estimate does not overshoot at all.</p>
 <p>Second, <span class="math inline">\(\tau\)</span> is not known, but it can be estimated from an <em>unfiltered</em> collection of <span class="math inline">\(z\)</span>-values, since <span class="math inline">\(\mathrm{Var}(Z) = 1 +
-\tau^2\)</span>. This is empirical Bayes. Do it on a filtered collection and the answer is wrong in a predictable direction: the filter removes the small <span class="math inline">\(|z|\)</span>, the variance is inflated, <span class="math inline">\(\hat\tau^2\)</span> comes out too large and the shrinkage too weak. Van Zwet, Schwab and Senn (2021) did it on 23,747 <span class="math inline">\(z\)</span>-values from trials in the Cochrane database, which records trials whatever their outcome, using a mixture of normals rather than a single one. They estimate the median achieved power of a trial to be 0.13, and that an estimate just significant at the 5% level overstates the true effect by a factor of about 1.7. Their conclusion is in the title of the paper that gave us the Medline histogram: the need to shrink.</p>
+\tau^2\)</span>. This is empirical Bayes. Do it on a filtered collection and the answer is wrong in a predictable direction: the filter removes the small <span class="math inline">\(|z|\)</span>, the variance is inflated, <span class="math inline">\(\hat\tau^2\)</span> comes out too large and the shrinkage too weak. Van Zwet, Schwab and Senn (2021) did it on 23,747 <span class="math inline">\(z\)</span>-values from trials in the Cochrane database, which records trials whatever their outcome, using a mixture of normals rather than a single one. They estimate the median achieved power of a trial to be 0.13, and that an estimate just significant at the 5% level overstates the true effect by a factor of about 1.7. Their title ends in “a proposal for shrinkage”, the conclusion van Zwet and Cator’s title states as “the need to shrink”.</p>
 </section>
 </section>
 <section id="many-comparisons" class="level2">
