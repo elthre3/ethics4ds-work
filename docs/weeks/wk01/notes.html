@@ -230,13 +230,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#the-filter-on-its-own" id="toc-the-filter-on-its-own" class="nav-link" data-scroll-target="#the-filter-on-its-own">The filter on its own</a></li>
   <li><a href="#exaggeration" id="toc-exaggeration" class="nav-link" data-scroll-target="#exaggeration">Exaggeration</a></li>
-  <li><a href="#what-the-model-leaves-out" id="toc-what-the-model-leaves-out" class="nav-link" data-scroll-target="#what-the-model-leaves-out">What the model leaves out</a></li>
+  <li><a href="#limitations-of-the-model" id="toc-limitations-of-the-model" class="nav-link" data-scroll-target="#limitations-of-the-model">Limitations of the model</a></li>
   <li><a href="#optional-sign-and-magnitude-errors" id="toc-optional-sign-and-magnitude-errors" class="nav-link" data-scroll-target="#optional-sign-and-magnitude-errors">Optional: sign and magnitude errors</a></li>
   <li><a href="#optional-and-advanced-shrinkage-an-empirical-bayes-view" id="toc-optional-and-advanced-shrinkage-an-empirical-bayes-view" class="nav-link" data-scroll-target="#optional-and-advanced-shrinkage-an-empirical-bayes-view">Optional and advanced: shrinkage, an empirical Bayes view</a></li>
   </ul></li>
   <li><a href="#many-comparisons" id="toc-many-comparisons" class="nav-link" data-scroll-target="#many-comparisons">Many comparisons</a></li>
   <li><a href="#how-much-of-the-crisis-does-selection-alone-explain" id="toc-how-much-of-the-crisis-does-selection-alone-explain" class="nav-link" data-scroll-target="#how-much-of-the-crisis-does-selection-alone-explain">How much of the crisis does selection alone explain?</a></li>
-  <li><a href="#two-lenses" id="toc-two-lenses" class="nav-link" data-scroll-target="#two-lenses">Two lenses</a></li>
+  <li><a href="#lenses" id="toc-lenses" class="nav-link" data-scroll-target="#lenses">Lenses</a></li>
   <li><a href="#two-cases" id="toc-two-cases" class="nav-link" data-scroll-target="#two-cases">Two cases</a></li>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a>
   <ul class="collapse">
@@ -317,7 +317,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>Same funder, same kind of trial, same statistics. What changed is that the comparison had to be chosen before the data could influence it.</p>
-<p>Here is a second picture, a histogram. Van Zwet and Cator (2020) collected over a million <span class="math inline">\(z\)</span>-values from Medline abstracts published between 1976 and 2019. A <span class="math inline">\(z\)</span>-value is an estimate divided by its standard error.</p>
+<p>Van Zwet and Cator (2020) collected over a million <span class="math inline">\(z\)</span>-values from Medline abstracts published between 1976 and 2019. A <span class="math inline">\(z\)</span>-value is an estimate divided by its standard error.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../files/vanzwet_cator_2020_fig1.png" class="img-fluid figure-img"></p>
@@ -325,7 +325,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>It is striking how large the hole in the histogram is: values between <span class="math inline">\(-2\)</span> and <span class="math inline">\(2\)</span> are missing in bulk. Results that were not significant were far less likely to appear.</p>
-<p>Two explanations are on the table. The first is misconduct and incompetence, and there is plenty of both; see the hall of shame in the optional readings. The second is that nobody has to behave badly for the picture to look like that. A journal preferring significant results, a researcher writing up the study that worked, a reader citing the surprising finding: each one is a filter. Let’s take the second explanation seriously enough to build it.</p>
+<p>Two explanations are on the table. The first is misconduct and incompetence, and there is plenty of both; see the hall of shame in the optional readings. The second is that nobody has to behave badly for the picture to look like that. A journal preferring significant results, a researcher writing up the study that worked, a reader citing the surprising finding: each one is a filter.</p>
 </section>
 <section id="rejection-rates-and-power" class="level2">
 <h2 class="anchored" data-anchor-id="rejection-rates-and-power">Rejection rates and power</h2>
@@ -422,7 +422,7 @@ P(|Z| &gt; c \mid \mu = 0) = 2\,(1 - \Phi(c)) = 0.05 .
 </section>
 <section id="simulating-publication-bias" class="level2">
 <h2 class="anchored" data-anchor-id="simulating-publication-bias">Simulating publication bias</h2>
-<p>Now the filter. Simulate a world of many studies. Some test hypotheses that are true nulls; the rest test real effects of modest size. Every test is done honestly. The only thing that goes wrong is that most results are written up only if they are significant. The rest stay in the file drawer, which is why this is called the file-drawer effect.</p>
+<p>Simulate a world of many studies. Some test hypotheses that are true nulls; the rest test real effects of modest size. Every test is done honestly. The only thing that goes wrong is that most results are written up only if they are significant. The rest stay in the file drawer, which is why this is called the file-drawer effect.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fl">5e4</span>                     <span class="co"># studies conducted</span></span>
@@ -489,7 +489,7 @@ P(|Z| &gt; c \mid \mu = 0) = 2\,(1 - \Phi(c)) = 0.05 .
 </section>
 <section id="the-significance-filter" class="level2">
 <h2 class="anchored" data-anchor-id="the-significance-filter">The significance filter</h2>
-<p>That number is not an accident of the simulation. It is a property of the normal distribution.</p>
+<p>That number is a property of the normal distribution.</p>
 <p>Suppose <span class="math inline">\(Z \sim N(\theta, 1)\)</span> and we only get to see <span class="math inline">\(Z\)</span> when <span class="math inline">\(Z &gt; c\)</span>. What is the expected value of what we see? Write <span class="math inline">\(u = z - \theta\)</span>, so that <span class="math inline">\(u\)</span> is standard normal and the condition becomes <span class="math inline">\(u &gt; c - \theta\)</span>: <span class="math display">\[
 E[Z \mid Z &gt; c]
 = \frac{\int_c^\infty z\,\phi(z - \theta)\,dz}{P(Z &gt; c)}
@@ -581,10 +581,10 @@ E[Z \mid Z &gt; 1.96] = \frac{0.0584}{0.025} \approx 2.34 .
 </tbody>
 </table>
 <p>A study with 17% power that reaches significance reports, on average, two and a half times the true effect. A study with 85% power overstates it by about a tenth. Van Zwet and Cator prove the general statement: the exaggeration factor is a decreasing function of the power, and if the power is 50% or less, the usual 95% confidence interval on a significant result does not reach its nominal coverage. (Their formula is for the two-sided filter on <span class="math inline">\(|Z|\)</span>; for <span class="math inline">\(\theta \ge 1\)</span> it gives the same numbers as the one-sided version in the table, to two decimals.)</p>
-<p>Put the two halves together. The power of a study is about how much its estimate varies. The exaggeration of a published estimate is a bias. The file-drawer effect turns variance into bias. So when you are shown an estimate, ask whether the problem is bias, variance, or both.</p>
+<p>The power of a study is about how much its estimate varies. The exaggeration of a published estimate is a bias. The file-drawer effect turns variance into bias. So when you are shown an estimate, ask whether the problem is bias, variance, or both.</p>
 </section>
-<section id="what-the-model-leaves-out" class="level3">
-<h3 class="anchored" data-anchor-id="what-the-model-leaves-out">What the model leaves out</h3>
+<section id="limitations-of-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-of-the-model">Limitations of the model</h3>
 <p>Two things, both of which make matters worse. A two-sided filter also lets through estimates of the wrong sign, so a low-powered study can produce a significant result pointing the wrong way. And real filters are softer than a hard threshold and act at several stages. Neither changes the direction of anything above.</p>
 </section>
 <section id="optional-sign-and-magnitude-errors" class="level3">
@@ -630,8 +630,8 @@ P(Z &lt; -c \mid |Z| &gt; c) = \frac{\Phi(-c-\theta)}{1 - \Phi(c-\theta) + \Phi(
 \theta \sim N(0, \tau^2), \qquad Z \mid \theta \sim N(\theta, 1).
 \]</span> Then marginally <span class="math inline">\(Z \sim N(0, 1 + \tau^2)\)</span>, and <span class="math display">\[
 \theta \mid Z = z \;\sim\; N\!\left( \frac{\tau^2}{1 + \tau^2}\, z,\; \frac{\tau^2}{1 + \tau^2} \right).
-\]</span> The posterior mean shrinks <span class="math inline">\(z\)</span> towards zero by the factor <span class="math inline">\(\tau^2/(1+\tau^2)\)</span>. With <span class="math inline">\(\tau = 1\)</span>, a field where the typical study has power under 20%, a just-significant <span class="math inline">\(z = 1.96\)</span> is best read as about <span class="math inline">\(0.98\)</span>. The frequentist calculation from the other direction gave <span class="math inline">\(1.96/2.5 \approx 0.8\)</span> at <span class="math inline">\(\theta = 1\)</span>. Different questions, similar answers.</p>
-<p>Two things follow. First, the selection rule does not appear in the posterior. The filter acts on <span class="math inline">\(z\)</span>, and once you condition on <span class="math inline">\(z\)</span> it has nothing more to say. The bias in the frequentist calculation comes from averaging over what was selected; the Bayesian conditions on what was seen. You can check this by simulation:</p>
+\]</span> The posterior mean shrinks <span class="math inline">\(z\)</span> toward zero by the factor <span class="math inline">\(\tau^2/(1+\tau^2)\)</span>. With <span class="math inline">\(\tau = 1\)</span>, a field where the typical study has power under 20%, a just-significant <span class="math inline">\(z = 1.96\)</span> is best read as about <span class="math inline">\(0.98\)</span>. For comparison, at <span class="math inline">\(\theta = 1\)</span> a significant <span class="math inline">\(z\)</span> is about <span class="math inline">\(2.5\)</span> on average (the exaggeration ratio above): an average over the estimates that pass the filter, at a fixed effect.</p>
+<p>Two things follow. First, the selection rule does not appear in the posterior. The filter acts on <span class="math inline">\(z\)</span>, and once you condition on <span class="math inline">\(z\)</span> it adds no further information. The bias in the frequentist calculation comes from averaging over what was selected; the Bayesian conditions on what was seen. You can check this by simulation:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
@@ -658,7 +658,7 @@ P(Z &lt; -c \mid |Z| &gt; c) = \frac{\Phi(-c-\theta)}{1 - \Phi(c-\theta) + \Phi(
 1 - 0.95^k ,
 \]</span> which is 0.23 at <span class="math inline">\(k = 5\)</span>, 0.40 at <span class="math inline">\(k = 10\)</span> and 0.64 at <span class="math inline">\(k = 20\)</span>. Reporting the best of <span class="math inline">\(k\)</span> is the significance filter applied to one analyst’s own work.</p>
 <p>The analyst need not literally run all <span class="math inline">\(k\)</span>. Gelman and Loken call this the <em>garden of forking paths</em>. An analysis involves many choices: which outcome, which subgroup, which covariates, which outliers to drop, one-sided or two-sided. If the choice depends on the data, the reported test behaves as though the alternatives had been run, even when they were not. The researcher who “just looked at the data first” is in a similar position to the one who ran twenty tests, and it is harder to count the paths.</p>
-<p>Here is a recent example from genetics. In 2017 a large team reported 91 genes linked to neurodevelopmental disorders, 38 of them new (Stessman et al., <em>Nature Genetics</em>). They had sequenced 208 candidate genes in more than 11,000 cases. To decide which genes had more mutations than chance would produce they needed a significance threshold corrected for the number of genes tested, and they used 208. But the mutation counts combined their own data with earlier studies that had sequenced the whole exome, around 20,000 genes, and a mutation found by searching 20,000 genes is much less surprising than one found by searching 208. A group of geneticists led by Mark Daly pointed this out within a month. Redone with the larger denominator, one of the 38 new genes remained. To see the size of the error: a Bonferroni threshold at 5% is <span class="math inline">\(0.05/208 = 2.4 \times 10^{-4}\)</span> for 208 tests and <span class="math inline">\(0.05/20{,}000 = 2.5 \times 10^{-6}\)</span> for 20,000. A factor of a hundred in the threshold was the difference between 38 discoveries and one. Nobody fabricated anything. The senior author’s comment to <a href="https://www.thetransmitter.org/spectrum/researchers-correct-statistical-flaw-high-profile-paper/">Spectrum</a>: “We should have seen that when we went across the tables, and we just didn’t.”</p>
+<p>In 2017 a large team reported 91 genes linked to neurodevelopmental disorders, 38 of them new (Stessman et al., <em>Nature Genetics</em>). They had sequenced 208 candidate genes in more than 11,000 cases. To decide which genes had more mutations than chance would produce they needed a significance threshold corrected for the number of genes tested, and they used 208. But the mutation counts combined their own data with earlier studies that had sequenced the whole exome, around 20,000 genes, and a mutation found by searching 20,000 genes is much less surprising than one found by searching 208. A group of geneticists led by Mark Daly pointed this out within a month. Redone with the larger denominator, one of the 38 new genes remained. To see the size of the error: a Bonferroni threshold at 5% is <span class="math inline">\(0.05/208 = 2.4 \times 10^{-4}\)</span> for 208 tests and <span class="math inline">\(0.05/20{,}000 = 2.5 \times 10^{-6}\)</span> for 20,000. A factor of a hundred in the threshold was the difference between 38 discoveries and one. Nobody fabricated anything. The senior author’s comment to <a href="https://www.thetransmitter.org/spectrum/researchers-correct-statistical-flaw-high-profile-paper/">Spectrum</a>: “We should have seen that when we went across the tables, and we just didn’t.”</p>
 <p>The remedy has a name, <strong>pre-specification</strong> or pre-registration: fix the analysis before the data can influence it. It does not make a test more powerful. It makes the reported comparison the one that was planned. The NHLBI trials above are what that looks like at the scale of a field.</p>
 <p>The profession’s own code says the same thing. The American Statistical Association’s guidelines (2022 revision, item B.3) ask the practitioner to be “transparent about a priori versus post hoc objectives and planned versus unplanned statistical practices” and to disclose “when multiple comparisons are conducted and any relevant adjustments.” If you wonder why an ethics course is teaching you about power and selection, this is why.</p>
 </section>
@@ -701,17 +701,17 @@ P(H_0 \text{ true} \mid \text{reject})
 </table>
 <p>A field where true effects are rare and studies are small will have a literature in which most significant findings are false, with no misconduct at all. Each ingredient is one of this week’s ideas: <span class="math inline">\(\alpha\)</span> is the advertised error rate, the power is the variation, and <span class="math inline">\(p\)</span> is about who is in the data, because a field that tests wild hypotheses has a different literature from one that tests safe ones.</p>
 <p>What the formula does not show is that most published findings in any <em>particular</em> field are false. Nobody observes <span class="math inline">\(p\)</span>. Ioannidis’s title is a claim about the range of <span class="math inline">\(p\)</span> and power he considered plausible, and you can disagree with the range without disagreeing with the arithmetic.</p>
-<p>The same arithmetic, with a risk score in place of a <span class="math inline">\(p\)</span>-value, describes a classifier that flags people rather than hypotheses. We will do it again.</p>
+<p>The same arithmetic, with a risk score in place of a <span class="math inline">\(p\)</span>-value, describes a classifier that flags people rather than hypotheses. We will do it again later in the course.</p>
 </section>
-<section id="two-lenses" class="level2">
-<h2 class="anchored" data-anchor-id="two-lenses">Two lenses</h2>
+<section id="lenses" class="level2">
+<h2 class="anchored" data-anchor-id="lenses">Lenses</h2>
 <p>Which comparison gets reported? Inside a study: the best of <span class="math inline">\(k\)</span> tests, the forking paths, the 208 genes.</p>
 <p>Who is in the data? Between studies. For anyone reading the literature, the data are the published studies, and the ones in the file drawer are missing in a known direction. A meta-analysis that pools every published trial has a sample chosen by the filter, and Ioannidis’s <span class="math inline">\(p\)</span> is a statement about which hypotheses a field puts into the data at all.</p>
 <p>And why? Because the filter serves someone: the journal that prefers positive results, the author whose career depends on them, the reader who prefers a story.</p>
 </section>
 <section id="two-cases" class="level2">
 <h2 class="anchored" data-anchor-id="two-cases">Two cases</h2>
-<p><em>Would a more competent analyst have chosen differently?</em> One case where the answer is yes and one where it is no.</p>
+<p><em>Would a more competent analyst have chosen differently?</em></p>
 <p><strong>Lucia de Berk.</strong> A Dutch nurse was convicted in 2003, and again on appeal in 2004, of murders and attempted murders. Part of the evidence was a calculation: the chance that the deaths and resuscitations on her wards would all fall on her shifts by coincidence was put at 1 in 342 million. The number came from three wards. For each ward the statistician computed the probability that a nurse working her share of shifts would be present at that many incidents, and then multiplied the three probabilities together.</p>
 <p>Two things are wrong with that before we even get to the data. A product of three <span class="math inline">\(p\)</span>-values is not a <span class="math inline">\(p\)</span>-value. Combining them properly (Fisher’s method, <span class="math inline">\(-2\sum_i \log p_i \sim \chi^2_6\)</span> under the null) gives about one in a million, not one in 342 million. And <span class="math inline">\(P(\text{this pattern} \mid
 \text{coincidence})\)</span> is not <span class="math inline">\(P(\text{coincidence} \mid \text{this

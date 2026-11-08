@@ -2500,7 +2500,6 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="in-class">In class</h2>
 <section id="to-start" class="level3">
 <h3 class="anchored" data-anchor-id="to-start">To start</h3>
-<p>Two things.</p>
 <ol type="1">
 <li>One ethical issue in data science that concerns you. A sentence is enough.</li>
 <li>From memory: what does the power of a test depend on? And which way does selecting on significance push a published estimate?</li>
@@ -2692,7 +2691,7 @@ window.Quarto = {
 </div>
 <ol type="1">
 <li>Close to 0.05.</li>
-<li>About 0.16 rather than <span class="math inline">\(1 - 0.95^4 = 0.19\)</span> (0.160 in 20,000 runs). The four <span class="math inline">\(p\)</span>-values are not independent: the <span class="math inline">\(X\)</span> coefficient in the two models and the interaction share information, so the search buys less than four independent tries would. Still more than three times the advertised rate, and in the same direction as the significance filter.</li>
+<li>About 0.16 rather than <span class="math inline">\(1 - 0.95^4 = 0.19\)</span> (0.160 in 20,000 runs). The four <span class="math inline">\(p\)</span>-values are not independent: the <span class="math inline">\(X\)</span> coefficient in the two models and the interaction share information, so the search raises the rejection rate less than four independent tries would. Still more than three times the advertised rate, and in the same direction as the significance filter.</li>
 <li>About <span class="math inline">\(n = 400\)</span>. The coefficient on <span class="math inline">\(X\)</span> in <code>Y ~ X + A + X * A</code> is the slope within the group <span class="math inline">\(A = 0\)</span>, which holds roughly half the sample, so <span class="math inline">\(n_{\text{eff}} \approx n/2\)</span> and <span class="math inline">\(\theta \approx 0.2\sqrt{200} \approx 2.8\)</span>, where the power is about 0.80.</li>
 <li>The kept estimates average noticeably above 0.2, even at 80% power, because only the draws that came out large enough survive. Reduce <span class="math inline">\(n\)</span> and the gap widens.</li>
 </ol>

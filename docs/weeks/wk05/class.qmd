@@ -36,8 +36,8 @@ not there. Someone made that decision, usually not the people left
 out, and every way of handling what is missing is an assumption about
 people nobody asked. So each item ends by asking who the mistake falls
 on, who gains from it going unnoticed, or who the choice could be
-justified to. The arithmetic is how you earn an answer to that
-question; it is not the answer.
+justified to. The arithmetic supports an answer to that question but
+does not settle it.
 
 Notation as in the lecture: $C = 1$ if a person's $Y$ is recorded and
 $C = 0$ if it is missing; $e(X) = P(C = 1 \mid X)$; $A$ is a group. A
@@ -87,8 +87,9 @@ Among the applicants with a referral, the hiring rule kept everyone.
 ### Exercise 2. The unaware model, with a smaller coaching effect
 
 Leaving a protected characteristic out of a model is often done in the
-name of fairness. This exercise computes what it buys, in the lecture's
-model with a smaller coaching effect.
+name of fairness. This exercise computes what that does to accuracy
+and to the gap between groups, in the lecture's model with a smaller
+coaching effect.
 
 Job performance $Y \sim N(0, 1)$, larger is better. A group $A \in
 \{0, 1\}$, half the population each, independent of $Y$. A test score
@@ -388,7 +389,7 @@ if it approved them.
 1. Who is missing from the evaluation, and by what mechanism? Which
    way are the new model's measured error rates likely to be wrong?
 2. Who benefits from the problem going unnoticed?
-3. The honest fix is to approve some applicants the current model
+3. One fix is to approve some applicants the current model
    rejects, chosen at random, and record what happens. Who pays for
    that, and is it justified?
 

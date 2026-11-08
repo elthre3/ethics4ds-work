@@ -379,8 +379,8 @@ about $-0.001$: each leaves one back door open.
 
 3. The average is close to $-0.05$, and the differences vary from trial
 to trial with a standard deviation of about 0.02. Randomization removes
-the bias without measuring $Z$ or $W$, and the price is that a single
-trial can miss by a few points.
+the bias without measuring $Z$ or $W$, though a single trial can miss
+by a few points.
 :::
 
 ### Exercise 7. Intervening in a program, in R

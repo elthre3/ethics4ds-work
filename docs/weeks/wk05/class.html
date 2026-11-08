@@ -284,7 +284,7 @@ Note
 <section id="how-this-sheet-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
 <p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions, the problems and the coding under “In class,” in that order. Discussions are in groups of three or four, then with the room. Each problem, and the coding, is gone through as soon as the room has tried it.</p>
-<p>Every item is about one decision: who is in the data, what is recorded about them, and what to do about the people and the columns that are not there. Someone made that decision, usually not the people left out, and every way of handling what is missing is an assumption about people nobody asked. So each item ends by asking who the mistake falls on, who gains from it going unnoticed, or who the choice could be justified to. The arithmetic is how you earn an answer to that question; it is not the answer.</p>
+<p>Every item is about one decision: who is in the data, what is recorded about them, and what to do about the people and the columns that are not there. Someone made that decision, usually not the people left out, and every way of handling what is missing is an assumption about people nobody asked. So each item ends by asking who the mistake falls on, who gains from it going unnoticed, or who the choice could be justified to. The arithmetic supports an answer to that question but does not settle it.</p>
 <p>Notation as in the lecture: <span class="math inline">\(C = 1\)</span> if a person’s <span class="math inline">\(Y\)</span> is recorded and <span class="math inline">\(C = 0\)</span> if it is missing; <span class="math inline">\(e(X) = P(C = 1 \mid X)\)</span>; <span class="math inline">\(A\)</span> is a group. A subscript on an expectation names the random variables it averages over: <span class="math inline">\(E_X\big[E_Y[Y \mid X]\big]\)</span> averages <span class="math inline">\(Y\)</span> among the people with each value of <span class="math inline">\(X\)</span>, then averages those means over <span class="math inline">\(X\)</span>. An expectation with no subscript averages over everything random inside it.</p>
 </section>
 <section id="exercises" class="level2">
@@ -347,7 +347,7 @@ Note
 </section>
 <section id="exercise-2.-the-unaware-model-with-a-smaller-coaching-effect" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-2.-the-unaware-model-with-a-smaller-coaching-effect">Exercise 2. The unaware model, with a smaller coaching effect</h3>
-<p>Leaving a protected characteristic out of a model is often done in the name of fairness. This exercise computes what it buys, in the lecture’s model with a smaller coaching effect.</p>
+<p>Leaving a protected characteristic out of a model is often done in the name of fairness. This exercise computes what that does to accuracy and to the gap between groups, in the lecture’s model with a smaller coaching effect.</p>
 <p>Job performance <span class="math inline">\(Y \sim N(0, 1)\)</span>, larger is better. A group <span class="math inline">\(A \in
 \{0, 1\}\)</span>, half the population each, independent of <span class="math inline">\(Y\)</span>. A test score <span class="math inline">\(X = Y + A + \varepsilon\)</span> with <span class="math inline">\(\varepsilon \sim N(0, 1)\)</span> independent of both: group 1 gets one point from coaching, and nothing else. (The lecture had two points, <span class="math inline">\(\beta_A = 2\)</span>; here <span class="math inline">\(\beta_A = 1\)</span>.)</p>
 <ol type="a">
@@ -618,7 +618,7 @@ Note
 <ol type="1">
 <li>Who is missing from the evaluation, and by what mechanism? Which way are the new model’s measured error rates likely to be wrong?</li>
 <li>Who benefits from the problem going unnoticed?</li>
-<li>The honest fix is to approve some applicants the current model rejects, chosen at random, and record what happens. Who pays for that, and is it justified?</li>
+<li>One fix is to approve some applicants the current model rejects, chosen at random, and record what happens. Who pays for that, and is it justified?</li>
 </ol>
 </section>
 </section>
