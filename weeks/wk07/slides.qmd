@@ -41,7 +41,7 @@ st313:
     - {label: "dark: Proposition 5 from the identity (stretch)", minutes: 2, mode: exposition, results: [R3]}
     - {label: "the general result, named and not proved: (A), (B), (C); Theorems 1.1 and 1.2; the mapping to the criteria", minutes: 4, mode: exposition, results: [R2]}
     # part 5, which fairness: 12
-    - {label: "three views of equality of opportunity and the criterion each reaches for", minutes: 6, mode: exposition}
+    - {label: "three views of equality of opportunity and the criterion the book ties to each", minutes: 6, mode: exposition}
     - {label: "which criterion to give up: which one would you give up, and who do you owe the explanation to", minutes: 3, mode: production, retrieves: [S6]}
     - {label: "a cutoff per group: the two groups' ROC points; the threshold moves the errors, not the constraint", minutes: 3, mode: exposition, retrieves: [S4]}
     # close: 9
@@ -254,11 +254,11 @@ ProPublica sorted people by what happened and reported how the score had treated
 ## From the significance filter
 
 ::: {.notes}
-Retrieve it: the share of true hypotheses p, level alpha, power 1 - beta, and the probability that a rejection is a false one. Rename and it is the PPV of a classifier. One formula, twice in the course.
+Retrieve it: the share of true research hypotheses p, level alpha, power 1 - beta, and the probability that a rejection is a true discovery. Rename and it is the PPV of a classifier. One formula, twice in the course.
 :::
 
 ::: {.retrieval}
-Among hypotheses tested, a share $p$ are true. Tests have level $\alpha$ and power $1 - \beta$. What is the probability that a rejected hypothesis is true?
+Among the research hypotheses tested, a share $p$ are true (their nulls are false). Tests have level $\alpha$ and power $1 - \beta$. What is the probability that a rejection is a true discovery?
 :::
 
 $$
@@ -295,7 +295,7 @@ Three families, each equalizing something across groups. The book's names, and w
 |:---|:---|:---|:---|
 | independence | $R \perp A$ | equal share flagged | demographic parity |
 | separation | $R \perp A \mid Y$ | equal FPR and equal FNR | error rate parity |
-| sufficiency | $Y \perp A \mid R$ | equal PPV and equal NPV | predictive parity |
+| sufficiency | $Y \perp A \mid R$ | equal PPV and equal NPV | predictive parity is equal PPV alone, a relaxation |
 
 Each is a property of the joint distribution of $(A, R, Y)$: eight numbers, when all three are binary.
 
@@ -333,7 +333,7 @@ Separation fails at every cutoff. Independence fails too: `r pct(at5$flagged[1])
 ## Calibration by group
 
 ::: {.notes}
-Observed re-arrest rate by decile, by group: the two lines lie close. That is what the replies pointed at. Definitions: calibrated, calibrated by group; calibration by group implies sufficiency (Fact 2); the optimal score E[Y | X] is calibrated within any group it can tell apart (Fact 3), so a well-fitted score has it without anyone asking, and demanding it asks for little. And it is lost on thresholding: a calibrated score, cut at a decile, need not give equal PPV, which is why the two PPVs on the first table differ by four points.
+Observed re-arrest rate by decile, by group: the two lines lie close. That is what the replies pointed at. Deciles are not probabilities, so the figure shows the same decile, the same rate. Definitions: calibrated, calibrated by group; calibration by group implies sufficiency (Fact 2); the optimal score E[Y | X] is calibrated within any group it can tell apart (Fact 3), so a well-fitted score has it without anyone asking, and demanding it asks for little. And it is lost on thresholding: a calibrated score, cut at a decile, need not give equal PPV, which is why the two PPVs on the first table differ by four points.
 :::
 
 ```{r calibration, fig.height=3.3, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
@@ -351,7 +351,7 @@ counts |>
   theme(legend.position = "top")
 ```
 
-*Calibrated by group*: $P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and $a$. It implies sufficiency; the optimal score $E[Y \mid X]$ has it already; and a calibrated score cut at $t$ need not give equal PPV.
+*Calibrated by group*: $P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and $a$. It implies sufficiency; the optimal score $E[Y \mid X]$ has it already, for any group the features identify; and a calibrated score cut at $t$ need not give equal PPV.
 
 ::: {.source}
 Barocas, Hardt and Narayanan (2023), chapter 3, "Calibration and sufficiency" (Facts 2 and 3, Proposition 1), pages 61 to 63, and "Calibration values," page 71.
@@ -447,16 +447,16 @@ The observed ratio at the county's cutoff is `r sprintf("%.2f", at5$FPR[1] / at5
 ## Proposition 5 {.inverse}
 
 ::: {.notes}
-Skip if behind. Sufficiency for a binary flag is equal PPV and equal NPV; separation is equal FPR and FNR. Suppose both and FPR > 0. Equal PPV with equal FPR and TPR forces, by the formula, equal odds of p, so equal prevalence; the book's proof route is via TPR = 0 and then unequal NPV. Either way: both criteria, unequal base rates, and an imperfect flag cannot coexist.
+Skip if behind. Sufficiency for a binary flag is equal PPV and equal NPV; separation is equal FPR and FNR. Suppose both and 0 < FPR < 1; the book assumes only FPR > 0 and its proof passes over the reversed flag. Equal PPV with equal FPR and TPR forces, by the formula, equal odds of p, so equal prevalence; the book's proof route is via TPR = 0 and then unequal NPV. Either way: both criteria, unequal base rates, and an imperfect flag cannot coexist.
 :::
 
-Suppose $Y$ depends on $A$, and the flag has $\text{FPR} > 0$ and $\text{TPR} > 0$.
+Suppose $Y$ depends on $A$, and the flag has $0 < \text{FPR} < 1$ and $\text{TPR} > 0$.
 
 If the flag satisfies separation (equal FPR and FNR) and sufficiency (equal PPV and NPV), the identity gives
 $$
 \frac{p_a}{1 - p_a} \;=\; \frac{\text{FPR}}{(1 - \text{FNR})}\cdot\frac{\text{PPV}}{1 - \text{PPV}} \;=\; \frac{p_b}{1 - p_b},
 $$
-so $p_a = p_b$. Contradiction. (If $\text{TPR} = 0$ the PPVs are both $0$ and the NPVs differ instead.)
+so $p_a = p_b$. Contradiction. (If $\text{TPR} = 0$ the PPVs are both $0$ and the NPVs differ instead, unless $\text{FPR} = 1$: the outcome reversed satisfies both criteria.)
 
 ::: {.source style="color: #BCAF6F"}
 Barocas, Hardt and Narayanan (2023), chapter 3, Proposition 5 and its proof, page 67. Propositions 2 and 3 (independence against the other two) are on pages 65 and 66.
@@ -468,14 +468,14 @@ Barocas, Hardt and Narayanan (2023), chapter 3, Proposition 5 and its proof, pag
 Named, not proved. Scores, not flags; two groups; three conditions. (A) is calibration by group. (B) and (C) ask only that the average score given to the negatives, and to the positives, be the same in both groups: weaker than separation, which asks for the whole distribution. Theorem 1.1: all three only if prediction is perfect or base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two. The binary case is the identity we just derived.
 :::
 
-Scores in bins with values $v$; two groups. Three conditions. (A) *Calibration within groups*: in each group, people scored $v$ are positives with frequency $v$. (B) *Balance for the negative class*: the negatives' mean score is the same in both groups. (C) *Balance for the positive class*: likewise.
+Scores in bins with values $v$; two groups; $p_\sigma$ is the share of positives among people with feature vector $\sigma$. Three conditions. (A) *Calibration within groups*: in each group, people scored $v$ are positives with frequency $v$. (B) *Balance for the negative class*: the negatives' mean score is the same in both groups. (C) *Balance for the positive class*: likewise.
 
 Theorem 1.1: all three hold only if prediction is perfect (every $p_\sigma$ is $0$ or $1$) or the base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two.
 
 Condition (A) is calibration by group; (B) and (C) are weaker than separation. Not proved here.
 
 ::: {.source}
-Kleinberg, Mullainathan and Raghavan (2017), "Inherent Trade-Offs in the Fair Determination of Risk Scores," *8th Innovations in Theoretical Computer Science Conference (ITCS 2017)*, LIPIcs 67, 43:1--43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2.
+Kleinberg, Mullainathan and Raghavan (2017), "Inherent Trade-Offs in the Fair Determination of Risk Scores," *8th Innovations in Theoretical Computer Science Conference (ITCS 2017)*, LIPIcs 67, 43:1--43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2; theorem numbers as in the arXiv version (1609.05807v2), the one linked from the readings.
 :::
 
 # Part 5: Which fairness
@@ -483,16 +483,16 @@ Kleinberg, Mullainathan and Raghavan (2017), "Inherent Trade-Offs in the Fair De
 ## Three views of equality of opportunity {minutes="3"}
 
 ::: {.notes}
-From the reading. Narrow: treat people as they are now; calibration is its criterion, same score same meaning. Middle: discount dissimilarities with causes we should not hold against people; the book ties error rate parity to it, and says it is the hardest criterion to justify. Broad: not about the decision at all, about the institutions before it; demographic parity relates to it, tenuously. ProPublica's number is a middle-view number; the replies' numbers are narrow-view numbers. The book's own caveat: every one of these criteria ignores who applied in the first place.
+From the reading. Narrow: treat people as they are now; calibration is its criterion, same score same meaning. Middle: discount dissimilarities with causes we should not hold against people; the book ties error rate parity partly to it and partly to the narrow view (collect more data), and says it answers to no single principle. Broad: not about the decision at all, about the institutions before it; demographic parity relates to it, tenuously. ProPublica's number is a middle-view number; the replies' numbers are narrow-view numbers. The book's own caveat: every one of these criteria ignores who applied in the first place.
 :::
 
 | view | the rule | the criterion the book ties to it |
 |:---|:---|:---|
 | narrow | treat similar people similarly, as they are now | calibration by group: the same score means the same thing in every group |
-| middle | treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount | error rate parity: one group should not bear more of the mistakes |
+| middle | treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount | error rate parity, in part: one group should not bear more of the mistakes |
 | broad | organize society so that equal ability and ambition reach equal outcomes | demographic parity, loosely: equal shares, at the decision |
 
-The first table again: the error rates are a middle-view complaint; the predictive values are a narrow-view defense.
+The book ties error rate parity to both the middle and the narrow view, and to no single principle. The first table again: the error rates are mostly a middle-view complaint; the predictive values are a narrow-view defense.
 
 ::: {.source}
 Barocas, Hardt and Narayanan (2023), chapter 4, "Equality of opportunity," pages 81 to 85, and "Connecting statistical and moral notions of fairness," pages 92 to 97.
@@ -501,11 +501,11 @@ Barocas, Hardt and Narayanan (2023), chapter 4, "Equality of opportunity," pages
 ## Which would you give up? {minutes="3"}
 
 ::: {.notes}
-Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person detained who would not have reoffended; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups. The book makes that asymmetry the start of its case for caring about error rates at all.
+Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person flagged who was not re-arrested, detained where the flag decides; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups. The book makes that asymmetry the start of its case for caring about error rates at all.
 :::
 
 ::: {.ask}
-The criteria cannot all hold. Which one would you give up, and who do you owe the explanation to?
+Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?
 
 Who pays for your choice: which group, and which error?
 :::
@@ -513,7 +513,7 @@ Who pays for your choice: which group, and which error?
 ## A cutoff per group {minutes="3"}
 
 ::: {.notes}
-Each group's (FPR, TPR) at every cutoff. The same cutoff puts the two groups at different points; the only way to put them at the same point is a different cutoff per group, and then the same decile means different treatment. The identity holds at every cutoff: moving it changes all three rates and not the constraint between them. What each error costs, and the cutoff that follows from the costs, comes later in the course.
+Each group's (FPR, TPR) at every cutoff. The same cutoff puts the two groups at different points; a cutoff per group (6 for Black defendants, 4 for white) brings both error rates within about a point of each other, and then the same decile means different treatment. The identity holds at every cutoff: moving it changes all three rates and not the constraint between them. What each error costs, and the cutoff that follows from the costs, comes later in the course.
 :::
 
 ```{r roc_by_group, fig.height=3.1, fig.alt="True positive rate against false positive rate for the two groups, Black defendants in navy and white defendants in gold, one point per cutoff from 2 to 10, joined by lines, with the cutoff written beside each point and a dotted diagonal. At the same cutoff the navy point is up and to the right of the gold one."}
@@ -532,13 +532,13 @@ sweep |>
 ```
 
 ::: {.leave}
-The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates. A cutoff per group does, and then the same score means different treatment.
+The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates; a cutoff per group (6 and 4) nearly does, and then the same score means different treatment.
 :::
 
 ## A screening test {minutes="6"}
 
 ::: {.notes}
-Six minutes, written, individually; then one answer read out. Separation holds by construction. PPV: 0.9(0.02)/(0.9(0.02) + 0.1(0.98)) = 0.018/0.116 = 0.155 in the first region; 0.09/(0.09 + 0.09) = 0.5 in the second. A positive result is wrong five times in six in the first region, half the time in the second, and the people who bear that are the healthy people sent for treatment or further tests there. Equal PPV would need a stricter cutoff in the low-prevalence region, which raises its FNR: the lab would be giving up separation, and it owes the explanation to the sick people it will now miss there.
+Six minutes, written, individually; then one answer read out. Separation holds by construction. PPV: 0.9(0.02)/(0.9(0.02) + 0.1(0.98)) = 0.018/0.116 = 0.155 in the first region; 0.09/(0.09 + 0.09) = 0.5 in the second. A positive result is wrong five times in six in the first region, half the time in the second, and the people who bear that are the healthy people sent for treatment or further tests there. Equal PPV at different prevalences needs different error-rate pairs: the identity, not a choice. With one test the only lever is the cutoff; a stricter one in the low-prevalence region raises PPV and FNR, and whether it reaches 0.5 depends on the test (one sensitivity and specificity pair fixes no ROC curve). Either way the lab gives up separation, and owes the explanation to the sick people it will now miss there.
 :::
 
 A test for a disease has sensitivity $0.9$ and specificity $0.9$ (TPR $0.9$, FPR $0.1$) in both of two regions. The disease affects $2\%$ of people in the first region and $10\%$ in the second.
@@ -546,8 +546,8 @@ A test for a disease has sensitivity $0.9$ and specificity $0.9$ (TPR $0.9$, FPR
 ::: {.ask}
 1. In each region, what share of positive results are correct?
 2. In which region is a positive result wrong more often, and who bears that error?
-3. The laboratory wants the two shares equal. What has to change in one region, and what happens to that region's error rates?
-4. Which criterion did the laboratory give up, and who does it owe the explanation to?
+3. The laboratory wants the two shares equal. Can it keep the same error rates in both regions? What does the identity say has to differ?
+4. If it moves one region's cutoff to get there, which criterion has it given up, and who does it owe the explanation to?
 :::
 
 ## Lenses this week
@@ -558,7 +558,7 @@ Each lens, what it referred to this week. Then the last slide.
 
 - **What are we optimizing or predicting?** Re-arrest, standing in for reoffending; the base rates included.
 - **Which comparison gets reported?** ProPublica conditioned on the truth; the replies on the flag. Each reported what its position made visible.
-- **Who bears the error?** A false positive, the person detained; a false negative, someone else. The groups pay different prices.
+- **Who bears the error?** A false positive, the person flagged, and detained where the flag decides; a false negative, someone else. The groups pay different prices.
 - **You have to choose, so choose, and defend it.** Equal predictive value or equal error rates. A default chooses too, with nobody to defend it.
 - **What can be changed, and how?** The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?
 
@@ -567,10 +567,10 @@ Each lens, what it referred to this week. Then the last slide.
 ## {minutes="3"}
 
 ::: {.notes}
-COMPAS is a product. "Equally accurate for both groups" was the number its vendor wanted in the headline, and it is a true number. Then the task below, which is also where next week starts.
+COMPAS is a product. "Equally accurate for both groups" was the vendor's headline; it meant predictive value and calibration, which are about equal. Plain accuracy, the share the flag got right, was 64 and 67 percent. Then the task below, which is also where next week starts.
 :::
 
-COMPAS is a commercial product. "Equally accurate in both groups" is true, and it was the vendor's headline.
+COMPAS is a commercial product. "Equally accurate in both groups" was the vendor's headline, and in the sense it meant, equal predictive value, the number is about right.
 
 ::: {.ask}
 Who benefited from that being the number that was reported? And would a more competent analyst have chosen a different one?

@@ -1290,7 +1290,7 @@ display:block!important;
 <h2>From the significance filter</h2>
 <aside class="notes">
 <p><code>[######--------------]</code> 30%  22 of 74 min</p>
-<p>Retrieve it: the share of true hypotheses p, level alpha, power 1 - beta, and the probability that a rejection is a false one. Rename and it is the PPV of a classifier. One formula, twice in the course.</p>
+<p>Retrieve it: the share of true research hypotheses p, level alpha, power 1 - beta, and the probability that a rejection is a true discovery. Rename and it is the PPV of a classifier. One formula, twice in the course.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1303,7 +1303,7 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 <div class="retrieval">
-<p>Among hypotheses tested, a share <span class="math inline">\(p\)</span> are true. Tests have level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1 - \beta\)</span>. What is the probability that a rejected hypothesis is true?</p>
+<p>Among the research hypotheses tested, a share <span class="math inline">\(p\)</span> are true (their nulls are false). Tests have level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1 - \beta\)</span>. What is the probability that a rejection is a true discovery?</p>
 </div>
 <p><span class="math display">\[
 P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) + (1 - p)\,\alpha}
@@ -1399,7 +1399,7 @@ display:block!important;
 <td style="text-align: left;">sufficiency</td>
 <td style="text-align: left;"><span class="math inline">\(Y \perp A \mid R\)</span></td>
 <td style="text-align: left;">equal PPV and equal NPV</td>
-<td style="text-align: left;">predictive parity</td>
+<td style="text-align: left;">predictive parity is equal PPV alone, a relaxation</td>
 </tr>
 </tbody>
 </table>
@@ -1439,7 +1439,7 @@ display:block!important;
 <h2>Calibration by group</h2>
 <aside class="notes">
 <p><code>[########------------]</code> 42%  31 of 74 min</p>
-<p>Observed re-arrest rate by decile, by group: the two lines lie close. That is what the replies pointed at. Definitions: calibrated, calibrated by group; calibration by group implies sufficiency (Fact 2); the optimal score E[Y | X] is calibrated within any group it can tell apart (Fact 3), so a well-fitted score has it without anyone asking, and demanding it asks for little. And it is lost on thresholding: a calibrated score, cut at a decile, need not give equal PPV, which is why the two PPVs on the first table differ by four points.</p>
+<p>Observed re-arrest rate by decile, by group: the two lines lie close. That is what the replies pointed at. Deciles are not probabilities, so the figure shows the same decile, the same rate. Definitions: calibrated, calibrated by group; calibration by group implies sufficiency (Fact 2); the optimal score E[Y | X] is calibrated within any group it can tell apart (Fact 3), so a well-fitted score has it without anyone asking, and demanding it asks for little. And it is lost on thresholding: a calibrated score, cut at a decile, need not give equal PPV, which is why the two PPVs on the first table differ by four points.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1460,7 +1460,7 @@ display:block!important;
 </div>
 </div>
 </div>
-<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; the optimal score <span class="math inline">\(E[Y \mid X]\)</span> has it already; and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
+<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; the optimal score <span class="math inline">\(E[Y \mid X]\)</span> has it already, for any group the features identify; and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, “Calibration and sufficiency” (Facts 2 and 3, Proposition 1), pages 61 to 63, and “Calibration values,” page 71.</p>
 </div>
@@ -1609,7 +1609,7 @@ display:block!important;
 <h2>Proposition 5</h2>
 <aside class="notes">
 <p><code>[#############-------]</code> 66%  49 of 74 min</p>
-<p>Skip if behind. Sufficiency for a binary flag is equal PPV and equal NPV; separation is equal FPR and FNR. Suppose both and FPR &gt; 0. Equal PPV with equal FPR and TPR forces, by the formula, equal odds of p, so equal prevalence; the book’s proof route is via TPR = 0 and then unequal NPV. Either way: both criteria, unequal base rates, and an imperfect flag cannot coexist.</p>
+<p>Skip if behind. Sufficiency for a binary flag is equal PPV and equal NPV; separation is equal FPR and FNR. Suppose both and 0 &lt; FPR &lt; 1; the book assumes only FPR &gt; 0 and its proof passes over the reversed flag. Equal PPV with equal FPR and TPR forces, by the formula, equal odds of p, so equal prevalence; the book’s proof route is via TPR = 0 and then unequal NPV. Either way: both criteria, unequal base rates, and an imperfect flag cannot coexist.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1621,10 +1621,10 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-<p>Suppose <span class="math inline">\(Y\)</span> depends on <span class="math inline">\(A\)</span>, and the flag has <span class="math inline">\(\text{FPR} &gt; 0\)</span> and <span class="math inline">\(\text{TPR} &gt; 0\)</span>.</p>
+<p>Suppose <span class="math inline">\(Y\)</span> depends on <span class="math inline">\(A\)</span>, and the flag has <span class="math inline">\(0 &lt; \text{FPR} &lt; 1\)</span> and <span class="math inline">\(\text{TPR} &gt; 0\)</span>.</p>
 <p>If the flag satisfies separation (equal FPR and FNR) and sufficiency (equal PPV and NPV), the identity gives <span class="math display">\[
 \frac{p_a}{1 - p_a} \;=\; \frac{\text{FPR}}{(1 - \text{FNR})}\cdot\frac{\text{PPV}}{1 - \text{PPV}} \;=\; \frac{p_b}{1 - p_b},
-\]</span> so <span class="math inline">\(p_a = p_b\)</span>. Contradiction. (If <span class="math inline">\(\text{TPR} = 0\)</span> the PPVs are both <span class="math inline">\(0\)</span> and the NPVs differ instead.)</p>
+\]</span> so <span class="math inline">\(p_a = p_b\)</span>. Contradiction. (If <span class="math inline">\(\text{TPR} = 0\)</span> the PPVs are both <span class="math inline">\(0\)</span> and the NPVs differ instead, unless <span class="math inline">\(\text{FPR} = 1\)</span>: the outcome reversed satisfies both criteria.)</p>
 <div class="source" style="color: #BCAF6F">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, Proposition 5 and its proof, page 67. Propositions 2 and 3 (independence against the other two) are on pages 65 and 66.</p>
 </div>
@@ -1645,11 +1645,11 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-<p>Scores in bins with values <span class="math inline">\(v\)</span>; two groups. Three conditions. (A) <em>Calibration within groups</em>: in each group, people scored <span class="math inline">\(v\)</span> are positives with frequency <span class="math inline">\(v\)</span>. (B) <em>Balance for the negative class</em>: the negatives’ mean score is the same in both groups. (C) <em>Balance for the positive class</em>: likewise.</p>
+<p>Scores in bins with values <span class="math inline">\(v\)</span>; two groups; <span class="math inline">\(p_\sigma\)</span> is the share of positives among people with feature vector <span class="math inline">\(\sigma\)</span>. Three conditions. (A) <em>Calibration within groups</em>: in each group, people scored <span class="math inline">\(v\)</span> are positives with frequency <span class="math inline">\(v\)</span>. (B) <em>Balance for the negative class</em>: the negatives’ mean score is the same in both groups. (C) <em>Balance for the positive class</em>: likewise.</p>
 <p>Theorem 1.1: all three hold only if prediction is perfect (every <span class="math inline">\(p_\sigma\)</span> is <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>) or the base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two.</p>
 <p>Condition (A) is calibration by group; (B) and (C) are weaker than separation. Not proved here.</p>
 <div class="source">
-<p>Kleinberg, Mullainathan and Raghavan (2017), “Inherent Trade-Offs in the Fair Determination of Risk Scores,” <em>8th Innovations in Theoretical Computer Science Conference (ITCS 2017)</em>, LIPIcs 67, 43:1–43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2.</p>
+<p>Kleinberg, Mullainathan and Raghavan (2017), “Inherent Trade-Offs in the Fair Determination of Risk Scores,” <em>8th Innovations in Theoretical Computer Science Conference (ITCS 2017)</em>, LIPIcs 67, 43:1–43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2; theorem numbers as in the arXiv version (1609.05807v2), the one linked from the readings.</p>
 </div>
 </section></section>
 <section>
@@ -1673,7 +1673,7 @@ display:block!important;
 <h2>Three views of equality of opportunity</h2>
 <aside class="notes">
 <p><code>[###############-----]</code> 73%  54 of 74 min</p>
-<p>From the reading. Narrow: treat people as they are now; calibration is its criterion, same score same meaning. Middle: discount dissimilarities with causes we should not hold against people; the book ties error rate parity to it, and says it is the hardest criterion to justify. Broad: not about the decision at all, about the institutions before it; demographic parity relates to it, tenuously. ProPublica’s number is a middle-view number; the replies’ numbers are narrow-view numbers. The book’s own caveat: every one of these criteria ignores who applied in the first place.</p>
+<p>From the reading. Narrow: treat people as they are now; calibration is its criterion, same score same meaning. Middle: discount dissimilarities with causes we should not hold against people; the book ties error rate parity partly to it and partly to the narrow view (collect more data), and says it answers to no single principle. Broad: not about the decision at all, about the institutions before it; demographic parity relates to it, tenuously. ProPublica’s number is a middle-view number; the replies’ numbers are narrow-view numbers. The book’s own caveat: every one of these criteria ignores who applied in the first place.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1707,7 +1707,7 @@ display:block!important;
 <tr class="even">
 <td style="text-align: left;">middle</td>
 <td style="text-align: left;">treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount</td>
-<td style="text-align: left;">error rate parity: one group should not bear more of the mistakes</td>
+<td style="text-align: left;">error rate parity, in part: one group should not bear more of the mistakes</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">broad</td>
@@ -1716,7 +1716,7 @@ display:block!important;
 </tr>
 </tbody>
 </table>
-<p>The first table again: the error rates are a middle-view complaint; the predictive values are a narrow-view defense.</p>
+<p>The book ties error rate parity to both the middle and the narrow view, and to no single principle. The first table again: the error rates are mostly a middle-view complaint; the predictive values are a narrow-view defense.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 4, “Equality of opportunity,” pages 81 to 85, and “Connecting statistical and moral notions of fairness,” pages 92 to 97.</p>
 </div>
@@ -1725,7 +1725,7 @@ display:block!important;
 <h2>Which would you give up?</h2>
 <aside class="notes">
 <p><code>[###############-----]</code> 77%  57 of 74 min</p>
-<p>Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person detained who would not have reoffended; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups. The book makes that asymmetry the start of its case for caring about error rates at all.</p>
+<p>Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person flagged who was not re-arrested, detained where the flag decides; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups. The book makes that asymmetry the start of its case for caring about error rates at all.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1738,7 +1738,7 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 <div class="ask">
-<p>The criteria cannot all hold. Which one would you give up, and who do you owe the explanation to?</p>
+<p>Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?</p>
 <p>Who pays for your choice: which group, and which error?</p>
 </div>
 </section>
@@ -1746,7 +1746,7 @@ display:block!important;
 <h2>A cutoff per group</h2>
 <aside class="notes">
 <p><code>[################----]</code> 81%  60 of 74 min</p>
-<p>Each group’s (FPR, TPR) at every cutoff. The same cutoff puts the two groups at different points; the only way to put them at the same point is a different cutoff per group, and then the same decile means different treatment. The identity holds at every cutoff: moving it changes all three rates and not the constraint between them. What each error costs, and the cutoff that follows from the costs, comes later in the course.</p>
+<p>Each group’s (FPR, TPR) at every cutoff. The same cutoff puts the two groups at different points; a cutoff per group (6 for Black defendants, 4 for white) brings both error rates within about a point of each other, and then the same decile means different treatment. The identity holds at every cutoff: moving it changes all three rates and not the constraint between them. What each error costs, and the cutoff that follows from the costs, comes later in the course.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1768,14 +1768,14 @@ display:block!important;
 </div>
 </div>
 <div class="leave">
-<p>The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates. A cutoff per group does, and then the same score means different treatment.</p>
+<p>The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates; a cutoff per group (6 and 4) nearly does, and then the same score means different treatment.</p>
 </div>
 </section>
 <section id="a-screening-test" class="slide level2" data-minutes="6">
 <h2>A screening test</h2>
 <aside class="notes">
 <p><code>[#################---]</code> 85%  63 of 74 min</p>
-<p>Six minutes, written, individually; then one answer read out. Separation holds by construction. PPV: 0.9(0.02)/(0.9(0.02) + 0.1(0.98)) = 0.018/0.116 = 0.155 in the first region; 0.09/(0.09 + 0.09) = 0.5 in the second. A positive result is wrong five times in six in the first region, half the time in the second, and the people who bear that are the healthy people sent for treatment or further tests there. Equal PPV would need a stricter cutoff in the low-prevalence region, which raises its FNR: the lab would be giving up separation, and it owes the explanation to the sick people it will now miss there.</p>
+<p>Six minutes, written, individually; then one answer read out. Separation holds by construction. PPV: 0.9(0.02)/(0.9(0.02) + 0.1(0.98)) = 0.018/0.116 = 0.155 in the first region; 0.09/(0.09 + 0.09) = 0.5 in the second. A positive result is wrong five times in six in the first region, half the time in the second, and the people who bear that are the healthy people sent for treatment or further tests there. Equal PPV at different prevalences needs different error-rate pairs: the identity, not a choice. With one test the only lever is the cutoff; a stricter one in the low-prevalence region raises PPV and FNR, and whether it reaches 0.5 depends on the test (one sensitivity and specificity pair fixes no ROC curve). Either way the lab gives up separation, and owes the explanation to the sick people it will now miss there.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1792,8 +1792,8 @@ display:block!important;
 <ol type="1">
 <li>In each region, what share of positive results are correct?</li>
 <li>In which region is a positive result wrong more often, and who bears that error?</li>
-<li>The laboratory wants the two shares equal. What has to change in one region, and what happens to that region’s error rates?</li>
-<li>Which criterion did the laboratory give up, and who does it owe the explanation to?</li>
+<li>The laboratory wants the two shares equal. Can it keep the same error rates in both regions? What does the identity say has to differ?</li>
+<li>If it moves one region’s cutoff to get there, which criterion has it given up, and who does it owe the explanation to?</li>
 </ol>
 </div>
 </section>
@@ -1816,7 +1816,7 @@ display:block!important;
 <ul>
 <li><strong>What are we optimizing or predicting?</strong> Re-arrest, standing in for reoffending; the base rates included.</li>
 <li><strong>Which comparison gets reported?</strong> ProPublica conditioned on the truth; the replies on the flag. Each reported what its position made visible.</li>
-<li><strong>Who bears the error?</strong> A false positive, the person detained; a false negative, someone else. The groups pay different prices.</li>
+<li><strong>Who bears the error?</strong> A false positive, the person flagged, and detained where the flag decides; a false negative, someone else. The groups pay different prices.</li>
 <li><strong>You have to choose, so choose, and defend it.</strong> Equal predictive value or equal error rates. A default chooses too, with nobody to defend it.</li>
 <li><strong>What can be changed, and how?</strong> The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?</li>
 </ul>
@@ -1826,7 +1826,7 @@ display:block!important;
 <h2></h2>
 <aside class="notes">
 <p><code>[###################-]</code> 96%  71 of 74 min</p>
-<p>COMPAS is a product. “Equally accurate for both groups” was the number its vendor wanted in the headline, and it is a true number. Then the task below, which is also where next week starts.</p>
+<p>COMPAS is a product. “Equally accurate for both groups” was the vendor’s headline; it meant predictive value and calibration, which are about equal. Plain accuracy, the share the flag got right, was 64 and 67 percent. Then the task below, which is also where next week starts.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1838,7 +1838,7 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-<p>COMPAS is a commercial product. “Equally accurate in both groups” is true, and it was the vendor’s headline.</p>
+<p>COMPAS is a commercial product. “Equally accurate in both groups” was the vendor’s headline, and in the sense it meant, equal predictive value, the number is about right.</p>
 <div class="ask">
 <p>Who benefited from that being the number that was reported? And would a more competent analyst have chosen a different one?</p>
 </div>

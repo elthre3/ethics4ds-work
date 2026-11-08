@@ -294,7 +294,7 @@ Joshua Loftus
 <section id="from-the-significance-filter" class="slide level2">
 <h2>From the significance filter</h2>
 <div class="retrieval">
-<p>Among hypotheses tested, a share <span class="math inline">\(p\)</span> are true. Tests have level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1 - \beta\)</span>. What is the probability that a rejected hypothesis is true?</p>
+<p>Among the research hypotheses tested, a share <span class="math inline">\(p\)</span> are true (their nulls are false). Tests have level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1 - \beta\)</span>. What is the probability that a rejection is a true discovery?</p>
 </div>
 <p><span class="math display">\[
 P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) + (1 - p)\,\alpha}
@@ -350,7 +350,7 @@ P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) +
 <td style="text-align: left;">sufficiency</td>
 <td style="text-align: left;"><span class="math inline">\(Y \perp A \mid R\)</span></td>
 <td style="text-align: left;">equal PPV and equal NPV</td>
-<td style="text-align: left;">predictive parity</td>
+<td style="text-align: left;">predictive parity is equal PPV alone, a relaxation</td>
 </tr>
 </tbody>
 </table>
@@ -383,7 +383,7 @@ P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) +
 </div>
 </div>
 </div>
-<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; the optimal score <span class="math inline">\(E[Y \mid X]\)</span> has it already; and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
+<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; the optimal score <span class="math inline">\(E[Y \mid X]\)</span> has it already, for any group the features identify; and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, “Calibration and sufficiency” (Facts 2 and 3, Proposition 1), pages 61 to 63, and “Calibration values,” page 71.</p>
 </div>
@@ -448,21 +448,21 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </section>
 <section id="proposition-5" class="slide level2 inverse">
 <h2>Proposition 5</h2>
-<p>Suppose <span class="math inline">\(Y\)</span> depends on <span class="math inline">\(A\)</span>, and the flag has <span class="math inline">\(\text{FPR} &gt; 0\)</span> and <span class="math inline">\(\text{TPR} &gt; 0\)</span>.</p>
+<p>Suppose <span class="math inline">\(Y\)</span> depends on <span class="math inline">\(A\)</span>, and the flag has <span class="math inline">\(0 &lt; \text{FPR} &lt; 1\)</span> and <span class="math inline">\(\text{TPR} &gt; 0\)</span>.</p>
 <p>If the flag satisfies separation (equal FPR and FNR) and sufficiency (equal PPV and NPV), the identity gives <span class="math display">\[
 \frac{p_a}{1 - p_a} \;=\; \frac{\text{FPR}}{(1 - \text{FNR})}\cdot\frac{\text{PPV}}{1 - \text{PPV}} \;=\; \frac{p_b}{1 - p_b},
-\]</span> so <span class="math inline">\(p_a = p_b\)</span>. Contradiction. (If <span class="math inline">\(\text{TPR} = 0\)</span> the PPVs are both <span class="math inline">\(0\)</span> and the NPVs differ instead.)</p>
+\]</span> so <span class="math inline">\(p_a = p_b\)</span>. Contradiction. (If <span class="math inline">\(\text{TPR} = 0\)</span> the PPVs are both <span class="math inline">\(0\)</span> and the NPVs differ instead, unless <span class="math inline">\(\text{FPR} = 1\)</span>: the outcome reversed satisfies both criteria.)</p>
 <div class="source" style="color: #BCAF6F">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, Proposition 5 and its proof, page 67. Propositions 2 and 3 (independence against the other two) are on pages 65 and 66.</p>
 </div>
 </section>
 <section id="the-general-result" class="slide level2" data-minutes="3">
 <h2>The general result</h2>
-<p>Scores in bins with values <span class="math inline">\(v\)</span>; two groups. Three conditions. (A) <em>Calibration within groups</em>: in each group, people scored <span class="math inline">\(v\)</span> are positives with frequency <span class="math inline">\(v\)</span>. (B) <em>Balance for the negative class</em>: the negatives’ mean score is the same in both groups. (C) <em>Balance for the positive class</em>: likewise.</p>
+<p>Scores in bins with values <span class="math inline">\(v\)</span>; two groups; <span class="math inline">\(p_\sigma\)</span> is the share of positives among people with feature vector <span class="math inline">\(\sigma\)</span>. Three conditions. (A) <em>Calibration within groups</em>: in each group, people scored <span class="math inline">\(v\)</span> are positives with frequency <span class="math inline">\(v\)</span>. (B) <em>Balance for the negative class</em>: the negatives’ mean score is the same in both groups. (C) <em>Balance for the positive class</em>: likewise.</p>
 <p>Theorem 1.1: all three hold only if prediction is perfect (every <span class="math inline">\(p_\sigma\)</span> is <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>) or the base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two.</p>
 <p>Condition (A) is calibration by group; (B) and (C) are weaker than separation. Not proved here.</p>
 <div class="source">
-<p>Kleinberg, Mullainathan and Raghavan (2017), “Inherent Trade-Offs in the Fair Determination of Risk Scores,” <em>8th Innovations in Theoretical Computer Science Conference (ITCS 2017)</em>, LIPIcs 67, 43:1–43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2.</p>
+<p>Kleinberg, Mullainathan and Raghavan (2017), “Inherent Trade-Offs in the Fair Determination of Risk Scores,” <em>8th Innovations in Theoretical Computer Science Conference (ITCS 2017)</em>, LIPIcs 67, 43:1–43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2; theorem numbers as in the arXiv version (1609.05807v2), the one linked from the readings.</p>
 </div>
 </section></section>
 <section>
@@ -494,7 +494,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <tr class="even">
 <td style="text-align: left;">middle</td>
 <td style="text-align: left;">treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount</td>
-<td style="text-align: left;">error rate parity: one group should not bear more of the mistakes</td>
+<td style="text-align: left;">error rate parity, in part: one group should not bear more of the mistakes</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">broad</td>
@@ -503,7 +503,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </tr>
 </tbody>
 </table>
-<p>The first table again: the error rates are a middle-view complaint; the predictive values are a narrow-view defense.</p>
+<p>The book ties error rate parity to both the middle and the narrow view, and to no single principle. The first table again: the error rates are mostly a middle-view complaint; the predictive values are a narrow-view defense.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 4, “Equality of opportunity,” pages 81 to 85, and “Connecting statistical and moral notions of fairness,” pages 92 to 97.</p>
 </div>
@@ -511,7 +511,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <section id="which-would-you-give-up" class="slide level2" data-minutes="3">
 <h2>Which would you give up?</h2>
 <div class="ask">
-<p>The criteria cannot all hold. Which one would you give up, and who do you owe the explanation to?</p>
+<p>Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?</p>
 <p>Who pays for your choice: which group, and which error?</p>
 </div>
 </section>
@@ -527,7 +527,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </div>
 </div>
 <div class="leave">
-<p>The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates. A cutoff per group does, and then the same score means different treatment.</p>
+<p>The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates; a cutoff per group (6 and 4) nearly does, and then the same score means different treatment.</p>
 </div>
 </section>
 <section id="a-screening-test" class="slide level2" data-minutes="6">
@@ -537,8 +537,8 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <ol type="1">
 <li>In each region, what share of positive results are correct?</li>
 <li>In which region is a positive result wrong more often, and who bears that error?</li>
-<li>The laboratory wants the two shares equal. What has to change in one region, and what happens to that region’s error rates?</li>
-<li>Which criterion did the laboratory give up, and who does it owe the explanation to?</li>
+<li>The laboratory wants the two shares equal. Can it keep the same error rates in both regions? What does the identity say has to differ?</li>
+<li>If it moves one region’s cutoff to get there, which criterion has it given up, and who does it owe the explanation to?</li>
 </ol>
 </div>
 </section>
@@ -547,7 +547,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <ul>
 <li><strong>What are we optimizing or predicting?</strong> Re-arrest, standing in for reoffending; the base rates included.</li>
 <li><strong>Which comparison gets reported?</strong> ProPublica conditioned on the truth; the replies on the flag. Each reported what its position made visible.</li>
-<li><strong>Who bears the error?</strong> A false positive, the person detained; a false negative, someone else. The groups pay different prices.</li>
+<li><strong>Who bears the error?</strong> A false positive, the person flagged, and detained where the flag decides; a false negative, someone else. The groups pay different prices.</li>
 <li><strong>You have to choose, so choose, and defend it.</strong> Equal predictive value or equal error rates. A default chooses too, with nobody to defend it.</li>
 <li><strong>What can be changed, and how?</strong> The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?</li>
 </ul>
@@ -555,7 +555,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </section>
 <section id="section-1" class="slide level2" data-minutes="3">
 <h2></h2>
-<p>COMPAS is a commercial product. “Equally accurate in both groups” is true, and it was the vendor’s headline.</p>
+<p>COMPAS is a commercial product. “Equally accurate in both groups” was the vendor’s headline, and in the sense it meant, equal predictive value, the number is about right.</p>
 <div class="ask">
 <p>Who benefited from that being the number that was reported? And would a more competent analyst have chosen a different one?</p>
 </div>

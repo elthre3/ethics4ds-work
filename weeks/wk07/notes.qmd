@@ -51,7 +51,7 @@ different false positive rate or a different false negative rate in
 the two. The general version of that result, for
 scores rather than flags, is stated and not proved. What remains is a
 choice among criteria, and the reading's three views of equality of
-opportunity say which criterion each kind of fairness reaches for. The
+opportunity say which criterion each kind of fairness supports. The
 choice is a value judgment that the arithmetic narrows and does not
 make.
 
@@ -202,14 +202,19 @@ trial cannot be arrested on the street, so the outcome is observed
 under conditions the score itself helped set.
 
 Every rate in this week, the two groups' prevalences included, is a
-rate of the proxy. If arrests overstate reoffending more in one group
-than the other, that group's measured prevalence is too high relative
-to the truth, and so is the measured false positive rate (people
-counted as "did not reoffend" are, after all, people who were not
-arrested). I do not know the size of that gap in these data and
-neither does anyone else; the point of asking is that the base-rate
-difference the whole argument turns on is partly a product of the
-system being evaluated.
+rate of the proxy. Errors in the label move people between the rows
+of the table, so they change the measured rates, and the direction
+depends on how the errors line up with the score. A reoffender who is
+not caught is counted as "did not reoffend," and if the score flagged
+them they are counted as a false positive, so the measured false
+positive rate is too high. A non-reoffender who is wrongly arrested
+leaves the "did not reoffend" row, and if wrongful arrests fall mostly
+on flagged people the measured false positive rate is too low. If the
+errors differ between groups, so does the bias in each group's
+measured prevalence and rates. I do not know the size of either gap in
+these data and neither does anyone else; the point of asking is that
+the base-rate difference the whole argument turns on is partly a
+product of the system being evaluated.
 
 ## Rates
 
@@ -265,9 +270,9 @@ $$
 
 You have seen this formula with the significance filter, as the
 probability that a published finding is true: a share $p$ of the
-hypotheses tested are true, tests have level $\alpha$ and
-power $1 - \beta$, and the probability that a rejection is a true
-discovery is $p(1-\beta) / [p(1-\beta) + (1-p)\alpha]$. Replace $\alpha$ by FPR,
+research hypotheses tested are true (their nulls are false), tests
+have level $\alpha$ and power $1 - \beta$, and the probability that a
+rejection is a true discovery is $p(1-\beta) / [p(1-\beta) + (1-p)\alpha]$. Replace $\alpha$ by FPR,
 $\beta$ by FNR and "true hypothesis" by "reoffended" and it is the
 same computation. In both settings the quantity that nobody designing
 the procedure controls is $p$, and in both it is the quantity that
@@ -293,7 +298,7 @@ flag $\hat Y$ as an equality of rates.
 |:---|:---|:---|:---|
 | independence | $R \perp A$ | the same share flagged in every group | demographic parity, statistical parity |
 | separation | $R \perp A \mid Y$ | the same FPR and the same FNR in every group | error rate parity, equalized odds |
-| sufficiency | $Y \perp A \mid R$ | the same PPV and the same NPV in every group | predictive parity |
+| sufficiency | $Y \perp A \mid R$ | the same PPV and the same NPV in every group | predictive parity, which asks for equal PPV only (a relaxation) |
 
 Each is a property of the joint distribution of $(A, R, Y)$. When all
 three variables are binary that distribution is eight numbers, and
@@ -492,10 +497,13 @@ identity" below.
 The textbook states the same thing as a proposition about two of the
 three criteria (page 67): if $Y$ is not independent of $A$ and the flag
 has a nonzero false positive rate, separation and sufficiency cannot
-both hold for the flag. The identity gives a short proof. Suppose
-both hold, so FPR, FNR, PPV and NPV are all the same in both groups,
-with $\text{FPR} > 0$. If also $\text{TPR} > 0$, rearrange the identity
-once more:
+both hold for the flag. One more condition is needed, $\text{FPR} < 1$:
+the flag $\hat Y = 1 - Y$ has FPR $= 1$, FNR $= 1$ and PPV $=$ NPV $= 0$
+in every group, so it satisfies both criteria whatever the base rates,
+and the book's proof passes over it. With that condition the identity
+gives a short proof. Suppose both criteria hold, so FPR, FNR, PPV and
+NPV are all the same in both groups, with $0 < \text{FPR} < 1$. If also
+$\text{TPR} > 0$, rearrange the identity once more:
 $$
 \frac{p}{1 - p} \;=\; \frac{\text{FPR}}{1 - \text{FNR}}\cdot\frac{\text{PPV}}{1 - \text{PPV}},
 $$
@@ -503,8 +511,8 @@ and the right side is the same in both groups, so $p_a = p_b$, which
 contradicts $Y$ depending on $A$. If $\text{TPR} = 0$, every flag is a
 false positive, both PPVs are $0$, and the negative predictive values
 $(1 - \text{FPR})(1 - p_a) / [(1 - \text{FPR})(1 - p_a) + p_a]$ differ
-between the groups, so sufficiency fails anyway. That second branch is
-the textbook's own route.
+between the groups because $\text{FPR} < 1$, so sufficiency fails
+anyway. That second branch is the textbook's own route.
 
 The textbook's Propositions 2 and 3 (pages 65 and 66) do the same for
 the other two pairs. Independence and sufficiency cannot both hold
@@ -600,15 +608,19 @@ those in place:
   book is careful to say the relation is loose.
 - Error rate parity is, in the book's words, the hardest criterion to
   connect rigorously to any moral notion, and it is nevertheless the
-  one ProPublica's finding tapped into. The book's own account ties it
-  to the middle view: if one group's higher error rate comes from
-  historical and present conditions that account for differences in
-  qualifications, then letting that group bear more of the mistakes
-  perpetuates the disadvantage.
+  one ProPublica's finding tapped into. The book ties it to the middle
+  view: if one group's higher error rate comes from historical and
+  present conditions that account for differences in qualifications,
+  then letting that group bear more of the mistakes perpetuates the
+  disadvantage. It ties it to the narrow view as well, since one
+  remedy for an error-rate gap is to collect more data and assess
+  people more accurately as they are, and it concludes that error rate
+  parity answers to no single principle but says something about both
+  views (page 101).
 
 The dispute over the first table is a dispute between two of these
-views. The error rates are a middle-view complaint; the predictive
-values are a narrow-view defense. Neither is a mistake. They disagree about what a fair score
+views. The error rates are mostly a middle-view complaint; the
+predictive values are a narrow-view defense. Neither is a mistake. They disagree about what a fair score
 owes, and who it owes it to.
 
 The book also says (page 97) that the two errors do not weigh the
@@ -623,16 +635,18 @@ caring about error rates at all starts from the false positives.
 
 ### Which criterion to give up
 
-The criteria cannot all hold. Which one would you give up, and who do
-you owe the explanation to? And who pays for your choice: which group,
-and which kind of error?
+Equal predictive value or equal error rates: the two cannot both hold.
+Which would you require, and which would you give up? Who do you owe
+the explanation to, and who pays for your choice: which group, and
+which kind of error?
 
 There is no house answer. A defensible position gives up predictive
 parity, equalizes the false positive rate, and owes the explanation to
 judges, whose flag now means something different depending on who it
 is on. Another defensible position keeps predictive parity, accepts
 unequal error rates, and owes the explanation to the Black defendants
-who will not reoffend and will be detained at nearly twice the rate.
+who will not be re-arrested and will be flagged at nearly twice the
+rate, and detained where the flag decides.
 A third refuses to use a score for this decision at all, which the
 textbook also lists as a response, and owes the explanation to
 whoever bears the errors of the human judgment that replaces it. What
@@ -670,13 +684,15 @@ at (`r pct(at5$FPR[1])`, `r pct(at5$TPR[1])`) and white defendants at
 at which the two groups have the same error rates. The two curves run
 close to each other, which is the textbook's "visualizing
 separation" picture (pages 58 to 60): the trade-offs achievable in
-both groups are the points under both curves, and reaching the same
-point in both groups means a different cutoff for each group, say
-decile 6 for one group and decile 4 or 5 for the other. That is
-post-processing (textbook, pages 63 and 64): take the score as given
-and set group-specific cutoffs so that one criterion holds. Then the
-same decile means different treatment depending on the group, and the
-score is no longer sufficient for the flag.
+both groups are the points under both curves, and coming close to the
+same point in both groups means a different cutoff for each group:
+decile 6 for Black defendants and decile 4 for white defendants puts
+the two groups' false positive rates within a point of each other and
+their false negative rates within two. That is post-processing
+(textbook, pages 63 and 64): take the score as given and set
+group-specific cutoffs so that one criterion holds, or nearly. Then
+the same decile means different treatment depending on the group, and
+the score is no longer sufficient for the flag.
 
 The identity holds at every cutoff, in every group. Moving the cutoff
 changes all three of FPR, FNR and PPV; it does not change the
@@ -710,10 +726,10 @@ neither bias nor variance; it is exact. Variance enters when the rates
 are estimated from a group of finite size. White defendants with high
 deciles are few, so the white defendants' calibration curve wobbles
 at the top, and a PPV computed in a small group has a wide interval.
-Chouldechova's Figure 1 shows 95 percent intervals on every bar;
-when you compare two groups' rates, look at whether the intervals
-overlap before reading a gap as a difference between the groups rather
-than sampling variation.
+Chouldechova's Figure 1 shows 95 percent intervals on every bar.
+When you compare two groups' rates, what tells you whether a gap is
+more than sampling variation is an interval for the difference between
+the two rates, not whether two separate intervals overlap.
 
 ## Lenses
 
@@ -728,9 +744,9 @@ the flag, as a judge does, and reported predictive values and
 calibration. Each side reported the comparison that its position made
 visible, and each number was correct.
 
-Who bears the error? A false positive is a person detained who would
-not have reoffended. A false negative is a release that went badly,
-paid for by someone else. Separation failing says the two groups pay
+Who bears the error? A false positive is a person flagged who was not
+re-arrested, and detained where the flag decides the detention. A false
+negative is a release that went badly, paid for by someone else. Separation failing says the two groups pay
 different prices for the same score, and the identity says that at
 unequal base rates a score with predictive parity has to make them.
 
@@ -790,7 +806,8 @@ lecture.
   (*8th Innovations in Theoretical Computer Science Conference*, ITCS
   2017, LIPIcs 67, 43:1--43:23,
   <https://doi.org/10.4230/LIPIcs.ITCS.2017.43>): section 1 through the
-  statement of Theorem 1.1, and section 5.
+  statement of Theorem 1.1, and section 5. Theorem numbers here follow
+  the arXiv version (1609.05807v2), which is the version linked.
 - Chouldechova,
   [Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments](https://arxiv.org/abs/1703.00056)
   (*Big Data* 5(2), 2017, 153--163,
