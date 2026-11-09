@@ -26,27 +26,28 @@ st313:
   segments:                        # sums to 80: 77 of material and 3 of slack; production 27 (34%)
     # opener: 4
     - {label: "what you brought: the 5 -> 7 task; each rule's two errors and who pays", minutes: 4, mode: production, retrieves: [S5]}
-    # part 1, the COMPAS dispute: 12
-    - {label: "COMPAS: Broward County, ProPublica's four numbers, the replies; the convention for Y and Y-hat", minutes: 6, mode: exposition}
-    - {label: "written commitment: which number should be equal, as defendant, judge, public", minutes: 3, mode: production}
-    - {label: "lens A, asked: Y is re-arrest, Y* is reoffending; every rate is against the proxy", minutes: 3, mode: production, retrieves: [S2]}
-    # part 2, rates: 10
-    - {label: "the four rates and two predictive values; which way each conditions; Type I and II recalled; the PPV formula from the significance filter", minutes: 8, mode: exposition, introduces: [CC-19], core: CC-19, results: [R40]}
+    # part 1, scores that sort people: 15
+    - {label: "three scores that sort people: job ads with the same targeting and skewed audiences, and the 2022 housing-ad settlement; DWP's fraud checks, referral rate and true discovery rate by nationality; COMPAS in Broward County and the convention for Y and Y-hat", minutes: 7, mode: exposition}
+    - {label: "ProPublica's table read across the rows (FPR, FNR; Type I and II recalled); the vendor's reply read down the columns (PPV, NPV)", minutes: 5, mode: exposition, introduces: [CC-19], core: CC-19}
+    - {label: "written commitment: which number should be equal, as defendant, judge, public; the same for the fraud checks", minutes: 3, mode: production}
+    # part 2, an identity: 17
     - {label: "prediction: can FPR, FNR, PPV and NPV all be equal when prevalence differs", minutes: 2, mode: production}
-    # part 3, three criteria: 8
-    - {label: "independence, separation, sufficiency; the criteria on the COMPAS table; calibration by group, Facts 2 and 3, lost on thresholding; two calibrated scores (dark)", minutes: 8, mode: exposition, introduces: [CC-22], core: CC-22, results: [R41]}
-    # part 4, the identity: 22
-    - {label: "PPV from the rates; rearranged to Chouldechova's (2.6)", minutes: 10, mode: exposition, introduces: [CC-20], core: CC-20, results: [R1]}
+    - {label: "PPV from the rates, the significance filter's formula; rearranged to Chouldechova's (2.6)", minutes: 7, mode: exposition, introduces: [CC-20], core: CC-20, results: [R40, R1]}
     - {label: "students solve for FNR and derive the ratio of FPRs under equal PPV and FNR; COMPAS's prevalences give 1.6", minutes: 6, mode: production, introduces: [CC-21], core: CC-21, results: [R1]}
-    - {label: "dark: Proposition 5 from the identity (stretch)", minutes: 2, mode: exposition, results: [R3]}
-    - {label: "the general result, named and not proved: (A), (B), (C); Theorems 1.1 and 1.2; the mapping to the criteria", minutes: 4, mode: exposition, results: [R2]}
-    # part 5, which fairness: 12
-    - {label: "three views of equality of opportunity and the criterion the book ties to each", minutes: 6, mode: exposition}
+    - {label: "COMPAS in the identity: 1.63, and the observed 1.91 as 1.63 x 0.85 x 1.38; the fraud checks' equal true discovery rate with unequal referral rates", minutes: 2, mode: exposition, results: [R1]}
+    # part 3, three criteria: 10
+    - {label: "independence, separation, sufficiency with a COMPAS column; the ad settlement as independence; calibration by group, Facts 2 and 3, lost on thresholding; the care-management score; two calibrated scores (dark)", minutes: 7, mode: exposition, introduces: [CC-22], core: CC-22, results: [R41]}
+    - {label: "impossibility results: Propositions 2, 3 and 5, with 0 < FPR < 1; Theorems 1.1 and 1.2 named, not proved", minutes: 3, mode: exposition, results: [R3, R2]}
+    # part 4, remedies and their costs: 23
+    - {label: "leaving race out: redundant encodings and the job ads; the kidney equation without race", minutes: 5, mode: exposition}
+    - {label: "a cutoff per group: the two groups' ROC points, 6 and 4; the credit-score case study; contextual offers", minutes: 3, mode: exposition, retrieves: [S4]}
+    - {label: "lens A, asked: Y is re-arrest, Y* is reoffending; a caseworker's decline stands in for fraud and is recorded only when referred or sampled", minutes: 3, mode: production, retrieves: [S2]}
+    - {label: "three views of equality of opportunity and the criterion the book ties to each", minutes: 3, mode: exposition}
     - {label: "which criterion to give up: which one would you give up, and who do you owe the explanation to", minutes: 3, mode: production, retrieves: [S6]}
-    - {label: "a cutoff per group: the two groups' ROC points; the threshold moves the errors, not the constraint", minutes: 3, mode: exposition, retrieves: [S4]}
-    # close: 9
     - {label: "a screening test in two regions, answered individually", minutes: 6, mode: production, item: W07-I1}
-    - {label: "lenses A, C, D, E, F; the standing question; the task for next time", minutes: 3, mode: exposition}
+    # part 5, what the table cannot show: 8
+    - {label: "two mechanisms, one table: what observational criteria hide", minutes: 3, mode: exposition}
+    - {label: "lenses A, C, D, E, F; the standing question; the task for next time", minutes: 5, mode: exposition}
     # slack: 3
     - {label: "slack: questions and overrun", minutes: 3, mode: exposition}
   history: []
@@ -69,15 +70,6 @@ set.seed(313)
 # cividis: navy, slate, gray, khaki, gold, yellow (viridisLite::cividis(9)[c(1, 3, 5, 6, 7, 9)])
 navy <- "#00204D"; slate <- "#414D6B"; cgray <- "#7C7B78"; khaki <- "#9B9477"; gold <- "#BCAF6F"; yellow <- "#FFEA46"
 two <- c(navy, gold)               # the two groups, wherever there are two
-# charts on dark (.inverse) slides: white text on the navy background
-dark <- theme(text = element_text(color = "white"), axis.text = element_text(color = "white"),
-              legend.text = element_text(color = "white"), plot.title = element_text(color = "white"),
-              strip.text = element_text(color = "white"),
-              panel.grid.major = element_line(color = slate), panel.grid.minor = element_blank(),
-              plot.background = element_rect(fill = navy, color = NA),
-              panel.background = element_rect(fill = navy, color = NA),
-              legend.background = element_rect(fill = navy, color = NA),
-              legend.key = element_rect(fill = navy, color = NA))
 
 # COMPAS, Broward County, Florida: the people in ProPublica's two-year file
 # (compas-scores-two-years.csv, github.com/propublica/compas-analysis, 7,214 rows) whose
@@ -108,49 +100,97 @@ at5 <- rates_at(5)
 sweep <- bind_rows(lapply(1:10, rates_at))
 pct <- function(x) sprintf("%.0f%%", 100 * x)
 odds <- function(p) p / (1 - p)
+big <- function(x) format(x, big.mark = ",")
+
+# the two-by-two table of each group at the county's cutoff (decile 5 or above)
+cells <- counts |>
+  mutate(flag = decile >= 5) |>
+  group_by(group) |>
+  summarize(TP = sum(n[flag & two_year_recid == 1]), FN = sum(n[!flag & two_year_recid == 1]),
+            FP = sum(n[flag & two_year_recid == 0]), TN = sum(n[!flag & two_year_recid == 0]),
+            .groups = "drop")
+
+# the observed ratio of false positive rates as the identity's three factors
+or_p   <- odds(at5$p[1]) / odds(at5$p[2])
+or_ppv <- ((1 - at5$PPV[1]) / at5$PPV[1]) / ((1 - at5$PPV[2]) / at5$PPV[2])
+r_tpr  <- at5$TPR[1] / at5$TPR[2]
 ```
 
 ## {.inverse}
 
 ::: {.notes}
-Compress: the five parts. Plan 77 in the 80: opener 4, the COMPAS dispute 12, rates 10, three criteria 8, the identity 22, which fairness 12, close 9; then 3 of slack. Dark = rush or skip.
+Compress: the five parts. Plan 77 in the 80: opener 4, scores that sort people 15, an identity 17, three criteria 10, remedies and their costs 23, what the table cannot show 8; then 3 of slack. Dark = rush or skip.
 
-Cut order: (1) Proposition 5; (2) "Two calibrated scores" to one sentence; (3) the ROC slide to its last sentence; (4) the general result to Theorem 1.1's statement. Do not cut the written commitment, the lens A question, the derivation and the students' part, the splitting question, or the screening test.
+Cut order: (1) "Two calibrated scores" to one sentence; (2) the impossibility results to Proposition 5's statement; (3) the screening test to its first two questions; (4) "Two worlds" to the quotation. Do not cut the written commitment, the derivation and the students' part, the lens A question, the splitting question, or the screening test's first two questions.
 
-Pace: 0:04 Part 1; 0:16 Part 2; 0:26 Part 3; 0:34 Part 4; 0:56 Part 5; 1:08 screening test; 1:14 lenses; 1:17 end.
+Pace: 0:04 Part 1; 0:19 Part 2; 0:36 Part 3; 0:46 Part 4; 1:03 screening test; 1:09 Part 5; 1:17 end.
 :::
 
 ### Week 7
 
-Part 1: The COMPAS dispute
+Part 1: Scores that sort people
 
-Part 2: Rates
+Part 2: An identity
 
 Part 3: Three criteria
 
-Part 4: The identity
+Part 4: Remedies and their costs
 
-Part 5: Which fairness
+Part 5: What the table cannot show
 
-## What you brought {minutes="4"}
+## What you brought {minutes="3"}
 
 ::: {.notes}
-Two or three rules from the room. For each: the two ways it is wrong, and who pays for each. Keep one where the two errors fall on different people (a flag for fraud: the person flagged, the public purse) for the slide after next.
+Two or three rules from the room. For each: the two ways it is wrong, and who pays for each. If someone brings a fraud flag, it leads into the second example.
 :::
 
 ::: {.ask}
 For the rule you brought: who pays when it wrongly says yes? Who pays when it wrongly says no? Are they the same people?
 :::
 
-# Part 1: The COMPAS dispute
+# Part 1: Scores that sort people
 
-## COMPAS
+## Who sees a job ad
 
 ::: {.notes}
-Northpointe's tool. Broward County used it in pretrial decisions. ProPublica got the scores of people assessed in 2013 and 2014 and two years of arrest records. The convention for the week, said once: 1 is the bad outcome and the flag. The book's lending and hiring examples run the other way; reading someone else's coding is part of the skill.
+The advertiser picks who may see the ad; the platform picks who does, by predicting who will click. There is no outcome here to be right or wrong about, only who saw the ad. The settlement equalizes one thing across groups; it comes back with the three criteria.
 :::
 
-COMPAS: a risk score from 137 questions, sold by Northpointe; a decile from 1 to 10. Broward County, Florida, used it in pretrial decisions. ProPublica (May 2016): the scores of more than 7,000 people assessed in 2013 and 2014, and whether each was arrested again within two years.
+An advertiser chooses who may see an ad. The platform then chooses who does see it, by predicting who is likely to click.
+
+Ali and colleagues ran job ads on Facebook aimed at the same audience. Ads for jobs in the lumber industry reached an audience 72% white and 90% male; ads for supermarket cashiers, 85% female; ads for taxi companies, 75% Black.
+
+In 2022 Meta settled a US Justice Department case over housing ads. It built a system to bring the audience that sees a housing ad closer to the eligible audience, by sex and by estimated race or ethnicity.
+
+::: {.source}
+Ali, Sapiezynski, Bogen, Korolova, Mislove and Rieke (2019), "Discrimination through Optimization: How Facebook's Ad Delivery Can Lead to Biased Outcomes," *Proceedings of the ACM on Human-Computer Interaction* 3(CSCW), 1--30, doi:10.1145/3359301, page 2 of arXiv:1904.02095v5. US Department of Justice, *United States v. Meta Platforms, Inc.* (S.D.N.Y.), case page, https://www.justice.gov/crt/case/united-states-v-meta-platforms-inc-fka-facebook-inc-sdny, and US Attorney's Office, S.D.N.Y., press release of 9 January 2023.
+:::
+
+## Fraud checks on universal credit advances
+
+::: {.notes}
+The department publishes two numbers per group: the share referred, and the share of referrals the caseworker declined, which its annex calls the true discovery rate. Hold on to 2.27 and 0.97.
+:::
+
+New universal credit claimants can request an advance. The Department for Work and Pensions scores each request; those scored high risk go to a caseworker, who is not told that the model sent them, and who approves or declines.
+
+The department's 2025 fairness assessment reports two numbers per group: the share of requests referred, and the share of referrals the caseworker declined.
+
+Non-UK nationals, against UK nationals: referred 2.27 times as often; their referrals declined 0.97 times as often, not significantly different from 1.
+
+The department judged it "reasonable and proportionate to continue operating the model," and will retrain it.
+
+::: {.source}
+Department for Work and Pensions (2025), "UC Advances Model: Fairness Assessment," with its Statistical Annex (1 April 2024 to 31 March 2025), published 17 July 2025, https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025: paragraphs 10, 15 and 26 (pages 2 to 4 and 6) and Tables 3 and 4 (page 12).
+:::
+
+## Pretrial risk scores in Broward County
+
+::: {.notes}
+Northpointe's tool. Broward County used it in pretrial decisions. ProPublica got the scores of people assessed in 2013 and 2014 and two years of arrest records. The convention for the week, said once: 1 is the bad outcome and the flag. The book's lending and hiring examples run the other way.
+:::
+
+COMPAS: a risk score from 137 questions, none of them about race, sold by Northpointe; a decile from 1 to 10. Broward County, Florida, used it in pretrial decisions. ProPublica (May 2016): the scores of more than 7,000 people assessed in 2013 and 2014, and whether each was arrested again within two years.
 
 Convention: $Y = 1$ is a new arrest within two years; $\hat Y = 1$ is decile 5 or above, the county's "medium" and "high"; $A$ is race as recorded, Black or white.
 
@@ -160,26 +200,56 @@ $1$ is the bad outcome and the flag. The book's examples run the other way.
 Angwin, Larson, Mattu and Kirchner (2016), "Machine Bias," *ProPublica*, 23 May 2016, https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing; Larson, Mattu, Kirchner and Angwin (2016), "How We Analyzed the COMPAS Recidivism Algorithm," *ProPublica*, 23 May 2016, https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm.
 :::
 
-## Four numbers
+## ProPublica's table {minutes="3"}
 
 ::: {.notes}
-Counts from ProPublica's published data, all 7,214 rows, the two races. The table reproduces their published rates. ProPublica's sentence: Black defendants who did not reoffend were almost twice as likely to be flagged. The replies, Northpointe's and a reanalysis by criminal-justice researchers, as Chouldechova summarizes them: the same decile means the same re-arrest rate in both groups, and among those flagged the share re-arrested is about the same. Both are readings of this table.
+Counts from ProPublica's published data; the rates reproduce theirs. Their sentence: Black defendants who did not reoffend were almost twice as likely to be flagged. ProPublica had two years of hindsight and sorted people by what happened. Retrieve: which of these is alpha, which is beta?
 :::
 
-```{r four_numbers}
-at5 |>
-  transmute(` ` = as.character(group), n = format(n, big.mark = ","),
-            `re-arrested within 2 years` = pct(p), `flagged` = pct(flagged),
-            `FPR` = pct(FPR), `FNR` = pct(FNR), `PPV` = pct(PPV)) |>
-  knitr::kable(align = "lrrrrrr")
+```{r propublica_table}
+bind_rows(
+  cells |> transmute(group = as.character(group), outcome = "re-arrested",
+                     flagged = big(TP), `not flagged` = big(FN), `across the row` = paste("FNR", pct(FN / (TP + FN)))),
+  cells |> transmute(group = as.character(group), outcome = "not re-arrested",
+                     flagged = big(FP), `not flagged` = big(TN), `across the row` = paste("FPR", pct(FP / (FP + TN))))) |>
+  arrange(group, desc(outcome == "re-arrested")) |>
+  mutate(group = ifelse(duplicated(group), "", group)) |>
+  rename(` ` = group, `  ` = outcome) |>
+  knitr::kable(align = "llrrr")
 ```
 
-ProPublica: of those not re-arrested, `r pct(at5$FPR[1])` of Black defendants had been flagged, against `r pct(at5$FPR[2])` of white defendants. Of those re-arrested, `r pct(at5$FNR[2])` of white defendants had not been flagged, against `r pct(at5$FNR[1])`.
+Across a row, conditioning on the truth: $\text{TPR} = P(\hat Y = 1 \mid Y = 1)$, $\;\text{FNR} = 1 - \text{TPR}$, $\;\text{FPR} = P(\hat Y = 1 \mid Y = 0)$.
 
-The replies: of those flagged, the share re-arrested was about the same, `r pct(at5$PPV[1])` and `r pct(at5$PPV[2])`; and the same decile meant the same re-arrest rate in both groups.
+Of those not re-arrested, `r big(cells$FP[1])` of `r big(cells$FP[1] + cells$TN[1])` Black defendants had been flagged, against `r big(cells$FP[2])` of `r big(cells$FP[2] + cells$TN[2])` white defendants.
+
+::: {.retrieval}
+A test rejects a true null with probability $\alpha$ and misses a false one with probability $\beta$. Which rates are these, with what as the null?
+:::
 
 ::: {.source}
-Counts: ProPublica's `compas-scores-two-years.csv` (github.com/propublica/compas-analysis), 6,150 people recorded as African-American or Caucasian. The replies as summarized in Chouldechova (2017), "Fair Prediction with Disparate Impact," *Big Data* 5(2), 153--163, doi:10.1089/big.2016.0047, section 1.
+Counts: ProPublica's `compas-scores-two-years.csv` (github.com/propublica/compas-analysis), 6,150 people recorded as African-American or Caucasian. Rates: Barocas, Hardt and Narayanan (2023), Tables 3.1 and 3.2, page 47.
+:::
+
+## The vendor's reply
+
+::: {.notes}
+The replies, Northpointe's and a reanalysis by criminal-justice researchers, as Chouldechova summarizes them: among the flagged the share re-arrested is about the same, and the same decile means about the same rate. A judge has the flag and nothing else. Both sides read the same table.
+:::
+
+```{r reply_table}
+cells |>
+  transmute(` ` = as.character(group),
+            `re-arrested, of those flagged` = paste0(big(TP), " of ", big(TP + FP), ": PPV ", pct(TP / (TP + FP))),
+            `not re-arrested, of those not flagged` = paste0(big(TN), " of ", big(TN + FN), ": NPV ", pct(TN / (TN + FN)))) |>
+  knitr::kable(align = "lrr")
+```
+
+Down a column, conditioning on the flag: $\text{PPV} = P(Y = 1 \mid \hat Y = 1)$, $\;\text{NPV} = P(Y = 0 \mid \hat Y = 0)$.
+
+The replies: of those flagged, about the same share was re-arrested in both groups, and the same decile meant about the same re-arrest rate. ProPublica sorted people by what happened; the replies sorted them by what the score said.
+
+::: {.source}
+The replies as summarized in Chouldechova (2017), "Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments," *Big Data* 5(2), 153--163, doi:10.1089/big.2016.0047, section 1.
 :::
 
 ## Which number should be equal? {minutes="3"}
@@ -195,81 +265,10 @@ If the score has to treat Black and white defendants the same in one respect, wh
 - as the judge reading the flag;
 - as a member of the public?
 
-One sentence each. Say why.
+Then the fraud checks: a claimant who is not committing fraud, the caseworker, a taxpayer. One sentence each. Say why.
 :::
 
-## What is being predicted? {minutes="3"}
-
-::: {.notes}
-Lens A before the arithmetic. Y is an arrest in the county's records; the thing anyone cares about is reoffending. Who is arrested depends on who is policed, and a defendant held in jail cannot be re-arrested on the street (selective labels, from the missing-data week). Everything from here on is computed against the proxy, prevalence included.
-:::
-
-$Y = 1$ means a new arrest in Broward County's records within two years.
-
-What we want to know about is reoffending, $Y^*$. Nobody observes it.
-
-::: {.ask}
-Name one way the gap between being arrested and reoffending could differ between the two groups. Which of the four numbers does it move, and which way?
-:::
-
-Every rate that follows, the two groups' base rates included, is a rate of the proxy.
-
-# Part 2: Rates
-
-## Four rates {minutes="3"}
-
-::: {.notes}
-The matrix, then the two families. Error rates condition on the truth: among those who did or did not reoffend, how did the score behave. Predictive values condition on the flag: among those flagged, how many reoffended. Retrieve from the room: which of these is alpha, which is beta.
-:::
-
-| | $\hat Y = 1$ (flagged) | $\hat Y = 0$ (not flagged) |
-|:---|:---:|:---:|
-| $Y = 1$ (re-arrested) | true positive | false negative |
-| $Y = 0$ (not re-arrested) | false positive | true negative |
-
-Across a row, conditioning on the truth: $\text{TPR} = P(\hat Y = 1 \mid Y = 1)$, $\;\text{FNR} = 1 - \text{TPR}$, $\;\text{FPR} = P(\hat Y = 1 \mid Y = 0)$.
-
-Down a column, conditioning on the flag: $\text{PPV} = P(Y = 1 \mid \hat Y = 1)$, $\;\text{NPV} = P(Y = 0 \mid \hat Y = 0)$.
-
-::: {.retrieval}
-A test rejects a true null with probability $\alpha$ and misses a false one with probability $\beta$. Which rates are these, with what as the null?
-:::
-
-::: {.source}
-Barocas, Hardt and Narayanan (2023), *Fairness and Machine Learning: Limitations and Opportunities*, MIT Press, chapter 3, Tables 3.1 and 3.2, page 47 of the fairmlbook.org PDF.
-:::
-
-## Conditioning on the truth, or on the flag
-
-::: {.notes}
-Both sides conditioned on what they could see. ProPublica had two years of hindsight, so it could sort people by what happened and ask how the score treated each kind. A judge at the hearing has the flag and nothing else, so what a judge experiences is the predictive value. Lens C: which comparison gets reported, and here each side reported the one its position made visible.
-:::
-
-FPR asks: of the people who did not reoffend, how many did the score flag? You can only compute it after two years.
-
-PPV asks: of the people the score flagged, how many reoffended? It is the rate at which the flag a judge sees is right.
-
-ProPublica sorted people by what happened and reported how the score had treated each kind. The replies sorted people by what the score said and reported what happened to each kind. Both read the same table.
-
-## From the significance filter
-
-::: {.notes}
-Retrieve it: the share of true research hypotheses p, level alpha, power 1 - beta, and the probability that a rejection is a true discovery. Rename and it is the PPV of a classifier. One formula, twice in the course.
-:::
-
-::: {.retrieval}
-Among the research hypotheses tested, a share $p$ are true (their nulls are false). Tests have level $\alpha$ and power $1 - \beta$. What is the probability that a rejection is a true discovery?
-:::
-
-$$
-P(\text{true} \mid \text{rejected}) \;=\; \frac{p\,(1 - \beta)}{p\,(1 - \beta) + (1 - p)\,\alpha}
-$$
-
-$$
-\text{PPV} \;=\; \frac{p\,(1 - \text{FNR})}{p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}}
-$$
-
-$p$ is the prevalence, $P(Y = 1)$, in whatever population the rates are computed on: a field's literature, or one group of defendants.
+# Part 2: An identity
 
 ## Can all four be equal? {minutes="2"}
 
@@ -283,102 +282,10 @@ Two groups. In one, `r pct(at5$p[1])` are re-arrested; in the other, `r pct(at5$
 Can one score have the same FPR, the same FNR, the same PPV and the same NPV in both groups?
 :::
 
-# Part 3: Three criteria
-
-## Independence, separation, sufficiency
-
-::: {.notes}
-Three families, each equalizing something across groups. The book's names, and what each means for a binary flag. The commitment slide's three answers are these three.
-:::
-
-| | the score $R$ | the flag $\hat Y$ | other names |
-|:---|:---|:---|:---|
-| independence | $R \perp A$ | equal share flagged | demographic parity |
-| separation | $R \perp A \mid Y$ | equal FPR and equal FNR | error rate parity |
-| sufficiency | $Y \perp A \mid R$ | equal PPV and equal NPV | predictive parity is equal PPV alone, a relaxation |
-
-Each is a property of the joint distribution of $(A, R, Y)$: eight numbers, when all three are binary.
-
-::: {.source}
-Barocas, Hardt and Narayanan (2023), chapter 3, "Statistical non-discrimination criteria" through "Sufficiency," pages 54 to 61.
-:::
-
-## The criteria on the COMPAS table
-
-::: {.notes}
-Error rates at every possible cutoff, from ProPublica's counts. The gap does not close at any threshold: separation fails everywhere. Independence fails too: 59 percent of Black defendants flagged against 35 percent of white. The next slide is what holds.
-:::
-
-```{r error_rates_by_threshold, fig.height=3.5, fig.alt="Two panels. Left, the false positive rate against the threshold decile from 1 to 10, for Black defendants in navy and white defendants in gold; the navy line is above the gold at every threshold. Right, the false negative rate against the threshold; the gold line is above the navy at every threshold. A vertical dotted line marks threshold 5 in both panels."}
-sweep |>
-  filter(threshold >= 2) |>
-  select(group, threshold, FPR, FNR) |>
-  tidyr::pivot_longer(c(FPR, FNR), names_to = "rate", values_to = "value") |>
-  mutate(rate = factor(rate, levels = c("FPR", "FNR"),
-                       labels = c("false positive rate", "false negative rate"))) |>
-  ggplot(aes(threshold, value, color = group)) +
-  geom_vline(xintercept = 5, linetype = "dotted", color = cgray) +
-  geom_line(linewidth = 1.1) +
-  geom_point(size = 2.4) +
-  facet_wrap(~ rate) +
-  scale_color_manual(values = two, name = NULL) +
-  scale_x_continuous(breaks = 2:10) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
-  labs(x = "flagged if decile is at least", y = NULL) +
-  theme(legend.position = "top")
-```
-
-Separation fails at every cutoff. Independence fails too: `r pct(at5$flagged[1])` of Black defendants flagged against `r pct(at5$flagged[2])`.
-
-## Calibration by group
-
-::: {.notes}
-Observed re-arrest rate by decile, by group: the two lines lie close. That is what the replies pointed at. Deciles are not probabilities, so the figure shows the same decile, the same rate. Definitions: calibrated, calibrated by group; calibration by group implies sufficiency (Fact 2); the optimal score E[Y | X] is calibrated within any group it can tell apart (Fact 3), so a well-fitted score has it without anyone asking, and demanding it asks for little. And it is lost on thresholding: a calibrated score, cut at a decile, need not give equal PPV, which is why the two PPVs on the first table differ by four points.
-:::
-
-```{r calibration, fig.height=3.3, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
-counts |>
-  group_by(group, decile) |>
-  summarize(total = sum(n), rate = sum(n[two_year_recid == 1]) / total, .groups = "drop") |>
-  ggplot(aes(decile, rate, color = group)) +
-  geom_line(linewidth = 1) +
-  geom_point(aes(size = total)) +
-  scale_color_manual(values = two, name = NULL) +
-  scale_size_area(max_size = 7, guide = "none") +
-  scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
-  labs(x = "COMPAS decile", y = "re-arrested in 2 years") +
-  theme(legend.position = "top")
-```
-
-*Calibrated by group*: $P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and $a$. It implies sufficiency; the optimal score $E[Y \mid X]$ has it already, for any group the features identify; and a calibrated score cut at $t$ need not give equal PPV.
-
-::: {.source}
-Barocas, Hardt and Narayanan (2023), chapter 3, "Calibration and sufficiency" (Facts 2 and 3, Proposition 1), pages 61 to 63, and "Calibration values," page 71.
-:::
-
-## Two calibrated scores {.inverse}
-
-::: {.notes}
-Compress: a score that gives everyone the base rate is calibrated; a score that is perfect in one group and gives the other its base rate is calibrated by group. Calibration checks the fit, and a good fit has it; the value judgment is in treating it as the test.
-:::
-
-A score that gives everyone the population's base rate is calibrated.
-
-A score that is perfect in one group and gives the other group its base rate is calibrated by group.
-
-Calibration checks that the score means what it says. It does not say the score is any good, or that it treats the groups alike.
-
-::: {.source style="color: #BCAF6F"}
-Barocas, Hardt and Narayanan (2023), chapter 4, "Calibration," pages 93 and 94.
-:::
-
-# Part 4: The identity
-
 ## PPV from the rates {minutes="3"}
 
 ::: {.notes}
-Within one group, with its prevalence p. Retrieve the law of total probability from the room for the first line; the second is the definition of conditional probability. Nothing beyond ST102.
+Within one group, with its prevalence p. Retrieve the law of total probability from the room for the first line; the second is the definition of conditional probability. The DWP annex calls PPV the true discovery rate: the significance filter's word.
 :::
 
 One group, prevalence $p = P(Y = 1)$, a flag $\hat Y$ with rates FPR and FNR.
@@ -393,7 +300,11 @@ $$
 
 The numerator is the true positives, the denominator everyone flagged.
 
-## Rearranged {minutes="3"}
+::: {.retrieval}
+The significance filter: a share $p$ of the hypotheses tested are true, tests have level $\alpha$ and power $1 - \beta$. The probability that a rejection is a true discovery is this formula with $\alpha$ for FPR and $\beta$ for FNR.
+:::
+
+## Chouldechova's identity {minutes="3"}
 
 ::: {.notes}
 Odds against a flag being right, then solve for FPR. Three quantities on the right, one of which, p, nobody designing a score controls. This is Chouldechova's equation (2.6); she introduces it with "it is not difficult to show".
@@ -425,98 +336,149 @@ Six minutes, in pairs, on paper. (1) FNR = 1 - FPR (1 - p)/p times PPV/(1 - PPV)
 
 3. Put in $p_a = `r sprintf("%.3f", at5$p[1])`$ and $p_b = `r sprintf("%.3f", at5$p[2])`$.
 
-## Unequal base rates
+## COMPAS in the identity
 
 ::: {.notes}
-Read the box slowly. The condition on PPV: some false positives and some true positives, so the odds are defined. The approximate version is the next slide but one: nearly equal on all three still forces nearly one of the two escapes. So the ProPublica gap was not a defect anybody could have tuned away at that threshold; it is what predictive parity costs at these base rates.
+The box first. The observed ratio is the identity's three factors, each a ratio between the groups: the odds of re-arrest, the odds against a flag being right, the TPR. For the fraud checks: if FPR and FNR were also equal, the identity would make the prevalences equal, and then the share referred, p(1 - FNR) + (1 - p)FPR, would be equal too. It is 2.27 times as high. So the error rates differ, though the department does not report them.
 :::
 
 ::: {.leave}
 When two groups differ in prevalence, a flag with the same positive predictive value in both, strictly between $0$ and $1$, has a different false positive rate or a different false negative rate in the two groups.
 :::
 
-With equal PPV and equal FNR:
+With equal PPV and equal FNR, $\text{FPR}_a / \text{FPR}_b$ would be the odds ratio, `r sprintf("%.2f", or_p)`. The observed ratio is `r sprintf("%.2f", at5$FPR[1] / at5$FPR[2])` $=$ `r sprintf("%.2f", or_p)` $\times$ `r sprintf("%.2f", or_ppv)` $\times$ `r sprintf("%.2f", r_tpr)`: the odds ratio, the ratio of $(1 - \text{PPV})/\text{PPV}$, and the ratio of TPRs.
 
-$$
-\frac{\text{FPR}_a}{\text{FPR}_b} \;=\; \frac{p_a / (1 - p_a)}{p_b / (1 - p_b)}
-\;=\; `r sprintf("%.2f", odds(at5$p[1]) / odds(at5$p[2]))` \text{ for COMPAS's two groups.}
-$$
+The fraud checks: about the same PPV by nationality (0.97), and 2.27 times the referrals. With equal PPVs the two error rates could not both be equal as well: the prevalences would then be equal, and so would the share referred.
 
-The observed ratio at the county's cutoff is `r sprintf("%.2f", at5$FPR[1] / at5$FPR[2])`: the PPVs and FNRs are not exactly equal, and the identity accounts for the rest.
+# Part 3: Three criteria
 
-## Proposition 5 {.inverse}
+## Independence, separation, sufficiency {minutes="3"}
 
 ::: {.notes}
-Skip if behind. Sufficiency for a binary flag is equal PPV and equal NPV; separation is equal FPR and FNR. Suppose both and 0 < FPR < 1; the book assumes only FPR > 0 and its proof passes over the reversed flag. Equal PPV with equal FPR and TPR forces, by the formula, equal odds of p, so equal prevalence; the book's proof route is via TPR = 0 and then unequal NPV. Either way: both criteria, unequal base rates, and an imperfect flag cannot coexist.
+Three families, each equalizing something across groups; the commitment slide's three answers are these three. Separation fails at every cutoff from 2 to 10 (the notes have the figure). The ad settlement asks for something like independence: the audience that sees an ad should look like the audience that could have.
 :::
 
-Suppose $Y$ depends on $A$, and the flag has $0 < \text{FPR} < 1$ and $\text{TPR} > 0$.
+| | the score $R$ | the flag $\hat Y$ | on the COMPAS table |
+|:---|:---|:---|:---|
+| independence (demographic parity) | $R \perp A$ | equal share flagged | fails: `r pct(at5$flagged[1])` against `r pct(at5$flagged[2])` |
+| separation (error rate parity) | $R \perp A \mid Y$ | equal FPR and equal FNR | fails, at every cutoff |
+| sufficiency | $Y \perp A \mid R$ | equal PPV and equal NPV | roughly: PPV `r pct(at5$PPV[1])` and `r pct(at5$PPV[2])` |
 
-If the flag satisfies separation (equal FPR and FNR) and sufficiency (equal PPV and NPV), the identity gives
-$$
-\frac{p_a}{1 - p_a} \;=\; \frac{\text{FPR}}{(1 - \text{FNR})}\cdot\frac{\text{PPV}}{1 - \text{PPV}} \;=\; \frac{p_b}{1 - p_b},
-$$
-so $p_a = p_b$. Contradiction. (If $\text{TPR} = 0$ the PPVs are both $0$ and the NPVs differ instead, unless $\text{FPR} = 1$: the outcome reversed satisfies both criteria.)
+Predictive parity is equal PPV alone, a relaxation of sufficiency. Each criterion is a property of the joint distribution of $(A, R, Y)$: eight numbers, when all three are binary.
+
+The housing-ad settlement asks for something like independence: the audience that sees an ad should match, by sex and estimated race or ethnicity, the audience that was eligible to see it.
+
+::: {.source}
+Barocas, Hardt and Narayanan (2023), *Fairness and Machine Learning: Limitations and Opportunities*, MIT Press, https://fairmlbook.org, chapter 3, "Statistical non-discrimination criteria" through "Sufficiency," pages 54 to 61.
+:::
+
+## Calibration by group
+
+::: {.notes}
+Observed re-arrest rate by decile, by group: the two lines lie close, which is what the replies pointed at. Calibration by group implies sufficiency (Fact 2); the optimal score has it within any group the features identify (Fact 3); it is lost on thresholding, which is why the two PPVs differ by four points. The care-management score: calibrated for its label, and the label was the problem.
+:::
+
+:::: {.columns}
+::: {.column width="52%"}
+```{r calibration, fig.width=5, fig.height=4.4, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
+counts |>
+  group_by(group, decile) |>
+  summarize(total = sum(n), rate = sum(n[two_year_recid == 1]) / total, .groups = "drop") |>
+  ggplot(aes(decile, rate, color = group)) +
+  geom_line(linewidth = 1) +
+  geom_point(aes(size = total)) +
+  scale_color_manual(values = two, name = NULL) +
+  scale_size_area(max_size = 7, guide = "none") +
+  scale_x_continuous(breaks = 1:10) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
+  labs(x = "COMPAS decile", y = "re-arrested in 2 years") +
+  theme(legend.position = "top", legend.text = element_text(size = 13))
+```
+:::
+::: {.column width="48%"}
+*Calibrated by group*: $P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and $a$. It implies sufficiency, and a calibrated score cut at $t$ need not give equal PPV.
+
+The care-management score was well calibrated across races for its label, next year's cost. At a given score, Black patients were sicker.
+:::
+::::
+
+::: {.source}
+Barocas, Hardt and Narayanan (2023), chapter 3, "Calibration and sufficiency," pages 61 to 63, and page 71. Obermeyer, Powers, Vogeli and Mullainathan (2019), "Dissecting racial bias in an algorithm used to manage the health of populations," *Science* 366(6464), 447--453, doi:10.1126/science.aax2342, Figures 1A and 3A.
+:::
+
+## Two calibrated scores {.inverse}
+
+::: {.notes}
+Compress: a score that gives everyone the base rate is calibrated; a score that is perfect in one group and gives the other its base rate is calibrated by group. Calibration checks the fit, and a good fit has it; the value judgment is in treating it as the test.
+:::
+
+A score that gives everyone the population's base rate is calibrated.
+
+A score that is perfect in one group and gives the other group its base rate is calibrated by group.
+
+Calibration checks that the score means what it says. It does not say the score is any good, or that it treats the groups alike.
 
 ::: {.source style="color: #BCAF6F"}
-Barocas, Hardt and Narayanan (2023), chapter 3, Proposition 5 and its proof, page 67. Propositions 2 and 3 (independence against the other two) are on pages 65 and 66.
+Barocas, Hardt and Narayanan (2023), chapter 4, "Calibration," pages 93 and 94.
 :::
 
-## The general result {minutes="3"}
+## Impossibility results {minutes="3"}
 
 ::: {.notes}
-Named, not proved. Scores, not flags; two groups; three conditions. (A) is calibration by group. (B) and (C) ask only that the average score given to the negatives, and to the positives, be the same in both groups: weaker than separation, which asks for the whole distribution. Theorem 1.1: all three only if prediction is perfect or base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two. The binary case is the identity we just derived.
+Stated, not proved here; the notes prove Proposition 5 from the identity. The book assumes only FPR > 0; the reversed flag, Y-hat = 1 - Y, has FPR = FNR = 1 and PPV = NPV = 0 in every group and satisfies both, so FPR < 1 is needed too. Kleinberg, Mullainathan and Raghavan: (B) and (C) ask only for equal means, weaker than separation, and the same two escapes remain.
 :::
 
-Scores in bins with values $v$; two groups; $p_\sigma$ is the share of positives among people with feature vector $\sigma$. Three conditions. (A) *Calibration within groups*: in each group, people scored $v$ are positives with frequency $v$. (B) *Balance for the negative class*: the negatives' mean score is the same in both groups. (C) *Balance for the positive class*: likewise.
+For a flag. Independence with sufficiency holds only if $Y \perp A$; independence with separation, only if $Y \perp A$ or $R \perp Y$ ($Y$ binary). Separation with sufficiency: if $Y$ depends on $A$ and $0 < \text{FPR} < 1$, a flag cannot have both.
 
-Theorem 1.1: all three hold only if prediction is perfect (every $p_\sigma$ is $0$ or $1$) or the base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two.
-
-Condition (A) is calibration by group; (B) and (C) are weaker than separation. Not proved here.
+For a score. (A) calibration within groups; (B) the negatives' average score the same in both groups; (C) the positives' likewise. Theorem 1.1: all three hold only if prediction is perfect (the features determine the outcome) or the base rates are equal. Theorem 1.2: approximately all three forces approximately one of the two.
 
 ::: {.source}
-Kleinberg, Mullainathan and Raghavan (2017), "Inherent Trade-Offs in the Fair Determination of Risk Scores," *8th Innovations in Theoretical Computer Science Conference (ITCS 2017)*, LIPIcs 67, 43:1--43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2; theorem numbers as in the arXiv version (1609.05807v2), the one linked from the readings.
+Barocas, Hardt and Narayanan (2023), chapter 3, Propositions 2, 3 and 5, pages 65 to 67. Kleinberg, Mullainathan and Raghavan (2017), "Inherent Trade-Offs in the Fair Determination of Risk Scores," *8th Innovations in Theoretical Computer Science Conference (ITCS 2017)*, LIPIcs 67, 43:1--43:23, doi:10.4230/LIPIcs.ITCS.2017.43, sections 1.1 and 1.2; theorem numbers as in the arXiv version (1609.05807v2), the one linked from the readings.
 :::
 
-# Part 5: Which fairness
+# Part 4: Remedies and their costs
 
-## Three views of equality of opportunity {minutes="3"}
+## Leaving race out
 
 ::: {.notes}
-From the reading. Narrow: treat people as they are now; calibration is its criterion, same score same meaning. Middle: discount dissimilarities with causes we should not hold against people; the book ties error rate parity partly to it and partly to the narrow view (collect more data), and says it answers to no single principle. Broad: not about the decision at all, about the institutions before it; demographic parity relates to it, tenuously. ProPublica's number is a middle-view number; the replies' numbers are narrow-view numbers. The book's own caveat: every one of these criteria ignores who applied in the first place.
+The obvious remedy, and why it does not do what it sounds like. A model that would have used the attribute finds it again in the other columns. The job ads: nothing about race or sex in the targeting. The book's own caution is on page 54: in medicine, race sometimes enters legitimately, and forcing a decision to ignore it can harm. The next slide is a case where the profession decided it should not enter.
 :::
 
-| view | the rule | the criterion the book ties to it |
-|:---|:---|:---|
-| narrow | treat similar people similarly, as they are now | calibration by group: the same score means the same thing in every group |
-| middle | treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount | error rate parity, in part: one group should not bear more of the mistakes |
-| broad | organize society so that equal ability and ambition reach equal outcomes | demographic parity, loosely: equal shares, at the decision |
+COMPAS's 137 questions include none about race. That alone does not keep race out of a score.
 
-The book ties error rate parity to both the middle and the narrow view, and to no single principle. The first table again: the error rates are mostly a middle-view complaint; the predictive values are a narrow-view defense.
+Many features, each slightly correlated with group membership, predict it well together. In a large feature space the attribute is generally redundant: remove it, and a model that used it finds a redundant encoding in the other features.
+
+The job ads: the same targeting for every ad, and audiences skewed by the ad's content alone, through the platform's estimate of who it was relevant to.
 
 ::: {.source}
-Barocas, Hardt and Narayanan (2023), chapter 4, "Equality of opportunity," pages 81 to 85, and "Connecting statistical and moral notions of fairness," pages 92 to 97.
+Barocas, Hardt and Narayanan (2023), chapter 3, "No fairness through unawareness," pages 52 to 54. Ali and colleagues (2019), as above.
 :::
 
-## Which would you give up? {minutes="3"}
+## A kidney equation without race
 
 ::: {.notes}
-Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person flagged who was not re-arrested, detained where the flag decides; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups. The book makes that asymmetry the start of its case for caring about error rates at all.
+Kidney function estimated from blood creatinine. The race multiplier made Black patients look healthier; the transplant network says it led to underestimating disease severity and may have delayed listing. The race-free creatinine equation is less calibrated by group, and its errors for Black patients now run the other way. Ask the room: which criterion got worse, and what was gained, for whom?
 :::
 
-::: {.ask}
-Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?
+Kidney function is estimated (eGFR) from blood creatinine, age and sex. The US equation in use in 2021 also multiplied the estimate by 1.159 for Black patients, who in the studies behind it had higher average creatinine at the same measured function.
 
-Who pays for your choice: which group, and which error?
+The US transplant network: this led to underestimating many Black patients' kidney disease. Race-neutral estimates for transplant listing from July 2022; from January 2023, lost waiting time restored, to more than 6,100 Black candidates by July 2023, a median of 1.7 years.
+
+Refitted without race, the creatinine equation's median error is about 4 ml/min per 1.73 m² each way: too low for Black participants, too high for others.
+
+::: {.source}
+Inker, Eneanya, Coresh and colleagues (2021), "New Creatinine- and Cystatin C--Based Equations to Estimate GFR without Race," *New England Journal of Medicine* 385(19), 1737--1749, doi:10.1056/NEJMoa2102953, abstract and Table 2. OPTN, via HRSA (hrsa.gov): "OPTN Board Approves Elimination of Race-Based Calculation for Transplant Candidate Listing," 28 June 2022; "Early Monitoring Report Shows Black Kidney Candidates Are Receiving Waiting Time Modifications After Implementation of New Policies," 4 December 2023.
 :::
 
 ## A cutoff per group {minutes="3"}
 
 ::: {.notes}
-Each group's (FPR, TPR) at every cutoff. The same cutoff puts the two groups at different points; a cutoff per group (6 for Black defendants, 4 for white) brings both error rates within about a point of each other, and then the same decile means different treatment. The identity holds at every cutoff: moving it changes all three rates and not the constraint between them. What each error costs, and the cutoff that follows from the costs, comes later in the course.
+Each group's (FPR, TPR) at every cutoff. A cutoff per group (6 for Black defendants, 4 for white) brings both error rates within about a point of each other, and then the same decile means different treatment. The identity holds at every cutoff. The credit-score case study in the reading does this with four groups and several criteria. Contextual offers: a lower grade threshold for applicants who meet the criteria.
 :::
 
-```{r roc_by_group, fig.height=3.1, fig.alt="True positive rate against false positive rate for the two groups, Black defendants in navy and white defendants in gold, one point per cutoff from 2 to 10, joined by lines, with the cutoff written beside each point and a dotted diagonal. At the same cutoff the navy point is up and to the right of the gold one."}
+:::: {.columns}
+::: {.column width="55%"}
+```{r roc_by_group, fig.width=5, fig.height=4.8, fig.alt="True positive rate against false positive rate for the two groups, Black defendants in navy and white defendants in gold, one point per cutoff from 2 to 10, joined by lines, with the cutoff written beside each point and a dotted diagonal. At the same cutoff the navy point is up and to the right of the gold one."}
 sweep |>
   filter(threshold >= 2) |>
   ggplot(aes(FPR, TPR, color = group)) +
@@ -528,11 +490,66 @@ sweep |>
   scale_x_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
   labs(x = "false positive rate", y = "true positive rate") +
-  theme(legend.position = "top")
+  theme(legend.position = "top", legend.text = element_text(size = 13))
 ```
-
+:::
+::: {.column width="45%"}
 ::: {.leave}
-The number by each point is the cutoff. No single cutoff here gives the two groups the same error rates; a cutoff per group (6 and 4) nearly does, and then the same score means different treatment.
+No single cutoff (the number by each point) gives the two groups the same error rates. A cutoff per group, 6 and 4, nearly does, and then the same score means different treatment.
+:::
+
+Elsewhere: the reading's credit-score case study (pages 67 to 71); a contextual offer, one or two grades below the standard offer.
+:::
+::::
+
+::: {.source}
+LSE, "Contextual admissions and offers," https://www.lse.ac.uk/study-at-lse/undergraduate/prospective-students/how-to-apply/contextual-admissions-and-offers.
+:::
+
+## Re-arrest is not reoffending {minutes="3"}
+
+::: {.notes}
+Lens A. Who is arrested depends on who is policed, and a defendant held in jail cannot be re-arrested on the street (selective labels). In the fraud checks the outcome is a caseworker's decision, seen only for referred requests and a random sample of the rest, which the department uses to check for false negatives. Every rate here, prevalence included, is computed against the proxy.
+:::
+
+$Y = 1$ means a new arrest in Broward County's records within two years. What we want to know about is reoffending, $Y^*$. Nobody observes it.
+
+In the fraud checks, a referral counts as correct when the caseworker declines the advance. That outcome is recorded only for requests that were referred, or sampled at random.
+
+::: {.ask}
+Name one way the gap between being arrested and reoffending could differ between the two groups. Which of the four numbers does it move, and which way?
+:::
+
+Every rate so far, the base rates included, is a rate of the proxy.
+
+## Three views of equality of opportunity {minutes="3"}
+
+::: {.notes}
+From the reading. Narrow: treat people as they are now; calibration is its criterion. Middle: discount dissimilarities with causes we should not hold against people; the book ties error rate parity partly to it and partly to the narrow view, and says it answers to no single principle. Broad: the institutions before the decision; demographic parity relates to it, tenuously. The book's own caveat: every one of these criteria ignores who applied in the first place.
+:::
+
+| view | the rule | the criterion the book ties to it |
+|:---|:---|:---|
+| narrow | treat similar people similarly, as they are now | calibration by group: the same score means the same thing in every group |
+| middle | treat seemingly dissimilar people similarly when the dissimilarity has causes we should discount | error rate parity, in part: one group should not bear more of the mistakes |
+| broad | organize society so that equal ability and ambition reach equal outcomes | demographic parity, loosely: equal shares, at the decision |
+
+The book ties error rate parity to both the middle and the narrow view. ProPublica's error rates are mostly a middle-view complaint; the predictive values, a narrow-view defense.
+
+::: {.source}
+Barocas, Hardt and Narayanan (2023), chapter 4, "Equality of opportunity," pages 81 to 85, and "Connecting statistical and moral notions of fairness," pages 92 to 97.
+:::
+
+## Which would you give up? {minutes="3"}
+
+::: {.notes}
+Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person flagged who was not re-arrested, detained where the flag decides; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups.
+:::
+
+::: {.ask}
+Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?
+
+Who pays for your choice: which group, and which error?
 :::
 
 ## A screening test {minutes="6"}
@@ -550,21 +567,41 @@ A test for a disease has sensitivity $0.9$ and specificity $0.9$ (TPR $0.9$, FPR
 4. If it moves one region's cutoff to get there, which criterion has it given up, and who does it owe the explanation to?
 :::
 
+# Part 5: What the table cannot show
+
+## Two worlds, one table
+
+::: {.notes}
+The reading's last section. The same eight numbers can come from a decision maker who discriminates or from an inequality the decision maker did not make; the criteria cannot tell them apart. Methods for mechanisms come next week. If time: one pair from the room, for re-arrest or for the fraud checks.
+:::
+
+Every criterion in this lecture is a property of the joint distribution of the features, the group, the score and the outcome. With binary $A$, $\hat Y$ and $Y$: eight numbers.
+
+"What observational definitions hide are the mechanisms that created an observed disparity" (the reading, page 72). One table can come from a decision maker who considers group membership out of spite, or from an inequality in society that gives one group an advantage.
+
+::: {.ask}
+For re-arrest, or for the fraud checks: describe two worlds that would give the same table, one where the disparity is the decision maker's doing and one where it is not.
+:::
+
+::: {.source}
+Barocas, Hardt and Narayanan (2023), chapter 3, "Inherent limitations of observational criteria," pages 71 to 73.
+:::
+
 ## Lenses this week
 
 ::: {.notes}
 Each lens, what it referred to this week. Then the last slide.
 :::
 
-- **What are we optimizing or predicting?** Re-arrest, standing in for reoffending; the base rates included.
-- **Which comparison gets reported?** ProPublica conditioned on the truth; the replies on the flag. Each reported what its position made visible.
-- **Who bears the error?** A false positive, the person flagged, and detained where the flag decides; a false negative, someone else. The groups pay different prices.
-- **You have to choose, so choose, and defend it.** Equal predictive value or equal error rates. A default chooses too, with nobody to defend it.
+- **What are we optimizing or predicting?** Re-arrest for reoffending; a caseworker's decline for fraud.
+- **Which comparison gets reported?** ProPublica conditioned on the truth, the replies on the flag. The fraud checks report no error rates.
+- **Who bears the error?** A false positive, the person flagged, and detained where the flag decides; a false negative, someone else.
+- **You have to choose, so choose, and defend it.** Equal predictive value or equal error rates. A default chooses too.
 - **What can be changed, and how?** The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?
 
 ...and why?
 
-## {minutes="3"}
+## Who chose the number? {minutes="3"}
 
 ::: {.notes}
 COMPAS is a product. "Equally accurate for both groups" was the vendor's headline; it meant predictive value and calibration, which are about equal. Plain accuracy, the share the flag got right, was 64 and 67 percent. Then the task below, which is also where next week starts.
