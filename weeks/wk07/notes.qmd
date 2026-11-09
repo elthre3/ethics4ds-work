@@ -105,6 +105,12 @@ sweep <- bind_rows(lapply(1:10, rates_at))
 pct <- function(x) sprintf("%.0f%%", 100 * x)
 pct1 <- function(x) sprintf("%.1f%%", 100 * x)
 odds <- function(p) p / (1 - p)
+# among those selected at the county's cutoff, the share in deciles 8 to 10, by group
+top_share <- counts |>
+  filter(decile >= 5) |>
+  group_by(group) |>
+  summarize(s = sum(n[decile >= 8]) / sum(n), .groups = "drop") |>
+  pull(s)
 ```
 
 ## What you brought
@@ -133,7 +139,8 @@ relevant to. Ali, Sapiezynski, Bogen, Korolova, Mislove and Rieke
 reached. Ads for jobs in the lumber industry reached an audience that
 was 72 percent white and 90 percent male; ads for cashier positions in
 supermarkets, an audience 85 percent female; ads for positions with taxi
-companies, an audience 75 percent Black (page 2 of the arXiv version).
+companies, an audience 75 percent Black (page 2 of the arXiv version;
+their Figure 8, page 12, shows the full breakdown).
 The advertiser had chosen none of this. The skew came from the content
 of the ad, in large part through the platform's estimate of relevance,
 and they found skew in the delivery of housing ads as well.
@@ -236,7 +243,9 @@ has to equalize.
 **The convention for this week.** $Y = 1$ means a new arrest within two
 years of the assessment, in the county's records. $\hat Y = 1$ means
 the score flagged the person as higher risk, which in ProPublica's
-tables means a decile of 5 or above. $A$ is race as the data record it,
+tables means a decile of 5 or above. Flagged and selected mean the same
+thing in these notes: $\hat Y = 1$, the person the score picks out,
+whether for detention, a fraud check or an ad. $A$ is race as the data record it,
 "African-American" or "Caucasian"; I write Black and white. So $1$ is
 the bad outcome and $1$ is the flag. The textbook's examples (hiring,
 lending) run the other way, with $1$ as acceptance, and reading
@@ -314,7 +323,167 @@ $\alpha$ has a false positive rate of $\alpha$, with "null is true" in
 the role of $Y = 0$ and "reject" in the role of $\hat Y = 1$; its Type
 II error rate $\beta$ is a false negative rate.
 
-## An identity
+## Differing definitions of fairness
+
+### Independence, separation, sufficiency
+
+The textbook organizes the dozens of statistical fairness criteria
+proposed in the literature into three families (pages 54 to 61). Each
+equalizes something across the groups defined by $A$; each can be
+stated for a score $R$ as a conditional independence, and for a binary
+flag $\hat Y$ as an equality of rates.
+
+| | the score $R$ | the flag $\hat Y$ | other names |
+|:---|:---|:---|:---|
+| independence | $R \perp A$ | the same share selected (flagged) in every group | demographic parity, statistical parity |
+| separation | $R \perp A \mid Y$ | the same FPR and the same FNR in every group | error rate parity, equalized odds |
+| sufficiency | $Y \perp A \mid R$ | the same PPV and the same NPV in every group | predictive parity, which asks for equal PPV only (a relaxation) |
+
+Each is a property of the joint distribution of $(A, R, Y)$. When all
+three variables are binary that distribution is eight numbers, and
+you can check any of the criteria from those eight numbers and nothing
+else. That is what the textbook means by calling them observational,
+and it is where the week's title comes from.
+
+The housing-ad settlement asks for something like independence. Meta's
+system works to bring the make-up of the audience that sees a housing
+ad, by sex and by estimated race or ethnicity, close to that of the
+audience eligible to see it: independence of being shown the ad from
+those attributes, within the eligible audience. Here a regulator chose
+the criterion and wrote a tolerance into an agreement.
+
+The commitment I asked for in the lecture, which number you would want
+equal as a defendant who will not reoffend, as the judge, or as the
+public, has these three as its answers. The defendant who will not
+reoffend is in the $Y = 0$ row and is harmed by a false positive, so
+wants the false positive rate equal: separation. The judge sees only
+the flag and wants a flag to mean the same thing whoever it is on:
+sufficiency. The public may want the shares flagged to be equal, or
+may want the misses equal; those are independence and the other half
+of separation.
+
+### The criteria on the COMPAS table
+
+Independence fails: `r pct(at5$flagged[1])` of Black defendants were
+flagged against `r pct(at5$flagged[2])` of white defendants. Separation
+fails, and not only at the county's cutoff. The figure moves the
+cutoff from decile 2 to decile 10 and recomputes both error rates;
+the gap between the groups does not close anywhere in that range.
+(Flagging everyone, or no one, equalizes the error rates trivially.)
+
+```{r error_rates_by_threshold, echo=FALSE, fig.height=3.8, fig.alt="Two panels. Left, the false positive rate against the threshold decile from 2 to 10, for Black defendants in navy and white defendants in gold; the navy line is above the gold at every threshold. Right, the false negative rate against the threshold; the gold line is above the navy at every threshold. A vertical dotted line marks threshold 5 in both panels."}
+sweep |>
+  filter(threshold >= 2) |>
+  select(group, threshold, FPR, FNR) |>
+  tidyr::pivot_longer(c(FPR, FNR), names_to = "rate", values_to = "value") |>
+  mutate(rate = factor(rate, levels = c("FPR", "FNR"),
+                       labels = c("false positive rate", "false negative rate"))) |>
+  ggplot(aes(threshold, value, color = group)) +
+  geom_vline(xintercept = 5, linetype = "dotted", color = cgray) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 2) +
+  facet_wrap(~ rate) +
+  scale_color_manual(values = two, name = NULL) +
+  scale_x_continuous(breaks = 2:10) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
+  labs(x = "flagged if decile is at least", y = NULL) +
+  theme(legend.position = "bottom")
+```
+
+Sufficiency comes nearer to holding, but for the flag it does not
+hold: the positive predictive values at the county's cutoff are
+`r pct1(at5$PPV[1])` and `r pct1(at5$PPV[2])`, four points apart, and
+the negative predictive values are `r pct1(at5$NPV[1])` and
+`r pct1(at5$NPV[2])`, six points apart. Predictive parity, equal PPV
+alone, is closer than sufficiency. And the score is roughly calibrated by group:
+the observed two-year re-arrest rate rises with the decile in the same
+way for both groups.
+
+```{r calibration, echo=FALSE, fig.height=3.6, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
+counts |>
+  group_by(group, decile) |>
+  summarize(total = sum(n), rate = sum(n[two_year_recid == 1]) / total, .groups = "drop") |>
+  ggplot(aes(decile, rate, color = group)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(aes(size = total)) +
+  scale_color_manual(values = two, name = NULL) +
+  scale_size_area(max_size = 6, guide = "none") +
+  scale_x_continuous(breaks = 1:10) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
+  labs(x = "COMPAS decile", y = "re-arrested within two years",
+       caption = "point size: number of people with that decile") +
+  theme(legend.position = "bottom", plot.caption = element_text(color = cgray))
+```
+
+The white defendants' line wobbles at the top because few of them had
+high deciles (64 had decile 10, against 286 Black defendants). That is
+sampling variation, and it is the one place in this week where
+variance rather than bias is the issue: every rate in the tables is an
+estimate from a finite group, and Chouldechova's figures show
+confidence intervals that the lecture's do not.
+
+### Calibration and calibration by group
+
+A score $R$ with values in $[0, 1]$ is *calibrated* if
+$P(Y = 1 \mid R = r) = r$ for every $r$: of the people given score
+$r$, a fraction $r$ have the outcome. It is *calibrated by group* if
+$P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and every group $a$.
+COMPAS's deciles are not probabilities, so the figure above shows the
+weaker thing that is actually at stake: the same decile, the same rate
+in both groups. The textbook's Fact 2 (page 61) says calibration by
+group implies sufficiency, and its Proposition 1 says the converse
+nearly holds: a sufficient score can be relabeled, by the map
+$r \mapsto P(Y = 1 \mid R = r)$, into one that is calibrated by group.
+Sufficiency and calibration by group are the same idea up to a
+renaming of the score's values.
+
+Calibration by group says less than the replies implied.
+
+Nothing has to be imposed to get it. The optimal score,
+$r(x) = E[Y \mid X = x]$, is calibrated within any group that the
+features $X$ can identify (Fact 3, page 62). A model fitted well on
+rich features will be approximately calibrated by group without anyone
+asking for it, and the textbook shows this on census income data with
+an off-the-shelf random forest (pages 62 and 63). So demanding
+calibration by group is not much of a demand; it mostly certifies that
+the model was fitted properly.
+
+It is also lost when a score is turned into a flag. If $R$ is
+calibrated by group and the flag is $\hat Y = 1\{R \geq t\}$, then the
+positive predictive value in group $a$ is
+$E[R \mid R \geq t, A = a]$, the average score above the cutoff in that
+group. Two groups with different score distributions have different
+averages above the same cutoff, so equal calibration does not give
+equal PPV after thresholding (textbook, page 71). On the COMPAS table,
+`r pct(top_share[1])` of the Black defendants selected at the county's
+cutoff are in deciles 8 to 10, against `r pct(top_share[2])` of the
+white defendants selected, so the average re-arrest rate among those
+selected, the PPV, is higher in the first group. That is why the two
+PPVs in the table differ by four points although the deciles are
+roughly calibrated. It also means that "calibrated" and "predictive
+parity" are two different claims; the replies made both.
+
+The care-management score met earlier in the course shows how little
+calibration certifies. Obermeyer, Powers, Vogeli and Mullainathan
+(2019) found its predictions well calibrated across races for its
+label, next year's medical cost: at every level of the score, Black and
+White patients had roughly the same costs the following year (their
+Figure 3A). At a given score, Black patients were considerably sicker
+(Figure 1A), because unequal access to care meant that less was spent
+on Black patients than on White patients with the same needs.
+Calibration holds for the label a score was trained on. It says nothing
+about whether that label is the one that matters.
+
+Calibration checks that the score's values mean what they say. A score
+that gives everyone the population's base rate is perfectly
+calibrated. A score that is perfect in one group and gives the other
+group its base rate is perfectly calibrated by group (textbook, page
+94). Neither is a score anyone would call fair, and the second is
+informative in one group only. The value judgment hidden in "it is
+calibrated, so it is fair" is that a score is fair when it means what
+it says, whatever it does with that meaning.
+
+## Conflicting definitions
 
 ### The predictive value from the rates
 
@@ -458,162 +627,6 @@ million of the £0.8 billion paid (paragraph 3), though that is by value
 and is not the same thing as a caseworker's decline. The assessment
 gives neither group's $p$, so this is as far as its numbers go.
 
-## Three criteria
-
-### Independence, separation, sufficiency
-
-The textbook organizes the dozens of statistical fairness criteria
-proposed in the literature into three families (pages 54 to 61). Each
-equalizes something across the groups defined by $A$; each can be
-stated for a score $R$ as a conditional independence, and for a binary
-flag $\hat Y$ as an equality of rates.
-
-| | the score $R$ | the flag $\hat Y$ | other names |
-|:---|:---|:---|:---|
-| independence | $R \perp A$ | the same share flagged in every group | demographic parity, statistical parity |
-| separation | $R \perp A \mid Y$ | the same FPR and the same FNR in every group | error rate parity, equalized odds |
-| sufficiency | $Y \perp A \mid R$ | the same PPV and the same NPV in every group | predictive parity, which asks for equal PPV only (a relaxation) |
-
-Each is a property of the joint distribution of $(A, R, Y)$. When all
-three variables are binary that distribution is eight numbers, and
-you can check any of the criteria from those eight numbers and nothing
-else. That is what the textbook means by calling them observational,
-and it is where the week's title comes from.
-
-The housing-ad settlement asks for something like independence. Meta's
-system works to bring the make-up of the audience that sees a housing
-ad, by sex and by estimated race or ethnicity, close to that of the
-audience eligible to see it: independence of being shown the ad from
-those attributes, within the eligible audience. Here a regulator chose
-the criterion and wrote a tolerance into an agreement.
-
-The commitment I asked for in the lecture, which number you would want
-equal as a defendant who will not reoffend, as the judge, or as the
-public, has these three as its answers. The defendant who will not
-reoffend is in the $Y = 0$ row and is harmed by a false positive, so
-wants the false positive rate equal: separation. The judge sees only
-the flag and wants a flag to mean the same thing whoever it is on:
-sufficiency. The public may want the shares flagged to be equal, or
-may want the misses equal; those are independence and the other half
-of separation.
-
-### The criteria on the COMPAS table
-
-Independence fails: `r pct(at5$flagged[1])` of Black defendants were
-flagged against `r pct(at5$flagged[2])` of white defendants. Separation
-fails, and not only at the county's cutoff. The figure moves the
-cutoff from decile 2 to decile 10 and recomputes both error rates;
-the gap between the groups does not close anywhere in that range.
-(Flagging everyone, or no one, equalizes the error rates trivially.)
-
-```{r error_rates_by_threshold, echo=FALSE, fig.height=3.8, fig.alt="Two panels. Left, the false positive rate against the threshold decile from 2 to 10, for Black defendants in navy and white defendants in gold; the navy line is above the gold at every threshold. Right, the false negative rate against the threshold; the gold line is above the navy at every threshold. A vertical dotted line marks threshold 5 in both panels."}
-sweep |>
-  filter(threshold >= 2) |>
-  select(group, threshold, FPR, FNR) |>
-  tidyr::pivot_longer(c(FPR, FNR), names_to = "rate", values_to = "value") |>
-  mutate(rate = factor(rate, levels = c("FPR", "FNR"),
-                       labels = c("false positive rate", "false negative rate"))) |>
-  ggplot(aes(threshold, value, color = group)) +
-  geom_vline(xintercept = 5, linetype = "dotted", color = cgray) +
-  geom_line(linewidth = 0.9) +
-  geom_point(size = 2) +
-  facet_wrap(~ rate) +
-  scale_color_manual(values = two, name = NULL) +
-  scale_x_continuous(breaks = 2:10) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
-  labs(x = "flagged if decile is at least", y = NULL) +
-  theme(legend.position = "bottom")
-```
-
-Sufficiency comes nearer to holding, but for the flag it does not
-hold: the positive predictive values at the county's cutoff are
-`r pct1(at5$PPV[1])` and `r pct1(at5$PPV[2])`, four points apart, and
-the negative predictive values are `r pct1(at5$NPV[1])` and
-`r pct1(at5$NPV[2])`, six points apart. Predictive parity, equal PPV
-alone, is closer than sufficiency. And the score is roughly calibrated by group:
-the observed two-year re-arrest rate rises with the decile in the same
-way for both groups.
-
-```{r calibration, echo=FALSE, fig.height=3.6, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
-counts |>
-  group_by(group, decile) |>
-  summarize(total = sum(n), rate = sum(n[two_year_recid == 1]) / total, .groups = "drop") |>
-  ggplot(aes(decile, rate, color = group)) +
-  geom_line(linewidth = 0.8) +
-  geom_point(aes(size = total)) +
-  scale_color_manual(values = two, name = NULL) +
-  scale_size_area(max_size = 6, guide = "none") +
-  scale_x_continuous(breaks = 1:10) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
-  labs(x = "COMPAS decile", y = "re-arrested within two years",
-       caption = "point size: number of people with that decile") +
-  theme(legend.position = "bottom", plot.caption = element_text(color = cgray))
-```
-
-The white defendants' line wobbles at the top because few of them had
-high deciles (64 had decile 10, against 286 Black defendants). That is
-sampling variation, and it is the one place in this week where
-variance rather than bias is the issue: every rate in the tables is an
-estimate from a finite group, and Chouldechova's figures show
-confidence intervals that the lecture's do not.
-
-### Calibration and calibration by group
-
-A score $R$ with values in $[0, 1]$ is *calibrated* if
-$P(Y = 1 \mid R = r) = r$ for every $r$: of the people given score
-$r$, a fraction $r$ have the outcome. It is *calibrated by group* if
-$P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and every group $a$.
-COMPAS's deciles are not probabilities, so the figure above shows the
-weaker thing that is actually at stake: the same decile, the same rate
-in both groups. The textbook's Fact 2 (page 61) says calibration by
-group implies sufficiency, and its Proposition 1 says the converse
-nearly holds: a sufficient score can be relabeled, by the map
-$r \mapsto P(Y = 1 \mid R = r)$, into one that is calibrated by group.
-Sufficiency and calibration by group are the same idea up to a
-renaming of the score's values.
-
-Calibration by group says less than the replies implied.
-
-Nothing has to be imposed to get it. The optimal score,
-$r(x) = E[Y \mid X = x]$, is calibrated within any group that the
-features $X$ can identify (Fact 3, page 62). A model fitted well on
-rich features will be approximately calibrated by group without anyone
-asking for it, and the textbook shows this on census income data with
-an off-the-shelf random forest (pages 62 and 63). So demanding
-calibration by group is not much of a demand; it mostly certifies that
-the model was fitted properly.
-
-It is also lost when a score is turned into a flag. If $R$ is
-calibrated by group and the flag is $\hat Y = 1\{R \geq t\}$, then the
-positive predictive value in group $a$ is
-$E[R \mid R \geq t, A = a]$, the average score above the cutoff in that
-group. Two groups with different score distributions have different
-averages above the same cutoff, so equal calibration does not give
-equal PPV after thresholding (textbook, page 71). That is why the two
-PPVs in the table differ by four points although the deciles are
-roughly calibrated. It also means that "calibrated" and "predictive
-parity" are two different claims; the replies made both.
-
-The care-management score met earlier in the course shows how little
-calibration certifies. Obermeyer, Powers, Vogeli and Mullainathan
-(2019) found its predictions well calibrated across races for its
-label, next year's medical cost: at every level of the score, Black and
-White patients had roughly the same costs the following year (their
-Figure 3A). At a given score, Black patients were considerably sicker
-(Figure 1A), because unequal access to care meant that less was spent
-on Black patients than on White patients with the same needs.
-Calibration holds for the label a score was trained on. It says nothing
-about whether that label is the one that matters.
-
-Calibration checks that the score's values mean what they say. A score
-that gives everyone the population's base rate is perfectly
-calibrated. A score that is perfect in one group and gives the other
-group its base rate is perfectly calibrated by group (textbook, page
-94). Neither is a score anyone would call fair, and the second is
-informative in one group only. The value judgment hidden in "it is
-calibrated, so it is fair" is that a score is fair when it means what
-it says, whatever it does with that meaning.
-
 ### Proposition 5
 
 The textbook states the same thing as a proposition about two of the
@@ -751,7 +764,13 @@ errors for Black patients changed direction, from estimates too high to
 estimates too low. These are median errors over each whole group. They
 are not a check of calibration by group, which asks about measured GFR
 among people with the same estimate; that would need the paper's data
-rather than its summary. Equations that add a second
+rather than its summary. The race-free equation's error for Black
+participants, an estimate too low, is the pattern the coefficient was
+introduced to correct; in this validation data the coefficient
+over-corrected, to an estimate too high. Neither creatinine equation
+is right on average for Black participants. The case for dropping race
+rests on what race stands for and on which error is worse, not on
+accuracy. Equations that add a second
 marker, cystatin C, and omit race were more accurate than the new
 creatinine equations, with smaller differences between the groups.
 
@@ -984,7 +1003,7 @@ When you compare two groups' rates, what tells you whether a gap is
 more than sampling variation is an interval for the difference between
 the two rates, not whether two separate intervals overlap.
 
-## What the table cannot show
+## Where disparities come from
 
 All the criteria in these notes are, in the reading's word,
 observational: properties of the joint distribution of the features,
@@ -1017,6 +1036,7 @@ rates included, is a rate of the proxy, and the difference in base
 rates that the whole argument runs on is partly a fact about policing. In
 the fraud checks, a caseworker's decision to decline stands in for
 fraud, and it is recorded only for requests that someone reviewed.
+Proxies or true outcomes?
 
 Which comparison gets reported? ProPublica conditioned on the truth,
 two years later, and reported error rates. The replies conditioned on
