@@ -339,7 +339,7 @@ Six minutes, in pairs, on paper. (1) FNR = 1 - FPR (1 - p)/p times PPV/(1 - PPV)
 ## COMPAS in the identity
 
 ::: {.notes}
-The box first. The observed ratio is the identity's three factors, each a ratio between the groups: the odds of re-arrest, the odds against a flag being right, the TPR. For the fraud checks: if FPR and FNR were also equal, the identity would make the prevalences equal, and then the share referred, p(1 - FNR) + (1 - p)FPR, would be equal too. It is 2.27 times as high. So the error rates differ, though the department does not report them.
+The box first. The observed ratio is the identity's three factors, each a ratio between the groups: the odds of re-arrest, the odds against a flag being right, the TPR. Fraud checks: correct referrals per request are p TPR = f PPV, incorrect ones (1 - p) FPR = f (1 - PPV); the second ratio is 2.27 (1 - PPV_nonUK)/(1 - PPV_UK), above 2.27 since PPV_nonUK is the lower. These are the reported ratios for one year, not inference about population rates; the argument also works with the PPV ratio at 1.
 :::
 
 ::: {.leave}
@@ -348,25 +348,25 @@ When two groups differ in prevalence, a flag with the same positive predictive v
 
 With equal PPV and equal FNR, $\text{FPR}_a / \text{FPR}_b$ would be the odds ratio, `r sprintf("%.2f", or_p)`. The observed ratio is `r sprintf("%.2f", at5$FPR[1] / at5$FPR[2])` $=$ `r sprintf("%.2f", or_p)` $\times$ `r sprintf("%.2f", or_ppv)` $\times$ `r sprintf("%.2f", r_tpr)`: the odds ratio, the ratio of $(1 - \text{PPV})/\text{PPV}$, and the ratio of TPRs.
 
-The fraud checks: about the same PPV by nationality (0.97), and 2.27 times the referrals. With equal PPVs the two error rates could not both be equal as well: the prevalences would then be equal, and so would the share referred.
+The fraud checks: per request, non-UK nationals had $2.27 \times 0.97 = 2.2$ times as many correct referrals as UK nationals, and more than $2.27$ times as many incorrect ones. With the same TPR and FPR in both groups, these two ratios would be $p_a/p_b$ and $(1 - p_a)/(1 - p_b)$, which cannot both exceed $1$.
 
 # Part 3: Three criteria
 
 ## Independence, separation, sufficiency {minutes="3"}
 
 ::: {.notes}
-Three families, each equalizing something across groups; the commitment slide's three answers are these three. Separation fails at every cutoff from 2 to 10 (the notes have the figure). The ad settlement asks for something like independence: the audience that sees an ad should look like the audience that could have.
+Three families, each equalizing something across groups; the commitment slide's three answers are these three. Separation fails at every cutoff from 2 to 10 (the notes have the figure); flagging everyone or no one equalizes the error rates trivially. The ad settlement asks for something like independence: the audience that sees an ad should look like the audience that could have.
 :::
 
 | | the score $R$ | the flag $\hat Y$ | on the COMPAS table |
 |:---|:---|:---|:---|
 | independence (demographic parity) | $R \perp A$ | equal share flagged | fails: `r pct(at5$flagged[1])` against `r pct(at5$flagged[2])` |
-| separation (error rate parity) | $R \perp A \mid Y$ | equal FPR and equal FNR | fails, at every cutoff |
-| sufficiency | $Y \perp A \mid R$ | equal PPV and equal NPV | roughly: PPV `r pct(at5$PPV[1])` and `r pct(at5$PPV[2])` |
+| separation (error rate parity) | $R \perp A \mid Y$ | equal FPR and equal FNR | fails at every cutoff from 2 to 10 |
+| sufficiency | $Y \perp A \mid R$ | equal PPV and equal NPV | nearer: PPV `r pct(at5$PPV[1])` and `r pct(at5$PPV[2])`, NPV `r pct(at5$NPV[1])` and `r pct(at5$NPV[2])` |
 
-Predictive parity is equal PPV alone, a relaxation of sufficiency. Each criterion is a property of the joint distribution of $(A, R, Y)$: eight numbers, when all three are binary.
+Predictive parity is equal PPV alone, a relaxation of sufficiency. Each criterion is a property of the joint distribution of $(A, R, Y)$.
 
-The housing-ad settlement asks for something like independence: the audience that sees an ad should match, by sex and estimated race or ethnicity, the audience that was eligible to see it.
+The housing-ad settlement asks for something like independence: the audience that sees an ad should match the eligible audience, by sex and estimated race or ethnicity.
 
 ::: {.source}
 Barocas, Hardt and Narayanan (2023), *Fairness and Machine Learning: Limitations and Opportunities*, MIT Press, https://fairmlbook.org, chapter 3, "Statistical non-discrimination criteria" through "Sufficiency," pages 54 to 61.
@@ -379,8 +379,8 @@ Observed re-arrest rate by decile, by group: the two lines lie close, which is w
 :::
 
 :::: {.columns}
-::: {.column width="52%"}
-```{r calibration, fig.width=5, fig.height=4.4, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
+::: {.column width="48%"}
+```{r calibration, fig.width=5, fig.height=4.6, fig.alt="Observed two-year re-arrest rate against COMPAS decile, 1 to 10, for Black defendants in navy and white defendants in gold, with point size showing how many people had each decile. The two lines rise together from about 20 percent at decile 1 to 70 or 80 percent at decile 10."}
 counts |>
   group_by(group, decile) |>
   summarize(total = sum(n), rate = sum(n[two_year_recid == 1]) / total, .groups = "drop") |>
@@ -395,10 +395,12 @@ counts |>
   theme(legend.position = "top", legend.text = element_text(size = 13))
 ```
 :::
-::: {.column width="48%"}
-*Calibrated by group*: $P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and $a$. It implies sufficiency, and a calibrated score cut at $t$ need not give equal PPV.
+::: {.column width="52%"}
+*Calibrated by group*: $P(Y = 1 \mid R = r, A = a) = r$ for every $r$ and $a$. It implies sufficiency; cut at $t$, it need not give equal PPV.
 
-The care-management score was well calibrated across races for its label, next year's cost. At a given score, Black patients were sicker.
+Deciles are not probabilities: the figure checks that a decile means about the same rate in both groups.
+
+The care-management score: well calibrated across races for its label, next year's cost. At a given score, Black patients were sicker.
 :::
 ::::
 
@@ -457,7 +459,7 @@ Barocas, Hardt and Narayanan (2023), chapter 3, "No fairness through unawareness
 ## A kidney equation without race
 
 ::: {.notes}
-Kidney function estimated from blood creatinine. The race multiplier made Black patients look healthier; the transplant network says it led to underestimating disease severity and may have delayed listing. The race-free creatinine equation is less calibrated by group, and its errors for Black patients now run the other way. Ask the room: which criterion got worse, and what was gained, for whom?
+Kidney function estimated from blood creatinine. The race multiplier made Black patients look healthier; the transplant network says it led to underestimating disease severity and may have delayed listing. Without race the gap between the two groups' median errors is larger, and the errors for Black patients now run the other way. Median errors over a whole group are not a calibration check, which conditions on the estimate. Ask the room: what got worse, what was gained, and for whom?
 :::
 
 Kidney function is estimated (eGFR) from blood creatinine, age and sex. The US equation in use in 2021 also multiplied the estimate by 1.159 for Black patients, who in the studies behind it had higher average creatinine at the same measured function.
@@ -478,6 +480,15 @@ Each group's (FPR, TPR) at every cutoff. A cutoff per group (6 for Black defenda
 
 :::: {.columns}
 ::: {.column width="55%"}
+```{r roc_labels}
+# labels offset on opposite sides of the two curves; the pair 6 (Black) and 4 (white) circled
+rocl <- sweep |>
+  filter(threshold >= 2) |>
+  mutate(nx = ifelse(group == "Black defendants", -0.045, 0.045),
+         ny = ifelse(group == "Black defendants", 0.05, -0.05))
+pair64 <- filter(rocl, (group == "Black defendants" & threshold == 6) | (group == "white defendants" & threshold == 4))
+```
+
 ```{r roc_by_group, fig.width=5, fig.height=4.8, fig.alt="True positive rate against false positive rate for the two groups, Black defendants in navy and white defendants in gold, one point per cutoff from 2 to 10, joined by lines, with the cutoff written beside each point and a dotted diagonal. At the same cutoff the navy point is up and to the right of the gold one."}
 sweep |>
   filter(threshold >= 2) |>
@@ -485,7 +496,8 @@ sweep |>
   geom_abline(intercept = 0, slope = 1, linetype = "dotted", color = cgray) +
   geom_line(linewidth = 1) +
   geom_point(size = 2.6) +
-  geom_text(aes(label = threshold), nudge_y = 0.045, nudge_x = 0.012, size = 4.5, show.legend = FALSE) +
+  geom_point(data = pair64, shape = 21, size = 7, stroke = 1.2, fill = NA, show.legend = FALSE) +
+  geom_text(data = rocl, aes(x = FPR + nx, y = TPR + ny, label = threshold), size = 4.2, show.legend = FALSE) +
   scale_color_manual(values = two, name = NULL) +
   scale_x_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
@@ -495,10 +507,10 @@ sweep |>
 :::
 ::: {.column width="45%"}
 ::: {.leave}
-No single cutoff (the number by each point) gives the two groups the same error rates. A cutoff per group, 6 and 4, nearly does, and then the same score means different treatment.
+No single cutoff from 2 to 10 (the numbers) gives the two groups the same error rates. A cutoff per group, 6 and 4 (circled), nearly does; then the same score means different treatment.
 :::
 
-Elsewhere: the reading's credit-score case study (pages 67 to 71); a contextual offer, one or two grades below the standard offer.
+Elsewhere: the reading's credit-score case study (pages 67 to 71); contextual offers, one or two grades below the standard.
 :::
 ::::
 
@@ -555,7 +567,7 @@ Who pays for your choice: which group, and which error?
 ## A screening test {minutes="6"}
 
 ::: {.notes}
-Six minutes, written, individually; then one answer read out. Separation holds by construction. PPV: 0.9(0.02)/(0.9(0.02) + 0.1(0.98)) = 0.018/0.116 = 0.155 in the first region; 0.09/(0.09 + 0.09) = 0.5 in the second. A positive result is wrong five times in six in the first region, half the time in the second, and the people who bear that are the healthy people sent for treatment or further tests there. Equal PPV at different prevalences needs different error-rate pairs: the identity, not a choice. With one test the only lever is the cutoff; a stricter one in the low-prevalence region raises PPV and FNR, and whether it reaches 0.5 depends on the test (one sensitivity and specificity pair fixes no ROC curve). Either way the lab gives up separation, and owes the explanation to the sick people it will now miss there.
+Six minutes, written, individually; then one answer read out. Separation holds by construction. PPV: 0.9(0.02)/(0.9(0.02) + 0.1(0.98)) = 0.018/0.116 = 0.155 in the first region; 0.09/(0.09 + 0.09) = 0.5 in the second. A positive result is wrong five times in six in the first region, half the time in the second, and the people who bear that are the healthy people sent for treatment or further tests there. Equal PPV at different prevalences needs different error-rate pairs: the identity, not a choice. With one test the only levers are the two regions' cutoffs, and what a move does depends on the test's score distribution: one sensitivity and specificity pair fixes no ROC curve. If its ROC curve is concave, a stricter cutoff in the first region raises PPV and FNR there, and a looser one in the second lowers PPV and raises FPR there. Which region moves decides who pays. Either way the lab gives up separation.
 :::
 
 A test for a disease has sensitivity $0.9$ and specificity $0.9$ (TPR $0.9$, FPR $0.1$) in both of two regions. The disease affects $2\%$ of people in the first region and $10\%$ in the second.

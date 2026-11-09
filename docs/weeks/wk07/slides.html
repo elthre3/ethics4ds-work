@@ -358,7 +358,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <p>When two groups differ in prevalence, a flag with the same positive predictive value in both, strictly between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, has a different false positive rate or a different false negative rate in the two groups.</p>
 </div>
 <p>With equal PPV and equal FNR, <span class="math inline">\(\text{FPR}_a / \text{FPR}_b\)</span> would be the odds ratio, 1.63. The observed ratio is 1.91 <span class="math inline">\(=\)</span> 1.63 <span class="math inline">\(\times\)</span> 0.85 <span class="math inline">\(\times\)</span> 1.38: the odds ratio, the ratio of <span class="math inline">\((1 - \text{PPV})/\text{PPV}\)</span>, and the ratio of TPRs.</p>
-<p>The fraud checks: about the same PPV by nationality (0.97), and 2.27 times the referrals. With equal PPVs the two error rates could not both be equal as well: the prevalences would then be equal, and so would the share referred.</p>
+<p>The fraud checks: per request, non-UK nationals had <span class="math inline">\(2.27 \times 0.97 = 2.2\)</span> times as many correct referrals as UK nationals, and more than <span class="math inline">\(2.27\)</span> times as many incorrect ones. With the same TPR and FPR in both groups, these two ratios would be <span class="math inline">\(p_a/p_b\)</span> and <span class="math inline">\((1 - p_a)/(1 - p_b)\)</span>, which cannot both exceed <span class="math inline">\(1\)</span>.</p>
 </section></section>
 <section>
 <section id="part-3-three-criteria" class="title-slide slide level1 center">
@@ -393,18 +393,18 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <td style="text-align: left;">separation (error rate parity)</td>
 <td style="text-align: left;"><span class="math inline">\(R \perp A \mid Y\)</span></td>
 <td style="text-align: left;">equal FPR and equal FNR</td>
-<td style="text-align: left;">fails, at every cutoff</td>
+<td style="text-align: left;">fails at every cutoff from 2 to 10</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">sufficiency</td>
 <td style="text-align: left;"><span class="math inline">\(Y \perp A \mid R\)</span></td>
 <td style="text-align: left;">equal PPV and equal NPV</td>
-<td style="text-align: left;">roughly: PPV 63% and 59%</td>
+<td style="text-align: left;">nearer: PPV 63% and 59%, NPV 65% and 71%</td>
 </tr>
 </tbody>
 </table>
-<p>Predictive parity is equal PPV alone, a relaxation of sufficiency. Each criterion is a property of the joint distribution of <span class="math inline">\((A, R, Y)\)</span>: eight numbers, when all three are binary.</p>
-<p>The housing-ad settlement asks for something like independence: the audience that sees an ad should match, by sex and estimated race or ethnicity, the audience that was eligible to see it.</p>
+<p>Predictive parity is equal PPV alone, a relaxation of sufficiency. Each criterion is a property of the joint distribution of <span class="math inline">\((A, R, Y)\)</span>.</p>
+<p>The housing-ad settlement asks for something like independence: the audience that sees an ad should match the eligible audience, by sex and estimated race or ethnicity.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), <em>Fairness and Machine Learning: Limitations and Opportunities</em>, MIT Press, https://fairmlbook.org, chapter 3, “Statistical non-discrimination criteria” through “Sufficiency,” pages 54 to 61.</p>
 </div>
@@ -412,7 +412,7 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <section id="calibration-by-group" class="slide level2">
 <h2>Calibration by group</h2>
 <div class="columns">
-<div class="column" style="width:52%;">
+<div class="column" style="width:48%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -422,9 +422,10 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </div>
 </div>
 </div>
-</div><div class="column" style="width:48%;">
-<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency, and a calibrated score cut at <span class="math inline">\(t\)</span> need not give equal PPV.</p>
-<p>The care-management score was well calibrated across races for its label, next year’s cost. At a given score, Black patients were sicker.</p>
+</div><div class="column" style="width:52%;">
+<p><em>Calibrated by group</em>: <span class="math inline">\(P(Y = 1 \mid R = r, A = a) = r\)</span> for every <span class="math inline">\(r\)</span> and <span class="math inline">\(a\)</span>. It implies sufficiency; cut at <span class="math inline">\(t\)</span>, it need not give equal PPV.</p>
+<p>Deciles are not probabilities: the figure checks that a decile means about the same rate in both groups.</p>
+<p>The care-management score: well calibrated across races for its label, next year’s cost. At a given score, Black patients were sicker.</p>
 </div></div>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, “Calibration and sufficiency,” pages 61 to 63, and page 71. Obermeyer, Powers, Vogeli and Mullainathan (2019), “Dissecting racial bias in an algorithm used to manage the health of populations,” <em>Science</em> 366(6464), 447–453, doi:10.1126/science.aax2342, Figures 1A and 3A.</p>
@@ -485,9 +486,9 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 </div>
 </div><div class="column" style="width:45%;">
 <div class="leave">
-<p>No single cutoff (the number by each point) gives the two groups the same error rates. A cutoff per group, 6 and 4, nearly does, and then the same score means different treatment.</p>
+<p>No single cutoff from 2 to 10 (the numbers) gives the two groups the same error rates. A cutoff per group, 6 and 4 (circled), nearly does; then the same score means different treatment.</p>
 </div>
-<p>Elsewhere: the reading’s credit-score case study (pages 67 to 71); a contextual offer, one or two grades below the standard offer.</p>
+<p>Elsewhere: the reading’s credit-score case study (pages 67 to 71); contextual offers, one or two grades below the standard.</p>
 </div></div>
 <div class="source">
 <p>LSE, “Contextual admissions and offers,” https://www.lse.ac.uk/study-at-lse/undergraduate/prospective-students/how-to-apply/contextual-admissions-and-offers.</p>
