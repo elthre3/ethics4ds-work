@@ -2195,7 +2195,7 @@ vertical-align: -.125em;
 
 <section id="keep-or-rush" class="level2">
 <h2 class="anchored" data-anchor-id="keep-or-rush">Keep or rush</h2>
-<p>In class order. Planned total 79 of the 80 minutes.</p>
+<p>In class order. Planned total 65 of the 80 minutes.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 34%">
@@ -2219,36 +2219,30 @@ vertical-align: -.125em;
 <td>Question 2 only, with hands: ProPublica’s sentence is an error rate (separation), the replies a predictive value (sufficiency)</td>
 </tr>
 <tr class="even">
-<td>Coding 1: COMPAS from ProPublica’s file; the rates at cutoff 5, the sweep, decile 5, a cutoff per group, with feedback</td>
-<td style="text-align: right;">30</td>
-<td>Keep</td>
-<td>Steps 1, 4 and 5; show the sweep plot and the decile-5 table from the complete sheet</td>
-</tr>
-<tr class="odd">
 <td>Problem 1: the fraud checks; why the error rates differ, and a lower bound on the ratio of false positive rates, with feedback</td>
 <td style="text-align: right;">16</td>
 <td>Keep</td>
 <td>(a) to (c), then say (d): if fewer than one UK request in ten would be declined, non-UK requests that should be approved are referred more than twice as often</td>
 </tr>
+<tr class="odd">
+<td>Discussion 2: three views; the middle view; which view each criterion fits</td>
+<td style="text-align: right;">12</td>
+<td>Rush</td>
+<td>Question 2 only</td>
+</tr>
 <tr class="even">
-<td>Discussion 2: which criterion, for COMPAS and for the fraud checks; how to decide; the sentence to the losers</td>
-<td style="text-align: right;">8</td>
+<td>Discussion 3: predictive policing; show Lum and Isaac’s figures and the feedback loop, then the questions</td>
+<td style="text-align: right;">20</td>
 <td>Keep</td>
-<td>Question 3 only</td>
+<td>Figures 1 and 3, then questions 2 and 4</td>
 </tr>
 <tr class="odd">
-<td>Discussion 3: the kidney equation; which error, and who bears it</td>
-<td style="text-align: right;">10</td>
+<td>Discussion 4: two open questions</td>
+<td style="text-align: right;">8</td>
 <td>Rush</td>
-<td>Question 1 with hands, then question 3; or drop it for discussion 4</td>
+<td>One question for the whole room</td>
 </tr>
 <tr class="even">
-<td>Discussion 4: two open questions; keep or drop the score; judged by the group</td>
-<td style="text-align: right;">6</td>
-<td>Rush</td>
-<td>One question for the whole room; or drop it for discussion 3</td>
-</tr>
-<tr class="odd">
 <td>The task for next time</td>
 <td style="text-align: right;">1</td>
 <td>Keep</td>
@@ -2256,22 +2250,23 @@ vertical-align: -.125em;
 </tr>
 </tbody>
 </table>
-<p>Minimum class, about 55 minutes: coding steps 1, 4 and 5, problem 1 (a) to (c), discussion 2’s question 3 and the task for next time. With more time, add back one of discussions 3 and 4, whichever the room’s discussion 2 leads into, then the other, then discussion 1. “Three views” at the end of the sheet is only for a room that finishes early.</p>
+<p>Minimum class, about 45 minutes: problem 1 (a) to (c), discussion 3 as above, discussion 2’s question 2 and the task for next time. With more time, add discussion 4, then discussion 1. Spare minutes go to “If there is time,” in its order: the coding (about 30 minutes; a pair that does not reach it can run it at home), which criterion (8), the kidney equation (10).</p>
 </section>
 <section id="if-you-read-on" class="level2">
 <h2 class="anchored" data-anchor-id="if-you-read-on">If you read on</h2>
 <p>How it runs</p>
 <ul>
 <li>The exercises at the top of the sheet rederive or apply the lecture’s results; students do them on their own time and the class does not work them. Open the <a href="https://ethics4ds.com/teachers/wk07/class_complete.html">complete class sheet</a> on screen: green boxes are hints, opened in order after a few minutes; blue boxes are answers and example answers.</li>
-<li>The coding reads ProPublica’s published file from GitHub, so each pair needs a laptop with R, <code>dplyr</code>, <code>ggplot2</code> and an internet connection; it loads in a few seconds. The file has one row per defendant with names and dates of birth, which is why the first lines keep three columns. If GitHub is blocked for a pair, they work with a neighbor. The convention for the week, said once in the lecture: 1 is the bad outcome, and flagged and selected mean the same.</li>
+<li>The coding, under “If there is time,” reads ProPublica’s published file from GitHub, so each pair needs a laptop with R, <code>dplyr</code>, <code>ggplot2</code> and an internet connection; it loads in a few seconds. The file has one row per defendant with names and dates of birth, which is why the first lines keep three columns. If GitHub is blocked for a pair, they work with a neighbor. The convention for the week, said once in the lecture: 1 is the bad outcome, and flagged and selected mean the same.</li>
 <li>Problem 1 uses an example from the lecture’s opening (the DWP’s model for universal credit advances). The lecture showed the two published ratios, 2.27 and 0.97, but not the argument; this is where students make it. The argument uses the reported ratios for one year and does not depend on the 0.97 being exactly 1.</li>
-<li>Discussion 3 picks up the lecture’s kidney example. The point is that neither equation is right on average for Black patients, so the choice was which error, and who would bear it; the lecture said so but did not stop on it.</li>
+<li>Discussion 3: show Lum and Isaac’s Figures 1 to 3 (arrests against estimated drug use; days targeted, by race; the 20 percent simulation) and explain the loop, about 6 minutes; the paper is linked from the sheet. The aim is for the room to find that base rates can differ for reasons other than the outcome (a proxy, feedback, who gets recorded), so that a difference in base rates may record an unfairness rather than justify more of it. Let them get there; do not open with it. Week 4’s reading (fairmlbook ch. 1, pp. 14 and 15) summarized the study, so some will recognize it, and question 3 asks them to connect it to performative prediction, Goodhart and selection.</li>
+<li>The kidney equation, under “If there is time,” picks up the lecture’s example. Neither equation is right on average for Black patients, so the choice was which error, and who would bear it.</li>
 <li>Discussion 4’s questions name no framework on purpose. Its two boxes list directions in a few words each (the frameworks, Belmont–Menlo, the five Cs, the lenses, earlier ideas); pick from them as the discussion goes. They are not a checklist.</li>
 <li>Every item ends with a question about who the error falls on, who gains from the number reported, or who the choice could be justified to. Those questions are the point of the class. A group that has the number and skips the question has not finished; ask it.</li>
 </ul>
 <p>What students should see</p>
 <ul>
-<li>At cutoff 5: FPR 0.448 and 0.235, FNR 0.280 and 0.477, PPV 0.630 and 0.591, selected 0.588 and 0.348 (Black and white defendants).</li>
+<li>Coding, if reached, at cutoff 5: FPR 0.448 and 0.235, FNR 0.280 and 0.477, PPV 0.630 and 0.591, selected 0.588 and 0.348 (Black and white defendants).</li>
 <li>At decile exactly 5: 48 and 46 percent re-arrested, below either PPV.</li>
 <li>With cutoffs 6 and 4: FPR 0.343 and 0.350, FNR 0.372 and 0.360, PPV 0.659 and 0.543. Other pairs within two points: (7, 5), (8, 6), (10, 9).</li>
 <li>Fraud checks: correct referrals per request 2.20 times as many; incorrect ones more than 2.27 times; with equal PPVs and fewer than 10 percent of UK requests declined on review, the ratio of FPRs is above 2.04.</li>
@@ -2279,7 +2274,7 @@ vertical-align: -.125em;
 <p>Where they get stuck</p>
 <ul>
 <li>Conditioning the wrong way: FNR averages over the people who reoffended, PPV over the people flagged.</li>
-<li>In step 4, writing two <code>filter()</code> calls instead of indexing <code>cutoff[race]</code>.</li>
+<li>In the coding’s step 4, if it is reached, writing two <code>filter()</code> calls instead of indexing <code>cutoff[race]</code>.</li>
 <li>In problem 1, reading the 0.97 as “the model is fair”: it is the predictive value, and the problem is about what it leaves out.</li>
 <li>Treating “fair by two criteria” as settled; exercise 3 has a rule that is wrong about everyone and passes both.</li>
 </ul>

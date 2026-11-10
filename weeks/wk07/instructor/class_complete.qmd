@@ -14,21 +14,20 @@ st313:
   week: 07
   session: class
   register: 1
-  segments:                        # sums to 80: 79 of material and 1 of slack; production 74 (93%); discussion 32. Discussion 4's two questions name no framework; its directions list them, each in a few words, for the teacher to pick from (convenor, 10 November). If short, one of discussions 3 and 4. Exercises (rederiving or applying the lecture) are for students' own time and sit outside the segments (convenor, 19 October). The coding reads ProPublica's row-level file (convenor, 10 November). Problem 1 is the fraud checks' two published ratios, which the lecture dropped (convenor, 10 November). Discussion 3 is the kidney equation; the three views are under "If there is time" (convenor, 10 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
+  segments:                        # sums to 80: 65 of material and 15 of slack; production 56 (70%); discussion 42. In class, in order (convenor, 10 November, 16:45): discussion 1, problem 1, three views, predictive policing (Lum and Isaac 2016), the two open questions; the coding, which criterion and the kidney equation moved to "If there is time", outside the segments, as the exercises are (convenor, 19 October). The coding reads ProPublica's row-level file (convenor, 10 November). Problem 1 is the fraud checks' two published ratios, which the lecture dropped (convenor, 10 November). Lum and Isaac: the teacher shows the paper's figures and the feedback loop, then the room works out why base rates can differ (proxies, feedback), so that a difference in base rates may record unfairness rather than justify more of it (convenor); not planned for any later week (checked 10 November: spine, readings.csv, repository, Dropbox drafts); summarized in week 4's reading, fairmlbook ch. 1, pp. 14-15 (printed page numbers). Discussion 4's two questions name no framework; its directions list them, each in a few words, for the teacher to pick from (convenor, 10 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
     - {label: "discussion 1: the rule each student brought (the 5 -> 7 task); its two errors and who pays; which rate each party would want equal; the criterion behind ProPublica's sentence and behind the replies", minutes: 8, mode: production, retrieves: [S5]}
-    - {label: "coding 1: ProPublica's file, three columns kept; FPR, FNR, PPV and the share selected at the county's cutoff; the sweep of one cutoff; decile 5 against the PPV; a cutoff per group (6 and 4); the same decile, different treatment", minutes: 28, mode: production, core: CC-19, results: [R40, R41], retrieves: [S4]}
-    - {label: "feedback on the coding", minutes: 2, mode: exposition}
     - {label: "problem 1: the fraud checks; from a referral ratio of 2.27 and a correct-referral ratio of 0.97, the error rates differ; FPR = f (1 - PPV) / (1 - p) and the lower bound on the ratio of FPRs; who is owed the missing number", minutes: 14, mode: production, core: CC-20, results: [R1]}
     - {label: "feedback on problem 1", minutes: 2, mode: exposition}
-    - {label: "discussion 2: which criterion for COMPAS and for the fraud checks; how to decide when they conflict; the sentence to the people who lose", minutes: 8, mode: production, results: [R3], retrieves: [S6]}
-    - {label: "discussion 3: the kidney equation; which error, and who bears it; restored waiting time; a second marker available in some hospitals and not others", minutes: 10, mode: production, retrieves: [S2]}
-    - {label: "discussion 4: two open questions, take one; keep or drop a pretrial score; is a decision from people like you ever unfair to you; no framework named", minutes: 6, mode: production, retrieves: [S6]}
+    - {label: "discussion 2: three views of equality of opportunity; a setting for the middle view, and who decides what is discounted; which view each criterion fits; what the impossibility results leave", minutes: 12, mode: production, retrieves: [S6]}
+    - {label: "predictive policing: Lum and Isaac's figures (arrests against estimated use; days targeted, by race; the 20 percent simulation) and the feedback loop, shown by the teacher", minutes: 6, mode: exposition}
+    - {label: "discussion 3: predictive policing; could the model look calibrated; reasons recorded base rates differ when actual rates do not (proxies, feedback, selection); a loop met before; what to say to 'the score only reflects base rates', and who pays for the correction", minutes: 14, mode: production, retrieves: [S2, S3]}
+    - {label: "discussion 4: two open questions, take one; keep or drop a pretrial score; is a decision from people like you ever unfair to you; no framework named", minutes: 8, mode: production, retrieves: [S6]}
     - {label: "prep task for next class (the 7 -> 8 task)", minutes: 1, mode: exposition}
-    - {label: "slack: overrun", minutes: 1, mode: exposition}
+    - {label: "slack: overrun, or the items under If there is time", minutes: 15, mode: exposition}
   history: []
   complications: []
-  retrieves: [S2, S4, S5, S6]
-  lenses: [A, C, D, E]
+  retrieves: [S2, S3, S4, S5, S6]
+  lenses: [A, B, C, D, E]
   readings: [fairmlbook-ch3, fairmlbook-ch3-rates, fairmlbook-ch3-limits, fairmlbook-ch3-unawareness, fairmlbook-ch4-eoo]
   results: [R1, R3, R40, R41]   # R1 and R40 in exercises 2 and problem 1; R3 in exercise 3; R41 in exercise 4 and the coding
   assumes: [ST102]
@@ -53,14 +52,15 @@ set.seed(313)
 ## How this sheet works
 
 Exercises rederive or apply the lecture's results. Do them on your own
-time; they are not worked in class. The class works the discussions,
-the problem and the coding under "In class," in that order.
-Discussions are in groups of three or four, then with the room. The
-problem, and the coding, are gone through as soon as the room has
-tried them.
+time; they are not worked in class. The class works the discussions
+and the problem under "In class," in that order, then what it can of
+"If there is time." Discussions are in groups of three or four, then
+with the room. The problem, and the coding, are gone through as soon
+as the room has tried them.
 
-Every item is about a rule that selects some people: for detention,
-for a fraud check, for a treatment. The same table of who was selected
+Every item is about a rule that selects some people, or places: for
+detention, for a fraud check, for a treatment, for patrols. The same
+table of who was selected
 and what happened supports different numbers, and a disagreement about
 fairness is often a disagreement about which number a fair rule has to
 equalize. So each item ends by asking who the error falls on, who
@@ -343,7 +343,320 @@ part of separation; the replies are about the PPV (predictive parity,
 a relaxation of sufficiency) and calibration.
 :::
 
-### Coding 1: COMPAS from ProPublica's file
+### Problem 1. The fraud checks
+
+The Department for Work and Pensions scores requests for a universal
+credit advance, and refers those it scores high risk to a caseworker,
+who approves or declines them. For non-UK against UK nationals, its
+fairness assessment reports two ratios: requests referred $2.27$ times
+as often, and referrals declined, which it counts as correct, $0.97$
+times as often, not significantly different from 1. It reports no
+error rate. Take a decline as $Y = 1$ and a referral as $\hat Y = 1$,
+and write $f$ for the share of a group's requests that are referred.
+
+(a) Show that correct referrals are a share $f \cdot \text{PPV} = p
+\cdot \text{TPR}$ of all of a group's requests, and incorrect
+referrals a share $f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}$.
+
+(b) Non-UK against UK, what is the ratio of correct referrals per
+request? Show that the ratio of incorrect referrals per request is
+above $2.27$.
+
+(c) Suppose both groups had the same TPR and the same FPR. Write the
+two ratios in (b) in terms of the prevalences $p_{\text{non-UK}}$ and
+$p_{\text{UK}}$. Can both be above 1? What do you conclude?
+
+(d) Show that $\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)$. Taking the
+two PPVs as equal, show that the ratio of non-UK to UK FPRs is at
+least $2.27\,(1 - p_{\text{UK}})$. If fewer than one UK request in ten
+would be declined on review, how much more often are non-UK requests
+that a caseworker would approve referred?
+
+(e) The $0.97$ is not significantly different from 1. Does your
+conclusion in (c) depend on it?
+
+(f) The department judged the model "reasonable and proportionate" to
+keep using. Which number would a claimant who did nothing wrong want
+to see, and who could have published it?
+
+::: {.callout-tip .answer collapse="true" title="Hint 1"}
+For (a): the referred share times the share of referrals that are
+correct is the share of all requests that are both referred and
+declined.
+:::
+
+::: {.callout-tip .answer collapse="true" title="Hint 2"}
+For (b): the non-UK PPV is $0.97$ times the UK PPV, so $1 -
+\text{PPV}$ is larger for non-UK nationals.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $f \cdot \text{PPV} = P(\hat Y = 1)\,P(Y = 1 \mid \hat Y = 1) =
+P(\hat Y = 1, Y = 1) = P(Y = 1)\,P(\hat Y = 1 \mid Y = 1) = p \cdot
+\text{TPR}$, and in the same way $f\,(1 - \text{PPV}) = P(\hat Y = 1,
+Y = 0) = (1 - p)\,\text{FPR}$.
+
+(b) Correct referrals: $2.27 \times 0.97 = 2.20$. Incorrect referrals:
+$2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 -
+\text{PPV}_{\text{UK}}}$, and the fraction is above 1 because the
+non-UK PPV is the smaller, so the ratio is above $2.27$.
+
+(c) $p_{\text{non-UK}} / p_{\text{UK}}$ and $(1 - p_{\text{non-UK}}) /
+(1 - p_{\text{UK}})$. If the first is above 1 the second is below it,
+so they cannot both be above 1. Both observed ratios are, so the
+groups do not have the same TPR and FPR: the error rates differ. This
+describes the reported year's referrals; it is not an inference about
+the rates behind them.
+
+(d) Divide the incorrect referrals by the share who would not be
+declined, $1 - p$. The ratio of FPRs is
+$2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 - \text{PPV}_{\text{UK}}} \times \frac{1 - p_{\text{UK}}}{1 - p_{\text{non-UK}}}$.
+With equal PPVs the middle factor is 1, and the last is at least $1 -
+p_{\text{UK}}$ because $1 - p_{\text{non-UK}} \leq 1$. With
+$p_{\text{UK}} < 0.1$ the ratio is above $2.27 \times 0.9 = 2.04$:
+more than twice as often.
+
+(e) No. With the PPV ratio at 1, both ratios are $2.27$, still above 1,
+and the conclusion stands. It needs both ratios above 1, which holds
+for PPV ratios in a range around 1 but not for every ratio: with a UK
+PPV of $0.5$, for a non-UK PPV between about $0.22$ and $0.78$.
+
+(f) The FPR: the chance that a request which should be approved is
+referred anyway. The department could estimate it. It already reviews
+a random sample of requests the model scores as low risk, to monitor
+false negatives (annex, paragraph 31). With the reviews of referred
+requests, that is what an estimate of each group's prevalence needs,
+and (d) needs the prevalence.
+:::
+
+### Discussion 2: three views
+
+1. The middle view says to treat seemingly dissimilar people similarly
+   when the dissimilarity is the result of something that should be
+   discounted. Give one setting where that seems reasonable and one
+   where it seems less defensible, and say what differs between them.
+   Who decides what should be discounted?
+2. For two of the three criteria, say which view of equality of
+   opportunity it fits, and where the fit fails.
+3. In one sentence: what do you take away from the impossibility
+   results?
+
+::: {.callout-note .answer title="Some directions" collapse="true"}
+Calibration by group fits the narrow view. Demographic parity
+resembles the broad view, but at a single decision rather than over a
+life. Error rate parity has no single principle behind it; the book
+ties it both to the middle view (an unequal burden of mistakes
+perpetuates disadvantage) and to the narrow view (collect more data
+and assess people more accurately as they are), page 101. For the
+last question: the trade-off is a fact about base rates, so a choice
+has to be made and defended; it is not a reason to stop asking.
+
+From this lecture:
+
+- ProPublica's error rates, a middle-view complaint; the predictive
+  values, a narrow-view defense.
+- LSE's contextual offers, a cutoff per group defined by background:
+  which view, and does it act at the decision or before it?
+- A cutoff per group on COMPAS: which view could accept it?
+- Restored waiting time: the narrow view with a better measurement, or
+  the middle view?
+- Job ads: the broad view; who hears of the opportunity at all.
+- Every observational criterion ignores who applied in the first place.
+
+From earlier in the course:
+
+- Measurement: if $Y = Y^* + \beta_A A$, the narrow view treats the
+  offset as the person's; the middle view discounts it.
+- Proxies: re-arrest for offending, cost for need; which view takes
+  the proxy at face value?
+- Who is in the data: the narrow view needs outcomes, seen only for
+  people selected before (selective labels, complete cases).
+- Conditioning: comparing qualifications among people already
+  admitted conditions on admission, a collider.
+- Feedback, performative prediction: the narrow view applied year
+  after year can entrench a gap; the broad view looks across a life.
+- Goodhart: a qualification used as a target also measures access to
+  preparation.
+- Groups and individuals: the narrow view judges individuals, the
+  broad view groups' chances; the ecological fallacy between them.
+- Consequences: accuracy now against welfare later; whose welfare.
+- Duties: desert; what may be held against a person; treated as an
+  individual.
+- Character: what a fair institution is disposed to do.
+- Pragmatism: different views for hiring, lending, medicine, bail.
+- Respect for persons: responsibility for choices, not circumstances.
+- Justice (Belmont): burdens and benefits shared fairly; fair
+  selection.
+- Lens D: under each view, who bears the cost: the applicant, the
+  institution, the next cohort?
+- Lens E: the views conflict; choose one for a setting and defend it.
+- Standing question: who benefits from the narrow view being the
+  default?
+:::
+
+### Discussion 3: predictive policing
+
+Lum and Isaac,
+["To predict and serve?"](https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1740-9713.2016.00960.x)
+(*Significance*, 2016), ran PredPol's published predictive policing
+algorithm on Oakland police records of drug crimes. Drug arrests in
+2010 were concentrated in two areas of the city. Estimates of drug
+use, from a national survey applied to a synthetic population of the
+city, were spread across it, and roughly equal by race. Run on the
+police records, the algorithm would have targeted Black residents at
+roughly twice the rate of white residents, although it uses no
+demographic data. In a simulation in which 20 percent more crimes are
+recorded wherever police are sent, the model grew more confident that
+crime was where it had already sent them.
+
+1. Suppose the model is checked against records of the same kind as
+   those it was trained on. Could it look accurate, even calibrated?
+   What would a difference in base rates between neighborhoods, or
+   between racial groups, be measuring?
+2. List as many reasons as you can why two groups' recorded rates of
+   an outcome could differ when their actual rates do not. Which of
+   them could apply to re-arrest for COMPAS, and to declined requests
+   in the fraud checks?
+3. Have you met a loop like this before in the course? What is the
+   same here, and what is new?
+4. A defense of risk scores goes: the score only reflects real
+   differences in base rates, and ignoring them would be unfair. What
+   would you say back? If base rates are partly the product of earlier
+   decisions, who should bear the cost of correcting them?
+
+::: {.callout-note .answer title="Some directions" collapse="true"}
+- Where it can end: a difference in base rates can record an earlier
+  unfairness; on its own it is not a reason to keep acting on it.
+- Proxy (lens A): arrests measure drug use and policing together; in
+  the earlier notation, $Y = Y^* + \beta_A A$, with $\beta_A$ set by
+  where patrols go.
+- Who is in the data (lens B): a crime enters the records only where
+  police look; missing not at random.
+- Conditioning: being recorded is a common effect of use and of
+  patrols, and the records condition on it.
+- Selective labels: an outcome is recorded only where someone acted.
+- Calibration against the proxy: sufficiency compares predictions with
+  recorded outcomes, so a model can pass it and inherit their bias.
+- Feedback: predictions send patrols, patrols make records, records
+  train the next prediction; "selection bias meets confirmation bias,"
+  in the authors' words.
+- Performative prediction: the deployed model changes the data it is
+  judged on; retraining can settle at a point that is stable, not one
+  that is right.
+- Goodhart: once arrests decide where to patrol, they measure crime
+  less well.
+- Amplification: a small first difference grows, as the selection
+  filters earlier in the course amplified extremes.
+- Leaving race out: no demographic data, and location encodes group.
+- Two worlds, one table: more offending or more policing; the table
+  cannot tell them apart.
+- COMPAS: the outcome, re-arrest, and the criminal history among the
+  inputs both pass through policing.
+- Fraud checks: a decline is recorded only for a request someone
+  reviewed; more reviews find more.
+- Lens C: the survey estimate is a model too (self-reported use, a
+  synthetic population); how far should it be trusted?
+- Remedies: measure the outcome independently; the book's introduction
+  suggests updating only on surprising observations.
+- Consequences: crime prevented against the harms of concentrated
+  policing; who counts which.
+- Duties: suspicion by address; equal treatment under the law.
+- Justice (Belmont): the burdens of policing concentrated on some
+  neighborhoods.
+- Consistency and trust: policed by a loop no one there can see.
+- Standing question: who benefits from the loop staying invisible?
+  Would a more competent analyst have checked against an independent
+  measure, as Lum and Isaac did?
+- The causal question to come: what would the records show if patrols
+  were equal?
+:::
+
+### Discussion 4: two open questions
+
+Take one of the two.
+
+1. A county that uses a risk score like COMPAS before trial is deciding
+   whether to keep it. Make the strongest case you can for keeping it
+   and the strongest case for dropping it. Which is stronger, and what
+   would change your mind? Who would the county have to justify its
+   decision to?
+2. In each of today's examples, a decision about one person rested on
+   what is true of people like them: which job ads they see, whether
+   their request for an advance is referred for checks, whether they
+   are held before trial, how well their kidneys are judged to work. Is
+   that ever unfair to the person decided about, and does your answer
+   differ among the four?
+
+::: {.callout-note .answer title="Some directions: question 1" collapse="true"}
+- Compared with what: judges without a score; a simpler, public rule;
+  releasing more people.
+- Consequences: detentions, re-arrests, days held before a verdict,
+  cost; whose welfare counts; how sure the estimates are.
+- Duties: held for what one might do; presumption of innocence; judged
+  as an individual.
+- Character: deference to the tool; responsibility handed to a vendor;
+  judgment no longer practiced.
+- Pragmatism: a decision, not a conclusion; a trial period, an audit, a
+  date to review.
+- Respect for persons: no say; the calculation is not public, and
+  defendants rarely have a chance to challenge it (ProPublica).
+- Beneficence: harms and benefits assessed systematically, before and
+  after.
+- Justice: who bears the false positives.
+- Law and the public interest: due process; transparent methods; who is
+  accountable for a vendor's product.
+- Consent and clarity: does the defendant know a score was used, and
+  what it means?
+- Consistency and trust: can judges, defendants and the public predict
+  what it will do?
+- Control and transparency: can a defendant see or correct the inputs?
+- Consequences of the data existing: reuse beyond pretrial, as at
+  sentencing.
+- Lens A: re-arrest stands in for reoffending, and arrests follow where
+  police look.
+- Lens C: ProPublica's comparison or the vendor's.
+- Lens D: who bears each error.
+- Lens E: keeping the status quo is also a choice.
+- Selective labels: no outcome for the people held.
+- Feedback: detention can change what it predicts.
+- Standing question: who benefits from the choice staying invisible?
+:::
+
+::: {.callout-note .answer title="Some directions: question 2" collapse="true"}
+- Every prediction uses people like you; which people count as like you
+  is the choice.
+- Consequences: group information can make the estimate more accurate,
+  for the person too; accurate on average over which people?
+- Duties: treated as an individual; judged by what one did or by what
+  one is.
+- Responsibility: traits one chose against traits one did not; the
+  middle view of equality of opportunity.
+- Character: what a careful decision-maker owes the person in front of
+  them.
+- Pragmatism: depends on the purpose and the setting; revisable.
+- Respect for persons: the person's own information or the group's.
+- Beneficence and justice: selected for help (a listing, a job ad) or
+  for a burden (a check, detention); how burdens and benefits are
+  shared.
+- Law: what discrimination law allows, setting by setting.
+- Consent and clarity: did the person know a group attribute was used?
+- Control: can the person replace the group's number with their own
+  (cystatin C)?
+- Aggregation: spread within groups against the gap between them.
+- History: base rates produced by past policing, access to care, past
+  decisions.
+- Proxies: what the group label stands in for, and whether that could
+  be measured instead.
+- Repair: group information used to correct, as in restored waiting
+  time or a cutoff per group.
+- Lens D: who bears the error when the group's rate is wrong for them.
+- Standing question: who gains from deciding by group averages, which
+  are cheaper and faster than looking closer?
+:::
+
+## If there is time
+
+### Coding: COMPAS from ProPublica's file
 
 You need `dplyr` and `ggplot2`. ProPublica published the data behind
 its analysis: one row per defendant, with names and dates of birth as
@@ -483,96 +796,10 @@ Step 5: with 6 and 4, a Black defendant at decile 4 or 5 is not
 flagged, and a white defendant at the same decile is. The score means
 different things for different people, and the judge has to know
 which. Whether that is fairer depends on which error you think the
-county owes equally, which is discussion 2.
+county owes equally, the question under "Which criterion" below.
 :::
 
-### Problem 1. The fraud checks
-
-The Department for Work and Pensions scores requests for a universal
-credit advance, and refers those it scores high risk to a caseworker,
-who approves or declines them. For non-UK against UK nationals, its
-fairness assessment reports two ratios: requests referred $2.27$ times
-as often, and referrals declined, which it counts as correct, $0.97$
-times as often, not significantly different from 1. It reports no
-error rate. Take a decline as $Y = 1$ and a referral as $\hat Y = 1$,
-and write $f$ for the share of a group's requests that are referred.
-
-(a) Show that correct referrals are a share $f \cdot \text{PPV} = p
-\cdot \text{TPR}$ of all of a group's requests, and incorrect
-referrals a share $f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}$.
-
-(b) Non-UK against UK, what is the ratio of correct referrals per
-request? Show that the ratio of incorrect referrals per request is
-above $2.27$.
-
-(c) Suppose both groups had the same TPR and the same FPR. Write the
-two ratios in (b) in terms of the prevalences $p_{\text{non-UK}}$ and
-$p_{\text{UK}}$. Can both be above 1? What do you conclude?
-
-(d) Show that $\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)$. Taking the
-two PPVs as equal, show that the ratio of non-UK to UK FPRs is at
-least $2.27\,(1 - p_{\text{UK}})$. If fewer than one UK request in ten
-would be declined on review, how much more often are non-UK requests
-that a caseworker would approve referred?
-
-(e) The $0.97$ is not significantly different from 1. Does your
-conclusion in (c) depend on it?
-
-(f) The department judged the model "reasonable and proportionate" to
-keep using. Which number would a claimant who did nothing wrong want
-to see, and who could have published it?
-
-::: {.callout-tip .answer collapse="true" title="Hint 1"}
-For (a): the referred share times the share of referrals that are
-correct is the share of all requests that are both referred and
-declined.
-:::
-
-::: {.callout-tip .answer collapse="true" title="Hint 2"}
-For (b): the non-UK PPV is $0.97$ times the UK PPV, so $1 -
-\text{PPV}$ is larger for non-UK nationals.
-:::
-
-::: {.callout-note .answer title="Solution" collapse="true"}
-(a) $f \cdot \text{PPV} = P(\hat Y = 1)\,P(Y = 1 \mid \hat Y = 1) =
-P(\hat Y = 1, Y = 1) = P(Y = 1)\,P(\hat Y = 1 \mid Y = 1) = p \cdot
-\text{TPR}$, and in the same way $f\,(1 - \text{PPV}) = P(\hat Y = 1,
-Y = 0) = (1 - p)\,\text{FPR}$.
-
-(b) Correct referrals: $2.27 \times 0.97 = 2.20$. Incorrect referrals:
-$2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 -
-\text{PPV}_{\text{UK}}}$, and the fraction is above 1 because the
-non-UK PPV is the smaller, so the ratio is above $2.27$.
-
-(c) $p_{\text{non-UK}} / p_{\text{UK}}$ and $(1 - p_{\text{non-UK}}) /
-(1 - p_{\text{UK}})$. If the first is above 1 the second is below it,
-so they cannot both be above 1. Both observed ratios are, so the
-groups do not have the same TPR and FPR: the error rates differ. This
-describes the reported year's referrals; it is not an inference about
-the rates behind them.
-
-(d) Divide the incorrect referrals by the share who would not be
-declined, $1 - p$. The ratio of FPRs is
-$2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 - \text{PPV}_{\text{UK}}} \times \frac{1 - p_{\text{UK}}}{1 - p_{\text{non-UK}}}$.
-With equal PPVs the middle factor is 1, and the last is at least $1 -
-p_{\text{UK}}$ because $1 - p_{\text{non-UK}} \leq 1$. With
-$p_{\text{UK}} < 0.1$ the ratio is above $2.27 \times 0.9 = 2.04$:
-more than twice as often.
-
-(e) No. With the PPV ratio at 1, both ratios are $2.27$, still above 1,
-and the conclusion stands. It needs both ratios above 1, which holds
-for PPV ratios in a range around 1 but not for every ratio: with a UK
-PPV of $0.5$, for a non-UK PPV between about $0.22$ and $0.78$.
-
-(f) The FPR: the chance that a request which should be approved is
-referred anyway. The department could estimate it. It already reviews
-a random sample of requests the model scores as low risk, to monitor
-false negatives (annex, paragraph 31). With the reviews of referred
-requests, that is what an estimate of each group's prevalence needs,
-and (d) needs the prevalence.
-:::
-
-### Discussion 2: which criterion
+### Which criterion
 
 1. Of independence, separation and sufficiency, which is the better
    fairness measure for COMPAS, and why? On that measure, is COMPAS
@@ -599,7 +826,7 @@ case; historical injustice. The point to press: the table does not
 settle what is fair, and the choice has owners.
 :::
 
-### Discussion 3: the kidney equation
+### The kidney equation
 
 Kidney function is estimated from blood creatinine, age and sex. In
 2021 the US equation also multiplied the estimate by 1.159 for Black
@@ -634,111 +861,6 @@ depending on the hospital; dropping it everywhere accepts the new
 error everywhere. Neither is neutral.
 :::
 
-### Discussion 4: two open questions
-
-Take one of the two.
-
-1. A county that uses a risk score like COMPAS before trial is deciding
-   whether to keep it. Make the strongest case you can for keeping it
-   and the strongest case for dropping it. Which is stronger, and what
-   would change your mind? Who would the county have to justify its
-   decision to?
-2. In each of today's examples, a decision about one person rested on
-   what is true of people like them: which job ads they see, whether
-   their request for an advance is referred for checks, whether they
-   are held before trial, how well their kidneys are judged to work. Is
-   that ever unfair to the person decided about, and does your answer
-   differ among the four?
-
-::: {.callout-note .answer title="Some directions: question 1" collapse="true"}
-- Compared with what: judges without a score; a simpler, public rule;
-  releasing more people.
-- Consequences: detentions, re-arrests, days held before a verdict,
-  cost; whose welfare counts; how sure the estimates are.
-- Duties: held for what one might do; presumption of innocence; judged
-  as an individual.
-- Character: deference to the tool; responsibility handed to a vendor;
-  judgment no longer practiced.
-- Pragmatism: a decision, not a conclusion; a trial period, an audit, a
-  date to review.
-- Respect for persons: no say; the calculation is not public, and
-  defendants rarely have a chance to challenge it (ProPublica).
-- Beneficence: harms and benefits assessed systematically, before and
-  after.
-- Justice: who bears the false positives.
-- Law and the public interest: due process; transparent methods; who is
-  accountable for a vendor's product.
-- Consent and clarity: does the defendant know a score was used, and
-  what it means?
-- Consistency and trust: can judges, defendants and the public predict
-  what it will do?
-- Control and transparency: can a defendant see or correct the inputs?
-- Consequences of the data existing: reuse beyond pretrial, as at
-  sentencing.
-- Lens A: re-arrest stands in for reoffending, and arrests follow where
-  police look.
-- Lens C: ProPublica's comparison or the vendor's.
-- Lens D: who bears each error.
-- Lens E: keeping the status quo is also a choice.
-- Selective labels: no outcome for the people held.
-- Feedback: detention can change what it predicts.
-- Standing question: who benefits from the choice staying invisible?
-:::
-
-::: {.callout-note .answer title="Some directions: question 2" collapse="true"}
-- Every prediction uses people like you; which people count as like you
-  is the choice.
-- Consequences: group information can make the estimate more accurate,
-  for the person too; accurate on average over which people?
-- Duties: treated as an individual; judged by what one did or by what
-  one is.
-- Responsibility: traits one chose against traits one did not; the
-  middle view of equality of opportunity.
-- Character: what a careful decision-maker owes the person in front of
-  them.
-- Pragmatism: depends on the purpose and the setting; revisable.
-- Respect for persons: the person's own information or the group's.
-- Beneficence and justice: selected for help (a listing, a job ad) or
-  for a burden (a check, detention); how burdens and benefits are
-  shared.
-- Law: what discrimination law allows, setting by setting.
-- Consent and clarity: did the person know a group attribute was used?
-- Control: can the person replace the group's number with their own
-  (cystatin C)?
-- Aggregation: spread within groups against the gap between them.
-- History: base rates produced by past policing, access to care, past
-  decisions.
-- Proxies: what the group label stands in for, and whether that could
-  be measured instead.
-- Repair: group information used to correct, as in restored waiting
-  time or a cutoff per group.
-- Lens D: who bears the error when the group's rate is wrong for them.
-- Standing question: who gains from deciding by group averages, which
-  are cheaper and faster than looking closer?
-:::
-
-## If there is time: three views
-
-1. The middle view says to treat seemingly dissimilar people similarly
-   when the dissimilarity is the result of something that should be
-   discounted. Give one setting where that seems reasonable and one
-   where it seems less defensible, and say what differs between them.
-2. For two of the three criteria, say which view of equality of
-   opportunity it fits, and where the fit fails.
-3. In one sentence: what do you take away from the impossibility
-   results?
-
-::: {.callout-note .answer title="Some directions" collapse="true"}
-Calibration by group fits the narrow view. Demographic parity
-resembles the broad view, but at a single decision rather than over a
-life. Error rate parity has no single principle behind it; the book
-ties it both to the middle view (an unequal burden of mistakes
-perpetuates disadvantage) and to the narrow view (collect more data
-and assess people more accurately as they are), page 101. For the
-last question: the trade-off is a fact about base rates, so a choice
-has to be made and defended; it is not a reason to stop asking.
-:::
-
 ## For next time
 
 Bring one decision in which an attribute is used, or deliberately not
@@ -754,8 +876,8 @@ that route is fair. One sentence each.
   <https://github.com/propublica/compas-analysis>.
 - Barocas, Solon, Moritz Hardt and Arvind Narayanan, *Fairness and
   Machine Learning: Limitations and Opportunities* (MIT Press, 2023),
-  <https://fairmlbook.org>, chapter 3, Proposition 5, page 67; chapter
-  4, pages 94 and 101.
+  <https://fairmlbook.org>, chapter 1, pages 14 and 15; chapter 3,
+  Proposition 5, page 67; chapter 4, pages 94 and 101.
 - Chouldechova, Alexandra, "Fair Prediction with Disparate Impact: A
   Study of Bias in Recidivism Prediction Instruments," *Big Data* 5(2),
   2017, 153--163, <https://doi.org/10.1089/big.2016.0047>.
@@ -769,6 +891,9 @@ that route is fair. One sentence each.
   without Race," *New England Journal of Medicine* 385(19), 2021,
   1737--1749, <https://doi.org/10.1056/NEJMoa2102953>, abstract and
   Table 2.
+- Lum, Kristian and William Isaac, "To Predict and Serve?,"
+  *Significance* 13(5), 2016, 14--19,
+  <https://doi.org/10.1111/j.1740-9713.2016.00960.x>, Figures 1 to 3.
 - Organ Procurement and Transplantation Network, via the Health
   Resources and Services Administration, "Early Monitoring Report
   Shows Black Kidney Candidates Are Receiving Waiting Time

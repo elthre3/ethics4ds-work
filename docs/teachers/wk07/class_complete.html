@@ -2361,13 +2361,17 @@ window.Quarto = {
   <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In class</a>
   <ul class="collapse">
   <li><a href="#discussion-1-the-rule-you-brought" id="toc-discussion-1-the-rule-you-brought" class="nav-link" data-scroll-target="#discussion-1-the-rule-you-brought">Discussion 1: the rule you brought</a></li>
-  <li><a href="#coding-1-compas-from-propublicas-file" id="toc-coding-1-compas-from-propublicas-file" class="nav-link" data-scroll-target="#coding-1-compas-from-propublicas-file">Coding 1: COMPAS from ProPublica’s file</a></li>
   <li><a href="#problem-1.-the-fraud-checks" id="toc-problem-1.-the-fraud-checks" class="nav-link" data-scroll-target="#problem-1.-the-fraud-checks">Problem 1. The fraud checks</a></li>
-  <li><a href="#discussion-2-which-criterion" id="toc-discussion-2-which-criterion" class="nav-link" data-scroll-target="#discussion-2-which-criterion">Discussion 2: which criterion</a></li>
-  <li><a href="#discussion-3-the-kidney-equation" id="toc-discussion-3-the-kidney-equation" class="nav-link" data-scroll-target="#discussion-3-the-kidney-equation">Discussion 3: the kidney equation</a></li>
+  <li><a href="#discussion-2-three-views" id="toc-discussion-2-three-views" class="nav-link" data-scroll-target="#discussion-2-three-views">Discussion 2: three views</a></li>
+  <li><a href="#discussion-3-predictive-policing" id="toc-discussion-3-predictive-policing" class="nav-link" data-scroll-target="#discussion-3-predictive-policing">Discussion 3: predictive policing</a></li>
   <li><a href="#discussion-4-two-open-questions" id="toc-discussion-4-two-open-questions" class="nav-link" data-scroll-target="#discussion-4-two-open-questions">Discussion 4: two open questions</a></li>
   </ul></li>
-  <li><a href="#if-there-is-time-three-views" id="toc-if-there-is-time-three-views" class="nav-link" data-scroll-target="#if-there-is-time-three-views">If there is time: three views</a></li>
+  <li><a href="#if-there-is-time" id="toc-if-there-is-time" class="nav-link" data-scroll-target="#if-there-is-time">If there is time</a>
+  <ul class="collapse">
+  <li><a href="#coding-compas-from-propublicas-file" id="toc-coding-compas-from-propublicas-file" class="nav-link" data-scroll-target="#coding-compas-from-propublicas-file">Coding: COMPAS from ProPublica’s file</a></li>
+  <li><a href="#which-criterion" id="toc-which-criterion" class="nav-link" data-scroll-target="#which-criterion">Which criterion</a></li>
+  <li><a href="#the-kidney-equation" id="toc-the-kidney-equation" class="nav-link" data-scroll-target="#the-kidney-equation">The kidney equation</a></li>
+  </ul></li>
   <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -2406,8 +2410,8 @@ window.Quarto = {
 </div>
 <section id="how-this-sheet-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
-<p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions, the problem and the coding under “In class,” in that order. Discussions are in groups of three or four, then with the room. The problem, and the coding, are gone through as soon as the room has tried them.</p>
-<p>Every item is about a rule that selects some people: for detention, for a fraud check, for a treatment. The same table of who was selected and what happened supports different numbers, and a disagreement about fairness is often a disagreement about which number a fair rule has to equalize. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice of criterion could be justified to. The arithmetic narrows the answer; it does not give it.</p>
+<p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions and the problem under “In class,” in that order, then what it can of “If there is time.” Discussions are in groups of three or four, then with the room. The problem, and the coding, are gone through as soon as the room has tried them.</p>
+<p>Every item is about a rule that selects some people, or places: for detention, for a fraud check, for a treatment, for patrols. The same table of who was selected and what happened supports different numbers, and a disagreement about fairness is often a disagreement about which number a fair rule has to equalize. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice of criterion could be justified to. The arithmetic narrows the answer; it does not give it.</p>
 <p>Notation as in the lecture. <span class="math inline">\(Y = 1\)</span> is the bad outcome; <span class="math inline">\(\hat Y = 1\)</span> means flagged, or selected: picked out by the rule. Where a rule selects people for something good, an offer or a loan, the coding runs the other way, as in the book’s examples: <span class="math inline">\(Y = 1\)</span> is success and <span class="math inline">\(\hat Y = 1\)</span> is the offer. <span class="math inline">\(A\)</span> is the group and <span class="math inline">\(p = P(Y = 1)\)</span> the prevalence within a group. Within a group, <span class="math inline">\(\text{FPR} = P(\hat Y = 1 \mid Y = 0)\)</span>, <span class="math inline">\(\text{FNR} = P(\hat Y = 0
 \mid Y = 1)\)</span>, <span class="math inline">\(\text{TPR} = 1 - \text{FNR}\)</span>, <span class="math inline">\(\text{PPV} = P(Y = 1
 \mid \hat Y = 1)\)</span> and <span class="math inline">\(\text{NPV} = P(Y = 0 \mid \hat Y = 0)\)</span>.</p>
@@ -2697,8 +2701,266 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="coding-1-compas-from-propublicas-file" class="level3">
-<h3 class="anchored" data-anchor-id="coding-1-compas-from-propublicas-file">Coding 1: COMPAS from ProPublica’s file</h3>
+<section id="problem-1.-the-fraud-checks" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1.-the-fraud-checks">Problem 1. The fraud checks</h3>
+<p>The Department for Work and Pensions scores requests for a universal credit advance, and refers those it scores high risk to a caseworker, who approves or declines them. For non-UK against UK nationals, its fairness assessment reports two ratios: requests referred <span class="math inline">\(2.27\)</span> times as often, and referrals declined, which it counts as correct, <span class="math inline">\(0.97\)</span> times as often, not significantly different from 1. It reports no error rate. Take a decline as <span class="math inline">\(Y = 1\)</span> and a referral as <span class="math inline">\(\hat Y = 1\)</span>, and write <span class="math inline">\(f\)</span> for the share of a group’s requests that are referred.</p>
+<ol type="a">
+<li><p>Show that correct referrals are a share <span class="math inline">\(f \cdot \text{PPV} = p
+\cdot \text{TPR}\)</span> of all of a group’s requests, and incorrect referrals a share <span class="math inline">\(f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}\)</span>.</p></li>
+<li><p>Non-UK against UK, what is the ratio of correct referrals per request? Show that the ratio of incorrect referrals per request is above <span class="math inline">\(2.27\)</span>.</p></li>
+<li><p>Suppose both groups had the same TPR and the same FPR. Write the two ratios in (b) in terms of the prevalences <span class="math inline">\(p_{\text{non-UK}}\)</span> and <span class="math inline">\(p_{\text{UK}}\)</span>. Can both be above 1? What do you conclude?</p></li>
+<li><p>Show that <span class="math inline">\(\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)\)</span>. Taking the two PPVs as equal, show that the ratio of non-UK to UK FPRs is at least <span class="math inline">\(2.27\,(1 - p_{\text{UK}})\)</span>. If fewer than one UK request in ten would be declined on review, how much more often are non-UK requests that a caseworker would approve referred?</p></li>
+<li><p>The <span class="math inline">\(0.97\)</span> is not significantly different from 1. Does your conclusion in (c) depend on it?</p></li>
+<li><p>The department judged the model “reasonable and proportionate” to keep using. Which number would a claimant who did nothing wrong want to see, and who could have published it?</p></li>
+</ol>
+<div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (a): the referred share times the share of referrals that are correct is the share of all requests that are both referred and declined.</p>
+</div>
+</div>
+</div>
+<div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 2">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (b): the non-UK PPV is <span class="math inline">\(0.97\)</span> times the UK PPV, so <span class="math inline">\(1 -
+\text{PPV}\)</span> is larger for non-UK nationals.</p>
+</div>
+</div>
+</div>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Solution">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p><span class="math inline">\(f \cdot \text{PPV} = P(\hat Y = 1)\,P(Y = 1 \mid \hat Y = 1) =
+P(\hat Y = 1, Y = 1) = P(Y = 1)\,P(\hat Y = 1 \mid Y = 1) = p \cdot
+\text{TPR}\)</span>, and in the same way <span class="math inline">\(f\,(1 - \text{PPV}) = P(\hat Y = 1,
+Y = 0) = (1 - p)\,\text{FPR}\)</span>.</p></li>
+<li><p>Correct referrals: <span class="math inline">\(2.27 \times 0.97 = 2.20\)</span>. Incorrect referrals: <span class="math inline">\(2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 -
+\text{PPV}_{\text{UK}}}\)</span>, and the fraction is above 1 because the non-UK PPV is the smaller, so the ratio is above <span class="math inline">\(2.27\)</span>.</p></li>
+<li><p><span class="math inline">\(p_{\text{non-UK}} / p_{\text{UK}}\)</span> and <span class="math inline">\((1 - p_{\text{non-UK}}) /
+(1 - p_{\text{UK}})\)</span>. If the first is above 1 the second is below it, so they cannot both be above 1. Both observed ratios are, so the groups do not have the same TPR and FPR: the error rates differ. This describes the reported year’s referrals; it is not an inference about the rates behind them.</p></li>
+<li><p>Divide the incorrect referrals by the share who would not be declined, <span class="math inline">\(1 - p\)</span>. The ratio of FPRs is <span class="math inline">\(2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 - \text{PPV}_{\text{UK}}} \times \frac{1 - p_{\text{UK}}}{1 - p_{\text{non-UK}}}\)</span>. With equal PPVs the middle factor is 1, and the last is at least <span class="math inline">\(1 -
+p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}} \leq 1\)</span>. With <span class="math inline">\(p_{\text{UK}} &lt; 0.1\)</span> the ratio is above <span class="math inline">\(2.27 \times 0.9 = 2.04\)</span>: more than twice as often.</p></li>
+<li><p>No. With the PPV ratio at 1, both ratios are <span class="math inline">\(2.27\)</span>, still above 1, and the conclusion stands. It needs both ratios above 1, which holds for PPV ratios in a range around 1 but not for every ratio: with a UK PPV of <span class="math inline">\(0.5\)</span>, for a non-UK PPV between about <span class="math inline">\(0.22\)</span> and <span class="math inline">\(0.78\)</span>.</p></li>
+<li><p>The FPR: the chance that a request which should be approved is referred anyway. The department could estimate it. It already reviews a random sample of requests the model scores as low risk, to monitor false negatives (annex, paragraph 31). With the reviews of referred requests, that is what an estimate of each group’s prevalence needs, and (d) needs the prevalence.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-2-three-views" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-2-three-views">Discussion 2: three views</h3>
+<ol type="1">
+<li>The middle view says to treat seemingly dissimilar people similarly when the dissimilarity is the result of something that should be discounted. Give one setting where that seems reasonable and one where it seems less defensible, and say what differs between them. Who decides what should be discounted?</li>
+<li>For two of the three criteria, say which view of equality of opportunity it fits, and where the fit fails.</li>
+<li>In one sentence: what do you take away from the impossibility results?</li>
+</ol>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Calibration by group fits the narrow view. Demographic parity resembles the broad view, but at a single decision rather than over a life. Error rate parity has no single principle behind it; the book ties it both to the middle view (an unequal burden of mistakes perpetuates disadvantage) and to the narrow view (collect more data and assess people more accurately as they are), page 101. For the last question: the trade-off is a fact about base rates, so a choice has to be made and defended; it is not a reason to stop asking.</p>
+<p>From this lecture:</p>
+<ul>
+<li>ProPublica’s error rates, a middle-view complaint; the predictive values, a narrow-view defense.</li>
+<li>LSE’s contextual offers, a cutoff per group defined by background: which view, and does it act at the decision or before it?</li>
+<li>A cutoff per group on COMPAS: which view could accept it?</li>
+<li>Restored waiting time: the narrow view with a better measurement, or the middle view?</li>
+<li>Job ads: the broad view; who hears of the opportunity at all.</li>
+<li>Every observational criterion ignores who applied in the first place.</li>
+</ul>
+<p>From earlier in the course:</p>
+<ul>
+<li>Measurement: if <span class="math inline">\(Y = Y^* + \beta_A A\)</span>, the narrow view treats the offset as the person’s; the middle view discounts it.</li>
+<li>Proxies: re-arrest for offending, cost for need; which view takes the proxy at face value?</li>
+<li>Who is in the data: the narrow view needs outcomes, seen only for people selected before (selective labels, complete cases).</li>
+<li>Conditioning: comparing qualifications among people already admitted conditions on admission, a collider.</li>
+<li>Feedback, performative prediction: the narrow view applied year after year can entrench a gap; the broad view looks across a life.</li>
+<li>Goodhart: a qualification used as a target also measures access to preparation.</li>
+<li>Groups and individuals: the narrow view judges individuals, the broad view groups’ chances; the ecological fallacy between them.</li>
+<li>Consequences: accuracy now against welfare later; whose welfare.</li>
+<li>Duties: desert; what may be held against a person; treated as an individual.</li>
+<li>Character: what a fair institution is disposed to do.</li>
+<li>Pragmatism: different views for hiring, lending, medicine, bail.</li>
+<li>Respect for persons: responsibility for choices, not circumstances.</li>
+<li>Justice (Belmont): burdens and benefits shared fairly; fair selection.</li>
+<li>Lens D: under each view, who bears the cost: the applicant, the institution, the next cohort?</li>
+<li>Lens E: the views conflict; choose one for a setting and defend it.</li>
+<li>Standing question: who benefits from the narrow view being the default?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-3-predictive-policing" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-3-predictive-policing">Discussion 3: predictive policing</h3>
+<p>Lum and Isaac, <a href="https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1740-9713.2016.00960.x">“To predict and serve?”</a> (<em>Significance</em>, 2016), ran PredPol’s published predictive policing algorithm on Oakland police records of drug crimes. Drug arrests in 2010 were concentrated in two areas of the city. Estimates of drug use, from a national survey applied to a synthetic population of the city, were spread across it, and roughly equal by race. Run on the police records, the algorithm would have targeted Black residents at roughly twice the rate of white residents, although it uses no demographic data. In a simulation in which 20 percent more crimes are recorded wherever police are sent, the model grew more confident that crime was where it had already sent them.</p>
+<ol type="1">
+<li>Suppose the model is checked against records of the same kind as those it was trained on. Could it look accurate, even calibrated? What would a difference in base rates between neighborhoods, or between racial groups, be measuring?</li>
+<li>List as many reasons as you can why two groups’ recorded rates of an outcome could differ when their actual rates do not. Which of them could apply to re-arrest for COMPAS, and to declined requests in the fraud checks?</li>
+<li>Have you met a loop like this before in the course? What is the same here, and what is new?</li>
+<li>A defense of risk scores goes: the score only reflects real differences in base rates, and ignoring them would be unfair. What would you say back? If base rates are partly the product of earlier decisions, who should bear the cost of correcting them?</li>
+</ol>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Where it can end: a difference in base rates can record an earlier unfairness; on its own it is not a reason to keep acting on it.</li>
+<li>Proxy (lens A): arrests measure drug use and policing together; in the earlier notation, <span class="math inline">\(Y = Y^* + \beta_A A\)</span>, with <span class="math inline">\(\beta_A\)</span> set by where patrols go.</li>
+<li>Who is in the data (lens B): a crime enters the records only where police look; missing not at random.</li>
+<li>Conditioning: being recorded is a common effect of use and of patrols, and the records condition on it.</li>
+<li>Selective labels: an outcome is recorded only where someone acted.</li>
+<li>Calibration against the proxy: sufficiency compares predictions with recorded outcomes, so a model can pass it and inherit their bias.</li>
+<li>Feedback: predictions send patrols, patrols make records, records train the next prediction; “selection bias meets confirmation bias,” in the authors’ words.</li>
+<li>Performative prediction: the deployed model changes the data it is judged on; retraining can settle at a point that is stable, not one that is right.</li>
+<li>Goodhart: once arrests decide where to patrol, they measure crime less well.</li>
+<li>Amplification: a small first difference grows, as the selection filters earlier in the course amplified extremes.</li>
+<li>Leaving race out: no demographic data, and location encodes group.</li>
+<li>Two worlds, one table: more offending or more policing; the table cannot tell them apart.</li>
+<li>COMPAS: the outcome, re-arrest, and the criminal history among the inputs both pass through policing.</li>
+<li>Fraud checks: a decline is recorded only for a request someone reviewed; more reviews find more.</li>
+<li>Lens C: the survey estimate is a model too (self-reported use, a synthetic population); how far should it be trusted?</li>
+<li>Remedies: measure the outcome independently; the book’s introduction suggests updating only on surprising observations.</li>
+<li>Consequences: crime prevented against the harms of concentrated policing; who counts which.</li>
+<li>Duties: suspicion by address; equal treatment under the law.</li>
+<li>Justice (Belmont): the burdens of policing concentrated on some neighborhoods.</li>
+<li>Consistency and trust: policed by a loop no one there can see.</li>
+<li>Standing question: who benefits from the loop staying invisible? Would a more competent analyst have checked against an independent measure, as Lum and Isaac did?</li>
+<li>The causal question to come: what would the records show if patrols were equal?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-4-two-open-questions" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-4-two-open-questions">Discussion 4: two open questions</h3>
+<p>Take one of the two.</p>
+<ol type="1">
+<li>A county that uses a risk score like COMPAS before trial is deciding whether to keep it. Make the strongest case you can for keeping it and the strongest case for dropping it. Which is stronger, and what would change your mind? Who would the county have to justify its decision to?</li>
+<li>In each of today’s examples, a decision about one person rested on what is true of people like them: which job ads they see, whether their request for an advance is referred for checks, whether they are held before trial, how well their kidneys are judged to work. Is that ever unfair to the person decided about, and does your answer differ among the four?</li>
+</ol>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions: question 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions: question 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Compared with what: judges without a score; a simpler, public rule; releasing more people.</li>
+<li>Consequences: detentions, re-arrests, days held before a verdict, cost; whose welfare counts; how sure the estimates are.</li>
+<li>Duties: held for what one might do; presumption of innocence; judged as an individual.</li>
+<li>Character: deference to the tool; responsibility handed to a vendor; judgment no longer practiced.</li>
+<li>Pragmatism: a decision, not a conclusion; a trial period, an audit, a date to review.</li>
+<li>Respect for persons: no say; the calculation is not public, and defendants rarely have a chance to challenge it (ProPublica).</li>
+<li>Beneficence: harms and benefits assessed systematically, before and after.</li>
+<li>Justice: who bears the false positives.</li>
+<li>Law and the public interest: due process; transparent methods; who is accountable for a vendor’s product.</li>
+<li>Consent and clarity: does the defendant know a score was used, and what it means?</li>
+<li>Consistency and trust: can judges, defendants and the public predict what it will do?</li>
+<li>Control and transparency: can a defendant see or correct the inputs?</li>
+<li>Consequences of the data existing: reuse beyond pretrial, as at sentencing.</li>
+<li>Lens A: re-arrest stands in for reoffending, and arrests follow where police look.</li>
+<li>Lens C: ProPublica’s comparison or the vendor’s.</li>
+<li>Lens D: who bears each error.</li>
+<li>Lens E: keeping the status quo is also a choice.</li>
+<li>Selective labels: no outcome for the people held.</li>
+<li>Feedback: detention can change what it predicts.</li>
+<li>Standing question: who benefits from the choice staying invisible?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions: question 2">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions: question 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Every prediction uses people like you; which people count as like you is the choice.</li>
+<li>Consequences: group information can make the estimate more accurate, for the person too; accurate on average over which people?</li>
+<li>Duties: treated as an individual; judged by what one did or by what one is.</li>
+<li>Responsibility: traits one chose against traits one did not; the middle view of equality of opportunity.</li>
+<li>Character: what a careful decision-maker owes the person in front of them.</li>
+<li>Pragmatism: depends on the purpose and the setting; revisable.</li>
+<li>Respect for persons: the person’s own information or the group’s.</li>
+<li>Beneficence and justice: selected for help (a listing, a job ad) or for a burden (a check, detention); how burdens and benefits are shared.</li>
+<li>Law: what discrimination law allows, setting by setting.</li>
+<li>Consent and clarity: did the person know a group attribute was used?</li>
+<li>Control: can the person replace the group’s number with their own (cystatin C)?</li>
+<li>Aggregation: spread within groups against the gap between them.</li>
+<li>History: base rates produced by past policing, access to care, past decisions.</li>
+<li>Proxies: what the group label stands in for, and whether that could be measured instead.</li>
+<li>Repair: group information used to correct, as in restored waiting time or a cutoff per group.</li>
+<li>Lens D: who bears the error when the group’s rate is wrong for them.</li>
+<li>Standing question: who gains from deciding by group averages, which are cheaper and faster than looking closer?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="if-there-is-time" class="level2">
+<h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
+<section id="coding-compas-from-propublicas-file" class="level3">
+<h3 class="anchored" data-anchor-id="coding-compas-from-propublicas-file">Coding: COMPAS from ProPublica’s file</h3>
 <p>You need <code>dplyr</code> and <code>ggplot2</code>. ProPublica published the data behind its analysis: one row per defendant, with names and dates of birth as well as scores and outcomes. Keep only the three columns the analysis needs. <code>decile_score</code> is the COMPAS decile, 1 to 10, and <code>two_year_recid</code> is 1 if the person was arrested again within two years.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -2741,7 +3003,7 @@ window.Quarto = {
 <li>At your pair of cutoffs, describe a Black defendant and a white defendant with the same decile who are treated differently. Which criterion did you satisfy, which did you give up, and who do you owe the explanation to: the defendant who is now flagged, the one who is not, or the judge who reads the same score two ways? Is the prediction now fairer?</li>
 </ol>
 <div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2750,14 +3012,14 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>FNR</code> is a mean of <code>!flag</code> among <code>two_year_recid == 1</code>; <code>PPV</code> is a mean of <code>two_year_recid == 1</code> among <code>flag</code>.</p>
 </div>
 </div>
 </div>
 <div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 2">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2766,14 +3028,14 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For step 4, try a higher cutoff for the group with the higher FPR.</p>
 </div>
 </div>
 </div>
 <div class="answer callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2782,7 +3044,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>compas <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv&quot;</span>) <span class="sc">|&gt;</span></span>
@@ -2853,221 +3115,17 @@ window.Quarto = {
 <p>Step 2: no. FPR is higher for Black defendants at every cutoff from 2 to 10, and FNR higher for white defendants at every one. (A cutoff of 1 selects everyone and equalizes both trivially.)</p>
 <p>Step 3: at decile 5, 48 percent of Black defendants and 46 percent of white defendants were re-arrested, below either PPV. The PPV averages over deciles 5 to 10, so the flag tells a decile-5 defendant less than it seems to: their own rate is closer to even.</p>
 <p>Step 4: cutoffs 6 for Black defendants and 4 for white: FPR 0.343 and 0.350, FNR 0.372 and 0.360, PPV 0.659 and 0.543, selected 0.489 and 0.464. Separation nearly holds; predictive parity is lost by twelve points, as the identity requires; the shares selected come close as a by-product. The pairs (7, 5), (8, 6) and (10, 9) also bring both rates within two points, and each splits the PPVs further.</p>
-<p>Step 5: with 6 and 4, a Black defendant at decile 4 or 5 is not flagged, and a white defendant at the same decile is. The score means different things for different people, and the judge has to know which. Whether that is fairer depends on which error you think the county owes equally, which is discussion 2.</p>
+<p>Step 5: with 6 and 4, a Black defendant at decile 4 or 5 is not flagged, and a white defendant at the same decile is. The score means different things for different people, and the judge has to know which. Whether that is fairer depends on which error you think the county owes equally, the question under “Which criterion” below.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="problem-1.-the-fraud-checks" class="level3">
-<h3 class="anchored" data-anchor-id="problem-1.-the-fraud-checks">Problem 1. The fraud checks</h3>
-<p>The Department for Work and Pensions scores requests for a universal credit advance, and refers those it scores high risk to a caseworker, who approves or declines them. For non-UK against UK nationals, its fairness assessment reports two ratios: requests referred <span class="math inline">\(2.27\)</span> times as often, and referrals declined, which it counts as correct, <span class="math inline">\(0.97\)</span> times as often, not significantly different from 1. It reports no error rate. Take a decline as <span class="math inline">\(Y = 1\)</span> and a referral as <span class="math inline">\(\hat Y = 1\)</span>, and write <span class="math inline">\(f\)</span> for the share of a group’s requests that are referred.</p>
-<ol type="a">
-<li><p>Show that correct referrals are a share <span class="math inline">\(f \cdot \text{PPV} = p
-\cdot \text{TPR}\)</span> of all of a group’s requests, and incorrect referrals a share <span class="math inline">\(f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}\)</span>.</p></li>
-<li><p>Non-UK against UK, what is the ratio of correct referrals per request? Show that the ratio of incorrect referrals per request is above <span class="math inline">\(2.27\)</span>.</p></li>
-<li><p>Suppose both groups had the same TPR and the same FPR. Write the two ratios in (b) in terms of the prevalences <span class="math inline">\(p_{\text{non-UK}}\)</span> and <span class="math inline">\(p_{\text{UK}}\)</span>. Can both be above 1? What do you conclude?</p></li>
-<li><p>Show that <span class="math inline">\(\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)\)</span>. Taking the two PPVs as equal, show that the ratio of non-UK to UK FPRs is at least <span class="math inline">\(2.27\,(1 - p_{\text{UK}})\)</span>. If fewer than one UK request in ten would be declined on review, how much more often are non-UK requests that a caseworker would approve referred?</p></li>
-<li><p>The <span class="math inline">\(0.97\)</span> is not significantly different from 1. Does your conclusion in (c) depend on it?</p></li>
-<li><p>The department judged the model “reasonable and proportionate” to keep using. Which number would a claimant who did nothing wrong want to see, and who could have published it?</p></li>
-</ol>
-<div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Hint 1
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>For (a): the referred share times the share of referrals that are correct is the share of all requests that are both referred and declined.</p>
-</div>
-</div>
-</div>
-<div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 2">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Hint 2
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>For (b): the non-UK PPV is <span class="math inline">\(0.97\)</span> times the UK PPV, so <span class="math inline">\(1 -
-\text{PPV}\)</span> is larger for non-UK nationals.</p>
-</div>
-</div>
-</div>
-<div class="answer callout callout-style-default callout-note callout-titled" title="Solution">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="a">
-<li><p><span class="math inline">\(f \cdot \text{PPV} = P(\hat Y = 1)\,P(Y = 1 \mid \hat Y = 1) =
-P(\hat Y = 1, Y = 1) = P(Y = 1)\,P(\hat Y = 1 \mid Y = 1) = p \cdot
-\text{TPR}\)</span>, and in the same way <span class="math inline">\(f\,(1 - \text{PPV}) = P(\hat Y = 1,
-Y = 0) = (1 - p)\,\text{FPR}\)</span>.</p></li>
-<li><p>Correct referrals: <span class="math inline">\(2.27 \times 0.97 = 2.20\)</span>. Incorrect referrals: <span class="math inline">\(2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 -
-\text{PPV}_{\text{UK}}}\)</span>, and the fraction is above 1 because the non-UK PPV is the smaller, so the ratio is above <span class="math inline">\(2.27\)</span>.</p></li>
-<li><p><span class="math inline">\(p_{\text{non-UK}} / p_{\text{UK}}\)</span> and <span class="math inline">\((1 - p_{\text{non-UK}}) /
-(1 - p_{\text{UK}})\)</span>. If the first is above 1 the second is below it, so they cannot both be above 1. Both observed ratios are, so the groups do not have the same TPR and FPR: the error rates differ. This describes the reported year’s referrals; it is not an inference about the rates behind them.</p></li>
-<li><p>Divide the incorrect referrals by the share who would not be declined, <span class="math inline">\(1 - p\)</span>. The ratio of FPRs is <span class="math inline">\(2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 - \text{PPV}_{\text{UK}}} \times \frac{1 - p_{\text{UK}}}{1 - p_{\text{non-UK}}}\)</span>. With equal PPVs the middle factor is 1, and the last is at least <span class="math inline">\(1 -
-p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}} \leq 1\)</span>. With <span class="math inline">\(p_{\text{UK}} &lt; 0.1\)</span> the ratio is above <span class="math inline">\(2.27 \times 0.9 = 2.04\)</span>: more than twice as often.</p></li>
-<li><p>No. With the PPV ratio at 1, both ratios are <span class="math inline">\(2.27\)</span>, still above 1, and the conclusion stands. It needs both ratios above 1, which holds for PPV ratios in a range around 1 but not for every ratio: with a UK PPV of <span class="math inline">\(0.5\)</span>, for a non-UK PPV between about <span class="math inline">\(0.22\)</span> and <span class="math inline">\(0.78\)</span>.</p></li>
-<li><p>The FPR: the chance that a request which should be approved is referred anyway. The department could estimate it. It already reviews a random sample of requests the model scores as low risk, to monitor false negatives (annex, paragraph 31). With the reviews of referred requests, that is what an estimate of each group’s prevalence needs, and (d) needs the prevalence.</p></li>
-</ol>
-</div>
-</div>
-</div>
-</section>
-<section id="discussion-2-which-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-2-which-criterion">Discussion 2: which criterion</h3>
+<section id="which-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="which-criterion">Which criterion</h3>
 <ol type="1">
 <li>Of independence, separation and sufficiency, which is the better fairness measure for COMPAS, and why? On that measure, is COMPAS fair? Is your answer the same for the fraud checks?</li>
 <li>Equal predictive values and equal error rates cannot both hold when base rates differ, except for a perfect rule or one that is wrong about everyone. How should a county, or a department, decide which to require and which to give up? Possible grounds: who bears the cost; which error is worse here; the history that produced the base rates; the purpose the rule serves. Which would you put first, and which would you refuse to use?</li>
 <li>Whichever you chose, name the people who lose by it and write the sentence you would say to them.</li>
-</ol>
-<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Some directions
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Separation, because the people the rule errs on did nothing to earn the error, and in pretrial decisions the error can be detention. Sufficiency, because a judge or caseworker who cannot trust what a flag means will discount it. Independence rarely, since it ignores the outcome, though for the fraud checks the referral itself is a burden on everyone referred. Previous years’ answers to question 2: a normative judgment; who bears the cost; which error rate; case by case; historical injustice. The point to press: the table does not settle what is fair, and the choice has owners.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="discussion-3-the-kidney-equation" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-3-the-kidney-equation">Discussion 3: the kidney equation</h3>
-<p>Kidney function is estimated from blood creatinine, age and sex. In 2021 the US equation also multiplied the estimate by 1.159 for Black patients, who in the data it was fitted to had higher creatinine at the same measured function. In a validation set it overestimated Black participants’ measured function by a median of 3.7 (ml/min per 1.73 m²). Refitted without race, it underestimated Black participants’ by 3.6 and overestimated others’ by 3.9.</p>
-<ol type="1">
-<li>Neither equation is right on average for Black patients. Which error is worse here, an estimate too high or one too low, and who is it worse for?</li>
-<li>US transplant programs restored waiting time to Black candidates whose disease the old equation made look milder. Who pays for that correction, and is it owed?</li>
-<li>A second blood marker, cystatin C, narrows the gap without race. Suppose some hospitals can measure it and others cannot. Should the equation without the second marker use race in the hospitals that cannot? Who decides, and who is it explained to?</li>
-</ol>
-<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Some directions
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>An estimate too high makes disease look milder, so diagnosis, referral and listing come later; an estimate too low brings them sooner, and can mean treating some people as sicker than they are. The transplant network’s view was that the first error had fallen on many Black patients. Restoring waiting time moves those candidates up the list, so others move down: the correction has a cost, and whether it is owed is the question. On the third question, using race where the second marker is not available keeps the old error’s direction for some patients and not others, depending on the hospital; dropping it everywhere accepts the new error everywhere. Neither is neutral.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="discussion-4-two-open-questions" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-4-two-open-questions">Discussion 4: two open questions</h3>
-<p>Take one of the two.</p>
-<ol type="1">
-<li>A county that uses a risk score like COMPAS before trial is deciding whether to keep it. Make the strongest case you can for keeping it and the strongest case for dropping it. Which is stronger, and what would change your mind? Who would the county have to justify its decision to?</li>
-<li>In each of today’s examples, a decision about one person rested on what is true of people like them: which job ads they see, whether their request for an advance is referred for checks, whether they are held before trial, how well their kidneys are judged to work. Is that ever unfair to the person decided about, and does your answer differ among the four?</li>
-</ol>
-<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions: question 1">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Some directions: question 1
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Compared with what: judges without a score; a simpler, public rule; releasing more people.</li>
-<li>Consequences: detentions, re-arrests, days held before a verdict, cost; whose welfare counts; how sure the estimates are.</li>
-<li>Duties: held for what one might do; presumption of innocence; judged as an individual.</li>
-<li>Character: deference to the tool; responsibility handed to a vendor; judgment no longer practiced.</li>
-<li>Pragmatism: a decision, not a conclusion; a trial period, an audit, a date to review.</li>
-<li>Respect for persons: no say; the calculation is not public, and defendants rarely have a chance to challenge it (ProPublica).</li>
-<li>Beneficence: harms and benefits assessed systematically, before and after.</li>
-<li>Justice: who bears the false positives.</li>
-<li>Law and the public interest: due process; transparent methods; who is accountable for a vendor’s product.</li>
-<li>Consent and clarity: does the defendant know a score was used, and what it means?</li>
-<li>Consistency and trust: can judges, defendants and the public predict what it will do?</li>
-<li>Control and transparency: can a defendant see or correct the inputs?</li>
-<li>Consequences of the data existing: reuse beyond pretrial, as at sentencing.</li>
-<li>Lens A: re-arrest stands in for reoffending, and arrests follow where police look.</li>
-<li>Lens C: ProPublica’s comparison or the vendor’s.</li>
-<li>Lens D: who bears each error.</li>
-<li>Lens E: keeping the status quo is also a choice.</li>
-<li>Selective labels: no outcome for the people held.</li>
-<li>Feedback: detention can change what it predicts.</li>
-<li>Standing question: who benefits from the choice staying invisible?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions: question 2">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Some directions: question 2
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Every prediction uses people like you; which people count as like you is the choice.</li>
-<li>Consequences: group information can make the estimate more accurate, for the person too; accurate on average over which people?</li>
-<li>Duties: treated as an individual; judged by what one did or by what one is.</li>
-<li>Responsibility: traits one chose against traits one did not; the middle view of equality of opportunity.</li>
-<li>Character: what a careful decision-maker owes the person in front of them.</li>
-<li>Pragmatism: depends on the purpose and the setting; revisable.</li>
-<li>Respect for persons: the person’s own information or the group’s.</li>
-<li>Beneficence and justice: selected for help (a listing, a job ad) or for a burden (a check, detention); how burdens and benefits are shared.</li>
-<li>Law: what discrimination law allows, setting by setting.</li>
-<li>Consent and clarity: did the person know a group attribute was used?</li>
-<li>Control: can the person replace the group’s number with their own (cystatin C)?</li>
-<li>Aggregation: spread within groups against the gap between them.</li>
-<li>History: base rates produced by past policing, access to care, past decisions.</li>
-<li>Proxies: what the group label stands in for, and whether that could be measured instead.</li>
-<li>Repair: group information used to correct, as in restored waiting time or a cutoff per group.</li>
-<li>Lens D: who bears the error when the group’s rate is wrong for them.</li>
-<li>Standing question: who gains from deciding by group averages, which are cheaper and faster than looking closer?</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="if-there-is-time-three-views" class="level2">
-<h2 class="anchored" data-anchor-id="if-there-is-time-three-views">If there is time: three views</h2>
-<ol type="1">
-<li>The middle view says to treat seemingly dissimilar people similarly when the dissimilarity is the result of something that should be discounted. Give one setting where that seems reasonable and one where it seems less defensible, and say what differs between them.</li>
-<li>For two of the three criteria, say which view of equality of opportunity it fits, and where the fit fails.</li>
-<li>In one sentence: what do you take away from the impossibility results?</li>
 </ol>
 <div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
@@ -3081,10 +3139,36 @@ p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}}
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Calibration by group fits the narrow view. Demographic parity resembles the broad view, but at a single decision rather than over a life. Error rate parity has no single principle behind it; the book ties it both to the middle view (an unequal burden of mistakes perpetuates disadvantage) and to the narrow view (collect more data and assess people more accurately as they are), page 101. For the last question: the trade-off is a fact about base rates, so a choice has to be made and defended; it is not a reason to stop asking.</p>
+<p>Separation, because the people the rule errs on did nothing to earn the error, and in pretrial decisions the error can be detention. Sufficiency, because a judge or caseworker who cannot trust what a flag means will discount it. Independence rarely, since it ignores the outcome, though for the fraud checks the referral itself is a burden on everyone referred. Previous years’ answers to question 2: a normative judgment; who bears the cost; which error rate; case by case; historical injustice. The point to press: the table does not settle what is fair, and the choice has owners.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="the-kidney-equation" class="level3">
+<h3 class="anchored" data-anchor-id="the-kidney-equation">The kidney equation</h3>
+<p>Kidney function is estimated from blood creatinine, age and sex. In 2021 the US equation also multiplied the estimate by 1.159 for Black patients, who in the data it was fitted to had higher creatinine at the same measured function. In a validation set it overestimated Black participants’ measured function by a median of 3.7 (ml/min per 1.73 m²). Refitted without race, it underestimated Black participants’ by 3.6 and overestimated others’ by 3.9.</p>
+<ol type="1">
+<li>Neither equation is right on average for Black patients. Which error is worse here, an estimate too high or one too low, and who is it worse for?</li>
+<li>US transplant programs restored waiting time to Black candidates whose disease the old equation made look milder. Who pays for that correction, and is it owed?</li>
+<li>A second blood marker, cystatin C, narrows the gap without race. Suppose some hospitals can measure it and others cannot. Should the equation without the second marker use race in the hospitals that cannot? Who decides, and who is it explained to?</li>
+</ol>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An estimate too high makes disease look milder, so diagnosis, referral and listing come later; an estimate too low brings them sooner, and can mean treating some people as sicker than they are. The transplant network’s view was that the first error had fallen on many Black patients. Restoring waiting time moves those candidates up the list, so others move down: the correction has a cost, and whether it is owed is the question. On the third question, using race where the second marker is not available keeps the old error’s direction for some patients and not others, depending on the hospital; dropping it everywhere accepts the new error everywhere. Neither is neutral.</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="for-next-time" class="level2">
 <h2 class="anchored" data-anchor-id="for-next-time">For next time</h2>
@@ -3094,10 +3178,11 @@ p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}}
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li>Angwin, Julia, Jeff Larson, Surya Mattu and Lauren Kirchner, “Machine Bias,” <em>ProPublica</em>, 23 May 2016, <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing" class="uri">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>; data: ProPublica, <code>compas-scores-two-years.csv</code>, <a href="https://github.com/propublica/compas-analysis" class="uri">https://github.com/propublica/compas-analysis</a>.</li>
-<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 3, Proposition 5, page 67; chapter 4, pages 94 and 101.</li>
+<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 1, pages 14 and 15; chapter 3, Proposition 5, page 67; chapter 4, pages 94 and 101.</li>
 <li>Chouldechova, Alexandra, “Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments,” <em>Big Data</em> 5(2), 2017, 153–163, <a href="https://doi.org/10.1089/big.2016.0047" class="uri">https://doi.org/10.1089/big.2016.0047</a>.</li>
 <li>Department for Work and Pensions, “UC Advances Model: Fairness Assessment,” with its Statistical Annex (1 April 2024 to 31 March 2025), published 17 July 2025, <a href="https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025" class="uri">https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025</a>, Tables 3 and 4 and annex paragraph 31.</li>
 <li>Inker, Lesley A., Nwamaka D. Eneanya, Josef Coresh and colleagues, “New Creatinine- and Cystatin C–Based Equations to Estimate GFR without Race,” <em>New England Journal of Medicine</em> 385(19), 2021, 1737–1749, <a href="https://doi.org/10.1056/NEJMoa2102953" class="uri">https://doi.org/10.1056/NEJMoa2102953</a>, abstract and Table 2.</li>
+<li>Lum, Kristian and William Isaac, “To Predict and Serve?,” <em>Significance</em> 13(5), 2016, 14–19, <a href="https://doi.org/10.1111/j.1740-9713.2016.00960.x" class="uri">https://doi.org/10.1111/j.1740-9713.2016.00960.x</a>, Figures 1 to 3.</li>
 <li>Organ Procurement and Transplantation Network, via the Health Resources and Services Administration, “Early Monitoring Report Shows Black Kidney Candidates Are Receiving Waiting Time Modifications After Implementation of New Policies,” 4 December 2023, <a href="https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/" class="uri">https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/</a>.</li>
 </ul>
 </section>

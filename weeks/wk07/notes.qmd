@@ -1028,6 +1028,22 @@ from differences in how the requests and the declines came to be
 recorded. Telling such worlds apart needs a model of how the data came
 about, which is the subject of the next part of the course.
 
+Lum and Isaac (2016), discussed in class, put numbers on the policing
+half of that sentence, and the book's introduction (pages 14 and 15)
+describes their study. They ran PredPol's published predictive policing
+algorithm on Oakland police records of drug crimes. Drug arrests in
+2010 were concentrated in two areas of the city, while estimates of
+drug use, from a national survey applied to a synthetic population of
+the city, were spread across it and roughly equal by race. Run on the
+police records, the algorithm would have targeted Black residents at
+roughly twice the rate of white residents, although it uses no
+demographic data. They then simulated the loop: if 20 percent more
+crimes are recorded wherever police are sent, the model grows more
+confident that crime is where it already sent them. A model checked
+against records of that kind can look accurate, and even calibrated.
+What a difference in base rates then measures, and whether it can
+justify a rule that acts on it, is the question the class takes up.
+
 ## Lenses
 
 What are we optimizing or predicting? Re-arrest within two years,
@@ -1175,3 +1191,6 @@ The examples other than COMPAS, in the order they appear:
   <https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/>.
 - London School of Economics, "Contextual admissions and offers,"
   <https://www.lse.ac.uk/study-at-lse/undergraduate/prospective-students/how-to-apply/contextual-admissions-and-offers>.
+- Lum and Isaac, "To Predict and Serve?," *Significance* 13(5), 2016,
+  14--19, <https://doi.org/10.1111/j.1740-9713.2016.00960.x>, Figures 1
+  to 3.

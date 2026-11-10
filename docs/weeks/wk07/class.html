@@ -228,13 +228,17 @@ window.Quarto = {
   <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In class</a>
   <ul class="collapse">
   <li><a href="#discussion-1-the-rule-you-brought" id="toc-discussion-1-the-rule-you-brought" class="nav-link" data-scroll-target="#discussion-1-the-rule-you-brought">Discussion 1: the rule you brought</a></li>
-  <li><a href="#coding-1-compas-from-propublicas-file" id="toc-coding-1-compas-from-propublicas-file" class="nav-link" data-scroll-target="#coding-1-compas-from-propublicas-file">Coding 1: COMPAS from ProPublica’s file</a></li>
   <li><a href="#problem-1.-the-fraud-checks" id="toc-problem-1.-the-fraud-checks" class="nav-link" data-scroll-target="#problem-1.-the-fraud-checks">Problem 1. The fraud checks</a></li>
-  <li><a href="#discussion-2-which-criterion" id="toc-discussion-2-which-criterion" class="nav-link" data-scroll-target="#discussion-2-which-criterion">Discussion 2: which criterion</a></li>
-  <li><a href="#discussion-3-the-kidney-equation" id="toc-discussion-3-the-kidney-equation" class="nav-link" data-scroll-target="#discussion-3-the-kidney-equation">Discussion 3: the kidney equation</a></li>
+  <li><a href="#discussion-2-three-views" id="toc-discussion-2-three-views" class="nav-link" data-scroll-target="#discussion-2-three-views">Discussion 2: three views</a></li>
+  <li><a href="#discussion-3-predictive-policing" id="toc-discussion-3-predictive-policing" class="nav-link" data-scroll-target="#discussion-3-predictive-policing">Discussion 3: predictive policing</a></li>
   <li><a href="#discussion-4-two-open-questions" id="toc-discussion-4-two-open-questions" class="nav-link" data-scroll-target="#discussion-4-two-open-questions">Discussion 4: two open questions</a></li>
   </ul></li>
-  <li><a href="#if-there-is-time-three-views" id="toc-if-there-is-time-three-views" class="nav-link" data-scroll-target="#if-there-is-time-three-views">If there is time: three views</a></li>
+  <li><a href="#if-there-is-time" id="toc-if-there-is-time" class="nav-link" data-scroll-target="#if-there-is-time">If there is time</a>
+  <ul class="collapse">
+  <li><a href="#coding-compas-from-propublicas-file" id="toc-coding-compas-from-propublicas-file" class="nav-link" data-scroll-target="#coding-compas-from-propublicas-file">Coding: COMPAS from ProPublica’s file</a></li>
+  <li><a href="#which-criterion" id="toc-which-criterion" class="nav-link" data-scroll-target="#which-criterion">Which criterion</a></li>
+  <li><a href="#the-kidney-equation" id="toc-the-kidney-equation" class="nav-link" data-scroll-target="#the-kidney-equation">The kidney equation</a></li>
+  </ul></li>
   <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -284,8 +288,8 @@ Note
 </div>
 <section id="how-this-sheet-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
-<p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions, the problem and the coding under “In class,” in that order. Discussions are in groups of three or four, then with the room. The problem, and the coding, are gone through as soon as the room has tried them.</p>
-<p>Every item is about a rule that selects some people: for detention, for a fraud check, for a treatment. The same table of who was selected and what happened supports different numbers, and a disagreement about fairness is often a disagreement about which number a fair rule has to equalize. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice of criterion could be justified to. The arithmetic narrows the answer; it does not give it.</p>
+<p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions and the problem under “In class,” in that order, then what it can of “If there is time.” Discussions are in groups of three or four, then with the room. The problem, and the coding, are gone through as soon as the room has tried them.</p>
+<p>Every item is about a rule that selects some people, or places: for detention, for a fraud check, for a treatment, for patrols. The same table of who was selected and what happened supports different numbers, and a disagreement about fairness is often a disagreement about which number a fair rule has to equalize. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice of criterion could be justified to. The arithmetic narrows the answer; it does not give it.</p>
 <p>Notation as in the lecture. <span class="math inline">\(Y = 1\)</span> is the bad outcome; <span class="math inline">\(\hat Y = 1\)</span> means flagged, or selected: picked out by the rule. Where a rule selects people for something good, an offer or a loan, the coding runs the other way, as in the book’s examples: <span class="math inline">\(Y = 1\)</span> is success and <span class="math inline">\(\hat Y = 1\)</span> is the offer. <span class="math inline">\(A\)</span> is the group and <span class="math inline">\(p = P(Y = 1)\)</span> the prevalence within a group. Within a group, <span class="math inline">\(\text{FPR} = P(\hat Y = 1 \mid Y = 0)\)</span>, <span class="math inline">\(\text{FNR} = P(\hat Y = 0
 \mid Y = 1)\)</span>, <span class="math inline">\(\text{TPR} = 1 - \text{FNR}\)</span>, <span class="math inline">\(\text{PPV} = P(Y = 1
 \mid \hat Y = 1)\)</span> and <span class="math inline">\(\text{NPV} = P(Y = 0 \mid \hat Y = 0)\)</span>.</p>
@@ -472,8 +476,50 @@ Note
 <li>For your rule, suppose the base rates differ between two groups. Which of the two criteria in question 2 would you give up, and who would you explain it to?</li>
 </ol>
 </section>
-<section id="coding-1-compas-from-propublicas-file" class="level3">
-<h3 class="anchored" data-anchor-id="coding-1-compas-from-propublicas-file">Coding 1: COMPAS from ProPublica’s file</h3>
+<section id="problem-1.-the-fraud-checks" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1.-the-fraud-checks">Problem 1. The fraud checks</h3>
+<p>The Department for Work and Pensions scores requests for a universal credit advance, and refers those it scores high risk to a caseworker, who approves or declines them. For non-UK against UK nationals, its fairness assessment reports two ratios: requests referred <span class="math inline">\(2.27\)</span> times as often, and referrals declined, which it counts as correct, <span class="math inline">\(0.97\)</span> times as often, not significantly different from 1. It reports no error rate. Take a decline as <span class="math inline">\(Y = 1\)</span> and a referral as <span class="math inline">\(\hat Y = 1\)</span>, and write <span class="math inline">\(f\)</span> for the share of a group’s requests that are referred.</p>
+<ol type="a">
+<li><p>Show that correct referrals are a share <span class="math inline">\(f \cdot \text{PPV} = p
+\cdot \text{TPR}\)</span> of all of a group’s requests, and incorrect referrals a share <span class="math inline">\(f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}\)</span>.</p></li>
+<li><p>Non-UK against UK, what is the ratio of correct referrals per request? Show that the ratio of incorrect referrals per request is above <span class="math inline">\(2.27\)</span>.</p></li>
+<li><p>Suppose both groups had the same TPR and the same FPR. Write the two ratios in (b) in terms of the prevalences <span class="math inline">\(p_{\text{non-UK}}\)</span> and <span class="math inline">\(p_{\text{UK}}\)</span>. Can both be above 1? What do you conclude?</p></li>
+<li><p>Show that <span class="math inline">\(\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)\)</span>. Taking the two PPVs as equal, show that the ratio of non-UK to UK FPRs is at least <span class="math inline">\(2.27\,(1 - p_{\text{UK}})\)</span>. If fewer than one UK request in ten would be declined on review, how much more often are non-UK requests that a caseworker would approve referred?</p></li>
+<li><p>The <span class="math inline">\(0.97\)</span> is not significantly different from 1. Does your conclusion in (c) depend on it?</p></li>
+<li><p>The department judged the model “reasonable and proportionate” to keep using. Which number would a claimant who did nothing wrong want to see, and who could have published it?</p></li>
+</ol>
+</section>
+<section id="discussion-2-three-views" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-2-three-views">Discussion 2: three views</h3>
+<ol type="1">
+<li>The middle view says to treat seemingly dissimilar people similarly when the dissimilarity is the result of something that should be discounted. Give one setting where that seems reasonable and one where it seems less defensible, and say what differs between them. Who decides what should be discounted?</li>
+<li>For two of the three criteria, say which view of equality of opportunity it fits, and where the fit fails.</li>
+<li>In one sentence: what do you take away from the impossibility results?</li>
+</ol>
+</section>
+<section id="discussion-3-predictive-policing" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-3-predictive-policing">Discussion 3: predictive policing</h3>
+<p>Lum and Isaac, <a href="https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1740-9713.2016.00960.x">“To predict and serve?”</a> (<em>Significance</em>, 2016), ran PredPol’s published predictive policing algorithm on Oakland police records of drug crimes. Drug arrests in 2010 were concentrated in two areas of the city. Estimates of drug use, from a national survey applied to a synthetic population of the city, were spread across it, and roughly equal by race. Run on the police records, the algorithm would have targeted Black residents at roughly twice the rate of white residents, although it uses no demographic data. In a simulation in which 20 percent more crimes are recorded wherever police are sent, the model grew more confident that crime was where it had already sent them.</p>
+<ol type="1">
+<li>Suppose the model is checked against records of the same kind as those it was trained on. Could it look accurate, even calibrated? What would a difference in base rates between neighborhoods, or between racial groups, be measuring?</li>
+<li>List as many reasons as you can why two groups’ recorded rates of an outcome could differ when their actual rates do not. Which of them could apply to re-arrest for COMPAS, and to declined requests in the fraud checks?</li>
+<li>Have you met a loop like this before in the course? What is the same here, and what is new?</li>
+<li>A defense of risk scores goes: the score only reflects real differences in base rates, and ignoring them would be unfair. What would you say back? If base rates are partly the product of earlier decisions, who should bear the cost of correcting them?</li>
+</ol>
+</section>
+<section id="discussion-4-two-open-questions" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-4-two-open-questions">Discussion 4: two open questions</h3>
+<p>Take one of the two.</p>
+<ol type="1">
+<li>A county that uses a risk score like COMPAS before trial is deciding whether to keep it. Make the strongest case you can for keeping it and the strongest case for dropping it. Which is stronger, and what would change your mind? Who would the county have to justify its decision to?</li>
+<li>In each of today’s examples, a decision about one person rested on what is true of people like them: which job ads they see, whether their request for an advance is referred for checks, whether they are held before trial, how well their kidneys are judged to work. Is that ever unfair to the person decided about, and does your answer differ among the four?</li>
+</ol>
+</section>
+</section>
+<section id="if-there-is-time" class="level2">
+<h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
+<section id="coding-compas-from-propublicas-file" class="level3">
+<h3 class="anchored" data-anchor-id="coding-compas-from-propublicas-file">Coding: COMPAS from ProPublica’s file</h3>
 <p>You need <code>dplyr</code> and <code>ggplot2</code>. ProPublica published the data behind its analysis: one row per defendant, with names and dates of birth as well as scores and outcomes. Keep only the three columns the analysis needs. <code>decile_score</code> is the COMPAS decile, 1 to 10, and <code>two_year_recid</code> is 1 if the person was arrested again within two years.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -516,29 +562,16 @@ Note
 <li>At your pair of cutoffs, describe a Black defendant and a white defendant with the same decile who are treated differently. Which criterion did you satisfy, which did you give up, and who do you owe the explanation to: the defendant who is now flagged, the one who is not, or the judge who reads the same score two ways? Is the prediction now fairer?</li>
 </ol>
 </section>
-<section id="problem-1.-the-fraud-checks" class="level3">
-<h3 class="anchored" data-anchor-id="problem-1.-the-fraud-checks">Problem 1. The fraud checks</h3>
-<p>The Department for Work and Pensions scores requests for a universal credit advance, and refers those it scores high risk to a caseworker, who approves or declines them. For non-UK against UK nationals, its fairness assessment reports two ratios: requests referred <span class="math inline">\(2.27\)</span> times as often, and referrals declined, which it counts as correct, <span class="math inline">\(0.97\)</span> times as often, not significantly different from 1. It reports no error rate. Take a decline as <span class="math inline">\(Y = 1\)</span> and a referral as <span class="math inline">\(\hat Y = 1\)</span>, and write <span class="math inline">\(f\)</span> for the share of a group’s requests that are referred.</p>
-<ol type="a">
-<li><p>Show that correct referrals are a share <span class="math inline">\(f \cdot \text{PPV} = p
-\cdot \text{TPR}\)</span> of all of a group’s requests, and incorrect referrals a share <span class="math inline">\(f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}\)</span>.</p></li>
-<li><p>Non-UK against UK, what is the ratio of correct referrals per request? Show that the ratio of incorrect referrals per request is above <span class="math inline">\(2.27\)</span>.</p></li>
-<li><p>Suppose both groups had the same TPR and the same FPR. Write the two ratios in (b) in terms of the prevalences <span class="math inline">\(p_{\text{non-UK}}\)</span> and <span class="math inline">\(p_{\text{UK}}\)</span>. Can both be above 1? What do you conclude?</p></li>
-<li><p>Show that <span class="math inline">\(\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)\)</span>. Taking the two PPVs as equal, show that the ratio of non-UK to UK FPRs is at least <span class="math inline">\(2.27\,(1 - p_{\text{UK}})\)</span>. If fewer than one UK request in ten would be declined on review, how much more often are non-UK requests that a caseworker would approve referred?</p></li>
-<li><p>The <span class="math inline">\(0.97\)</span> is not significantly different from 1. Does your conclusion in (c) depend on it?</p></li>
-<li><p>The department judged the model “reasonable and proportionate” to keep using. Which number would a claimant who did nothing wrong want to see, and who could have published it?</p></li>
-</ol>
-</section>
-<section id="discussion-2-which-criterion" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-2-which-criterion">Discussion 2: which criterion</h3>
+<section id="which-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="which-criterion">Which criterion</h3>
 <ol type="1">
 <li>Of independence, separation and sufficiency, which is the better fairness measure for COMPAS, and why? On that measure, is COMPAS fair? Is your answer the same for the fraud checks?</li>
 <li>Equal predictive values and equal error rates cannot both hold when base rates differ, except for a perfect rule or one that is wrong about everyone. How should a county, or a department, decide which to require and which to give up? Possible grounds: who bears the cost; which error is worse here; the history that produced the base rates; the purpose the rule serves. Which would you put first, and which would you refuse to use?</li>
 <li>Whichever you chose, name the people who lose by it and write the sentence you would say to them.</li>
 </ol>
 </section>
-<section id="discussion-3-the-kidney-equation" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-3-the-kidney-equation">Discussion 3: the kidney equation</h3>
+<section id="the-kidney-equation" class="level3">
+<h3 class="anchored" data-anchor-id="the-kidney-equation">The kidney equation</h3>
 <p>Kidney function is estimated from blood creatinine, age and sex. In 2021 the US equation also multiplied the estimate by 1.159 for Black patients, who in the data it was fitted to had higher creatinine at the same measured function. In a validation set it overestimated Black participants’ measured function by a median of 3.7 (ml/min per 1.73 m²). Refitted without race, it underestimated Black participants’ by 3.6 and overestimated others’ by 3.9.</p>
 <ol type="1">
 <li>Neither equation is right on average for Black patients. Which error is worse here, an estimate too high or one too low, and who is it worse for?</li>
@@ -546,22 +579,6 @@ Note
 <li>A second blood marker, cystatin C, narrows the gap without race. Suppose some hospitals can measure it and others cannot. Should the equation without the second marker use race in the hospitals that cannot? Who decides, and who is it explained to?</li>
 </ol>
 </section>
-<section id="discussion-4-two-open-questions" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-4-two-open-questions">Discussion 4: two open questions</h3>
-<p>Take one of the two.</p>
-<ol type="1">
-<li>A county that uses a risk score like COMPAS before trial is deciding whether to keep it. Make the strongest case you can for keeping it and the strongest case for dropping it. Which is stronger, and what would change your mind? Who would the county have to justify its decision to?</li>
-<li>In each of today’s examples, a decision about one person rested on what is true of people like them: which job ads they see, whether their request for an advance is referred for checks, whether they are held before trial, how well their kidneys are judged to work. Is that ever unfair to the person decided about, and does your answer differ among the four?</li>
-</ol>
-</section>
-</section>
-<section id="if-there-is-time-three-views" class="level2">
-<h2 class="anchored" data-anchor-id="if-there-is-time-three-views">If there is time: three views</h2>
-<ol type="1">
-<li>The middle view says to treat seemingly dissimilar people similarly when the dissimilarity is the result of something that should be discounted. Give one setting where that seems reasonable and one where it seems less defensible, and say what differs between them.</li>
-<li>For two of the three criteria, say which view of equality of opportunity it fits, and where the fit fails.</li>
-<li>In one sentence: what do you take away from the impossibility results?</li>
-</ol>
 </section>
 <section id="for-next-time" class="level2">
 <h2 class="anchored" data-anchor-id="for-next-time">For next time</h2>
@@ -571,10 +588,11 @@ Note
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li>Angwin, Julia, Jeff Larson, Surya Mattu and Lauren Kirchner, “Machine Bias,” <em>ProPublica</em>, 23 May 2016, <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing" class="uri">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>; data: ProPublica, <code>compas-scores-two-years.csv</code>, <a href="https://github.com/propublica/compas-analysis" class="uri">https://github.com/propublica/compas-analysis</a>.</li>
-<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 3, Proposition 5, page 67; chapter 4, pages 94 and 101.</li>
+<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 1, pages 14 and 15; chapter 3, Proposition 5, page 67; chapter 4, pages 94 and 101.</li>
 <li>Chouldechova, Alexandra, “Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments,” <em>Big Data</em> 5(2), 2017, 153–163, <a href="https://doi.org/10.1089/big.2016.0047" class="uri">https://doi.org/10.1089/big.2016.0047</a>.</li>
 <li>Department for Work and Pensions, “UC Advances Model: Fairness Assessment,” with its Statistical Annex (1 April 2024 to 31 March 2025), published 17 July 2025, <a href="https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025" class="uri">https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025</a>, Tables 3 and 4 and annex paragraph 31.</li>
 <li>Inker, Lesley A., Nwamaka D. Eneanya, Josef Coresh and colleagues, “New Creatinine- and Cystatin C–Based Equations to Estimate GFR without Race,” <em>New England Journal of Medicine</em> 385(19), 2021, 1737–1749, <a href="https://doi.org/10.1056/NEJMoa2102953" class="uri">https://doi.org/10.1056/NEJMoa2102953</a>, abstract and Table 2.</li>
+<li>Lum, Kristian and William Isaac, “To Predict and Serve?,” <em>Significance</em> 13(5), 2016, 14–19, <a href="https://doi.org/10.1111/j.1740-9713.2016.00960.x" class="uri">https://doi.org/10.1111/j.1740-9713.2016.00960.x</a>, Figures 1 to 3.</li>
 <li>Organ Procurement and Transplantation Network, via the Health Resources and Services Administration, “Early Monitoring Report Shows Black Kidney Candidates Are Receiving Waiting Time Modifications After Implementation of New Policies,” 4 December 2023, <a href="https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/" class="uri">https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/</a>.</li>
 </ul>
 

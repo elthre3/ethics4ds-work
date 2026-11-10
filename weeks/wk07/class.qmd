@@ -23,14 +23,15 @@ theme_set(theme_minimal())
 ## How this sheet works
 
 Exercises rederive or apply the lecture's results. Do them on your own
-time; they are not worked in class. The class works the discussions,
-the problem and the coding under "In class," in that order.
-Discussions are in groups of three or four, then with the room. The
-problem, and the coding, are gone through as soon as the room has
-tried them.
+time; they are not worked in class. The class works the discussions
+and the problem under "In class," in that order, then what it can of
+"If there is time." Discussions are in groups of three or four, then
+with the room. The problem, and the coding, are gone through as soon
+as the room has tried them.
 
-Every item is about a rule that selects some people: for detention,
-for a fraud check, for a treatment. The same table of who was selected
+Every item is about a rule that selects some people, or places: for
+detention, for a fraud check, for a treatment, for patrols. The same
+table of who was selected
 and what happened supports different numbers, and a disagreement about
 fairness is often a disagreement about which number a fair rule has to
 equalize. So each item ends by asking who the error falls on, who
@@ -200,7 +201,103 @@ hospital's triage score; an airport security check.
    Which of the two criteria in question 2 would you give up, and who
    would you explain it to?
 
-### Coding 1: COMPAS from ProPublica's file
+### Problem 1. The fraud checks
+
+The Department for Work and Pensions scores requests for a universal
+credit advance, and refers those it scores high risk to a caseworker,
+who approves or declines them. For non-UK against UK nationals, its
+fairness assessment reports two ratios: requests referred $2.27$ times
+as often, and referrals declined, which it counts as correct, $0.97$
+times as often, not significantly different from 1. It reports no
+error rate. Take a decline as $Y = 1$ and a referral as $\hat Y = 1$,
+and write $f$ for the share of a group's requests that are referred.
+
+(a) Show that correct referrals are a share $f \cdot \text{PPV} = p
+\cdot \text{TPR}$ of all of a group's requests, and incorrect
+referrals a share $f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}$.
+
+(b) Non-UK against UK, what is the ratio of correct referrals per
+request? Show that the ratio of incorrect referrals per request is
+above $2.27$.
+
+(c) Suppose both groups had the same TPR and the same FPR. Write the
+two ratios in (b) in terms of the prevalences $p_{\text{non-UK}}$ and
+$p_{\text{UK}}$. Can both be above 1? What do you conclude?
+
+(d) Show that $\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)$. Taking the
+two PPVs as equal, show that the ratio of non-UK to UK FPRs is at
+least $2.27\,(1 - p_{\text{UK}})$. If fewer than one UK request in ten
+would be declined on review, how much more often are non-UK requests
+that a caseworker would approve referred?
+
+(e) The $0.97$ is not significantly different from 1. Does your
+conclusion in (c) depend on it?
+
+(f) The department judged the model "reasonable and proportionate" to
+keep using. Which number would a claimant who did nothing wrong want
+to see, and who could have published it?
+
+### Discussion 2: three views
+
+1. The middle view says to treat seemingly dissimilar people similarly
+   when the dissimilarity is the result of something that should be
+   discounted. Give one setting where that seems reasonable and one
+   where it seems less defensible, and say what differs between them.
+   Who decides what should be discounted?
+2. For two of the three criteria, say which view of equality of
+   opportunity it fits, and where the fit fails.
+3. In one sentence: what do you take away from the impossibility
+   results?
+
+### Discussion 3: predictive policing
+
+Lum and Isaac,
+["To predict and serve?"](https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1740-9713.2016.00960.x)
+(*Significance*, 2016), ran PredPol's published predictive policing
+algorithm on Oakland police records of drug crimes. Drug arrests in
+2010 were concentrated in two areas of the city. Estimates of drug
+use, from a national survey applied to a synthetic population of the
+city, were spread across it, and roughly equal by race. Run on the
+police records, the algorithm would have targeted Black residents at
+roughly twice the rate of white residents, although it uses no
+demographic data. In a simulation in which 20 percent more crimes are
+recorded wherever police are sent, the model grew more confident that
+crime was where it had already sent them.
+
+1. Suppose the model is checked against records of the same kind as
+   those it was trained on. Could it look accurate, even calibrated?
+   What would a difference in base rates between neighborhoods, or
+   between racial groups, be measuring?
+2. List as many reasons as you can why two groups' recorded rates of
+   an outcome could differ when their actual rates do not. Which of
+   them could apply to re-arrest for COMPAS, and to declined requests
+   in the fraud checks?
+3. Have you met a loop like this before in the course? What is the
+   same here, and what is new?
+4. A defense of risk scores goes: the score only reflects real
+   differences in base rates, and ignoring them would be unfair. What
+   would you say back? If base rates are partly the product of earlier
+   decisions, who should bear the cost of correcting them?
+
+### Discussion 4: two open questions
+
+Take one of the two.
+
+1. A county that uses a risk score like COMPAS before trial is deciding
+   whether to keep it. Make the strongest case you can for keeping it
+   and the strongest case for dropping it. Which is stronger, and what
+   would change your mind? Who would the county have to justify its
+   decision to?
+2. In each of today's examples, a decision about one person rested on
+   what is true of people like them: which job ads they see, whether
+   their request for an advance is referred for checks, whether they
+   are held before trial, how well their kidneys are judged to work. Is
+   that ever unfair to the person decided about, and does your answer
+   differ among the four?
+
+## If there is time
+
+### Coding: COMPAS from ProPublica's file
 
 You need `dplyr` and `ggplot2`. ProPublica published the data behind
 its analysis: one row per defendant, with names and dates of birth as
@@ -266,43 +363,7 @@ compas |>
    who is not, or the judge who reads the same score two ways? Is the
    prediction now fairer?
 
-### Problem 1. The fraud checks
-
-The Department for Work and Pensions scores requests for a universal
-credit advance, and refers those it scores high risk to a caseworker,
-who approves or declines them. For non-UK against UK nationals, its
-fairness assessment reports two ratios: requests referred $2.27$ times
-as often, and referrals declined, which it counts as correct, $0.97$
-times as often, not significantly different from 1. It reports no
-error rate. Take a decline as $Y = 1$ and a referral as $\hat Y = 1$,
-and write $f$ for the share of a group's requests that are referred.
-
-(a) Show that correct referrals are a share $f \cdot \text{PPV} = p
-\cdot \text{TPR}$ of all of a group's requests, and incorrect
-referrals a share $f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}$.
-
-(b) Non-UK against UK, what is the ratio of correct referrals per
-request? Show that the ratio of incorrect referrals per request is
-above $2.27$.
-
-(c) Suppose both groups had the same TPR and the same FPR. Write the
-two ratios in (b) in terms of the prevalences $p_{\text{non-UK}}$ and
-$p_{\text{UK}}$. Can both be above 1? What do you conclude?
-
-(d) Show that $\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)$. Taking the
-two PPVs as equal, show that the ratio of non-UK to UK FPRs is at
-least $2.27\,(1 - p_{\text{UK}})$. If fewer than one UK request in ten
-would be declined on review, how much more often are non-UK requests
-that a caseworker would approve referred?
-
-(e) The $0.97$ is not significantly different from 1. Does your
-conclusion in (c) depend on it?
-
-(f) The department judged the model "reasonable and proportionate" to
-keep using. Which number would a claimant who did nothing wrong want
-to see, and who could have published it?
-
-### Discussion 2: which criterion
+### Which criterion
 
 1. Of independence, separation and sufficiency, which is the better
    fairness measure for COMPAS, and why? On that measure, is COMPAS
@@ -317,7 +378,7 @@ to see, and who could have published it?
 3. Whichever you chose, name the people who lose by it and write the
    sentence you would say to them.
 
-### Discussion 3: the kidney equation
+### The kidney equation
 
 Kidney function is estimated from blood creatinine, age and sex. In
 2021 the US equation also multiplied the estimate by 1.159 for Black
@@ -338,33 +399,6 @@ m²). Refitted without race, it underestimated Black participants' by
    equation without the second marker use race in the hospitals that
    cannot? Who decides, and who is it explained to?
 
-### Discussion 4: two open questions
-
-Take one of the two.
-
-1. A county that uses a risk score like COMPAS before trial is deciding
-   whether to keep it. Make the strongest case you can for keeping it
-   and the strongest case for dropping it. Which is stronger, and what
-   would change your mind? Who would the county have to justify its
-   decision to?
-2. In each of today's examples, a decision about one person rested on
-   what is true of people like them: which job ads they see, whether
-   their request for an advance is referred for checks, whether they
-   are held before trial, how well their kidneys are judged to work. Is
-   that ever unfair to the person decided about, and does your answer
-   differ among the four?
-
-## If there is time: three views
-
-1. The middle view says to treat seemingly dissimilar people similarly
-   when the dissimilarity is the result of something that should be
-   discounted. Give one setting where that seems reasonable and one
-   where it seems less defensible, and say what differs between them.
-2. For two of the three criteria, say which view of equality of
-   opportunity it fits, and where the fit fails.
-3. In one sentence: what do you take away from the impossibility
-   results?
-
 ## For next time
 
 Bring one decision in which an attribute is used, or deliberately not
@@ -380,8 +414,8 @@ that route is fair. One sentence each.
   <https://github.com/propublica/compas-analysis>.
 - Barocas, Solon, Moritz Hardt and Arvind Narayanan, *Fairness and
   Machine Learning: Limitations and Opportunities* (MIT Press, 2023),
-  <https://fairmlbook.org>, chapter 3, Proposition 5, page 67; chapter
-  4, pages 94 and 101.
+  <https://fairmlbook.org>, chapter 1, pages 14 and 15; chapter 3,
+  Proposition 5, page 67; chapter 4, pages 94 and 101.
 - Chouldechova, Alexandra, "Fair Prediction with Disparate Impact: A
   Study of Bias in Recidivism Prediction Instruments," *Big Data* 5(2),
   2017, 153--163, <https://doi.org/10.1089/big.2016.0047>.
@@ -395,6 +429,9 @@ that route is fair. One sentence each.
   without Race," *New England Journal of Medicine* 385(19), 2021,
   1737--1749, <https://doi.org/10.1056/NEJMoa2102953>, abstract and
   Table 2.
+- Lum, Kristian and William Isaac, "To Predict and Serve?,"
+  *Significance* 13(5), 2016, 14--19,
+  <https://doi.org/10.1111/j.1740-9713.2016.00960.x>, Figures 1 to 3.
 - Organ Procurement and Transplantation Network, via the Health
   Resources and Services Administration, "Early Monitoring Report
   Shows Black Kidney Candidates Are Receiving Waiting Time
