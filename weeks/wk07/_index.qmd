@@ -9,3 +9,5 @@ A platform decides who sees a job ad; a government department decides which bene
 **Bring to the class:** one rule or score that sorts people into two groups (admit or reject, flag or clear, treat or not), with the two ways it can be wrong and who pays for each.
 
 **Lecture:** [notes](weeks/wk07/notes.html) · [slides](weeks/wk07/slides.html)
+
+**Class:** [class sheet](weeks/wk07/class.html) ([.qmd](https://ethics4ds.com/weeks/wk07/class.qmd){download="class.qmd"})

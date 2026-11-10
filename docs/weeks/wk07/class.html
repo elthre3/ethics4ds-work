@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Joshua Loftus">
+
+<title>Fairness I: observational – ethics 4 data science</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bb5ce4f09c3d713477d34b1921f208f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><i class="fa-solid fa-chart-simple fa-large" aria-label="chart-simple"></i> ethics 4 data science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-references" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">references</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-references">    
+        <li>
+    <a class="dropdown-item" href="https://www.bitbybitbook.com/en/1st-ed/ethics/">
+ <span class="dropdown-text">Bit by Bit</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://fairmlbook.org/">
+ <span class="dropdown-text">Fairness and Machine Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://data-feminism.mitpress.mit.edu/">
+ <span class="dropdown-text">Data Feminism</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf">
+ <span class="dropdown-text">RSS Guidelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice">
+ <span class="dropdown-text">ASA Guidelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.acm.org/code-of-ethics">
+ <span class="dropdown-text">ACM Guidelines</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text"><i class="fa-solid fa-house fa-large" aria-label="house"></i> content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text"><i class="fa-solid fa-user fa-large" aria-label="user"></i> about</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-this-sheet-works" id="toc-how-this-sheet-works" class="nav-link active" data-scroll-target="#how-this-sheet-works">How this sheet works</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.-two-groups-twenty-people" id="toc-exercise-1.-two-groups-twenty-people" class="nav-link" data-scroll-target="#exercise-1.-two-groups-twenty-people">Exercise 1. Two groups, twenty people</a></li>
+  <li><a href="#exercise-2.-chouldechovas-identity" id="toc-exercise-2.-chouldechovas-identity" class="nav-link" data-scroll-target="#exercise-2.-chouldechovas-identity">Exercise 2. Chouldechova’s identity</a></li>
+  <li><a href="#exercise-3.-separation-and-sufficiency-together" id="toc-exercise-3.-separation-and-sufficiency-together" class="nav-link" data-scroll-target="#exercise-3.-separation-and-sufficiency-together">Exercise 3. Separation and sufficiency together</a></li>
+  <li><a href="#exercise-4.-two-calibrated-scores" id="toc-exercise-4.-two-calibrated-scores" class="nav-link" data-scroll-target="#exercise-4.-two-calibrated-scores">Exercise 4. Two calibrated scores</a></li>
+  </ul></li>
+  <li><a href="#in-class" id="toc-in-class" class="nav-link" data-scroll-target="#in-class">In class</a>
+  <ul class="collapse">
+  <li><a href="#discussion-1-the-rule-you-brought" id="toc-discussion-1-the-rule-you-brought" class="nav-link" data-scroll-target="#discussion-1-the-rule-you-brought">Discussion 1: the rule you brought</a></li>
+  <li><a href="#problem-1.-the-fraud-checks" id="toc-problem-1.-the-fraud-checks" class="nav-link" data-scroll-target="#problem-1.-the-fraud-checks">Problem 1. The fraud checks</a></li>
+  <li><a href="#discussion-2-three-views" id="toc-discussion-2-three-views" class="nav-link" data-scroll-target="#discussion-2-three-views">Discussion 2: three views</a></li>
+  <li><a href="#discussion-3-predictive-policing" id="toc-discussion-3-predictive-policing" class="nav-link" data-scroll-target="#discussion-3-predictive-policing">Discussion 3: predictive policing</a></li>
+  <li><a href="#discussion-4-two-open-questions" id="toc-discussion-4-two-open-questions" class="nav-link" data-scroll-target="#discussion-4-two-open-questions">Discussion 4: two open questions</a></li>
+  </ul></li>
+  <li><a href="#if-there-is-time" id="toc-if-there-is-time" class="nav-link" data-scroll-target="#if-there-is-time">If there is time</a>
+  <ul class="collapse">
+  <li><a href="#coding-compas-from-propublicas-file" id="toc-coding-compas-from-propublicas-file" class="nav-link" data-scroll-target="#coding-compas-from-propublicas-file">Coding: COMPAS from ProPublica’s file</a></li>
+  <li><a href="#which-criterion" id="toc-which-criterion" class="nav-link" data-scroll-target="#which-criterion">Which criterion</a></li>
+  <li><a href="#the-kidney-equation" id="toc-the-kidney-equation" class="nav-link" data-scroll-target="#the-kidney-equation">The kidney equation</a></li>
+  </ul></li>
+  <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Fairness I: observational</h1>
+<p class="subtitle lead">Class</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Joshua Loftus </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is the student version of the class sheet. The exercises are for your own time; the class works through everything under “In class”. Answers are revealed in class.</p>
+</div>
+</div>
+<section id="how-this-sheet-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
+<p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions and the problem under “In class,” in that order, then what it can of “If there is time.” Discussions are in groups of three or four, then with the room. The problem, and the coding, are gone through as soon as the room has tried them.</p>
+<p>Every item is about a rule that selects some people, or places: for detention, for a fraud check, for a treatment, for patrols. The same table of who was selected and what happened supports different numbers, and a disagreement about fairness is often a disagreement about which number a fair rule has to equalize. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice of criterion could be justified to. The arithmetic narrows the answer; it does not give it.</p>
+<p>Notation as in the lecture. <span class="math inline">\(Y = 1\)</span> is the bad outcome; <span class="math inline">\(\hat Y = 1\)</span> means flagged, or selected: picked out by the rule. Where a rule selects people for something good, an offer or a loan, the coding runs the other way, as in the book’s examples: <span class="math inline">\(Y = 1\)</span> is success and <span class="math inline">\(\hat Y = 1\)</span> is the offer. <span class="math inline">\(A\)</span> is the group and <span class="math inline">\(p = P(Y = 1)\)</span> the prevalence within a group. Within a group, <span class="math inline">\(\text{FPR} = P(\hat Y = 1 \mid Y = 0)\)</span>, <span class="math inline">\(\text{FNR} = P(\hat Y = 0
+\mid Y = 1)\)</span>, <span class="math inline">\(\text{TPR} = 1 - \text{FNR}\)</span>, <span class="math inline">\(\text{PPV} = P(Y = 1
+\mid \hat Y = 1)\)</span> and <span class="math inline">\(\text{NPV} = P(Y = 0 \mid \hat Y = 0)\)</span>.</p>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<p>Attempt each part before you open a hint.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Hints">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Hints
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not open a hint unless you have been stuck for at least a few minutes, and open them in order.</p>
+</div>
+</div>
+<section id="exercise-1.-two-groups-twenty-people" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.-two-groups-twenty-people">Exercise 1. Two groups, twenty people</h3>
+<p>Group a has ten people, and five of them reoffend. Group b has ten people, and two of them reoffend. A rule flags six people in group a (four who reoffend and two who do not) and three in group b (two who reoffend and one who does not).</p>
+<ol type="a">
+<li><p>For each group, write the two-by-two table of flag against outcome, and compute FPR, FNR, PPV, NPV and the share flagged.</p></li>
+<li><p>Which of independence, separation and sufficiency does the rule satisfy, and which does it fail?</p></li>
+<li><p>Check the identity <span class="math inline">\(\text{FPR} = \frac{p}{1-p} \cdot
+\frac{1-\text{PPV}}{\text{PPV}} \cdot (1-\text{FNR})\)</span> in each group with your numbers.</p></li>
+<li><p>In group a, stop flagging one of the two people who do not reoffend, and leave the rest as they are. Compute group a’s FPR and PPV again. Could any choice of who to flag in group a give it the same FPR as group b? Then flag only three people in group a, as many of them reoffenders as possible, so that both groups have the same share flagged. What happens to the two error rates?</p></li>
+<li><p>Suppose instead the rule is perfect in both groups. Which criterion does it fail, and why does that depend on the base rates?</p></li>
+<li><p>For each change in (d), say who gains, who loses, and who you would have to explain the change to.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Group b has eight people who do not reoffend. An FPR is a count out of the people who do not reoffend in that group.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 2">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (b), sufficiency for a flag needs the same PPV and the same NPV.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2.-chouldechovas-identity" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.-chouldechovas-identity">Exercise 2. Chouldechova’s identity</h3>
+<ol type="a">
+<li><p>Starting from <span class="math inline">\(\text{PPV} = \frac{p\,(1-\text{FNR})}{p\,(1-\text{FNR}) + (1-p)\,\text{FPR}}\)</span>, derive <span class="math inline">\(\text{FPR} = \frac{p}{1-p} \cdot
+\frac{1-\text{PPV}}{\text{PPV}} \cdot (1-\text{FNR})\)</span>, then solve it for FNR.</p></li>
+<li><p>Two groups, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, have prevalences <span class="math inline">\(p_a \neq p_b\)</span>. A rule has the same PPV in both groups, strictly between 0 and 1, and the same FNR in both. Find <span class="math inline">\(\text{FPR}_a / \text{FPR}_b\)</span> in terms of <span class="math inline">\(p_a\)</span> and <span class="math inline">\(p_b\)</span>, and evaluate it with COMPAS’s prevalences, <span class="math inline">\(0.514\)</span> and <span class="math inline">\(0.394\)</span>.</p></li>
+<li><p>At the county’s cutoff COMPAS had PPV <span class="math inline">\(0.630\)</span> and <span class="math inline">\(0.591\)</span> and FNR <span class="math inline">\(0.280\)</span> and <span class="math inline">\(0.477\)</span>, and the observed ratio of FPRs was <span class="math inline">\(1.91\)</span>. Write that ratio as a product of three factors, one for each term of the identity, and compute each. Which factor takes the ratio above your answer to (b)?</p></li>
+<li><p>A vendor reports equal predictive values and a journalist reports unequal false positive rates for the same rule. Which of them has made an arithmetic mistake? Who is each number useful to?</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (a), take the odds against a flag being right: <span class="math inline">\((1 - \text{PPV}) /
+\text{PPV}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 2">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (b), write the identity for each group and divide.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3.-separation-and-sufficiency-together" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3.-separation-and-sufficiency-together">Exercise 3. Separation and sufficiency together</h3>
+<ol type="a">
+<li><p>A rule has the same FPR, FNR, PPV and NPV in two groups, with <span class="math inline">\(0 &lt; \text{FPR} &lt; 1\)</span>. Show that the two groups have the same prevalence.</p></li>
+<li><p>The reversed rule <span class="math inline">\(\hat Y = 1 - Y\)</span> flags the people who do not reoffend and no one else. Compute its four rates in any group. Which criteria does it satisfy, whatever the base rates? Which condition in (a) rules it out?</p></li>
+<li><p>An auditor finds a rule that satisfies separation and sufficiency in two groups. What should they check before calling it fair, and who would be misled if they did not?</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For (a), if <span class="math inline">\(\text{TPR} &gt; 0\)</span>, solve the identity for <span class="math inline">\(p/(1-p)\)</span>. If <span class="math inline">\(\text{TPR} = 0\)</span>, look at NPV instead.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 2">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>With <span class="math inline">\(\text{TPR} = 0\)</span>, the people not flagged are all of the reoffenders and a share <span class="math inline">\(1 - \text{FPR}\)</span> of the others, so <span class="math inline">\(\text{NPV} = \frac{(1-p)(1-\text{FPR})}{(1-p)(1-\text{FPR}) + p}\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4.-two-calibrated-scores" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.-two-calibrated-scores">Exercise 4. Two calibrated scores</h3>
+<p>Take the two groups of exercise 1, with prevalences <span class="math inline">\(0.5\)</span> and <span class="math inline">\(0.2\)</span>.</p>
+<ol type="a">
+<li><p>Score 1 gives everyone the overall base rate, <span class="math inline">\(0.35\)</span>. Show that it is calibrated in the whole population. Is it calibrated by group?</p></li>
+<li><p>Score 2 gives each person in group a their true outcome, 0 or 1, and each person in group b the value <span class="math inline">\(0.2\)</span>. Show that it is calibrated within each group.</p></li>
+<li><p>Select everyone whose score 2 is at least <span class="math inline">\(0.5\)</span>. Compute the share selected, FPR, FNR and NPV by group. Which of the three criteria, if any, does the selection satisfy?</p></li>
+<li><p>Score 2 is calibrated by group, which the replies to ProPublica treated as the test of fairness. Who does score 2 serve, and who would you have to explain it to?</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Calibrated means: among the people given score <span class="math inline">\(r\)</span>, a share <span class="math inline">\(r\)</span> have <span class="math inline">\(Y = 1\)</span>. Check it for each value the score takes.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="in-class" class="level2">
+<h2 class="anchored" data-anchor-id="in-class">In class</h2>
+<section id="discussion-1-the-rule-you-brought" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-1-the-rule-you-brought">Discussion 1: the rule you brought</h3>
+<p>Use the rule or score you brought, which selects some people and has two ways of being wrong. If you did not bring one, choose: a spam filter; a university’s offer rule; a bank’s credit decision; a hospital’s triage score; an airport security check.</p>
+<ol type="1">
+<li>Name the two errors and who pays for each. Of FPR, FNR, PPV and NPV, which would each of those people want equal across groups, and which would the decision maker want equal?</li>
+<li>ProPublica wrote that Black defendants who did not reoffend were nearly twice as likely as white defendants to be labeled higher risk. Which criterion is that sentence about? The replies said that the score was equally accurate for both groups. Which criterion is that about?</li>
+<li>For your rule, suppose the base rates differ between two groups. Which of the two criteria in question 2 would you give up, and who would you explain it to?</li>
+</ol>
+</section>
+<section id="problem-1.-the-fraud-checks" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1.-the-fraud-checks">Problem 1. The fraud checks</h3>
+<p>The Department for Work and Pensions scores requests for a universal credit advance, and refers those it scores high risk to a caseworker, who approves or declines them. For non-UK against UK nationals, its fairness assessment reports two ratios: requests referred <span class="math inline">\(2.27\)</span> times as often, and referrals declined, which it counts as correct, <span class="math inline">\(0.97\)</span> times as often, not significantly different from 1. It reports no error rate. Take a decline as <span class="math inline">\(Y = 1\)</span> and a referral as <span class="math inline">\(\hat Y = 1\)</span>, and write <span class="math inline">\(f\)</span> for the share of a group’s requests that are referred.</p>
+<ol type="a">
+<li><p>Show that correct referrals are a share <span class="math inline">\(f \cdot \text{PPV} = p
+\cdot \text{TPR}\)</span> of all of a group’s requests, and incorrect referrals a share <span class="math inline">\(f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}\)</span>.</p></li>
+<li><p>Non-UK against UK, what is the ratio of correct referrals per request? Show that the ratio of incorrect referrals per request is above <span class="math inline">\(2.27\)</span>.</p></li>
+<li><p>Suppose both groups had the same TPR and the same FPR. Write the two ratios in (b) in terms of the prevalences <span class="math inline">\(p_{\text{non-UK}}\)</span> and <span class="math inline">\(p_{\text{UK}}\)</span>. Can both be above 1? What do you conclude?</p></li>
+<li><p>Show that <span class="math inline">\(\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)\)</span>. Taking the two PPVs as equal, show that the ratio of non-UK to UK FPRs is at least <span class="math inline">\(2.27\,(1 - p_{\text{UK}})\)</span>. If fewer than one UK request in ten would be declined on review, how much more often are non-UK requests that a caseworker would approve referred?</p></li>
+<li><p>The <span class="math inline">\(0.97\)</span> is not significantly different from 1. Does your conclusion in (c) depend on it?</p></li>
+<li><p>The department judged the model “reasonable and proportionate” to keep using. Which number would a claimant who did nothing wrong want to see, and who could have published it?</p></li>
+</ol>
+</section>
+<section id="discussion-2-three-views" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-2-three-views">Discussion 2: three views</h3>
+<ol type="1">
+<li>The middle view says to treat seemingly dissimilar people similarly when the dissimilarity is the result of something that should be discounted. Give one setting where that seems reasonable and one where it seems less defensible, and say what differs between them. Who decides what should be discounted?</li>
+<li>For two of the three criteria, say which view of equality of opportunity it fits, and where the fit fails.</li>
+<li>In one sentence: what do you take away from the impossibility results?</li>
+</ol>
+</section>
+<section id="discussion-3-predictive-policing" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-3-predictive-policing">Discussion 3: predictive policing</h3>
+<p>Lum and Isaac, <a href="https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/j.1740-9713.2016.00960.x">“To predict and serve?”</a> (<em>Significance</em>, 2016), ran PredPol’s published predictive policing algorithm on Oakland police records of drug crimes. Drug arrests in 2010 were concentrated in two areas of the city. Estimates of drug use, from a national survey applied to a synthetic population of the city, were spread across it, and roughly equal by race. Run on the police records, the algorithm would have targeted Black residents at roughly twice the rate of white residents, although it uses no demographic data. In a simulation in which 20 percent more crimes are recorded wherever police are sent, the model grew more confident that crime was where it had already sent them.</p>
+<ol type="1">
+<li>Suppose the model is checked against records of the same kind as those it was trained on. Could it look accurate, even calibrated? What would a difference in base rates between neighborhoods, or between racial groups, be measuring?</li>
+<li>List as many reasons as you can why two groups’ recorded rates of an outcome could differ when their actual rates do not. Which of them could apply to re-arrest for COMPAS, and to declined requests in the fraud checks?</li>
+<li>Have you met a loop like this before in the course? What is the same here, and what is new?</li>
+<li>A defense of risk scores goes: the score only reflects real differences in base rates, and ignoring them would be unfair. What would you say back? If base rates are partly the product of earlier decisions, who should bear the cost of correcting them?</li>
+</ol>
+</section>
+<section id="discussion-4-two-open-questions" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-4-two-open-questions">Discussion 4: two open questions</h3>
+<p>Take one of the two.</p>
+<ol type="1">
+<li>A county that uses a risk score like COMPAS before trial is deciding whether to keep it. Make the strongest case you can for keeping it and the strongest case for dropping it. Which is stronger, and what would change your mind? Who would the county have to justify its decision to?</li>
+<li>In each of today’s examples, a decision about one person rested on what is true of people like them: which job ads they see, whether their request for an advance is referred for checks, whether they are held before trial, how well their kidneys are judged to work. Is that ever unfair to the person decided about, and does your answer differ among the four?</li>
+</ol>
+</section>
+</section>
+<section id="if-there-is-time" class="level2">
+<h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
+<section id="coding-compas-from-propublicas-file" class="level3">
+<h3 class="anchored" data-anchor-id="coding-compas-from-propublicas-file">Coding: COMPAS from ProPublica’s file</h3>
+<p>You need <code>dplyr</code> and <code>ggplot2</code>. ProPublica published the data behind its analysis: one row per defendant, with names and dates of birth as well as scores and outcomes. Keep only the three columns the analysis needs. <code>decile_score</code> is the COMPAS decile, 1 to 10, and <code>two_year_recid</code> is 1 if the person was arrested again within two years.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>compas <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"African-American"</span>, <span class="st">"Caucasian"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(race, decile_score, two_year_recid)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>rates_at <span class="ot">&lt;-</span> <span class="cf">function</span>(cutoff) {</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  compas <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">flag =</span> decile_score <span class="sc">&gt;=</span> cutoff) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(race) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">FPR =</span> <span class="fu">mean</span>(flag[two_year_recid <span class="sc">==</span> <span class="dv">0</span>]),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">FNR =</span> <span class="co"># ...</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">PPV =</span> <span class="co"># ...</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">selected =</span> <span class="fu">mean</span>(flag),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cutoff =</span> cutoff)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rates_at</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li>Complete <code>FNR</code> and <code>PPV</code>. Each is a mean over the right people, like the <code>FPR</code> line. Check <code>rates_at(5)</code> against the lecture: FPR 45 and 23 percent, PPV 63 and 59 percent.</li>
+<li>Compute the rates at every cutoff from 2 to 10, with <code>bind_rows(lapply(2:10, rates_at))</code>, and plot FPR, then FNR, against the cutoff with one line per group. Is there a cutoff at which the two groups have the same FPR? The same FNR?</li>
+<li>A defendant whose decile is exactly 5 has been flagged and asks what the flag means for someone like them. Compute the share re-arrested among defendants at decile 5, by group, and compare it with the PPV. What does the flag tell them, and what does it leave out?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cutoff <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"African-American"</span> <span class="ot">=</span> <span class="co"># ...</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Caucasian"</span> <span class="ot">=</span> <span class="co"># ...</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>compas <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> decile_score <span class="sc">&gt;=</span> cutoff[race]) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(race) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">FPR =</span> <span class="fu">mean</span>(flag[two_year_recid <span class="sc">==</span> <span class="dv">0</span>]),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">FNR =</span> <span class="co"># ...</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">PPV =</span> <span class="co"># ...</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">selected =</span> <span class="fu">mean</span>(flag))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="4" type="1">
+<li>The code above gives each group its own cutoff. Find a pair of cutoffs at which the two groups’ FPRs and FNRs are both within two percentage points. What has happened to the PPVs? To the shares selected?</li>
+<li>At your pair of cutoffs, describe a Black defendant and a white defendant with the same decile who are treated differently. Which criterion did you satisfy, which did you give up, and who do you owe the explanation to: the defendant who is now flagged, the one who is not, or the judge who reads the same score two ways? Is the prediction now fairer?</li>
+</ol>
+</section>
+<section id="which-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="which-criterion">Which criterion</h3>
+<ol type="1">
+<li>Of independence, separation and sufficiency, which is the better fairness measure for COMPAS, and why? On that measure, is COMPAS fair? Is your answer the same for the fraud checks?</li>
+<li>Equal predictive values and equal error rates cannot both hold when base rates differ, except for a perfect rule or one that is wrong about everyone. How should a county, or a department, decide which to require and which to give up? Possible grounds: who bears the cost; which error is worse here; the history that produced the base rates; the purpose the rule serves. Which would you put first, and which would you refuse to use?</li>
+<li>Whichever you chose, name the people who lose by it and write the sentence you would say to them.</li>
+</ol>
+</section>
+<section id="the-kidney-equation" class="level3">
+<h3 class="anchored" data-anchor-id="the-kidney-equation">The kidney equation</h3>
+<p>Kidney function is estimated from blood creatinine, age and sex. In 2021 the US equation also multiplied the estimate by 1.159 for Black patients, who in the data it was fitted to had higher creatinine at the same measured function. In a validation set it overestimated Black participants’ measured function by a median of 3.7 (ml/min per 1.73 m²). Refitted without race, it underestimated Black participants’ by 3.6 and overestimated others’ by 3.9.</p>
+<ol type="1">
+<li>Neither equation is right on average for Black patients. Which error is worse here, an estimate too high or one too low, and who is it worse for?</li>
+<li>US transplant programs restored waiting time to Black candidates whose disease the old equation made look milder. Who pays for that correction, and is it owed?</li>
+<li>A second blood marker, cystatin C, narrows the gap without race. Suppose some hospitals can measure it and others cannot. Should the equation without the second marker use race in the hospitals that cannot? Who decides, and who is it explained to?</li>
+</ol>
+</section>
+</section>
+<section id="for-next-time" class="level2">
+<h2 class="anchored" data-anchor-id="for-next-time">For next time</h2>
+<p>Bring one decision in which an attribute is used, or deliberately not used, with one route by which it could affect the outcome, and whether that route is fair. One sentence each.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>Angwin, Julia, Jeff Larson, Surya Mattu and Lauren Kirchner, “Machine Bias,” <em>ProPublica</em>, 23 May 2016, <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing" class="uri">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>; data: ProPublica, <code>compas-scores-two-years.csv</code>, <a href="https://github.com/propublica/compas-analysis" class="uri">https://github.com/propublica/compas-analysis</a>.</li>
+<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 1, pages 14 and 15; chapter 3, Proposition 5, page 67; chapter 4, pages 94 and 101.</li>
+<li>Chouldechova, Alexandra, “Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments,” <em>Big Data</em> 5(2), 2017, 153–163, <a href="https://doi.org/10.1089/big.2016.0047" class="uri">https://doi.org/10.1089/big.2016.0047</a>.</li>
+<li>Department for Work and Pensions, “UC Advances Model: Fairness Assessment,” with its Statistical Annex (1 April 2024 to 31 March 2025), published 17 July 2025, <a href="https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025" class="uri">https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025</a>, Tables 3 and 4 and annex paragraph 31.</li>
+<li>Inker, Lesley A., Nwamaka D. Eneanya, Josef Coresh and colleagues, “New Creatinine- and Cystatin C–Based Equations to Estimate GFR without Race,” <em>New England Journal of Medicine</em> 385(19), 2021, 1737–1749, <a href="https://doi.org/10.1056/NEJMoa2102953" class="uri">https://doi.org/10.1056/NEJMoa2102953</a>, abstract and Table 2.</li>
+<li>Lum, Kristian and William Isaac, “To Predict and Serve?,” <em>Significance</em> 13(5), 2016, 14–19, <a href="https://doi.org/10.1111/j.1740-9713.2016.00960.x" class="uri">https://doi.org/10.1111/j.1740-9713.2016.00960.x</a>, Figures 1 to 3.</li>
+<li>Organ Procurement and Transplantation Network, via the Health Resources and Services Administration, “Early Monitoring Report Shows Black Kidney Candidates Are Receiving Waiting Time Modifications After Implementation of New Policies,” 4 December 2023, <a href="https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/" class="uri">https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/</a>.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ethics4ds\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
