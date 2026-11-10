@@ -14,16 +14,17 @@ st313:
   week: 07
   session: class
   register: 1
-  segments:                        # sums to 80: 73 of material and 7 of slack; production 68 (85%); discussion 26. Exercises (rederiving or applying the lecture) are for students' own time and sit outside the segments (convenor, 19 October). The coding reads ProPublica's row-level file (convenor, 10 November). Problem 1 is the fraud checks' two published ratios, which the lecture dropped (convenor, 10 November). Discussion 3 is the kidney equation; the three views are under "If there is time" (convenor, 10 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
+  segments:                        # sums to 80: 79 of material and 1 of slack; production 74 (93%); discussion 32. Discussion 4's two questions name no framework; its directions list them, each in a few words, for the teacher to pick from (convenor, 10 November). If short, one of discussions 3 and 4. Exercises (rederiving or applying the lecture) are for students' own time and sit outside the segments (convenor, 19 October). The coding reads ProPublica's row-level file (convenor, 10 November). Problem 1 is the fraud checks' two published ratios, which the lecture dropped (convenor, 10 November). Discussion 3 is the kidney equation; the three views are under "If there is time" (convenor, 10 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
     - {label: "discussion 1: the rule each student brought (the 5 -> 7 task); its two errors and who pays; which rate each party would want equal; the criterion behind ProPublica's sentence and behind the replies", minutes: 8, mode: production, retrieves: [S5]}
     - {label: "coding 1: ProPublica's file, three columns kept; FPR, FNR, PPV and the share selected at the county's cutoff; the sweep of one cutoff; decile 5 against the PPV; a cutoff per group (6 and 4); the same decile, different treatment", minutes: 28, mode: production, core: CC-19, results: [R40, R41], retrieves: [S4]}
     - {label: "feedback on the coding", minutes: 2, mode: exposition}
     - {label: "problem 1: the fraud checks; from a referral ratio of 2.27 and a correct-referral ratio of 0.97, the error rates differ; FPR = f (1 - PPV) / (1 - p) and the lower bound on the ratio of FPRs; who is owed the missing number", minutes: 14, mode: production, core: CC-20, results: [R1]}
     - {label: "feedback on problem 1", minutes: 2, mode: exposition}
     - {label: "discussion 2: which criterion for COMPAS and for the fraud checks; how to decide when they conflict; the sentence to the people who lose", minutes: 8, mode: production, results: [R3], retrieves: [S6]}
-    - {label: "discussion 3: the kidney equation; which error, for whom; restored waiting time; a second marker available in some hospitals and not others", minutes: 10, mode: production, retrieves: [S2]}
+    - {label: "discussion 3: the kidney equation; which error, and who bears it; restored waiting time; a second marker available in some hospitals and not others", minutes: 10, mode: production, retrieves: [S2]}
+    - {label: "discussion 4: two open questions, take one; keep or drop a pretrial score; is a decision from people like you ever unfair to you; no framework named", minutes: 6, mode: production, retrieves: [S6]}
     - {label: "prep task for next class (the 7 -> 8 task)", minutes: 1, mode: exposition}
-    - {label: "slack: overrun", minutes: 7, mode: exposition}
+    - {label: "slack: overrun", minutes: 1, mode: exposition}
   history: []
   complications: []
   retrieves: [S2, S4, S5, S6]
@@ -105,7 +106,7 @@ with your numbers.
 
 (d) In group a, stop flagging one of the two people who do not
 reoffend, and leave the rest as they are. Compute group a's FPR and PPV
-again. Could any choice of whom to flag in group a give it the same
+again. Could any choice of who to flag in group a give it the same
 FPR as group b? Then flag only three people in group a, as many of
 them reoffenders as possible, so that both groups have the same share
 flagged. What happens to the two error rates?
@@ -609,8 +610,8 @@ m²). Refitted without race, it underestimated Black participants' by
 3.6 and overestimated others' by 3.9.
 
 1. Neither equation is right on average for Black patients. Which
-   error is worse here, an estimate too high or one too low, and for
-   whom?
+   error is worse here, an estimate too high or one too low, and who
+   is it worse for?
 2. US transplant programs restored waiting time to Black candidates
    whose disease the old equation made look milder. Who pays for that
    correction, and is it owed?
@@ -631,6 +632,89 @@ third question, using race where the second marker is not available
 keeps the old error's direction for some patients and not others,
 depending on the hospital; dropping it everywhere accepts the new
 error everywhere. Neither is neutral.
+:::
+
+### Discussion 4: two open questions
+
+Take one of the two.
+
+1. A county that uses a risk score like COMPAS before trial is deciding
+   whether to keep it. Make the strongest case you can for keeping it
+   and the strongest case for dropping it. Which is stronger, and what
+   would change your mind? Who would the county have to justify its
+   decision to?
+2. In each of today's examples, a decision about one person rested on
+   what is true of people like them: which job ads they see, whether
+   their request for an advance is referred for checks, whether they
+   are held before trial, how well their kidneys are judged to work. Is
+   that ever unfair to the person decided about, and does your answer
+   differ among the four?
+
+::: {.callout-note .answer title="Some directions: question 1" collapse="true"}
+- Compared with what: judges without a score; a simpler, public rule;
+  releasing more people.
+- Consequences: detentions, re-arrests, days held before a verdict,
+  cost; whose welfare counts; how sure the estimates are.
+- Duties: held for what one might do; presumption of innocence; judged
+  as an individual.
+- Character: deference to the tool; responsibility handed to a vendor;
+  judgment no longer practiced.
+- Pragmatism: a decision, not a conclusion; a trial period, an audit, a
+  date to review.
+- Respect for persons: no say; the calculation is not public, and
+  defendants rarely have a chance to challenge it (ProPublica).
+- Beneficence: harms and benefits assessed systematically, before and
+  after.
+- Justice: who bears the false positives.
+- Law and the public interest: due process; transparent methods; who is
+  accountable for a vendor's product.
+- Consent and clarity: does the defendant know a score was used, and
+  what it means?
+- Consistency and trust: can judges, defendants and the public predict
+  what it will do?
+- Control and transparency: can a defendant see or correct the inputs?
+- Consequences of the data existing: reuse beyond pretrial, as at
+  sentencing.
+- Lens A: re-arrest stands in for reoffending, and arrests follow where
+  police look.
+- Lens C: ProPublica's comparison or the vendor's.
+- Lens D: who bears each error.
+- Lens E: keeping the status quo is also a choice.
+- Selective labels: no outcome for the people held.
+- Feedback: detention can change what it predicts.
+- Standing question: who benefits from the choice staying invisible?
+:::
+
+::: {.callout-note .answer title="Some directions: question 2" collapse="true"}
+- Every prediction uses people like you; which people count as like you
+  is the choice.
+- Consequences: group information can make the estimate more accurate,
+  for the person too; accurate on average over which people?
+- Duties: treated as an individual; judged by what one did or by what
+  one is.
+- Responsibility: traits one chose against traits one did not; the
+  middle view of equality of opportunity.
+- Character: what a careful decision-maker owes the person in front of
+  them.
+- Pragmatism: depends on the purpose and the setting; revisable.
+- Respect for persons: the person's own information or the group's.
+- Beneficence and justice: selected for help (a listing, a job ad) or
+  for a burden (a check, detention); how burdens and benefits are
+  shared.
+- Law: what discrimination law allows, setting by setting.
+- Consent and clarity: did the person know a group attribute was used?
+- Control: can the person replace the group's number with their own
+  (cystatin C)?
+- Aggregation: spread within groups against the gap between them.
+- History: base rates produced by past policing, access to care, past
+  decisions.
+- Proxies: what the group label stands in for, and whether that could
+  be measured instead.
+- Repair: group information used to correct, as in restored waiting
+  time or a cutoff per group.
+- Lens D: who bears the error when the group's rate is wrong for them.
+- Standing question: who gains from deciding by group averages, which
+  are cheaper and faster than looking closer?
 :::
 
 ## If there is time: three views

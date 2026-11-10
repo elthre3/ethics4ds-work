@@ -76,7 +76,7 @@ with your numbers.
 
 (d) In group a, stop flagging one of the two people who do not
 reoffend, and leave the rest as they are. Compute group a's FPR and PPV
-again. Could any choice of whom to flag in group a give it the same
+again. Could any choice of who to flag in group a give it the same
 FPR as group b? Then flag only three people in group a, as many of
 them reoffenders as possible, so that both groups have the same share
 flagged. What happens to the two error rates?
@@ -328,8 +328,8 @@ m²). Refitted without race, it underestimated Black participants' by
 3.6 and overestimated others' by 3.9.
 
 1. Neither equation is right on average for Black patients. Which
-   error is worse here, an estimate too high or one too low, and for
-   whom?
+   error is worse here, an estimate too high or one too low, and who
+   is it worse for?
 2. US transplant programs restored waiting time to Black candidates
    whose disease the old equation made look milder. Who pays for that
    correction, and is it owed?
@@ -337,6 +337,22 @@ m²). Refitted without race, it underestimated Black participants' by
    Suppose some hospitals can measure it and others cannot. Should the
    equation without the second marker use race in the hospitals that
    cannot? Who decides, and who is it explained to?
+
+### Discussion 4: two open questions
+
+Take one of the two.
+
+1. A county that uses a risk score like COMPAS before trial is deciding
+   whether to keep it. Make the strongest case you can for keeping it
+   and the strongest case for dropping it. Which is stronger, and what
+   would change your mind? Who would the county have to justify its
+   decision to?
+2. In each of today's examples, a decision about one person rested on
+   what is true of people like them: which job ads they see, whether
+   their request for an advance is referred for checks, whether they
+   are held before trial, how well their kidneys are judged to work. Is
+   that ever unfair to the person decided about, and does your answer
+   differ among the four?
 
 ## If there is time: three views
 

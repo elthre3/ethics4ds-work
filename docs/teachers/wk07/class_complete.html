@@ -2365,6 +2365,7 @@ window.Quarto = {
   <li><a href="#problem-1.-the-fraud-checks" id="toc-problem-1.-the-fraud-checks" class="nav-link" data-scroll-target="#problem-1.-the-fraud-checks">Problem 1. The fraud checks</a></li>
   <li><a href="#discussion-2-which-criterion" id="toc-discussion-2-which-criterion" class="nav-link" data-scroll-target="#discussion-2-which-criterion">Discussion 2: which criterion</a></li>
   <li><a href="#discussion-3-the-kidney-equation" id="toc-discussion-3-the-kidney-equation" class="nav-link" data-scroll-target="#discussion-3-the-kidney-equation">Discussion 3: the kidney equation</a></li>
+  <li><a href="#discussion-4-two-open-questions" id="toc-discussion-4-two-open-questions" class="nav-link" data-scroll-target="#discussion-4-two-open-questions">Discussion 4: two open questions</a></li>
   </ul></li>
   <li><a href="#if-there-is-time-three-views" id="toc-if-there-is-time-three-views" class="nav-link" data-scroll-target="#if-there-is-time-three-views">If there is time: three views</a></li>
   <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
@@ -2435,7 +2436,7 @@ window.Quarto = {
 <li><p>Which of independence, separation and sufficiency does the rule satisfy, and which does it fail?</p></li>
 <li><p>Check the identity <span class="math inline">\(\text{FPR} = \frac{p}{1-p} \cdot
 \frac{1-\text{PPV}}{\text{PPV}} \cdot (1-\text{FNR})\)</span> in each group with your numbers.</p></li>
-<li><p>In group a, stop flagging one of the two people who do not reoffend, and leave the rest as they are. Compute group a’s FPR and PPV again. Could any choice of whom to flag in group a give it the same FPR as group b? Then flag only three people in group a, as many of them reoffenders as possible, so that both groups have the same share flagged. What happens to the two error rates?</p></li>
+<li><p>In group a, stop flagging one of the two people who do not reoffend, and leave the rest as they are. Compute group a’s FPR and PPV again. Could any choice of who to flag in group a give it the same FPR as group b? Then flag only three people in group a, as many of them reoffenders as possible, so that both groups have the same share flagged. What happens to the two error rates?</p></li>
 <li><p>Suppose instead the rule is perfect in both groups. Which criterion does it fail, and why does that depend on the base rates?</p></li>
 <li><p>For each change in (d), say who gains, who loses, and who you would have to explain the change to.</p></li>
 </ol>
@@ -2960,7 +2961,7 @@ p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}}
 <h3 class="anchored" data-anchor-id="discussion-3-the-kidney-equation">Discussion 3: the kidney equation</h3>
 <p>Kidney function is estimated from blood creatinine, age and sex. In 2021 the US equation also multiplied the estimate by 1.159 for Black patients, who in the data it was fitted to had higher creatinine at the same measured function. In a validation set it overestimated Black participants’ measured function by a median of 3.7 (ml/min per 1.73 m²). Refitted without race, it underestimated Black participants’ by 3.6 and overestimated others’ by 3.9.</p>
 <ol type="1">
-<li>Neither equation is right on average for Black patients. Which error is worse here, an estimate too high or one too low, and for whom?</li>
+<li>Neither equation is right on average for Black patients. Which error is worse here, an estimate too high or one too low, and who is it worse for?</li>
 <li>US transplant programs restored waiting time to Black candidates whose disease the old equation made look milder. Who pays for that correction, and is it owed?</li>
 <li>A second blood marker, cystatin C, narrows the gap without race. Suppose some hospitals can measure it and others cannot. Should the equation without the second marker use race in the hospitals that cannot? Who decides, and who is it explained to?</li>
 </ol>
@@ -2981,6 +2982,85 @@ p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}}
 </div>
 </div>
 </section>
+<section id="discussion-4-two-open-questions" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-4-two-open-questions">Discussion 4: two open questions</h3>
+<p>Take one of the two.</p>
+<ol type="1">
+<li>A county that uses a risk score like COMPAS before trial is deciding whether to keep it. Make the strongest case you can for keeping it and the strongest case for dropping it. Which is stronger, and what would change your mind? Who would the county have to justify its decision to?</li>
+<li>In each of today’s examples, a decision about one person rested on what is true of people like them: which job ads they see, whether their request for an advance is referred for checks, whether they are held before trial, how well their kidneys are judged to work. Is that ever unfair to the person decided about, and does your answer differ among the four?</li>
+</ol>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions: question 1">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions: question 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Compared with what: judges without a score; a simpler, public rule; releasing more people.</li>
+<li>Consequences: detentions, re-arrests, days held before a verdict, cost; whose welfare counts; how sure the estimates are.</li>
+<li>Duties: held for what one might do; presumption of innocence; judged as an individual.</li>
+<li>Character: deference to the tool; responsibility handed to a vendor; judgment no longer practiced.</li>
+<li>Pragmatism: a decision, not a conclusion; a trial period, an audit, a date to review.</li>
+<li>Respect for persons: no say; the calculation is not public, and defendants rarely have a chance to challenge it (ProPublica).</li>
+<li>Beneficence: harms and benefits assessed systematically, before and after.</li>
+<li>Justice: who bears the false positives.</li>
+<li>Law and the public interest: due process; transparent methods; who is accountable for a vendor’s product.</li>
+<li>Consent and clarity: does the defendant know a score was used, and what it means?</li>
+<li>Consistency and trust: can judges, defendants and the public predict what it will do?</li>
+<li>Control and transparency: can a defendant see or correct the inputs?</li>
+<li>Consequences of the data existing: reuse beyond pretrial, as at sentencing.</li>
+<li>Lens A: re-arrest stands in for reoffending, and arrests follow where police look.</li>
+<li>Lens C: ProPublica’s comparison or the vendor’s.</li>
+<li>Lens D: who bears each error.</li>
+<li>Lens E: keeping the status quo is also a choice.</li>
+<li>Selective labels: no outcome for the people held.</li>
+<li>Feedback: detention can change what it predicts.</li>
+<li>Standing question: who benefits from the choice staying invisible?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="answer callout callout-style-default callout-note callout-titled" title="Some directions: question 2">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Some directions: question 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Every prediction uses people like you; which people count as like you is the choice.</li>
+<li>Consequences: group information can make the estimate more accurate, for the person too; accurate on average over which people?</li>
+<li>Duties: treated as an individual; judged by what one did or by what one is.</li>
+<li>Responsibility: traits one chose against traits one did not; the middle view of equality of opportunity.</li>
+<li>Character: what a careful decision-maker owes the person in front of them.</li>
+<li>Pragmatism: depends on the purpose and the setting; revisable.</li>
+<li>Respect for persons: the person’s own information or the group’s.</li>
+<li>Beneficence and justice: selected for help (a listing, a job ad) or for a burden (a check, detention); how burdens and benefits are shared.</li>
+<li>Law: what discrimination law allows, setting by setting.</li>
+<li>Consent and clarity: did the person know a group attribute was used?</li>
+<li>Control: can the person replace the group’s number with their own (cystatin C)?</li>
+<li>Aggregation: spread within groups against the gap between them.</li>
+<li>History: base rates produced by past policing, access to care, past decisions.</li>
+<li>Proxies: what the group label stands in for, and whether that could be measured instead.</li>
+<li>Repair: group information used to correct, as in restored waiting time or a cutoff per group.</li>
+<li>Lens D: who bears the error when the group’s rate is wrong for them.</li>
+<li>Standing question: who gains from deciding by group averages, which are cheaper and faster than looking closer?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="if-there-is-time-three-views" class="level2">
 <h2 class="anchored" data-anchor-id="if-there-is-time-three-views">If there is time: three views</h2>
@@ -2990,7 +3070,7 @@ p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}}
 <li>In one sentence: what do you take away from the impossibility results?</li>
 </ol>
 <div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2999,7 +3079,7 @@ p_{\text{UK}}\)</span> because <span class="math inline">\(1 - p_{\text{non-UK}}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Calibration by group fits the narrow view. Demographic parity resembles the broad view, but at a single decision rather than over a life. Error rate parity has no single principle behind it; the book ties it both to the middle view (an unequal burden of mistakes perpetuates disadvantage) and to the narrow view (collect more data and assess people more accurately as they are), page 101. For the last question: the trade-off is a fact about base rates, so a choice has to be made and defended; it is not a reason to stop asking.</p>
 </div>
