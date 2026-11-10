@@ -1,0 +1,682 @@
+---
+title: "Fairness I: observational"
+subtitle: "Class"
+author: "Joshua Loftus"
+format:
+  html:
+    toc: true
+execute:
+  message: false
+  warning: false
+# ---- instructor-side front matter (CONTRACT.md), nested under st313: so that Quarto
+# ---- ignores it (Quarto reserves top-level keys such as `history`); stripped from output
+st313:
+  week: 07
+  session: class
+  register: 1
+  segments:                        # sums to 80: 73 of material and 7 of slack; production 68 (85%); discussion 26. Exercises (rederiving or applying the lecture) are for students' own time and sit outside the segments (convenor, 19 October). The coding reads ProPublica's row-level file (convenor, 10 November). Problem 1 is the fraud checks' two published ratios, which the lecture dropped (convenor, 10 November). Discussion 3 is the kidney equation; the three views are under "If there is time" (convenor, 10 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
+    - {label: "discussion 1: the rule each student brought (the 5 -> 7 task); its two errors and who pays; which rate each party would want equal; the criterion behind ProPublica's sentence and behind the replies", minutes: 8, mode: production, retrieves: [S5]}
+    - {label: "coding 1: ProPublica's file, three columns kept; FPR, FNR, PPV and the share selected at the county's cutoff; the sweep of one cutoff; decile 5 against the PPV; a cutoff per group (6 and 4); the same decile, different treatment", minutes: 28, mode: production, core: CC-19, results: [R40, R41], retrieves: [S4]}
+    - {label: "feedback on the coding", minutes: 2, mode: exposition}
+    - {label: "problem 1: the fraud checks; from a referral ratio of 2.27 and a correct-referral ratio of 0.97, the error rates differ; FPR = f (1 - PPV) / (1 - p) and the lower bound on the ratio of FPRs; who is owed the missing number", minutes: 14, mode: production, core: CC-20, results: [R1]}
+    - {label: "feedback on problem 1", minutes: 2, mode: exposition}
+    - {label: "discussion 2: which criterion for COMPAS and for the fraud checks; how to decide when they conflict; the sentence to the people who lose", minutes: 8, mode: production, results: [R3], retrieves: [S6]}
+    - {label: "discussion 3: the kidney equation; which error, for whom; restored waiting time; a second marker available in some hospitals and not others", minutes: 10, mode: production, retrieves: [S2]}
+    - {label: "prep task for next class (the 7 -> 8 task)", minutes: 1, mode: exposition}
+    - {label: "slack: overrun", minutes: 7, mode: exposition}
+  history: []
+  complications: []
+  retrieves: [S2, S4, S5, S6]
+  lenses: [A, C, D, E]
+  readings: [fairmlbook-ch3, fairmlbook-ch3-rates, fairmlbook-ch3-limits, fairmlbook-ch3-unawareness, fairmlbook-ch4-eoo]
+  results: [R1, R3, R40, R41]   # R1 and R40 in exercises 2 and problem 1; R3 in exercise 3; R41 in exercise 4 and the coding
+  assumes: [ST102]
+  solutions: complete             # this file carries answers; the student file is generated
+# ---------------------------------------------------------------------------------
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+theme_set(theme_minimal())
+```
+
+::: {.answer}
+```{r seed, include=FALSE}
+# The teacher's sheet and the sheet with solutions start from this seed. The student
+# sheet gets none: the generator drops this div with the answers (convenor, 13 October).
+set.seed(313)
+```
+:::
+
+## How this sheet works
+
+Exercises rederive or apply the lecture's results. Do them on your own
+time; they are not worked in class. The class works the discussions,
+the problem and the coding under "In class," in that order.
+Discussions are in groups of three or four, then with the room. The
+problem, and the coding, are gone through as soon as the room has
+tried them.
+
+Every item is about a rule that selects some people: for detention,
+for a fraud check, for a treatment. The same table of who was selected
+and what happened supports different numbers, and a disagreement about
+fairness is often a disagreement about which number a fair rule has to
+equalize. So each item ends by asking who the error falls on, who
+gains from the number that was reported, or who the choice of
+criterion could be justified to. The arithmetic narrows the answer; it
+does not give it.
+
+Notation as in the lecture. $Y = 1$ is the bad outcome; $\hat Y = 1$
+means flagged, or selected: picked out by the rule. $A$ is the group
+and $p = P(Y = 1)$ the prevalence within a group. Within a group,
+$\text{FPR} = P(\hat Y = 1 \mid Y = 0)$, $\text{FNR} = P(\hat Y = 0
+\mid Y = 1)$, $\text{TPR} = 1 - \text{FNR}$, $\text{PPV} = P(Y = 1
+\mid \hat Y = 1)$ and $\text{NPV} = P(Y = 0 \mid \hat Y = 0)$.
+
+## Exercises
+
+Attempt each part before you open a hint.
+
+::: {.callout-warning title="Hints"}
+Do not open a hint unless you have been stuck for at least a few
+minutes, and open them in order.
+:::
+
+### Exercise 1. Two groups, twenty people
+
+Group a has ten people, and five of them reoffend. Group b has ten
+people, and two of them reoffend. A rule flags six people in group a
+(four who reoffend and two who do not) and three in group b (two who
+reoffend and one who does not).
+
+(a) For each group, write the two-by-two table of flag against
+outcome, and compute FPR, FNR, PPV, NPV and the share flagged.
+
+(b) Which of independence, separation and sufficiency does the rule
+satisfy, and which does it fail?
+
+(c) Check the identity $\text{FPR} = \frac{p}{1-p} \cdot
+\frac{1-\text{PPV}}{\text{PPV}} \cdot (1-\text{FNR})$ in each group
+with your numbers.
+
+(d) In group a, stop flagging one of the two people who do not
+reoffend, and leave the rest as they are. Compute group a's FPR and PPV
+again. Could any choice of whom to flag in group a give it the same
+FPR as group b? Then flag only three people in group a, as many of
+them reoffenders as possible, so that both groups have the same share
+flagged. What happens to the two error rates?
+
+(e) Suppose instead the rule is perfect in both groups. Which
+criterion does it fail, and why does that depend on the base rates?
+
+(f) For each change in (d), say who gains, who loses, and who you would
+have to explain the change to.
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+Group b has eight people who do not reoffend. An FPR is a count out of
+the people who do not reoffend in that group.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+For (b), sufficiency for a flag needs the same PPV and the same NPV.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) Group a: 4 true positives, 2 false positives, 1 false negative, 3
+true negatives; FPR $2/5$, FNR $1/5$, PPV $2/3$, NPV $3/4$, share
+flagged $6/10$. Group b: 2, 1, 0, 7; FPR $1/8$, FNR $0$, PPV $2/3$, NPV
+$1$, share flagged $3/10$.
+
+(b) The PPVs are equal (predictive parity), but the NPVs differ, so
+sufficiency fails. Both error rates differ, so separation fails. The
+shares flagged differ, so independence fails.
+
+(c) Group a: $p = 1/2$, so $1 \cdot \tfrac{1}{2} \cdot \tfrac{4}{5} =
+0.4$. Group b: $p = 1/5$, so $\tfrac{1}{4} \cdot \tfrac{1}{2} \cdot 1
+= 0.125$.
+
+(d) With 4 true positives and 1 false positive, group a's FPR is $1/5$
+and its PPV $4/5$, so predictive parity is lost. Group a has five
+people who do not reoffend, so its FPR is a multiple of $1/5$ and
+cannot be $1/8$. Flagging three reoffenders: FPR $0$ against $1/8$,
+FNR $2/5$ against $0$, so separation now fails the other way.
+
+(e) Independence. A perfect rule flags the people who reoffend and
+no one else, 50 percent of group a and 20 percent of group b, so the gap
+in shares flagged is the gap in base rates. Separation and sufficiency
+both hold.
+
+(f) First change: the person no longer flagged gains, nobody in group
+a loses, and the flag means more to whoever reads it. Second change:
+one more reoffender in group a goes unflagged; they gain, and whoever
+they go on to harm pays. The people owed an explanation are those
+whose flag changed although nothing about them did.
+:::
+
+### Exercise 2. Chouldechova's identity
+
+(a) Starting from
+$\text{PPV} = \frac{p\,(1-\text{FNR})}{p\,(1-\text{FNR}) + (1-p)\,\text{FPR}}$,
+derive $\text{FPR} = \frac{p}{1-p} \cdot
+\frac{1-\text{PPV}}{\text{PPV}} \cdot (1-\text{FNR})$, then solve it
+for FNR.
+
+(b) Two groups, $a$ and $b$, have prevalences $p_a \neq p_b$. A rule
+has the same PPV in both groups and the same FNR in both. Find
+$\text{FPR}_a / \text{FPR}_b$ in terms of $p_a$ and $p_b$, and evaluate
+it with COMPAS's prevalences, $0.514$ and $0.394$.
+
+(c) At the county's cutoff COMPAS had PPV $0.630$ and $0.591$ and FNR
+$0.280$ and $0.477$, and the observed ratio of FPRs was $1.91$. Write
+that ratio as a product of three factors, one for each term of the
+identity, and compute each. Which factor takes the ratio above your
+answer to (b)?
+
+(d) A vendor reports equal predictive values and a journalist reports
+unequal false positive rates for the same rule. Which of them has made
+an arithmetic mistake? Who is each number useful to?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a), take the odds against a flag being right: $(1 - \text{PPV}) /
+\text{PPV}$.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+For (b), write the identity for each group and divide.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $\frac{1-\text{PPV}}{\text{PPV}} = \frac{(1-p)\,\text{FPR}}{p\,(1-\text{FNR})}$;
+multiply by $\frac{p}{1-p}\,(1-\text{FNR})$. Then
+$\text{FNR} = 1 - \text{FPR} \cdot \frac{1-p}{p} \cdot \frac{\text{PPV}}{1-\text{PPV}}$.
+
+(b) The PPV and FNR terms cancel:
+$\text{FPR}_a / \text{FPR}_b = \frac{p_a/(1-p_a)}{p_b/(1-p_b)}$, the
+ratio of the groups' odds of the outcome. With $0.514/0.486 = 1.058$
+and $0.394/0.606 = 0.650$, it is $1.63$.
+
+(c) $1.91 = 1.63 \times 0.85 \times 1.38$: the odds ratio; the ratio of
+$(1-\text{PPV})/\text{PPV}$, $(0.370/0.630)/(0.409/0.591) = 0.85$; the
+ratio of TPRs, $0.720/0.523 = 1.38$. The TPR factor takes it above
+1.63, and the PPV factor pulls the other way.
+
+(d) Neither. Once one of the two is fixed, the identity says the other
+follows from the base rates. The PPV is the number a judge reading
+the flag lives with; the FPR is the number a defendant who will not
+reoffend lives with.
+:::
+
+### Exercise 3. Separation and sufficiency together
+
+(a) A rule has the same FPR, FNR, PPV and NPV in two groups, with
+$0 < \text{FPR} < 1$. Show that the two groups have the same
+prevalence.
+
+(b) The reversed rule $\hat Y = 1 - Y$ flags the people who do not
+reoffend and no one else. Compute its four rates in any group. Which criteria does
+it satisfy, whatever the base rates? Which condition in (a) rules it
+out?
+
+(c) An auditor finds a rule that satisfies separation and sufficiency
+in two groups. What should they check before calling it fair, and who
+would be misled if they did not?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a), if $\text{TPR} > 0$, solve the identity for $p/(1-p)$. If
+$\text{TPR} = 0$, look at NPV instead.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+With $\text{TPR} = 0$, the people not flagged are all of the
+reoffenders and a share $1 - \text{FPR}$ of the others, so
+$\text{NPV} = \frac{(1-p)(1-\text{FPR})}{(1-p)(1-\text{FPR}) + p}$.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) If $\text{TPR} > 0$ then, since $\text{FPR} > 0$, the PPV is
+strictly between 0 and 1, and
+$\frac{p}{1-p} = \frac{\text{FPR}}{1-\text{FNR}} \cdot \frac{\text{PPV}}{1-\text{PPV}}$.
+The right side is the same in both groups, so the odds, and so the
+prevalences, are equal. If $\text{TPR} = 0$, the NPV in hint 2 is
+strictly decreasing in $p$ when $\text{FPR} < 1$, so equal NPVs give
+equal prevalences. This is the book's Proposition 5 (page 67), with
+the condition $\text{FPR} < 1$, which its proof passes over.
+
+(b) $\text{FPR} = 1$, $\text{FNR} = 1$, $\text{PPV} = 0$,
+$\text{NPV} = 0$ in every group: it satisfies separation and
+sufficiency for any base rates. The condition $\text{FPR} < 1$ rules
+it out.
+
+(c) Whether the base rates really are equal, and whether the rule is
+degenerate, with an FPR of 0 or 1. A rule that is wrong about everyone
+passes both tests. The people misled are those who read "fair by two
+criteria" as "good": the people it decides about and whoever relies on
+it.
+:::
+
+### Exercise 4. Two calibrated scores
+
+Take the two groups of exercise 1, with prevalences $0.5$ and $0.2$.
+
+(a) Score 1 gives everyone the overall base rate, $0.35$. Show that it
+is calibrated in the whole population. Is it calibrated by group?
+
+(b) Score 2 gives each person in group a their true outcome, 0 or 1,
+and each person in group b the value $0.2$. Show that it is
+calibrated within each group.
+
+(c) Select everyone whose score 2 is at least $0.5$. Compute FPR, FNR
+and NPV by group. Which criterion does the selection satisfy, and
+which does it fail?
+
+(d) Score 2 is calibrated by group, which the replies to ProPublica
+treated as the test of fairness. Who does score 2 serve, and who would
+you have to explain it to?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+Calibrated means: among the people given score $r$, a share $r$ have
+$Y = 1$. Check it for each value the score takes.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) Seven of the twenty people reoffend, so among everyone scored
+$0.35$ the share is $0.35$: calibrated. By group it is not: among
+group a's people scored $0.35$ the share is $0.5$.
+
+(b) In group a the score is the outcome; in group b everyone is scored
+$0.2$ and two in ten reoffend.
+
+(c) Group a: everyone who reoffends is selected and nobody else, so
+FPR 0, FNR 0, NPV 1. Group b: nobody is selected, so FPR 0, FNR 1, NPV
+$0.8$. Separation fails as badly as it can (FNR 0 against 1), and the
+NPVs differ, so the selection is not sufficient either, although the
+score is calibrated by group: thresholding loses calibration.
+
+(d) It serves whoever wants group a sorted and group b left alone. The
+people in group b who reoffend are never selected, and those who do
+not are never told apart from those who do. The book's example is on
+page 94.
+:::
+
+## In class
+
+### Discussion 1: the rule you brought
+
+Use the rule or score you brought, which selects some people and has
+two ways of being wrong. If you did not bring one, choose: a spam
+filter; a university's offer rule; a bank's credit decision; a
+hospital's triage score; an airport security check.
+
+1. Name the two errors and who pays for each. Of FPR, FNR, PPV and
+   NPV, which would each of those people want equal across groups, and
+   which would the decision maker want equal?
+2. ProPublica wrote that Black defendants who did not reoffend were
+   nearly twice as likely as white defendants to be labeled higher
+   risk. Which criterion is that sentence about? The replies said that
+   the score was equally accurate for both groups. Which criterion is
+   that about?
+3. For your rule, suppose the base rates differ between two groups.
+   Which of the two criteria in question 2 would you give up, and who
+   would you explain it to?
+
+::: {.callout-note .answer title="Some examples" collapse="true"}
+A spam filter's false positive falls on the sender and on the reader
+who misses a message; its false negative on the reader's time. The
+reader wants a low FNR, the sender a low FPR, and the provider a high
+PPV so that the spam folder is trusted. An offer rule's false positive
+is an admitted student who fails; its false negative is a rejected
+student who would have passed. The applicant wants equal FNR, the
+admissions office equal PPV. ProPublica's sentence is about the FPR,
+part of separation; the replies are about the PPV (predictive parity,
+a relaxation of sufficiency) and calibration.
+:::
+
+### Coding 1: COMPAS from ProPublica's file
+
+You need `dplyr` and `ggplot2`. ProPublica published the data behind
+its analysis: one row per defendant, with names and dates of birth as
+well as scores and outcomes. Keep only the three columns the analysis
+needs. `decile_score` is the COMPAS decile, 1 to 10, and
+`two_year_recid` is 1 if the person was arrested again within two
+years.
+
+```{r compas_starter, eval=FALSE}
+library(dplyr)
+library(ggplot2)
+compas <- read.csv("https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv") |>
+  filter(race %in% c("African-American", "Caucasian")) |>
+  select(race, decile_score, two_year_recid)
+
+rates_at <- function(cutoff) {
+  compas |>
+    mutate(flag = decile_score >= cutoff) |>
+    group_by(race) |>
+    summarize(FPR = mean(flag[two_year_recid == 0]),
+              FNR = # ...
+              PPV = # ...
+              selected = mean(flag),
+              .groups = "drop") |>
+    mutate(cutoff = cutoff)
+}
+rates_at(5)
+```
+
+1. Complete `FNR` and `PPV`. Each is a mean over the right people,
+   like the `FPR` line. Check `rates_at(5)` against the lecture: FPR
+   45 and 23 percent, PPV 63 and 59 percent.
+2. Compute the rates at every cutoff from 2 to 10, with
+   `bind_rows(lapply(2:10, rates_at))`, and plot FPR, then FNR, against
+   the cutoff with one line per group. Is there a cutoff at which the
+   two groups have the same FPR? The same FNR?
+3. A defendant whose decile is exactly 5 has been flagged and asks
+   what the flag means for someone like them. Compute the share
+   re-arrested among defendants at decile 5, by group, and compare it
+   with the PPV. What does the flag tell them, and what does it leave
+   out?
+
+```{r cutoffs_starter, eval=FALSE}
+cutoff <- c("African-American" = # ...
+            "Caucasian" = # ...
+compas |>
+  mutate(flag = decile_score >= cutoff[race]) |>
+  group_by(race) |>
+  summarize(FPR = mean(flag[two_year_recid == 0]),
+            FNR = # ...
+            PPV = # ...
+            selected = mean(flag))
+```
+
+4. The code above gives each group its own cutoff. Find a pair of
+   cutoffs at which the two groups' FPRs and FNRs are both within two
+   percentage points. What has happened to the PPVs? To the shares
+   selected?
+5. At your pair of cutoffs, describe a Black defendant and a white
+   defendant with the same decile who are treated differently. Which
+   criterion did you satisfy, which did you give up, and who do you
+   owe the explanation to: the defendant who is now flagged, the one
+   who is not, or the judge who reads the same score two ways? Is the
+   prediction now fairer?
+
+::: {.callout-tip .answer collapse="true" title="Hint 1"}
+`FNR` is a mean of `!flag` among `two_year_recid == 1`; `PPV` is a
+mean of `two_year_recid == 1` among `flag`.
+:::
+
+::: {.callout-tip .answer collapse="true" title="Hint 2"}
+For step 4, try a higher cutoff for the group with the higher FPR.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+```{r compas_solution, fig.height=3.2, fig.width=9, fig.alt="Two panels. Left, the false positive rate against the cutoff from 2 to 10 for the two groups: the African-American line is above the Caucasian line at every cutoff. Right, the false negative rate: the Caucasian line is above at every cutoff."}
+compas <- read.csv("https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv") |>
+  filter(race %in% c("African-American", "Caucasian")) |>
+  select(race, decile_score, two_year_recid)
+
+rates_at <- function(cutoff) {
+  compas |>
+    mutate(flag = decile_score >= cutoff) |>
+    group_by(race) |>
+    summarize(FPR = mean(flag[two_year_recid == 0]),
+              FNR = mean(!flag[two_year_recid == 1]),
+              PPV = mean(two_year_recid[flag] == 1),
+              selected = mean(flag),
+              .groups = "drop") |>
+    mutate(cutoff = cutoff)
+}
+rates_at(5)
+
+sweep <- bind_rows(lapply(2:10, rates_at))
+sweep |>
+  tidyr::pivot_longer(c(FPR, FNR), names_to = "rate") |>
+  ggplot(aes(cutoff, value, color = race)) +
+  geom_line() + geom_point() +
+  facet_wrap(~ rate) +
+  scale_x_continuous(breaks = 2:10)
+
+compas |>
+  filter(decile_score == 5) |>
+  group_by(race) |>
+  summarize(people = n(), rearrested = mean(two_year_recid))
+
+cutoff <- c("African-American" = 6, "Caucasian" = 4)
+compas |>
+  mutate(flag = decile_score >= cutoff[race]) |>
+  group_by(race) |>
+  summarize(FPR = mean(flag[two_year_recid == 0]),
+            FNR = mean(!flag[two_year_recid == 1]),
+            PPV = mean(two_year_recid[flag] == 1),
+            selected = mean(flag))
+```
+
+Step 1: FPR 0.448 and 0.235, FNR 0.280 and 0.477, PPV 0.630 and 0.591,
+selected 0.588 and 0.348, for Black and white defendants.
+
+Step 2: no. FPR is higher for Black defendants at every cutoff from 2
+to 10, and FNR higher for white defendants at every one. (A cutoff of 1
+selects everyone and equalizes both trivially.)
+
+Step 3: at decile 5, 48 percent of Black defendants and 46 percent of
+white defendants were re-arrested, below either PPV. The PPV averages
+over deciles 5 to 10, so the flag tells a decile-5 defendant less than
+it seems to: their own rate is closer to even.
+
+Step 4: cutoffs 6 for Black defendants and 4 for white: FPR 0.343 and
+0.350, FNR 0.372 and 0.360, PPV 0.659 and 0.543, selected 0.489 and
+0.464. Separation nearly holds; predictive parity is lost by twelve
+points, as the identity requires; the shares selected come close as a
+by-product. The pairs (7, 5), (8, 6) and (10, 9) also bring both rates
+within two points, and each splits the PPVs further.
+
+Step 5: with 6 and 4, a Black defendant at decile 4 or 5 is not
+flagged, and a white defendant at the same decile is. The score means
+different things for different people, and the judge has to know
+which. Whether that is fairer depends on which error you think the
+county owes equally, which is discussion 2.
+:::
+
+### Problem 1. The fraud checks
+
+The Department for Work and Pensions scores requests for a universal
+credit advance, and refers those it scores high risk to a caseworker,
+who approves or declines them. For non-UK against UK nationals, its
+fairness assessment reports two ratios: requests referred $2.27$ times
+as often, and referrals declined, which it counts as correct, $0.97$
+times as often, not significantly different from 1. It reports no
+error rate. Take a decline as $Y = 1$ and a referral as $\hat Y = 1$,
+and write $f$ for the share of a group's requests that are referred.
+
+(a) Show that correct referrals are a share $f \cdot \text{PPV} = p
+\cdot \text{TPR}$ of all of a group's requests, and incorrect
+referrals a share $f\,(1 - \text{PPV}) = (1 - p)\,\text{FPR}$.
+
+(b) Non-UK against UK, what is the ratio of correct referrals per
+request? Show that the ratio of incorrect referrals per request is
+above $2.27$.
+
+(c) Suppose both groups had the same TPR and the same FPR. Write the
+two ratios in (b) in terms of the prevalences $p_{\text{non-UK}}$ and
+$p_{\text{UK}}$. Can both be above 1? What do you conclude?
+
+(d) Show that $\text{FPR} = f\,(1 - \text{PPV}) / (1 - p)$. Taking the
+two PPVs as equal, show that the ratio of non-UK to UK FPRs is at
+least $2.27\,(1 - p_{\text{UK}})$. If fewer than one UK request in ten
+would be declined on review, how much more often are non-UK requests
+that a caseworker would approve referred?
+
+(e) The $0.97$ is not significantly different from 1. Does your
+conclusion in (c) depend on it?
+
+(f) The department judged the model "reasonable and proportionate" to
+keep using. Which number would a claimant who did nothing wrong want
+to see, and who could have published it?
+
+::: {.callout-tip .answer collapse="true" title="Hint 1"}
+For (a): the referred share times the share of referrals that are
+correct is the share of all requests that are both referred and
+declined.
+:::
+
+::: {.callout-tip .answer collapse="true" title="Hint 2"}
+For (b): the non-UK PPV is $0.97$ times the UK PPV, so $1 -
+\text{PPV}$ is larger for non-UK nationals.
+:::
+
+::: {.callout-note .answer title="Solution" collapse="true"}
+(a) $f \cdot \text{PPV} = P(\hat Y = 1)\,P(Y = 1 \mid \hat Y = 1) =
+P(\hat Y = 1, Y = 1) = P(Y = 1)\,P(\hat Y = 1 \mid Y = 1) = p \cdot
+\text{TPR}$, and in the same way $f\,(1 - \text{PPV}) = P(\hat Y = 1,
+Y = 0) = (1 - p)\,\text{FPR}$.
+
+(b) Correct referrals: $2.27 \times 0.97 = 2.20$. Incorrect referrals:
+$2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 -
+\text{PPV}_{\text{UK}}}$, and the fraction is above 1 because the
+non-UK PPV is the smaller, so the ratio is above $2.27$.
+
+(c) $p_{\text{non-UK}} / p_{\text{UK}}$ and $(1 - p_{\text{non-UK}}) /
+(1 - p_{\text{UK}})$. If the first is above 1 the second is below it,
+so they cannot both be above 1. Both observed ratios are, so the
+groups do not have the same TPR and FPR: the error rates differ. This
+describes the reported year's referrals; it is not an inference about
+the rates behind them.
+
+(d) Divide the incorrect referrals by the share who would not be
+declined, $1 - p$. The ratio of FPRs is
+$2.27 \times \frac{1 - \text{PPV}_{\text{non-UK}}}{1 - \text{PPV}_{\text{UK}}} \times \frac{1 - p_{\text{UK}}}{1 - p_{\text{non-UK}}}$.
+With equal PPVs the middle factor is 1, and the last is at least $1 -
+p_{\text{UK}}$ because $1 - p_{\text{non-UK}} \leq 1$. With
+$p_{\text{UK}} < 0.1$ the ratio is above $2.27 \times 0.9 = 2.04$:
+more than twice as often.
+
+(e) No. With the PPV ratio at 1, the incorrect-referral ratio is
+exactly $2.27$, still above 1. The conclusion fails only if the
+non-UK PPV is well above the UK one: with a UK PPV of $0.5$, for
+example, a non-UK PPV above about $0.78$.
+
+(f) The FPR: the chance that a request which should be approved is
+referred anyway. The department could estimate it. It already reviews
+a random sample of requests the model scores as low risk, to monitor
+false negatives (annex, paragraph 31). With the reviews of referred
+requests, that is what an estimate of each group's prevalence needs,
+and (d) needs the prevalence.
+:::
+
+### Discussion 2: which criterion
+
+1. Of independence, separation and sufficiency, which is the better
+   fairness measure for COMPAS, and why? On that measure, is COMPAS
+   fair? Is your answer the same for the fraud checks?
+2. Equal predictive values and equal error rates cannot both hold when
+   base rates differ. How should a county, or a department, decide
+   which to require and which to give up? Possible grounds: who bears
+   the cost; which error is worse here; the history that produced the
+   base rates; the purpose the rule serves. Which would you put first,
+   and which would you refuse to use?
+3. Whichever you chose, name the people who lose by it and write the
+   sentence you would say to them.
+
+::: {.callout-note .answer title="Some directions" collapse="true"}
+Separation, because the people the rule errs on did nothing to earn
+the error, and in pretrial decisions the error can be detention.
+Sufficiency, because a judge or caseworker who cannot trust what a
+flag means will discount it. Independence rarely, since it ignores the
+outcome, though for the fraud checks the referral itself is a burden
+on everyone referred. Previous years' answers to question 2: a
+normative judgment; who bears the cost; which error rate; case by
+case; historical injustice. The point to press: the table does not
+settle what is fair, and the choice has owners.
+:::
+
+### Discussion 3: the kidney equation
+
+Kidney function is estimated from blood creatinine, age and sex. In
+2021 the US equation also multiplied the estimate by 1.159 for Black
+patients, who in the data it was fitted to had higher creatinine at
+the same measured function. In a validation set it overestimated Black
+participants' measured function by a median of 3.7 (ml/min per 1.73
+m²). Refitted without race, it underestimated Black participants' by
+3.6 and overestimated others' by 3.9.
+
+1. Neither equation is right on average for Black patients. Which
+   error is worse here, an estimate too high or one too low, and for
+   whom?
+2. US transplant programs restored waiting time to Black candidates
+   whose disease the old equation made look milder. Who pays for that
+   correction, and is it owed?
+3. A second blood marker, cystatin C, narrows the gap without race.
+   Suppose some hospitals can measure it and others cannot. Should the
+   equation without the second marker use race in the hospitals that
+   cannot? Who decides, and who is it explained to?
+
+::: {.callout-note .answer title="Some directions" collapse="true"}
+An estimate too high makes disease look milder, so diagnosis, referral
+and listing come later; an estimate too low brings them sooner, and
+can mean treating some people as sicker than they are. The transplant
+network's view was that the first error had fallen on many Black
+patients. Restoring waiting time moves those candidates up the list,
+so others move down: the correction has a cost, and whether it is owed
+is the question. On the
+third question, using race where the second marker is not available
+keeps the old error's direction for some patients and not others,
+depending on the hospital; dropping it everywhere accepts the new
+error everywhere. Neither is neutral.
+:::
+
+## If there is time: three views
+
+1. The middle view says to treat seemingly dissimilar people similarly
+   when the dissimilarity is the result of something that should be
+   discounted. Give one setting where that seems reasonable and one
+   where it seems less defensible, and say what differs between them.
+2. For two of the three criteria, say which view of equality of
+   opportunity it fits, and where the fit fails.
+3. In one sentence: what do you take away from the impossibility
+   results?
+
+::: {.callout-note .answer title="Some directions" collapse="true"}
+Calibration by group fits the narrow view. Demographic parity
+resembles the broad view, but at a single decision rather than over a
+life. Error rate parity has no single principle behind it; the book
+ties it both to the middle view (an unequal burden of mistakes
+perpetuates disadvantage) and to the narrow view (collect more data
+and assess people more accurately as they are), page 101. For the
+last question: the trade-off is a fact about base rates, so a choice
+has to be made and defended; it is not a reason to stop asking.
+:::
+
+## For next time
+
+Bring one decision in which an attribute is used, or deliberately not
+used, with one route by which it could affect the outcome, and whether
+that route is fair. One sentence each.
+
+## References
+
+- Angwin, Julia, Jeff Larson, Surya Mattu and Lauren Kirchner,
+  "Machine Bias," *ProPublica*, 23 May 2016,
+  <https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing>;
+  data: ProPublica, `compas-scores-two-years.csv`,
+  <https://github.com/propublica/compas-analysis>.
+- Barocas, Solon, Moritz Hardt and Arvind Narayanan, *Fairness and
+  Machine Learning: Limitations and Opportunities* (MIT Press, 2023),
+  <https://fairmlbook.org>, chapter 3, Proposition 5, page 67; chapter
+  4, pages 94 and 101.
+- Chouldechova, Alexandra, "Fair Prediction with Disparate Impact: A
+  Study of Bias in Recidivism Prediction Instruments," *Big Data* 5(2),
+  2017, 153--163, <https://doi.org/10.1089/big.2016.0047>.
+- Department for Work and Pensions, "UC Advances Model: Fairness
+  Assessment," with its Statistical Annex (1 April 2024 to 31 March
+  2025), published 17 July 2025,
+  <https://www.gov.uk/government/publications/fairness-assessment-including-statistical-analysis-of-the-universal-credit-advances-machine-learning-model-1-april-2024-to-31-march-2025>,
+  Tables 3 and 4 and annex paragraph 31.
+- Inker, Lesley A., Nwamaka D. Eneanya, Josef Coresh and colleagues,
+  "New Creatinine- and Cystatin C--Based Equations to Estimate GFR
+  without Race," *New England Journal of Medicine* 385(19), 2021,
+  1737--1749, <https://doi.org/10.1056/NEJMoa2102953>, abstract and
+  Table 2.
+- Organ Procurement and Transplantation Network, via the Health
+  Resources and Services Administration, "Early Monitoring Report
+  Shows Black Kidney Candidates Are Receiving Waiting Time
+  Modifications After Implementation of New Policies," 4 December
+  2023,
+  <https://www.hrsa.gov/optn/news-events/news/early-monitoring-report-shows-black-kidney-candidates-are-receiving-waiting-time-modifications-after-implementation-of-new-policies/>.
