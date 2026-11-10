@@ -603,8 +603,8 @@ exceed $1$. So the TPRs differ, or the FPRs do, or both. The argument
 uses the reported ratios for one year, a description of what happened
 rather than an inference about the rates behind it. The $0.97$ is not
 significantly different from $1$, and the argument goes through with
-it set to $1$; it would fail only if the non-UK predictive value were
-well above the UK one.
+it set to $1$. It needs both ratios above $1$, which holds for
+predictive-value ratios in a range around $1$ but not for every ratio.
 
 More can be said about the false positive rate. Dividing the share of
 incorrect referrals by the share of requests that would not be

@@ -285,7 +285,7 @@ Note
 <h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
 <p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the discussions, the problem and the coding under “In class,” in that order. Discussions are in groups of three or four, then with the room. The problem, and the coding, are gone through as soon as the room has tried them.</p>
 <p>Every item is about a rule that selects some people: for detention, for a fraud check, for a treatment. The same table of who was selected and what happened supports different numbers, and a disagreement about fairness is often a disagreement about which number a fair rule has to equalize. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice of criterion could be justified to. The arithmetic narrows the answer; it does not give it.</p>
-<p>Notation as in the lecture. <span class="math inline">\(Y = 1\)</span> is the bad outcome; <span class="math inline">\(\hat Y = 1\)</span> means flagged, or selected: picked out by the rule. <span class="math inline">\(A\)</span> is the group and <span class="math inline">\(p = P(Y = 1)\)</span> the prevalence within a group. Within a group, <span class="math inline">\(\text{FPR} = P(\hat Y = 1 \mid Y = 0)\)</span>, <span class="math inline">\(\text{FNR} = P(\hat Y = 0
+<p>Notation as in the lecture. <span class="math inline">\(Y = 1\)</span> is the bad outcome; <span class="math inline">\(\hat Y = 1\)</span> means flagged, or selected: picked out by the rule. Where a rule selects people for something good, an offer or a loan, the coding runs the other way, as in the book’s examples: <span class="math inline">\(Y = 1\)</span> is success and <span class="math inline">\(\hat Y = 1\)</span> is the offer. <span class="math inline">\(A\)</span> is the group and <span class="math inline">\(p = P(Y = 1)\)</span> the prevalence within a group. Within a group, <span class="math inline">\(\text{FPR} = P(\hat Y = 1 \mid Y = 0)\)</span>, <span class="math inline">\(\text{FNR} = P(\hat Y = 0
 \mid Y = 1)\)</span>, <span class="math inline">\(\text{TPR} = 1 - \text{FNR}\)</span>, <span class="math inline">\(\text{PPV} = P(Y = 1
 \mid \hat Y = 1)\)</span> and <span class="math inline">\(\text{NPV} = P(Y = 0 \mid \hat Y = 0)\)</span>.</p>
 </section>
@@ -355,7 +355,7 @@ Note
 <ol type="a">
 <li><p>Starting from <span class="math inline">\(\text{PPV} = \frac{p\,(1-\text{FNR})}{p\,(1-\text{FNR}) + (1-p)\,\text{FPR}}\)</span>, derive <span class="math inline">\(\text{FPR} = \frac{p}{1-p} \cdot
 \frac{1-\text{PPV}}{\text{PPV}} \cdot (1-\text{FNR})\)</span>, then solve it for FNR.</p></li>
-<li><p>Two groups, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, have prevalences <span class="math inline">\(p_a \neq p_b\)</span>. A rule has the same PPV in both groups and the same FNR in both. Find <span class="math inline">\(\text{FPR}_a / \text{FPR}_b\)</span> in terms of <span class="math inline">\(p_a\)</span> and <span class="math inline">\(p_b\)</span>, and evaluate it with COMPAS’s prevalences, <span class="math inline">\(0.514\)</span> and <span class="math inline">\(0.394\)</span>.</p></li>
+<li><p>Two groups, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, have prevalences <span class="math inline">\(p_a \neq p_b\)</span>. A rule has the same PPV in both groups, strictly between 0 and 1, and the same FNR in both. Find <span class="math inline">\(\text{FPR}_a / \text{FPR}_b\)</span> in terms of <span class="math inline">\(p_a\)</span> and <span class="math inline">\(p_b\)</span>, and evaluate it with COMPAS’s prevalences, <span class="math inline">\(0.514\)</span> and <span class="math inline">\(0.394\)</span>.</p></li>
 <li><p>At the county’s cutoff COMPAS had PPV <span class="math inline">\(0.630\)</span> and <span class="math inline">\(0.591\)</span> and FNR <span class="math inline">\(0.280\)</span> and <span class="math inline">\(0.477\)</span>, and the observed ratio of FPRs was <span class="math inline">\(1.91\)</span>. Write that ratio as a product of three factors, one for each term of the identity, and compute each. Which factor takes the ratio above your answer to (b)?</p></li>
 <li><p>A vendor reports equal predictive values and a journalist reports unequal false positive rates for the same rule. Which of them has made an arithmetic mistake? Who is each number useful to?</p></li>
 </ol>
@@ -439,7 +439,7 @@ Note
 <ol type="a">
 <li><p>Score 1 gives everyone the overall base rate, <span class="math inline">\(0.35\)</span>. Show that it is calibrated in the whole population. Is it calibrated by group?</p></li>
 <li><p>Score 2 gives each person in group a their true outcome, 0 or 1, and each person in group b the value <span class="math inline">\(0.2\)</span>. Show that it is calibrated within each group.</p></li>
-<li><p>Select everyone whose score 2 is at least <span class="math inline">\(0.5\)</span>. Compute FPR, FNR and NPV by group. Which criterion does the selection satisfy, and which does it fail?</p></li>
+<li><p>Select everyone whose score 2 is at least <span class="math inline">\(0.5\)</span>. Compute the share selected, FPR, FNR and NPV by group. Which of the three criteria, if any, does the selection satisfy?</p></li>
 <li><p>Score 2 is calibrated by group, which the replies to ProPublica treated as the test of fairness. Who does score 2 serve, and who would you have to explain it to?</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled" title="Hint 1">
@@ -532,7 +532,7 @@ Note
 <h3 class="anchored" data-anchor-id="discussion-2-which-criterion">Discussion 2: which criterion</h3>
 <ol type="1">
 <li>Of independence, separation and sufficiency, which is the better fairness measure for COMPAS, and why? On that measure, is COMPAS fair? Is your answer the same for the fraud checks?</li>
-<li>Equal predictive values and equal error rates cannot both hold when base rates differ. How should a county, or a department, decide which to require and which to give up? Possible grounds: who bears the cost; which error is worse here; the history that produced the base rates; the purpose the rule serves. Which would you put first, and which would you refuse to use?</li>
+<li>Equal predictive values and equal error rates cannot both hold when base rates differ, except for a perfect rule or one that is wrong about everyone. How should a county, or a department, decide which to require and which to give up? Possible grounds: who bears the cost; which error is worse here; the history that produced the base rates; the purpose the rule serves. Which would you put first, and which would you refuse to use?</li>
 <li>Whichever you chose, name the people who lose by it and write the sentence you would say to them.</li>
 </ol>
 </section>

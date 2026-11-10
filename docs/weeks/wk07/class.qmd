@@ -39,7 +39,10 @@ criterion could be justified to. The arithmetic narrows the answer; it
 does not give it.
 
 Notation as in the lecture. $Y = 1$ is the bad outcome; $\hat Y = 1$
-means flagged, or selected: picked out by the rule. $A$ is the group
+means flagged, or selected: picked out by the rule. Where a rule
+selects people for something good, an offer or a loan, the coding
+runs the other way, as in the book's examples: $Y = 1$ is success and
+$\hat Y = 1$ is the offer. $A$ is the group
 and $p = P(Y = 1)$ the prevalence within a group. Within a group,
 $\text{FPR} = P(\hat Y = 1 \mid Y = 0)$, $\text{FNR} = P(\hat Y = 0
 \mid Y = 1)$, $\text{TPR} = 1 - \text{FNR}$, $\text{PPV} = P(Y = 1
@@ -102,7 +105,8 @@ derive $\text{FPR} = \frac{p}{1-p} \cdot
 for FNR.
 
 (b) Two groups, $a$ and $b$, have prevalences $p_a \neq p_b$. A rule
-has the same PPV in both groups and the same FNR in both. Find
+has the same PPV in both groups, strictly between 0 and 1, and the
+same FNR in both. Find
 $\text{FPR}_a / \text{FPR}_b$ in terms of $p_a$ and $p_b$, and evaluate
 it with COMPAS's prevalences, $0.514$ and $0.394$.
 
@@ -162,9 +166,9 @@ is calibrated in the whole population. Is it calibrated by group?
 and each person in group b the value $0.2$. Show that it is
 calibrated within each group.
 
-(c) Select everyone whose score 2 is at least $0.5$. Compute FPR, FNR
-and NPV by group. Which criterion does the selection satisfy, and
-which does it fail?
+(c) Select everyone whose score 2 is at least $0.5$. Compute the share
+selected, FPR, FNR and NPV by group. Which of the three criteria, if
+any, does the selection satisfy?
 
 (d) Score 2 is calibrated by group, which the replies to ProPublica
 treated as the test of fairness. Who does score 2 serve, and who would
@@ -304,7 +308,8 @@ to see, and who could have published it?
    fairness measure for COMPAS, and why? On that measure, is COMPAS
    fair? Is your answer the same for the fraud checks?
 2. Equal predictive values and equal error rates cannot both hold when
-   base rates differ. How should a county, or a department, decide
+   base rates differ, except for a perfect rule or one that is wrong
+   about everyone. How should a county, or a department, decide
    which to require and which to give up? Possible grounds: who bears
    the cost; which error is worse here; the history that produced the
    base rates; the purpose the rule serves. Which would you put first,

@@ -68,7 +68,10 @@ criterion could be justified to. The arithmetic narrows the answer; it
 does not give it.
 
 Notation as in the lecture. $Y = 1$ is the bad outcome; $\hat Y = 1$
-means flagged, or selected: picked out by the rule. $A$ is the group
+means flagged, or selected: picked out by the rule. Where a rule
+selects people for something good, an offer or a loan, the coding
+runs the other way, as in the book's examples: $Y = 1$ is success and
+$\hat Y = 1$ is the offer. $A$ is the group
 and $p = P(Y = 1)$ the prevalence within a group. Within a group,
 $\text{FPR} = P(\hat Y = 1 \mid Y = 0)$, $\text{FNR} = P(\hat Y = 0
 \mid Y = 1)$, $\text{TPR} = 1 - \text{FNR}$, $\text{PPV} = P(Y = 1
@@ -140,7 +143,8 @@ shares flagged differ, so independence fails.
 and its PPV $4/5$, so predictive parity is lost. Group a has five
 people who do not reoffend, so its FPR is a multiple of $1/5$ and
 cannot be $1/8$. Flagging three reoffenders: FPR $0$ against $1/8$,
-FNR $2/5$ against $0$, so separation now fails the other way.
+FNR $2/5$ against $0$: the FPR gap reverses and the FNR gap widens,
+so separation still fails.
 
 (e) Independence. A perfect rule flags the people who reoffend and
 no one else, 50 percent of group a and 20 percent of group b, so the gap
@@ -163,7 +167,8 @@ derive $\text{FPR} = \frac{p}{1-p} \cdot
 for FNR.
 
 (b) Two groups, $a$ and $b$, have prevalences $p_a \neq p_b$. A rule
-has the same PPV in both groups and the same FNR in both. Find
+has the same PPV in both groups, strictly between 0 and 1, and the
+same FNR in both. Find
 $\text{FPR}_a / \text{FPR}_b$ in terms of $p_a$ and $p_b$, and evaluate
 it with COMPAS's prevalences, $0.514$ and $0.394$.
 
@@ -191,7 +196,7 @@ For (b), write the identity for each group and divide.
 multiply by $\frac{p}{1-p}\,(1-\text{FNR})$. Then
 $\text{FNR} = 1 - \text{FPR} \cdot \frac{1-p}{p} \cdot \frac{\text{PPV}}{1-\text{PPV}}$.
 
-(b) The PPV and FNR terms cancel:
+(b) With $0 < \text{PPV} < 1$ both FPRs are positive, and the PPV and FNR terms cancel:
 $\text{FPR}_a / \text{FPR}_b = \frac{p_a/(1-p_a)}{p_b/(1-p_b)}$, the
 ratio of the groups' odds of the outcome. With $0.514/0.486 = 1.058$
 and $0.394/0.606 = 0.650$, it is $1.63$.
@@ -201,8 +206,10 @@ $(1-\text{PPV})/\text{PPV}$, $(0.370/0.630)/(0.409/0.591) = 0.85$; the
 ratio of TPRs, $0.720/0.523 = 1.38$. The TPR factor takes it above
 1.63, and the PPV factor pulls the other way.
 
-(d) Neither. Once one of the two is fixed, the identity says the other
-follows from the base rates. The PPV is the number a judge reading
+(d) Neither. The two reports can both be true: the identity ties the
+FPR to the base rate, the PPV and the FNR, so fixing the PPV leaves the
+FPR free to move with the FNR. With different base rates, equal PPVs
+and equal FNRs force unequal FPRs, as in (b). The PPV is the number a judge reading
 the flag lives with; the FPR is the number a defendant who will not
 reoffend lives with.
 :::
@@ -266,9 +273,9 @@ is calibrated in the whole population. Is it calibrated by group?
 and each person in group b the value $0.2$. Show that it is
 calibrated within each group.
 
-(c) Select everyone whose score 2 is at least $0.5$. Compute FPR, FNR
-and NPV by group. Which criterion does the selection satisfy, and
-which does it fail?
+(c) Select everyone whose score 2 is at least $0.5$. Compute the share
+selected, FPR, FNR and NPV by group. Which of the three criteria, if
+any, does the selection satisfy?
 
 (d) Score 2 is calibrated by group, which the replies to ProPublica
 treated as the test of fairness. Who does score 2 serve, and who would
@@ -288,8 +295,10 @@ group a's people scored $0.35$ the share is $0.5$.
 $0.2$ and two in ten reoffend.
 
 (c) Group a: everyone who reoffends is selected and nobody else, so
-FPR 0, FNR 0, NPV 1. Group b: nobody is selected, so FPR 0, FNR 1, NPV
-$0.8$. Separation fails as badly as it can (FNR 0 against 1), and the
+50 percent selected, FPR 0, FNR 0, NPV 1. Group b: nobody is selected,
+so 0 percent selected, FPR 0, FNR 1, NPV $0.8$. None of the three
+holds. Independence fails (50 percent against 0); separation fails as
+badly as it can (FNR 0 against 1), although the FPRs agree; and the
 NPVs differ, so the selection is not sufficient either, although the
 score is calibrated by group: thresholding loses calibration.
 
@@ -324,8 +333,9 @@ hospital's triage score; an airport security check.
 A spam filter's false positive falls on the sender and on the reader
 who misses a message; its false negative on the reader's time. The
 reader wants a low FNR, the sender a low FPR, and the provider a high
-PPV so that the spam folder is trusted. An offer rule's false positive
-is an admitted student who fails; its false negative is a rejected
+PPV so that the spam folder is trusted. An offer rule selects for the
+good outcome, so its coding runs the other way ($Y = 1$ is passing):
+its false positive is an admitted student who fails; its false negative is a rejected
 student who would have passed. The applicant wants equal FNR, the
 admissions office equal PPV. ProPublica's sentence is about the FPR,
 part of separation; the replies are about the PPV (predictive parity,
@@ -408,7 +418,7 @@ For step 4, try a higher cutoff for the group with the higher FPR.
 :::
 
 ::: {.callout-note .answer title="Solution" collapse="true"}
-```{r compas_solution, fig.height=3.2, fig.width=9, fig.alt="Two panels. Left, the false positive rate against the cutoff from 2 to 10 for the two groups: the African-American line is above the Caucasian line at every cutoff. Right, the false negative rate: the Caucasian line is above at every cutoff."}
+```{r compas_solution, fig.height=3.2, fig.width=9, fig.alt="Two panels. Left, the false negative rate against the cutoff from 2 to 10 for the two groups: the Caucasian line is above the African-American line at every cutoff. Right, the false positive rate: the African-American line is above at every cutoff."}
 compas <- read.csv("https://raw.githubusercontent.com/propublica/compas-analysis/master/compas-scores-two-years.csv") |>
   filter(race %in% c("African-American", "Caucasian")) |>
   select(race, decile_score, two_year_recid)
@@ -548,10 +558,10 @@ p_{\text{UK}}$ because $1 - p_{\text{non-UK}} \leq 1$. With
 $p_{\text{UK}} < 0.1$ the ratio is above $2.27 \times 0.9 = 2.04$:
 more than twice as often.
 
-(e) No. With the PPV ratio at 1, the incorrect-referral ratio is
-exactly $2.27$, still above 1. The conclusion fails only if the
-non-UK PPV is well above the UK one: with a UK PPV of $0.5$, for
-example, a non-UK PPV above about $0.78$.
+(e) No. With the PPV ratio at 1, both ratios are $2.27$, still above 1,
+and the conclusion stands. It needs both ratios above 1, which holds
+for PPV ratios in a range around 1 but not for every ratio: with a UK
+PPV of $0.5$, for a non-UK PPV between about $0.22$ and $0.78$.
 
 (f) The FPR: the chance that a request which should be approved is
 referred anyway. The department could estimate it. It already reviews
@@ -567,7 +577,8 @@ and (d) needs the prevalence.
    fairness measure for COMPAS, and why? On that measure, is COMPAS
    fair? Is your answer the same for the fraud checks?
 2. Equal predictive values and equal error rates cannot both hold when
-   base rates differ. How should a county, or a department, decide
+   base rates differ, except for a perfect rule or one that is wrong
+   about everyone. How should a county, or a department, decide
    which to require and which to give up? Possible grounds: who bears
    the cost; which error is worse here; the history that produced the
    base rates; the purpose the rule serves. Which would you put first,
