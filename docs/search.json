@@ -102,14 +102,14 @@
     "href": "weeks/wk07/slides.html#compas-in-the-identity",
     "title": "Fairness I: observational",
     "section": "COMPAS in the identity",
-    "text": "COMPAS in the identity\n\nWhen two groups differ in prevalence, a flag with the same positive predictive value in both, strictly between \\(0\\) and \\(1\\), has a different false positive rate or a different false negative rate in the two groups.\n\nWith equal PPV and equal FNR, dividing the identity for one group by the other gives \\(\\text{FPR}_a / \\text{FPR}_b\\) as the odds ratio, 1.63. The observed ratio is 1.91 \\(=\\) 1.63 \\(\\times\\) 0.85 \\(\\times\\) 1.38: the odds ratio, the ratio of \\((1 - \\text{PPV})/\\text{PPV}\\), and the ratio of TPRs.\nThe fraud checks: per request, non-UK nationals had \\(2.27 \\times 0.97 = 2.2\\) times as many correct referrals as UK nationals, and more than \\(2.27\\) times as many incorrect ones. With the same TPR and FPR in both groups, these two ratios would be \\(p_a/p_b\\) and \\((1 - p_a)/(1 - p_b)\\), which cannot both exceed \\(1\\)."
+    "text": "COMPAS in the identity\n\nWhen two groups differ in prevalence \\(p\\), a flag with the same positive predictive value in both, strictly between \\(0\\) and \\(1\\), has a different false positive rate or a different false negative rate in the two groups.\n\nWith equal PPV and equal FNR, dividing the identity for one group by the other gives \\(\\text{FPR}_a / \\text{FPR}_b\\) as the odds ratio, 1.63. The observed ratio is 1.91 \\(=\\) 1.63 \\(\\times\\) 0.85 \\(\\times\\) 1.38: the odds ratio, the ratio of \\((1 - \\text{PPV})/\\text{PPV}\\), and the ratio of TPRs."
   },
   {
     "objectID": "weeks/wk07/slides.html#impossibility-for-a-flag",
     "href": "weeks/wk07/slides.html#impossibility-for-a-flag",
     "title": "Fairness I: observational",
     "section": "Impossibility for a flag",
-    "text": "Impossibility for a flag\n\nWhen base rates differ, a flag that is informative about \\(Y\\), and is right about some people and wrong about others, satisfies at most one of the three criteria.\n\n\nIndependence and sufficiency: only if \\(Y \\perp A\\), equal base rates.\nIndependence and separation: only if \\(Y \\perp A\\), or the score is independent of \\(Y\\).\nSeparation and sufficiency: if \\(Y\\) depends on \\(A\\) and \\(0 &lt; \\text{FPR} &lt; 1\\), not both.\n\nFor COMPAS and the fraud checks the base rates differ, so choosing one criterion gives up the other two.\n\nBarocas, Hardt and Narayanan (2023), chapter 3, Propositions 2, 3 and 5, pages 65 to 67."
+    "text": "Impossibility for a flag\n\nWhen base rates differ (\\(Y \\not\\perp A\\)), a flag that is informative (\\(\\hat Y \\not\\perp Y\\)) and has \\(0 &lt; \\text{FPR} &lt; 1\\) in each group satisfies at most one of the three criteria.\n\n\nIndependence and sufficiency: only if \\(Y \\perp A\\).\nIndependence and separation: only if \\(Y \\perp A\\) or \\(\\hat Y \\perp Y\\).\nSeparation and sufficiency: only if \\(Y \\perp A\\), when \\(0 &lt; \\text{FPR} &lt; 1\\).\n\nFor COMPAS the base rates differ, so choosing one criterion gives up the other two.\n\nBarocas, Hardt and Narayanan (2023), chapter 3, Propositions 2, 3 and 5, pages 65 to 67."
   },
   {
     "objectID": "weeks/wk07/slides.html#impossibility-for-a-score",
@@ -117,6 +117,13 @@
     "title": "Fairness I: observational",
     "section": "Impossibility for a score",
     "text": "Impossibility for a score\n\ncalibration within groups, condition A: in each group, people scored \\(v\\) are positives with frequency \\(v\\);\nbalance for the negative class, B: the negatives’ average score is the same in both groups;\nbalance for the positive class, C: likewise for the positives.\n\nTheorem 1.1: all three hold only if prediction is perfect (the features determine the outcome) or the base rates are equal.\nIn the authors’ reading, ProPublica pointed at B and C failing, the replies at A holding. Even these weaker versions of equal error rates conflict with calibration.\n\nKleinberg, Mullainathan and Raghavan (2017), “Inherent Trade-Offs in the Fair Determination of Risk Scores,” 8th Innovations in Theoretical Computer Science Conference (ITCS 2017), LIPIcs 67, 43:1–43:23, doi:10.4230/LIPIcs.ITCS.2017.43, section 1; theorem numbering of arXiv:1609.05807v2, the version linked from the readings."
+  },
+  {
+    "objectID": "weeks/wk07/slides.html#which-would-you-give-up",
+    "href": "weeks/wk07/slides.html#which-would-you-give-up",
+    "title": "Fairness I: observational",
+    "section": "Which would you give up?",
+    "text": "Which would you give up?\n\nEqual predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?\nWho pays for your choice: which group, and which error?"
   },
   {
     "objectID": "weeks/wk07/slides.html#leaving-race-out",
@@ -154,13 +161,6 @@
     "text": "Three views of equality of opportunity\n\n\n\n\n\n\n\n\nview\nthe rule\nthe criterion the book ties to it\n\n\n\n\nnarrow\ntreat similar people similarly, as they are now\ncalibration by group: the same score means the same thing in every group\n\n\nmiddle\ntreat seemingly dissimilar people similarly when the dissimilarity has causes we should discount\nerror rate parity, in part: one group should not bear more of the mistakes\n\n\nbroad\norganize society so that equal ability and ambition reach equal outcomes\ndemographic parity, loosely: equal shares, at the decision\n\n\n\nThe book ties error rate parity to both the middle and the narrow view. ProPublica’s error rates are mostly a middle-view complaint; the predictive values, a narrow-view defense.\n\nBarocas, Hardt and Narayanan (2023), chapter 4, “Equality of opportunity,” pages 81 to 85, and “Connecting statistical and moral notions of fairness,” pages 92 to 97."
   },
   {
-    "objectID": "weeks/wk07/slides.html#which-would-you-give-up",
-    "href": "weeks/wk07/slides.html#which-would-you-give-up",
-    "title": "Fairness I: observational",
-    "section": "Which would you give up?",
-    "text": "Which would you give up?\n\nEqual predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?\nWho pays for your choice: which group, and which error?"
-  },
-  {
     "objectID": "weeks/wk07/slides.html#a-screening-test",
     "href": "weeks/wk07/slides.html#a-screening-test",
     "title": "Fairness I: observational",
@@ -179,7 +179,7 @@
     "href": "weeks/wk07/slides.html#lenses-this-week",
     "title": "Fairness I: observational",
     "section": "Lenses this week",
-    "text": "Lenses this week\n\nWhat are we optimizing or predicting? Re-arrest for reoffending; a caseworker’s decline for fraud. Proxies or true outcomes?\nWhich comparison gets reported? ProPublica conditioned on the truth, the replies on the flag. The fraud checks report no error rates.\nWho bears the error? A false positive, the person flagged, and detained where the flag decides; a false negative, someone else.\nYou have to choose, so choose, and defend it. Equal predictive value or equal error rates. A default chooses too.\nWhat can be changed, and how? The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?"
+    "text": "Lenses this week\n\nWhat are we optimizing or predicting? Re-arrest for reoffending; a caseworker’s decline for fraud. Proxies or true outcomes?\nWhich comparison gets reported? ProPublica conditioned on the truth, the replies on the flag. The fraud checks report no error rates.\nWho bears the error? A false positive, the person flagged, and detained where the flag decides; a false negative, someone else.\nYou have to choose, so choose, and defend it. Equal predictive value or equal error rates. A default chooses too."
   },
   {
     "objectID": "weeks/wk07/slides.html#who-chose-the-number",
@@ -1992,7 +1992,7 @@
     "href": "weeks/wk07/notes.html#lenses",
     "title": "Fairness I: observational",
     "section": "Lenses",
-    "text": "Lenses\nWhat are we optimizing or predicting? Re-arrest within two years, standing in for reoffending. Every rate in the week, the two base rates included, is a rate of the proxy, and the difference in base rates that the whole argument runs on is partly a fact about policing. In the fraud checks, a caseworker’s decision to decline stands in for fraud, and it is recorded only for requests that someone reviewed. Proxies or true outcomes?\nWhich comparison gets reported? ProPublica conditioned on the truth, two years later, and reported error rates. The replies conditioned on the flag, as a judge does, and reported predictive values and calibration. Each side reported the comparison that its position made visible, and each number was correct. The fraud checks report the share referred and the predictive value by group, and no error rate; the ratios it reports imply that the error rates differ.\nWho bears the error? A false positive is a person flagged who was not re-arrested, and detained where the flag decides the detention. A false negative is a release that went badly, paid for by someone else. Separation failing says the two groups pay different prices for the same score, and the identity says that at unequal base rates a score with predictive parity has to make them.\nYou have to choose, so choose, and defend it. Equal predictive value or equal error rates, not both. A vendor that ships a calibrated score has made the choice; so has a county that adopts it; so has a newsroom that reports error rates. A default makes the choice too, with nobody to defend it.\nWhat can be changed, and how? What things are considered “controlled for” or “held fixed,” and is that realistic? Every one of the criteria takes the two groups’ base rates as given. Arrests depend on policing, and policing can be changed; the base rate is the one input to the identity that a policy, rather than a score, controls.\nAnd why? COMPAS is a commercial product. “Equally accurate in both groups” was the statement its vendor wanted in the headline, and in the sense it meant, equal predictive value, it is about right. Who benefited from that being the number reported, and would a more competent analyst have chosen a different one?"
+    "text": "Lenses\nWhat are we optimizing or predicting? Re-arrest within two years, standing in for reoffending. Every rate in the week, the two base rates included, is a rate of the proxy, and the difference in base rates that the whole argument runs on is partly a fact about policing. In the fraud checks, a caseworker’s decision to decline stands in for fraud, and it is recorded only for requests that someone reviewed. Proxies or true outcomes?\nWhich comparison gets reported? ProPublica conditioned on the truth, two years later, and reported error rates. The replies conditioned on the flag, as a judge does, and reported predictive values and calibration. Each side reported the comparison that its position made visible, and each number was correct. The fraud checks report the share referred and the predictive value by group, and no error rate; the ratios it reports imply that the error rates differ.\nWho bears the error? A false positive is a person flagged who was not re-arrested, and detained where the flag decides the detention. A false negative is a release that went badly, paid for by someone else. Separation failing says the two groups pay different prices for the same score, and the identity says that at unequal base rates a score with predictive parity has to make them.\nYou have to choose, so choose, and defend it. Equal predictive value or equal error rates, not both. A vendor that ships a calibrated score has made the choice; so has a county that adopts it; so has a newsroom that reports error rates. A default makes the choice too, with nobody to defend it.\nAnd why? COMPAS is a commercial product. “Equally accurate in both groups” was the statement its vendor wanted in the headline, and in the sense it meant, equal predictive value, it is about right. Who benefited from that being the number reported, and would a more competent analyst have chosen a different one?"
   },
   {
     "objectID": "weeks/wk07/notes.html#readings",

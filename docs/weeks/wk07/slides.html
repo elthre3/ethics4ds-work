@@ -428,25 +428,24 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <p>Chouldechova (2017), “Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments,” <em>Big Data</em> 5(2), 153–163, doi:10.1089/big.2016.0047, equation (2.6), section 2.3.</p>
 </div>
 </section>
-<section id="compas-in-the-identity" class="slide level2" data-minutes="3">
+<section id="compas-in-the-identity" class="slide level2">
 <h2>COMPAS in the identity</h2>
 <div class="leave">
-<p>When two groups differ in prevalence, a flag with the same positive predictive value in both, strictly between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, has a different false positive rate or a different false negative rate in the two groups.</p>
+<p>When two groups differ in prevalence <span class="math inline">\(p\)</span>, a flag with the same positive predictive value in both, strictly between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, has a different false positive rate or a different false negative rate in the two groups.</p>
 </div>
 <p>With equal PPV and equal FNR, dividing the identity for one group by the other gives <span class="math inline">\(\text{FPR}_a / \text{FPR}_b\)</span> as the odds ratio, 1.63. The observed ratio is 1.91 <span class="math inline">\(=\)</span> 1.63 <span class="math inline">\(\times\)</span> 0.85 <span class="math inline">\(\times\)</span> 1.38: the odds ratio, the ratio of <span class="math inline">\((1 - \text{PPV})/\text{PPV}\)</span>, and the ratio of TPRs.</p>
-<p>The fraud checks: per request, non-UK nationals had <span class="math inline">\(2.27 \times 0.97 = 2.2\)</span> times as many correct referrals as UK nationals, and more than <span class="math inline">\(2.27\)</span> times as many incorrect ones. With the same TPR and FPR in both groups, these two ratios would be <span class="math inline">\(p_a/p_b\)</span> and <span class="math inline">\((1 - p_a)/(1 - p_b)\)</span>, which cannot both exceed <span class="math inline">\(1\)</span>.</p>
 </section>
 <section id="impossibility-for-a-flag" class="slide level2" data-minutes="3">
 <h2>Impossibility for a flag</h2>
 <div class="leave">
-<p>When base rates differ, a flag that is informative about <span class="math inline">\(Y\)</span>, and is right about some people and wrong about others, satisfies at most one of the three criteria.</p>
+<p>When base rates differ (<span class="math inline">\(Y \not\perp A\)</span>), a flag that is informative (<span class="math inline">\(\hat Y \not\perp Y\)</span>) and has <span class="math inline">\(0 &lt; \text{FPR} &lt; 1\)</span> in each group satisfies at most one of the three criteria.</p>
 </div>
 <ul>
-<li>Independence and sufficiency: only if <span class="math inline">\(Y \perp A\)</span>, equal base rates.</li>
-<li>Independence and separation: only if <span class="math inline">\(Y \perp A\)</span>, or the score is independent of <span class="math inline">\(Y\)</span>.</li>
-<li>Separation and sufficiency: if <span class="math inline">\(Y\)</span> depends on <span class="math inline">\(A\)</span> and <span class="math inline">\(0 &lt; \text{FPR} &lt; 1\)</span>, not both.</li>
+<li>Independence and sufficiency: only if <span class="math inline">\(Y \perp A\)</span>.</li>
+<li>Independence and separation: only if <span class="math inline">\(Y \perp A\)</span> or <span class="math inline">\(\hat Y \perp Y\)</span>.</li>
+<li>Separation and sufficiency: only if <span class="math inline">\(Y \perp A\)</span>, when <span class="math inline">\(0 &lt; \text{FPR} &lt; 1\)</span>.</li>
 </ul>
-<p>For COMPAS and the fraud checks the base rates differ, so choosing one criterion gives up the other two.</p>
+<p>For COMPAS the base rates differ, so choosing one criterion gives up the other two.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), chapter 3, Propositions 2, 3 and 5, pages 65 to 67.</p>
 </div>
@@ -462,6 +461,13 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <p>In the authors’ reading, ProPublica pointed at B and C failing, the replies at A holding. Even these weaker versions of equal error rates conflict with calibration.</p>
 <div class="source">
 <p>Kleinberg, Mullainathan and Raghavan (2017), “Inherent Trade-Offs in the Fair Determination of Risk Scores,” <em>8th Innovations in Theoretical Computer Science Conference (ITCS 2017)</em>, LIPIcs 67, 43:1–43:23, doi:10.4230/LIPIcs.ITCS.2017.43, section 1; theorem numbering of arXiv:1609.05807v2, the version linked from the readings.</p>
+</div>
+</section>
+<section id="which-would-you-give-up" class="slide level2" data-minutes="3">
+<h2>Which would you give up?</h2>
+<div class="ask">
+<p>Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?</p>
+<p>Who pays for your choice: which group, and which error?</p>
 </div>
 </section></section>
 <section>
@@ -604,13 +610,6 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <p>Barocas, Hardt and Narayanan (2023), chapter 4, “Equality of opportunity,” pages 81 to 85, and “Connecting statistical and moral notions of fairness,” pages 92 to 97.</p>
 </div>
 </section>
-<section id="which-would-you-give-up" class="slide level2" data-minutes="3">
-<h2>Which would you give up?</h2>
-<div class="ask">
-<p>Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?</p>
-<p>Who pays for your choice: which group, and which error?</p>
-</div>
-</section>
 <section id="a-screening-test" class="slide level2" data-minutes="6">
 <h2>A screening test</h2>
 <p>A test for a disease has sensitivity <span class="math inline">\(0.9\)</span> and specificity <span class="math inline">\(0.9\)</span> (TPR <span class="math inline">\(0.9\)</span>, FPR <span class="math inline">\(0.1\)</span>) in both of two regions. The disease affects <span class="math inline">\(2\%\)</span> of people in the first region and <span class="math inline">\(10\%\)</span> in the second.</p>
@@ -646,7 +645,6 @@ P(\hat Y = 1) \;=\; p\,(1 - \text{FNR}) + (1 - p)\,\text{FPR}
 <li><strong>Which comparison gets reported?</strong> ProPublica conditioned on the truth, the replies on the flag. The fraud checks report no error rates.</li>
 <li><strong>Who bears the error?</strong> A false positive, the person flagged, and detained where the flag decides; a false negative, someone else.</li>
 <li><strong>You have to choose, so choose, and defend it.</strong> Equal predictive value or equal error rates. A default chooses too.</li>
-<li><strong>What can be changed, and how?</strong> The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?</li>
 </ul>
 </section>
 <section id="who-chose-the-number" class="slide level2" data-minutes="3">

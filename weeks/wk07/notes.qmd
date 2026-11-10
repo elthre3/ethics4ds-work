@@ -12,7 +12,7 @@ st313:
   complications: []
   retrieves: [S2, S4, S5, S6]
   introduces: [CC-19, CC-20, CC-21, CC-22]
-  lenses: [A, C, D, E, F]
+  lenses: [A, C, D, E]
   readings: [fairmlbook-ch3, fairmlbook-ch3-rates, fairmlbook-ch3-limits, fairmlbook-ch3-unawareness, fairmlbook-ch4-eoo, fairmlbook-ch4-mapping, fairmlbook-ch3-casestudy, kmr-2016, chouldechova-2017, propublica-2016-methods]
   results: [R1, R2, R3, R40, R41]
   assumes: [ST102]
@@ -1057,12 +1057,6 @@ or equal error rates, not both. A vendor that ships a calibrated
 score has made the choice; so has a county that adopts it; so has a
 newsroom that reports error rates. A default makes the choice too,
 with nobody to defend it.
-
-What can be changed, and how? What things are considered "controlled
-for" or "held fixed," and is that realistic? Every one of the criteria
-takes the two groups' base rates as given. Arrests depend on policing,
-and policing can be changed; the base rate is the one input to the
-identity that a policy, rather than a score, controls.
 
 And why? COMPAS is a commercial product. "Equally accurate in both
 groups" was the statement its vendor wanted in the headline, and in the

@@ -23,7 +23,7 @@ st313:
   week: 07
   session: lecture
   register: 1
-  segments:                        # sums to 80: 77 of material and 3 of slack; production 21 (26%)
+  segments:                        # sums to 80: 76 of material and 4 of slack; production 21 (26%)
     # opener: 4
     - {label: "what you brought: the 5 -> 7 task; each rule's two errors and who pays", minutes: 4, mode: production, retrieves: [S5]}
     # part 1, scores that sort people: 16
@@ -32,28 +32,28 @@ st313:
     - {label: "written commitment: which number should be equal, as defendant, judge, public; the same for the fraud checks", minutes: 3, mode: production}
     # part 2, differing definitions of fairness: 7
     - {label: "independence, separation, sufficiency with a COMPAS column; calibration by group, Fact 2, lost on thresholding through the mix of deciles selected; two calibrated scores (dark)", minutes: 7, mode: exposition, introduces: [CC-22], core: CC-22, results: [R41]}
-    # part 3, conflicting definitions: 18
+    # part 3, conflicting definitions: 20
     - {label: "prediction: can FPR, FNR, PPV and NPV all be equal when prevalence differs", minutes: 2, mode: production}
     - {label: "PPV from the rates, the significance filter's formula; rearranged to Chouldechova's (2.6)", minutes: 7, mode: exposition, introduces: [CC-20, CC-21], core: CC-20, results: [R40, R1]}
-    - {label: "COMPAS in the identity: the odds ratio 1.63 by dividing the identity, the observed 1.91 as 1.63 x 0.85 x 1.38; the fraud checks' ratios", minutes: 3, mode: exposition, results: [R1]}
+    - {label: "COMPAS in the identity: the odds ratio 1.63 by dividing the identity, the observed 1.91 as 1.63 x 0.85 x 1.38", minutes: 2, mode: exposition, results: [R1]}
     - {label: "impossibility for a flag: Propositions 2, 3 and 5, with 0 < FPR < 1, and what they mean; impossibility for a score: Theorem 1.1 named, not proved", minutes: 6, mode: exposition, results: [R3, R2]}
-    # part 4, remedies and their costs: 24
+    - {label: "which criterion to give up: which one would you give up, and who do you owe the explanation to", minutes: 3, mode: production, retrieves: [S6]}
+    # part 4, remedies and their costs: 21
     - {label: "leaving race out: redundant encodings and the job ads; the kidney equation without race: which error, for whom", minutes: 6, mode: exposition}
     - {label: "a cutoff per group: the two groups' ROC points zoomed, 6 and 4, with the table of error rates", minutes: 3, mode: exposition, retrieves: [S4]}
     - {label: "lens A, asked: Y is re-arrest, Y* is reoffending; a caseworker's decline stands in for fraud and is recorded only when referred or sampled", minutes: 3, mode: production, retrieves: [S2]}
     - {label: "three views of equality of opportunity and the criterion the book ties to each", minutes: 3, mode: exposition}
-    - {label: "which criterion to give up: which one would you give up, and who do you owe the explanation to", minutes: 3, mode: production, retrieves: [S6]}
     - {label: "a screening test in two regions, answered individually", minutes: 6, mode: production, item: W07-I1}
     # part 5, where disparities come from: 8
     - {label: "two mechanisms, one table: what observational criteria hide", minutes: 3, mode: exposition}
-    - {label: "lenses A, C, D, E, F; the task for next time", minutes: 5, mode: exposition}
-    # slack: 3
-    - {label: "slack: questions and overrun", minutes: 3, mode: exposition}
+    - {label: "lenses A, C, D, E; the task for next time", minutes: 5, mode: exposition}
+    # slack: 4
+    - {label: "slack: questions and overrun", minutes: 4, mode: exposition}
   history: []
   complications: []
   retrieves: [S2, S4, S5, S6]
   introduces: [CC-19, CC-20, CC-21, CC-22]
-  lenses: [A, C, D, E, F]
+  lenses: [A, C, D, E]
   readings: [fairmlbook-ch3, fairmlbook-ch3-rates, fairmlbook-ch3-limits, fairmlbook-ch3-unawareness, fairmlbook-ch4-eoo]
   results: [R1, R2, R3, R40, R41]
   assumes: [ST102]
@@ -125,11 +125,11 @@ top_share <- counts |>
 ## {.inverse}
 
 ::: {.notes}
-Compress: the five parts. Plan 77 in the 80: opener 4, scores that sort people 16, differing definitions 7, conflicting definitions 18, remedies and their costs 24, where disparities come from 8; then 3 of slack. Dark = rush or skip.
+Compress: the five parts. Plan 76 in the 80: opener 4, scores that sort people 16, differing definitions 7, conflicting definitions 20, remedies and their costs 21, where disparities come from 8; then 4 of slack. Dark = rush or skip.
 
 Cut order: (1) "Two calibrated scores" to one sentence; (2) "Impossibility for a score" to Theorem 1.1's statement; (3) the screening test to its first two questions; (4) "Two worlds" to the quotation. Do not cut the written commitment, the prediction, the derivation, the lens A question, the splitting question, or the screening test's first two questions.
 
-Pace: 0:04 Part 1; 0:20 Part 2; 0:27 Part 3; 0:45 Part 4; 1:03 screening test; 1:09 Part 5; 1:17 end.
+Pace: 0:04 Part 1; 0:20 Part 2; 0:27 Part 3; 0:47 Part 4; 1:02 screening test; 1:08 Part 5; 1:16 end.
 :::
 
 ### Week 7
@@ -175,7 +175,7 @@ Ali, Sapiezynski, Bogen, Korolova, Mislove and Rieke (2019), "Discrimination thr
 ## Fraud checks on universal credit advances
 
 ::: {.notes}
-Dark dots: how often each group's requests are referred, against the comparison group. Light triangles: how often a referral is then declined, which the department counts as a correct referral. Non-UK nationals: referred 2.27 times as often, declined at about the same rate (0.97). That pair comes back after the identity.
+Dark dots: how often each group's requests are referred, against the comparison group. Light triangles: how often a referral is then declined, which the department counts as a correct referral. Non-UK nationals: referred 2.27 times as often, declined at about the same rate (0.97).
 :::
 
 The DWP scores each request for an advance; high-risk ones go to a caseworker, who is not told the model sent them. Its 2025 fairness assessment compares groups on two numbers, and judged the model "reasonable and proportionate to continue operating":
@@ -309,7 +309,7 @@ Then the fraud checks: a claimant who is not committing fraud, the caseworker, a
 ## Independence, separation, sufficiency {minutes="3"}
 
 ::: {.notes}
-Three families, each equalizing something across groups; the commitment slide's three answers are these three. Separation fails at every cutoff from 2 to 10 (the notes have the figure); flagging everyone or no one equalizes the error rates trivially. The ad settlement asks for something like independence.
+The flag column is each criterion with Y-hat in place of R; no relationship between them is assumed. If Y-hat is R cut at one cutoff for everyone, it is a function of R alone, so independence and separation of R pass to Y-hat; sufficiency does not, as the next slide shows. The COMPAS column checks the flag at cutoff 5, and separation at every cutoff from 2 to 10.
 :::
 
 | | the score $R$ | the flag $\hat Y$ | on the COMPAS table |
@@ -430,35 +430,33 @@ Four quantities, one equation. Fix any three and the fourth is determined.
 Chouldechova (2017), "Fair Prediction with Disparate Impact: A Study of Bias in Recidivism Prediction Instruments," *Big Data* 5(2), 153--163, doi:10.1089/big.2016.0047, equation (2.6), section 2.3.
 :::
 
-## COMPAS in the identity {minutes="3"}
+## COMPAS in the identity
 
 ::: {.notes}
-The box first. The observed ratio is the identity's three factors, each a ratio between the groups: the odds of re-arrest, the odds against a flag being right, the TPR. Fraud checks: correct referrals per request are p TPR = f PPV, incorrect ones (1 - p) FPR = f (1 - PPV); the second ratio is 2.27 (1 - PPV_nonUK)/(1 - PPV_UK), above 2.27 since PPV_nonUK is the lower. These are the reported ratios for one year, not inference about population rates; the argument also works with the PPV ratio at 1.
+The box first. The observed ratio is the identity's three factors, each a ratio between the groups: the odds of re-arrest, the odds against a flag being right, the TPR.
 :::
 
 ::: {.leave}
-When two groups differ in prevalence, a flag with the same positive predictive value in both, strictly between $0$ and $1$, has a different false positive rate or a different false negative rate in the two groups.
+When two groups differ in prevalence $p$, a flag with the same positive predictive value in both, strictly between $0$ and $1$, has a different false positive rate or a different false negative rate in the two groups.
 :::
 
 With equal PPV and equal FNR, dividing the identity for one group by the other gives $\text{FPR}_a / \text{FPR}_b$ as the odds ratio, `r sprintf("%.2f", or_p)`. The observed ratio is `r sprintf("%.2f", at5$FPR[1] / at5$FPR[2])` $=$ `r sprintf("%.2f", or_p)` $\times$ `r sprintf("%.2f", or_ppv)` $\times$ `r sprintf("%.2f", r_tpr)`: the odds ratio, the ratio of $(1 - \text{PPV})/\text{PPV}$, and the ratio of TPRs.
 
-The fraud checks: per request, non-UK nationals had $2.27 \times 0.97 = 2.2$ times as many correct referrals as UK nationals, and more than $2.27$ times as many incorrect ones. With the same TPR and FPR in both groups, these two ratios would be $p_a/p_b$ and $(1 - p_a)/(1 - p_b)$, which cannot both exceed $1$.
-
 ## Impossibility for a flag {minutes="3"}
 
 ::: {.notes}
-Read the box first. Each pair fails for its own reason: independence with sufficiency needs equal base rates outright; independence with separation needs a score that tells you nothing; separation with sufficiency is the identity. The notes prove Proposition 5 from the identity, with the condition FPR < 1 the book leaves out.
+Read the box first. Each pair fails for its own reason: independence with sufficiency needs equal base rates outright; independence with separation needs a flag that tells you nothing about Y; separation with sufficiency is the identity. The notes prove Proposition 5 from the identity, with the condition FPR < 1 the book leaves out.
 :::
 
 ::: {.leave}
-When base rates differ, a flag that is informative about $Y$, and is right about some people and wrong about others, satisfies at most one of the three criteria.
+When base rates differ ($Y \not\perp A$), a flag that is informative ($\hat Y \not\perp Y$) and has $0 < \text{FPR} < 1$ in each group satisfies at most one of the three criteria.
 :::
 
-- Independence and sufficiency: only if $Y \perp A$, equal base rates.
-- Independence and separation: only if $Y \perp A$, or the score is independent of $Y$.
-- Separation and sufficiency: if $Y$ depends on $A$ and $0 < \text{FPR} < 1$, not both.
+- Independence and sufficiency: only if $Y \perp A$.
+- Independence and separation: only if $Y \perp A$ or $\hat Y \perp Y$.
+- Separation and sufficiency: only if $Y \perp A$, when $0 < \text{FPR} < 1$.
 
-For COMPAS and the fraud checks the base rates differ, so choosing one criterion gives up the other two.
+For COMPAS the base rates differ, so choosing one criterion gives up the other two.
 
 ::: {.source}
 Barocas, Hardt and Narayanan (2023), chapter 3, Propositions 2, 3 and 5, pages 65 to 67.
@@ -480,6 +478,18 @@ In the authors' reading, ProPublica pointed at B and C failing, the replies at A
 
 ::: {.source}
 Kleinberg, Mullainathan and Raghavan (2017), "Inherent Trade-Offs in the Fair Determination of Risk Scores," *8th Innovations in Theoretical Computer Science Conference (ITCS 2017)*, LIPIcs 67, 43:1--43:23, doi:10.4230/LIPIcs.ITCS.2017.43, section 1; theorem numbering of arXiv:1609.05807v2, the version linked from the readings.
+:::
+
+## Which would you give up? {minutes="3"}
+
+::: {.notes}
+Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person flagged who was not re-arrested, detained where the flag decides; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups.
+:::
+
+::: {.ask}
+Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?
+
+Who pays for your choice: which group, and which error?
 :::
 
 # Part 4: Remedies and their costs
@@ -602,18 +612,6 @@ The book ties error rate parity to both the middle and the narrow view. ProPubli
 Barocas, Hardt and Narayanan (2023), chapter 4, "Equality of opportunity," pages 81 to 85, and "Connecting statistical and moral notions of fairness," pages 92 to 97.
 :::
 
-## Which would you give up? {minutes="3"}
-
-::: {.notes}
-Hands for each criterion, then one reason from each side; no house answer. If nobody says it: the two errors do not weigh the same. A false positive here is a person flagged who was not re-arrested, detained where the flag decides; a false negative is a release that went badly, and its cost depends on the total, not on how it is split between groups.
-:::
-
-::: {.ask}
-Equal predictive value or equal error rates: the two cannot both hold. Which would you require, and which would you give up? Who do you owe the explanation to?
-
-Who pays for your choice: which group, and which error?
-:::
-
 ## A screening test {minutes="6"}
 
 ::: {.notes}
@@ -659,7 +657,6 @@ Each lens, what it referred to this week. Then the last slide.
 - **Which comparison gets reported?** ProPublica conditioned on the truth, the replies on the flag. The fraud checks report no error rates.
 - **Who bears the error?** A false positive, the person flagged, and detained where the flag decides; a false negative, someone else.
 - **You have to choose, so choose, and defend it.** Equal predictive value or equal error rates. A default chooses too.
-- **What can be changed, and how?** The criteria hold the base rates fixed. Arrests depend on policing; is that realistic?
 
 ## Who chose the number? {minutes="3"}
 
