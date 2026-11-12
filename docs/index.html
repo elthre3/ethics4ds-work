@@ -188,6 +188,7 @@ window.Quarto = {
   <li><a href="#week-4-whats-the-score" id="toc-week-4-whats-the-score" class="nav-link" data-scroll-target="#week-4-whats-the-score">Week 4: What’s the score?</a></li>
   <li><a href="#week-5-who-counts-as-a-case" id="toc-week-5-who-counts-as-a-case" class="nav-link" data-scroll-target="#week-5-who-counts-as-a-case">Week 5: Who counts as a case</a></li>
   <li><a href="#week-7-fairness-i-observational" id="toc-week-7-fairness-i-observational" class="nav-link" data-scroll-target="#week-7-fairness-i-observational">Week 7: Fairness I: observational</a></li>
+  <li><a href="#week-8-fairness-ii-causal" id="toc-week-8-fairness-ii-causal" class="nav-link" data-scroll-target="#week-8-fairness-ii-causal">Week 8: Fairness II: causal</a></li>
   </ul>
 </nav>
     </div>
@@ -272,6 +273,14 @@ that it edits only its own block. -->
 <p><strong>Bring to the class:</strong> one rule or score that sorts people into two groups (admit or reject, flag or clear, treat or not), with the two ways it can be wrong and who pays for each.</p>
 <p><strong>Lecture:</strong> <a href="weeks/wk07/notes.html">notes</a> · <a href="weeks/wk07/slides.html">slides</a></p>
 <p><strong>Class:</strong> <a href="weeks/wk07/class.html">class sheet</a> (<a href="https://ethics4ds.com/weeks/wk07/class.qmd" download="class.qmd">.qmd</a>)</p>
+</section>
+<section id="week-8-fairness-ii-causal" class="level2">
+<h2 class="anchored" data-anchor-id="week-8-fairness-ii-causal">Week 8: Fairness II: causal</h2>
+<p>Since December 2012 an insurer in the European Union may not price on sex. It can still price on the car, the mileage and everything else it records, and some of those depend on sex. Writing the mechanism down as a causal model makes it possible to ask what the price would have been for the same person had the attribute been different. Counterfactual fairness asks that it be the same; in the simplest example, the red car, the price that ignores sex fails that test and a price that uses it passes. Direct and indirect effects split the effect of an attribute along the paths it takes, and a path-specific criterion removes it only along the paths judged unfair. The two fair prices differ by the contribution of the path someone judged fair. Which paths those are is a judgment about control and responsibility, where moral luck and luck egalitarianism come in.</p>
+<p><strong>Required reading:</strong> <a href="https://fairmlbook.org/pdf/fairmlbook.pdf">Barocas, Hardt and Narayanan, Fairness and Machine Learning, chapter 5: Causality</a> (“Graphical discrimination analysis” through the end of “Counterfactual discrimination analysis”, pages 117 to 131; a PDF viewer shows them as 127 to 141) · re-read <a href="https://joshualoftus.com/ms4ds/ethical-data-science.html#causality-and-ethics">Loftus, Modern Statistics 4 Data Science, section 3.4: Causality and ethics</a></p>
+<p><strong>Optional:</strong> the same book, chapter 5, “Validity of causal modeling” (pages 132 to 137) · chapter 4, “Tensions between the different views” through “The cost of fairness” (pages 85 to 92) · <a href="https://plato.stanford.edu/entries/justice-bad-luck/">Lippert-Rasmussen, Justice and Bad Luck</a> (<em>Stanford Encyclopedia of Philosophy</em>, revised 2023) · <a href="https://arxiv.org/abs/1703.06856">Kusner, Loftus, Russell and Silva, Counterfactual Fairness</a> (NeurIPS 2017) · <a href="https://doi.org/10.1609/aaai.v33i01.33017801">Chiappa, Path-Specific Counterfactual Fairness</a> (AAAI 2019) · <a href="https://arxiv.org/abs/1705.10378">Nabi and Shpitser, Fair Inference on Outcomes</a> (AAAI 2018) · <a href="https://arxiv.org/abs/2006.08688">Yang, Loftus and Stoyanovich, Causal Intersectionality and Fair Ranking</a> (FORC 2021)</p>
+<p><strong>Bring to the class:</strong> one decision in which an attribute is used, or deliberately not used, with one route by which it could affect the outcome, and whether that route is fair.</p>
+<p><strong>Lecture:</strong> <a href="weeks/wk08/notes.html">notes</a> · <a href="weeks/wk08/slides.html">slides</a></p>
 
 
 </section>
