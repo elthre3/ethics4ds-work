@@ -155,7 +155,7 @@ Joshua Loftus
 <section id="what-you-brought" class="slide level2" data-minutes="4">
 <h2>What you brought</h2>
 <div class="ask">
-<p>Draw the route you brought as arrows, from the attribute to the outcome. Which arrow is your judgment of fairness about?</p>
+<p>Draw the route you brought as arrows, from the attribute to the outcome. Which arrow is your judgment about?</p>
 </div>
 </section>
 <section>
@@ -165,13 +165,13 @@ Joshua Loftus
 </section>
 <section id="pricing-without-sex" class="slide level2">
 <h2>Pricing without sex</h2>
-<p>Test-Achats, a Belgian consumers’ association, went to court over an exemption in EU law that let member states allow sex-based insurance premiums. The Court of Justice of the European Union ruled on 1 March 2011, and its press release is headed:</p>
+<p>Court of Justice of the European Union, <em>Test-Achats</em>, 1 March 2011:</p>
 <blockquote>
 <p>“Taking the gender of the insured individual into account as a risk factor in insurance contracts constitutes discrimination”</p>
 </blockquote>
-<p>From 21 December 2012, insurers in the EU may not use sex as a factor in premiums and benefits. They still predict claims from everything else they record.</p>
+<p>From 21 December 2012: no sex-based premiums in the EU. Everything else the insurer records can still be used.</p>
 <div class="source">
-<p>Court of Justice of the European Union (2011), Press Release No 12/11, Luxembourg, 1 March 2011, on Case C-236/09, <em>Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres</em>, https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf, pages 1–2.</p>
+<p>Court of Justice of the European Union (2011), Press Release No 12/11, 1 March 2011, on Case C-236/09, <em>Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres</em>, https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf, pages 1–2.</p>
 </div>
 </section>
 <section id="the-red-car" class="slide level2">
@@ -185,8 +185,8 @@ Joshua Loftus
 </div>
 </div>
 </div>
-<p>An insurer predicts claims <span class="math inline">\(Y\)</span> from car color <span class="math inline">\(X\)</span>. Aggression <span class="math inline">\(U\)</span>, never observed, makes a red car and a claim more likely. Women (<span class="math inline">\(A = 1\)</span>) are more likely to drive red cars, and no more likely to be aggressive or to claim.</p>
-<p>Fairness through unawareness: predict from <span class="math inline">\(X\)</span>, never from <span class="math inline">\(A\)</span>.</p>
+<p>Aggression <span class="math inline">\(U\)</span> is never observed.</p>
+<p>Fairness through unawareness: price on <span class="math inline">\(X\)</span>, never on <span class="math inline">\(A\)</span>.</p>
 <div class="source">
 <p>Kusner, Loftus, Russell and Silva (2017), “Counterfactual Fairness,” <em>Advances in Neural Information Processing Systems</em> 30; arXiv:1703.06856v3, Scenario 1, page 4 (with race as <span class="math inline">\(A\)</span>). Loftus, <em>Modern Statistics 4 Data Science</em>, section 3.4.1, https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models (with gender).</p>
 </div>
@@ -194,23 +194,25 @@ Joshua Loftus
 <section id="is-the-price-fair" class="slide level2" data-minutes="2">
 <h2>Is the price fair?</h2>
 <div class="ask">
-<p>The insurer prices on the car alone and never looks at sex. Is that price fair to women? Write yes or no, and one reason.</p>
+<p>The insurer prices on the car alone. Is that price fair to women? Write yes or no, and one reason.</p>
 </div>
 </section>
 <section id="the-red-car-in-numbers" class="slide level2" data-minutes="4">
 <h2>The red car in numbers</h2>
 <div class="retrieval">
-<p>A test score <span class="math inline">\(X = Y + 2A + \varepsilon\)</span>, and a model that may not use <span class="math inline">\(A\)</span>. Which group did it predict higher, and why?</p>
+<p>With a test score <span class="math inline">\(X = Y + 2A + \varepsilon\)</span>, which group did the model without <span class="math inline">\(A\)</span> predict higher?</p>
 </div>
-<p><span class="math inline">\(A = 1\)</span> for a woman, half the drivers. <span class="math inline">\(\;U \sim N(0, 1)\)</span>, independent of <span class="math inline">\(A\)</span>.</p>
-<p><span class="math inline">\(X = 2A + U\)</span>: car color on a continuous scale, higher is redder. <span class="math inline">\(\;Y = U + \varepsilon\)</span>: claims, <span class="math inline">\(\varepsilon \sim N(0, 1)\)</span> independent of <span class="math inline">\((A, U)\)</span>.</p>
+<p><span class="math display">\[
+X = 2A + U, \qquad Y = U + \varepsilon
+\]</span></p>
+<p><span class="math inline">\(A = 1\)</span> for a woman, half the drivers; <span class="math inline">\(U\)</span> and <span class="math inline">\(\varepsilon\)</span> are <span class="math inline">\(N(0, 1)\)</span>, independent of each other and of <span class="math inline">\(A\)</span>.</p>
 <div class="ask">
-<p>Fit <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> alone by least squares. What is the slope? What is the average prediction for women, and for men? What are their average claims?</p>
+<p>Fit <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> alone. Which group does it charge more, and by how much? Which group claims more?</p>
 </div>
 </section>
 <section id="the-unaware-price" class="slide level2">
 <h2>The unaware price</h2>
-<p><span class="math inline">\(\operatorname{Var}(X) = 2^2 \cdot \tfrac14 + 1 = 2\)</span>, <span class="math inline">\(\;\operatorname{Cov}(X, Y) = \operatorname{Var}(U) = 1\)</span>: slope <span class="math inline">\(\tfrac12\)</span>, and <span class="math inline">\(\hat Y = \tfrac12 X - \tfrac12\)</span>. Average prediction: women <span class="math inline">\(\tfrac12\)</span>, men <span class="math inline">\(-\tfrac12\)</span>. Average claims: <span class="math inline">\(0\)</span> in both groups.</p>
+<p>Women are charged <span class="math inline">\(\tfrac12\)</span> on average and men <span class="math inline">\(-\tfrac12\)</span>. Both groups claim <span class="math inline">\(0\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -221,67 +223,65 @@ Joshua Loftus
 </div>
 </div>
 </section>
-<section id="a-counterfactual-driver" class="slide level2" data-minutes="3">
-<h2>A counterfactual driver</h2>
-<p>A woman with <span class="math inline">\(X = 2.6\)</span>. What would her price have been had she been a man?</p>
+<section id="one-driver" class="slide level2" data-minutes="3">
+<h2>One driver</h2>
+<div class="ask">
+<p>A woman’s car scores <span class="math inline">\(X = 2.6\)</span>. What would her price have been, had she been a man?</p>
+</div>
+<div class="fragment">
 <table class="caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
-<th style="text-align: right;">as observed</th>
+<th style="text-align: right;">she, <span class="math inline">\(A = 1\)</span></th>
 <th style="text-align: right;">had <span class="math inline">\(A\)</span> been <span class="math inline">\(0\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">abduction: <span class="math inline">\(U = X - 2A\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(U = X - 2A\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">action</td>
-<td style="text-align: right;"><span class="math inline">\(A = 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(A := 0\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">prediction: <span class="math inline">\(X = 2A + U\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(X = 2A + U\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(2.6\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">price from <span class="math inline">\(X\)</span> alone, <span class="math inline">\(\tfrac12 X - \tfrac12\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.8\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(-0.2\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">price from <span class="math inline">\(X\)</span> and <span class="math inline">\(A\)</span>, <span class="math inline">\(X - 2A\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>Abduction: find <span class="math inline">\(U\)</span> from what was observed. Action: set <span class="math inline">\(A\)</span>. Prediction: recompute everything downstream of <span class="math inline">\(A\)</span>, with the same <span class="math inline">\(U\)</span>.</p>
+<p>Abduction: find <span class="math inline">\(U\)</span>. Action: set <span class="math inline">\(A\)</span>. Prediction: recompute with the same <span class="math inline">\(U\)</span>.</p>
 <div class="source">
 <p>Barocas, Hardt and Narayanan (2023), <em>Fairness and Machine Learning: Limitations and Opportunities</em>, MIT Press, https://fairmlbook.org/pdf/fairmlbook.pdf, chapter 5, Definition 5, page 123.</p>
+</div>
 </div>
 </section>
 <section id="counterfactual-fairness" class="slide level2">
 <h2>Counterfactual fairness</h2>
-<p><span class="math inline">\(\hat Y(a)\)</span>: the prediction for the same person, with <span class="math inline">\(U\)</span> abducted from what was observed, had <span class="math inline">\(A\)</span> been set to <span class="math inline">\(a\)</span>. Kusner et al.&nbsp;write <span class="math inline">\(\hat Y_{A \leftarrow a}(U)\)</span>.</p>
-<p><span class="math inline">\(\hat Y\)</span> is counterfactually fair if, given what was observed about a person, <span class="math inline">\(X = x\)</span> and <span class="math inline">\(A = a\)</span>, the predictions <span class="math inline">\(\hat Y(a)\)</span> and <span class="math inline">\(\hat Y(a')\)</span> have the same distribution, for every value <span class="math inline">\(a'\)</span> of <span class="math inline">\(A\)</span>.</p>
-<p>Lemma 1: if <span class="math inline">\(\hat Y\)</span> is a function of the non-descendants of <span class="math inline">\(A\)</span> in the causal graph, it is counterfactually fair. Here <span class="math inline">\(X - 2A = U\)</span>.</p>
+<p><span class="math inline">\(\hat Y(a)\)</span>: the prediction for the same person, with <span class="math inline">\(U\)</span> as abducted, had <span class="math inline">\(A\)</span> been <span class="math inline">\(a\)</span>.</p>
 <div class="leave">
-<p>“Regressing Y on X alone obeys the FTU criterion but is not counterfactually fair, so omitting A (FTU) may introduce unfairness into an otherwise fair world.” FTU: fairness through unawareness.</p>
+<p><span class="math inline">\(\hat Y\)</span> is counterfactually fair if, given what was observed, <span class="math inline">\(\hat Y(a)\)</span> and <span class="math inline">\(\hat Y(a')\)</span> have the same distribution for every <span class="math inline">\(a'\)</span>.</p>
 </div>
+<p>Lemma 1: a function of the non-descendants of <span class="math inline">\(A\)</span> is counterfactually fair. Here, <span class="math inline">\(X - 2A = U\)</span>.</p>
 <div class="source">
-<p>Kusner, Loftus, Russell and Silva (2017), as above: Definition 5, page 3; Lemma 1, page 5; the quotation, page 4 (arXiv:1703.06856v3).</p>
+<p>Kusner, Loftus, Russell and Silva (2017), as above: Definition 5, page 3; Lemma 1, page 5; the quotation, page 4.</p>
 </div>
 </section>
 <section id="conditioning-or-intervening" class="slide level2" data-minutes="2">
 <h2>Conditioning or intervening</h2>
 <div class="retrieval">
-<p>In this world <span class="math inline">\(P(Y \mid do(A := 1)) = P(Y \mid do(A := 0))\)</span>: sex has no effect on claims. In the fitted <span class="math inline">\(\hat Y = X - 2A\)</span>, the coefficient on <span class="math inline">\(A\)</span> is <span class="math inline">\(-2\)</span>.</p>
-<p>Which of these is a statement about intervening, and which about conditioning? Among which drivers does the <span class="math inline">\(-2\)</span> compare women and men?</p>
+<p>Here <span class="math inline">\(do(A)\)</span> has no effect on <span class="math inline">\(Y\)</span>. In the fit <span class="math inline">\(X - 2A\)</span>, the coefficient on <span class="math inline">\(A\)</span> is <span class="math inline">\(-2\)</span>.</p>
+<p>Which is a statement about intervening, and which about conditioning?</p>
 </div>
 </section></section>
 <section>
@@ -300,18 +300,23 @@ Joshua Loftus
 </div>
 </div>
 </div>
-<p><span class="math inline">\(M = \mu_0 + \alpha A + U_M\)</span>: annual mileage, in thousands of miles. <span class="math inline">\(\;Y = \gamma A + \beta M + U_Y\)</span>: claims, in hundreds of pounds a year.</p>
-<p><span class="math inline">\(U_M\)</span> and <span class="math inline">\(U_Y\)</span> have mean <span class="math inline">\(0\)</span> and are independent of each other and of <span class="math inline">\(A\)</span>; <span class="math inline">\(A = 1\)</span> for a woman.</p>
-<p><span class="math inline">\(\mu_0 = 10\)</span>, <span class="math inline">\(\;\alpha = -4\)</span>, <span class="math inline">\(\;\beta = 0.25\)</span>, <span class="math inline">\(\;\gamma = -0.5\)</span>. The numbers are invented.</p>
+<p><span class="math display">\[
+M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
+\]</span></p>
+<p><span class="math inline">\(M\)</span> in thousands of miles a year, <span class="math inline">\(Y\)</span> in hundreds of pounds a year. <span class="math inline">\(U_M\)</span> and <span class="math inline">\(U_Y\)</span> are independent of each other and of <span class="math inline">\(A\)</span>.</p>
 </section>
-<section id="nested-counterfactuals" class="slide level2" data-minutes="3">
-<h2>Nested counterfactuals</h2>
+<section id="splitting-an-effect" class="slide level2" data-minutes="3">
+<h2>Splitting an effect</h2>
+<div class="ask">
+<p>Sex affects claims directly and through mileage. For one person, how would you define the part of the effect that does not go through mileage?</p>
+</div>
+<div class="fragment">
 <p><span class="math inline">\(Y(a, m)\)</span>: claims under <span class="math inline">\(do(A := a, M := m)\)</span>. <span class="math inline">\(\quad M(a)\)</span>: mileage under <span class="math inline">\(do(A := a)\)</span>.</p>
-<p><span class="math inline">\(Y(a, M(a'))\)</span>: claims with <span class="math inline">\(A\)</span> set to <span class="math inline">\(a\)</span> and mileage set to what it would have been under <span class="math inline">\(a'\)</span>. So <span class="math inline">\(Y(1, M(0))\)</span> is a woman driving the miles she would have driven as a man.</p>
-<p>Controlled direct effect: <span class="math inline">\(\;\text{CDE}(m) = E[Y(1, m) - Y(0, m)]\)</span>.</p>
-<p>The reading writes <span class="math inline">\(Y_{X := 1,\, Z := Z_{X := 0}}\)</span> for <span class="math inline">\(Y(1, M(0))\)</span>, with <span class="math inline">\(X\)</span> the treatment and <span class="math inline">\(Z\)</span> the mediator.</p>
+<p>Controlled: <span class="math inline">\(\text{CDE}(m) = E[Y(1, m) - Y(0, m)]\)</span>, everyone at mileage <span class="math inline">\(m\)</span>.</p>
+<p>Natural: <span class="math inline">\(Y(1, M(0))\)</span>, a woman driving the miles she would have driven as a man.</p>
 <div class="source">
-<p>Barocas, Hardt and Narayanan (2023), chapter 5, “Quantitative path analysis,” pages 127–128.</p>
+<p>The reading writes <span class="math inline">\(Y_{X := 1,\, Z := Z_{X := 0}}\)</span> for <span class="math inline">\(Y(1, M(0))\)</span>, with <span class="math inline">\(X\)</span> the treatment and <span class="math inline">\(Z\)</span> the mediator: Barocas, Hardt and Narayanan (2023), pages 127–128.</p>
+</div>
 </div>
 </section>
 <section id="direct-and-indirect-effects" class="slide level2" data-minutes="3">
@@ -323,68 +328,63 @@ Joshua Loftus
 &amp;\quad + \underbrace{E[Y(1, M(1)) - Y(1, M(0))]}_{\text{NIE}}
 \end{aligned}
 \]</span></p>
-<p>Natural direct effect: change <span class="math inline">\(A\)</span>, with mileage held at what it would have been under <span class="math inline">\(A = 0\)</span>. Natural indirect effect: hold <span class="math inline">\(A\)</span> at <span class="math inline">\(1\)</span>, and change mileage from <span class="math inline">\(M(0)\)</span> to <span class="math inline">\(M(1)\)</span>.</p>
 <div class="leave">
 <p><span class="math inline">\(\text{TE} = \text{NDE} + \text{NIE}\)</span> in any model, when the NIE holds <span class="math inline">\(A\)</span> at the level the NDE moves it to.</p>
 </div>
 </section>
-<section id="in-the-linear-model" class="slide level2">
+<section id="in-the-linear-model" class="slide level2" data-minutes="4">
 <h2>In the linear model</h2>
-<p><span class="math inline">\(M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y\)</span></p>
-<p><span class="math inline">\(\text{CDE}(m) = \gamma\)</span> for every <span class="math inline">\(m\)</span></p>
-<p><span class="math inline">\(\text{NDE} = \gamma\)</span></p>
-<p><span class="math inline">\(\text{NIE} = \beta\, E[M(1) - M(0)] = \alpha\beta\)</span></p>
-<p><span class="math inline">\(\text{TE} = \gamma + \alpha\beta\)</span></p>
-<div class="leave">
-<p>In a linear model with no interaction, the indirect effect is the product of the coefficients along the path.</p>
-</div>
-</section>
-<section id="effects-in-the-mileage-world" class="slide level2" data-minutes="2">
-<h2>Effects in the mileage world</h2>
+<p><span class="math display">\[
+M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
+\]</span></p>
 <div class="ask">
-<p>With <span class="math inline">\(\mu_0 = 10\)</span>, <span class="math inline">\(\alpha = -4\)</span>, <span class="math inline">\(\beta = 0.25\)</span>, <span class="math inline">\(\gamma = -0.5\)</span>: what are the NDE, the NIE and the TE? How much of the difference in claims between women and men runs through mileage?</p>
+<p>What are the CDE, the NDE, the NIE and the TE?</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\text{CDE}(m) = \text{NDE} = \gamma, \qquad \text{NIE} = \alpha\beta, \qquad \text{TE} = \gamma + \alpha\beta
+\]</span></p>
+<div class="leave">
+<p>With no interaction, the indirect effect is the product of the coefficients along the path.</p>
+</div>
 </div>
 </section>
 <section id="holding-a-mediator-fixed" class="slide level2">
 <h2>Holding a mediator fixed</h2>
-<p><span class="math inline">\(\text{NDE} = -0.5\)</span>, <span class="math inline">\(\;\text{NIE} = -1\)</span>, <span class="math inline">\(\;\text{TE} = -1.5\)</span>: women claim £150 a year less, £100 of it through mileage.</p>
 <p><span class="math inline">\(Y(1, M(0))\)</span> is nobody’s observed outcome. The model supplies it.</p>
-<p>Comparing women and men with the same mileage estimates the CDE only if nothing else affects both mileage and claims. If driving for work, <span class="math inline">\(U\)</span>, does, then <span class="math inline">\(M\)</span> is a collider on <span class="math inline">\(A \to M \leftarrow U \to Y\)</span>, and women and men with equal mileage are different mixes of work drivers.</p>
+<p>Equal mileage in the data is not mileage held fixed. If driving for work, <span class="math inline">\(U\)</span>, adds both miles and claims, <span class="math inline">\(M\)</span> is a collider on <span class="math inline">\(A \to M \leftarrow U \to Y\)</span>.</p>
 </section></section>
 <section>
 <section id="part-3-two-fair-predictors" class="title-slide slide level1 center">
 <h1>Part 3: Two fair predictors</h1>
 
 </section>
-<section id="predict-the-gaps" class="slide level2" data-minutes="2">
-<h2>Predict the gaps</h2>
-<p>The insurer’s best prediction, legal until December 2012: <span class="math inline">\(\;\hat Y_{\text{full}} = \gamma A + \beta M\)</span>.</p>
-<p>A path-specific premium removes the effect of <span class="math inline">\(A\)</span> along <span class="math inline">\(A \to Y\)</span> only. A counterfactually fair premium removes it along every path from <span class="math inline">\(A\)</span>.</p>
+<section id="removing-the-effect-of-sex" class="slide level2" data-minutes="2">
+<h2>Removing the effect of sex</h2>
+<p>The insurer’s best prediction before 2012: <span class="math inline">\(\;\hat Y_{\text{full}} = \gamma A + \beta M\)</span>.</p>
 <div class="ask">
-<p>Order the three premiums by the gap between women’s and men’s average. Write it down.</p>
+<p>Write down a premium that removes the effect of sex along every path. Then one that removes it along <span class="math inline">\(A \to Y\)</span> only, and keeps the path through mileage.</p>
 </div>
 </section>
 <section id="the-counterfactually-fair-premium" class="slide level2" data-minutes="3">
 <h2>The counterfactually fair premium</h2>
-<p>Abduction: <span class="math inline">\(U_M = M - \mu_0 - \alpha A\)</span>. <span class="math inline">\(\;\)</span> Action: <span class="math inline">\(A := 0\)</span>. <span class="math inline">\(\;\)</span> Prediction: <span class="math inline">\(M(0) = \mu_0 + U_M = M - \alpha A\)</span>.</p>
+<p>Abduction: <span class="math inline">\(U_M = M - \mu_0 - \alpha A\)</span>. <span class="math inline">\(\;\)</span> Action: <span class="math inline">\(A := 0\)</span>. <span class="math inline">\(\;\)</span> Prediction: <span class="math inline">\(M(0) = M - \alpha A\)</span>.</p>
 <p><span class="math display">\[
-\hat Y_{\text{CF}} = \hat Y_{\text{full}} \text{ at } \big(0, M(0)\big) = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M)
+\hat Y_{\text{CF}} = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M)
 \]</span></p>
-<p>A function of <span class="math inline">\(U_M\)</span>, which is not a descendant of <span class="math inline">\(A\)</span>: counterfactually fair. It takes <span class="math inline">\(A\)</span> as an input: a woman is priced as if she drove <span class="math inline">\(4{,}000\)</span> more miles.</p>
-<p>Average: <span class="math inline">\(\beta \mu_0 = 2.5\)</span>, for women and for men.</p>
+<p>A function of <span class="math inline">\(U_M\)</span> alone, so counterfactually fair. It needs <span class="math inline">\(A\)</span> as an input.</p>
 </section>
 <section id="the-path-specific-premium" class="slide level2" data-minutes="3">
 <h2>The path-specific premium</h2>
 <blockquote>
 <p>“a decision is fair toward an individual if it coincides with the one that would have been taken in a counterfactual world in which the sensitive attribute along the unfair pathways were different”</p>
 </blockquote>
-<p>Unfair: <span class="math inline">\(A \to Y\)</span>. Fair: <span class="math inline">\(A \to M \to Y\)</span>. Set <span class="math inline">\(A := 0\)</span> along the direct arrow only, and keep the mileage the person drives:</p>
+<p>Set <span class="math inline">\(A := 0\)</span> on <span class="math inline">\(A \to Y\)</span> only, and keep the observed mileage:</p>
 <p><span class="math display">\[
-\hat Y_{\text{PS}} = \gamma \cdot 0 + \beta M = \beta M
+\hat Y_{\text{PS}} = \beta M
 \]</span></p>
-<p>Average: men <span class="math inline">\(\beta\mu_0 = 2.5\)</span>, women <span class="math inline">\(\beta(\mu_0 + \alpha) = 1.5\)</span>.</p>
 <div class="source">
-<p>Chiappa (2019), “Path-Specific Counterfactual Fairness,” <em>Proceedings of the AAAI Conference on Artificial Intelligence</em> 33(01), 7801–7808, doi:10.1609/aaai.v33i01.33017801, page 7801. Nabi and Shpitser (2018), “Fair Inference on Outcomes,” <em>Proceedings of the AAAI Conference on Artificial Intelligence</em> 32(1), doi:10.1609/aaai.v32i1.11553, define fairness by the same paths.</p>
+<p>Chiappa (2019), “Path-Specific Counterfactual Fairness,” <em>Proceedings of the AAAI Conference on Artificial Intelligence</em> 33(01), 7801–7808, doi:10.1609/aaai.v33i01.33017801, page 7801.</p>
 </div>
 </section>
 <section id="the-premiums-compared" class="slide level2">
@@ -393,12 +393,12 @@ Joshua Loftus
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides_files/figure-revealjs/premiums-1.png" style="width:100.0%" alt="Dot chart of average premiums in hundreds of pounds a year. Full prediction: men 2.5, women 1.0. Path-specific: men 2.5, women 1.5. Counterfactually fair: men 2.5, women 2.5, the two dots on top of each other."></p>
+<p><img data-src="slides_files/figure-revealjs/premiums-1.png" style="width:100.0%" alt="Dot chart of average premiums in hundreds of pounds a year. Full prediction: men 2.5, women 1.0. Path-specific: men 2.5, women 1.5. Counterfactually fair: men 2.5, women 2.5."></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="math inline">\(\hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A\)</span>, the direct path; <span class="math inline">\(\;\hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A\)</span>, the path through mileage.</p>
+<p><span class="math inline">\(\hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A \qquad \hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A\)</span></p>
 <div class="leave">
 <p>The two fair premiums differ by the contribution of the path someone judged fair.</p>
 </div>
@@ -411,31 +411,21 @@ Joshua Loftus
 </section>
 <section id="whose-judgment" class="slide level2" data-minutes="3">
 <h2>Whose judgment</h2>
-<p>Kusner et al., on Berkeley admissions, with <span class="math inline">\(A \to X\)</span> from sex to the course applied to: “Our judgment is that the higher rejection among female than male applicants is acceptable, if the mechanism A → X is interpreted as a choice which is under the control of the applicant.”</p>
-<p>The reading, on the same example: “This, however, is a substantive judgment that may not be a fact.”</p>
+<p>Kusner et al., on Berkeley admissions: “the higher rejection among female than male applicants is acceptable, if the mechanism A → X is interpreted as a choice which is under the control of the applicant.”</p>
+<div class="fragment">
+<p>The reading, on the same case: “This, however, is a substantive judgment that may not be a fact.”</p>
+</div>
+<div class="fragment">
 <p>Nabi and Shpitser: “The specific paths which correspond to discrimination are a domain specific issue.”</p>
-<p>A second choice: setting everyone to the women’s baseline, <span class="math inline">\(\gamma + \beta(\mu_0 + \alpha + U_M)\)</span>, is also counterfactually fair, at an average of <span class="math inline">\(1.0\)</span>.</p>
 <div class="source">
-<p>Kusner, Loftus, Russell and Silva (2017), supplementary material, page 15 of arXiv:1703.06856v3. Barocas, Hardt and Narayanan (2023), chapter 5, “Indirect paths,” page 119. Nabi and Shpitser (2018), as above, page 4 of arXiv:1705.10378v4.</p>
+<p>Kusner, Loftus, Russell and Silva (2017), supplementary material, page 15 of arXiv:1703.06856v3. Barocas, Hardt and Narayanan (2023), chapter 5, page 119. Nabi and Shpitser (2018), “Fair Inference on Outcomes,” <em>Proceedings of the AAAI Conference on Artificial Intelligence</em> 32(1), doi:10.1609/aaai.v32i1.11553, page 4 of arXiv:1705.10378v4.</p>
+</div>
 </div>
 </section>
 <section id="dropping-a-and-an-interaction" class="slide level2 inverse" data-minutes="2">
 <h2>Dropping <span class="math inline">\(A\)</span>, and an interaction</h2>
-<p>Claims refitted on mileage alone, with <span class="math inline">\(\operatorname{Var}(U_M) = 4\)</span>, so <span class="math inline">\(\operatorname{Var}(M) = 8\)</span> and <span class="math inline">\(\operatorname{Cov}(A, M) = -1\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{slope} &amp;= \beta + \gamma\,\operatorname{Cov}(A, M)/\operatorname{Var}(M) = 0.3125 \\
-\text{gap} &amp;= \alpha \times 0.3125 = -1.25 = \text{NIE} + R^2\,\text{NDE}
-\end{aligned}
-\]</span></p>
-<p><span class="math inline">\(R^2 = \tfrac12\)</span>: the share of <span class="math inline">\(\operatorname{Var}(M)\)</span> explained by <span class="math inline">\(A\)</span>.</p>
-<p>With <span class="math inline">\(Y = \gamma A + \beta M + \delta AM + U_Y\)</span>, <span class="math inline">\(\text{NDE}_a\)</span> holding mileage at <span class="math inline">\(M(a)\)</span> and <span class="math inline">\(\text{NIE}_a\)</span> holding <span class="math inline">\(A\)</span> at <span class="math inline">\(a\)</span>:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{NDE}_0 + \text{NIE}_1 &amp;= \text{NDE}_1 + \text{NIE}_0 = \text{TE} \\
-\text{NDE}_0 + \text{NIE}_0 &amp;= \text{TE} - \alpha\delta, \qquad \text{NIE}_0 = \alpha\beta
-\end{aligned}
-\]</span></p>
+<p>Refit on mileage alone: the gap becomes <span class="math inline">\(\text{NIE} + R^2\,\text{NDE}\)</span>, where <span class="math inline">\(R^2\)</span> is the share of <span class="math inline">\(\operatorname{Var}(M)\)</span> explained by <span class="math inline">\(A\)</span>.</p>
+<p>With <span class="math inline">\(\delta AM\)</span> in <span class="math inline">\(Y\)</span>, and a subscript for the level held fixed: <span class="math inline">\(\;\text{NDE}_0 + \text{NIE}_1 = \text{TE}\)</span>, but <span class="math inline">\(\text{NDE}_0 + \text{NIE}_0 = \text{TE} - \alpha\delta\)</span>.</p>
 </section></section>
 <section>
 <section id="part-4-luck-and-responsibility" class="title-slide slide level1 center">
@@ -444,17 +434,23 @@ Joshua Loftus
 </section>
 <section id="moral-luck" class="slide level2">
 <h2>Moral luck</h2>
-<p>“Moral luck refers to how our evaluation of whether someone has done good or not can depend on factors which are outside of that person’s control. The control principle says that we should only judge people to the extent that the factors we judge them on are under their control.”</p>
-<p>“The middle view has particular purchase in the case of insurance, where we really might want insurers to ignore the additional costs that they are likely to face in setting the price of a policy for someone with an expensive pre-existing condition outside the person’s control.”</p>
+<blockquote>
+<p>“The control principle says that we should only judge people to the extent that the factors we judge them on are under their control.”</p>
+</blockquote>
+<div class="fragment">
+<blockquote>
+<p>“we really might want insurers to ignore the additional costs that they are likely to face in setting the price of a policy for someone with an expensive pre-existing condition outside the person’s control”</p>
+</blockquote>
 <div class="source">
 <p>Loftus, <em>Modern Statistics 4 Data Science</em>, section 3.4.2, https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck. Barocas, Hardt and Narayanan (2023), chapter 4, page 85.</p>
+</div>
 </div>
 </section>
 <section id="luck-egalitarianism" class="slide level2" data-minutes="1">
 <h2>Luck egalitarianism</h2>
-<p>The same idea, applied to who gets what. Brute luck: risks a person did not choose to take. Option luck: how a gamble the person chose turns out. “Luck-egalitarians, for example, often separate option luck and brute luck and deny that instances of differential option luck are unjust.”</p>
+<p>Brute luck: risks a person did not choose. Option luck: how a chosen gamble turns out.</p>
 <div class="leave">
-<p>The book: concepts “such as whether a decision subject has control over an attribute used for decision making, cannot be expressed in the statistical language of conditional probabilities and expectations.”</p>
+<p>Control “cannot be expressed in the statistical language of conditional probabilities and expectations.”</p>
 </div>
 <div class="source">
 <p>Lippert-Rasmussen, “Justice and Bad Luck,” <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2005, substantive revision 2 February 2023, https://plato.stanford.edu/entries/justice-bad-luck/, section 7. Barocas, Hardt and Narayanan (2023), chapter 4, page 92.</p>
@@ -462,17 +458,17 @@ Joshua Loftus
 </section>
 <section id="a-mediator-shaped-by-the-attribute" class="slide level2" data-minutes="5">
 <h2>A mediator shaped by the attribute</h2>
-<p>In the mileage world, part of the difference in claims runs through mileage, and mileage itself differs by sex.</p>
 <div class="ask">
-<p>Is the path <span class="math inline">\(A \to M \to Y\)</span> fair, when <span class="math inline">\(M\)</span> was itself shaped by <span class="math inline">\(A\)</span>? One of you argues that it is, the other that it is not, using the control principle at least once; then swap. Then try the same on the route you brought.</p>
+<p>Is the path <span class="math inline">\(A \to M \to Y\)</span> fair, when mileage was itself shaped by sex? One of you argues yes, the other no; then swap.</p>
 </div>
 </section>
 <section id="a-framework-and-a-criterion" class="slide level2">
 <h2>A framework and a criterion</h2>
+<blockquote>
 <p>“But there may be a deontological argument in favor of functional independence, including empirical evidence that people generally believe a process with functional independence is more fair.”</p>
-<p>Functional independence is ms4ds’s term for unawareness: <span class="math inline">\(\hat Y = \hat f(X)\)</span>, with <span class="math inline">\(A\)</span> not an input. In the red car world the unaware price is not counterfactually fair, and the counterfactually fair price takes <span class="math inline">\(A\)</span> as an input. Since 2012, EU law forbids the second.</p>
+</blockquote>
 <div class="ask">
-<p>Does a deontologist have to prefer the price that never looks at sex?</p>
+<p>In the red car world, the price that never looks at sex is not counterfactually fair. Does a deontologist have to prefer it anyway?</p>
 </div>
 <div class="source">
 <p>Loftus, <em>Modern Statistics 4 Data Science</em>, section 3.4.1, as above.</p>
@@ -480,10 +476,12 @@ Joshua Loftus
 </section>
 <section id="intersectionality" class="slide level2 inverse">
 <h2>Intersectionality</h2>
-<p>Two attributes, <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span>: <span class="math inline">\(\;Y = \gamma_1 A_1 + \gamma_2 A_2 + \delta A_1 A_2 + \dots\)</span></p>
-<p>The effect of <span class="math inline">\(A_1\)</span> is <span class="math inline">\(\gamma_1\)</span> when <span class="math inline">\(A_2 = 0\)</span> and <span class="math inline">\(\gamma_1 + \delta\)</span> when <span class="math inline">\(A_2 = 1\)</span>. A model without the interaction, <span class="math inline">\(\delta = 0\)</span>, assumes that the effect of one attribute is the same at every level of the other.</p>
+<p><span class="math display">\[
+Y = \gamma_1 A_1 + \gamma_2 A_2 + \delta A_1 A_2 + \dots
+\]</span></p>
+<p>The effect of <span class="math inline">\(A_1\)</span> is <span class="math inline">\(\gamma_1\)</span> when <span class="math inline">\(A_2 = 0\)</span> and <span class="math inline">\(\gamma_1 + \delta\)</span> when <span class="math inline">\(A_2 = 1\)</span>. Leaving out <span class="math inline">\(\delta\)</span> assumes the two are equal.</p>
 <div class="source" style="color: #BCAF6F">
-<p>Yang, Loftus and Stoyanovich (2021), “Causal Intersectionality and Fair Ranking,” <em>2nd Symposium on Foundations of Responsible Computing (FORC 2021)</em>, LIPIcs 192, 7:1–7:20, doi:10.4230/LIPIcs.FORC.2021.7; arXiv:2006.08688, page 3: “we generally assume that f_j contains non-additive interactions between sensitive attributes.”</p>
+<p>Yang, Loftus and Stoyanovich (2021), “Causal Intersectionality and Fair Ranking,” <em>2nd Symposium on Foundations of Responsible Computing (FORC 2021)</em>, LIPIcs 192, 7:1–7:20, doi:10.4230/LIPIcs.FORC.2021.7.</p>
 </div>
 </section>
 <section id="firefighter-hiring" class="slide level2" data-minutes="6">
@@ -499,7 +497,7 @@ Joshua Loftus
 </div>
 </div>
 </div>
-<p>A fire service hires. The direct path is the panel; career breaks reduce years of experience.</p>
+<p>The direct path is the hiring panel. Career breaks reduce experience.</p>
 </div><div class="column" style="width:58%;">
 <div class="ask">
 <ol type="1">
@@ -513,14 +511,14 @@ Joshua Loftus
 <section id="lenses-this-week" class="slide level2">
 <h2>Lenses this week</h2>
 <ul>
-<li><strong>Who is in the data?</strong> Each driver is in it once, with one sex. The same driver with the other sex, <span class="math inline">\(Y(1, M(0))\)</span> included, is in nobody’s data; the model fills it in.</li>
-<li><strong>You have to choose, so choose, and defend it.</strong> Which paths are fair; which group is the baseline; the unaware price or the counterfactually fair one.</li>
-<li><strong>What can be changed, and how?</strong> Held fixed: <span class="math inline">\(U\)</span> for the counterfactual driver; mileage at <span class="math inline">\(M(0)\)</span> in the natural direct effect. Equal mileage in a regression is not mileage held fixed.</li>
+<li><strong>Who is in the data?</strong> Each driver once, with one sex. <span class="math inline">\(Y(1, M(0))\)</span> is in nobody’s data.</li>
+<li><strong>You have to choose, so choose, and defend it.</strong> Which paths are fair; whose baseline; unaware or counterfactually fair.</li>
+<li><strong>What can be changed, and how?</strong> Held fixed: <span class="math inline">\(U\)</span> for the counterfactual driver, mileage at <span class="math inline">\(M(0)\)</span>. Equal mileage in the data is not mileage held fixed.</li>
 </ul>
 </section>
 <section id="for-next-time" class="slide level2" data-minutes="1">
 <h2>For next time</h2>
-<p>The next reading is about decisions made from predictions: what an institution decides from a prediction, what a wrong prediction costs, and how far life outcomes can be predicted at all.</p>
+<p>The next reading is about decisions made from predictions: what a wrong prediction costs, and how far life outcomes can be predicted at all.</p>
 <p>Bring one prediction an institution acted on: what was predicted, what was decided, and what a wrong prediction costs and who bears it.</p>
 
 

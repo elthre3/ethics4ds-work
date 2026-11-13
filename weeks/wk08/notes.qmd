@@ -117,31 +117,16 @@ draw_dag <- function(nodes, edges, dashed = character(0), highlight = character(
     scale_linetype_identity() + scale_color_identity()
 }
 
-# The mileage world (as in the slides), and the version with an interaction.
+# The mileage world (as in the slides). The checks stop the render if a number stated in
+# the text does not follow from the parameters.
 mu0 <- 10; alpha <- -4; beta <- 0.25; gamma <- -0.5; var_UM <- 4; pA <- 1/2
 NDE <- gamma; NIE <- alpha * beta; TE <- NDE + NIE
 var_M <- alpha^2 * pA * (1 - pA) + var_UM
 slope_refit <- beta + gamma * alpha * pA * (1 - pA) / var_M
 R2 <- alpha^2 * pA * (1 - pA) / var_M
-delta <- -0.05
-TE_i   <- gamma + alpha * beta + delta * (mu0 + alpha)
-NDE0_i <- gamma + delta * mu0;           NIE1_i <- alpha * (beta + delta)
-NDE1_i <- gamma + delta * (mu0 + alpha); NIE0_i <- alpha * beta
 stopifnot(abs(NDE + 0.5) < 1e-12, abs(NIE + 1) < 1e-12, abs(TE + 1.5) < 1e-12,
           abs(var_M - 8) < 1e-12, abs(slope_refit - 0.3125) < 1e-12, abs(R2 - 0.5) < 1e-12,
-          abs(alpha * slope_refit - (NIE + R2 * NDE)) < 1e-12,
-          abs(TE_i + 1.8) < 1e-12, abs(NDE0_i + 1) < 1e-12, abs(NIE1_i + 0.8) < 1e-12,
-          abs(NDE1_i + 0.8) < 1e-12, abs(NIE0_i + 1) < 1e-12,
-          abs(NDE0_i + NIE1_i - TE_i) < 1e-12, abs(NDE1_i + NIE0_i - TE_i) < 1e-12,
-          abs(NDE0_i + NIE0_i - (TE_i - alpha * delta)) < 1e-12)
-
-# A simulated check of the mileage world's premiums and of the refit on mileage alone.
-n_mw <- 200000
-mw_sim <- data.frame(A = rbinom(n_mw, 1, pA)) |>
-  mutate(M = mu0 + alpha * A + rnorm(n_mw, sd = sqrt(var_UM)),
-         Y = gamma * A + beta * M + rnorm(n_mw),
-         full = gamma * A + beta * M, ps = beta * M, cf = beta * (M - alpha * A))
-refit_sim <- coef(lm(Y ~ M, data = mw_sim))[["M"]]
+          abs(alpha * slope_refit - (NIE + R2 * NDE)) < 1e-12)
 ```
 
 ## What you brought
@@ -258,32 +243,36 @@ ggplot(car, aes(X, Y, color = group)) +
 ```
 
 The figure shows the simulated drivers and the population lines. The
-dashed line is the fit on $X$ alone. The two solid lines are
-$E[Y \mid X, A] = X - 2A$, one for each group: at any given color, a
-woman has lower expected claims than a man, because two units of her
-color came from $A$ rather than from $U$.
+dashed line is the fit on $X$ alone. The two solid lines are the best
+predictions from $X$ and $A$, one for each group: at any given color, a
+woman has lower expected claims than a man.
 
 ### A counterfactual driver
 
-Take one woman whose car scores $X = 2.6$, and ask what her price would
-have been had she been a man. The reading's Definition 5 (page 123)
-gives three steps for a counterfactual in a structural causal model.
-*Abduction*: adjust the unobserved variables to be consistent with what
-was observed. Here $U = X - 2A = 0.6$. *Action*: set the attribute,
-$A := 0$. *Prediction*: recompute everything downstream of $A$ in the
-modified model, with the abducted $U$. Her car would have scored
-$X = 2 \cdot 0 + 0.6 = 0.6$.
+::: {.callout-note .ask icon=false title="Before reading on, try this"}
+A woman's car scores $X = 2.6$. What would her price from $X$ alone have
+been, had she been a man? Write down how you got there.
+:::
 
-| | as observed | had $A$ been $0$ |
+The reading's Definition 5 (page 123) gives three steps for a
+counterfactual in a structural causal model. *Abduction*: adjust the
+unobserved variables to be consistent with what was observed. Here
+$U = X - 2A = 0.6$. *Action*: set the attribute, $A := 0$.
+*Prediction*: recompute everything downstream of $A$ in the modified
+model, with the abducted $U$. Her car would have scored
+$X = 2 \cdot 0 + 0.6 = 0.6$: two units of her color came from $A$
+rather than from $U$.
+
+| | she, $A = 1$ | had $A$ been $0$ |
 |:---|---:|---:|
 | abduction: $U = X - 2A$ | $0.6$ | $0.6$ |
-| action | $A = 1$ | $A := 0$ |
 | prediction: $X = 2A + U$ | $2.6$ | $0.6$ |
 | price from $X$ alone, $\tfrac12 X - \tfrac12$ | $0.8$ | $-0.2$ |
 | price from $X$ and $A$, $X - 2A$ | $0.6$ | $0.6$ |
 
 The unaware price for this driver would have been one unit lower had
-she been a man. The price that uses $A$ would have been the same.
+she been a man. The price that uses $A$, which is the best prediction
+from $X$ and $A$ in this model, would have been the same.
 
 ### Counterfactual fairness
 
@@ -381,9 +370,17 @@ draw_dag(mw, data.frame(from = c("A: sex", "M: mileage", "A: sex"), to = c("M: m
          boxes = TRUE, text_size = 4.5, xlim = c(-0.7, 3.9), ylim = c(-0.3, 1.3))
 ```
 
-### Nested counterfactuals
+::: {.callout-note .ask icon=false title="Before reading on, try this"}
+Sex affects claims here directly and through mileage. For one person,
+how would you define the part of the effect of sex on claims that does
+not go through mileage?
+:::
 
-Two kinds of counterfactual are needed, both built from $do(\cdot)$:
+### Counterfactuals with a mediator
+
+A natural first answer is to compare a woman and a man at the same
+mileage. Making that precise, and the alternative to it, needs two kinds
+of counterfactual, both built from $do(\cdot)$:
 
 - $Y(a, m)$, the claims under $do(A := a, M := m)$;
 - $M(a)$, the mileage under $do(A := a)$.
@@ -485,8 +482,17 @@ as holding it fixed by intervention.
 
 Before December 2012 the insurer's best prediction was the full one,
 $\hat Y_{\text{full}} = \gamma A + \beta M$, which is $E[Y \mid A, M]$ in
-this world. Two criteria remove the effect of $A$ from it in different
-ways, and on this model both can be computed by hand.
+this world.
+
+::: {.callout-note .ask icon=false title="Before reading on, try this"}
+Starting from $\hat Y_{\text{full}} = \gamma A + \beta M$, write down a
+premium that removes the effect of sex along every path from $A$. Then
+write down one that removes it along $A \to Y$ only, and keeps the path
+through mileage.
+:::
+
+The first is the counterfactually fair premium and the second the
+path-specific one. On this model both can be computed by hand.
 
 ### The counterfactually fair premium
 
@@ -502,8 +508,8 @@ It is a function of $U_M$ alone, and $U_M$ is not a descendant of $A$,
 so it is counterfactually fair by Lemma 1. It takes $A$ as an input:
 with $\alpha = -4$, a woman is priced as if she drove $4{,}000$ more
 miles than she does. Every driver, woman or man, is priced as the full
-model would price the same person had they been a man, and the average
-is $\beta\mu_0 = 2.5$ in both groups.
+model would price the same person had they been a man, so the average
+premium is the same in both groups.
 
 ### The path-specific premium
 
@@ -523,8 +529,8 @@ $$
 \hat Y_{\text{PS}} = \gamma \cdot 0 + \beta M = \beta M .
 $$
 
-It does not use $A$ at all. Its average is $\beta\mu_0 = 2.5$ for men and
-$\beta(\mu_0 + \alpha) = 1.5$ for women.
+It does not use $A$ at all, and women, who drive less, pay less on
+average.
 
 ### The comparison
 
@@ -563,12 +569,7 @@ $$
 The first difference is the contribution of the direct path, and the
 second is the contribution of the path through mileage. The two fair
 premiums differ by the contribution of the path someone judged fair.
-Neither criterion says which path that is. (A simulation of
-`r format(n_mw, big.mark = ",", scientific = FALSE)` drivers from the model gives group
-averages within $0.01$ of the table:
-`r sprintf("%.2f", mean(mw_sim$ps[mw_sim$A == 1]))` for women's
-path-specific premium, `r sprintf("%.2f", mean(mw_sim$cf[mw_sim$A == 1]))`
-for their counterfactually fair one.)
+Neither criterion says which path that is.
 
 ### The baseline
 
@@ -576,10 +577,10 @@ The counterfactually fair premium above prices everyone as the full
 model would price them had they been men. Pricing everyone as the full
 model would price them had they been women,
 $\gamma + \beta(\mu_0 + \alpha + U_M)$, is also a function of $U_M$ and
-also counterfactually fair, with an average of $1.0$ in both groups.
+also counterfactually fair, at a lower level for everyone.
 So is either one plus a constant. The definition fixes the gap between
 groups at zero and leaves the level open. An insurer whose premiums
-must cover average claims of $\tfrac12(2.5 + 1.0) = 1.75$ has to choose
+must cover its average claims has to choose
 a level, and at that level women pay on average more than they claim,
 and men less. Which group is the baseline, and what level is
 charged, are further choices the definition does not make.
@@ -650,8 +651,7 @@ $\operatorname{Var}(A) = 1/4$ and $\operatorname{Var}(U_M) = 4$,
 $\operatorname{Var}(M) = 8$, $\operatorname{Cov}(A, M) = -1$, the slope is
 $0.25 + (-0.5)(-1)/8 = 0.3125$ and the gap is $-1.25$: the path through
 mileage, $-1$, and half of the direct effect, $-0.25$, which returns
-because mileage stands in for sex. (The simulation's slope is
-`r sprintf("%.4f", refit_sim)`.) The refitted premium has no arrow from
+because mileage stands in for sex. The refitted premium has no arrow from
 $A$, and charges more per mile than the world does.
 
 Nabi and Shpitser's method fits the model closest to the data, by
@@ -697,12 +697,7 @@ the total effect: the decomposition holds with the reference levels
 paired this way, and not in general. The pair the reading defines,
 $\text{NDE}_0$ and $\text{NIE}_0$, sums to $\text{TE} - \alpha\delta$.
 The product of coefficients $\alpha\beta$ is $\text{NIE}_0$, which is
-not the indirect effect that pairs with $\text{NDE}_0$.
-
-In the mileage world with $\delta = -0.05$ (women's claims rise by
-£20 per thousand miles, men's by £25), $\text{TE} = -1.8$;
-$\text{NDE}_0 = -1$ and $\text{NIE}_1 = -0.8$; $\text{NDE}_1 = -0.8$
-and $\text{NIE}_0 = -1$; and $\text{NDE}_0 + \text{NIE}_0 = -2$. With
+not the indirect effect that pairs with $\text{NDE}_0$. With
 $\delta = 0$ both pairings give $\gamma$ and $\alpha\beta$.
 
 ## Luck and responsibility

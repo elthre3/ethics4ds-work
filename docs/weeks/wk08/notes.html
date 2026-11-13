@@ -231,7 +231,7 @@ window.Quarto = {
   <li><a href="#direct-and-indirect-effects" id="toc-direct-and-indirect-effects" class="nav-link" data-scroll-target="#direct-and-indirect-effects">Direct and indirect effects</a>
   <ul class="collapse">
   <li><a href="#a-second-world" id="toc-a-second-world" class="nav-link" data-scroll-target="#a-second-world">A second world</a></li>
-  <li><a href="#nested-counterfactuals" id="toc-nested-counterfactuals" class="nav-link" data-scroll-target="#nested-counterfactuals">Nested counterfactuals</a></li>
+  <li><a href="#counterfactuals-with-a-mediator" id="toc-counterfactuals-with-a-mediator" class="nav-link" data-scroll-target="#counterfactuals-with-a-mediator">Counterfactuals with a mediator</a></li>
   <li><a href="#the-decomposition" id="toc-the-decomposition" class="nav-link" data-scroll-target="#the-decomposition">The decomposition</a></li>
   <li><a href="#in-the-linear-model" id="toc-in-the-linear-model" class="nav-link" data-scroll-target="#in-the-linear-model">In the linear model</a></li>
   <li><a href="#holding-a-mediator-fixed" id="toc-holding-a-mediator-fixed" class="nav-link" data-scroll-target="#holding-a-mediator-fixed">Holding a mediator fixed</a></li>
@@ -344,12 +344,12 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> X))                 <span class="co"># the price from X alone</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)           X 
- -0.4143944   0.4706224 </code></pre>
+ -0.5454934   0.5115697 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> X <span class="sc">+</span> A))             <span class="co"># the price from X and A</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)           X           A 
- 0.06257693  1.01128566 -2.11795872 </code></pre>
+ 0.01150287  1.04309699 -2.12880088 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -361,16 +361,29 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The figure shows the simulated drivers and the population lines. The dashed line is the fit on <span class="math inline">\(X\)</span> alone. The two solid lines are <span class="math inline">\(E[Y \mid X, A] = X - 2A\)</span>, one for each group: at any given color, a woman has lower expected claims than a man, because two units of her color came from <span class="math inline">\(A\)</span> rather than from <span class="math inline">\(U\)</span>.</p>
+<p>The figure shows the simulated drivers and the population lines. The dashed line is the fit on <span class="math inline">\(X\)</span> alone. The two solid lines are the best predictions from <span class="math inline">\(X\)</span> and <span class="math inline">\(A\)</span>, one for each group: at any given color, a woman has lower expected claims than a man.</p>
 </section>
 <section id="a-counterfactual-driver" class="level3">
 <h3 class="anchored" data-anchor-id="a-counterfactual-driver">A counterfactual driver</h3>
-<p>Take one woman whose car scores <span class="math inline">\(X = 2.6\)</span>, and ask what her price would have been had she been a man. The reading’s Definition 5 (page 123) gives three steps for a counterfactual in a structural causal model. <em>Abduction</em>: adjust the unobserved variables to be consistent with what was observed. Here <span class="math inline">\(U = X - 2A = 0.6\)</span>. <em>Action</em>: set the attribute, <span class="math inline">\(A := 0\)</span>. <em>Prediction</em>: recompute everything downstream of <span class="math inline">\(A\)</span> in the modified model, with the abducted <span class="math inline">\(U\)</span>. Her car would have scored <span class="math inline">\(X = 2 \cdot 0 + 0.6 = 0.6\)</span>.</p>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A woman’s car scores <span class="math inline">\(X = 2.6\)</span>. What would her price from <span class="math inline">\(X\)</span> alone have been, had she been a man? Write down how you got there.</p>
+</div>
+</div>
+<p>The reading’s Definition 5 (page 123) gives three steps for a counterfactual in a structural causal model. <em>Abduction</em>: adjust the unobserved variables to be consistent with what was observed. Here <span class="math inline">\(U = X - 2A = 0.6\)</span>. <em>Action</em>: set the attribute, <span class="math inline">\(A := 0\)</span>. <em>Prediction</em>: recompute everything downstream of <span class="math inline">\(A\)</span> in the modified model, with the abducted <span class="math inline">\(U\)</span>. Her car would have scored <span class="math inline">\(X = 2 \cdot 0 + 0.6 = 0.6\)</span>: two units of her color came from <span class="math inline">\(A\)</span> rather than from <span class="math inline">\(U\)</span>.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
-<th style="text-align: right;">as observed</th>
+<th style="text-align: right;">she, <span class="math inline">\(A = 1\)</span></th>
 <th style="text-align: right;">had <span class="math inline">\(A\)</span> been <span class="math inline">\(0\)</span></th>
 </tr>
 </thead>
@@ -381,28 +394,23 @@ window.Quarto = {
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">action</td>
-<td style="text-align: right;"><span class="math inline">\(A = 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(A := 0\)</span></td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">prediction: <span class="math inline">\(X = 2A + U\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(2.6\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">price from <span class="math inline">\(X\)</span> alone, <span class="math inline">\(\tfrac12 X - \tfrac12\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.8\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(-0.2\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">price from <span class="math inline">\(X\)</span> and <span class="math inline">\(A\)</span>, <span class="math inline">\(X - 2A\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(0.6\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>The unaware price for this driver would have been one unit lower had she been a man. The price that uses <span class="math inline">\(A\)</span> would have been the same.</p>
+<p>The unaware price for this driver would have been one unit lower had she been a man. The price that uses <span class="math inline">\(A\)</span>, which is the best prediction from <span class="math inline">\(X\)</span> and <span class="math inline">\(A\)</span> in this model, would have been the same.</p>
 </section>
 <section id="counterfactual-fairness" class="level3">
 <h3 class="anchored" data-anchor-id="counterfactual-fairness">Counterfactual fairness</h3>
@@ -439,10 +447,23 @@ M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y ,
 </div>
 </div>
 </div>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sex affects claims here directly and through mileage. For one person, how would you define the part of the effect of sex on claims that does not go through mileage?</p>
+</div>
+</div>
 </section>
-<section id="nested-counterfactuals" class="level3">
-<h3 class="anchored" data-anchor-id="nested-counterfactuals">Nested counterfactuals</h3>
-<p>Two kinds of counterfactual are needed, both built from <span class="math inline">\(do(\cdot)\)</span>:</p>
+<section id="counterfactuals-with-a-mediator" class="level3">
+<h3 class="anchored" data-anchor-id="counterfactuals-with-a-mediator">Counterfactuals with a mediator</h3>
+<p>A natural first answer is to compare a woman and a man at the same mileage. Making that precise, and the alternative to it, needs two kinds of counterfactual, both built from <span class="math inline">\(do(\cdot)\)</span>:</p>
 <ul>
 <li><span class="math inline">\(Y(a, m)\)</span>, the claims under <span class="math inline">\(do(A := a, M := m)\)</span>;</li>
 <li><span class="math inline">\(M(a)\)</span>, the mileage under <span class="math inline">\(do(A := a)\)</span>.</li>
@@ -486,7 +507,21 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y .
 </section>
 <section id="two-fair-predictors" class="level2">
 <h2 class="anchored" data-anchor-id="two-fair-predictors">Two fair predictors</h2>
-<p>Before December 2012 the insurer’s best prediction was the full one, <span class="math inline">\(\hat Y_{\text{full}} = \gamma A + \beta M\)</span>, which is <span class="math inline">\(E[Y \mid A, M]\)</span> in this world. Two criteria remove the effect of <span class="math inline">\(A\)</span> from it in different ways, and on this model both can be computed by hand.</p>
+<p>Before December 2012 the insurer’s best prediction was the full one, <span class="math inline">\(\hat Y_{\text{full}} = \gamma A + \beta M\)</span>, which is <span class="math inline">\(E[Y \mid A, M]\)</span> in this world.</p>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Starting from <span class="math inline">\(\hat Y_{\text{full}} = \gamma A + \beta M\)</span>, write down a premium that removes the effect of sex along every path from <span class="math inline">\(A\)</span>. Then write down one that removes it along <span class="math inline">\(A \to Y\)</span> only, and keeps the path through mileage.</p>
+</div>
+</div>
+<p>The first is the counterfactually fair premium and the second the path-specific one. On this model both can be computed by hand.</p>
 <section id="the-counterfactually-fair-premium" class="level3">
 <h3 class="anchored" data-anchor-id="the-counterfactually-fair-premium">The counterfactually fair premium</h3>
 <p>Abduction: <span class="math inline">\(U_M = M - \mu_0 - \alpha A\)</span>. Action: <span class="math inline">\(A := 0\)</span> along every path. Prediction: mileage would have been <span class="math inline">\(M(0) = \mu_0 + U_M =
@@ -494,7 +529,7 @@ M - \alpha A\)</span>, and the premium</p>
 <p><span class="math display">\[
 \hat Y_{\text{CF}} = \gamma \cdot 0 + \beta\, M(0) = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M) .
 \]</span></p>
-<p>It is a function of <span class="math inline">\(U_M\)</span> alone, and <span class="math inline">\(U_M\)</span> is not a descendant of <span class="math inline">\(A\)</span>, so it is counterfactually fair by Lemma 1. It takes <span class="math inline">\(A\)</span> as an input: with <span class="math inline">\(\alpha = -4\)</span>, a woman is priced as if she drove <span class="math inline">\(4{,}000\)</span> more miles than she does. Every driver, woman or man, is priced as the full model would price the same person had they been a man, and the average is <span class="math inline">\(\beta\mu_0 = 2.5\)</span> in both groups.</p>
+<p>It is a function of <span class="math inline">\(U_M\)</span> alone, and <span class="math inline">\(U_M\)</span> is not a descendant of <span class="math inline">\(A\)</span>, so it is counterfactually fair by Lemma 1. It takes <span class="math inline">\(A\)</span> as an input: with <span class="math inline">\(\alpha = -4\)</span>, a woman is priced as if she drove <span class="math inline">\(4{,}000\)</span> more miles than she does. Every driver, woman or man, is priced as the full model would price the same person had they been a man, so the average premium is the same in both groups.</p>
 </section>
 <section id="the-path-specific-premium" class="level3">
 <h3 class="anchored" data-anchor-id="the-path-specific-premium">The path-specific premium</h3>
@@ -503,7 +538,7 @@ M - \alpha A\)</span>, and the premium</p>
 <p><span class="math display">\[
 \hat Y_{\text{PS}} = \gamma \cdot 0 + \beta M = \beta M .
 \]</span></p>
-<p>It does not use <span class="math inline">\(A\)</span> at all. Its average is <span class="math inline">\(\beta\mu_0 = 2.5\)</span> for men and <span class="math inline">\(\beta(\mu_0 + \alpha) = 1.5\)</span> for women.</p>
+<p>It does not use <span class="math inline">\(A\)</span> at all, and women, who drive less, pay less on average.</p>
 </section>
 <section id="the-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="the-comparison">The comparison</h3>
@@ -555,11 +590,11 @@ M - \alpha A\)</span>, and the premium</p>
 \hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A, \qquad
 \hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A .
 \]</span></p>
-<p>The first difference is the contribution of the direct path, and the second is the contribution of the path through mileage. The two fair premiums differ by the contribution of the path someone judged fair. Neither criterion says which path that is. (A simulation of 200,000 drivers from the model gives group averages within <span class="math inline">\(0.01\)</span> of the table: 1.50 for women’s path-specific premium, 2.50 for their counterfactually fair one.)</p>
+<p>The first difference is the contribution of the direct path, and the second is the contribution of the path through mileage. The two fair premiums differ by the contribution of the path someone judged fair. Neither criterion says which path that is.</p>
 </section>
 <section id="the-baseline" class="level3">
 <h3 class="anchored" data-anchor-id="the-baseline">The baseline</h3>
-<p>The counterfactually fair premium above prices everyone as the full model would price them had they been men. Pricing everyone as the full model would price them had they been women, <span class="math inline">\(\gamma + \beta(\mu_0 + \alpha + U_M)\)</span>, is also a function of <span class="math inline">\(U_M\)</span> and also counterfactually fair, with an average of <span class="math inline">\(1.0\)</span> in both groups. So is either one plus a constant. The definition fixes the gap between groups at zero and leaves the level open. An insurer whose premiums must cover average claims of <span class="math inline">\(\tfrac12(2.5 + 1.0) = 1.75\)</span> has to choose a level, and at that level women pay on average more than they claim, and men less. Which group is the baseline, and what level is charged, are further choices the definition does not make.</p>
+<p>The counterfactually fair premium above prices everyone as the full model would price them had they been men. Pricing everyone as the full model would price them had they been women, <span class="math inline">\(\gamma + \beta(\mu_0 + \alpha + U_M)\)</span>, is also a function of <span class="math inline">\(U_M\)</span> and also counterfactually fair, at a lower level for everyone. So is either one plus a constant. The definition fixes the gap between groups at zero and leaves the level open. An insurer whose premiums must cover its average claims has to choose a level, and at that level women pay on average more than they claim, and men less. Which group is the baseline, and what level is charged, are further choices the definition does not make.</p>
 </section>
 <section id="whose-judgment" class="level3">
 <h3 class="anchored" data-anchor-id="whose-judgment">Whose judgment</h3>
@@ -581,7 +616,7 @@ M - \alpha A\)</span>, and the premium</p>
 \alpha\beta + \gamma\,\frac{\alpha^2 \operatorname{Var}(A)}{\operatorname{Var}(M)}
 = \text{NIE} + R^2\,\text{NDE} ,
 \]</span></p>
-<p>where <span class="math inline">\(R^2 = \alpha^2 \operatorname{Var}(A)/\operatorname{Var}(M)\)</span> is the share of the variance of mileage explained by sex. With <span class="math inline">\(\operatorname{Var}(A) = 1/4\)</span> and <span class="math inline">\(\operatorname{Var}(U_M) = 4\)</span>, <span class="math inline">\(\operatorname{Var}(M) = 8\)</span>, <span class="math inline">\(\operatorname{Cov}(A, M) = -1\)</span>, the slope is <span class="math inline">\(0.25 + (-0.5)(-1)/8 = 0.3125\)</span> and the gap is <span class="math inline">\(-1.25\)</span>: the path through mileage, <span class="math inline">\(-1\)</span>, and half of the direct effect, <span class="math inline">\(-0.25\)</span>, which returns because mileage stands in for sex. (The simulation’s slope is 0.3115.) The refitted premium has no arrow from <span class="math inline">\(A\)</span>, and charges more per mile than the world does.</p>
+<p>where <span class="math inline">\(R^2 = \alpha^2 \operatorname{Var}(A)/\operatorname{Var}(M)\)</span> is the share of the variance of mileage explained by sex. With <span class="math inline">\(\operatorname{Var}(A) = 1/4\)</span> and <span class="math inline">\(\operatorname{Var}(U_M) = 4\)</span>, <span class="math inline">\(\operatorname{Var}(M) = 8\)</span>, <span class="math inline">\(\operatorname{Cov}(A, M) = -1\)</span>, the slope is <span class="math inline">\(0.25 + (-0.5)(-1)/8 = 0.3125\)</span> and the gap is <span class="math inline">\(-1.25\)</span>: the path through mileage, <span class="math inline">\(-1\)</span>, and half of the direct effect, <span class="math inline">\(-0.25\)</span>, which returns because mileage stands in for sex. The refitted premium has no arrow from <span class="math inline">\(A\)</span>, and charges more per mile than the world does.</p>
 <p>Nabi and Shpitser’s method fits the model closest to the data, by likelihood, among those in which the path-specific effect judged unfair is held within bounds. When the outcome model is linear and the unfair effect is the natural direct effect, they note that holding it at zero “coincides to simply dropping A from the outcome regression” (arXiv version, page 6). In the mileage world that fitted model charges <span class="math inline">\(0.3125\)</span> per thousand miles, and has no direct effect by construction. Measured against the world the data came from, its gap includes half of the direct effect. The path-specific premium <span class="math inline">\(\beta M\)</span> charges the world’s price per mile, <span class="math inline">\(0.25\)</span>, and needs <span class="math inline">\(\beta\)</span>, which can be estimated only from a model that includes <span class="math inline">\(A\)</span>. Which of the two is the fair price of a mile depends on whether the fitted model or the world is what the criterion is about.</p>
 </section>
 <section id="with-an-interaction" class="level3">
@@ -600,8 +635,7 @@ M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + \delta A M + U_Y ,
 \text{NIE}_0 &amp;= E[Y(0, M(1)) - Y(0, M(0))] = \alpha\beta .
 \end{aligned}
 \]</span></p>
-<p>Both <span class="math inline">\(\text{NDE}_0 + \text{NIE}_1\)</span> and <span class="math inline">\(\text{NDE}_1 + \text{NIE}_0\)</span> equal the total effect: the decomposition holds with the reference levels paired this way, and not in general. The pair the reading defines, <span class="math inline">\(\text{NDE}_0\)</span> and <span class="math inline">\(\text{NIE}_0\)</span>, sums to <span class="math inline">\(\text{TE} - \alpha\delta\)</span>. The product of coefficients <span class="math inline">\(\alpha\beta\)</span> is <span class="math inline">\(\text{NIE}_0\)</span>, which is not the indirect effect that pairs with <span class="math inline">\(\text{NDE}_0\)</span>.</p>
-<p>In the mileage world with <span class="math inline">\(\delta = -0.05\)</span> (women’s claims rise by £20 per thousand miles, men’s by £25), <span class="math inline">\(\text{TE} = -1.8\)</span>; <span class="math inline">\(\text{NDE}_0 = -1\)</span> and <span class="math inline">\(\text{NIE}_1 = -0.8\)</span>; <span class="math inline">\(\text{NDE}_1 = -0.8\)</span> and <span class="math inline">\(\text{NIE}_0 = -1\)</span>; and <span class="math inline">\(\text{NDE}_0 + \text{NIE}_0 = -2\)</span>. With <span class="math inline">\(\delta = 0\)</span> both pairings give <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\alpha\beta\)</span>.</p>
+<p>Both <span class="math inline">\(\text{NDE}_0 + \text{NIE}_1\)</span> and <span class="math inline">\(\text{NDE}_1 + \text{NIE}_0\)</span> equal the total effect: the decomposition holds with the reference levels paired this way, and not in general. The pair the reading defines, <span class="math inline">\(\text{NDE}_0\)</span> and <span class="math inline">\(\text{NIE}_0\)</span>, sums to <span class="math inline">\(\text{TE} - \alpha\delta\)</span>. The product of coefficients <span class="math inline">\(\alpha\beta\)</span> is <span class="math inline">\(\text{NIE}_0\)</span>, which is not the indirect effect that pairs with <span class="math inline">\(\text{NDE}_0\)</span>. With <span class="math inline">\(\delta = 0\)</span> both pairings give <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\alpha\beta\)</span>.</p>
 </section>
 </section>
 <section id="luck-and-responsibility" class="level2">
