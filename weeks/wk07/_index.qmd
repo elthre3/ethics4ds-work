@@ -10,4 +10,4 @@ A platform decides who sees a job ad; a government department decides which bene
 
 **Lecture:** [notes](weeks/wk07/notes.html) · [slides](weeks/wk07/slides.html)
 
-**Class:** [class sheet](weeks/wk07/class.html) ([.qmd](https://ethics4ds.com/weeks/wk07/class.qmd){download="class.qmd"})
+**Class:** [class sheet](weeks/wk07/class.html) ([.qmd](https://ethics4ds.com/weeks/wk07/class.qmd){download="class.qmd"}) · [class sheet with solutions](https://ethics4ds.com/solutions/wk07/class_solutions.html)
