@@ -31,16 +31,16 @@ marks.
 ## Summary
 
 Since December 2012 an insurer in the European Union may not use sex
-as a factor in its premiums. It can still use the car, the mileage and
-everything else it records, and some of those depend on sex. The
+to set an individual's premium. It can still use other risk factors,
+and some of those depend on sex. The
 observational criteria compare groups in a table, and the same table
 can come from different mechanisms. This week writes the mechanism down
 as a causal model, which makes a new kind of question possible: what
 would this person's price have been had the attribute been different?
 
 Counterfactual fairness asks that the answer be the same price. In the
-simplest example, the red car, the price that never looks at sex fails
-this test and a price that uses sex passes it. Direct and indirect
+simplest example, the red car, any price that depends on the car but
+not on sex fails this test, and a price that uses both can pass it. Direct and indirect
 effects split the effect of an attribute along the paths it takes, and
 the total effect is their sum when the two are defined with matching
 reference levels. A path-specific criterion removes the effect of the
@@ -48,11 +48,12 @@ attribute only along the paths judged unfair. On one small model, the
 counterfactually fair price and the path-specific price differ by the
 contribution of the path someone judged fair.
 
-Which paths are fair is not something the data can say. It is a
-judgment about control and responsibility, and moral luck, the control
-principle and luck egalitarianism bear on it. The week ends where those ideas meet the law: the
-counterfactually fair price needs the attribute that the law forbids
-an insurer to use.
+Which paths are fair is not something the data can say. One way to
+judge it, the one this week follows, is by control and responsibility,
+with moral luck, the control principle and luck egalitarianism. In the
+red car, a counterfactually fair price that depends on the car needs
+the attribute that the law forbids an insurer to price an individual
+on.
 
 ```{r setup, echo=FALSE, message=FALSE}
 library(ggplot2)
@@ -136,7 +137,7 @@ deliberately not used, with one route by which it could affect the
 outcome, and whether that route is fair. A route is a path in a causal
 graph: an arrow from the attribute to something, and on to the
 outcome. Drawing it makes the judgment visible, because the judgment
-is always about a particular arrow. "Sex affects the premium" says
+is about particular arrows. "Sex affects the premium" says
 little; "sex affects how many miles a person drives, and mileage
 affects claims" names a path someone can defend or object to.
 
@@ -155,27 +156,39 @@ data behind them were reliable, regularly updated and available to the
 public. The Court's press release is headed "Taking the gender
 of the insured individual into account as a risk factor in insurance
 contracts constitutes discrimination", and the Court ruled that the
-exception was invalid from 21 December 2012. Since then, insurers in
-the EU may not use sex as a factor in premiums and benefits.
+exception was invalid from 21 December 2012.
 
-The law forbids an input. It does not forbid predicting claims from
-everything else, and some of everything else depends on sex. The
-observational criteria cannot say whether that is fair, because the
-same table of counts can come from different mechanisms. The mechanism
-has to be written down.
+The European Commission's guidelines on the ruling say what it covers.
+From 21 December 2012 the unisex rule applies "without any possible
+exception in relation to the calculation of individuals' premiums and
+benefits in new contracts" (paragraph 5). Sex may still be used "in the
+calculation of premiums and benefits at the aggregate level, as long as
+it does not lead to differentiation at individual level", for example
+in reserving and internal pricing (paragraph 14). Other risk factors
+are covered by the rules on indirect discrimination, and "The use of
+risk factors which might be correlated with gender therefore remains
+possible, as long as they are true risk factors in their own right"
+(paragraph 17). Their footnote gives an example from motor insurance:
+pricing on the size of a car's engine "should remain possible, even if
+statistically men drive cars with more powerful engines."
+
+These notes simplify all this to a model that does not take $A$ as an
+input. The observational criteria cannot say whether such a price is
+fair, because the same table of counts can come from different
+mechanisms. The mechanism has to be written down.
 
 ### The red car
 
 [ms4ds, section 3.4.1](https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models),
 and Kusner, Loftus, Russell and Silva (2017), the first of whose
 scenarios this is, describe an insurer that predicts the accident
-rate or the claims $Y$ of a policy from the color of the car $X$. An
+rate (here, claims $Y$) of a policy from the color of the car $X$. An
 unobserved factor $U$, aggressive driving, makes a person both more
 likely to choose a red car and more likely to have an accident.
 Members of one group, $A = 1$, are more likely to drive red cars, and
 no more likely to be aggressive or to have accidents. Kusner et al.
-take $A$ to be race; ms4ds takes it to be gender, and so do these
-notes, with $A = 1$ for a woman.
+take $A$ to be race; ms4ds takes it to be gender. These notes write
+sex, as the directive does, with $A = 1$ for a woman.
 
 ```{r dag_redcar, echo=FALSE, warning=FALSE, fig.height=1.6, fig.width=7, fig.alt="A causal graph in boxes: A, sex, points into X, car color; U, aggression, points into X and into Y, claims. There is no arrow from A to U or from A to Y."}
 rc <- data.frame(name = c("A: sex", "X: car color", "U: aggression", "Y: claims"),
@@ -214,7 +227,8 @@ $$
 and since $E[X] = 1$ and $E[Y] = 0$, the fitted line is
 $\hat Y = \tfrac12 X - \tfrac12$. Women's average car color is $2$ and
 men's is $0$, so women's average predicted claims are $\tfrac12$ and
-men's are $-\tfrac12$. Average claims are $0$ in both groups. The price
+men's are $-\tfrac12$, with claims and prices measured from the
+average. Average claims are $0$ in both groups. The price
 that never looks at sex charges women more, for claims they do not
 make.
 
@@ -315,13 +329,16 @@ predictor is not counterfactually fair. The least-squares predictor
 from $X$ and $A$ is $E[Y \mid X, A] = X - \beta_A A$, because $U$ is
 determined by $(X, A)$; and $X - \beta_A A = U$, a non-descendant of
 $A$, so by Lemma 1 it is counterfactually fair. With $\beta_A = 2$
-these are the two prices in the table. Kusner et al. prove the same
-statement as Lemma 3 of their supplement (page 14), and say it in a
+these are the two prices in the table. Kusner et al. prove the
+noise-free case, with $Y = \gamma U$, as Lemma 3 of their supplement
+(page 14), and say it in a
 sentence on page 4: "Regressing Y on X alone obeys the FTU criterion but
 is not counterfactually fair, so omitting A (FTU) may introduce
-unfairness into an otherwise fair world." The counterfactually fair
-price uses the attribute; the price that ignores it does not satisfy
-the definition.
+unfairness into an otherwise fair world." They add that in this graph
+"any non-constant estimator that depends only on X is not
+counterfactually fair" (page 15). A constant price is counterfactually
+fair without $A$; a counterfactually fair price that depends on the
+car at all needs $A$.
 
 This depends on the model. The fair predictor is built from $U$, and
 $U$ is never observed: it is abducted from $X$ and $A$ through the
@@ -329,7 +346,11 @@ structural equation for $X$. A different model for $X$ gives a
 different $U$, and a different fair price. Kusner et al. describe three
 levels of assumption (page 7). Using only the observed non-descendants
 of $A$ needs least; using the error terms of an additive model, as
-here, extracts the most information and assumes the most.
+here, extracts the most information and assumes the most. Holding
+$U$ fixed while sex changes, and recovering it from $X = 2A + U$, are
+claims about how the world works, which evidence could support or
+undermine. Which effects of sex are acceptable is a different kind of
+claim.
 
 ### Conditioning or intervening
 
@@ -346,8 +367,8 @@ the absence of an effect is a statement about intervening on $A$.
 
 ### A second world
 
-The red car has no path from $A$ to $Y$ at all. In most cases that
-matter, the attribute does affect the outcome, along some paths that
+The red car has no path from $A$ to $Y$ at all. In many cases the
+attribute does affect the outcome, along some paths that
 people find acceptable and some that they do not. Keep the insurer and
 change the world. Annual mileage $M$, in thousands of miles, depends on
 sex, and claims $Y$, in hundreds of pounds a year, depend on mileage
@@ -390,8 +411,7 @@ mileage set to the value it would have taken under $A = a'$. When
 $a \neq a'$ this is a cross-world quantity: $Y(1, M(0))$ is a woman
 driving the miles she would have driven as a man. Nobody's data
 contain it. The reading writes $Y_{X := 1,\, Z := Z_{X := 0}}$ for the
-same thing, with $X$ the treatment and $Z$ the mediator (pages 127 and
-128); these notes keep $Z$ for a confounder and $X$ for covariates.
+same thing, with $X$ the treatment and $Z$ the mediator (page 128); these notes keep $Z$ for a confounder and $X$ for covariates.
 
 The **controlled direct effect** at mileage $m$ sets the mediator to
 the same value for everyone:
@@ -429,9 +449,8 @@ The natural effects need more than $do(\cdot)$: they combine two
 settings of $A$ for the same person, which no experiment can do.
 Estimating them from data needs an assumption about the two worlds
 together. In the model above it is built in, by taking $U_M$ and $U_Y$
-independent; with no confounding of $A$ and $M$ or $M$ and $Y$, the
-reading gives the indirect effect as a formula in conditional
-expectations (page 128).
+independent. When the effect is unconfounded, the reading gives the
+indirect effect as a formula in conditional expectations (page 128).
 
 ### In the linear model
 
@@ -462,15 +481,15 @@ men's, £100 of it through mileage and £50 directly.
 ### Holding a mediator fixed
 
 $Y(1, M(0))$ is nobody's observed outcome; the model supplies it, and
-every statement about the natural direct effect is a statement about
-the model.
+every statement about the natural direct effect rests on the model's
+assumption about the two worlds together.
 
 A regression of $Y$ on $A$ and $M$ compares women and men with the same
 mileage. In the model above, its coefficient on $A$ is $\gamma$, the
 controlled direct effect, because nothing else affects both mileage and
-claims. Suppose something does: driving for work, $U$, adds miles and,
+claims. Suppose something does: driving for work, $Z$, adds miles and,
 mile for mile, adds claims. Then $M$ is a collider on the path
-$A \to M \leftarrow U \to Y$. Women drive fewer miles on average, so a
+$A \to M \leftarrow Z \to Y$. Women drive fewer miles on average, so a
 woman with the same mileage as a man is more likely to drive for work,
 and at equal mileage her expected claims are higher, relative to his,
 than the direct effect alone would make them: the coefficient on $A$
@@ -534,30 +553,11 @@ average.
 
 ### The comparison
 
-```{r premiums, echo=FALSE, fig.height=2.4, fig.width=7, fig.alt="Dot chart of average premiums in hundreds of pounds a year. Full prediction: men 2.5, women 1.0. Path-specific: men 2.5, women 1.5. Counterfactually fair: men 2.5, women 2.5."}
-prem <- data.frame(
-  predictor = rep(c("full", "path-specific", "counterfactually fair"), each = 2),
-  group = rep(c("men", "women"), 3),
-  mean = c(beta * mu0, gamma + beta * (mu0 + alpha), beta * mu0, beta * (mu0 + alpha), beta * mu0, beta * mu0))
-lev <- c("counterfactually fair", "path-specific", "full")
-prem |>
-  mutate(row = match(predictor, lev), y = row + ifelse(group == "women", 0.14, -0.14)) |>
-  ggplot(aes(mean, y, color = group)) +
-  geom_point(size = 3.5) +
-  geom_text(aes(x = mean + ifelse(group == "women", -0.14, 0.14), label = sprintf("%.1f", mean)),
-            size = 4, show.legend = FALSE) +
-  scale_color_manual(values = two, name = NULL) +
-  scale_x_continuous(limits = c(0.7, 2.9), breaks = c(1, 1.5, 2, 2.5)) +
-  scale_y_continuous(breaks = 1:3, labels = lev, limits = c(0.6, 3.4)) +
-  labs(x = "average premium, hundreds of pounds a year", y = NULL) +
-  theme(panel.grid.minor = element_blank())
-```
-
-| premium | formula | men | women | gap |
-|:---|:---|---:|---:|---:|
-| full | $\gamma A + \beta M$ | $2.5$ | $1.0$ | $-1.5$, the TE |
-| path-specific | $\beta M$ | $2.5$ | $1.5$ | $-1$, the NIE |
-| counterfactually fair | $\beta(M - \alpha A)$ | $2.5$ | $2.5$ | $0$ |
+| premium | formula | gap, women minus men |
+|:---|:---|---:|
+| full | $\gamma A + \beta M$ | $\gamma + \alpha\beta$, the TE |
+| path-specific | $\beta M$ | $\alpha\beta$, the NIE |
+| counterfactually fair | $\beta(M - \alpha A)$ | $0$ |
 
 The three differ, for every driver, by
 
@@ -571,19 +571,58 @@ second is the contribution of the path through mileage. The two fair
 premiums differ by the contribution of the path someone judged fair.
 Neither criterion says which path that is.
 
-### The baseline
+### The level
 
-The counterfactually fair premium above prices everyone as the full
-model would price them had they been men. Pricing everyone as the full
-model would price them had they been women,
-$\gamma + \beta(\mu_0 + \alpha + U_M)$, is also a function of $U_M$ and
-also counterfactually fair, at a lower level for everyone.
-So is either one plus a constant. The definition fixes the gap between
-groups at zero and leaves the level open. An insurer whose premiums
-must cover its average claims has to choose
-a level, and at that level women pay on average more than they claim,
-and men less. Which group is the baseline, and what level is
-charged, are further choices the definition does not make.
+As constructed, the three premiums collect different amounts: in the
+mileage world, with as many women as men, £175, £200 and £250 a policy
+on average, while the average claim is £175. Men pay £250 under all
+three, so the full premium is the cheapest or equal for every driver,
+and choosing between them involves no trade-off. Adding a constant to a
+premium changes neither its gaps nor its fairness properties: the
+path-specific premium still takes no $A$, and the counterfactually fair
+one is still a function of $U_M$. Shifting each so that it collects the
+average claim gives:
+
+```{r premiums, echo=FALSE, fig.height=2.4, fig.width=7, fig.alt="Dot chart of average premiums in hundreds of pounds a year, each rule collecting 1.75 on average. Full prediction: men 2.50, women 1.00. Path-specific: men 2.25, women 1.25. Counterfactually fair: men 1.75, women 1.75."}
+prem <- data.frame(
+  predictor = rep(c("full", "path-specific", "counterfactually fair"), each = 2),
+  group = rep(c("men", "women"), 3),
+  mean = c(beta * mu0, gamma + beta * (mu0 + alpha), beta * mu0, beta * (mu0 + alpha), beta * mu0, beta * mu0))
+avg_claim <- pA * (gamma + beta * (mu0 + alpha)) + (1 - pA) * beta * mu0
+prem <- prem |> group_by(predictor) |> mutate(level = mean - mean(mean) + avg_claim) |> ungroup()
+stopifnot(abs(avg_claim - 1.75) < 1e-12, isTRUE(all.equal(prem$level, c(2.5, 1.0, 2.25, 1.25, 1.75, 1.75))))
+lev <- c("counterfactually fair", "path-specific", "full")
+prem |>
+  mutate(row = match(predictor, lev), y = row + ifelse(group == "women", 0.14, -0.14)) |>
+  ggplot(aes(level, y, color = group)) +
+  geom_point(size = 3.5) +
+  geom_text(aes(x = level + ifelse(group == "women", -0.22, 0.22), label = sprintf("%.2f", level)),
+            size = 4, show.legend = FALSE) +
+  scale_color_manual(values = two, name = NULL) +
+  scale_x_continuous(limits = c(0.7, 2.9), breaks = c(1, 1.5, 2, 2.5)) +
+  scale_y_continuous(breaks = 1:3, labels = lev, limits = c(0.6, 3.4)) +
+  labs(x = "average premium, hundreds of pounds a year", y = NULL) +
+  theme(panel.grid.minor = element_blank())
+```
+
+| premium, each collecting £175 a policy | men | women |
+|:---|---:|---:|
+| full | £250 | £100 |
+| path-specific, less £25 | £225 | £125 |
+| counterfactually fair, less £75 | £175 | £175 |
+
+Now the choice moves money between groups: men pay least under the
+counterfactually fair premium and women under the full one, and the
+insurer collects the same either way.
+
+The level is a choice the definitions do not make. Pricing everyone as
+the full model would price them had they been women,
+$\gamma + \beta(\mu_0 + \alpha + U_M)$, is counterfactually fair too,
+and differs from the premium above by a constant. The two groups'
+average counterfactually fair premiums are equal here because $U_M$ is
+independent of $A$ in this model. In a model where a non-descendant of
+$A$ is associated with $A$, a counterfactually fair premium can differ
+between groups.
 
 ### Whose judgment
 
@@ -602,8 +641,9 @@ as the applicant's own inherent preference "is a substantive judgment
 that may not be a fact" (page 119). It describes worlds consistent with
 the same data in which discrimination runs through department
 choice: a program advertised in a way that discouraged women
-from applying, or a department known for hostility to women. Accepting
-the path as fair asserts that all of these are implausible.
+from applying, or a department known for hostility to women, and
+concludes: "Accepting the indirect path as non-discriminatory is to
+assert that all these scenarios we described are deemed implausible."
 
 Nabi and Shpitser: "The specific paths which correspond to
 discrimination are a domain specific issue." Their example is a
@@ -651,22 +691,27 @@ $\operatorname{Var}(A) = 1/4$ and $\operatorname{Var}(U_M) = 4$,
 $\operatorname{Var}(M) = 8$, $\operatorname{Cov}(A, M) = -1$, the slope is
 $0.25 + (-0.5)(-1)/8 = 0.3125$ and the gap is $-1.25$: the path through
 mileage, $-1$, and half of the direct effect, $-0.25$, which returns
-because mileage stands in for sex. The refitted premium has no arrow from
-$A$, and charges more per mile than the world does.
+because mileage stands in for sex. The refitted premium does not take
+$A$ as an input, and its slope on mileage, $0.3125$, is above
+$\beta = 0.25$.
 
 Nabi and Shpitser's method fits the model closest to the data, by
 likelihood, among those in which the path-specific effect judged unfair
 is held within bounds. When the outcome model is linear and the
 unfair effect is the natural direct effect, they note that holding it
 at zero "coincides to simply dropping A from the outcome regression"
-(arXiv version, page 6). In the mileage world that fitted model charges
-$0.3125$ per thousand miles, and has no direct effect by construction.
-Measured against the world the data came from, its gap includes half
-of the direct effect. The path-specific premium $\beta M$ charges the
-world's price per mile, $0.25$, and needs $\beta$, which can be
-estimated only from a model that includes $A$. Which of the two is the
-fair price of a mile depends on whether the fitted model or the world
-is what the criterion is about.
+(arXiv version, page 6). In the mileage world that fitted outcome
+regression has slope $0.3125$ on mileage, and the fitted model has no
+direct effect by construction. To predict for a new case they average
+the mediator out, using $\tilde E[Y \mid A, C] = \sum_M \tilde E[Y \mid A, M, C]\, \tilde p(M \mid A, C)$
+(page 5), so their prediction depends on $A$ through the mileage the
+fitted model expects; its gap between women and men is again $-1.25$.
+Measured against the world the data came from, that gap includes half
+of the direct effect. The path-specific premium $\beta M$ uses the
+world's slope, $0.25$, which a regression that leaves $A$ out does not
+estimate. Which of the two is the fair price of a mile depends on
+whether the fitted model or the world is what the criterion is
+about.
 
 ### With an interaction
 
@@ -724,7 +769,7 @@ condition outside the person's control" (chapter 4, page 85).
 
 ### Luck egalitarianism
 
-Luck egalitarianism applies a similar idea to who gets what. Kasper
+Luck egalitarianism is a related view about who gets what. Kasper
 Lippert-Rasmussen's encyclopedia entry opens with the observation that
 some people end up worse off than others partly because of bad luck,
 and its section 7 sets out the distinction between brute luck, risks a
@@ -735,21 +780,22 @@ are unjust." The entry also records that views on option luck differ:
 whether justice requires its effects to stand, permits correcting them,
 or requires correcting some of them.
 
-Moral luck and luck egalitarianism are distinct ideas. Moral luck is about whether luck should
-bear on how we judge what people did; luck egalitarianism is about how
-goods and burdens should be distributed. This course takes them
-together, because both ask what a person is responsible for, and both
-answer that what a person does not control should not count against
-them. A premium is a burden distributed among policyholders.
+Moral luck names a problem: how we judge what people did can depend
+on things they did not control. The control principle is one response
+to it. Luck egalitarianism is about how goods and burdens should be
+distributed, and its distinction between brute and option luck is a
+related response there. This course takes them together because they
+ask the same question, what a person is responsible for. A premium is
+a burden distributed among policyholders.
 
-The reading marks the limit of the formal tools here: "many of the
+The book, in chapter 4, marks the limit of the formal tools here: "many of the
 concepts in this chapter, such as whether a decision subject has
 control over an attribute used for decision making, cannot be
 expressed in the statistical language of conditional probabilities and
 expectations" (chapter 4, page 92). A causal graph does not settle it
-either. It can show that a path exists; whether the person controls
-what happens along it is the judgment that decides whether the path is
-fair.
+either. It can show that a path exists. On the control principle,
+whether the person controls what happens along it decides whether the
+path is fair.
 
 ### A mediator shaped by the attribute
 
@@ -763,7 +809,9 @@ share of caring, it is less clear that the choice was the person's.
 The Berkeley example has the same shape, with department choice in the
 place of mileage, and the reading's alternative worlds are the
 argument that a mediator's appearing to be a choice does not make it
-one.
+one. The Commission's guidelines answer the legal version of the
+question: a factor correlated with sex may be used "as long as" it is a
+true risk factor "in their own right" (paragraph 17).
 
 ### A framework and a criterion
 
@@ -774,9 +822,10 @@ believe a process with functional independence is more fair"
 ([section 3.4.1](https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models)).
 A deontologist may hold that a decision should not take a protected
 attribute as an input, whatever the consequences. In the red car world
-that rule produces the price that is not counterfactually fair, and the
-counterfactually fair price breaks it. Since December 2012, EU law
-forbids the second. Whether a framework implies a criterion, and
+that rule produces a price that is not counterfactually fair, unless
+it ignores the car too, and a counterfactually fair price that depends
+on the car breaks it. Since December 2012, EU law forbids the second
+for an individual's premium. Whether a framework implies a criterion, and
 whether the two can disagree like this, is a question for the class.
 
 ### Intersectionality
@@ -807,25 +856,24 @@ counterfactual criterion is a statement about people the insurer has
 never observed, and it is only as good as the model that supplies them.
 
 You have to choose, so choose, and defend it. Which paths are fair;
-which group is the baseline for the counterfactually fair premium, and
-at what level; whether to price without the attribute, as the law
-requires, or with it, as counterfactual fairness requires in the red
-car world. The criteria compute the consequences of each choice and do
-not make it.
+the level of each premium, and so which group pays toward the other's claims; whether to price
+without the attribute, as the law requires, or with it, as any
+counterfactually fair price that depends on the car does in the red car
+world. Given a choice, the criteria give its consequences.
 
 What can be changed, and how? What things are considered "controlled
 for" or "held fixed," and is that realistic? Abduction holds $U$ fixed
 for the counterfactual driver, which assumes the model's $U$ is a
 property of the person that would not change with the attribute. The
-natural direct effect holds mileage at $M(0)$, a value no one is
-observed at. Equal mileage in a regression is mileage held fixed in
+natural direct effect holds mileage at $M(0)$, which for a woman is
+a mileage she is never observed at. Equal mileage in a regression is mileage held fixed in
 the data, not by intervention, and the two differ when something else
 drives both mileage and claims.
 
 And why? An insurer prices on the variables it is allowed to use, and
-the path-specific premium in the mileage world needs no sex at all. A
-price that never mentions the attribute can still carry an indirect
-effect that someone judged fair. Who judged it, and on what grounds?
+the path-specific premium in the mileage world takes no sex as an
+input. A price that never mentions the attribute can still include an
+indirect effect that someone judged fair. Who judged it, and on what grounds?
 
 ## Readings
 
@@ -853,8 +901,7 @@ effect that someone judged fair. Who judged it, and on what grounds?
   to 137): whether categories such as race and gender can be variables
   in a causal model at all.
 - The same book, chapter 4, "Tensions between the different views"
-  through "The cost of fairness" (pages 85 to 92), which includes the
-  insurance sentence quoted above.
+  through "The cost of fairness" (pages 85 to 92).
 - Lippert-Rasmussen,
   [Justice and Bad Luck](https://plato.stanford.edu/entries/justice-bad-luck/),
   *The Stanford Encyclopedia of Philosophy*, first published 20 June
@@ -864,8 +911,9 @@ effect that someone judged fair. Who judged it, and on what grounds?
   [Counterfactual Fairness](https://arxiv.org/abs/1703.06856),
   *Advances in Neural Information Processing Systems* 30 (NIPS 2017),
   <https://proceedings.neurips.cc/paper_files/paper/2017/file/a486cd07e4ac3d270571622f4f316ec5-Paper.pdf>:
-  sections 1 to 4. Page numbers in these notes are those of the arXiv
-  version, 1703.06856v3, which also has the supplement.
+  sections 1 to 4. The proceedings record gives no page range; page
+numbers in these notes are those of the arXiv version, 1703.06856v3,
+which also has the supplement.
 - Chiappa,
   [Path-Specific Counterfactual Fairness](https://doi.org/10.1609/aaai.v33i01.33017801),
   *Proceedings of the AAAI Conference on Artificial Intelligence*
@@ -873,8 +921,9 @@ effect that someone judged fair. Who judged it, and on what grounds?
 - Nabi and Shpitser,
   [Fair Inference on Outcomes](https://arxiv.org/abs/1705.10378),
   *Proceedings of the AAAI Conference on Artificial Intelligence* 32(1),
-  2018, <https://doi.org/10.1609/aaai.v32i1.11553>. Page numbers in
-  these notes are those of the arXiv version, 1705.10378v4.
+  2018, <https://doi.org/10.1609/aaai.v32i1.11553>. The DOI record gives
+no page range; page numbers in these notes are those of the arXiv
+version, 1705.10378v4.
 - Yang, Loftus and Stoyanovich,
   [Causal Intersectionality and Fair Ranking](https://arxiv.org/abs/2006.08688),
   *2nd Symposium on Foundations of Responsible Computing (FORC 2021)*,
@@ -891,3 +940,10 @@ factor in insurance contracts constitutes discrimination", Luxembourg,
 Consommateurs Test-Achats ASBL and Others v Conseil des ministres*,
 <https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf>.
 I have read the press release, not the judgment.
+
+European Commission, "Guidelines on the application of Council
+Directive 2004/113/EC to insurance, in the light of the judgment of the
+Court of Justice of the European Union in Case C-236/09 (Test-Achats)",
+2012/C 11/01, *Official Journal of the European Union* C 11, 13 January
+2012, 1--11, <https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL>:
+paragraphs 5, 14 and 17 and footnote 3 to paragraph 17.

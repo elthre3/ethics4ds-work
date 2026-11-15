@@ -23,15 +23,16 @@ st313:
   week: 08
   session: lecture
   register: 1
-  segments:                        # sums to 80: 77 of material and 3 of slack; production 31 (39%)
+  segments:                        # sums to 80: 77 of material and 3 of slack; production 33 (41%)
     # opener: 4
     - {label: "what you brought: the 7 -> 8 task drawn as arrows; which arrow the judgment is about", minutes: 4, mode: production}
-    # part 1, the red car: 20
+    # part 1, the red car: 22
     - {label: "Test-Achats; the red car graph A -> X <- U -> Y (ms4ds 3.4.1, Kusner et al. scenario 1); fairness through unawareness", minutes: 5, mode: exposition}
     - {label: "written commitment: the insurer prices on the car alone; is the price fair to women", minutes: 2, mode: production}
     - {label: "recall the test-score model; the unaware price: who is charged more, who claims more", minutes: 4, mode: production, retrieves: [S1]}
     - {label: "question before the idea: her price had she been a man", minutes: 1, mode: production}
     - {label: "abduction, action, prediction (fairmlbook Definition 5); Kusner et al.'s definition and Lemma 1; X - 2A = U uses A", minutes: 6, mode: exposition, introduces: [CC-24a], core: CC-24a, results: [R50, R51]}
+    - {label: "what justifies holding aggression fixed when sex changes; what evidence could support X = 2A + U; claims about the world against judgments about effects (protected; external review, 15 November)", minutes: 2, mode: production}
     - {label: "retrieve do(): effect of A on Y is 0, coefficient on A is -2; which is conditioning", minutes: 2, mode: production, retrieves: [S1]}
     # part 2, direct and indirect effects: 15
     - {label: "the mileage world: A -> M -> Y, A -> Y; the equations", minutes: 3, mode: exposition}
@@ -42,18 +43,17 @@ st313:
     - {label: "holding a mediator fixed: Y(1, M(0)) is nobody's outcome; equal mileage is not mileage held fixed when a common cause makes M a collider", minutes: 2, mode: exposition, retrieves: [S3]}
     # part 3, two fair predictors: 17
     - {label: "question before the idea: from the full premium, remove A along every path, then along A -> Y only", minutes: 2, mode: production}
-    - {label: "the counterfactually fair premium by abduction of U_M; the path-specific premium (Chiappa); the comparison: gamma A and alpha beta A", minutes: 8, mode: exposition, introduces: [CC-24b], core: CC-24b, results: [R53, R54, R55]}
+    - {label: "the counterfactually fair premium by abduction of U_M; the path-specific premium (Chiappa); the comparison at equal revenue: gaps TE, NIE, 0; gamma A and alpha beta A up to constants", minutes: 8, mode: exposition, introduces: [CC-24b], core: CC-24b, results: [R53, R54, R55]}
     - {label: "written: which premium for your own policy; the same without knowing your group", minutes: 2, mode: production, retrieves: [S6]}
     - {label: "whose judgment: Kusner et al. on Berkeley; fairmlbook p. 119; Nabi and Shpitser; the baseline group (speaker note)", minutes: 3, mode: exposition, retrieves: [S6]}
     - {label: "dark: dropping A and refitting, NIE + R^2 NDE; the interaction and the pairing of reference levels (stretch)", minutes: 2, mode: exposition, results: [R56, R57]}
-    # part 4, luck and responsibility: 12
+    # part 4, luck and responsibility: 10
     - {label: "moral luck and the control principle (ms4ds 3.4.2); the middle view and insurance (fairmlbook p. 85); luck egalitarianism (Lippert-Rasmussen); control is not a conditional probability (fairmlbook p. 92)", minutes: 4, mode: exposition}
-    - {label: "pairs, each side then swap: is a path through a legitimate mediator fair when the mediator was shaped by the attribute", minutes: 5, mode: production, retrieves: [S6]}
-    - {label: "a framework and a criterion: ms4ds's deontological argument for unawareness against the red car", minutes: 2, mode: exposition}
+    - {label: "pairs, each side then swap: is a path through a legitimate mediator fair when the mediator was shaped by the attribute; the Commission's guidelines, para. 17", minutes: 5, mode: production, retrieves: [S6]}
     - {label: "dark: intersectionality as an interaction term (Yang, Loftus and Stoyanovich)", minutes: 1, mode: exposition, results: [R58]}
     # close: 9
     - {label: "firefighter hiring, answered individually: classify three paths; what each fair predictor removes; the pass mark", minutes: 6, mode: production, item: W08-I1}
-    - {label: "lenses B, E, F; the task for next time", minutes: 3, mode: exposition}
+    - {label: "lenses B, E, F (no slide on the next week: not yet planned, convenor 15 November)", minutes: 3, mode: exposition}
     # slack: 3
     - {label: "slack: questions and overrun", minutes: 3, mode: exposition}
   history: []
@@ -154,6 +154,10 @@ prem <- data.frame(
   mean = c(beta * mu0, gamma + beta * (mu0 + alpha),     # full: gamma A + beta M
            beta * mu0, beta * (mu0 + alpha),              # path-specific: beta M
            beta * mu0, beta * mu0))                       # counterfactually fair: beta (M - alpha A)
+# Each rule shifted by a constant so that all three collect the average claim (equal group
+# sizes): a constant keeps both fairness properties and every gap between groups.
+avg_claim <- pA * (gamma + beta * (mu0 + alpha)) + (1 - pA) * beta * mu0
+prem <- prem |> group_by(predictor) |> mutate(level = mean - mean(mean) + avg_claim) |> ungroup()
 # Refit on M alone: slope beta + gamma Cov(A, M) / Var(M); the gap is alpha times the slope.
 var_M <- alpha^2 * pA * (1 - pA) + var_UM
 slope_refit <- beta + gamma * alpha * pA * (1 - pA) / var_M
@@ -161,19 +165,21 @@ R2 <- alpha^2 * pA * (1 - pA) / var_M
 stopifnot(abs(NDE + 0.5) < 1e-12, abs(NIE + 1) < 1e-12, abs(TE + 1.5) < 1e-12,
           abs(var_M - 8) < 1e-12, abs(slope_refit - 0.3125) < 1e-12,
           abs(alpha * slope_refit - (NIE + R2 * NDE)) < 1e-12, abs(alpha * slope_refit + 1.25) < 1e-12,
-          isTRUE(all.equal(prem$mean, c(2.5, 1.0, 2.5, 1.5, 2.5, 2.5))))
+          isTRUE(all.equal(prem$mean, c(2.5, 1.0, 2.5, 1.5, 2.5, 2.5))),
+          abs(avg_claim - 1.75) < 1e-12,
+          isTRUE(all.equal(prem$level, c(2.5, 1.0, 2.25, 1.25, 1.75, 1.75))))
 ```
 
 ## {.inverse}
 
 ::: {.notes}
-Plan 77 in the 80, deck estimate 79: opener 4, the red car 20, direct and indirect effects 15, two fair predictors 18, luck and responsibility 12, firefighter item 6, close 3. Dark = rush or skip.
+Deck estimate 78 (plan 77 and 3 of slack): title 1, opener 4, the red car 22, direct and indirect effects 15, two fair predictors 18, luck and responsibility 10, firefighter item 6, lenses 2. Dark = rush or skip.
 
-Questions before the reveal: her price had she been a man (Part 1); the effect not through mileage (Part 2); removing sex along one path (Part 3).
+Questions before the reveal: her price had she been a man (Part 1); the effect not through mileage (Part 2); removing sex along one path (Part 3). Protected: holding aggression fixed (Part 1).
 
-Cut order: (1) "Dropping A, and an interaction"; (2) "Intersectionality"; (3) "A framework and a criterion" to its quotation; (4) "Holding a mediator fixed" to its first line; (5) the firefighter item's third question. Do not cut the written commitment, the computation, the three questions above, the comparison of premiums, your own premium, the pairs question, or the firefighter item's first two questions.
+Cut order: (1) "Dropping A, and an interaction"; (2) "Intersectionality"; (3) "Holding a mediator fixed" to its first line; (4) the firefighter item's third question. Do not cut the written commitment, the computation, the questions above, the comparison of premiums, your own premium, the pairs question, or the firefighter item's first two questions.
 
-Pace: 0:05 Part 1; 0:25 Part 2; 0:40 Part 3; 0:58 Part 4; 1:10 firefighter item; 1:16 lenses; 1:19 end.
+Pace: 0:05 Part 1; 0:27 Part 2; 0:42 Part 3; 1:00 Part 4; 1:10 firefighter item; 1:16 lenses; 1:18 end.
 :::
 
 ### Week 8
@@ -203,17 +209,17 @@ Draw the route you brought as arrows, from the attribute to the outcome. Which a
 ## Pricing without sex
 
 ::: {.notes}
-Test-Achats, a Belgian consumers' association. The Court struck down the exemption that let member states allow sex-based premiums. The insurer still predicts from everything else.
+Test-Achats, a Belgian consumers' association. The Court struck down the exemption that let member states allow sex-based premiums. The Commission's guidelines: sex may still be used at the aggregate level, not to set an individual's premium.
 :::
 
-Court of Justice of the European Union, *Test-Achats*, 1 March 2011:
+Court of Justice of the European Union, press release on *Test-Achats*, 1 March 2011:
 
 > "Taking the gender of the insured individual into account as a risk factor in insurance contracts constitutes discrimination"
 
-From 21 December 2012: no sex-based premiums in the EU. Everything else the insurer records can still be used.
+From 21 December 2012: no differences by sex in individuals' premiums, in new contracts.
 
 ::: {.source}
-Court of Justice of the European Union (2011), Press Release No 12/11, 1 March 2011, on Case C-236/09, *Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres*, https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf, pages 1--2.
+Court of Justice of the European Union (2011), Press Release No 12/11, 1 March 2011, on Case C-236/09, *Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres*, https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf, pages 1--2. European Commission (2012), Guidelines on the application of Council Directive 2004/113/EC to insurance, in the light of the judgment in Case C-236/09 (Test-Achats), *Official Journal of the European Union* C 11, 13 January 2012, 1--11, paragraphs 5 and 14.
 :::
 
 ## The red car
@@ -232,7 +238,7 @@ draw_dag(rc, data.frame(from = c("A: sex", "U: aggression", "U: aggression"),
 
 Aggression $U$ is never observed.
 
-Fairness through unawareness: price on $X$, never on $A$.
+Fairness through unawareness: price on $X$, never on $A$. (The law is more detailed; this is the model's version.)
 
 ::: {.source}
 Kusner, Loftus, Russell and Silva (2017), "Counterfactual Fairness," *Advances in Neural Information Processing Systems* 30; arXiv:1703.06856v3, Scenario 1, page 4 (with race as $A$). Loftus, *Modern Statistics 4 Data Science*, section 3.4.1, https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models (with gender).
@@ -266,7 +272,7 @@ $$
 X = 2A + U, \qquad Y = U + \varepsilon
 $$
 
-$A = 1$ for a woman, half the drivers; $U$ and $\varepsilon$ are $N(0, 1)$, independent of each other and of $A$.
+$A = 1$ for a woman, half the drivers; $U$ and $\varepsilon$ are $N(0, 1)$, independent of each other and of $A$. Claims and prices are measured from the average.
 
 ::: {.ask}
 Fit $Y$ on $X$ alone. Which group does it charge more, and by how much? Which group claims more?
@@ -275,12 +281,12 @@ Fit $Y$ on $X$ alone. Which group does it charge more, and by how much? Which gr
 ## The unaware price
 
 ::: {.notes}
-Var(X) = 2, Cov(X, Y) = 1, so slope 1/2 and intercept -1/2. Dashed: the fit on X alone. Solid: the best prediction from X and A, one line per group.
+Var(X) = 2, Cov(X, Y) = 1, so slope 1/2 and intercept -1/2. The points are a sample; the numbers are population values.
 :::
 
-Women are charged $\tfrac12$ on average and men $-\tfrac12$. Both groups claim $0$.
+In the population, the price from $X$ alone is $\tfrac12 X - \tfrac12$: women $\tfrac12$ on average, men $-\tfrac12$. Both groups claim $0$.
 
-```{r redcar_plot, fig.height=3.5, fig.alt="Scatter plot of claims Y against car color X for 1,000 simulated drivers, men in navy and women in gold, the gold cloud shifted two units right. A dashed black line of slope one half runs through both clouds; a navy line Y = X and a gold line Y = X - 2 run through the men's and the women's clouds."}
+```{r redcar_plot, fig.height=3.1, fig.alt="Scatter plot of claims Y against car color X for 1,000 simulated drivers, men in navy and women in gold, the gold cloud shifted two units right. A dashed black line of slope one half runs through both clouds; a navy line Y = X and a gold line Y = X - 2 run through the men's and the women's clouds."}
 ggplot(car, aes(X, Y, color = group)) +
   geom_point(alpha = 0.35, size = 1.1) +
   geom_abline(intercept = 0, slope = 1, color = navy, linewidth = 1.2) +
@@ -291,6 +297,8 @@ ggplot(car, aes(X, Y, color = group)) +
   guides(color = guide_legend(override.aes = list(alpha = 1, size = 3))) +
   theme(legend.position = "right")
 ```
+
+Dashed: the price from $X$ alone. Solid: the best price from $X$ and $A$.
 
 ## One driver {minutes="3"}
 
@@ -331,10 +339,24 @@ $\hat Y(a)$: the prediction for the same person, with $U$ as abducted, had $A$ b
 $\hat Y$ is counterfactually fair if, given what was observed, $\hat Y(a)$ and $\hat Y(a')$ have the same distribution for every $a'$.
 :::
 
-Lemma 1: a function of the non-descendants of $A$ is counterfactually fair. Here, $X - 2A = U$.
+Lemma 1: a function of the non-descendants of $A$ is counterfactually fair. Here, $X - 2A = U$; any non-constant price from $X$ alone is not.
 
 ::: {.source}
-Kusner, Loftus, Russell and Silva (2017), as above: Definition 5, page 3; Lemma 1, page 5; the quotation, page 4.
+Kusner, Loftus, Russell and Silva (2017), as above: Definition 5, page 3; Lemma 1, page 5; the quotation, page 4; prices from $X$ alone, page 15.
+:::
+
+## Holding aggression fixed {minutes="2"}
+
+::: {.notes}
+QUESTION: what justifies holding U fixed; what evidence for X = 2A + U?
+
+Lens F. Sort the answers: claims about how the world works, judgments about which effects count.
+:::
+
+::: {.ask}
+The counterfactual driver keeps her $U$. What justifies holding aggression fixed when sex changes? What evidence could support $X = 2A + U$?
+
+Which of your answers are about how the world works, and which about which effects are acceptable?
 :::
 
 ## Conditioning or intervening {minutes="2"}
@@ -356,7 +378,7 @@ Which is a statement about intervening, and which about conditioning?
 ## A second world
 
 ::: {.notes}
-Same insurer, a world where sex does affect claims. Invented numbers: men 10,000 miles a year, women 6,000; £25 a year per thousand miles; women £50 less at the same mileage.
+Same insurer, a world where sex does affect claims. Men 10,000 miles a year, women 6,000; £25 a year per thousand miles; women £50 less at the same mileage.
 :::
 
 ```{r dag_mileage, fig.height=1.9, fig.alt="A causal graph in boxes: A, sex, points into M, mileage, and into Y, claims; M points into Y."}
@@ -369,7 +391,9 @@ $$
 M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
 $$
 
-$M$ in thousands of miles a year, $Y$ in hundreds of pounds a year. $U_M$ and $U_Y$ are independent of each other and of $A$.
+$M$ in thousands of miles a year, $Y$ in hundreds of pounds a year. $U_M$ and $U_Y$ have mean $0$ and are independent of each other and of $A$.
+
+Invented values: $\mu_0 = 10$, $\alpha = -4$, $\beta = 0.25$, $\gamma = -0.5$.
 
 ## Splitting an effect {minutes="3"}
 
@@ -392,7 +416,7 @@ Controlled: $\text{CDE}(m) = E[Y(1, m) - Y(0, m)]$, everyone at mileage $m$.
 Natural: $Y(1, M(0))$, a woman driving the miles she would have driven as a man.
 
 ::: {.source}
-The reading writes $Y_{X := 1,\, Z := Z_{X := 0}}$ for $Y(1, M(0))$, with $X$ the treatment and $Z$ the mediator: Barocas, Hardt and Narayanan (2023), pages 127--128.
+The reading writes $Y_{X := 1,\, Z := Z_{X := 0}}$ for $Y(1, M(0))$, with $X$ the treatment and $Z$ the mediator: Barocas, Hardt and Narayanan (2023), page 128.
 :::
 
 ## Direct and indirect effects {minutes="3"}
@@ -447,7 +471,7 @@ Lens F. With nothing else driving both mileage and claims, a regression on A and
 
 $Y(1, M(0))$ is nobody's observed outcome. The model supplies it.
 
-Equal mileage in the data is not mileage held fixed. If driving for work, $U$, adds both miles and claims, $M$ is a collider on $A \to M \leftarrow U \to Y$.
+Equal mileage in the data is not mileage held fixed. If driving for work, $Z$, adds both miles and claims, $M$ is a collider on $A \to M \leftarrow Z \to Y$.
 
 # Part 3: Two fair predictors
 
@@ -500,16 +524,16 @@ Chiappa (2019), "Path-Specific Counterfactual Fairness," *Proceedings of the AAA
 ## The premiums compared
 
 ::: {.notes}
-Gaps, women minus men: the TE, the NIE and zero. The difference between the fair premiums is the path judged fair: lens E.
+Each rule shifted by a constant to collect the average claim, £175 a policy; a constant keeps both fairness properties. Gaps: the TE, the NIE, zero. Lens E.
 :::
 
-```{r premiums, fig.height=2.5, fig.alt="Dot chart of average premiums in hundreds of pounds a year. Full prediction: men 2.5, women 1.0. Path-specific: men 2.5, women 1.5. Counterfactually fair: men 2.5, women 2.5."}
+```{r premiums, fig.height=2.1, fig.alt="Dot chart of average premiums in hundreds of pounds a year, each rule collecting 1.75 on average. Full prediction: men 2.50, women 1.00. Path-specific: men 2.25, women 1.25. Counterfactually fair: men 1.75, women 1.75."}
 lev <- c("counterfactually fair", "path-specific", "full")
 prem |>
   mutate(row = match(predictor, lev), y = row + ifelse(group == "women", 0.14, -0.14)) |>
-  ggplot(aes(mean, y, color = group)) +
+  ggplot(aes(level, y, color = group)) +
   geom_point(size = 5) +
-  geom_text(aes(x = mean + ifelse(group == "women", -0.14, 0.14), label = sprintf("%.1f", mean)),
+  geom_text(aes(x = level + ifelse(group == "women", -0.22, 0.22), label = sprintf("%.2f", level)),
             size = 5, show.legend = FALSE) +
   scale_color_manual(values = two, name = NULL) +
   scale_x_continuous(limits = c(0.7, 2.9), breaks = c(1, 1.5, 2, 2.5)) +
@@ -518,7 +542,9 @@ prem |>
   theme(legend.position = "right", panel.grid.minor = element_blank())
 ```
 
-$\hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A \qquad \hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A$
+All three collect the same average premium, £175 a policy: the level is a choice too.
+
+Up to constants: $\;\hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A, \quad \hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A$
 
 ::: {.leave}
 The two fair premiums differ by the contribution of the path someone judged fair.
@@ -539,10 +565,10 @@ Which of the three would you want your own premium computed from? Would you choo
 ## Whose judgment {minutes="3"}
 
 ::: {.notes}
-Who decides which path is fair. A second choice: pricing everyone as a woman is counterfactually fair too, at a lower level.
+Who decides which path is fair.
 :::
 
-Kusner et al., on Berkeley admissions: "the higher rejection among female than male applicants is acceptable, if the mechanism A → X is interpreted as a choice which is under the control of the applicant."
+Kusner et al., on Berkeley admissions ($A$: female applicant; $X$: course applied to): "the higher rejection among female than male applicants is acceptable, if the mechanism A → X is interpreted as a choice which is under the control of the applicant."
 
 . . .
 
@@ -571,7 +597,7 @@ With $\delta AM$ in $Y$, and a subscript for the level held fixed: $\;\text{NDE}
 ## Moral luck
 
 ::: {.notes}
-Moral luck: judging people by factors outside their control. Then the textbook's middle view, applied to insurance.
+Moral luck names the problem; the control principle is one response. Then the textbook's middle view, applied to insurance.
 :::
 
 > "The control principle says that we should only judge people to the extent that the factors we judge them on are under their control."
@@ -587,13 +613,13 @@ Loftus, *Modern Statistics 4 Data Science*, section 3.4.2, https://joshualoftus.
 ## Luck egalitarianism {minutes="1"}
 
 ::: {.notes}
-The same idea applied to who gets what; a premium is who pays what. Luck egalitarians often deny that differences in option luck are unjust.
+A related response, about who gets what; a premium is who pays what.
 :::
 
-Brute luck: risks a person did not choose. Option luck: how a chosen gamble turns out.
+Brute luck: risks a person did not choose. Option luck: how a chosen gamble turns out. Luck egalitarians often "deny that instances of differential option luck are unjust."
 
 ::: {.leave}
-Control "cannot be expressed in the statistical language of conditional probabilities and expectations."
+The book: whether a person has control over an attribute "cannot be expressed in the statistical language of conditional probabilities and expectations."
 :::
 
 ::: {.source}
@@ -605,29 +631,17 @@ Lippert-Rasmussen, "Justice and Bad Luck," *The Stanford Encyclopedia of Philoso
 ::: {.notes}
 QUESTION: is A -> M -> Y fair when mileage was shaped by sex? Pairs, then swap.
 
-Two minutes a side, one minute for two pairs to report.
+Two minutes a side, one minute for two pairs to report. The guidelines' example: engine size, "even if statistically men drive cars with more powerful engines."
 :::
+
+The Commission's guidelines on Test-Achats: "The use of risk factors which might be correlated with gender therefore remains possible, as long as they are true risk factors in their own right."
 
 ::: {.ask}
 Is the path $A \to M \to Y$ fair, when mileage was itself shaped by sex? One of you argues yes, the other no; then swap.
 :::
 
-## A framework and a criterion
-
-::: {.notes}
-QUESTION: must a deontologist prefer the price that never looks at sex?
-
-Functional independence is ms4ds's term for unawareness. Leave it open for the class.
-:::
-
-> "But there may be a deontological argument in favor of functional independence, including empirical evidence that people generally believe a process with functional independence is more fair."
-
-::: {.ask}
-In the red car world, the price that never looks at sex is not counterfactually fair. Does a deontologist have to prefer it anyway?
-:::
-
 ::: {.source}
-Loftus, *Modern Statistics 4 Data Science*, section 3.4.1, as above.
+European Commission (2012), as above, paragraph 17 and its footnote 3, page 4.
 :::
 
 ## Intersectionality {.inverse}
@@ -678,19 +692,9 @@ The direct path is the hiring panel. Career breaks reduce experience.
 ## Lenses this week
 
 ::: {.notes}
-Each lens, what it referred to this week.
+Each lens, what it referred to this week. Nothing on the next week: it is not planned yet.
 :::
 
 - **Who is in the data?** Each driver once, with one sex. $Y(1, M(0))$ is in nobody's data.
-- **You have to choose, so choose, and defend it.** Which paths are fair; whose baseline; unaware or counterfactually fair.
-- **What can be changed, and how?** Held fixed: $U$ for the counterfactual driver, mileage at $M(0)$. Equal mileage in the data is not mileage held fixed.
-
-## For next time {minutes="1"}
-
-::: {.notes}
-Week 9: decisions from predictions; its readings are settled at its plan.
-:::
-
-The next reading is about decisions made from predictions: what a wrong prediction costs, and how far life outcomes can be predicted at all.
-
-Bring one prediction an institution acted on: what was predicted, what was decided, and what a wrong prediction costs and who bears it.
+- **You have to choose, so choose, and defend it.** Which paths are fair; the level of the premium; unaware or counterfactually fair.
+- **What can be changed, and how?** Held fixed: aggression for the counterfactual driver, mileage at $M(0)$. Equal mileage in the data is not mileage held fixed.
