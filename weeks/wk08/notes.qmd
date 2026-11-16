@@ -21,7 +21,7 @@ st313:
 ---
 
 **Important note:** this week is about whether an insurer may price on
-sex, directly or through other variables, and about which causal paths
+gender, directly or through other variables, and about which causal paths
 from a protected attribute are fair. The algebra below is not
 contested. Which causal graph describes a real case, which paths are
 fair, and what the law should require are contested, and my view is
@@ -30,9 +30,9 @@ marks.
 
 ## Summary
 
-Since December 2012 an insurer in the European Union may not use sex
+Since December 2012 an insurer in the European Union may not use gender
 to set an individual's premium. It can still use other risk factors,
-and some of those depend on sex. The
+and some of those depend on gender. The
 observational criteria compare groups in a table, and the same table
 can come from different mechanisms. This week writes the mechanism down
 as a causal model, which makes a new kind of question possible: what
@@ -40,7 +40,7 @@ would this person's price have been had the attribute been different?
 
 Counterfactual fairness asks that the answer be the same price. In the
 simplest example, the red car, any price that depends on the car but
-not on sex fails this test, and a price that uses both can pass it. Direct and indirect
+not on gender fails this test, and a price that uses both can pass it. Direct and indirect
 effects split the effect of an attribute along the paths it takes, and
 the total effect is their sum when the two are defined with matching
 reference levels. A path-specific criterion removes the effect of the
@@ -130,20 +130,20 @@ stopifnot(abs(NDE + 0.5) < 1e-12, abs(NIE + 1) < 1e-12, abs(TE + 1.5) < 1e-12,
           abs(alpha * slope_refit - (NIE + R2 * NDE)) < 1e-12)
 ```
 
-## What you brought
+## Warm-up
 
 The task was to bring one decision in which an attribute is used, or
 deliberately not used, with one route by which it could affect the
 outcome, and whether that route is fair. A route is a path in a causal
 graph: an arrow from the attribute to something, and on to the
 outcome. Drawing it makes the judgment visible, because the judgment
-is about particular arrows. "Sex affects the premium" says
-little; "sex affects how many miles a person drives, and mileage
+is about particular arrows. "Gender affects the premium" says
+little; "gender affects how many miles a person drives, and mileage
 affects claims" names a path someone can defend or object to.
 
 ## The red car
 
-### Pricing without sex
+### Pricing without gender
 
 On 1 March 2011 the Court of Justice of the European Union ruled on a
 question sent to it by the Belgian Constitutional Court, where
@@ -161,7 +161,7 @@ exception was invalid from 21 December 2012.
 The European Commission's guidelines on the ruling say what it covers.
 From 21 December 2012 the unisex rule applies "without any possible
 exception in relation to the calculation of individuals' premiums and
-benefits in new contracts" (paragraph 5). Sex may still be used "in the
+benefits in new contracts" (paragraph 5). Gender may still be used "in the
 calculation of premiums and benefits at the aggregate level, as long as
 it does not lead to differentiation at individual level", for example
 in reserving and internal pricing (paragraph 14). Other risk factors
@@ -187,20 +187,20 @@ unobserved factor $U$, aggressive driving, makes a person both more
 likely to choose a red car and more likely to have an accident.
 Members of one group, $A = 1$, are more likely to drive red cars, and
 no more likely to be aggressive or to have accidents. Kusner et al.
-take $A$ to be race; ms4ds takes it to be gender. These notes write
-sex, as the directive does, with $A = 1$ for a woman.
+take $A$ to be race; ms4ds takes it to be gender, and so do these
+notes and the Commission's guidelines, with $A = 1$ for a woman.
 
-```{r dag_redcar, echo=FALSE, warning=FALSE, fig.height=1.6, fig.width=7, fig.alt="A causal graph in boxes: A, sex, points into X, car color; U, aggression, points into X and into Y, claims. There is no arrow from A to U or from A to Y."}
-rc <- data.frame(name = c("A: sex", "X: car color", "U: aggression", "Y: claims"),
+```{r dag_redcar, echo=FALSE, warning=FALSE, fig.height=1.6, fig.width=7, fig.alt="A causal graph in boxes: A, gender, points into X, car color; U, aggression, points into X and into Y, claims. There is no arrow from A to U or from A to Y."}
+rc <- data.frame(name = c("A: gender", "X: car color", "U: aggression", "Y: claims"),
                  x = c(0, 1.25, 2.5, 3.75), y = c(1, 0, 1, 0))
-draw_dag(rc, data.frame(from = c("A: sex", "U: aggression", "U: aggression"),
+draw_dag(rc, data.frame(from = c("A: gender", "U: aggression", "U: aggression"),
                         to = c("X: car color", "X: car color", "Y: claims")),
          boxes = TRUE, text_size = 4.5, xlim = c(-0.75, 4.5), ylim = c(-0.3, 1.3))
 ```
 
 The graph is $A \to X \leftarrow U \to Y$. There is no directed path
-from $A$ to $Y$: sex has no effect on claims. The insurer, forbidden to
-use sex, predicts from the car alone. ms4ds calls this *functional
+from $A$ to $Y$: gender has no effect on claims. The insurer, forbidden to
+use gender, predicts from the car alone. ms4ds calls this *functional
 independence*, $\hat Y = \hat f(X)$ with $A$ not an input; Kusner et al.
 call it *fairness through unawareness*.
 
@@ -212,10 +212,6 @@ $U \sim N(0, 1)$, independent of $A$; car color on a continuous scale,
 higher for redder, is $X = 2A + U$; and claims are $Y = U + \varepsilon$,
 with $\varepsilon \sim N(0, 1)$ independent of $(A, U)$.
 
-The test-score model from the discussion of leaving a column out had
-the same shape with $Y$ in the place of $U$: $X = Y + 2A + \varepsilon$.
-There, the model that could not use $A$ read group 1's two coached
-points as ability and predicted group 1 higher. The same happens here.
 The least-squares slope of $Y$ on $X$ alone is
 
 $$
@@ -229,7 +225,7 @@ $\hat Y = \tfrac12 X - \tfrac12$. Women's average car color is $2$ and
 men's is $0$, so women's average predicted claims are $\tfrac12$ and
 men's are $-\tfrac12$, with claims and prices measured from the
 average. Average claims are $0$ in both groups. The price
-that never looks at sex charges women more, for claims they do not
+that never looks at gender charges women more, for claims they do not
 make.
 
 A simulation of 1,000 drivers, and least squares with and without $A$:
@@ -347,9 +343,9 @@ different $U$, and a different fair price. Kusner et al. describe three
 levels of assumption (page 7). Using only the observed non-descendants
 of $A$ needs least; using the error terms of an additive model, as
 here, extracts the most information and assumes the most. Holding
-$U$ fixed while sex changes, and recovering it from $X = 2A + U$, are
+$U$ fixed while gender changes, and recovering it from $X = 2A + U$, are
 claims about how the world works, which evidence could support or
-undermine. Which effects of sex are acceptable is a different kind of
+undermine. Which effects of gender are acceptable is a different kind of
 claim.
 
 ### Conditioning or intervening
@@ -365,14 +361,14 @@ the absence of an effect is a statement about intervening on $A$.
 
 ## Direct and indirect effects
 
-### A second world
+### A mediation example
 
 The red car has no path from $A$ to $Y$ at all. In many cases the
 attribute does affect the outcome, along some paths that
 people find acceptable and some that they do not. Keep the insurer and
 change the world. Annual mileage $M$, in thousands of miles, depends on
-sex, and claims $Y$, in hundreds of pounds a year, depend on mileage
-and on sex directly:
+gender, and claims $Y$, in hundreds of pounds a year, depend on mileage
+and on gender directly:
 
 $$
 M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y ,
@@ -385,15 +381,15 @@ $\gamma = -0.5$. Men drive $10{,}000$ miles a year on average and women
 $6{,}000$; each thousand miles adds £25 a year in expected claims; and
 at the same mileage, women's expected claims are £50 a year lower.
 
-```{r dag_mileage, echo=FALSE, warning=FALSE, fig.height=1.6, fig.width=7, fig.alt="A causal graph in boxes: A, sex, points into M, mileage, and into Y, claims; M points into Y."}
-mw <- data.frame(name = c("A: sex", "M: mileage", "Y: claims"), x = c(0, 1.6, 3.2), y = c(0, 1, 0))
-draw_dag(mw, data.frame(from = c("A: sex", "M: mileage", "A: sex"), to = c("M: mileage", "Y: claims", "Y: claims")),
+```{r dag_mileage, echo=FALSE, warning=FALSE, fig.height=1.6, fig.width=7, fig.alt="A causal graph in boxes: A, gender, points into M, mileage, and into Y, claims; M points into Y."}
+mw <- data.frame(name = c("A: gender", "M: mileage", "Y: claims"), x = c(0, 1.6, 3.2), y = c(0, 1, 0))
+draw_dag(mw, data.frame(from = c("A: gender", "M: mileage", "A: gender"), to = c("M: mileage", "Y: claims", "Y: claims")),
          boxes = TRUE, text_size = 4.5, xlim = c(-0.7, 3.9), ylim = c(-0.3, 1.3))
 ```
 
 ::: {.callout-note .ask icon=false title="Before reading on, try this"}
-Sex affects claims here directly and through mileage. For one person,
-how would you define the part of the effect of sex on claims that does
+Gender affects claims here directly and through mileage. For one person,
+how would you define the part of the effect of gender on claims that does
 not go through mileage?
 :::
 
@@ -409,9 +405,10 @@ of counterfactual, both built from $do(\cdot)$:
 Combining them, $Y(a, M(a'))$ is the claims with $A$ set to $a$ and
 mileage set to the value it would have taken under $A = a'$. When
 $a \neq a'$ this is a cross-world quantity: $Y(1, M(0))$ is a woman
-driving the miles she would have driven as a man. Nobody's data
-contain it. The reading writes $Y_{X := 1,\, Z := Z_{X := 0}}$ for the
-same thing, with $X$ the treatment and $Z$ the mediator (page 128); these notes keep $Z$ for a confounder and $X$ for covariates.
+driving the miles she would have driven as a man. It is not
+observable. The reading writes $Y_{X := 1,\, Z := Z_{X := 0}}$ for the
+same thing, with $X$ the treatment and $Z$ the mediator (page 128);
+these notes keep $Z$ for a confounder and $X$ for covariates.
 
 The **controlled direct effect** at mileage $m$ sets the mediator to
 the same value for everyone:
@@ -433,10 +430,18 @@ $$
 
 The **natural direct effect** changes $A$ with mileage held at the value
 it would have taken under $A = 0$. The **natural indirect effect** holds
-$A$ at $1$ and changes mileage from $M(0)$ to $M(1)$. No model was used,
-so $\text{TE} = \text{NDE} + \text{NIE}$ in any model where the
-expectations exist, provided the NIE holds $A$ at the level the NDE
-moves it to.
+$A$ at $1$ and changes mileage from $M(0)$ to $M(1)$. The two are steps
+in a chain through the middle term $Y(1, M(0))$:
+
+$$
+Y(0, M(0)) \;\xrightarrow{\ \text{NDE}\ }\; Y(1, M(0)) \;\xrightarrow{\ \text{NIE}\ }\; Y(1, M(1)) .
+$$
+
+First change $A$ with mileage held at $M(0)$, then change mileage with
+$A$ held at its new value, $1$. The second step starts where the first
+ends, so the two add up to the total effect. No model was used, so
+$\text{TE} = \text{NDE} + \text{NIE}$ in any model where the
+expectations exist.
 
 The reading defines the natural indirect effect with $A$ held at $0$,
 $E[Y(0, M(1)) - Y(0, M(0))]$ (page 128). With that definition the sum
@@ -480,9 +485,20 @@ men's, £100 of it through mileage and £50 directly.
 
 ### Holding a mediator fixed
 
-$Y(1, M(0))$ is nobody's observed outcome; the model supplies it, and
-every statement about the natural direct effect rests on the model's
-assumption about the two worlds together.
+$Y(1, M(0))$ is not an observable outcome; the model supplies it,
+and every statement about the natural direct effect rests on the
+model's assumption about the two worlds together. The tempting
+substitute is to compare women and men who drive the same number of
+miles. That holds mileage fixed in the data rather than by
+intervention, and it can go wrong.
+
+```{r dag_work, echo=FALSE, warning=FALSE, fig.height=1.6, fig.width=7, fig.alt="A causal graph in boxes: A, gender, points into M, mileage, and into Y, claims; M points into Y; Z, drives for work, points into M and into Y."}
+wk <- data.frame(name = c("A: gender", "M: mileage", "Y: claims", "Z: drives for work"),
+                 x = c(0, 1.2, 3.0, 3.9), y = c(0, 1.1, 0, 1.1))
+draw_dag(wk, data.frame(from = c("A: gender", "M: mileage", "A: gender", "Z: drives for work", "Z: drives for work"),
+                        to = c("M: mileage", "Y: claims", "Y: claims", "M: mileage", "Y: claims")),
+         boxes = TRUE, text_size = 4.5, xlim = c(-0.7, 5.0), ylim = c(-0.3, 1.4))
+```
 
 A regression of $Y$ on $A$ and $M$ compares women and men with the same
 mileage. In the model above, its coefficient on $A$ is $\gamma$, the
@@ -500,12 +516,14 @@ as holding it fixed by intervention.
 ## Two fair predictors
 
 Before December 2012 the insurer's best prediction was the full one,
-$\hat Y_{\text{full}} = \gamma A + \beta M$, which is $E[Y \mid A, M]$ in
-this world.
+$Y_{\text{full}} = \gamma A + \beta M$, which is $E[Y \mid A, M]$ in
+this world. The premiums in this part are population quantities,
+written without hats: they depend on the unknown parameters $\mu_0$,
+$\alpha$, $\beta$ and $\gamma$, which an insurer would estimate.
 
 ::: {.callout-note .ask icon=false title="Before reading on, try this"}
-Starting from $\hat Y_{\text{full}} = \gamma A + \beta M$, write down a
-premium that removes the effect of sex along every path from $A$. Then
+Starting from $Y_{\text{full}} = \gamma A + \beta M$, write down a
+premium that removes the effect of gender along every path from $A$. Then
 write down one that removes it along $A \to Y$ only, and keeps the path
 through mileage.
 :::
@@ -520,7 +538,7 @@ path. Prediction: mileage would have been $M(0) = \mu_0 + U_M =
 M - \alpha A$, and the premium
 
 $$
-\hat Y_{\text{CF}} = \gamma \cdot 0 + \beta\, M(0) = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M) .
+Y_{\text{CF}} = \gamma \cdot 0 + \beta\, M(0) = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M) .
 $$
 
 It is a function of $U_M$ alone, and $U_M$ is not a descendant of $A$,
@@ -545,7 +563,7 @@ through mileage fair. Set $A := 0$ along the direct arrow only, and keep
 the mileage the person drives:
 
 $$
-\hat Y_{\text{PS}} = \gamma \cdot 0 + \beta M = \beta M .
+Y_{\text{PS}} = \gamma \cdot 0 + \beta M = \beta M .
 $$
 
 It does not use $A$ at all, and women, who drive less, pay less on
@@ -562,8 +580,8 @@ average.
 The three differ, for every driver, by
 
 $$
-\hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A, \qquad
-\hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A .
+Y_{\text{full}} - Y_{\text{PS}} = \gamma A, \qquad
+Y_{\text{PS}} - Y_{\text{CF}} = \alpha\beta A .
 $$
 
 The first difference is the contribution of the direct path, and the
@@ -636,9 +654,10 @@ rejection among female than male applicants is acceptable, if the
 mechanism A → X is interpreted as a choice which is under the control
 of the applicant."
 
-The reading, on the same example, says that treating department choice
-as the applicant's own inherent preference "is a substantive judgment
-that may not be a fact" (page 119). It describes worlds consistent with
+The reading, Barocas, Hardt and Narayanan, says of the same example
+that treating department choice as the applicant's own inherent
+preference "is a substantive judgment that may not be a fact"
+(page 119). It describes worlds consistent with
 the same data in which discrimination runs through department
 choice: a program advertised in a way that discouraged women
 from applying, or a department known for hostility to women, and
@@ -686,12 +705,12 @@ $$
 $$
 
 where $R^2 = \alpha^2 \operatorname{Var}(A)/\operatorname{Var}(M)$ is the
-share of the variance of mileage explained by sex. With
+share of the variance of mileage explained by gender. With
 $\operatorname{Var}(A) = 1/4$ and $\operatorname{Var}(U_M) = 4$,
 $\operatorname{Var}(M) = 8$, $\operatorname{Cov}(A, M) = -1$, the slope is
 $0.25 + (-0.5)(-1)/8 = 0.3125$ and the gap is $-1.25$: the path through
 mileage, $-1$, and half of the direct effect, $-0.25$, which returns
-because mileage stands in for sex. The refitted premium does not take
+because mileage stands in for gender. The refitted premium does not take
 $A$ as an input, and its slope on mileage, $0.3125$, is above
 $\beta = 0.25$.
 
@@ -749,6 +768,11 @@ $\delta = 0$ both pairings give $\gamma$ and $\alpha\beta$.
 
 ### Moral luck
 
+Dana Nelkin's encyclopedia entry opens: "Moral luck occurs when an
+agent can be correctly treated as an object of moral judgment despite
+the fact that a significant aspect of what she is assessed for depends
+on factors beyond her control."
+
 [ms4ds, section 3.4.2](https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck):
 "Moral luck refers to how our evaluation of whether someone has done
 good or not can depend on factors which are outside of that person's
@@ -759,9 +783,14 @@ justification for treating attributes such as race or gender as
 sensitive in the first place: they are commonly understood to be
 outside a person's control.
 
-The book's middle view of equality of opportunity discounts
-differences in qualifications that come from factors outside a
-person's control, and the book names insurance as a case: "The middle view has particular
+The middle view of equality of opportunity, in chapter 4 of Barocas,
+Hardt and Narayanan's book, holds that decision makers "must, to some
+degree, treat seemingly dissimilar people similarly when the causes of
+these dissimilarities are themselves problematic" (page 84). For
+employment, the book suggests that hiring managers might assess people
+by the opportunities they have had, "discounting certain differences in
+qualifications that might owe to factors outside their control"
+(page 85). It names insurance as a case: "The middle view has particular
 purchase in the case of insurance, where we really might want insurers
 to ignore the additional costs that they are likely to face in setting
 the price of a policy for someone with an expensive pre-existing
@@ -776,9 +805,12 @@ and its section 7 sets out the distinction between brute luck, risks a
 person did not choose to take, and option luck, how a gamble the person
 chose turns out: "Luck-egalitarians, for example, often separate option
 luck and brute luck and deny that instances of differential option luck
-are unjust." The entry also records that views on option luck differ:
-whether justice requires its effects to stand, permits correcting them,
-or requires correcting some of them.
+are unjust." On that view, two people who take the same gamble and
+end up unequal because one of them lost have no claim of justice
+against the result; an inequality that comes from brute luck, such as
+an illness nobody chose, can be unjust. The entry also records that
+views on option luck differ: whether justice requires its effects to
+stand, permits correcting them, or requires correcting some of them.
 
 Moral luck names a problem: how we judge what people did can depend
 on things they did not control. The control principle is one response
@@ -788,7 +820,8 @@ related response there. This course takes them together because they
 ask the same question, what a person is responsible for. A premium is
 a burden distributed among policyholders.
 
-The book, in chapter 4, marks the limit of the formal tools here: "many of the
+Barocas, Hardt and Narayanan's chapter 4 marks the limit of the
+formal tools here: "many of the
 concepts in this chapter, such as whether a decision subject has
 control over an attribute used for decision making, cannot be
 expressed in the statistical language of conditional probabilities and
@@ -800,7 +833,7 @@ path is fair.
 ### A mediator shaped by the attribute
 
 Mileage is a rating factor with an obvious connection to risk: more
-miles, more exposure. In the mileage world it also differs by sex, and
+miles, more exposure. In the mileage world it also differs by gender, and
 part of what makes women's claims lower runs through it. Whether the
 path $A \to M \to Y$ is fair depends on why mileage differs. If the
 difference reflects choices people control, the control principle
@@ -810,8 +843,26 @@ The Berkeley example has the same shape, with department choice in the
 place of mileage, and the reading's alternative worlds are the
 argument that a mediator's appearing to be a choice does not make it
 one. The Commission's guidelines answer the legal version of the
-question: a factor correlated with sex may be used "as long as" it is a
+question: a factor correlated with gender may be used "as long as" it is a
 true risk factor "in their own right" (paragraph 17).
+
+A second mediator makes the question sharper. A risk score used in
+criminal justice may take prior arrests as an input, and race can
+affect prior arrests: arrests record where police look as well as what
+people do, and they can follow from less economic opportunity. Here
+the mediator itself can record unequal treatment, and a path through
+it is harder to call fair than a path through mileage.
+
+```{r dag_two, echo=FALSE, warning=FALSE, fig.height=1.5, fig.width=7, fig.alt="Two causal graphs in boxes. Left: gender points into mileage, which points into claims. Right: race points into prior arrests, which points into the risk score."}
+lv <- c("insurance", "criminal justice")
+two_m <- data.frame(name = c("A: gender", "M: mileage", "Y: claims", "A: race", "M: prior arrests", "R: risk score"),
+                    x = c(0, 1.5, 3, 0, 1.5, 3), y = c(0, 0.8, 0, 0, 0.8, 0),
+                    panel = factor(rep(lv, each = 3), levels = lv))
+draw_dag(two_m, data.frame(from = c("A: gender", "M: mileage", "A: race", "M: prior arrests"),
+                           to = c("M: mileage", "Y: claims", "M: prior arrests", "R: risk score"),
+                           panel = factor(rep(lv, each = 2), levels = lv)),
+         boxes = TRUE, text_size = 3.5, xlim = c(-0.6, 3.6), ylim = c(-0.25, 1.05), strip_size = 12)
+```
 
 ### A framework and a criterion
 
@@ -851,7 +902,7 @@ model, each effect of one attribute is stated at a level of the other.
 
 Who is in the data? Each driver is in the data once, with one value of
 the attribute. The same driver with the other value, and $Y(1, M(0))$,
-are in nobody's data: the model fills them in by abduction. A
+are not observable: the model fills them in by abduction. A
 counterfactual criterion is a statement about people the insurer has
 never observed, and it is only as good as the model that supplies them.
 
@@ -871,7 +922,7 @@ the data, not by intervention, and the two differ when something else
 drives both mileage and claims.
 
 And why? An insurer prices on the variables it is allowed to use, and
-the path-specific premium in the mileage world takes no sex as an
+the path-specific premium in the mileage world takes no gender as an
 input. A price that never mentions the attribute can still include an
 indirect effect that someone judged fair. Who judged it, and on what grounds?
 
@@ -947,3 +998,8 @@ Court of Justice of the European Union in Case C-236/09 (Test-Achats)",
 2012/C 11/01, *Official Journal of the European Union* C 11, 13 January
 2012, 1--11, <https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL>:
 paragraphs 5, 14 and 17 and footnote 3 to paragraph 17.
+
+Nelkin, Dana K., "Moral Luck", *The Stanford Encyclopedia of
+Philosophy*, first published 26 January 2004, substantive revision
+20 January 2025, <https://plato.stanford.edu/entries/moral-luck/>: the
+opening sentence.

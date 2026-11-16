@@ -152,10 +152,11 @@ Joshua Loftus
 <p>Part 3: Two fair predictors</p>
 <p>Part 4: Luck and responsibility</p>
 </section>
-<section id="what-you-brought" class="slide level2" data-minutes="4">
-<h2>What you brought</h2>
+<section id="warm-up" class="slide level2" data-minutes="4">
+<h2>Warm-up</h2>
+<p>You were asked to bring one decision in which an attribute is used, or deliberately not used, with one route by which it could affect the outcome, and whether that route is fair.</p>
 <div class="ask">
-<p>Draw the route you brought as arrows, from the attribute to the outcome. Which arrow is your judgment about?</p>
+<p>Draw your route as arrows, from the attribute to the outcome. Which arrow is your judgment about?</p>
 </div>
 </section>
 <section>
@@ -163,13 +164,13 @@ Joshua Loftus
 <h1>Part 1: The red car</h1>
 
 </section>
-<section id="pricing-without-sex" class="slide level2">
-<h2>Pricing without sex</h2>
+<section id="pricing-without-gender" class="slide level2">
+<h2>Pricing without gender</h2>
 <p>Court of Justice of the European Union, press release on <em>Test-Achats</em>, 1 March 2011:</p>
 <blockquote>
 <p>“Taking the gender of the insured individual into account as a risk factor in insurance contracts constitutes discrimination”</p>
 </blockquote>
-<p>From 21 December 2012: no differences by sex in individuals’ premiums, in new contracts.</p>
+<p>From 21 December 2012: no differences by gender in individuals’ premiums, in new contracts.</p>
 <div class="source">
 <p>Court of Justice of the European Union (2011), Press Release No 12/11, 1 March 2011, on Case C-236/09, <em>Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres</em>, https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf, pages 1–2. European Commission (2012), Guidelines on the application of Council Directive 2004/113/EC to insurance, in the light of the judgment in Case C-236/09 (Test-Achats), <em>Official Journal of the European Union</em> C 11, 13 January 2012, 1–11, paragraphs 5 and 14.</p>
 </div>
@@ -180,7 +181,7 @@ Joshua Loftus
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides_files/figure-revealjs/dag_redcar-1.png" style="width:100.0%" alt="A causal graph in boxes: A, sex, points into X, car color; U, aggression, points into X and into Y, claims. There is no arrow from A to U or from A to Y."></p>
+<p><img data-src="slides_files/figure-revealjs/dag_redcar-1.png" style="width:100.0%" alt="A causal graph in boxes: A, gender, points into X, car color; U, aggression, points into X and into Y, claims. There is no arrow from A to U or from A to Y."></p>
 </figure>
 </div>
 </div>
@@ -197,11 +198,8 @@ Joshua Loftus
 <p>The insurer prices on the car alone. Is that price fair to women? Write yes or no, and one reason.</p>
 </div>
 </section>
-<section id="the-red-car-in-numbers" class="slide level2" data-minutes="4">
+<section id="the-red-car-in-numbers" class="slide level2" data-minutes="3">
 <h2>The red car in numbers</h2>
-<div class="retrieval">
-<p>With a test score <span class="math inline">\(X = Y + 2A + \varepsilon\)</span>, which group did the model without <span class="math inline">\(A\)</span> predict higher?</p>
-</div>
 <p><span class="math display">\[
 X = 2A + U, \qquad Y = U + \varepsilon
 \]</span></p>
@@ -281,8 +279,8 @@ X = 2A + U, \qquad Y = U + \varepsilon
 <section id="holding-aggression-fixed" class="slide level2" data-minutes="2">
 <h2>Holding aggression fixed</h2>
 <div class="ask">
-<p>The counterfactual driver keeps her <span class="math inline">\(U\)</span>. What justifies holding aggression fixed when sex changes? What evidence could support <span class="math inline">\(X = 2A + U\)</span>?</p>
-<p>Which of your answers are about how the world works, and which about which effects are acceptable?</p>
+<p>The counterfactual driver keeps her <span class="math inline">\(U\)</span>. What justifies holding aggression fixed when gender changes? What evidence could support <span class="math inline">\(X = 2A + U\)</span>?</p>
+<p>Which of your answers are about how the world works vs which effects are acceptable?</p>
 </div>
 </section>
 <section id="conditioning-or-intervening" class="slide level2" data-minutes="2">
@@ -297,13 +295,13 @@ X = 2A + U, \qquad Y = U + \varepsilon
 <h1>Part 2: Direct and indirect effects</h1>
 
 </section>
-<section id="a-second-world" class="slide level2">
-<h2>A second world</h2>
+<section id="mediation-example" class="slide level2">
+<h2>Mediation example</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides_files/figure-revealjs/dag_mileage-1.png" style="width:100.0%" alt="A causal graph in boxes: A, sex, points into M, mileage, and into Y, claims; M points into Y."></p>
+<p><img data-src="slides_files/figure-revealjs/dag_mileage-1.png" style="width:100.0%" alt="A causal graph in boxes: A, gender, points into M, mileage, and into Y, claims; M points into Y."></p>
 </figure>
 </div>
 </div>
@@ -317,7 +315,7 @@ M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
 <section id="splitting-an-effect" class="slide level2" data-minutes="3">
 <h2>Splitting an effect</h2>
 <div class="ask">
-<p>Sex affects claims directly and through mileage. For one person, how would you define the part of the effect that does not go through mileage?</p>
+<p>Gender affects claims directly and through mileage. For one person, how would you define the part of the effect that does not go through mileage?</p>
 </div>
 <div class="fragment">
 <p><span class="math inline">\(Y(a, m)\)</span>: claims under <span class="math inline">\(do(A := a, M := m)\)</span>. <span class="math inline">\(\quad M(a)\)</span>: mileage under <span class="math inline">\(do(A := a)\)</span>.</p>
@@ -338,7 +336,10 @@ M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
 \end{aligned}
 \]</span></p>
 <div class="leave">
-<p><span class="math inline">\(\text{TE} = \text{NDE} + \text{NIE}\)</span> in any model, when the NIE holds <span class="math inline">\(A\)</span> at the level the NDE moves it to.</p>
+<p><span class="math display">\[
+Y(0, M(0)) \;\xrightarrow{\ \text{NDE}\ }\; Y(1, M(0)) \;\xrightarrow{\ \text{NIE}\ }\; Y(1, M(1))
+\]</span></p>
+<p>First change <span class="math inline">\(A\)</span> with mileage held at <span class="math inline">\(M(0)\)</span>, then change mileage with <span class="math inline">\(A\)</span> held at <span class="math inline">\(1\)</span>. In any model, the two steps add up to the TE.</p>
 </div>
 </section>
 <section id="in-the-linear-model" class="slide level2" data-minutes="4">
@@ -358,30 +359,46 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
 </div>
 </div>
 </section>
-<section id="holding-a-mediator-fixed" class="slide level2">
+<section id="holding-a-mediator-fixed" class="slide level2" data-minutes="3">
 <h2>Holding a mediator fixed</h2>
-<p><span class="math inline">\(Y(1, M(0))\)</span> is nobody’s observed outcome. The model supplies it.</p>
-<p>Equal mileage in the data is not mileage held fixed. If driving for work, <span class="math inline">\(Z\)</span>, adds both miles and claims, <span class="math inline">\(M\)</span> is a collider on <span class="math inline">\(A \to M \leftarrow Z \to Y\)</span>.</p>
+<p><span class="math inline">\(Y(1, M(0))\)</span> is not an observable outcome: the model supplies it.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/dag_work-1.png" style="width:100.0%" alt="A causal graph in boxes: A, gender, points into M, mileage, and into Y, claims; M points into Y; Z, drives for work, points into M and into Y."></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Driving for work, <span class="math inline">\(Z\)</span>, adds miles, and adds claims beyond its miles. A woman with the same mileage as a man is more likely to drive for work.</p>
+<p>So comparing women and men at equal mileage does not hold mileage fixed: it mixes in <span class="math inline">\(Z\)</span>. <span class="math inline">\(M\)</span> is a collider on <span class="math inline">\(A \to M \leftarrow Z\)</span>.</p>
 </section></section>
 <section>
 <section id="part-3-two-fair-predictors" class="title-slide slide level1 center">
 <h1>Part 3: Two fair predictors</h1>
 
 </section>
-<section id="removing-the-effect-of-sex" class="slide level2" data-minutes="2">
-<h2>Removing the effect of sex</h2>
-<p>The insurer’s best prediction before 2012: <span class="math inline">\(\;\hat Y_{\text{full}} = \gamma A + \beta M\)</span>.</p>
+<section id="removing-the-effect-of-gender" class="slide level2" data-minutes="3">
+<h2>Removing the effect of gender</h2>
+<p><span class="math display">\[
+M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
+\]</span></p>
+<p>The insurer’s best premium before 2012: <span class="math inline">\(\;Y_{\text{full}} = \gamma A + \beta M\)</span>. These premiums are population quantities: they depend on the unknown <span class="math inline">\(\mu_0, \alpha, \beta, \gamma\)</span>, and so can your answers.</p>
 <div class="ask">
-<p>Write down a premium that removes the effect of sex along every path. Then one that removes it along <span class="math inline">\(A \to Y\)</span> only, and keeps the path through mileage.</p>
+<p>Write down a premium that removes the effect of gender along every path. Then one that removes it along <span class="math inline">\(A \to Y\)</span> only, and keeps the path through mileage.</p>
+</div>
+<div class="fragment">
+<p>Hint: three steps, as for the red car driver. The first is abduction: find <span class="math inline">\(U_M\)</span> from what you observe.</p>
 </div>
 </section>
 <section id="the-counterfactually-fair-premium" class="slide level2" data-minutes="3">
 <h2>The counterfactually fair premium</h2>
 <p>Abduction: <span class="math inline">\(U_M = M - \mu_0 - \alpha A\)</span>. <span class="math inline">\(\;\)</span> Action: <span class="math inline">\(A := 0\)</span>. <span class="math inline">\(\;\)</span> Prediction: <span class="math inline">\(M(0) = M - \alpha A\)</span>.</p>
 <p><span class="math display">\[
-\hat Y_{\text{CF}} = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M)
+Y_{\text{CF}} = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M)
 \]</span></p>
-<p>A function of <span class="math inline">\(U_M\)</span> alone, so counterfactually fair. It needs <span class="math inline">\(A\)</span> as an input.</p>
+<p>A function of <span class="math inline">\(U_M\)</span> alone, so counterfactually fair. It takes <span class="math inline">\(A\)</span> as an input.</p>
 </section>
 <section id="the-path-specific-premium" class="slide level2" data-minutes="3">
 <h2>The path-specific premium</h2>
@@ -390,7 +407,7 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
 </blockquote>
 <p>Set <span class="math inline">\(A := 0\)</span> on <span class="math inline">\(A \to Y\)</span> only, and keep the observed mileage:</p>
 <p><span class="math display">\[
-\hat Y_{\text{PS}} = \beta M
+Y_{\text{PS}} = \beta M
 \]</span></p>
 <div class="source">
 <p>Chiappa (2019), “Path-Specific Counterfactual Fairness,” <em>Proceedings of the AAAI Conference on Artificial Intelligence</em> 33(01), 7801–7808, doi:10.1609/aaai.v33i01.33017801, page 7801.</p>
@@ -408,7 +425,7 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
 </div>
 </div>
 <p>All three collect the same average premium, £175 a policy: the level is a choice too.</p>
-<p>Up to constants: <span class="math inline">\(\;\hat Y_{\text{full}} - \hat Y_{\text{PS}} = \gamma A, \quad \hat Y_{\text{PS}} - \hat Y_{\text{CF}} = \alpha\beta A\)</span></p>
+<p>Up to constants: <span class="math inline">\(\;Y_{\text{full}} - Y_{\text{PS}} = \gamma A, \quad Y_{\text{PS}} - Y_{\text{CF}} = \alpha\beta A\)</span></p>
 <div class="leave">
 <p>The two fair premiums differ by the contribution of the path someone judged fair.</p>
 </div>
@@ -423,7 +440,7 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
 <h2>Whose judgment</h2>
 <p>Kusner et al., on Berkeley admissions (<span class="math inline">\(A\)</span>: female applicant; <span class="math inline">\(X\)</span>: course applied to): “the higher rejection among female than male applicants is acceptable, if the mechanism A → X is interpreted as a choice which is under the control of the applicant.”</p>
 <div class="fragment">
-<p>The reading, on the same case: “This, however, is a substantive judgment that may not be a fact.”</p>
+<p>Barocas, Hardt and Narayanan, on the same example: “This, however, is a substantive judgment that may not be a fact.”</p>
 </div>
 <div class="fragment">
 <p>Nabi and Shpitser: “The specific paths which correspond to discrimination are a domain specific issue.”</p>
@@ -432,10 +449,16 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
 </div>
 </div>
 </section>
-<section id="dropping-a-and-an-interaction" class="slide level2 inverse" data-minutes="2">
-<h2>Dropping <span class="math inline">\(A\)</span>, and an interaction</h2>
-<p>Refit on mileage alone: the gap becomes <span class="math inline">\(\text{NIE} + R^2\,\text{NDE}\)</span>, where <span class="math inline">\(R^2\)</span> is the share of <span class="math inline">\(\operatorname{Var}(M)\)</span> explained by <span class="math inline">\(A\)</span>.</p>
-<p>With <span class="math inline">\(\delta AM\)</span> in <span class="math inline">\(Y\)</span>, and a subscript for the level held fixed: <span class="math inline">\(\;\text{NDE}_0 + \text{NIE}_1 = \text{TE}\)</span>, but <span class="math inline">\(\text{NDE}_0 + \text{NIE}_0 = \text{TE} - \alpha\delta\)</span>.</p>
+<section id="mediation-with-an-interaction" class="slide level2 inverse" data-minutes="2">
+<h2>Mediation with an interaction</h2>
+<p><span class="math inline">\(Y = \gamma A + \beta M + \delta AM + U_Y\)</span>: each mile adds <span class="math inline">\(\beta\)</span> for men and <span class="math inline">\(\beta + \delta\)</span> for women. Subscripts give the level held fixed: <span class="math inline">\(\text{NDE}_a\)</span> holds mileage at <span class="math inline">\(M(a)\)</span>, <span class="math inline">\(\text{NIE}_a\)</span> holds <span class="math inline">\(A\)</span> at <span class="math inline">\(a\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{NDE}_0 &amp;= \gamma + \delta\mu_0, &amp; \text{NIE}_1 &amp;= \alpha(\beta + \delta) \\
+\text{NDE}_1 &amp;= \gamma + \delta(\mu_0 + \alpha), &amp; \text{NIE}_0 &amp;= \alpha\beta
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\text{NDE}_0 + \text{NIE}_1 = \text{NDE}_1 + \text{NIE}_0 = \text{TE} = \gamma + \alpha\beta + \delta(\mu_0 + \alpha)\)</span>. Mixed pairs miss by <span class="math inline">\(\alpha\delta\)</span>: <span class="math inline">\(\text{NDE}_0 + \text{NIE}_0 = \text{TE} - \alpha\delta\)</span>. The product <span class="math inline">\(\alpha\beta\)</span> is <span class="math inline">\(\text{NIE}_0\)</span> only.</p>
 </section></section>
 <section>
 <section id="part-4-luck-and-responsibility" class="title-slide slide level1 center">
@@ -445,32 +468,51 @@ M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
 <section id="moral-luck" class="slide level2">
 <h2>Moral luck</h2>
 <blockquote>
-<p>“The control principle says that we should only judge people to the extent that the factors we judge them on are under their control.”</p>
+<p>“Moral luck occurs when an agent can be correctly treated as an object of moral judgment despite the fact that a significant aspect of what she is assessed for depends on factors beyond her control.” (Nelkin)</p>
 </blockquote>
 <div class="fragment">
 <blockquote>
-<p>“we really might want insurers to ignore the additional costs that they are likely to face in setting the price of a policy for someone with an expensive pre-existing condition outside the person’s control”</p>
+<p>“The control principle says that we should only judge people to the extent that the factors we judge them on are under their control.” (ms4ds)</p>
 </blockquote>
 <div class="source">
-<p>Loftus, <em>Modern Statistics 4 Data Science</em>, section 3.4.2, https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck. Barocas, Hardt and Narayanan (2023), chapter 4, page 85.</p>
+<p>Nelkin, “Moral Luck,” <em>The Stanford Encyclopedia of Philosophy</em>, first published 26 January 2004, substantive revision 20 January 2025, https://plato.stanford.edu/entries/moral-luck/, opening sentence. Loftus, <em>Modern Statistics 4 Data Science</em>, section 3.4.2, https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck.</p>
 </div>
+</div>
+</section>
+<section id="insurance-and-the-middle-view" class="slide level2" data-minutes="1">
+<h2>Insurance and the middle view</h2>
+<p>The middle view of equality of opportunity: decision makers “must, to some degree, treat seemingly dissimilar people similarly when the causes of these dissimilarities are themselves problematic.”</p>
+<blockquote>
+<p>“The middle view has particular purchase in the case of insurance, where we really might want insurers to ignore the additional costs that they are likely to face in setting the price of a policy for someone with an expensive pre-existing condition outside the person’s control” (Barocas, Hardt and Narayanan)</p>
+</blockquote>
+<div class="source">
+<p>Barocas, Hardt and Narayanan (2023), chapter 4, pages 84 and 85.</p>
 </div>
 </section>
 <section id="luck-egalitarianism" class="slide level2" data-minutes="1">
 <h2>Luck egalitarianism</h2>
-<p>Brute luck: risks a person did not choose. Option luck: how a chosen gamble turns out. Luck egalitarians often “deny that instances of differential option luck are unjust.”</p>
+<p>Brute luck: risks a person did not choose. Option luck: how a chosen gamble turns out. Luck egalitarians often “deny that instances of differential option luck are unjust”: losing a gamble you chose to take is not, on this view, an injustice, while brute bad luck can be.</p>
 <div class="leave">
-<p>The book: whether a person has control over an attribute “cannot be expressed in the statistical language of conditional probabilities and expectations.”</p>
+<p>Barocas, Hardt and Narayanan: whether a person has control over an attribute “cannot be expressed in the statistical language of conditional probabilities and expectations.”</p>
 </div>
 <div class="source">
 <p>Lippert-Rasmussen, “Justice and Bad Luck,” <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2005, substantive revision 2 February 2023, https://plato.stanford.edu/entries/justice-bad-luck/, section 7. Barocas, Hardt and Narayanan (2023), chapter 4, page 92.</p>
 </div>
 </section>
-<section id="a-mediator-shaped-by-the-attribute" class="slide level2" data-minutes="5">
-<h2>A mediator shaped by the attribute</h2>
+<section id="two-mediators" class="slide level2" data-minutes="5">
+<h2>Two mediators</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/dag_two-1.png" style="width:100.0%" alt="Two causal graphs in boxes. Left: gender points into mileage, which points into claims. Right: race points into prior arrests, which points into the risk score."></p>
+</figure>
+</div>
+</div>
+</div>
 <p>The Commission’s guidelines on Test-Achats: “The use of risk factors which might be correlated with gender therefore remains possible, as long as they are true risk factors in their own right.”</p>
 <div class="ask">
-<p>Is the path <span class="math inline">\(A \to M \to Y\)</span> fair, when mileage was itself shaped by sex? One of you argues yes, the other no; then swap.</p>
+<p>Is each path fair, when the mediator was itself shaped by the attribute? What makes the difference between the two?</p>
 </div>
 <div class="source">
 <p>European Commission (2012), as above, paragraph 17 and its footnote 3, page 4.</p>
@@ -486,26 +528,30 @@ Y = \gamma_1 A_1 + \gamma_2 A_2 + \delta A_1 A_2 + \dots
 <p>Yang, Loftus and Stoyanovich (2021), “Causal Intersectionality and Fair Ranking,” <em>2nd Symposium on Foundations of Responsible Computing (FORC 2021)</em>, LIPIcs 192, 7:1–7:20, doi:10.4230/LIPIcs.FORC.2021.7.</p>
 </div>
 </section>
-<section id="firefighter-hiring" class="slide level2" data-minutes="6">
-<h2>Firefighter hiring</h2>
+<section id="hiring-and-maternity-leave" class="slide level2" data-minutes="6">
+<h2>Hiring and maternity leave</h2>
 <div class="columns">
 <div class="column" style="width:42%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides_files/figure-revealjs/dag_fire-1.png" style="width:100.0%" alt="A causal graph in boxes: A, sex, points into Y, hired, into the fitness test and into years of experience; the fitness test and years of experience both point into Y."></p>
+<p><img data-src="slides_files/figure-revealjs/dag_leave-1.png" style="width:100.0%" alt="A causal graph in boxes: A, gender, points into Y, hired, and into maternity leave; maternity leave points into years of experience and into Y; years of experience points into Y."></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The direct path is the hiring panel. Career breaks reduce experience.</p>
+<ul>
+<li><span class="math inline">\(A \to Y\)</span>: the panel</li>
+<li>leave <span class="math inline">\(\to Y\)</span>: a CV gap</li>
+<li>leave <span class="math inline">\(\to\)</span> experience <span class="math inline">\(\to Y\)</span>: fewer years</li>
+</ul>
 </div><div class="column" style="width:58%;">
 <div class="ask">
 <ol type="1">
 <li>Classify each path from <span class="math inline">\(A\)</span> to <span class="math inline">\(Y\)</span> as fair or unfair, with a reason.</li>
 <li>Given your classification, what does a path-specific predictor remove? A counterfactually fair one?</li>
-<li>The pass mark was set from current firefighters’ scores, most of them men’s. Does that change your answer for the test path?</li>
+<li>If fathers could take leave on the same terms but mothers still took most of it, would your answers for the leave paths change?</li>
 </ol>
 </div>
 </div></div>
@@ -513,7 +559,7 @@ Y = \gamma_1 A_1 + \gamma_2 A_2 + \delta A_1 A_2 + \dots
 <section id="lenses-this-week" class="slide level2">
 <h2>Lenses this week</h2>
 <ul>
-<li><strong>Who is in the data?</strong> Each driver once, with one sex. <span class="math inline">\(Y(1, M(0))\)</span> is in nobody’s data.</li>
+<li><strong>Who is in the data?</strong> Each driver once, with one gender. <span class="math inline">\(Y(1, M(0))\)</span> is not observable.</li>
 <li><strong>You have to choose, so choose, and defend it.</strong> Which paths are fair; the level of the premium; unaware or counterfactually fair.</li>
 <li><strong>What can be changed, and how?</strong> Held fixed: aggression for the counterfactual driver, mileage at <span class="math inline">\(M(0)\)</span>. Equal mileage in the data is not mileage held fixed.</li>
 </ul>
