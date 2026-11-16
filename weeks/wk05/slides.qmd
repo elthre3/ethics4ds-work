@@ -25,7 +25,7 @@ st313:
   register: 1
   segments:                        # sums to 80: 76 of material and 4 of slack; production 32 (40%)
     # opener: 4
-    - {label: "what you brought: the 4 -> 5 task on the shared document; what decided who got in, and does it depend on the outcome", minutes: 4, mode: production, retrieves: [S3]}
+    - {label: "warm-up: the 4 -> 5 task restated, on the shared document; what decided who got in, and does it depend on the outcome", minutes: 4, mode: production, retrieves: [S3]}
     # part 1, selection on a common effect: 17
     - {label: "retrieval: among people offered a place on cost, need and resources became negatively related", minutes: 2, mode: production, retrieves: [S1]}
     - {label: "the birth weight paradox (Hernandez-Diaz et al. 2006, abstract): RR 0.79 among low-birth-weight infants", minutes: 2, mode: exposition}
@@ -194,11 +194,13 @@ Part 3: Who is missing
 
 Part 4: Filling in
 
-## What you brought {minutes="4"}
+## Warm-up {minutes="4"}
 
 ::: {.notes}
 Everyone's example on the shared document: who is missing, which way. Read out two, briefly. Keep one that selects on something two things cause (hiring, admission, a hospital) for part 1, and one where people go missing because of their own outcome (an income question, dropout) for part 3.
 :::
+
+You were asked to bring one dataset or study where some people who should be in it are not, with who is missing and in which direction their absence pushes the result.
 
 ::: {.ask}
 For the dataset you brought: what decided whether someone was in it? Does that depend on the outcome, on something that causes the outcome, or on neither?

@@ -7,11 +7,11 @@
     "text": "Week 7\nPart 1: Scores that sort people\nPart 2: Differing definitions of fairness\nPart 3: Conflicting definitions\nPart 4: Remedies and their costs\nPart 5: Where disparities come from"
   },
   {
-    "objectID": "weeks/wk07/slides.html#what-you-brought",
-    "href": "weeks/wk07/slides.html#what-you-brought",
+    "objectID": "weeks/wk07/slides.html#warm-up",
+    "href": "weeks/wk07/slides.html#warm-up",
     "title": "Fairness I: observational",
-    "section": "What you brought",
-    "text": "What you brought\n\nFor the rule you brought: who pays when it wrongly says yes? Who pays when it wrongly says no? Are they the same people?"
+    "section": "Warm-up",
+    "text": "Warm-up\nYou were asked to bring one rule or score that sorts people into two groups (admit or reject, flag or clear, treat or not), with the two ways it can be wrong and who pays for each.\n\nFor the rule you brought: who pays when it wrongly says yes? Who pays when it wrongly says no? Are they the same people?"
   },
   {
     "objectID": "weeks/wk07/slides.html#who-sees-a-job-ad",
@@ -252,11 +252,11 @@
     "text": "Summary\nEvery dataset has a rule for who gets into it: who was born small, who was hired, who answered the survey, who was released on bail. When that rule depends on two things at once, looking only at the people it let in creates an association between those two things that is not there in the population. When it depends on the outcome itself, even after accounting for what was recorded, the people you have are a biased sample of the people you wanted. The first is conditioning on a collider; the second is data missing not at random. Every analysis also has a rule for which columns it uses, and a column is absent for reasons that run from the law to a cleaning step nobody recorded. A model that leaves a column out can become less accurate in both groups and more unequal between them, because the score it keeps is a collider, and it is the same model whatever the reason the column went. A column with holes forces one of three choices, drop the column, drop the rows, or fill the holes, and each makes an assumption about the values nobody observed. Writing that assumption down does not make it true. It means someone can argue with it, and whoever wrote it can be asked to defend it."
   },
   {
-    "objectID": "weeks/wk05/notes.html#what-you-brought",
-    "href": "weeks/wk05/notes.html#what-you-brought",
+    "objectID": "weeks/wk05/notes.html#warm-up",
+    "href": "weeks/wk05/notes.html#warm-up",
     "title": "Who counts as a case",
-    "section": "What you brought",
-    "text": "What you brought\nThe task was one dataset or study where some people who should be in it are not, with who is missing and the direction. For each example:\n\nWhat decided whether someone was in the data? Write it as a variable and draw arrows into it from whatever causes it.\nDoes that variable depend on the outcome, on something that causes the outcome, or on neither?"
+    "section": "Warm-up",
+    "text": "Warm-up\nThe task was one dataset or study where some people who should be in it are not, with who is missing and the direction. For each example:\n\nWhat decided whether someone was in the data? Write it as a variable and draw arrows into it from whatever causes it.\nDoes that variable depend on the outcome, on something that causes the outcome, or on neither?"
   },
   {
     "objectID": "weeks/wk05/notes.html#selection-on-a-common-effect",
@@ -1785,11 +1785,11 @@
     "text": "Week 5\nPart 1: Selection on a common effect\nPart 2: Leaving a column out\nPart 3: Who is missing\nPart 4: Filling in"
   },
   {
-    "objectID": "weeks/wk05/slides.html#what-you-brought",
-    "href": "weeks/wk05/slides.html#what-you-brought",
+    "objectID": "weeks/wk05/slides.html#warm-up",
+    "href": "weeks/wk05/slides.html#warm-up",
     "title": "Who counts as a case",
-    "section": "What you brought",
-    "text": "What you brought\n\nFor the dataset you brought: what decided whether someone was in it? Does that depend on the outcome, on something that causes the outcome, or on neither?"
+    "section": "Warm-up",
+    "text": "Warm-up\nYou were asked to bring one dataset or study where some people who should be in it are not, with who is missing and in which direction their absence pushes the result.\n\nFor the dataset you brought: what decided whether someone was in it? Does that depend on the outcome, on something that causes the outcome, or on neither?"
   },
   {
     "objectID": "weeks/wk05/slides.html#people-offered-a-place",
@@ -1995,11 +1995,11 @@
     "text": "Summary\nA platform shows a job ad to some of the people an advertiser chose and not to others. A government department refers some requests for a benefit advance to a fraud check. A county’s courts see a risk score that flags some defendants as likely to be arrested again. Each is a score that sorts people into two groups, and in each someone has argued that one group is treated worse. The third has a public table of counts. In 2016 a newsroom reported that the score flagged Black defendants who did not reoffend almost twice as often as it flagged white defendants who did not reoffend. The score’s vendor, and others, replied that the score was equally accurate for both groups: among people it flagged, the same share reoffended, and the same score meant the same rate in both groups. Both are correct descriptions of the same table. This week is about why both can be true at once, and what follows, there and in the other examples.\nA classifier has four rates. Two of them condition on what happened (the false positive and false negative rates); two condition on what the classifier said (the positive and negative predictive values). The two sides of the dispute reported the two kinds. The three families of statistical fairness criteria ask for one or another of these to be equal across groups. A four-line identity ties a group’s prevalence, its predictive value and its two error rates together, so that when two groups differ in prevalence, a classifier with the same positive predictive value in both (neither \\(0\\) nor \\(1\\)) has a different false positive rate or a different false negative rate in the two. The general version of that result, for scores rather than flags, is stated and not proved. What remains is a choice among criteria, and the reading’s three views of equality of opportunity say which criterion each kind of fairness supports. The choice is a value judgment that the arithmetic narrows and does not make.\nThe usual remedies have costs of their own. Leaving the attribute out of a model does not keep it out of the predictions, and a cutoff per group gives the same score different meanings; a kidney-function equation that dropped race is a case where a cost was accepted on purpose. And none of the criteria can say how a disparity came about: the same table can come from different worlds."
   },
   {
-    "objectID": "weeks/wk07/notes.html#what-you-brought",
-    "href": "weeks/wk07/notes.html#what-you-brought",
+    "objectID": "weeks/wk07/notes.html#warm-up",
+    "href": "weeks/wk07/notes.html#warm-up",
     "title": "Fairness I: observational",
-    "section": "What you brought",
-    "text": "What you brought\nEvery rule that sorts people into two groups can be wrong in two ways, and the two mistakes usually fall on different people. A fraud flag that fires wrongly costs the person flagged; a fraud flag that stays silent wrongly costs whoever the fraud is against. A screening test that says “disease” to a healthy person costs that person a course of treatment or a month of worry; a test that says “healthy” to a sick person costs that person the treatment they needed. Keep your own example in mind. Everything below is about what happens when the people on one side of a rule are, on average, more or less likely than the people on the other side to have the thing the rule is looking for."
+    "section": "Warm-up",
+    "text": "Warm-up\nThe task was one rule or score that sorts people into two groups, with the two ways it can be wrong and who pays for each.\nEvery rule that sorts people into two groups can be wrong in two ways, and the two mistakes usually fall on different people. A fraud flag that fires wrongly costs the person flagged; a fraud flag that stays silent wrongly costs whoever the fraud is against. A screening test that says “disease” to a healthy person costs that person a course of treatment or a month of worry; a test that says “healthy” to a sick person costs that person the treatment they needed. Keep your own example in mind. Everything below is about what happens when the people on one side of a rule are, on average, more or less likely than the people on the other side to have the thing the rule is looking for."
   },
   {
     "objectID": "weeks/wk07/notes.html#scores-that-sort-people",

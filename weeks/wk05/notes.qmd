@@ -132,7 +132,7 @@ condition_on <- function(p, nodes, node, induced = NULL, text_size = 4.5, boxes 
 }
 ```
 
-## What you brought
+## Warm-up
 
 The task was one dataset or study where some people who should be in
 it are not, with who is missing and the direction. For each example:

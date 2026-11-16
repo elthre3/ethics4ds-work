@@ -113,7 +113,10 @@ top_share <- counts |>
   pull(s)
 ```
 
-## What you brought
+## Warm-up
+
+The task was one rule or score that sorts people into two groups, with
+the two ways it can be wrong and who pays for each.
 
 Every rule that sorts people into two groups can be wrong in two
 ways, and the two mistakes usually fall on different people. A fraud

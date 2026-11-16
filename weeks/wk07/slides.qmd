@@ -25,7 +25,7 @@ st313:
   register: 1
   segments:                        # sums to 80: 76 of material and 4 of slack; production 21 (26%)
     # opener: 4
-    - {label: "what you brought: the 5 -> 7 task; each rule's two errors and who pays", minutes: 4, mode: production, retrieves: [S5]}
+    - {label: "warm-up: the 5 -> 7 task restated; each rule's two errors and who pays", minutes: 4, mode: production, retrieves: [S5]}
     # part 1, scores that sort people: 16
     - {label: "three scores that sort people: job ads with the same targeting and skewed audiences (Figure 8 shown live), the 2022 housing-ad settlement; DWP's fraud checks, referral and true discovery ratios by age and nationality; COMPAS in Broward County, the convention for Y, Y-hat, flagged or selected", minutes: 8, mode: exposition}
     - {label: "ProPublica's table read across the rows (FPR, FNR; Type I and II recalled); the vendor's reply read down the columns (PPV, NPV)", minutes: 5, mode: exposition, introduces: [CC-19], core: CC-19}
@@ -144,11 +144,13 @@ Part 4: Remedies and their costs
 
 Part 5: Where disparities come from
 
-## What you brought {minutes="3"}
+## Warm-up {minutes="3"}
 
 ::: {.notes}
 Two or three rules from the room. For each: the two ways it is wrong, and who pays for each. If someone brings a fraud flag, it leads into the second example.
 :::
+
+You were asked to bring one rule or score that sorts people into two groups (admit or reject, flag or clear, treat or not), with the two ways it can be wrong and who pays for each.
 
 ::: {.ask}
 For the rule you brought: who pays when it wrongly says yes? Who pays when it wrongly says no? Are they the same people?

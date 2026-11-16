@@ -183,7 +183,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#what-you-brought" id="toc-what-you-brought" class="nav-link" data-scroll-target="#what-you-brought">What you brought</a></li>
+  <li><a href="#warm-up" id="toc-warm-up" class="nav-link" data-scroll-target="#warm-up">Warm-up</a></li>
   <li><a href="#scores-that-sort-people" id="toc-scores-that-sort-people" class="nav-link" data-scroll-target="#scores-that-sort-people">Scores that sort people</a>
   <ul class="collapse">
   <li><a href="#who-sees-a-job-ad" id="toc-who-sees-a-job-ad" class="nav-link" data-scroll-target="#who-sees-a-job-ad">Who sees a job ad</a></li>
@@ -263,8 +263,9 @@ window.Quarto = {
 <p>A classifier has four rates. Two of them condition on what happened (the false positive and false negative rates); two condition on what the classifier said (the positive and negative predictive values). The two sides of the dispute reported the two kinds. The three families of statistical fairness criteria ask for one or another of these to be equal across groups. A four-line identity ties a group’s prevalence, its predictive value and its two error rates together, so that when two groups differ in prevalence, a classifier with the same positive predictive value in both (neither <span class="math inline">\(0\)</span> nor <span class="math inline">\(1\)</span>) has a different false positive rate or a different false negative rate in the two. The general version of that result, for scores rather than flags, is stated and not proved. What remains is a choice among criteria, and the reading’s three views of equality of opportunity say which criterion each kind of fairness supports. The choice is a value judgment that the arithmetic narrows and does not make.</p>
 <p>The usual remedies have costs of their own. Leaving the attribute out of a model does not keep it out of the predictions, and a cutoff per group gives the same score different meanings; a kidney-function equation that dropped race is a case where a cost was accepted on purpose. And none of the criteria can say how a disparity came about: the same table can come from different worlds.</p>
 </section>
-<section id="what-you-brought" class="level2">
-<h2 class="anchored" data-anchor-id="what-you-brought">What you brought</h2>
+<section id="warm-up" class="level2">
+<h2 class="anchored" data-anchor-id="warm-up">Warm-up</h2>
+<p>The task was one rule or score that sorts people into two groups, with the two ways it can be wrong and who pays for each.</p>
 <p>Every rule that sorts people into two groups can be wrong in two ways, and the two mistakes usually fall on different people. A fraud flag that fires wrongly costs the person flagged; a fraud flag that stays silent wrongly costs whoever the fraud is against. A screening test that says “disease” to a healthy person costs that person a course of treatment or a month of worry; a test that says “healthy” to a sick person costs that person the treatment they needed. Keep your own example in mind. Everything below is about what happens when the people on one side of a rule are, on average, more or less likely than the people on the other side to have the thing the rule is looking for.</p>
 </section>
 <section id="scores-that-sort-people" class="level2">
