@@ -53,7 +53,7 @@ st313:
     - {label: "dark: intersectionality as an interaction term (Yang, Loftus and Stoyanovich)", minutes: 1, mode: exposition, results: [R58]}
     # close: 8
     - {label: "hiring and maternity leave, answered individually: classify three paths; what each fair predictor removes; leave open to fathers", minutes: 6, mode: production, item: W08-I1}
-    - {label: "lenses B, E, F (no slide on the next week: not yet planned, convenor 15 November)", minutes: 2, mode: exposition}
+    - {label: "lenses: data selection, ownership, leverage (no slide on the next week: not yet planned, convenor 15 November)", minutes: 2, mode: exposition}
     # slack: 4
     - {label: "slack: questions and overrun", minutes: 4, mode: exposition}
   history: []
@@ -350,7 +350,7 @@ QUESTION: what justifies holding U fixed; what evidence for X = 2A + U?
 
 Expected: holding U assumes gender does not shape aggression (no arrow A -> U); 2A + U assumes one additive shift for everyone, and U is never observed, so data on A and X alone cannot check it. Arrows and equations: claims about the world. Which effects count: judgment.
 
-The lens "What can be changed, and how?": what is held fixed, and is that realistic?
+Lens: Leverage. What is held fixed, and is that realistic?
 :::
 
 ::: {.ask}
@@ -436,11 +436,7 @@ $$
 $$
 
 ::: {.leave}
-$$
-Y(0, M(0)) \;\xrightarrow{\ \text{NDE}\ }\; Y(1, M(0)) \;\xrightarrow{\ \text{NIE}\ }\; Y(1, M(1))
-$$
-
-First change $A$ with mileage held at $M(0)$, then change mileage with $A$ held at $1$. In any model, the two steps add up to the TE.
+Change gender first, keeping mileage where it would have been; then change mileage, keeping gender at its new value. In any model, the two steps add up to the TE.
 :::
 
 ## In the linear model {minutes="4"}
@@ -474,7 +470,7 @@ With no interaction, the indirect effect is the product of the coefficients alon
 ::: {.notes}
 Point: the NDE needs Y(1, M(0)), which nobody observes. The tempting substitute, regressing on A and M, holds mileage fixed in the data, not by intervention.
 With Z: at equal mileage a woman is more likely to drive for work, so the coefficient on A comes out above gamma, the direct effect.
-Lens "What can be changed, and how?".
+Lens: Leverage.
 :::
 
 $Y(1, M(0))$ is not an observable outcome: the model supplies it.
@@ -550,7 +546,7 @@ Chiappa (2019), "Path-Specific Counterfactual Fairness," *Proceedings of the AAA
 ## The premiums compared
 
 ::: {.notes}
-Each rule shifted by a constant to collect the average claim, £175 a policy; a constant keeps both fairness properties. Gaps: the TE, the NIE, zero. The lens "You have to choose".
+Each rule shifted by a constant to collect the average claim, £175 a policy; a constant keeps both fairness properties. Gaps: the TE, the NIE, zero. Lens: Ownership.
 :::
 
 ```{r premiums, fig.height=2.1, fig.alt="Dot chart of average premiums in hundreds of pounds a year, each rule collecting 1.75 on average. Full prediction: men 2.50, women 1.00. Path-specific: men 2.25, women 1.25. Counterfactually fair: men 1.75, women 1.75."}
@@ -754,6 +750,6 @@ draw_dag(ml, data.frame(from = c("A: gender", "maternity\nleave", "maternity\nle
 Each lens, what it referred to this week. Nothing on the next week: it is not planned yet.
 :::
 
-- **Who is in the data?** Each driver once, with one gender. $Y(1, M(0))$ is not observable.
-- **You have to choose, so choose, and defend it.** Which paths are fair; the level of the premium; unaware or counterfactually fair.
-- **What can be changed, and how?** Held fixed: aggression for the counterfactual driver, mileage at $M(0)$. Equal mileage in the data is not mileage held fixed.
+- **Data selection.** Who is in the data? Each driver once, with one gender. $Y(1, M(0))$ is not observable.
+- **Ownership.** You have to choose, so choose, and defend it. Which paths are fair; the level of the premium; unaware or counterfactually fair.
+- **Leverage.** What can be changed, and how? Held fixed: aggression for the counterfactual driver, mileage at $M(0)$. Equal mileage in the data is not mileage held fixed.

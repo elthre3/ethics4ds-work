@@ -430,16 +430,10 @@ $$
 
 The **natural direct effect** changes $A$ with mileage held at the value
 it would have taken under $A = 0$. The **natural indirect effect** holds
-$A$ at $1$ and changes mileage from $M(0)$ to $M(1)$. The two are steps
-in a chain through the middle term $Y(1, M(0))$:
-
-$$
-Y(0, M(0)) \;\xrightarrow{\ \text{NDE}\ }\; Y(1, M(0)) \;\xrightarrow{\ \text{NIE}\ }\; Y(1, M(1)) .
-$$
-
-First change $A$ with mileage held at $M(0)$, then change mileage with
-$A$ held at its new value, $1$. The second step starts where the first
-ends, so the two add up to the total effect. No model was used, so
+$A$ at $1$ and changes mileage from $M(0)$ to $M(1)$. In words: change
+gender first, keeping mileage where it would have been; then change
+mileage, keeping gender at its new value. The second step starts where
+the first ends, at $Y(1, M(0))$, so the two add up to the total effect. No model was used, so
 $\text{TE} = \text{NDE} + \text{NIE}$ in any model where the
 expectations exist.
 
@@ -900,19 +894,19 @@ model, each effect of one attribute is stated at a level of the other.
 
 ## Lenses
 
-Who is in the data? Each driver is in the data once, with one value of
+**Data selection.** Who is in the data? Each driver is in the data once, with one value of
 the attribute. The same driver with the other value, and $Y(1, M(0))$,
 are not observable: the model fills them in by abduction. A
 counterfactual criterion is a statement about people the insurer has
 never observed, and it is only as good as the model that supplies them.
 
-You have to choose, so choose, and defend it. Which paths are fair;
+**Ownership.** You have to choose, so choose, and defend it. Which paths are fair;
 the level of each premium, and so which group pays toward the other's claims; whether to price
 without the attribute, as the law requires, or with it, as any
 counterfactually fair price that depends on the car does in the red car
 world. Given a choice, the criteria give its consequences.
 
-What can be changed, and how? What things are considered "controlled
+**Leverage.** What can be changed, and how? What things are considered "controlled
 for" or "held fixed," and is that realistic? Abduction holds $U$ fixed
 for the counterfactual driver, which assumes the model's $U$ is a
 property of the person that would not change with the attribute. The
