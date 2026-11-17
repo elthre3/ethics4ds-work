@@ -23,8 +23,9 @@ st313:
   week: 08
   session: lecture
   register: 1
-  segments:                        # sums to 80: 76 of material and 4 of slack; production 32 (40%)
-    # opener: 4
+  segments:                        # sums to 80: 77 of material and 3 of slack; production 32 (40%)
+    # opener: 5
+    - {label: "the six lenses by name and question, each ending and why? (convenor, 17 November)", minutes: 1, mode: exposition}
     - {label: "warm-up: the 7 -> 8 task restated, then drawn as arrows; which arrow the judgment is about", minutes: 4, mode: production}
     # part 1, the red car: 21
     - {label: "Test-Achats (press release; Commission guidelines); the red car graph A -> X <- U -> Y (ms4ds 3.4.1, Kusner et al. scenario 1); fairness through unawareness as the model's simplification", minutes: 5, mode: exposition}
@@ -54,8 +55,8 @@ st313:
     # close: 8
     - {label: "hiring and maternity leave, answered individually: classify three paths; what each fair predictor removes; leave open to fathers", minutes: 6, mode: production, item: W08-I1}
     - {label: "lenses: data selection, ownership, leverage (no slide on the next week: not yet planned, convenor 15 November)", minutes: 2, mode: exposition}
-    # slack: 4
-    - {label: "slack: questions and overrun", minutes: 4, mode: exposition}
+    # slack: 3
+    - {label: "slack: questions and overrun", minutes: 3, mode: exposition}
   history: []
   complications: []
   retrieves: [S1, S3, S6]
@@ -170,16 +171,31 @@ stopifnot(abs(NDE + 0.5) < 1e-12, abs(NIE + 1) < 1e-12, abs(TE + 1.5) < 1e-12,
           isTRUE(all.equal(prem$level, c(2.5, 1.0, 2.25, 1.25, 1.75, 1.75))))
 ```
 
+## The lenses {minutes="1"}
+
+::: {.notes}
+The lenses now have names. This week: Data selection, Ownership, Leverage.
+:::
+
+- **Goal selection.** What are we optimizing or predicting?
+- **Data selection.** Who is in the data?
+- **Honest reporting.** Which comparison gets reported?
+- **Justice.** Who bears the error?
+- **Ownership.** You have to choose, so choose, and defend it.
+- **Leverage.** What can be changed, and how?
+
+Each ends with the same two words: *and why?*
+
 ## {.inverse}
 
 ::: {.notes}
-Deck estimate 80: title 1, warm-up 4, the red car 21, direct and indirect effects 16, two fair predictors 19, luck and responsibility 11, maternity-leave item 6, lenses 2. Dark = rush or skip.
+Deck estimate 80: title 1, the lenses 1, warm-up 4, the red car 21, direct and indirect effects 16, two fair predictors 19, luck and responsibility 11, maternity-leave item 6, lenses this week 1. Dark = rush or skip.
 
 Questions before the reveal: her price had she been a man (Part 1); the effect not through mileage (Part 2); removing gender along one path (Part 3). Protected: holding aggression fixed (Part 1).
 
 Cut order: (1) "Mediation with an interaction"; (2) "Intersectionality"; (3) "Holding a mediator fixed" to its first two lines; (4) the maternity-leave item's third question. Do not cut the written commitment, the computation, the questions above, the comparison of premiums, your own premium, the two-mediators question, or the item's first two questions.
 
-Pace: 0:05 Part 1; 0:26 Part 2; 0:42 Part 3; 1:01 Part 4; 1:12 maternity-leave item; 1:18 lenses; 1:20 end.
+Pace: 0:06 Part 1; 0:27 Part 2; 0:43 Part 3; 1:02 Part 4; 1:13 maternity-leave item; 1:19 lenses; 1:20 end.
 :::
 
 ### Week 8
@@ -744,7 +760,7 @@ draw_dag(ml, data.frame(from = c("A: gender", "maternity\nleave", "maternity\nle
 :::
 ::::
 
-## Lenses this week
+## Lenses this week {minutes="1"}
 
 ::: {.notes}
 Each lens, what it referred to this week. Nothing on the next week: it is not planned yet.

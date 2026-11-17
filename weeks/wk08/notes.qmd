@@ -894,6 +894,18 @@ model, each effect of one attribute is stated at a level of the other.
 
 ## Lenses
 
+The six lenses, by name:
+
+- **Goal selection.** What are we optimizing or predicting?
+- **Data selection.** Who is in the data?
+- **Honest reporting.** Which comparison gets reported?
+- **Justice.** Who bears the error?
+- **Ownership.** You have to choose, so choose, and defend it.
+- **Leverage.** What can be changed, and how?
+
+Each ends with the same two words: *and why?* Three of them apply to
+this week's material.
+
 **Data selection.** Who is in the data? Each driver is in the data once, with one value of
 the attribute. The same driver with the other value, and $Y(1, M(0))$,
 are not observable: the model fills them in by abduction. A
