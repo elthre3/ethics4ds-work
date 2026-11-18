@@ -251,6 +251,8 @@ window.Quarto = {
   <li><a href="#moral-luck" id="toc-moral-luck" class="nav-link" data-scroll-target="#moral-luck">Moral luck</a></li>
   <li><a href="#luck-egalitarianism" id="toc-luck-egalitarianism" class="nav-link" data-scroll-target="#luck-egalitarianism">Luck egalitarianism</a></li>
   <li><a href="#a-mediator-shaped-by-the-attribute" id="toc-a-mediator-shaped-by-the-attribute" class="nav-link" data-scroll-target="#a-mediator-shaped-by-the-attribute">A mediator shaped by the attribute</a></li>
+  <li><a href="#permissions-with-a-time-stamp" id="toc-permissions-with-a-time-stamp" class="nav-link" data-scroll-target="#permissions-with-a-time-stamp">Permissions with a time stamp</a></li>
+  <li><a href="#which-arrows-should-count" id="toc-which-arrows-should-count" class="nav-link" data-scroll-target="#which-arrows-should-count">Which arrows should count?</a></li>
   <li><a href="#a-framework-and-a-criterion" id="toc-a-framework-and-a-criterion" class="nav-link" data-scroll-target="#a-framework-and-a-criterion">A framework and a criterion</a></li>
   <li><a href="#intersectionality" id="toc-intersectionality" class="nav-link" data-scroll-target="#intersectionality">Intersectionality</a></li>
   </ul></li>
@@ -696,6 +698,57 @@ M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + \delta A M + U_Y ,
 </div>
 </div>
 </section>
+<section id="permissions-with-a-time-stamp" class="level3">
+<h3 class="anchored" data-anchor-id="permissions-with-a-time-stamp">Permissions with a time stamp</h3>
+<p>A fairness criterion that conditions on a variable <span class="math inline">\(W\)</span>, or allows <span class="math inline">\(A\)</span>’s influence along paths through <span class="math inline">\(W\)</span>, works as a permission: it accepts whatever group disparity <span class="math inline">\(W\)</span> already has. Every variable is determined at some point in a person’s life, so each criterion has a <strong>temporal frontier</strong>, the latest variable it allows. On a hiring timeline, <span class="math inline">\(A\)</span>, then qualifications <span class="math inline">\(X\)</span>, then job performance <span class="math inline">\(Y\)</span>, then the decision <span class="math inline">\(D\)</span>, the frontiers fall into rough tiers. Demographic parity and counterfactual fairness allow nothing downstream of <span class="math inline">\(A\)</span>, the deep tier. Path-specific fairness and conditional statistical parity allow chosen mediators such as <span class="math inline">\(X\)</span>, the mid tier. Equality of opportunity conditions on the outcome <span class="math inline">\(Y\)</span> itself, the shallow tier. The heuristic is that a later frontier lets more accumulated history count as justified. The classification and the results below are from Loftus (manuscript in preparation, 2026), which extends a 2023 workshop paper.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notes_files/figure-html/td_timeline_notes-1.png" class="img-fluid figure-img" alt="A timeline of a hiring decision drawn as a causal graph: A points into X, qualifications, and with a dashed arrow into Y, job performance; X points into Y, and Y into D, the decision. Vertical dotted lines mark three frontiers: deep at A (demographic parity, counterfactual fairness), mid at X (path-specific fairness, conditional statistical parity), shallow at Y (equality of opportunity)." width="624"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>How much disparity a criterion lets through has a sharp bound for conditional statistical parity. Among decisions that use <span class="math inline">\(W\)</span>, the largest gap in decision rates between the two groups is the total-variation distance between the distributions of <span class="math inline">\(W\)</span> in the two groups. That distance equals <span class="math inline">\(2 \times \text{acc} - 1\)</span>, where acc is the best accuracy with which <span class="math inline">\(A\)</span> can be guessed from <span class="math inline">\(W\)</span> when the two groups are equally likely. A criterion permits as much disparity as <span class="math inline">\(W\)</span> reveals about the group.</p>
+<p>The timeline alone does not decide. If the criterion allows everything up to a time, moving the frontier later can only add information, and the permitted disparity never falls. If it allows only the latest variable, it can fall: a disparity can fade as it passes through noisy mediators, or be renewed when <span class="math inline">\(A\)</span> has a new direct effect at a later stage, as the dashed arrow above. The same students in the law-school data (LSAC), followed through family income, college GPA, LSAT and law-school GPA, show the difference between causal structures:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notes_files/figure-html/td_lsac_notes-1.png" class="img-fluid figure-img" alt="Line chart of the largest group gap a criterion can permit when it conditions on everything up to each stage, for the same law students: family income, college GPA, LSAT, law-school GPA. By race it rises at every stage, from 0.21 to 0.36. By sex it rises once, from 0.04 to 0.11, then stays near 0.10." width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>By race (White and non-White, as the open copy of the data records it), the permitted gap rises at every stage, from <span class="math inline">\(0.21\)</span> to <span class="math inline">\(0.36\)</span>. By sex it rises once, from <span class="math inline">\(0.04\)</span> to <span class="math inline">\(0.11\)</span>, and then stays near <span class="math inline">\(0.10\)</span>; the small fall afterwards is within sampling noise. Same timeline, different causal structure, different answer. These are illustrations from one manuscript, not established findings.</p>
+<p>The variables used as justifiers are measurements: arrest records, test scores, performance ratings. A measurement can contain a direct effect of <span class="math inline">\(A\)</span>, as arrest records can contain differential policing, and the data alone cannot say how much. On the COMPAS data the race gap in the risk score is <span class="math inline">\(1.64\)</span> deciles; controlling for prior arrests reduces it to <span class="math inline">\(1.19\)</span>, but <span class="math inline">\(1.19\)</span> is the direct effect only if the gap in prior arrests is itself race-neutral.</p>
+</section>
+<section id="which-arrows-should-count" class="level3">
+<h3 class="anchored" data-anchor-id="which-arrows-should-count">Which arrows should count?</h3>
+<p>Causal structure says what a criterion permits; whether it should permit it depends on the moral character of each path from <span class="math inline">\(A\)</span>. The manuscript proposes three types, as a diagnostic:</p>
+<ul>
+<li><strong>Injustice-transmitting</strong>: the effect reflects discrimination or structural disadvantage, such as unequal schooling. Blocking it reduces unfairness.</li>
+<li><strong>Justified mediation</strong>: the effect runs through a neutral mechanism, such as a person’s own choices or a legitimate signal. Allowing it is fine.</li>
+<li><strong>Injustice-responsive</strong>: the effect records harm or need that the decision should respond to, as in allocating care by health need (Obermeyer et al., 2019). Blocking it is itself a harm.</li>
+</ul>
+<p>The moral luck of the lecture gives a way to read each mediator: how much control did the person have over it? Choices are closest to what the control principle allows us to judge, and are the natural home of justified mediation. A neighborhood, a school’s quality or how heavily an area is policed are circumstantial luck, luck “in the circumstances in which one finds oneself” in Nelkin’s entry, and often transmit injustice. Traits and dispositions shaped before any choice are constitutive luck, luck in who one is. A later frontier sweeps in more choice-like mediators, and also everything luck did to the earlier ones: qualifications at a given time already contain the circumstances before it. This reading is an extension for this course; the manuscript does not discuss moral luck.</p>
+<p>Control is not the same as justice. Something outside a person’s control is not automatically an injustice, and something a person chose may have been shaped by unjust circumstances; this is the worry that constitutive luck undermines the control principle. One variable can carry both kinds of effect, and the measurement problem above says the data cannot separate them.</p>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pick one mediator, such as college GPA, prior arrests or credit history. How much of it was in the person’s control? Would you condition on it?</p>
+</div>
+</div>
+<p>The same causal graph can call for opposite criteria, depending on how each arrow is read. The mathematics says what a choice commits you to.</p>
+</section>
 <section id="a-framework-and-a-criterion" class="level3">
 <h3 class="anchored" data-anchor-id="a-framework-and-a-criterion">A framework and a criterion</h3>
 <p>ms4ds, after showing what the unaware model does in the red car world: “But there may be a deontological argument in favor of functional independence, including empirical evidence that people generally believe a process with functional independence is more fair” (<a href="https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models">section 3.4.1</a>). A deontologist may hold that a decision should not take a protected attribute as an input, whatever the consequences. In the red car world that rule produces a price that is not counterfactually fair, unless it ignores the car too, and a counterfactually fair price that depends on the car breaks it. Since December 2012, EU law forbids the second for an individual’s premium. Whether a framework implies a criterion, and whether the two can disagree like this, is a question for the class.</p>
@@ -751,7 +804,10 @@ Y = \gamma_1 A_1 + \gamma_2 A_2 + \delta A_1 A_2 + \dots ,
 <h3 class="anchored" data-anchor-id="cited-in-the-text-and-not-assigned">Cited in the text and not assigned</h3>
 <p>Court of Justice of the European Union, Press Release No 12/11, “Taking the gender of the insured individual into account as a risk factor in insurance contracts constitutes discrimination”, Luxembourg, 1 March 2011, on the judgment in Case C-236/09, <em>Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres</em>, <a href="https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf" class="uri">https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf</a>. I have read the press release, not the judgment.</p>
 <p>European Commission, “Guidelines on the application of Council Directive 2004/113/EC to insurance, in the light of the judgment of the Court of Justice of the European Union in Case C-236/09 (Test-Achats)”, 2012/C 11/01, <em>Official Journal of the European Union</em> C 11, 13 January 2012, 1–11, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL" class="uri">https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL</a>: paragraphs 5, 14 and 17 and footnote 3 to paragraph 17.</p>
-<p>Nelkin, Dana K., “Moral Luck”, <em>The Stanford Encyclopedia of Philosophy</em>, first published 26 January 2004, substantive revision 20 January 2025, <a href="https://plato.stanford.edu/entries/moral-luck/" class="uri">https://plato.stanford.edu/entries/moral-luck/</a>: the opening sentence.</p>
+<p>Loftus, Joshua R., <em>Permitted Disparity and the Limits of Temporal Depth</em>, manuscript in preparation, 2026: the temporal frontier and its tiers, the total-variation ceiling, the nested and singleton frontiers, the LSAC and COMPAS figures, and the three types of path. The LSAC values were rerun from the manuscript’s code on the open copy of the data.</p>
+<p>Loftus, Joshua R., “It’s About Time: Fairness and Temporal Depth”, NeurIPS 2023 Workshop on Algorithmic Fairness through the Lens of Time, <a href="https://neurips.cc/virtual/2023/78068" class="uri">https://neurips.cc/virtual/2023/78068</a>.</p>
+<p>Obermeyer, Ziad, Brian Powers, Christine Vogeli and Sendhil Mullainathan, “Dissecting racial bias in an algorithm used to manage the health of populations”, <em>Science</em> 366(6464), 2019, 447–453, <a href="https://doi.org/10.1126/science.aax2342" class="uri">https://doi.org/10.1126/science.aax2342</a>.</p>
+<p>Nelkin, Dana K., “Moral Luck”, <em>The Stanford Encyclopedia of Philosophy</em>, first published 26 January 2004, substantive revision 20 January 2025, <a href="https://plato.stanford.edu/entries/moral-luck/" class="uri">https://plato.stanford.edu/entries/moral-luck/</a>: the opening sentence; section 1, on circumstantial and constitutive luck.</p>
 
 
 </section>
