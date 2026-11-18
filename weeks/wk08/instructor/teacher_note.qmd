@@ -1,0 +1,92 @@
+---
+title: "Teacher note: week 8 class"
+subtitle: "For class teachers"
+format:
+  html:
+    toc: false
+    embed-resources: true
+---
+
+## Keep or rush
+
+In class order. Planned total 64 of the 80 minutes. The class has two
+halves: causal structure first, then frameworks and luck. It ends on
+luck: protect five minutes for discussion 4.
+
+| Item | Min | | If short |
+|---|---:|---|---|
+| Discussion 1, warm-up: the decision each student brought, as a graph; how the route judged fair could itself be unfair | 8 | Rush | Question 2 only, with one example from the room |
+| From memory: what to hold fixed | 6 | Rush | The mediator row only, then the firm's sentence |
+| Problem 1: a pay gap with an interaction, with feedback | 16 | Keep | (a) and (b), then say (c) and (e): the employer's $-2.6$ and the union's $-3$ are both correct, at different reference worlds |
+| Discussion 2: is the graph right? | 12 | Keep | Questions 1 and 3 |
+| Discussion 3: a framework and a criterion | 12 | Keep | Question 2, the red car, for the whole room |
+| Discussion 4: luck | 10 | Keep five | Question 1, the 2024 prompt, then question 3 |
+
+: {tbl-colwidths="[40,6,12,42]"}
+
+Minimum class, about 45 minutes: problem 1 (a) and (b), discussion 2's
+questions 1 and 3, discussion 3's question 2 and discussion 4's
+question 1. Spare minutes go to the coding under "If there is time"
+(about 25 minutes).
+
+## If you read on
+
+How it runs
+
+- The exercises at the top of the sheet rederive or apply the lecture's
+  results; students do them on their own time and the class does not
+  work them. Open the
+  [complete class sheet](https://ethics4ds.com/teachers/wk08/class_complete.html)
+  on screen: green boxes are hints, opened in order after a few minutes;
+  blue boxes are answers and example answers.
+- The sheet has no task for next time: the next week is not yet
+  planned, and its task comes with its readings.
+- Problem 1 extends the lecture's slide on mediation with an
+  interaction, with new numbers. The lecture defined
+  $\text{NDE}_a$ (mediator held at $M(a)$) and $\text{NIE}_a$ ($A$
+  held at $a$), and said the decomposition holds with the reference
+  levels paired. (e) is the point: two correct direct effects, and
+  someone chose which to report.
+- Discussion 2's lesson, which the room should reach rather than be
+  told: causal structure decides the answers to fairness questions; the
+  structure is usually uncertain; a decision still has to be made. The
+  two analysts' numbers are on the sheet, so the discussion is about
+  what they mean, not arithmetic. The graph is the lecture's slide on
+  holding a mediator fixed, where driving for work makes mileage a
+  collider; the notes work the numbers ("Two graphs, the same data").
+  The counterfactually fair premium is the same under both graphs; the
+  path-specific premium is not. Box's line is a section heading in his
+  1979 chapter.
+- Discussion 3 takes up ms4ds's deontological argument for not using
+  the attribute, which the lecture left for the class. The groups
+  should argue for a criterion, not recite the frameworks.
+- Discussion 4's first question is a prompt from the 2024 class.
+- Every item ends with a question about who the error falls on, who
+  gains from the number reported, or who the choice could be justified
+  to. Those questions are the point of the class. A group that has the
+  number and skips the question has not finished; ask it.
+
+What students should see
+
+- Problem 1: TE $-4.6$; $\text{NDE}_0 = -3$ with $\text{NIE}_1 =
+  -1.6$; $\text{NDE}_1 = -2.6$ with $\text{NIE}_0 = -2$; the mixed pair
+  $-5$, off by $\alpha\delta = 0.4$; the coefficient on $A$ with the
+  interaction, $-1$, is the direct effect at zero experience.
+- Discussion 2: the path-specific gap is £143 under the first analyst's
+  graph and £100 under the second's; the counterfactually fair gap is
+  zero under both.
+- Coding, if reached: TE $-1.5$, NDE $-0.5$, NIE $-1$ exactly; the
+  coefficient on $A$ near $-0.08$ without $Z$ (the population value is
+  $-0.07$) and near $-0.5$ with it.
+
+Where they get stuck
+
+- In problem 1, using $E[M] = 9$ for everyone instead of $M(0)$ and
+  $M(1)$; and reading (d)'s $-5$ as a mistake in arithmetic rather than
+  two steps that do not chain.
+- In the table, treating "control for more" as safer: a mediator held
+  fixed removes part of the effect, and a collider opens a path.
+- In discussion 2, concluding that because the graph is uncertain no
+  premium can be defended. Question 3 asks them to decide anyway.
+- In discussion 3, matching each framework to a criterion as if it were
+  a quiz. Ask for the best case, then the case where it breaks.

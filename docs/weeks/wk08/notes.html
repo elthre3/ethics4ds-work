@@ -242,6 +242,7 @@ window.Quarto = {
   <li><a href="#the-path-specific-premium" id="toc-the-path-specific-premium" class="nav-link" data-scroll-target="#the-path-specific-premium">The path-specific premium</a></li>
   <li><a href="#the-comparison" id="toc-the-comparison" class="nav-link" data-scroll-target="#the-comparison">The comparison</a></li>
   <li><a href="#the-level" id="toc-the-level" class="nav-link" data-scroll-target="#the-level">The level</a></li>
+  <li><a href="#two-graphs-the-same-data" id="toc-two-graphs-the-same-data" class="nav-link" data-scroll-target="#two-graphs-the-same-data">Two graphs, the same data</a></li>
   <li><a href="#whose-judgment" id="toc-whose-judgment" class="nav-link" data-scroll-target="#whose-judgment">Whose judgment</a></li>
   <li><a href="#dropping-the-attribute-and-refitting" id="toc-dropping-the-attribute-and-refitting" class="nav-link" data-scroll-target="#dropping-the-attribute-and-refitting">Dropping the attribute and refitting</a></li>
   <li><a href="#with-an-interaction" id="toc-with-an-interaction" class="nav-link" data-scroll-target="#with-an-interaction">With an interaction</a></li>
@@ -540,6 +541,11 @@ M - \alpha A\)</span>, and the premium</p>
 Y_{\text{CF}} = \gamma \cdot 0 + \beta\, M(0) = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M) .
 \]</span></p>
 <p>It is a function of <span class="math inline">\(U_M\)</span> alone, and <span class="math inline">\(U_M\)</span> is not a descendant of <span class="math inline">\(A\)</span>, so it is counterfactually fair by Lemma 1. It takes <span class="math inline">\(A\)</span> as an input: with <span class="math inline">\(\alpha = -4\)</span>, a woman is priced as if she drove <span class="math inline">\(4{,}000\)</span> more miles than she does. Every driver, woman or man, is priced as the full model would price the same person had they been a man, so the average premium is the same in both groups.</p>
+<p>The premium needs <span class="math inline">\(\alpha\)</span>, and an insurer has an estimate. With <span class="math inline">\(\hat\alpha\)</span> in its place,</p>
+<p><span class="math display">\[
+\beta\,(M - \hat\alpha A) = \beta\,(\mu_0 + U_M) + \beta\,(\alpha - \hat\alpha)\,A ,
+\]</span></p>
+<p>which differs from the counterfactually fair premium by <span class="math inline">\(\beta(\alpha - \hat\alpha)\)</span> for every woman and not at all for men. It is counterfactually fair only if <span class="math inline">\(\hat\alpha = \alpha\)</span>. An estimate from the insurer’s own customers, who chose to buy from it, can be off in a direction that depends on who chose: with <span class="math inline">\(\hat\alpha = -2\)</span>, women are priced as if they drove <span class="math inline">\(2{,}000\)</span> more miles rather than <span class="math inline">\(4{,}000\)</span>, and pay <span class="math inline">\(0.25 \times (-4 + 2) = -0.5\)</span>, or £50, less than the premium intended. Who is in the data decides who pays for the error.</p>
 </section>
 <section id="the-path-specific-premium" class="level3">
 <h3 class="anchored" data-anchor-id="the-path-specific-premium">The path-specific premium</h3>
@@ -625,6 +631,40 @@ Y_{\text{PS}} - Y_{\text{CF}} = \alpha\beta A .
 </table>
 <p>Now the choice moves money between groups: men pay least under the counterfactually fair premium and women under the full one, and the insurer collects the same either way.</p>
 <p>The level is a choice the definitions do not make. Pricing everyone as the full model would price them had they been women, <span class="math inline">\(\gamma + \beta(\mu_0 + \alpha + U_M)\)</span>, is counterfactually fair too, and differs from the premium above by a constant. The two groups’ average counterfactually fair premiums are equal here because <span class="math inline">\(U_M\)</span> is independent of <span class="math inline">\(A\)</span> in this model. In a model where a non-descendant of <span class="math inline">\(A\)</span> is associated with <span class="math inline">\(A\)</span>, a counterfactually fair premium can differ between groups.</p>
+</section>
+<section id="two-graphs-the-same-data" class="level3">
+<h3 class="anchored" data-anchor-id="two-graphs-the-same-data">Two graphs, the same data</h3>
+<p>The premiums above were computed from the model as written. An insurer has records of gender, mileage and claims, and has to choose a graph before it can compute anything. Suppose the world is the one on the slide about holding a mediator fixed: a quarter of drivers drive for work (<span class="math inline">\(Z = 1\)</span>), which adds <span class="math inline">\(4{,}000\)</span> miles and, on top of what those miles add, £100 of claims; the insurer does not record it:</p>
+<p><span class="math display">\[
+M = 9 + 4Z - 4A + U_M, \qquad Y = -0.5A + 0.25M + Z + U_Y ,
+\]</span></p>
+<p>with <span class="math inline">\(\operatorname{Var}(U_M) = 4\)</span> and half the drivers women. Men still drive <span class="math inline">\(10{,}000\)</span> miles on average. The direct effect is <span class="math inline">\(\gamma = -0.5\)</span> and the effect through mileage <span class="math inline">\(\alpha\beta = -1\)</span>, as before.</p>
+<p>An analyst who draws the lecture’s graph, without <span class="math inline">\(Z\)</span>, fits it by regressing claims on gender and mileage. The coefficients are the world’s plus the effect of <span class="math inline">\(Z\)</span> times the coefficients of <span class="math inline">\(Z\)</span> on <span class="math inline">\(A\)</span> and <span class="math inline">\(M\)</span> in the same regression, which are <span class="math inline">\(3/7\)</span> and <span class="math inline">\(3/28\)</span> (<span class="math inline">\(\operatorname{Var}(M) = 11\)</span>, <span class="math inline">\(\operatorname{Cov}(A, M) = -1\)</span>, <span class="math inline">\(\operatorname{Cov}(Z, M) = 0.75\)</span>):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">direct</th>
+<th style="text-align: right;">through mileage</th>
+<th style="text-align: right;">total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">graph without <span class="math inline">\(Z\)</span>, fitted</td>
+<td style="text-align: right;"><span class="math inline">\(-0.07\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(-1.43\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">graph with <span class="math inline">\(Z\)</span> (the world)</td>
+<td style="text-align: right;"><span class="math inline">\(-0.5\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(-1.0\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The graph without <span class="math inline">\(Z\)</span> has an arrow between every pair of the three variables it records, so it fits any means, variances and covariances of those variables: the records alone cannot tell the two graphs apart. The path-specific premium differs between them. Fitted without <span class="math inline">\(Z\)</span>, it is <span class="math inline">\(0.357\,M\)</span>, and women pay £143 less than men on average; in the world, it is <span class="math inline">\(0.25\,M\)</span> plus the effect of driving for work, and the gap is £100. The counterfactually fair premium does not differ: it is a function of <span class="math inline">\(M - \alpha A\)</span>, which both graphs agree is a non-descendant of <span class="math inline">\(A\)</span>, and the least-squares premium on <span class="math inline">\(M - \alpha A\)</span> has slope <span class="math inline">\(0.357\)</span> under either. A criterion that removes every path from <span class="math inline">\(A\)</span> needs less of the graph than one that keeps some, and the price is that it removes the path through mileage too. With the structure uncertain and a premium to set, choosing between the two is a decision about which error to risk.</p>
 </section>
 <section id="whose-judgment" class="level3">
 <h3 class="anchored" data-anchor-id="whose-judgment">Whose judgment</h3>

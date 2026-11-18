@@ -9,3 +9,5 @@ Since December 2012 an insurer in the European Union may not use gender to set a
 **Bring to the class:** one decision in which an attribute is used, or deliberately not used, with one route by which it could affect the outcome, and whether that route is fair.
 
 **Lecture:** [notes](weeks/wk08/notes.html) · [slides](weeks/wk08/slides.html)
+
+**Class:** [class sheet](weeks/wk08/class.html) ([.qmd](https://ethics4ds.com/weeks/wk08/class.qmd){download="class.qmd"})
