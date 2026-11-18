@@ -858,129 +858,6 @@ draw_dag(two_m, data.frame(from = c("A: gender", "M: mileage", "A: race", "M: pr
          boxes = TRUE, text_size = 3.5, xlim = c(-0.6, 3.6), ylim = c(-0.25, 1.05), strip_size = 12)
 ```
 
-### Permissions with a time stamp
-
-A fairness criterion that conditions on a variable $W$, or allows $A$'s
-influence along paths through $W$, works as a permission: it accepts
-whatever group disparity $W$ already has. Every variable is
-determined at some point in a person's life, so each criterion has a
-**temporal frontier**, the latest variable it allows. On a hiring
-timeline, $A$, then qualifications $X$, then job performance $Y$, then
-the decision $D$, the frontiers fall into rough tiers. Demographic
-parity and counterfactual fairness allow nothing downstream of $A$, the
-deep tier. Path-specific fairness and conditional statistical parity
-allow chosen mediators such as $X$, the mid tier. Equality of
-opportunity conditions on the outcome $Y$ itself, the shallow tier. The
-heuristic is that a later frontier lets more accumulated history count
-as justified. The classification and the results below are from Loftus
-(manuscript in preparation, 2026), which extends a 2023 workshop paper.
-
-```{r td_timeline_notes, echo=FALSE, warning=FALSE, fig.width=6.5, fig.height=2.6, fig.alt="A timeline of a hiring decision drawn as a causal graph: A points into X, qualifications, and with a dashed arrow into Y, job performance; X points into Y, and Y into D, the decision. Vertical dotted lines mark three frontiers: deep at A (demographic parity, counterfactual fairness), mid at X (path-specific fairness, conditional statistical parity), shallow at Y (equality of opportunity)."}
-tl <- data.frame(name = c("A", "X", "Y", "D"), x = c(0, 1.3, 2.6, 3.8), y = c(0.75, 0, 0, 0))
-draw_dag(tl, data.frame(from = c("A", "X", "A", "Y"), to = c("X", "Y", "Y", "D")),
-         dashed = "A Y", text_size = 5, xlim = c(-0.7, 4.3), ylim = c(-1.35, 1.1)) +
-  annotate("segment", x = c(0, 1.3, 2.6), xend = c(0, 1.3, 2.6), y = -0.35, yend = 1.05,
-           linetype = "dotted", color = "#414D6B", linewidth = 0.6) +
-  annotate("text", x = c(0, 1.3, 2.6), y = -0.75, size = 3.2, lineheight = 0.9,
-           label = c("deep\ndemographic parity,\ncounterfactual", "mid\npath-specific,\nconditional parity",
-                     "shallow\nequality of\nopportunity")) +
-  annotate("segment", x = -0.5, xend = 4.1, y = -1.25, yend = -1.25, color = "#414D6B",
-           arrow = arrow(length = unit(0.18, "cm"), type = "closed")) +
-  annotate("text", x = 4.1, y = -1.1, label = "time", hjust = 1, size = 3.2, color = "#414D6B")
-```
-
-How much disparity a criterion lets through has a sharp bound for
-conditional statistical parity. Among decisions that use $W$, the
-largest gap in decision rates between the two groups is the
-total-variation distance between the distributions of $W$ in the two
-groups. That distance equals $2 \times \text{acc} - 1$, where acc is the
-best accuracy with which $A$ can be guessed from $W$ when the two groups
-are equally likely. A criterion permits as much disparity as $W$ reveals
-about the group.
-
-The timeline alone does not decide. If the criterion allows everything
-up to a time, moving the frontier later can only add information, and
-the permitted disparity never falls. If it allows only the latest
-variable, it can fall: a disparity can fade as it passes through noisy
-mediators, or be renewed when $A$ has a new direct effect at a later
-stage, as the dashed arrow above. The same students in the law-school
-data (LSAC), followed through family income, college GPA, LSAT and
-law-school GPA, show the difference between causal structures:
-
-```{r td_lsac_notes, echo=FALSE, warning=FALSE, fig.width=6, fig.height=2.4, fig.alt="Line chart of the largest group gap a criterion can permit when it conditions on everything up to each stage, for the same law students: family income, college GPA, LSAT, law-school GPA. By race it rises at every stage, from 0.21 to 0.36. By sex it rises once, from 0.04 to 0.11, then stays near 0.10."}
-lsac <- data.frame(stage = factor(rep(c("family income", "college GPA", "LSAT", "law school GPA"), 2),
-                                  levels = c("family income", "college GPA", "LSAT", "law school GPA")),
-                   attribute = rep(c("race", "sex"), each = 4),
-                   tv = c(0.205, 0.238, 0.310, 0.358, 0.035, 0.111, 0.109, 0.099))
-ggplot(lsac, aes(stage, tv, color = attribute, group = attribute)) +
-  geom_line(linewidth = 0.8) + geom_point(size = 2.2) +
-  geom_text(data = subset(lsac, stage == "law school GPA"), aes(label = attribute),
-            hjust = -0.35, size = 3.8, show.legend = FALSE) +
-  scale_color_manual(values = c("#00204D", "#BCAF6F"), guide = "none") +
-  scale_y_continuous(limits = c(0, 0.4), breaks = c(0, 0.2, 0.4)) +
-  labs(x = NULL, y = "permitted gap") +
-  theme_minimal(base_size = 12) + theme(panel.grid.minor = element_blank())
-```
-
-By race (White and non-White, as the open copy of the data records it),
-the permitted gap rises at every stage, from $0.21$ to $0.36$. By sex it
-rises once, from $0.04$ to $0.11$, and then stays near $0.10$; the small
-fall afterwards is within sampling noise. Same timeline, different
-causal structure, different answer. These are illustrations from one
-manuscript, not established findings.
-
-The variables used as justifiers are measurements: arrest records, test
-scores, performance ratings. A measurement can contain a direct effect
-of $A$, as arrest records can contain differential policing, and the
-data alone cannot say how much. On the COMPAS data the race gap in the
-risk score is $1.64$ deciles; controlling for prior arrests reduces it
-to $1.19$, but $1.19$ is the direct effect only if the gap in prior
-arrests is itself race-neutral.
-
-### Which arrows should count?
-
-Causal structure says what a criterion permits; whether it should
-permit it depends on the moral character of each path from $A$. The
-manuscript proposes three types, as a diagnostic:
-
-- **Injustice-transmitting**: the effect reflects discrimination or
-  structural disadvantage, such as unequal schooling. Blocking it
-  reduces unfairness.
-- **Justified mediation**: the effect runs through a neutral mechanism,
-  such as a person's own choices or a legitimate signal. Allowing it is
-  fine.
-- **Injustice-responsive**: the effect records harm or need that the
-  decision should respond to, as in allocating care by health need
-  (Obermeyer et al., 2019). Blocking it is itself a harm.
-
-The moral luck of the lecture gives a way to read each mediator: how
-much control did the person have over it? Choices are closest to what
-the control principle allows us to judge, and are the natural home of
-justified mediation. A neighborhood, a school's quality or how heavily
-an area is policed are circumstantial luck, luck "in the circumstances
-in which one finds oneself" in Nelkin's entry, and often transmit
-injustice. Traits and dispositions shaped before any choice are
-constitutive luck, luck in who one is. A later frontier sweeps in more
-choice-like mediators, and also everything luck did to the earlier
-ones: qualifications at a given time already contain the circumstances
-before it. This reading is an extension for this course; the manuscript
-does not discuss moral luck.
-
-Control is not the same as justice. Something outside a person's
-control is not automatically an injustice, and something a person
-chose may have been shaped by unjust circumstances; this is the worry
-that constitutive luck undermines the control principle. One variable
-can carry both kinds of effect, and the measurement problem above says
-the data cannot separate them.
-
-::: {.callout-note .ask icon=false title="Before reading on, try this"}
-Pick one mediator, such as college GPA, prior arrests or credit history.
-How much of it was in the person's control? Would you condition on it?
-:::
-
-The same causal graph can call for opposite criteria, depending on how
-each arrow is read. The mathematics says what a choice commits you to.
-
 ### A framework and a criterion
 
 ms4ds, after showing what the unaware model does in the red car world:
@@ -1014,6 +891,93 @@ causal models for intersectional fairness in which, in their words,
 between sensitive attributes" (arXiv version, page 3), and keep main
 effects and second-order interactions in their examples. In such a
 model, each effect of one attribute is stated at a level of the other.
+
+### Permissions with a time stamp
+
+A fairness criterion that conditions on a variable $V$, or allows $A$'s
+influence along paths through $V$, works as a permission: it accepts
+whatever group disparity $V$ already has. Every variable is determined
+at some point in a person's life, so a criterion can be placed on a
+timeline by the latest variable it allows. On a hiring timeline, the
+attribute $A$, then qualifications $X$, then job performance $Y$, then
+the decision $D$, demographic parity and counterfactual fairness allow
+nothing after $A$. Path-specific fairness and conditional statistical
+parity allow chosen mediators such as $X$. Equality of opportunity
+conditions on the outcome $Y$ itself, and so, under this reading,
+essentially justifies all disparities. A criterion that allows later
+variables lets more accumulated history count as justified.
+
+```{r td_timeline_notes, echo=FALSE, warning=FALSE, fig.width=8, fig.height=3, fig.alt="A hiring timeline: A, then X (qualifications), then Y (job performance), then D (the decision), with arrows from A to X, X to Y, Y to D, and a dashed curved arrow from A to Y. Below it, three bars start at A and run later in time: demographic parity and counterfactual fairness allow nothing after A; path-specific fairness and conditional parity allow up to X; equality of opportunity allows up to Y."}
+nx <- c(A = 0, X = 2, Y = 4, D = 6)
+nodes <- data.frame(x = nx, y = 0, name = names(nx),
+                    sub = c("attribute", "qualifications", "performance", "decision"))
+bars <- data.frame(y = c(-1.2, -1.75, -2.3), xend = c(0, 2, 4),
+                   col = c("#00204D", "#414D6B", "#BCAF6F"),
+                   label = c("demographic parity, counterfactual fairness: nothing after A",
+                             "path-specific fairness, conditional parity: up to X",
+                             "equality of opportunity: up to Y"))
+ggplot() +
+  annotate("segment", x = c(0.28, 2.28, 4.28), xend = c(1.72, 3.72, 5.72), y = 0, yend = 0,
+           arrow = arrow(length = unit(0.22, "cm"), type = "closed"), linewidth = 0.6) +
+  annotate("curve", x = 0.2, xend = 3.8, y = 0.25, yend = 0.25, curvature = -0.25,
+           linetype = "dashed", linewidth = 0.6, arrow = arrow(length = unit(0.22, "cm"), type = "closed")) +
+  geom_point(data = nodes, aes(x, y), size = 13, shape = 21, fill = "white", stroke = 0.7) +
+  geom_text(data = nodes, aes(x, y, label = name), size = 5.5) +
+  geom_text(data = nodes, aes(x, y - 0.55, label = sub), size = 3.6, color = "#414D6B") +
+  geom_segment(data = bars, aes(x = 0, xend = xend, y = y, yend = y, color = col), linewidth = 3,
+               lineend = "round") +
+  geom_text(data = bars, aes(x = xend + 0.25, y = y, label = label), hjust = 0, size = 3.7) +
+  scale_color_identity() +
+  coord_cartesian(xlim = c(-0.4, 9.6), ylim = c(-2.5, 1.1), clip = "off") +
+  theme_void()
+```
+
+The dashed arrow is a direct effect of $A$ at a later stage. Whether
+the disparity a later variable has should count as justified depends on
+how it got there.
+
+### Which arrows should count?
+
+Causal structure says what a criterion permits; whether it should
+permit it depends on the moral character of each path from $A$. Three
+types, as a diagnostic rather than a settled theory:
+
+- **Injustice-transmitting**: the effect reflects discrimination or
+  structural disadvantage, such as unequal schooling. Blocking it
+  reduces unfairness.
+- **Justified mediation**: the effect runs through a neutral mechanism,
+  such as a person's own choices or a legitimate signal. Allowing it is
+  fine.
+- **Injustice-responsive**: the effect records harm or need that the
+  decision should respond to, as in allocating care by health need
+  (Obermeyer et al., 2019). Blocking it is itself a harm.
+
+The moral luck of the lecture gives a way to read each mediator: how
+much control did the person have over it? Choices are closest to what
+the control principle allows us to judge, and are the natural home of
+justified mediation. A neighborhood, a school's quality or how heavily
+an area is policed are circumstantial luck, luck "in the circumstances
+in which one finds oneself" in Nelkin's entry, and often transmit
+injustice. Traits and dispositions shaped before any choice are
+constitutive luck, luck in who one is. A criterion that allows later
+variables allows more choice-like mediators, and also everything luck
+did to the earlier ones: qualifications at a given time already contain
+the circumstances before it.
+
+Control is not the same as justice. Something outside a person's
+control is not automatically an injustice, and something a person
+chose may have been shaped by unjust circumstances; this is the worry
+that constitutive luck undermines the control principle. One variable
+can carry both kinds of effect, and data on the variable alone do not
+separate them.
+
+::: {.callout-note .ask icon=false title="Before reading on, try this"}
+Pick one mediator, such as college GPA, prior arrests or credit history.
+How much of it was in the person's control? Would you condition on it?
+:::
+
+The same causal graph can call for opposite criteria, depending on how
+each arrow is read.
 
 ## Lenses
 
@@ -1127,13 +1091,6 @@ Court of Justice of the European Union in Case C-236/09 (Test-Achats)",
 2012/C 11/01, *Official Journal of the European Union* C 11, 13 January
 2012, 1--11, <https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL>:
 paragraphs 5, 14 and 17 and footnote 3 to paragraph 17.
-
-Loftus, Joshua R., *Permitted Disparity and the Limits of Temporal
-Depth*, manuscript in preparation, 2026: the temporal frontier and its
-tiers, the total-variation ceiling, the nested and singleton frontiers,
-the LSAC and COMPAS figures, and the three types of path. The LSAC
-values were rerun from the manuscript's code on the open copy of the
-data.
 
 Loftus, Joshua R., "It's About Time: Fairness and Temporal Depth",
 NeurIPS 2023 Workshop on Algorithmic Fairness through the Lens of Time,
