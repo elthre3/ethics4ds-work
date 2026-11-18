@@ -23,7 +23,7 @@ st313:
   week: 08
   session: lecture
   register: 1
-  segments:                        # sums to 80: 77 of material and 3 of slack; production 32 (40%)
+  segments:                        # sums to 80: 80 of material and no slack; production 31 (39%). The three temporal-depth slides were added after the lecture (convenor, 18 November), from his brief; the deck estimate is 83 (title note)
     # opener: 5
     - {label: "the six lenses by name and question, each ending and why? (convenor, 17 November)", minutes: 1, mode: exposition}
     - {label: "warm-up: the 7 -> 8 task restated, then drawn as arrows; which arrow the judgment is about", minutes: 4, mode: production}
@@ -48,15 +48,16 @@ st313:
     - {label: "written: which premium for your own policy; the same without knowing your group", minutes: 2, mode: production, retrieves: [S6]}
     - {label: "whose judgment: Kusner et al. on Berkeley; fairmlbook p. 119; Nabi and Shpitser", minutes: 3, mode: exposition, retrieves: [S6]}
     - {label: "dark: mediation with an interaction; the four natural effects; paired reference levels (stretch)", minutes: 2, mode: exposition, results: [R57]}
-    # part 4, luck and responsibility: 10
+    # part 4, luck and responsibility: 13
     - {label: "moral luck (Nelkin, SEP) and the control principle (ms4ds 3.4.2); the middle view and insurance (fairmlbook pp. 84-85); luck egalitarianism (Lippert-Rasmussen); control is not a conditional probability (fairmlbook p. 92)", minutes: 4, mode: exposition}
-    - {label: "pairs: two mediators shaped by the attribute, gender -> mileage -> claims and race -> prior arrests -> risk score; what makes the difference; the Commission's guidelines, para. 17", minutes: 5, mode: production, retrieves: [S6]}
+    - {label: "pairs: two mediators shaped by the attribute, gender -> mileage -> claims and race -> prior arrests -> risk score; what makes the difference; the Commission's guidelines, para. 17", minutes: 3, mode: production, retrieves: [S6]}
+    - {label: "temporal depth: criteria as permissions with a frontier; nested against singleton frontiers; LSAC by race and by sex; the COMPAS proxy (Loftus, manuscript in preparation)", minutes: 3, mode: exposition}
+    - {label: "which arrows should count: injustice-transmitting, justified mediation, injustice-responsive; control and luck; control is not justice", minutes: 1, mode: exposition}
+    - {label: "one mediator: how much was in the person's control; would you condition on it", minutes: 1, mode: production, retrieves: [S6]}
     - {label: "dark: intersectionality as an interaction term (Yang, Loftus and Stoyanovich)", minutes: 1, mode: exposition, results: [R58]}
     # close: 8
     - {label: "hiring and maternity leave, answered individually: classify three paths; what each fair predictor removes; leave open to fathers", minutes: 6, mode: production, item: W08-I1}
     - {label: "lenses: data selection, ownership, leverage (no slide on the next week: not yet planned, convenor 15 November)", minutes: 2, mode: exposition}
-    # slack: 3
-    - {label: "slack: questions and overrun", minutes: 3, mode: exposition}
   history: []
   complications: []
   retrieves: [S1, S3, S6]
@@ -189,13 +190,13 @@ Each ends with the same two words: *and why?*
 ## {.inverse}
 
 ::: {.notes}
-Deck estimate 80: title 1, the lenses 1, warm-up 4, the red car 21, direct and indirect effects 16, two fair predictors 19, luck and responsibility 11, maternity-leave item 6, lenses this week 1. Dark = rush or skip.
+Deck estimate 83, over the 80 by 3 since the three temporal-depth slides: title 1, the lenses 1, warm-up 4, the red car 21, direct and indirect effects 16, two fair predictors 19, luck and responsibility 14, maternity-leave item 6, lenses this week 1. Cuts (1) and (2) bring it to 80. Dark = rush or skip.
 
 Questions before the reveal: her price had she been a man (Part 1); the effect not through mileage (Part 2); removing gender along one path (Part 3). Protected: holding aggression fixed (Part 1).
 
 Cut order: (1) "Mediation with an interaction"; (2) "Intersectionality"; (3) "Holding a mediator fixed" to its first two lines; (4) the maternity-leave item's third question. Do not cut the written commitment, the computation, the questions above, the comparison of premiums, your own premium, the two-mediators question, or the item's first two questions.
 
-Pace: 0:06 Part 1; 0:27 Part 2; 0:43 Part 3; 1:02 Part 4; 1:13 maternity-leave item; 1:19 lenses; 1:20 end.
+Pace: 0:06 Part 1; 0:27 Part 2; 0:43 Part 3; 1:02 Part 4; 1:10 temporal depth; 1:16 maternity-leave item; 1:22 lenses; 1:23 end.
 :::
 
 ### Week 8
@@ -685,7 +686,7 @@ Barocas, Hardt and Narayanan: whether a person has control over an attribute "ca
 Lippert-Rasmussen, "Justice and Bad Luck," *The Stanford Encyclopedia of Philosophy*, first published 20 June 2005, substantive revision 2 February 2023, https://plato.stanford.edu/entries/justice-bad-luck/, section 7. Barocas, Hardt and Narayanan (2023), chapter 4, page 92.
 :::
 
-## Two mediators {minutes="5"}
+## Two mediators {minutes="3"}
 
 ::: {.notes}
 QUESTION: each path fair, when the mediator was shaped by the attribute? What makes the difference?
@@ -711,6 +712,95 @@ Is each path fair, when the mediator was itself shaped by the attribute? What ma
 
 ::: {.source}
 European Commission (2012), as above, paragraph 17 and its footnote 3, page 4.
+:::
+
+## Permissions with a time stamp {minutes="2"}
+
+::: {.notes}
+Conditioning on W, or letting A act through W, accepts whatever disparity W has. Frontier: the latest variable allowed. Deep is early, shallow is late.
+Ceiling for conditioning on W: the total-variation distance between W's distributions in the two groups, = 2 x (best equal-prior accuracy of guessing A from W) - 1.
+:::
+
+```{r td_timeline, fig.width=9, fig.height=2.9, fig.alt="A timeline of a hiring decision drawn as a causal graph: A points into X, qualifications, and with a dashed arrow into Y, job performance; X points into Y, and Y into D, the decision. Vertical dotted lines mark three frontiers: deep at A (demographic parity, counterfactual fairness), mid at X (path-specific fairness, conditional statistical parity), shallow at Y (equality of opportunity)."}
+tl <- data.frame(name = c("A", "X", "Y", "D"), x = c(0, 2.6, 5.2, 6.8), y = c(0.6, 0, 0, 0))
+draw_dag(tl, data.frame(from = c("A", "X", "A", "Y"), to = c("X", "Y", "Y", "D")),
+         dashed = "A Y", text_size = 7, xlim = c(-1.5, 7.5), ylim = c(-1.1, 0.95)) +
+  annotate("segment", x = c(0, 2.6, 5.2), xend = c(0, 2.6, 5.2), y = -0.3, yend = 0.95,
+           linetype = "dotted", color = slate, linewidth = 0.6) +
+  annotate("text", x = c(0, 2.6, 5.2), y = -0.62, size = 5.2, lineheight = 0.9,
+           label = c("deep: demographic parity,\ncounterfactual fairness", "mid: path-specific,\nconditional parity",
+                     "shallow: equality\nof opportunity")) +
+  annotate("segment", x = -1.3, xend = 7.3, y = -1.03, yend = -1.03, color = slate,
+           arrow = arrow(length = unit(0.18, "cm"), type = "closed")) +
+  annotate("text", x = 7.3, y = -0.9, label = "time", hjust = 1, size = 5.2, color = slate)
+```
+
+A fairness criterion is a permission: conditioning on $W$, or letting $A$ act through $W$, accepts the disparity $W$ already has. Its **frontier** is the latest variable it allows. A later frontier lets more history count as justified.
+
+::: {.source}
+Loftus, *Permitted Disparity and the Limits of Temporal Depth* (manuscript in preparation, 2026), extending Loftus, "It's About Time: Fairness and Temporal Depth," NeurIPS 2023 Workshop on Algorithmic Fairness through the Lens of Time, https://neurips.cc/virtual/2023/78068.
+:::
+
+## The timeline does not decide {minutes="1"}
+
+::: {.notes}
+LSAC: the same students at four stages; race is White and non-White in the open copy; sex's small fall after the first rise is within noise.
+COMPAS: 1.19 is the direct effect only if the arrest gap is itself race-neutral; the data do not identify that.
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+- Allow everything up to a time: later never permits less.
+- Allow only the latest: disparity can fade, or be renewed by a new direct effect.
+- Justifiers are measurements: given prior arrests, COMPAS's race gap falls from $1.64$ to $1.19$ deciles, the direct effect only if arrests are race-neutral.
+:::
+::: {.column width="50%"}
+```{r td_lsac, fig.width=5.0, fig.height=3.6, fig.alt="Line chart of the largest group gap a criterion can permit when it conditions on everything up to each stage, for the same law students: family income, undergraduate GPA, LSAT, law-school GPA. By race it rises at every stage, from 0.21 to 0.36. By sex it rises once, from 0.04 to 0.11, then stays near 0.10."}
+lsac <- data.frame(stage = factor(rep(c("family\nincome", "college\nGPA", "LSAT", "law school\nGPA"), 2),
+                                  levels = c("family\nincome", "college\nGPA", "LSAT", "law school\nGPA")),
+                   attribute = rep(c("race", "sex"), each = 4),
+                   tv = c(0.205, 0.238, 0.310, 0.358, 0.035, 0.111, 0.109, 0.099))
+ggplot(lsac, aes(stage, tv, color = attribute, group = attribute)) +
+  geom_line(linewidth = 0.8) + geom_point(size = 2.2) +
+  geom_text(data = subset(lsac, stage == "law school\nGPA"), aes(label = attribute),
+            hjust = -0.3, size = 6, show.legend = FALSE) +
+  scale_color_manual(values = two, guide = "none") +
+  scale_y_continuous(limits = c(0, 0.4), breaks = c(0, 0.2, 0.4)) +
+  scale_x_discrete(expand = expansion(add = c(0.4, 0.9))) +
+  labs(x = NULL, y = "permitted gap") +
+  theme_minimal(base_size = 17) + theme(panel.grid.minor = element_blank())
+```
+:::
+::::
+
+::: {.source}
+Loftus (2026), as above. LSAC: the manuscript's same-unit ladder, rerun on the open copy of the data.
+:::
+
+## Which arrows should count? {minutes="2"}
+
+::: {.notes}
+QUESTION: one mediator: how much in the person's control? Would you condition on it?
+
+The three types are the manuscript's proposal, a diagnostic. The control column is our extension, not the paper's. Takeaway: the same graph can call for opposite criteria, depending on how each arrow is read.
+:::
+
+| a path from $A$ that is | for example | blocking it | how much control |
+|:---|:---|:---|:---|
+| injustice-transmitting | unequal schooling, policing | reduces unfairness | circumstantial luck |
+| justified mediation | a person's own choices | is not needed | the person's own |
+| injustice-responsive | health need (Obermeyer et al.) | is itself a harm | varies |
+
+. . .
+
+Control is not justice: luck is not always injustice, and a choice can be shaped by unjust circumstances. A later frontier sweeps in both.
+
+::: {.ask}
+Pick one mediator: college GPA, prior arrests, credit history. How much of it was in the person's control? Would you condition on it?
+:::
+
+::: {.source}
+Loftus (2026), as above. Kinds of moral luck: Nelkin, "Moral Luck," as above, section 1. Obermeyer, Powers, Vogeli and Mullainathan, "Dissecting racial bias in an algorithm used to manage the health of populations," *Science* 366(6464), 2019, 447-453, https://doi.org/10.1126/science.aax2342.
 :::
 
 ## Intersectionality {.inverse}

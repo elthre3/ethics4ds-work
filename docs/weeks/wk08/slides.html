@@ -508,7 +508,7 @@ Y_{\text{PS}} = \beta M
 <p>Lippert-Rasmussen, “Justice and Bad Luck,” <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2005, substantive revision 2 February 2023, https://plato.stanford.edu/entries/justice-bad-luck/, section 7. Barocas, Hardt and Narayanan (2023), chapter 4, page 92.</p>
 </div>
 </section>
-<section id="two-mediators" class="slide level2" data-minutes="5">
+<section id="two-mediators" class="slide level2" data-minutes="3">
 <h2>Two mediators</h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -525,6 +525,94 @@ Y_{\text{PS}} = \beta M
 </div>
 <div class="source">
 <p>European Commission (2012), as above, paragraph 17 and its footnote 3, page 4.</p>
+</div>
+</section>
+<section id="permissions-with-a-time-stamp" class="slide level2" data-minutes="2">
+<h2>Permissions with a time stamp</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/td_timeline-1.png" style="width:100.0%" alt="A timeline of a hiring decision drawn as a causal graph: A points into X, qualifications, and with a dashed arrow into Y, job performance; X points into Y, and Y into D, the decision. Vertical dotted lines mark three frontiers: deep at A (demographic parity, counterfactual fairness), mid at X (path-specific fairness, conditional statistical parity), shallow at Y (equality of opportunity)."></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A fairness criterion is a permission: conditioning on <span class="math inline">\(W\)</span>, or letting <span class="math inline">\(A\)</span> act through <span class="math inline">\(W\)</span>, accepts the disparity <span class="math inline">\(W\)</span> already has. Its <strong>frontier</strong> is the latest variable it allows. A later frontier lets more history count as justified.</p>
+<div class="source">
+<p>Loftus, <em>Permitted Disparity and the Limits of Temporal Depth</em> (manuscript in preparation, 2026), extending Loftus, “It’s About Time: Fairness and Temporal Depth,” NeurIPS 2023 Workshop on Algorithmic Fairness through the Lens of Time, https://neurips.cc/virtual/2023/78068.</p>
+</div>
+</section>
+<section id="the-timeline-does-not-decide" class="slide level2" data-minutes="1">
+<h2>The timeline does not decide</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Allow everything up to a time: later never permits less.</li>
+<li>Allow only the latest: disparity can fade, or be renewed by a new direct effect.</li>
+<li>Justifiers are measurements: given prior arrests, COMPAS’s race gap falls from <span class="math inline">\(1.64\)</span> to <span class="math inline">\(1.19\)</span> deciles, the direct effect only if arrests are race-neutral.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/td_lsac-1.png" style="width:100.0%" alt="Line chart of the largest group gap a criterion can permit when it conditions on everything up to each stage, for the same law students: family income, undergraduate GPA, LSAT, law-school GPA. By race it rises at every stage, from 0.21 to 0.36. By sex it rises once, from 0.04 to 0.11, then stays near 0.10."></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="source">
+<p>Loftus (2026), as above. LSAC: the manuscript’s same-unit ladder, rerun on the open copy of the data.</p>
+</div>
+</section>
+<section id="which-arrows-should-count" class="slide level2" data-minutes="2">
+<h2>Which arrows should count?</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">a path from <span class="math inline">\(A\)</span> that is</th>
+<th style="text-align: left;">for example</th>
+<th style="text-align: left;">blocking it</th>
+<th style="text-align: left;">how much control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">injustice-transmitting</td>
+<td style="text-align: left;">unequal schooling, policing</td>
+<td style="text-align: left;">reduces unfairness</td>
+<td style="text-align: left;">circumstantial luck</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">justified mediation</td>
+<td style="text-align: left;">a person’s own choices</td>
+<td style="text-align: left;">is not needed</td>
+<td style="text-align: left;">the person’s own</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">injustice-responsive</td>
+<td style="text-align: left;">health need (Obermeyer et al.)</td>
+<td style="text-align: left;">is itself a harm</td>
+<td style="text-align: left;">varies</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Control is not justice: luck is not always injustice, and a choice can be shaped by unjust circumstances. A later frontier sweeps in both.</p>
+<div class="ask">
+<p>Pick one mediator: college GPA, prior arrests, credit history. How much of it was in the person’s control? Would you condition on it?</p>
+</div>
+<div class="source">
+<p>Loftus (2026), as above. Kinds of moral luck: Nelkin, “Moral Luck,” as above, section 1. Obermeyer, Powers, Vogeli and Mullainathan, “Dissecting racial bias in an algorithm used to manage the health of populations,” <em>Science</em> 366(6464), 2019, 447-453, https://doi.org/10.1126/science.aax2342.</p>
+</div>
 </div>
 </section>
 <section id="intersectionality" class="slide level2 inverse">
