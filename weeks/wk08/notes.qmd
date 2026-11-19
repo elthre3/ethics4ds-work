@@ -128,6 +128,17 @@ R2 <- alpha^2 * pA * (1 - pA) / var_M
 stopifnot(abs(NDE + 0.5) < 1e-12, abs(NIE + 1) < 1e-12, abs(TE + 1.5) < 1e-12,
           abs(var_M - 8) < 1e-12, abs(slope_refit - 0.3125) < 1e-12, abs(R2 - 0.5) < 1e-12,
           abs(alpha * slope_refit - (NIE + R2 * NDE)) < 1e-12)
+# Two graphs, the same data: Z (how much a person drives for work), normal with mean 1/4 and
+# variance 3/16, adds 4 to mileage and 1 to claims per unit. Coefficients of the regression of
+# Z on (A, M), and the fitted graph without Z.
+pZ <- 1/4; var_M_Z <- 4^2 * pZ * (1 - pZ) + alpha^2 * pA * (1 - pA) + var_UM
+b_Z <- solve(matrix(c(pA * (1 - pA), alpha * pA * (1 - pA), alpha * pA * (1 - pA), var_M_Z), 2),
+             c(0, 4 * pZ * (1 - pZ)))
+gamma_hat <- gamma + b_Z[1]; beta_hat <- beta + b_Z[2]
+slope_cf_Z <- beta + 4 * pZ * (1 - pZ) / (4^2 * pZ * (1 - pZ) + var_UM)
+stopifnot(abs(var_M_Z - 11) < 1e-12, abs(b_Z[1] - 3/7) < 1e-12, abs(b_Z[2] - 3/28) < 1e-12,
+          abs(round(gamma_hat, 2) + 0.07) < 1e-12, abs(round(alpha * beta_hat, 2) + 1.43) < 1e-12,
+          abs(gamma_hat + alpha * beta_hat - TE) < 1e-12, abs(slope_cf_Z - beta_hat) < 1e-12)
 ```
 
 ## Warm-up
@@ -498,7 +509,7 @@ A regression of $Y$ on $A$ and $M$ compares women and men with the same
 mileage. In the model above, its coefficient on $A$ is $\gamma$, the
 controlled direct effect, because nothing else affects both mileage and
 claims. Suppose something does: driving for work, $Z$, adds miles and,
-mile for mile, adds claims. Then $M$ is a collider on the path
+beyond what those miles add, adds claims. Then $M$ is a collider on the path
 $A \to M \leftarrow Z \to Y$. Women drive fewer miles on average, so a
 woman with the same mileage as a man is more likely to drive for work,
 and at equal mileage her expected claims are higher, relative to his,
@@ -541,6 +552,25 @@ with $\alpha = -4$, a woman is priced as if she drove $4{,}000$ more
 miles than she does. Every driver, woman or man, is priced as the full
 model would price the same person had they been a man, so the average
 premium is the same in both groups.
+
+The premium needs $\alpha$, and an insurer has an estimate. With
+$\hat\alpha$ in its place,
+
+$$
+\beta\,(M - \hat\alpha A) = \beta\,(\mu_0 + U_M) + \beta\,(\alpha - \hat\alpha)\,A ,
+$$
+
+which differs from the counterfactually fair premium by
+$\beta(\alpha - \hat\alpha)$ for every woman and not at all for men.
+It is counterfactually fair only if $\hat\alpha = \alpha$. An estimate
+from the insurer's own customers, who chose to buy from it, can be off
+in a direction that depends on who chose: with $\hat\alpha = -2$, women
+are priced as if they drove $2{,}000$ more miles rather than $4{,}000$,
+and each pays $0.25 \times (-4 + 2) = -0.5$, or £50, less than the
+counterfactually fair premium. Unshifted, the insurer collects £25 less
+per policy on average. Shifted to collect the average claim, women pay
+£25 less and men £25 more than under the counterfactually fair premium
+shifted in the same way.
 
 ### The path-specific premium
 
@@ -635,6 +665,63 @@ average counterfactually fair premiums are equal here because $U_M$ is
 independent of $A$ in this model. In a model where a non-descendant of
 $A$ is associated with $A$, a counterfactually fair premium can differ
 between groups.
+
+### Two graphs, the same data
+
+The premiums above were computed from the model as written. An insurer
+has records of gender, mileage and claims, and has to choose a graph
+before it can compute anything. Suppose the world is the one in
+"Holding a mediator fixed" above. $Z$ is now a score for how much a
+person drives for work, normally distributed with mean $1/4$ and
+variance $3/16$ and independent of gender. Each unit of $Z$ adds
+$4{,}000$ miles a year and, beyond what those miles add, £100 of
+claims; the insurer does not record it:
+
+$$
+M = 9 + 4Z - 4A + U_M, \qquad Y = -0.5A + 0.25M + Z + U_Y ,
+$$
+
+with $U_M$ and $U_Y$ normal, $\operatorname{Var}(U_M) = 4$, and half
+the drivers women. Men still drive $10{,}000$ miles on average. The
+direct effect is $\gamma = -0.5$ and the effect through mileage
+$\alpha\beta = -1$, as before.
+
+An analyst who draws the lecture's graph, without $Z$, fits it by
+regressing claims on gender and mileage. The coefficients are the
+world's plus the effect of $Z$, which is 1, times the coefficients of a
+regression of $Z$ on $A$ and $M$, which are $3/7$ and $3/28$
+($\operatorname{Var}(M) = 11$, $\operatorname{Cov}(A, M) = -1$,
+$\operatorname{Cov}(Z, M) = 0.75$):
+
+| | direct | through mileage | total |
+|:---|---:|---:|---:|
+| graph without $Z$, fitted | $-0.07$ | $-1.43$ | $-1.5$ |
+| graph with $Z$ (the world) | $-0.5$ | $-1.0$ | $-1.5$ |
+
+In the world, mileage and claims are jointly normal for women and for
+men, with the same variances and covariance in both groups. The graph
+without $Z$ has an arrow between every pair of the three variables it
+records, so it fits such records exactly: the records alone cannot
+tell the two graphs apart. (Had $Z$ been yes or no, a quarter of
+drivers driving for work, the means, variances and covariances would be
+the same, but the average claim given gender and mileage would curve
+slightly in mileage, with a slightly different slope for women and men,
+which the linear graph without $Z$ would miss.)
+
+The path-specific premium differs between the graphs. Fitted without
+$Z$, it is $0.357\,M$ plus a constant, and women pay £143 less than men
+on average; in the world, it is $0.25\,M + Z$ plus a constant, which
+cannot be charged without recording $Z$, and the gap is £100. Take the
+counterfactually fair premium to be the least-squares premium on
+$M - \alpha A$, the mileage a driver would have had as a man; fairness
+alone does not pick a unique premium. It does not differ between the
+graphs: $Z$ is independent of gender, so both graphs agree that
+$M - \alpha A$ is a non-descendant of $A$ and both have $\alpha = -4$,
+and the slope is $0.357$ under either. A criterion that removes every
+path from $A$ needs less of the graph than one that keeps some, but it
+removes the path through mileage too. With the structure uncertain and
+a premium to set, choosing between the two is a decision about which
+error to risk.
 
 ### Whose judgment
 

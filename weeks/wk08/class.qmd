@@ -1,0 +1,382 @@
+---
+title: "Fairness II: causal"
+subtitle: "Class"
+author: "Joshua Loftus"
+format:
+  html:
+    toc: true
+execute:
+  message: false
+  warning: false
+---
+
+::: {.callout-note}
+This is the student version of the class sheet. The exercises are for your own time; the class works through everything under "In class". Answers are revealed in class.
+:::
+
+## How this sheet works
+
+Exercises rederive or apply the lecture's results. Do them on your own
+time; they are not worked in class. The class works the items under
+"In class," in that order, then what it can of "If there is time."
+Discussions are in groups of three or four, then with the room. The
+problem is gone through as soon as the room has tried it.
+
+The first half is about causal structure: what a model lets you hold
+fixed, and what changes when the graph changes. The second half is
+about the judgments the structure does not make: which framework, which
+criterion, which paths are fair, and what to do about luck. Every
+decision here prices or ranks people, and the fairness criteria give
+different prices from the same data. So each item ends by asking who
+the error falls on, who gains from the number that was reported, or who
+the choice could be justified to. The model narrows the answer; it does
+not give it.
+
+Notation as in the lecture. $A$ is the attribute, $M$ a mediator, $Y$
+the outcome, and $U$ terms are what the model leaves unobserved.
+$Y(a, m)$ is the outcome under $do(A := a, M := m)$ and $M(a)$ the
+mediator under $do(A := a)$. $\text{CDE}(m)$ is the controlled direct
+effect, $E[Y(1, m) - Y(0, m)]$, with the mediator set to $m$ for
+everyone. $\text{NDE}_a$ is the natural direct
+effect with the mediator held at $M(a)$, and $\text{NIE}_a$ the natural
+indirect effect with $A$ held at $a$; without an interaction the
+subscripts can be dropped. Which value of $A$ is 1 is said in each
+item.
+
+## Exercises
+
+Attempt each part before you open a hint.
+
+::: {.callout-warning title="Hints"}
+Do not open a hint unless you have been stuck for at least a few
+minutes, and open them in order.
+:::
+
+### Exercise 1. A contextual offer
+
+A university predicts each applicant's degree result $Y$ from their
+school grade $X$. Some applicants went to schools with fewer resources
+($A = 1$), half of all applicants, and those schools lower a grade by
+one unit:
+
+$$
+X = U - A, \qquad Y = U + \varepsilon ,
+$$
+
+where $U$ is what the applicant brings, with mean 0 and variance 1,
+independent of $A$, and $\varepsilon$ is independent noise with mean 0.
+
+(a) Draw the graph. Which variables are descendants of $A$?
+
+(b) Find the least-squares prediction of $Y$ from $X$ alone. What is
+its average in each group, and what is each group's average $Y$?
+
+(c) An applicant with $A = 1$ has $X = 1.5$. Find their prediction.
+Then compute the prediction had their school not lowered the grade. Is
+the prediction from $X$ alone counterfactually fair?
+
+(d) Find a counterfactually fair prediction with the same accuracy as
+the best prediction from $X$ and $A$. Does it use $A$?
+
+(e) A contextual offer adds one unit to the grade of every applicant
+with $A = 1$. Which prediction is that? Suppose that in fact some of
+those schools lower grades by two units and others by none. Who bears
+the error of a rule that adds one unit to all of them?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (b): the slope is $\operatorname{Cov}(X, Y)/\operatorname{Var}(X)$,
+and $\operatorname{Var}(A) = 1/4$.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+For (c): abduction recovers $U = X + A$.
+:::
+
+### Exercise 2. A pay gap
+
+An employer's pay data cover women ($A = 1$) and men in the same jobs.
+Years of experience $M$ and annual pay $Y$, in thousands of pounds,
+follow
+
+$$
+M = 10 - 2A + U_M, \qquad Y = 20 - A + M + U_Y ,
+$$
+
+with $U_M$ and $U_Y$ of mean 0, independent of $A$ and of each other.
+
+(a) Find $\text{CDE}(m)$, the NDE, the NIE and the TE.
+
+(b) The raw gap is $E[Y \mid A = 1] - E[Y \mid A = 0]$. Which of the
+four effects does it estimate here, and why?
+
+(c) A "like-for-like" comparison regresses $Y$ on $A$ and $M$. Which
+effect does its coefficient on $A$ estimate here? Name one thing about
+the world that would make it estimate something else.
+
+(d) The employer reports the like-for-like gap, and a union reports the
+raw gap. Which number answers "is there discrimination?", and who gains
+from each being the one reported?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+The model is the lecture's linear model with $\alpha = -2$, $\beta = 1$
+and $\gamma = -1$.
+:::
+
+### Exercise 3. A lender's two fair predictions
+
+A lender predicts the expected annual loss $Y$ on a loan, in hundreds
+of pounds, from years of credit history $M$. Applicants under 25 have
+$A = 1$, and are half the applicants:
+
+$$
+M = 8 - 4A + U_M, \qquad Y = 3 + 0.5A - 0.25M + U_Y ,
+$$
+
+with $U_M$ and $U_Y$ of mean 0, independent of $A$ and of each other.
+
+(a) Find the NDE, the NIE and the TE.
+
+(b) Write down the full prediction $E[Y \mid A, M]$, and its average for
+each group.
+
+(c) The lender judges the path through credit history fair and the
+direct path unfair. Write down the path-specific prediction, and its
+average for each group.
+
+(d) Write down the counterfactually fair prediction that prices every
+applicant as the full model would price them had they been 25 or over,
+and its average for each group.
+
+(e) Shift each prediction by a constant so that it collects the average
+loss. What does each group pay under each?
+
+(f) The lender estimates $\alpha$ from its own past customers, who are
+applicants it approved, and gets $\hat\alpha = -2$. It plugs this into
+(d). What does each group pay now, before the shift in (e)? Is the
+result counterfactually fair? Which group pays for the error in
+$\hat\alpha$, and who could check it?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (d): abduction gives $U_M = M - 8 + 4A$; set $A := 0$ along every
+path.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+For (e): the average loss is the average of the two groups' averages
+in (b).
+:::
+
+### Exercise 4. Dropping the attribute and refitting (harder)
+
+The lender of exercise 3 may not use age, so it regresses $Y$ on $M$
+alone. Take $\operatorname{Var}(U_M) = 12$.
+
+(a) Find $\operatorname{Var}(A)$, $\operatorname{Cov}(A, M)$ and
+$\operatorname{Var}(M)$.
+
+(b) Find the slope of the regression, and the gap between the two
+groups' average predictions.
+
+(c) Show that the gap is $\text{NIE} + R^2\,\text{NDE}$, where $R^2$ is
+the share of the variance of $M$ explained by $A$.
+
+(d) The rule "do not use age" is followed, and part of the direct
+effect of age returns through credit history. Who could notice, and
+who pays for it?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+$\operatorname{Cov}(Y, M) = \gamma \operatorname{Cov}(A, M) + \beta
+\operatorname{Var}(M)$.
+:::
+
+## In class
+
+### Discussion 1: warm-up
+
+You were asked to bring one decision in which an attribute is used, or
+deliberately not used, with one route by which it could affect the
+outcome, and whether that route is fair. If you did not bring one,
+choose: a car insurer's premium; a bank's credit limit; a university's
+offer; a hiring panel's shortlist.
+
+1. Draw the decision as a graph: the attribute, the route you brought
+   and anything else that affects the outcome. Which arrows does the
+   decision use?
+2. For the route you judged fair, describe one way in which the
+   mediator itself could have been shaped unfairly.
+3. Who gets to say that the route is fair: the person decided about,
+   the decision maker, or a regulator?
+
+### From memory: what to hold fixed
+
+Without the notes, fill in the table: should an analysis hold the
+variable fixed, by conditioning or adjusting for it?
+
+| | to estimate a total effect of $A$ | to estimate a controlled direct effect of $A$ | to predict $Y$ |
+|:---|:---|:---|:---|
+| a confounder of $A$ and $Y$ | | | |
+| a mediator between $A$ and $Y$ | | | |
+| a collider of $A$ and $Y$ | | | |
+
+A firm says: "We controlled for hours and occupation, and the pay gap
+between women and men vanished." Which cell is that? What has it not
+shown, and who gains from the sentence?
+
+### Problem 1. A pay gap with an interaction
+
+In another employer's data, women ($A = 1$) also earn less per year of
+experience:
+
+$$
+M = 10 - 2A + U_M, \qquad Y = 20 - A + M - 0.2\,A M + U_Y ,
+$$
+
+in years and thousands of pounds, with $U_M$ and $U_Y$ of mean 0,
+independent of $A$ and of each other.
+
+(a) Find the TE.
+
+(b) Find $\text{NDE}_0$, the direct effect with experience held at the
+men's level, and $\text{NIE}_1$. What do they add up to?
+
+(c) Find $\text{NDE}_1$ and $\text{NIE}_0$. What do they add up to?
+
+(d) Someone reports $\text{NDE}_0$ and $\text{NIE}_0$ side by side. What
+do they add up to, and why is it not the TE?
+
+(e) The employer reports a direct effect of $-2.6$ and the union one of
+$-3$. Are both correct? Who chooses the reference world, and who could
+the choice be justified to?
+
+### Discussion 2: is the graph right?
+
+> "All models are wrong but some are useful." (Box, 1979)
+
+Take the lecture's mileage example: women ($A = 1$), mileage $M$ in
+thousands of miles a year, claims $Y$ in hundreds of pounds. Two
+analysts have the same records of gender, mileage and claims. The
+first draws the lecture's graph and fits it to the records by least
+squares. The second supposes that the graph is missing $Z$, a score for
+how much a person drives for work, which the insurer does not record.
+Each unit of $Z$ adds $4{,}000$ miles a year and, beyond what those
+miles add, £100 of claims. The second row is the world as it would be
+if the second analyst is right:
+
+| | direct effect | through mileage | total |
+|:---|---:|---:|---:|
+| first analyst, fitted (no $Z$) | $-0.07$ | $-1.43$ | $-1.5$ |
+| second analyst, supposed (with $Z$) | $-0.5$ | $-1.0$ | $-1.5$ |
+
+1. Under each row, find the path-specific premium, removing the direct
+   path, and the counterfactually fair premium, taken to be the
+   least-squares premium on $M + 4A$, the mileage a driver would have
+   had as a man. How far apart are women's and men's average premiums
+   under each? Which differ between the rows, and which do not?
+2. What evidence could tell the two graphs apart? Do the insurer's
+   records? The same question for problem 1: with only gender,
+   experience and pay, can the employer's data tell a direct effect
+   from a variable nobody measured that affects both experience and
+   pay?
+3. A regulator has to approve one pricing rule this year. Choose: wait
+   for better evidence; adopt one analyst's graph; or require the
+   counterfactually fair premium. Defend your choice against the
+   strongest objection to it. Who must the decision be justified to,
+   and who pays if the graph behind it is wrong?
+
+### Discussion 3: a framework and a criterion
+
+Each group takes one framework: consequentialism, deontology, virtue
+ethics or pragmatic ethics.
+
+1. Which fairness criterion does your framework motivate: a price that
+   does not use the attribute; a criterion on the table of who was
+   selected and what happened (equal rates, calibration); a
+   counterfactually fair price; a path-specific one? Make the best
+   case.
+2. In the red car world, the price from the car alone is not
+   counterfactually fair, and the counterfactually fair price that
+   depends on the car uses gender. ms4ds suggests "there may be a
+   deontological argument in favor of functional independence," a
+   process that does not take the attribute as an input. Does your
+   framework side with the deontological argument or with
+   counterfactual fairness here? Find a case where your framework and
+   your criterion come apart.
+3. Who could each criterion be justified to: a careful woman driver
+   who bought a red car, an average man, the insurer, a court?
+
+### Discussion 4: luck
+
+1. Give examples of things outside a person's control (or that they
+   can only weakly influence) that strongly impact their life.
+2. Pick one that a price, a loan or a hiring decision could use, or
+   use something downstream of it. Is it brute luck or option luck?
+   Should the decision ignore it?
+3. A rule that ignores it, collecting the same amount in total, moves
+   cost to someone else. Who? Could you justify it to them?
+
+## If there is time
+
+### Coding: two analysts, simulated
+
+Base R is enough. The lecture's mileage example with $Z$, the score
+for how much a person drives for work from discussion 2, drawn from a
+normal distribution with mean $1/4$ and variance $3/16$. Mileage is in
+thousands of miles a year and claims in hundreds of pounds. Each driver
+has two potential mileages, as a man and as a woman.
+
+```{r analysts_starter, eval=FALSE}
+n <- 100000
+A <- rbinom(n, 1, 0.5)                  # 1 for a woman
+Z <- rnorm(n, 0.25, sqrt(0.1875))       # how much the driver drives for work
+U_M <- rnorm(n, 0, 2)
+U_Y <- rnorm(n, 0, 1)
+M0 <- 9 + 4 * Z + U_M                   # mileage had the driver been a man
+M1 <- M0 - 4                            # mileage had the driver been a woman
+M <- M0 - 4 * A                         # the mileage recorded
+Y <- -0.5 * A + 0.25 * M + Z + U_Y      # the claims recorded
+Y_0_M0 <- -0.5 * 0 + 0.25 * M0 + Z + U_Y
+Y_1_M1 <- # ...
+Y_1_M0 <- # ...
+TE  <- mean(Y_1_M1 - Y_0_M0)
+NDE <- # ...
+NIE <- # ...
+c(TE = TE, NDE = NDE, NIE = NIE)
+coef(lm(Y ~ A + M))
+coef(lm(Y ~ A + M + Z))
+```
+
+1. Complete the three lines and compute the TE, NDE and NIE. Does the
+   direct effect differ between drivers? Why?
+2. Run the two regressions. Which coefficient on $A$ is the direct
+   effect, and which is the first analyst's from discussion 2?
+3. An auditor has only $A$, $M$ and $Y$. Which of the numbers above
+   could they compute, and which would they get wrong? Who gains if the
+   auditor reports the first regression's coefficient as the direct
+   effect?
+
+## References
+
+- Barocas, Solon, Moritz Hardt and Arvind Narayanan, *Fairness and
+  Machine Learning: Limitations and Opportunities* (MIT Press, 2023),
+  <https://fairmlbook.org>, chapter 4 (the three views of equality of
+  opportunity) and chapter 5, page 119.
+- Box, G. E. P., "Robustness in the Strategy of Scientific Model
+  Building," in R. L. Launer and G. N. Wilkinson (eds.), *Robustness in
+  Statistics* (Academic Press, 1979), 201--236,
+  <https://doi.org/10.1016/B978-0-12-438150-6.50018-2>, page 202 (a
+  section heading).
+- European Commission, "Guidelines on the application of Council
+  Directive 2004/113/EC to insurance, in the light of the judgment of
+  the Court of Justice of the European Union in Case C-236/09
+  (Test-Achats)," 2012/C 11/01, *Official Journal of the European
+  Union* C 11, 13 January 2012, 1--11,
+  <https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL>,
+  paragraphs 5, 14 and 17.
+- Lippert-Rasmussen, Kasper, "Justice and Bad Luck," *The Stanford
+  Encyclopedia of Philosophy*, first published 20 June 2005,
+  substantive revision 2 February 2023,
+  <https://plato.stanford.edu/entries/justice-bad-luck/>, section 7.
+- Loftus, Joshua, *Modern Statistics 4 Data Science*, sections 3.4.1
+  and 3.4.2,
+  <https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models>
+  and <https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck>.
