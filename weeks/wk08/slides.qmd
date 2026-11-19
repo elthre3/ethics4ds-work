@@ -1,0 +1,836 @@
+---
+title: "Fairness II: causal"
+author: "Joshua Loftus"
+format:
+  revealjs:
+    theme: [default, ../../theme/st313.scss]
+    slide-number: c/t
+    auto-stretch: false
+    filters: [../../_build_env/strip_notes.lua]
+    fig-width: 8
+    fig-height: 4.5
+    fig-align: center
+execute:
+  echo: false
+  message: false
+  warning: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+# ---- instructor-side front matter (CONTRACT.md), nested under st313: so that Quarto
+# ---- ignores it (Quarto reserves top-level keys such as `history`); stripped from output
+st313:
+  week: 08
+  session: lecture
+  register: 1
+  segments:                        # sums to 80: 79 of material and 1 of slack; production 31 (39%). The two temporal-depth slides, after the maternity-leave item, were added after the lecture (convenor, 18 November); the deck estimate is 82 (title note)
+    # opener: 5
+    - {label: "the six lenses by name and question, each ending and why? (convenor, 17 November)", minutes: 1, mode: exposition}
+    - {label: "warm-up: the 7 -> 8 task restated, then drawn as arrows; which arrow the judgment is about", minutes: 4, mode: production}
+    # part 1, the red car: 21
+    - {label: "Test-Achats (press release; Commission guidelines); the red car graph A -> X <- U -> Y (ms4ds 3.4.1, Kusner et al. scenario 1); fairness through unawareness as the model's simplification", minutes: 5, mode: exposition}
+    - {label: "written commitment: the insurer prices on the car alone; is the price fair to women", minutes: 2, mode: production}
+    - {label: "the unaware price, measured from the average: who is charged more, who claims more", minutes: 3, mode: production}
+    - {label: "question before the idea: her price had she been a man", minutes: 1, mode: production}
+    - {label: "abduction, action, prediction (fairmlbook Definition 5); Kusner et al.'s definition and Lemma 1; X - 2A = U; any non-constant price from X alone is not counterfactually fair", minutes: 6, mode: exposition, introduces: [CC-24a], core: CC-24a, results: [R50, R51]}
+    - {label: "protected: holding aggression fixed; evidence for X = 2A + U; claims about the world vs judgments about effects", minutes: 2, mode: production}
+    - {label: "retrieve do(): effect of A on Y is 0, coefficient on A is -2; which is conditioning", minutes: 2, mode: production, retrieves: [S1]}
+    # part 2, direct and indirect effects: 16
+    - {label: "mediation example: A -> M -> Y, A -> Y; the equations on the board; invented values", minutes: 3, mode: exposition}
+    - {label: "question before the idea: the part of the effect not through mileage, for one person", minutes: 1, mode: production}
+    - {label: "Y(a, m), M(a); CDE; NDE, NIE, TE = NDE + NIE as two steps through Y(1, M(0))", minutes: 5, mode: exposition, introduces: [CC-23], core: CC-23, results: [R52]}
+    - {label: "students derive CDE, NDE, NIE and TE in the linear model", minutes: 2, mode: production}
+    - {label: "the linear model: gamma, alpha beta, gamma + alpha beta; the product of coefficients", minutes: 2, mode: exposition, results: [R52]}
+    - {label: "holding a mediator fixed: Y(1, M(0)) is not observable; Z, driving for work, makes M a collider, so equal mileage is not mileage held fixed", minutes: 3, mode: exposition, retrieves: [S3]}
+    # part 3, two fair predictors: 17
+    - {label: "question before the idea: from Y_full = gamma A + beta M, remove gender along every path, then along A -> Y only; hint after a pause", minutes: 2, mode: production}
+    - {label: "the counterfactually fair premium by abduction of U_M; the path-specific premium (Chiappa); the comparison at equal revenue: gaps TE, NIE, 0; gamma A and alpha beta A up to constants", minutes: 8, mode: exposition, introduces: [CC-24b], core: CC-24b, results: [R53, R54, R55]}
+    - {label: "written: which premium for your own policy; the same without knowing your group", minutes: 2, mode: production, retrieves: [S6]}
+    - {label: "whose judgment: Kusner et al. on Berkeley; fairmlbook p. 119; Nabi and Shpitser", minutes: 3, mode: exposition, retrieves: [S6]}
+    - {label: "dark: mediation with an interaction; the four natural effects; paired reference levels (stretch)", minutes: 2, mode: exposition, results: [R57]}
+    # part 4, luck and responsibility: 8
+    - {label: "moral luck (Nelkin, SEP) and the control principle (ms4ds 3.4.2); the middle view and insurance (fairmlbook pp. 84-85); luck egalitarianism (Lippert-Rasmussen); control is not a conditional probability (fairmlbook p. 92)", minutes: 4, mode: exposition}
+    - {label: "pairs: two mediators shaped by the attribute, gender -> mileage -> claims and race -> prior arrests -> risk score; what makes the difference; the Commission's guidelines, para. 17", minutes: 3, mode: production, retrieves: [S6]}
+    - {label: "dark: intersectionality as an interaction term (Yang, Loftus and Stoyanovich)", minutes: 1, mode: exposition, results: [R58]}
+    # close: 8
+    - {label: "hiring and maternity leave, answered individually: classify three paths; what each fair predictor removes; leave open to fathers", minutes: 6, mode: production, item: W08-I1}
+    - {label: "temporal depth: criteria as permissions in time, on a hiring timeline (Loftus, NeurIPS 2023 workshop)", minutes: 2, mode: exposition}
+    - {label: "which arrows should count: injustice-transmitting, justified mediation, injustice-responsive; control and luck; control is not justice", minutes: 1, mode: exposition}
+    - {label: "one mediator: how much was in the person's control; would you condition on it", minutes: 1, mode: production, retrieves: [S6]}
+    # slack: 1
+    - {label: "slack: questions and overrun", minutes: 1, mode: exposition}
+    - {label: "lenses: data selection, ownership, leverage (no slide on the next week: not yet planned, convenor 15 November)", minutes: 2, mode: exposition}
+  history: []
+  complications: []
+  retrieves: [S1, S3, S6]
+  introduces: [CC-23, CC-24a, CC-24b]
+  lenses: [B, E, F]
+  readings: [fairmlbook-ch5b, fairmlbook-ch5-validity, ms4ds-ch3]
+  results: [R50, R51, R52, R53, R54, R55, R57, R58]
+  assumes: [ST102]
+  figures: []
+# ---------------------------------------------------------------------------------
+---
+
+```{r setup}
+library(ggplot2)
+library(dplyr)
+theme_set(theme_minimal(base_size = 18))
+set.seed(313)
+# cividis: navy, slate, gray, khaki, gold, yellow (viridisLite::cividis(9)[c(1, 3, 5, 6, 7, 9)])
+navy <- "#00204D"; slate <- "#414D6B"; cgray <- "#7C7B78"; khaki <- "#9B9477"; gold <- "#BCAF6F"; yellow <- "#FFEA46"
+two <- c(navy, gold)               # the two groups, wherever there are two
+
+# Causal graphs. Nodes are letters in circles, or words in boxes (boxes = TRUE).
+# A node's size is fixed on the page, in inches, while the figure's size decides how
+# many inches a data unit is. draw_dag measures both on the graphics device open when it
+# is called (in a rendered document, the chunk's figure) and stops every arrow `gap`
+# inches short of the two nodes it joins. Arrows listed in `dashed` are dashed; arrows
+# listed in `highlight` are gold. One panel per value of `panel`. (From weeks 3 to 5.)
+draw_dag <- function(nodes, edges, dashed = character(0), highlight = character(0), boxes = FALSE,
+                     text_size = 7, xlim = c(-0.5, 2.5), ylim = c(-0.4, 1.4), strip_size = 18,
+                     gap = 0.05) {
+  if (!"panel" %in% names(nodes)) { nodes$panel <- ""; edges$panel <- "" }
+  pad <- unit(0.35, "lines"); border <- 0.5; dot <- 16; stroke <- 0.8; lw <- c(black = 0.7, gold = 1.5)
+  p <- ggplot() +
+    facet_wrap(~ panel, nrow = 1) +
+    coord_fixed(xlim = xlim, ylim = ylim) +
+    theme_void() +
+    theme(strip.text = element_text(size = strip_size), panel.spacing = unit(1.5, "lines"))
+  p <- if (boxes) {
+    p + geom_label(data = nodes, aes(x, y, label = name), size = text_size, label.size = border,
+                   label.padding = pad)
+  } else {
+    p + geom_point(data = nodes, aes(x, y), size = dot, shape = 21, fill = "white", stroke = stroke) +
+      geom_text(data = nodes, aes(x, y, label = name), size = text_size, parse = TRUE)
+  }
+  inch <- function(u, f) f(u, "in", valueOnly = TRUE)
+  g <- ggplotGrob(p)
+  pp <- ggplot_build(p)$layout$panel_params[[1]]
+  per_unit <- min((dev.size("in")[1] - sum(inch(g$widths, grid::convertWidth))) /
+                    (length(unique(nodes$panel)) * diff(pp$x.range)),
+                  (dev.size("in")[2] - sum(inch(g$heights, grid::convertHeight))) / diff(pp$y.range))
+  if (boxes) {
+    text <- lapply(as.character(nodes$name), grid::textGrob, gp = grid::gpar(fontsize = text_size * .pt))
+    nodes$hw <- (sapply(text, \(t) inch(grid::grobWidth(t), grid::convertWidth)) / 2 +
+                   inch(pad, grid::convertWidth) + border * .pt / 96 / 2) / per_unit
+    nodes$hh <- (sapply(text, \(t) inch(grid::grobHeight(t), grid::convertHeight)) / 2 +
+                   inch(pad, grid::convertHeight) + border * .pt / 96 / 2) / per_unit
+  } else {
+    nodes$hw <- nodes$hh <- (0.375 * (dot * .pt + stroke * .stroke / 2) / 72 +
+                               stroke * .stroke / 2 / 96 / 2) / per_unit
+  }
+  e <- edges |>
+    left_join(nodes, by = c("panel", "from" = "name")) |>
+    rename(x0 = x, y0 = y, hw0 = hw, hh0 = hh) |>
+    left_join(nodes, by = c("panel", "to" = "name")) |>
+    mutate(dx = x - x0, dy = y - y0, len = sqrt(dx^2 + dy^2), ux = dx / len, uy = dy / len,
+           col = ifelse(paste(from, to) %in% highlight, "#BCAF6F", "black"),
+           style = ifelse(paste(from, to) %in% dashed, "dashed", "solid"),
+           g0 = gap / per_unit,
+           g1 = (gap + ifelse(col == "black", lw[["black"]], lw[["gold"]]) * .pt / 96 / 2) / per_unit,
+           s0 = if (boxes) pmin((hw0 + g0) / pmax(abs(ux), 1e-9), (hh0 + g0) / pmax(abs(uy), 1e-9)) else hw0 + g0,
+           s1 = if (boxes) pmin((hw + g1) / pmax(abs(ux), 1e-9), (hh + g1) / pmax(abs(uy), 1e-9)) else hw + g1,
+           xs = x0 + s0 * ux, ys = y0 + s0 * uy, xe = x - s1 * ux, ye = y - s1 * uy)
+  p + geom_segment(data = e, aes(x = xs, y = ys, xend = xe, yend = ye, linetype = style, color = col),
+                   arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+                   linewidth = ifelse(e$col == "black", lw[["black"]], lw[["gold"]]), show.legend = FALSE) +
+    scale_linetype_identity() + scale_color_identity()
+}
+
+# The red car, linear version: A ~ Bernoulli(1/2) (1 = woman), U ~ N(0, 1) aggression,
+# X = 2A + U car color on a continuous scale, Y = U + e claims. Population values:
+# Var(X) = 2^2 * 1/4 + 1 = 2, Cov(X, Y) = Var(U) = 1, so the fit on X alone is X/2 - 1/2;
+# E[Y | X, A] = X - 2A.
+n_car <- 1000
+car <- data.frame(A = rbinom(n_car, 1, 1/2), U = rnorm(n_car)) |>
+  mutate(X = 2 * A + U, Y = U + rnorm(n_car),
+         group = factor(A, levels = c(0, 1), labels = c("men", "women")))
+stopifnot(abs((2^2 * 1/4 + 1) - 2) < 1e-12)
+
+# The mileage world: M = mu0 + alpha A + U_M (thousands of miles a year),
+# Y = gamma A + beta M + U_Y (claims, hundreds of pounds a year), A = 1 for a woman.
+mu0 <- 10; alpha <- -4; beta <- 0.25; gamma <- -0.5; var_UM <- 4; pA <- 1/2
+NDE <- gamma; NIE <- alpha * beta; TE <- NDE + NIE
+prem <- data.frame(
+  predictor = rep(c("full", "path-specific", "counterfactually fair"), each = 2),
+  group = rep(c("men", "women"), 3),
+  mean = c(beta * mu0, gamma + beta * (mu0 + alpha),     # full: gamma A + beta M
+           beta * mu0, beta * (mu0 + alpha),              # path-specific: beta M
+           beta * mu0, beta * mu0))                       # counterfactually fair: beta (M - alpha A)
+# Each rule shifted by a constant so that all three collect the average claim (equal group
+# sizes): a constant keeps both fairness properties and every gap between groups.
+avg_claim <- pA * (gamma + beta * (mu0 + alpha)) + (1 - pA) * beta * mu0
+prem <- prem |> group_by(predictor) |> mutate(level = mean - mean(mean) + avg_claim) |> ungroup()
+# Refit on M alone: slope beta + gamma Cov(A, M) / Var(M); the gap is alpha times the slope.
+var_M <- alpha^2 * pA * (1 - pA) + var_UM
+slope_refit <- beta + gamma * alpha * pA * (1 - pA) / var_M
+R2 <- alpha^2 * pA * (1 - pA) / var_M
+stopifnot(abs(NDE + 0.5) < 1e-12, abs(NIE + 1) < 1e-12, abs(TE + 1.5) < 1e-12,
+          abs(var_M - 8) < 1e-12, abs(slope_refit - 0.3125) < 1e-12,
+          abs(alpha * slope_refit - (NIE + R2 * NDE)) < 1e-12, abs(alpha * slope_refit + 1.25) < 1e-12,
+          isTRUE(all.equal(prem$mean, c(2.5, 1.0, 2.5, 1.5, 2.5, 2.5))),
+          abs(avg_claim - 1.75) < 1e-12,
+          isTRUE(all.equal(prem$level, c(2.5, 1.0, 2.25, 1.25, 1.75, 1.75))))
+```
+
+## The lenses {minutes="1"}
+
+::: {.notes}
+The lenses now have names. This week: Data selection, Ownership, Leverage.
+:::
+
+- **Goal selection.** What are we optimizing or predicting?
+- **Data selection.** Who is in the data?
+- **Honest reporting.** Which comparison gets reported?
+- **Justice.** Who bears the error?
+- **Ownership.** You have to choose, so choose, and defend it.
+- **Leverage.** What can be changed, and how?
+
+Each ends with the same two words: *and why?*
+
+## {.inverse}
+
+::: {.notes}
+Deck estimate 82, over the 80 by 2 since the two temporal-depth slides: title 1, the lenses 1, warm-up 4, the red car 21, direct and indirect effects 16, two fair predictors 19, luck and responsibility 9, maternity-leave item 6, temporal depth 4, lenses this week 1. Cuts (1) and (2) bring it under 80. Dark = rush or skip.
+
+Questions before the reveal: her price had she been a man (Part 1); the effect not through mileage (Part 2); removing gender along one path (Part 3). Protected: holding aggression fixed (Part 1).
+
+Cut order: (1) "Mediation with an interaction"; (2) "Intersectionality"; (3) "Holding a mediator fixed" to its first two lines; (4) the maternity-leave item's third question. Do not cut the written commitment, the computation, the questions above, the comparison of premiums, your own premium, the two-mediators question, or the item's first two questions.
+
+Pace: 0:06 Part 1; 0:27 Part 2; 0:43 Part 3; 1:02 Part 4; 1:11 maternity-leave item; 1:17 temporal depth; 1:21 lenses; 1:22 end.
+:::
+
+### Week 8
+
+Part 1: The red car
+
+Part 2: Direct and indirect effects
+
+Part 3: Two fair predictors
+
+Part 4: Luck and responsibility
+
+## Warm-up {minutes="4"}
+
+::: {.notes}
+QUESTION: your route as arrows; which arrow is the judgment about?
+
+Two or three from the room. Keep one where the attribute is deliberately left out.
+:::
+
+You were asked to bring one decision in which an attribute is used, or deliberately not used, with one route by which it could affect the outcome, and whether that route is fair.
+
+::: {.ask}
+Draw your route as arrows, from the attribute to the outcome. Which arrow is your judgment about?
+:::
+
+# Part 1: The red car
+
+## Pricing without gender
+
+::: {.notes}
+Test-Achats, a Belgian consumers' association. The Court struck down the exemption that let member states allow gender-based premiums. The Commission's guidelines: gender may still be used at the aggregate level, not to set an individual's premium.
+:::
+
+Court of Justice of the European Union, press release on *Test-Achats*, 1 March 2011:
+
+> "Taking the gender of the insured individual into account as a risk factor in insurance contracts constitutes discrimination"
+
+From 21 December 2012: no differences by gender in individuals' premiums, in new contracts.
+
+::: {.source}
+Court of Justice of the European Union (2011), Press Release No 12/11, 1 March 2011, on Case C-236/09, *Association belge des Consommateurs Test-Achats ASBL and Others v Conseil des ministres*, https://curia.europa.eu/site/upload/docs/application/pdf/2011-03/cp110012en.pdf, pages 1--2. European Commission (2012), Guidelines on the application of Council Directive 2004/113/EC to insurance, in the light of the judgment in Case C-236/09 (Test-Achats), *Official Journal of the European Union* C 11, 13 January 2012, 1--11, paragraphs 5 and 14.
+:::
+
+## The red car
+
+::: {.notes}
+Kusner et al.'s first scenario, with race; ms4ds has it with gender, A = 1 for a woman. Women drive more red cars and are no more aggressive.
+:::
+
+```{r dag_redcar, fig.height=1.7, fig.alt="A causal graph in boxes: A, gender, points into X, car color; U, aggression, points into X and into Y, claims. There is no arrow from A to U or from A to Y."}
+rc <- data.frame(name = c("A: gender", "X: car color", "U: aggression", "Y: claims"),
+                 x = c(0, 1.25, 2.5, 3.75), y = c(1, 0, 1, 0))
+draw_dag(rc, data.frame(from = c("A: gender", "U: aggression", "U: aggression"),
+                        to = c("X: car color", "X: car color", "Y: claims")),
+         boxes = TRUE, text_size = 5.5, xlim = c(-0.75, 4.5), ylim = c(-0.3, 1.3))
+```
+
+Aggression $U$ is never observed.
+
+Fairness through unawareness: price on $X$, never on $A$. (The law is more detailed; this is the model's version.)
+
+::: {.source}
+Kusner, Loftus, Russell and Silva (2017), "Counterfactual Fairness," *Advances in Neural Information Processing Systems* 30; arXiv:1703.06856v3, Scenario 1, page 4 (with race as $A$). Loftus, *Modern Statistics 4 Data Science*, section 3.4.1, https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models (with gender).
+:::
+
+## Is the price fair? {minutes="2"}
+
+::: {.notes}
+QUESTION: the unaware price, fair to women? Yes or no, one reason.
+
+Two minutes, written, alone.
+:::
+
+::: {.ask}
+The insurer prices on the car alone. Is that price fair to women? Write yes or no, and one reason.
+:::
+
+## The red car in numbers {minutes="3"}
+
+::: {.notes}
+QUESTION: the fit on X alone: who is charged more, who claims more?
+
+Two minutes, in pairs if they like. Answer on the next slide.
+:::
+
+$$
+X = 2A + U, \qquad Y = U + \varepsilon
+$$
+
+$A = 1$ for a woman, half the drivers; $U$ and $\varepsilon$ are $N(0, 1)$, independent of each other and of $A$. Claims and prices are measured from the average.
+
+::: {.ask}
+Fit $Y$ on $X$ alone. Which group does it charge more, and by how much? Which group claims more?
+:::
+
+## The unaware price
+
+::: {.notes}
+Var(X) = 2, Cov(X, Y) = 1, so slope 1/2 and intercept -1/2. The points are a sample; the numbers are population values.
+:::
+
+In the population, the price from $X$ alone is $\tfrac12 X - \tfrac12$: women $\tfrac12$ on average, men $-\tfrac12$. Both groups claim $0$.
+
+```{r redcar_plot, fig.height=3.1, fig.alt="Scatter plot of claims Y against car color X for 1,000 simulated drivers, men in navy and women in gold, the gold cloud shifted two units right. A dashed black line of slope one half runs through both clouds; a navy line Y = X and a gold line Y = X - 2 run through the men's and the women's clouds."}
+ggplot(car, aes(X, Y, color = group)) +
+  geom_point(alpha = 0.35, size = 1.1) +
+  geom_abline(intercept = 0, slope = 1, color = navy, linewidth = 1.2) +
+  geom_abline(intercept = -2, slope = 1, color = gold, linewidth = 1.2) +
+  geom_abline(intercept = -1/2, slope = 1/2, color = "black", linetype = "dashed", linewidth = 1.2) +
+  scale_color_manual(values = two, name = NULL) +
+  labs(x = "X: car color (higher is redder)", y = "Y: claims") +
+  guides(color = guide_legend(override.aes = list(alpha = 1, size = 3))) +
+  theme(legend.position = "right")
+```
+
+Dashed: the price from $X$ alone. Solid: the best price from $X$ and $A$.
+
+## One driver {minutes="3"}
+
+::: {.notes}
+QUESTION: her price, had she been a man? How?
+
+Let them try before the click. Same U in both columns: the reading's Definition 5.
+:::
+
+::: {.ask}
+A woman's car scores $X = 2.6$. What would her price have been, had she been a man?
+:::
+
+. . .
+
+| | she, $A = 1$ | had $A$ been $0$ |
+|:---|---:|---:|
+| $U = X - 2A$ | $0.6$ | $0.6$ |
+| $X = 2A + U$ | $2.6$ | $0.6$ |
+| price from $X$ alone, $\tfrac12 X - \tfrac12$ | $0.8$ | $-0.2$ |
+| price from $X$ and $A$, $X - 2A$ | $0.6$ | $0.6$ |
+
+Abduction: find $U$. Action: set $A$. Prediction: recompute with the same $U$.
+
+::: {.source}
+Barocas, Hardt and Narayanan (2023), *Fairness and Machine Learning: Limitations and Opportunities*, MIT Press, https://fairmlbook.org/pdf/fairmlbook.pdf, chapter 5, Definition 5, page 123.
+:::
+
+## Counterfactual fairness
+
+::: {.notes}
+Kusner et al.'s Definition 5 and Lemma 1. Their line on the red car: regressing on X alone "may introduce unfairness into an otherwise fair world."
+:::
+
+$\hat Y(a)$: the prediction for the same person, with $U$ as abducted, had $A$ been $a$.
+
+::: {.leave}
+$\hat Y$ is counterfactually fair if, given what was observed, $\hat Y(a)$ and $\hat Y(a')$ have the same distribution for every $a'$.
+:::
+
+Lemma 1: a function of the non-descendants of $A$ is counterfactually fair. Here, $X - 2A = U$; any non-constant price from $X$ alone is not.
+
+::: {.source}
+Kusner, Loftus, Russell and Silva (2017), as above: Definition 5, page 3; Lemma 1, page 5; the quotation, page 4; prices from $X$ alone, page 15.
+:::
+
+## Holding aggression fixed {minutes="2"}
+
+::: {.notes}
+QUESTION: what justifies holding U fixed; what evidence for X = 2A + U?
+
+Expected: holding U assumes gender does not shape aggression (no arrow A -> U); 2A + U assumes one additive shift for everyone, and U is never observed, so data on A and X alone cannot check it. Arrows and equations: claims about the world. Which effects count: judgment.
+
+Lens: Leverage. What is held fixed, and is that realistic?
+:::
+
+::: {.ask}
+The counterfactual driver keeps her $U$. What justifies holding aggression fixed when gender changes? What evidence could support $X = 2A + U$?
+
+Which of your answers are about how the world works vs which effects are acceptable?
+:::
+
+## Conditioning or intervening {minutes="2"}
+
+::: {.notes}
+QUESTION: no effect, yet a coefficient of -2: which is conditioning?
+
+Intervening: no directed path from A to Y, so do(A) leaves claims alone. Conditioning: the -2 compares women and men with the same car color. X is a collider of A and U: at a given X, a woman's color owes 2 to A, so her U, and her expected claims, are 2 lower.
+:::
+
+::: {.retrieval}
+Here $do(A)$ has no effect on $Y$. In the fit $X - 2A$, the coefficient on $A$ is $-2$.
+
+Which is a statement about intervening, and which about conditioning?
+:::
+
+# Part 2: Direct and indirect effects
+
+## Mediation example
+
+::: {.notes}
+WRITE THE TWO EQUATIONS ON THE BOARD: they are used through Part 3.
+
+Same insurer, a world where gender does affect claims. Men 10,000 miles a year, women 6,000; £25 a year per thousand miles; women £50 less at the same mileage.
+:::
+
+```{r dag_mileage, fig.height=1.9, fig.alt="A causal graph in boxes: A, gender, points into M, mileage, and into Y, claims; M points into Y."}
+mw <- data.frame(name = c("A: gender", "M: mileage", "Y: claims"), x = c(0, 1.6, 3.2), y = c(0, 1, 0))
+draw_dag(mw, data.frame(from = c("A: gender", "M: mileage", "A: gender"), to = c("M: mileage", "Y: claims", "Y: claims")),
+         boxes = TRUE, text_size = 5.5, xlim = c(-0.7, 3.9), ylim = c(-0.3, 1.3))
+```
+
+$$
+M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
+$$
+
+$M$ in thousands of miles a year, $Y$ in hundreds of pounds a year. $U_M$ and $U_Y$ have mean $0$ and are independent of each other and of $A$.
+
+Invented values: $\mu_0 = 10$, $\alpha = -4$, $\beta = 0.25$, $\gamma = -0.5$.
+
+## Splitting an effect {minutes="3"}
+
+::: {.notes}
+QUESTION: for one person, the part of the effect not through mileage?
+
+Most will say: compare at equal mileage. That is the CDE; the natural effect holds mileage at what it would have been.
+:::
+
+::: {.ask}
+Gender affects claims directly and through mileage. For one person, how would you define the part of the effect that does not go through mileage?
+:::
+
+. . .
+
+$Y(a, m)$: claims under $do(A := a, M := m)$. $\quad M(a)$: mileage under $do(A := a)$.
+
+Controlled: $\text{CDE}(m) = E[Y(1, m) - Y(0, m)]$, everyone at mileage $m$.
+
+Natural: $Y(1, M(0))$, a woman driving the miles she would have driven as a man.
+
+::: {.source}
+The reading writes $Y_{X := 1,\, Z := Z_{X := 0}}$ for $Y(1, M(0))$, with $X$ the treatment and $Z$ the mediator: Barocas, Hardt and Narayanan (2023), page 128.
+:::
+
+## Direct and indirect effects {minutes="3"}
+
+::: {.notes}
+Add and subtract E[Y(1, M(0))]; no model assumed. The reading's indirect effect holds A at 0 (page 128): that pair adds up to the TE only without an interaction.
+:::
+
+$$
+\begin{aligned}
+\text{TE} &= E[Y(1, M(1)) - Y(0, M(0))] \\
+&= \underbrace{E[Y(1, M(0)) - Y(0, M(0))]}_{\text{NDE}} \\
+&\quad + \underbrace{E[Y(1, M(1)) - Y(1, M(0))]}_{\text{NIE}}
+\end{aligned}
+$$
+
+::: {.leave}
+Change gender first, keeping mileage where it would have been; then change mileage, keeping gender at its new value. In any model, the two steps add up to the TE.
+:::
+
+## In the linear model {minutes="4"}
+
+::: {.notes}
+QUESTION: CDE, NDE, NIE, TE in the linear model?
+
+CDE: Y(1, m) - Y(0, m) = gamma. NDE: the same at m = M(0), so gamma. NIE: Y(1, M(1)) - Y(1, M(0)) = beta (M(1) - M(0)) = beta (alpha + U_M - U_M) = alpha beta. TE: gamma + alpha beta.
+:::
+
+$$
+M(a) = \mu_0 + \alpha a + U_M, \qquad Y(a, m) = \gamma a + \beta m + U_Y
+$$
+
+::: {.ask}
+What are the CDE, the NDE, the NIE and the TE?
+:::
+
+. . .
+
+$$
+\text{CDE}(m) = \text{NDE} = \gamma, \qquad \text{NIE} = \alpha\beta, \qquad \text{TE} = \gamma + \alpha\beta
+$$
+
+::: {.leave}
+With no interaction, the indirect effect is the product of the coefficients along the path.
+:::
+
+## Holding a mediator fixed {minutes="3"}
+
+::: {.notes}
+Point: the NDE needs Y(1, M(0)), which nobody observes. The tempting substitute, regressing on A and M, holds mileage fixed in the data, not by intervention.
+With Z: at equal mileage a woman is more likely to drive for work, so the coefficient on A comes out above gamma, the direct effect.
+Lens: Leverage.
+:::
+
+$Y(1, M(0))$ is not an observable outcome: the model supplies it.
+
+```{r dag_work, fig.height=1.9, fig.alt="A causal graph in boxes: A, gender, points into M, mileage, and into Y, claims; M points into Y; Z, drives for work, points into M and into Y."}
+wk <- data.frame(name = c("A: gender", "M: mileage", "Y: claims", "Z: drives for work"),
+                 x = c(0, 1.2, 3.0, 3.9), y = c(0, 1.1, 0, 1.1))
+draw_dag(wk, data.frame(from = c("A: gender", "M: mileage", "A: gender", "Z: drives for work", "Z: drives for work"),
+                        to = c("M: mileage", "Y: claims", "Y: claims", "M: mileage", "Y: claims")),
+         boxes = TRUE, text_size = 5.5, xlim = c(-0.7, 5.0), ylim = c(-0.3, 1.4))
+```
+
+Driving for work, $Z$, adds miles, and adds claims beyond its miles. A woman with the same mileage as a man is more likely to drive for work.
+
+So comparing women and men at equal mileage does not hold mileage fixed: it mixes in $Z$. $M$ is a collider on $A \to M \leftarrow Z$.
+
+# Part 3: Two fair predictors
+
+## Removing the effect of gender {minutes="3"}
+
+::: {.notes}
+QUESTION: from the full premium, remove gender along every path; along A -> Y only.
+
+Two minutes, in pairs; then the hint. Their answers can depend on the parameters.
+:::
+
+$$
+M = \mu_0 + \alpha A + U_M, \qquad Y = \gamma A + \beta M + U_Y
+$$
+
+The insurer's best premium before 2012: $\;Y_{\text{full}} = \gamma A + \beta M$. These premiums are population quantities: they depend on the unknown $\mu_0, \alpha, \beta, \gamma$, and so can your answers.
+
+::: {.ask}
+Write down a premium that removes the effect of gender along every path. Then one that removes it along $A \to Y$ only, and keeps the path through mileage.
+:::
+
+. . .
+
+Hint: three steps, as for the red car driver. The first is abduction: find $U_M$ from what you observe.
+
+## The counterfactually fair premium {minutes="3"}
+
+::: {.notes}
+Abduction of U_M, then A := 0 along every path; Lemma 1. A woman is priced as if she drove 4,000 more miles.
+:::
+
+Abduction: $U_M = M - \mu_0 - \alpha A$. $\;$ Action: $A := 0$. $\;$ Prediction: $M(0) = M - \alpha A$.
+
+$$
+Y_{\text{CF}} = \beta\,(M - \alpha A) = \beta\,(\mu_0 + U_M)
+$$
+
+A function of $U_M$ alone, so counterfactually fair. It takes $A$ as an input.
+
+## The path-specific premium {minutes="3"}
+
+::: {.notes}
+Chiappa's definition, read out. The direct arrow is judged unfair, the mileage path fair. The result never uses A.
+:::
+
+> "a decision is fair toward an individual if it coincides with the one that would have been taken in a counterfactual world in which the sensitive attribute along the unfair pathways were different"
+
+Set $A := 0$ on $A \to Y$ only, and keep the observed mileage:
+
+$$
+Y_{\text{PS}} = \beta M
+$$
+
+::: {.source}
+Chiappa (2019), "Path-Specific Counterfactual Fairness," *Proceedings of the AAAI Conference on Artificial Intelligence* 33(01), 7801--7808, doi:10.1609/aaai.v33i01.33017801, page 7801.
+:::
+
+## The premiums compared
+
+::: {.notes}
+Each rule shifted by a constant to collect the average claim, £175 a policy; a constant keeps both fairness properties. Gaps: the TE, the NIE, zero. Lens: Ownership.
+:::
+
+```{r premiums, fig.height=2.1, fig.alt="Dot chart of average premiums in hundreds of pounds a year, each rule collecting 1.75 on average. Full prediction: men 2.50, women 1.00. Path-specific: men 2.25, women 1.25. Counterfactually fair: men 1.75, women 1.75."}
+lev <- c("counterfactually fair", "path-specific", "full")
+prem |>
+  mutate(row = match(predictor, lev), y = row + ifelse(group == "women", 0.14, -0.14)) |>
+  ggplot(aes(level, y, color = group)) +
+  geom_point(size = 5) +
+  geom_text(aes(x = level + ifelse(group == "women", -0.22, 0.22), label = sprintf("%.2f", level)),
+            size = 5, show.legend = FALSE) +
+  scale_color_manual(values = two, name = NULL) +
+  scale_x_continuous(limits = c(0.7, 2.9), breaks = c(1, 1.5, 2, 2.5)) +
+  scale_y_continuous(breaks = 1:3, labels = lev, limits = c(0.6, 3.4)) +
+  labs(x = "average premium, hundreds of pounds a year", y = NULL) +
+  theme(legend.position = "right", panel.grid.minor = element_blank())
+```
+
+All three collect the same average premium, £175 a policy: the level is a choice too.
+
+Up to constants: $\;Y_{\text{full}} - Y_{\text{PS}} = \gamma A, \quad Y_{\text{PS}} - Y_{\text{CF}} = \alpha\beta A$
+
+::: {.leave}
+The two fair premiums differ by the contribution of the path someone judged fair.
+:::
+
+## Your own premium {minutes="2"}
+
+::: {.notes}
+QUESTION: which premium for your own policy; and not knowing your group?
+
+Written, alone, one minute; then two answers.
+:::
+
+::: {.ask}
+Which of the three would you want your own premium computed from? Would you choose the same one if you did not know which group you were in?
+:::
+
+## Whose judgment {minutes="3"}
+
+::: {.notes}
+Who decides which path is fair. The second quotation is the textbook, not Kusner et al.
+:::
+
+Kusner et al., on Berkeley admissions ($A$: female applicant; $X$: course applied to): "the higher rejection among female than male applicants is acceptable, if the mechanism A → X is interpreted as a choice which is under the control of the applicant."
+
+. . .
+
+Barocas, Hardt and Narayanan, on the same example: "This, however, is a substantive judgment that may not be a fact."
+
+. . .
+
+Nabi and Shpitser: "The specific paths which correspond to discrimination are a domain specific issue."
+
+::: {.source}
+Kusner, Loftus, Russell and Silva (2017), supplementary material, page 15 of arXiv:1703.06856v3. Barocas, Hardt and Narayanan (2023), chapter 5, page 119. Nabi and Shpitser (2018), "Fair Inference on Outcomes," *Proceedings of the AAAI Conference on Artificial Intelligence* 32(1), doi:10.1609/aaai.v32i1.11553, page 4 of arXiv:1705.10378v4.
+:::
+
+## Mediation with an interaction {.inverse minutes="2"}
+
+::: {.notes}
+Skip if behind. Why the decomposition pairs its reference levels: here the indirect effect depends on the level of A.
+:::
+
+$Y = \gamma A + \beta M + \delta AM + U_Y$: each mile adds $\beta$ for men and $\beta + \delta$ for women. Subscripts give the level held fixed: $\text{NDE}_a$ holds mileage at $M(a)$, $\text{NIE}_a$ holds $A$ at $a$.
+
+$$
+\begin{aligned}
+\text{NDE}_0 &= \gamma + \delta\mu_0, & \text{NIE}_1 &= \alpha(\beta + \delta) \\
+\text{NDE}_1 &= \gamma + \delta(\mu_0 + \alpha), & \text{NIE}_0 &= \alpha\beta
+\end{aligned}
+$$
+
+$\text{NDE}_0 + \text{NIE}_1 = \text{NDE}_1 + \text{NIE}_0 = \text{TE} = \gamma + \alpha\beta + \delta(\mu_0 + \alpha)$. Mixed pairs miss by $\alpha\delta$: $\text{NDE}_0 + \text{NIE}_0 = \text{TE} - \alpha\delta$. The product $\alpha\beta$ is $\text{NIE}_0$ only.
+
+# Part 4: Luck and responsibility
+
+## Moral luck
+
+::: {.notes}
+Moral luck names the problem; the control principle is one response.
+:::
+
+> "Moral luck occurs when an agent can be correctly treated as an object of moral judgment despite the fact that a significant aspect of what she is assessed for depends on factors beyond her control." (Nelkin)
+
+. . .
+
+> "The control principle says that we should only judge people to the extent that the factors we judge them on are under their control." (ms4ds)
+
+::: {.source}
+Nelkin, "Moral Luck," *The Stanford Encyclopedia of Philosophy*, first published 26 January 2004, substantive revision 20 January 2025, https://plato.stanford.edu/entries/moral-luck/, opening sentence. Loftus, *Modern Statistics 4 Data Science*, section 3.4.2, https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck.
+:::
+
+## Insurance and the middle view {minutes="1"}
+
+::: {.notes}
+Barocas, Hardt and Narayanan's middle view of equality of opportunity; insurance is their example.
+:::
+
+The middle view of equality of opportunity: decision makers "must, to some degree, treat seemingly dissimilar people similarly when the causes of these dissimilarities are themselves problematic."
+
+> "The middle view has particular purchase in the case of insurance, where we really might want insurers to ignore the additional costs that they are likely to face in setting the price of a policy for someone with an expensive pre-existing condition outside the person's control" (Barocas, Hardt and Narayanan)
+
+::: {.source}
+Barocas, Hardt and Narayanan (2023), chapter 4, pages 84 and 85.
+:::
+
+## Luck egalitarianism {minutes="1"}
+
+::: {.notes}
+A related response, about who gets what; a premium is who pays what.
+:::
+
+Brute luck: risks a person did not choose. Option luck: how a chosen gamble turns out. Luck egalitarians often "deny that instances of differential option luck are unjust": losing a gamble you chose to take is not, on this view, an injustice, while brute bad luck can be.
+
+::: {.leave}
+Barocas, Hardt and Narayanan: whether a person has control over an attribute "cannot be expressed in the statistical language of conditional probabilities and expectations."
+:::
+
+::: {.source}
+Lippert-Rasmussen, "Justice and Bad Luck," *The Stanford Encyclopedia of Philosophy*, first published 20 June 2005, substantive revision 2 February 2023, https://plato.stanford.edu/entries/justice-bad-luck/, section 7. Barocas, Hardt and Narayanan (2023), chapter 4, page 92.
+:::
+
+## Two mediators {minutes="3"}
+
+::: {.notes}
+QUESTION: each path fair, when the mediator was shaped by the attribute? What makes the difference?
+
+Pairs, then two reports. Prior arrests can reflect where police look (the predictive-policing discussion) and less economic opportunity, not only behavior. The guidelines' example: engine size.
+:::
+
+```{r dag_two, fig.height=1.7, fig.alt="Two causal graphs in boxes. Left: gender points into mileage, which points into claims. Right: race points into prior arrests, which points into the risk score."}
+two_m <- data.frame(name = c("A: gender", "M: mileage", "Y: claims", "A: race", "M: prior arrests", "R: risk score"),
+                    x = c(0, 1.5, 3, 0, 1.5, 3), y = c(0, 0.8, 0, 0, 0.8, 0),
+                    panel = factor(rep(c("insurance", "criminal justice"), each = 3), levels = c("insurance", "criminal justice")))
+draw_dag(two_m, data.frame(from = c("A: gender", "M: mileage", "A: race", "M: prior arrests"),
+                           to = c("M: mileage", "Y: claims", "M: prior arrests", "R: risk score"),
+                           panel = factor(rep(c("insurance", "criminal justice"), each = 2), levels = c("insurance", "criminal justice"))),
+         boxes = TRUE, text_size = 4.5, xlim = c(-0.6, 3.6), ylim = c(-0.25, 1.05), strip_size = 16)
+```
+
+The Commission's guidelines on Test-Achats: "The use of risk factors which might be correlated with gender therefore remains possible, as long as they are true risk factors in their own right."
+
+::: {.ask}
+Is each path fair, when the mediator was itself shaped by the attribute? What makes the difference between the two?
+:::
+
+::: {.source}
+European Commission (2012), as above, paragraph 17 and its footnote 3, page 4.
+:::
+
+## Intersectionality {.inverse}
+
+::: {.notes}
+Skip if behind.
+:::
+
+$$
+Y = \gamma_1 A_1 + \gamma_2 A_2 + \delta A_1 A_2 + \dots
+$$
+
+The effect of $A_1$ is $\gamma_1$ when $A_2 = 0$ and $\gamma_1 + \delta$ when $A_2 = 1$. Leaving out $\delta$ assumes the two are equal.
+
+::: {.source style="color: #BCAF6F"}
+Yang, Loftus and Stoyanovich (2021), "Causal Intersectionality and Fair Ranking," *2nd Symposium on Foundations of Responsible Computing (FORC 2021)*, LIPIcs 192, 7:1--7:20, doi:10.4230/LIPIcs.FORC.2021.7.
+:::
+
+## Hiring and maternity leave {minutes="6"}
+
+::: {.notes}
+QUESTION: classify the three paths; what each fair predictor removes.
+
+Six minutes, written, alone; the third question is the first to cut. No house answer to the first.
+:::
+
+:::: {.columns}
+::: {.column width="42%"}
+```{r dag_leave, fig.width=4.8, fig.height=2.6, fig.alt="A causal graph in boxes: A, gender, points into Y, hired, and into maternity leave; maternity leave points into years of experience and into Y; years of experience points into Y."}
+ml <- data.frame(name = c("A: gender", "maternity\nleave", "years of\nexperience", "Y: hired"),
+                 x = c(0, 0.35, 1.9, 2.55), y = c(0, 1.2, 1.2, 0))
+draw_dag(ml, data.frame(from = c("A: gender", "maternity\nleave", "maternity\nleave", "years of\nexperience", "A: gender"),
+                        to = c("maternity\nleave", "years of\nexperience", "Y: hired", "Y: hired", "Y: hired")),
+         boxes = TRUE, text_size = 5.5, xlim = c(-0.6, 3.1), ylim = c(-0.35, 1.6))
+```
+
+- $A \to Y$: the panel
+- leave $\to Y$: a CV gap
+- leave $\to$ experience $\to Y$: fewer years
+:::
+::: {.column width="58%"}
+::: {.ask}
+1. Classify each path from $A$ to $Y$ as fair or unfair, with a reason.
+2. Given your classification, what does a path-specific predictor remove? A counterfactually fair one?
+3. If fathers could take leave on the same terms but mothers still took most of it, would your answers for the leave paths change?
+:::
+:::
+::::
+
+## Permissions with a time stamp {minutes="2"}
+
+::: {.notes}
+Conditioning on V, or letting A act through V, accepts whatever disparity V has. Top bar: demographic parity and counterfactual fairness allow nothing after A. Bottom bar: equality of opportunity allows the outcome itself, which essentially justifies all disparities.
+:::
+
+```{r td_timeline, fig.width=9, fig.height=3.2, fig.alt="A hiring timeline: A, then X (qualifications), then Y (job performance), then D (the decision), with arrows from A to X, X to Y, Y to D, and a dashed curved arrow from A to Y. Below it, three bars start at A and run later in time: demographic parity and counterfactual fairness allow nothing after A; path-specific fairness and conditional parity allow up to X; equality of opportunity allows up to Y."}
+nx <- c(A = 0, X = 2, Y = 4, D = 6)
+nodes <- data.frame(x = nx, y = 0, name = names(nx),
+                    sub = c("attribute", "qualifications", "performance", "decision"))
+bars <- data.frame(y = c(-1.2, -1.75, -2.3), xend = c(0, 2, 4), col = c(navy, slate, gold),
+                   label = c("demographic parity, counterfactual fairness: nothing after A",
+                             "path-specific fairness, conditional parity: up to X",
+                             "equality of opportunity: up to Y"))
+ggplot() +
+  annotate("segment", x = c(0.28, 2.28, 4.28), xend = c(1.72, 3.72, 5.72), y = 0, yend = 0,
+           arrow = arrow(length = unit(0.25, "cm"), type = "closed"), linewidth = 0.7) +
+  annotate("curve", x = 0.2, xend = 3.8, y = 0.25, yend = 0.25, curvature = -0.25,
+           linetype = "dashed", linewidth = 0.7, arrow = arrow(length = unit(0.25, "cm"), type = "closed")) +
+  geom_point(data = nodes, aes(x, y), size = 16, shape = 21, fill = "white", stroke = 0.8) +
+  geom_text(data = nodes, aes(x, y, label = name), size = 7) +
+  geom_text(data = nodes, aes(x, y - 0.55, label = sub), size = 4.6, color = slate) +
+  geom_segment(data = bars, aes(x = 0, xend = xend, y = y, yend = y, color = col), linewidth = 4,
+               lineend = "round") +
+  geom_text(data = bars, aes(x = xend + 0.25, y = y, label = label), hjust = 0, size = 4.8) +
+  scale_color_identity() +
+  coord_cartesian(xlim = c(-0.4, 9.6), ylim = c(-2.5, 1.1), clip = "off") +
+  theme_void()
+```
+
+A fairness criterion is a permission: conditioning on $V$, or letting $A$ act through $V$, accepts the disparity $V$ already has. A criterion that allows later variables lets more history count as justified.
+
+::: {.source}
+Loftus, "It's About Time: Fairness and Temporal Depth," NeurIPS 2023 Workshop on Algorithmic Fairness through the Lens of Time, https://neurips.cc/virtual/2023/78068.
+:::
+
+## Which arrows should count? {minutes="2"}
+
+::: {.notes}
+QUESTION: one mediator: how much in the person's control? Would you condition on it?
+
+The three types are a diagnostic, not a settled theory. The control column is our reading through moral luck. Takeaway: the same graph can call for opposite criteria, depending on how each arrow is read.
+:::
+
+| a path from $A$ that is | for example | blocking it | how much control |
+|:---|:---|:---|:---|
+| injustice-transmitting | unequal schooling | reduces unfairness | circumstantial luck |
+| justified mediation | own choices | is not needed | the person's own |
+| injustice-responsive | health need | is itself a harm | varies |
+
+. . .
+
+Control is not justice: luck is not always injustice, and a choice can be shaped by unjust circumstances. A criterion that allows later variables allows both.
+
+::: {.ask}
+Pick one mediator: college GPA, prior arrests, credit history. How much of it was in the person's control? Would you condition on it?
+:::
+
+::: {.source}
+Loftus (2023), as above. Kinds of moral luck: Nelkin, "Moral Luck," as above, section 1. Health need: Obermeyer, Powers, Vogeli and Mullainathan, "Dissecting racial bias in an algorithm used to manage the health of populations," *Science* 366(6464), 2019, 447-453, https://doi.org/10.1126/science.aax2342.
+:::
+
+## Lenses this week {minutes="1"}
+
+::: {.notes}
+Each lens, what it referred to this week. Nothing on the next week: it is not planned yet.
+:::
+
+- **Data selection.** Who is in the data? Each driver once, with one gender. $Y(1, M(0))$ is not observable.
+- **Ownership.** You have to choose, so choose, and defend it. Which paths are fair; the level of the premium; unaware or counterfactually fair.
+- **Leverage.** What can be changed, and how? Held fixed: aggression for the counterfactual driver, mileage at $M(0)$. Equal mileage in the data is not mileage held fixed.
