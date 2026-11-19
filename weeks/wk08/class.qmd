@@ -14,11 +14,6 @@ execute:
 This is the student version of the class sheet. The exercises are for your own time; the class works through everything under "In class". Answers are revealed in class.
 :::
 
-```{r setup, include=FALSE}
-library(ggplot2)
-theme_set(theme_minimal())
-```
-
 ## How this sheet works
 
 Exercises rederive or apply the lecture's results. Do them on your own
@@ -40,7 +35,9 @@ not give it.
 Notation as in the lecture. $A$ is the attribute, $M$ a mediator, $Y$
 the outcome, and $U$ terms are what the model leaves unobserved.
 $Y(a, m)$ is the outcome under $do(A := a, M := m)$ and $M(a)$ the
-mediator under $do(A := a)$. $\text{NDE}_a$ is the natural direct
+mediator under $do(A := a)$. $\text{CDE}(m)$ is the controlled direct
+effect, $E[Y(1, m) - Y(0, m)]$, with the mediator set to $m$ for
+everyone. $\text{NDE}_a$ is the natural direct
 effect with the mediator held at $M(a)$, and $\text{NIE}_a$ the natural
 indirect effect with $A$ held at $a$; without an interaction the
 subscripts can be dropped. Which value of $A$ is 1 is said in each
@@ -75,9 +72,8 @@ independent of $A$, and $\varepsilon$ is independent noise with mean 0.
 its average in each group, and what is each group's average $Y$?
 
 (c) An applicant with $A = 1$ has $X = 1.5$. Find their prediction.
-Then compute the prediction had their school not lowered the grade, by
-abduction, action and prediction. Is the prediction from $X$ alone
-counterfactually fair?
+Then compute the prediction had their school not lowered the grade. Is
+the prediction from $X$ alone counterfactually fair?
 
 (d) Find a counterfactually fair prediction with the same accuracy as
 the best prediction from $X$ and $A$. Does it use $A$?
@@ -103,11 +99,10 @@ Years of experience $M$ and annual pay $Y$, in thousands of pounds,
 follow
 
 $$
-M = 10 - 2A + U_M, \qquad Y = c - A + M + U_Y ,
+M = 10 - 2A + U_M, \qquad Y = 20 - A + M + U_Y ,
 $$
 
-with $U_M$ and $U_Y$ independent of $A$ and of each other, and $c$ a
-constant.
+with $U_M$ and $U_Y$ of mean 0, independent of $A$ and of each other.
 
 (a) Find $\text{CDE}(m)$, the NDE, the NIE and the TE.
 
@@ -217,7 +212,7 @@ offer; a hiring panel's shortlist.
 Without the notes, fill in the table: should an analysis hold the
 variable fixed, by conditioning or adjusting for it?
 
-| | to estimate a total effect of $A$ | to estimate a direct effect of $A$ | to predict $Y$ |
+| | to estimate a total effect of $A$ | to estimate a controlled direct effect of $A$ | to predict $Y$ |
 |:---|:---|:---|:---|
 | a confounder of $A$ and $Y$ | | | |
 | a mediator between $A$ and $Y$ | | | |
@@ -233,7 +228,7 @@ In another employer's data, women ($A = 1$) also earn less per year of
 experience:
 
 $$
-M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
+M = 10 - 2A + U_M, \qquad Y = 20 - A + M - 0.2\,A M + U_Y ,
 $$
 
 in years and thousands of pounds, with $U_M$ and $U_Y$ of mean 0,
@@ -242,10 +237,9 @@ independent of $A$ and of each other.
 (a) Find the TE.
 
 (b) Find $\text{NDE}_0$, the direct effect with experience held at the
-men's level, and $\text{NIE}_1$. Check that they add up to the TE.
+men's level, and $\text{NIE}_1$. What do they add up to?
 
-(c) Find $\text{NDE}_1$ and $\text{NIE}_0$. Check that they add up to
-the TE too.
+(c) Find $\text{NDE}_1$ and $\text{NIE}_0$. What do they add up to?
 
 (d) Someone reports $\text{NDE}_0$ and $\text{NIE}_0$ side by side. What
 do they add up to, and why is it not the TE?
@@ -258,22 +252,26 @@ the choice be justified to?
 
 > "All models are wrong but some are useful." (Box, 1979)
 
-Take the lecture's mileage example: women ($A = 1$), mileage $M$,
-claims $Y$ in hundreds of pounds. Two analysts have the same records of
-gender, mileage and claims. The first draws the lecture's graph. The
-second adds $Z$, driving for work, which adds miles and adds claims on
-top of what those miles add, and which the insurer does not record.
-Each fits their graph to the records:
+Take the lecture's mileage example: women ($A = 1$), mileage $M$ in
+thousands of miles a year, claims $Y$ in hundreds of pounds. Two
+analysts have the same records of gender, mileage and claims. The
+first draws the lecture's graph and fits it to the records by least
+squares. The second supposes that the graph is missing $Z$, a score for
+how much a person drives for work, which the insurer does not record.
+Each unit of $Z$ adds $4{,}000$ miles a year and, beyond what those
+miles add, £100 of claims. The second row is the world as it would be
+if the second analyst is right:
 
 | | direct effect | through mileage | total |
 |:---|---:|---:|---:|
-| first analyst (no $Z$) | $-0.07$ | $-1.43$ | $-1.5$ |
-| second analyst (with $Z$) | $-0.5$ | $-1.0$ | $-1.5$ |
+| first analyst, fitted (no $Z$) | $-0.07$ | $-1.43$ | $-1.5$ |
+| second analyst, supposed (with $Z$) | $-0.5$ | $-1.0$ | $-1.5$ |
 
-1. Each analyst computes the path-specific premium, removing the direct
-   path, and the counterfactually fair premium. How far apart are women's
-   and men's average premiums under each? Which numbers differ between
-   the analysts, and which do not?
+1. Under each row, find the path-specific premium, removing the direct
+   path, and the counterfactually fair premium, taken to be the
+   least-squares premium on $M + 4A$, the mileage a driver would have
+   had as a man. How far apart are women's and men's average premiums
+   under each? Which differ between the rows, and which do not?
 2. What evidence could tell the two graphs apart? Do the insurer's
    records? The same question for problem 1: with only gender,
    experience and pay, can the employer's data tell a direct effect
@@ -281,7 +279,7 @@ Each fits their graph to the records:
    pay?
 3. A regulator has to approve one pricing rule this year. Choose: wait
    for better evidence; adopt one analyst's graph; or require the
-   premium that is the same under both. Defend your choice against the
+   counterfactually fair premium. Defend your choice against the
    strongest objection to it. Who must the decision be justified to,
    and who pays if the graph behind it is wrong?
 
@@ -320,15 +318,16 @@ ethics or pragmatic ethics.
 
 ### Coding: two analysts, simulated
 
-You need `ggplot2`. The lecture's mileage example, with drivers who
-drive for work ($Z = 1$). Mileage is in thousands of miles and claims
-in hundreds of pounds. Each driver has two potential mileages, as a man
-and as a woman.
+Base R is enough. The lecture's mileage example with $Z$, the score
+for how much a person drives for work from discussion 2, drawn from a
+normal distribution with mean $1/4$ and variance $3/16$. Mileage is in
+thousands of miles a year and claims in hundreds of pounds. Each driver
+has two potential mileages, as a man and as a woman.
 
 ```{r analysts_starter, eval=FALSE}
 n <- 100000
 A <- rbinom(n, 1, 0.5)                  # 1 for a woman
-Z <- rbinom(n, 1, 0.25)                 # 1 for a driver who drives for work
+Z <- rnorm(n, 0.25, sqrt(0.1875))       # how much the driver drives for work
 U_M <- rnorm(n, 0, 2)
 U_Y <- rnorm(n, 0, 1)
 M0 <- 9 + 4 * Z + U_M                   # mileage had the driver been a man
@@ -346,8 +345,8 @@ coef(lm(Y ~ A + M))
 coef(lm(Y ~ A + M + Z))
 ```
 
-1. Complete the three lines and compute the TE, NDE and NIE. Every
-   driver has the same direct effect. Why?
+1. Complete the three lines and compute the TE, NDE and NIE. Does the
+   direct effect differ between drivers? Why?
 2. Run the two regressions. Which coefficient on $A$ is the direct
    effect, and which is the first analyst's from discussion 2?
 3. An auditor has only $A$, $M$ and $Y$. Which of the numbers above
@@ -359,7 +358,8 @@ coef(lm(Y ~ A + M + Z))
 
 - Barocas, Solon, Moritz Hardt and Arvind Narayanan, *Fairness and
   Machine Learning: Limitations and Opportunities* (MIT Press, 2023),
-  <https://fairmlbook.org>, chapter 5, page 119.
+  <https://fairmlbook.org>, chapter 4 (the three views of equality of
+  opportunity) and chapter 5, page 119.
 - Box, G. E. P., "Robustness in the Strategy of Scientific Model
   Building," in R. L. Launer and G. N. Wilkinson (eds.), *Robustness in
   Statistics* (Academic Press, 1979), 201--236,
@@ -368,11 +368,15 @@ coef(lm(Y ~ A + M + Z))
 - European Commission, "Guidelines on the application of Council
   Directive 2004/113/EC to insurance, in the light of the judgment of
   the Court of Justice of the European Union in Case C-236/09
-  (Test-Achats)," *Official Journal of the European Union* C 11,
-  13 January 2012, 1--11, paragraphs 5 and 17.
+  (Test-Achats)," 2012/C 11/01, *Official Journal of the European
+  Union* C 11, 13 January 2012, 1--11,
+  <https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL>,
+  paragraphs 5, 14 and 17.
 - Lippert-Rasmussen, Kasper, "Justice and Bad Luck," *The Stanford
   Encyclopedia of Philosophy*, first published 20 June 2005,
   substantive revision 2 February 2023,
-  <https://plato.stanford.edu/entries/justice-bad-luck/>.
-- Loftus, Joshua, *Modern Statistics 4 Data Science*, section 3.4.1,
-  <https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models>.
+  <https://plato.stanford.edu/entries/justice-bad-luck/>, section 7.
+- Loftus, Joshua, *Modern Statistics 4 Data Science*, sections 3.4.1
+  and 3.4.2,
+  <https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models>
+  and <https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck>.

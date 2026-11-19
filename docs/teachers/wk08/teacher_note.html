@@ -2389,7 +2389,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>Minimum class, about 45 minutes: problem 1 (a) and (b), discussion 2’s questions 1 and 3, discussion 3’s question 2 and discussion 4’s question 1. Spare minutes go to the coding under “If there is time” (about 25 minutes).</p>
+<p>Minimum class: problem 1 (a) and (b), discussion 2’s questions 1 and 3, discussion 3’s question 2 and discussion 4’s question 1. Spare minutes go to the coding under “If there is time”; it needs laptops with R, and base R is enough.</p>
 </section>
 <section id="if-you-read-on" class="level2">
 <h2 class="anchored" data-anchor-id="if-you-read-on">If you read on</h2>
@@ -2397,18 +2397,19 @@ window.Quarto = {
 <ul>
 <li>The exercises at the top of the sheet rederive or apply the lecture’s results; students do them on their own time and the class does not work them. Open the <a href="https://ethics4ds.com/teachers/wk08/class_complete.html">complete class sheet</a> on screen: green boxes are hints, opened in order after a few minutes; blue boxes are answers and example answers.</li>
 <li>The sheet has no task for next time: the next week is not yet planned, and its task comes with its readings.</li>
-<li>Problem 1 extends the lecture’s slide on mediation with an interaction, with new numbers. The lecture defined <span class="math inline">\(\text{NDE}_a\)</span> (mediator held at <span class="math inline">\(M(a)\)</span>) and <span class="math inline">\(\text{NIE}_a\)</span> (<span class="math inline">\(A\)</span> held at <span class="math inline">\(a\)</span>), and said the decomposition holds with the reference levels paired. (e) is the point: two correct direct effects, and someone chose which to report.</li>
-<li>Discussion 2’s lesson, which the room should reach rather than be told: causal structure decides the answers to fairness questions; the structure is usually uncertain; a decision still has to be made. The two analysts’ numbers are on the sheet, so the discussion is about what they mean, not arithmetic. The graph is the lecture’s slide on holding a mediator fixed, where driving for work makes mileage a collider; the notes work the numbers (“Two graphs, the same data”). The counterfactually fair premium is the same under both graphs; the path-specific premium is not. Box’s line is a section heading in his 1979 chapter.</li>
+<li>Problem 1 extends the lecture’s slide on mediation with an interaction, with new numbers. The lecture defined <span class="math inline">\(\text{NDE}_a\)</span> (mediator held at <span class="math inline">\(M(a)\)</span>) and <span class="math inline">\(\text{NIE}_a\)</span> (<span class="math inline">\(A\)</span> held at <span class="math inline">\(a\)</span>), and said the decomposition holds with the reference levels paired. In (e) there are two correct direct effects, and someone chose which to report. If the lecture’s dark slide on the interaction was skipped, the sheet’s notation section defines the subscripts.</li>
+<li>Discussion 2’s lesson, which the room should reach rather than be told: causal structure is very important for answering questions about fairness; the structure is usually uncertain; a decision still has to be made. The two analysts’ numbers are on the sheet, so the discussion is about what they mean, not arithmetic. The first row is fitted to the records; the second is the world if the second analyst is right, and cannot be fitted without recording driving for work. The graph is the lecture’s slide on holding a mediator fixed, where driving for work makes mileage a collider; the notes work the numbers (“Two graphs, the same data”). On the sheet, driving for work is a normally distributed score, so the two graphs imply exactly the same distribution of the records, not only the same means and covariances. The counterfactually fair premium, taken as the least-squares premium on <span class="math inline">\(M + 4A\)</span>, is the same under both graphs; the path-specific premium is not. Box’s line is a section heading in his 1979 chapter.</li>
 <li>Discussion 3 takes up ms4ds’s deontological argument for not using the attribute, which the lecture left for the class. The groups should argue for a criterion, not recite the frameworks.</li>
 <li>Discussion 4’s first question is a prompt from the 2024 class.</li>
-<li>Every item ends with a question about who the error falls on, who gains from the number reported, or who the choice could be justified to. Those questions are the point of the class. A group that has the number and skips the question has not finished; ask it.</li>
+<li>Every item ends with a question about who the error falls on, who gains from the number reported, or who the choice could be justified to. A group that has the number and skips the question has not finished; ask it.</li>
 </ul>
 <p>What students should see</p>
 <ul>
 <li>Problem 1: TE <span class="math inline">\(-4.6\)</span>; <span class="math inline">\(\text{NDE}_0 = -3\)</span> with <span class="math inline">\(\text{NIE}_1 =
--1.6\)</span>; <span class="math inline">\(\text{NDE}_1 = -2.6\)</span> with <span class="math inline">\(\text{NIE}_0 = -2\)</span>; the mixed pair <span class="math inline">\(-5\)</span>, off by <span class="math inline">\(\alpha\delta = 0.4\)</span>; the coefficient on <span class="math inline">\(A\)</span> with the interaction, <span class="math inline">\(-1\)</span>, is the direct effect at zero experience.</li>
+-1.6\)</span>; <span class="math inline">\(\text{NDE}_1 = -2.6\)</span> with <span class="math inline">\(\text{NIE}_0 = -2\)</span>; the mixed pair <span class="math inline">\(-5\)</span>, which leaves out <span class="math inline">\(\alpha\delta = 0.4\)</span>, so <span class="math inline">\(\text{TE} =
+\text{NDE}_0 + \text{NIE}_0 + \alpha\delta\)</span>; the coefficient on <span class="math inline">\(A\)</span> with the interaction, <span class="math inline">\(-1\)</span>, is the direct effect at zero experience.</li>
 <li>Discussion 2: the path-specific gap is £143 under the first analyst’s graph and £100 under the second’s; the counterfactually fair gap is zero under both.</li>
-<li>Coding, if reached: TE <span class="math inline">\(-1.5\)</span>, NDE <span class="math inline">\(-0.5\)</span>, NIE <span class="math inline">\(-1\)</span> exactly; the coefficient on <span class="math inline">\(A\)</span> near <span class="math inline">\(-0.08\)</span> without <span class="math inline">\(Z\)</span> (the population value is <span class="math inline">\(-0.07\)</span>) and near <span class="math inline">\(-0.5\)</span> with it.</li>
+<li>Coding, if reached: TE <span class="math inline">\(-1.5\)</span>, NDE <span class="math inline">\(-0.5\)</span>, NIE <span class="math inline">\(-1\)</span> exactly; the coefficient on <span class="math inline">\(A\)</span> near <span class="math inline">\(-0.08\)</span> without <span class="math inline">\(Z\)</span> (the population value is <span class="math inline">\(-0.07\)</span>) and near <span class="math inline">\(-0.5\)</span> with it. A path-specific premium computed from the fit without <span class="math inline">\(Z\)</span>, at equal revenue, charges women £21.43 less and men £21.43 more than the one with <span class="math inline">\(Z\)</span>.</li>
 </ul>
 <p>Where they get stuck</p>
 <ul>
@@ -2416,6 +2417,13 @@ window.Quarto = {
 <li>In the table, treating “control for more” as safer: a mediator held fixed removes part of the effect, and a collider opens a path.</li>
 <li>In discussion 2, concluding that because the graph is uncertain no premium can be defended. Question 3 asks them to decide anyway.</li>
 <li>In discussion 3, matching each framework to a criterion as if it were a quiz. Ask for the best case, then the case where it breaks.</li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>Box, G. E. P., “Robustness in the Strategy of Scientific Model Building,” in R. L. Launer and G. N. Wilkinson (eds.), <em>Robustness in Statistics</em> (Academic Press, 1979), 201–236, <a href="https://doi.org/10.1016/B978-0-12-438150-6.50018-2" class="uri">https://doi.org/10.1016/B978-0-12-438150-6.50018-2</a>, page 202.</li>
+<li>Loftus, Joshua, <em>Modern Statistics 4 Data Science</em>, section 3.4.1, <a href="https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models" class="uri">https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models</a>.</li>
 </ul>
 </section>
 

@@ -288,7 +288,7 @@ Note
 <h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
 <p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class. The class works the items under “In class,” in that order, then what it can of “If there is time.” Discussions are in groups of three or four, then with the room. The problem is gone through as soon as the room has tried it.</p>
 <p>The first half is about causal structure: what a model lets you hold fixed, and what changes when the graph changes. The second half is about the judgments the structure does not make: which framework, which criterion, which paths are fair, and what to do about luck. Every decision here prices or ranks people, and the fairness criteria give different prices from the same data. So each item ends by asking who the error falls on, who gains from the number that was reported, or who the choice could be justified to. The model narrows the answer; it does not give it.</p>
-<p>Notation as in the lecture. <span class="math inline">\(A\)</span> is the attribute, <span class="math inline">\(M\)</span> a mediator, <span class="math inline">\(Y\)</span> the outcome, and <span class="math inline">\(U\)</span> terms are what the model leaves unobserved. <span class="math inline">\(Y(a, m)\)</span> is the outcome under <span class="math inline">\(do(A := a, M := m)\)</span> and <span class="math inline">\(M(a)\)</span> the mediator under <span class="math inline">\(do(A := a)\)</span>. <span class="math inline">\(\text{NDE}_a\)</span> is the natural direct effect with the mediator held at <span class="math inline">\(M(a)\)</span>, and <span class="math inline">\(\text{NIE}_a\)</span> the natural indirect effect with <span class="math inline">\(A\)</span> held at <span class="math inline">\(a\)</span>; without an interaction the subscripts can be dropped. Which value of <span class="math inline">\(A\)</span> is 1 is said in each item.</p>
+<p>Notation as in the lecture. <span class="math inline">\(A\)</span> is the attribute, <span class="math inline">\(M\)</span> a mediator, <span class="math inline">\(Y\)</span> the outcome, and <span class="math inline">\(U\)</span> terms are what the model leaves unobserved. <span class="math inline">\(Y(a, m)\)</span> is the outcome under <span class="math inline">\(do(A := a, M := m)\)</span> and <span class="math inline">\(M(a)\)</span> the mediator under <span class="math inline">\(do(A := a)\)</span>. <span class="math inline">\(\text{CDE}(m)\)</span> is the controlled direct effect, <span class="math inline">\(E[Y(1, m) - Y(0, m)]\)</span>, with the mediator set to <span class="math inline">\(m\)</span> for everyone. <span class="math inline">\(\text{NDE}_a\)</span> is the natural direct effect with the mediator held at <span class="math inline">\(M(a)\)</span>, and <span class="math inline">\(\text{NIE}_a\)</span> the natural indirect effect with <span class="math inline">\(A\)</span> held at <span class="math inline">\(a\)</span>; without an interaction the subscripts can be dropped. Which value of <span class="math inline">\(A\)</span> is 1 is said in each item.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -316,7 +316,7 @@ X = U - A, \qquad Y = U + \varepsilon ,
 <ol type="a">
 <li><p>Draw the graph. Which variables are descendants of <span class="math inline">\(A\)</span>?</p></li>
 <li><p>Find the least-squares prediction of <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span> alone. What is its average in each group, and what is each group’s average <span class="math inline">\(Y\)</span>?</p></li>
-<li><p>An applicant with <span class="math inline">\(A = 1\)</span> has <span class="math inline">\(X = 1.5\)</span>. Find their prediction. Then compute the prediction had their school not lowered the grade, by abduction, action and prediction. Is the prediction from <span class="math inline">\(X\)</span> alone counterfactually fair?</p></li>
+<li><p>An applicant with <span class="math inline">\(A = 1\)</span> has <span class="math inline">\(X = 1.5\)</span>. Find their prediction. Then compute the prediction had their school not lowered the grade. Is the prediction from <span class="math inline">\(X\)</span> alone counterfactually fair?</p></li>
 <li><p>Find a counterfactually fair prediction with the same accuracy as the best prediction from <span class="math inline">\(X\)</span> and <span class="math inline">\(A\)</span>. Does it use <span class="math inline">\(A\)</span>?</p></li>
 <li><p>A contextual offer adds one unit to the grade of every applicant with <span class="math inline">\(A = 1\)</span>. Which prediction is that? Suppose that in fact some of those schools lower grades by two units and others by none. Who bears the error of a rule that adds one unit to all of them?</p></li>
 </ol>
@@ -357,9 +357,9 @@ X = U - A, \qquad Y = U + \varepsilon ,
 <h3 class="anchored" data-anchor-id="exercise-2.-a-pay-gap">Exercise 2. A pay gap</h3>
 <p>An employer’s pay data cover women (<span class="math inline">\(A = 1\)</span>) and men in the same jobs. Years of experience <span class="math inline">\(M\)</span> and annual pay <span class="math inline">\(Y\)</span>, in thousands of pounds, follow</p>
 <p><span class="math display">\[
-M = 10 - 2A + U_M, \qquad Y = c - A + M + U_Y ,
+M = 10 - 2A + U_M, \qquad Y = 20 - A + M + U_Y ,
 \]</span></p>
-<p>with <span class="math inline">\(U_M\)</span> and <span class="math inline">\(U_Y\)</span> independent of <span class="math inline">\(A\)</span> and of each other, and <span class="math inline">\(c\)</span> a constant.</p>
+<p>with <span class="math inline">\(U_M\)</span> and <span class="math inline">\(U_Y\)</span> of mean 0, independent of <span class="math inline">\(A\)</span> and of each other.</p>
 <ol type="a">
 <li><p>Find <span class="math inline">\(\text{CDE}(m)\)</span>, the NDE, the NIE and the TE.</p></li>
 <li><p>The raw gap is <span class="math inline">\(E[Y \mid A = 1] - E[Y \mid A = 0]\)</span>. Which of the four effects does it estimate here, and why?</p></li>
@@ -484,7 +484,7 @@ M = 8 - 4A + U_M, \qquad Y = 3 + 0.5A - 0.25M + U_Y ,
 <tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: left;">to estimate a total effect of <span class="math inline">\(A\)</span></th>
-<th style="text-align: left;">to estimate a direct effect of <span class="math inline">\(A\)</span></th>
+<th style="text-align: left;">to estimate a controlled direct effect of <span class="math inline">\(A\)</span></th>
 <th style="text-align: left;">to predict <span class="math inline">\(Y\)</span></th>
 </tr>
 </thead>
@@ -515,13 +515,13 @@ M = 8 - 4A + U_M, \qquad Y = 3 + 0.5A - 0.25M + U_Y ,
 <h3 class="anchored" data-anchor-id="problem-1.-a-pay-gap-with-an-interaction">Problem 1. A pay gap with an interaction</h3>
 <p>In another employer’s data, women (<span class="math inline">\(A = 1\)</span>) also earn less per year of experience:</p>
 <p><span class="math display">\[
-M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
+M = 10 - 2A + U_M, \qquad Y = 20 - A + M - 0.2\,A M + U_Y ,
 \]</span></p>
 <p>in years and thousands of pounds, with <span class="math inline">\(U_M\)</span> and <span class="math inline">\(U_Y\)</span> of mean 0, independent of <span class="math inline">\(A\)</span> and of each other.</p>
 <ol type="a">
 <li><p>Find the TE.</p></li>
-<li><p>Find <span class="math inline">\(\text{NDE}_0\)</span>, the direct effect with experience held at the men’s level, and <span class="math inline">\(\text{NIE}_1\)</span>. Check that they add up to the TE.</p></li>
-<li><p>Find <span class="math inline">\(\text{NDE}_1\)</span> and <span class="math inline">\(\text{NIE}_0\)</span>. Check that they add up to the TE too.</p></li>
+<li><p>Find <span class="math inline">\(\text{NDE}_0\)</span>, the direct effect with experience held at the men’s level, and <span class="math inline">\(\text{NIE}_1\)</span>. What do they add up to?</p></li>
+<li><p>Find <span class="math inline">\(\text{NDE}_1\)</span> and <span class="math inline">\(\text{NIE}_0\)</span>. What do they add up to?</p></li>
 <li><p>Someone reports <span class="math inline">\(\text{NDE}_0\)</span> and <span class="math inline">\(\text{NIE}_0\)</span> side by side. What do they add up to, and why is it not the TE?</p></li>
 <li><p>The employer reports a direct effect of <span class="math inline">\(-2.6\)</span> and the union one of <span class="math inline">\(-3\)</span>. Are both correct? Who chooses the reference world, and who could the choice be justified to?</p></li>
 </ol>
@@ -531,7 +531,7 @@ M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
 <blockquote class="blockquote">
 <p>“All models are wrong but some are useful.” (Box, 1979)</p>
 </blockquote>
-<p>Take the lecture’s mileage example: women (<span class="math inline">\(A = 1\)</span>), mileage <span class="math inline">\(M\)</span>, claims <span class="math inline">\(Y\)</span> in hundreds of pounds. Two analysts have the same records of gender, mileage and claims. The first draws the lecture’s graph. The second adds <span class="math inline">\(Z\)</span>, driving for work, which adds miles and adds claims on top of what those miles add, and which the insurer does not record. Each fits their graph to the records:</p>
+<p>Take the lecture’s mileage example: women (<span class="math inline">\(A = 1\)</span>), mileage <span class="math inline">\(M\)</span> in thousands of miles a year, claims <span class="math inline">\(Y\)</span> in hundreds of pounds. Two analysts have the same records of gender, mileage and claims. The first draws the lecture’s graph and fits it to the records by least squares. The second supposes that the graph is missing <span class="math inline">\(Z\)</span>, a score for how much a person drives for work, which the insurer does not record. Each unit of <span class="math inline">\(Z\)</span> adds <span class="math inline">\(4{,}000\)</span> miles a year and, beyond what those miles add, £100 of claims. The second row is the world as it would be if the second analyst is right:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -543,13 +543,13 @@ M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">first analyst (no <span class="math inline">\(Z\)</span>)</td>
+<td style="text-align: left;">first analyst, fitted (no <span class="math inline">\(Z\)</span>)</td>
 <td style="text-align: right;"><span class="math inline">\(-0.07\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(-1.43\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">second analyst (with <span class="math inline">\(Z\)</span>)</td>
+<td style="text-align: left;">second analyst, supposed (with <span class="math inline">\(Z\)</span>)</td>
 <td style="text-align: right;"><span class="math inline">\(-0.5\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(-1.0\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
@@ -557,9 +557,9 @@ M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
 </tbody>
 </table>
 <ol type="1">
-<li>Each analyst computes the path-specific premium, removing the direct path, and the counterfactually fair premium. How far apart are women’s and men’s average premiums under each? Which numbers differ between the analysts, and which do not?</li>
+<li>Under each row, find the path-specific premium, removing the direct path, and the counterfactually fair premium, taken to be the least-squares premium on <span class="math inline">\(M + 4A\)</span>, the mileage a driver would have had as a man. How far apart are women’s and men’s average premiums under each? Which differ between the rows, and which do not?</li>
 <li>What evidence could tell the two graphs apart? Do the insurer’s records? The same question for problem 1: with only gender, experience and pay, can the employer’s data tell a direct effect from a variable nobody measured that affects both experience and pay?</li>
-<li>A regulator has to approve one pricing rule this year. Choose: wait for better evidence; adopt one analyst’s graph; or require the premium that is the same under both. Defend your choice against the strongest objection to it. Who must the decision be justified to, and who pays if the graph behind it is wrong?</li>
+<li>A regulator has to approve one pricing rule this year. Choose: wait for better evidence; adopt one analyst’s graph; or require the counterfactually fair premium. Defend your choice against the strongest objection to it. Who must the decision be justified to, and who pays if the graph behind it is wrong?</li>
 </ol>
 </section>
 <section id="discussion-3-a-framework-and-a-criterion" class="level3">
@@ -584,11 +584,11 @@ M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
 <h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
 <section id="coding-two-analysts-simulated" class="level3">
 <h3 class="anchored" data-anchor-id="coding-two-analysts-simulated">Coding: two analysts, simulated</h3>
-<p>You need <code>ggplot2</code>. The lecture’s mileage example, with drivers who drive for work (<span class="math inline">\(Z = 1\)</span>). Mileage is in thousands of miles and claims in hundreds of pounds. Each driver has two potential mileages, as a man and as a woman.</p>
+<p>Base R is enough. The lecture’s mileage example with <span class="math inline">\(Z\)</span>, the score for how much a person drives for work from discussion 2, drawn from a normal distribution with mean <span class="math inline">\(1/4\)</span> and variance <span class="math inline">\(3/16\)</span>. Mileage is in thousands of miles a year and claims in hundreds of pounds. Each driver has two potential mileages, as a man and as a woman.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>)                  <span class="co"># 1 for a woman</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.25</span>)                 <span class="co"># 1 for a driver who drives for work</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="fl">0.25</span>, <span class="fu">sqrt</span>(<span class="fl">0.1875</span>))       <span class="co"># how much the driver drives for work</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>U_M <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>U_Y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>M0 <span class="ot">&lt;-</span> <span class="dv">9</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">*</span> Z <span class="sc">+</span> U_M                   <span class="co"># mileage had the driver been a man</span></span>
@@ -606,7 +606,7 @@ M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> A <span class="sc">+</span> M <span class="sc">+</span> Z))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
-<li>Complete the three lines and compute the TE, NDE and NIE. Every driver has the same direct effect. Why?</li>
+<li>Complete the three lines and compute the TE, NDE and NIE. Does the direct effect differ between drivers? Why?</li>
 <li>Run the two regressions. Which coefficient on <span class="math inline">\(A\)</span> is the direct effect, and which is the first analyst’s from discussion 2?</li>
 <li>An auditor has only <span class="math inline">\(A\)</span>, <span class="math inline">\(M\)</span> and <span class="math inline">\(Y\)</span>. Which of the numbers above could they compute, and which would they get wrong? Who gains if the auditor reports the first regression’s coefficient as the direct effect?</li>
 </ol>
@@ -615,11 +615,11 @@ M = 10 - 2A + U_M, \qquad Y = c - A + M - 0.2\,A M + U_Y ,
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 5, page 119.</li>
+<li>Barocas, Solon, Moritz Hardt and Arvind Narayanan, <em>Fairness and Machine Learning: Limitations and Opportunities</em> (MIT Press, 2023), <a href="https://fairmlbook.org" class="uri">https://fairmlbook.org</a>, chapter 4 (the three views of equality of opportunity) and chapter 5, page 119.</li>
 <li>Box, G. E. P., “Robustness in the Strategy of Scientific Model Building,” in R. L. Launer and G. N. Wilkinson (eds.), <em>Robustness in Statistics</em> (Academic Press, 1979), 201–236, <a href="https://doi.org/10.1016/B978-0-12-438150-6.50018-2" class="uri">https://doi.org/10.1016/B978-0-12-438150-6.50018-2</a>, page 202 (a section heading).</li>
-<li>European Commission, “Guidelines on the application of Council Directive 2004/113/EC to insurance, in the light of the judgment of the Court of Justice of the European Union in Case C-236/09 (Test-Achats),” <em>Official Journal of the European Union</em> C 11, 13 January 2012, 1–11, paragraphs 5 and 17.</li>
-<li>Lippert-Rasmussen, Kasper, “Justice and Bad Luck,” <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2005, substantive revision 2 February 2023, <a href="https://plato.stanford.edu/entries/justice-bad-luck/" class="uri">https://plato.stanford.edu/entries/justice-bad-luck/</a>.</li>
-<li>Loftus, Joshua, <em>Modern Statistics 4 Data Science</em>, section 3.4.1, <a href="https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models" class="uri">https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models</a>.</li>
+<li>European Commission, “Guidelines on the application of Council Directive 2004/113/EC to insurance, in the light of the judgment of the Court of Justice of the European Union in Case C-236/09 (Test-Achats),” 2012/C 11/01, <em>Official Journal of the European Union</em> C 11, 13 January 2012, 1–11, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL" class="uri">https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C:2012:011:FULL</a>, paragraphs 5, 14 and 17.</li>
+<li>Lippert-Rasmussen, Kasper, “Justice and Bad Luck,” <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2005, substantive revision 2 February 2023, <a href="https://plato.stanford.edu/entries/justice-bad-luck/" class="uri">https://plato.stanford.edu/entries/justice-bad-luck/</a>, section 7.</li>
+<li>Loftus, Joshua, <em>Modern Statistics 4 Data Science</em>, sections 3.4.1 and 3.4.2, <a href="https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models" class="uri">https://joshualoftus.com/ms4ds/ethical-data-science.html#causal-models</a> and <a href="https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck" class="uri">https://joshualoftus.com/ms4ds/ethical-data-science.html#moral-luck</a>.</li>
 </ul>
 
 
