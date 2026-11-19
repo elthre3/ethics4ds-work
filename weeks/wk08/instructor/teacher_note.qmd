@@ -9,7 +9,7 @@ format:
 
 ## Keep or rush
 
-In class order. Planned total 64 of the 80 minutes. The class has two
+In class order. Planned total 67 of the 80 minutes. The class has two
 halves: causal structure first, then frameworks and luck. It ends on
 luck: protect five minutes for discussion 4.
 
@@ -18,14 +18,14 @@ luck: protect five minutes for discussion 4.
 | Discussion 1, warm-up: the decision each student brought, as a graph; how the route judged fair could itself be unfair | 8 | Rush | Question 2 only, with one example from the room |
 | From memory: what to hold fixed | 6 | Rush | The mediator row only, then the firm's sentence |
 | Problem 1: a pay gap with an interaction, with feedback | 16 | Keep | (a) and (b), then say (c) and (e): the employer's $-2.6$ and the union's $-3$ are both correct, at different reference worlds |
-| Discussion 2: is the graph right? | 12 | Keep | Questions 1 and 3 |
+| Discussion 2: is the graph right? | 15 | Keep | Skip the opener; questions 1, 2 and 5 on the group's scenario |
 | Discussion 3: a framework and a criterion | 12 | Keep | Question 2, the red car, for the whole room |
 | Discussion 4: luck | 10 | Keep five | Question 1, the 2024 prompt, then question 3 |
 
 : {tbl-colwidths="[40,6,12,42]"}
 
-Minimum class: problem 1 (a) and (b), discussion 2's questions 1 and
-3, discussion 3's question 2 and discussion 4's question 1. Spare
+Minimum class: problem 1 (a) and (b), discussion 2's questions 1, 2
+and 5, discussion 3's question 2 and discussion 4's question 1. Spare
 minutes go to the coding under "If there is time"; it needs laptops
 with R, and base R is enough.
 
@@ -52,18 +52,20 @@ How it runs
 - Discussion 2's lesson, which the room should reach rather than be
   told: causal structure is very important for answering questions
   about fairness; the structure is usually uncertain; a decision still
-  has to be made. The two analysts' numbers are on the sheet, so the
-  discussion is about what they mean, not arithmetic. The first row is
-  fitted to the records; the second is the world if the second analyst
-  is right, and cannot be fitted without recording driving for work.
-  The graph is the lecture's slide on holding a mediator fixed, where
-  driving for work makes mileage a collider; the notes work the numbers
-  ("Two graphs, the same data"). On the sheet, driving for work is a
-  normally distributed score, so the two graphs imply exactly the same
-  distribution of the records, not only the same means and covariances.
-  The counterfactually fair premium, taken as the least-squares premium
-  on $M + 4A$, is the same under both graphs; the path-specific premium
-  is not. Box's line is a section heading in his 1979 chapter.
+  has to be made. There are no numbers: students draw graphs. The
+  opener takes a couple of minutes, one sentence per group. Then each
+  group picks a scenario, a different one from every other group; with
+  more than five groups, two can share one if they report separately.
+  Students draw alone first, then compare within the group; a group
+  that agrees too readily should argue for a graph none of them drew.
+  Question 3 sorts the disagreements into four kinds: whether an arrow
+  is there, which way it points, an unrecorded common cause, and
+  whether a path is fair. Report back by kind, across scenarios, so the
+  room hears each kind more than once. Question 6 is open: collect two
+  or three of the students' own examples at the end. The notes have a
+  worked version with numbers ("Two graphs, the same data"), for
+  students who want it. Box's line is a section heading in his 1979
+  chapter.
 - Discussion 3 takes up ms4ds's deontological argument for not using
   the attribute, which the lecture left for the class. The groups
   should argue for a criterion, not recite the frameworks.
@@ -80,9 +82,9 @@ What students should see
   $-5$, which leaves out $\alpha\delta = 0.4$, so $\text{TE} =
   \text{NDE}_0 + \text{NIE}_0 + \alpha\delta$; the coefficient on $A$
   with the interaction, $-1$, is the direct effect at zero experience.
-- Discussion 2: the path-specific gap is £143 under the first analyst's
-  graph and £100 under the second's; the counterfactually fair gap is
-  zero under both.
+- Discussion 2: for each scenario, at least two graphs that disagree,
+  and at least one disagreement of each kind across the room; the
+  answer box sketches some.
 - Coding, if reached: TE $-1.5$, NDE $-0.5$, NIE $-1$ exactly; the
   coefficient on $A$ near $-0.08$ without $Z$ (the population value is
   $-0.07$) and near $-0.5$ with it. A path-specific premium computed
@@ -96,8 +98,11 @@ Where they get stuck
   two steps that do not chain.
 - In the table, treating "control for more" as safer: a mediator held
   fixed removes part of the effect, and a collider opens a path.
-- In discussion 2, concluding that because the graph is uncertain no
-  premium can be defended. Question 3 asks them to decide anyway.
+- In discussion 2, concluding that because the graph is uncertain
+  nothing can be decided. Question 5 asks which disagreement would
+  matter for a decision made now. Also, calling every difference a
+  matter of opinion: some can be tested with more data, and question 3
+  asks which.
 - In discussion 3, matching each framework to a criterion as if it were
   a quiz. Ask for the best case, then the case where it breaks.
 

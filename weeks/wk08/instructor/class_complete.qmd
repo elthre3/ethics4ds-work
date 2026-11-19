@@ -14,21 +14,21 @@ st313:
   week: 08
   session: class
   register: 1
-  segments:                        # sums to 80: 64 of material and 16 of slack; production 62 (78%). Plan: wk08-class.r2.md (convenor, 18 November). Two halves: causality (warm-up, the table, problem 1, the graph discussion), then frameworks and luck, ending on luck. Discussion 2's lesson (convenor): causal structure matters for fairness; it is usually uncertain; a decision is still needed. Box's heading heads it (convenor). No "For next time": week 9 is not planned (convenor, 15 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
+  segments:                        # sums to 80: 67 of material and 13 of slack; production 65 (81%). Plan: wk08-class.r2.md (convenor, 18 November). Two halves: causality (warm-up, the table, problem 1, the graph discussion), then frameworks and luck, ending on luck. Discussion 2's lesson (convenor): causal structure matters for fairness; it is usually uncertain; a decision is still needed. Box's heading heads it (convenor). No "For next time": week 9 is not planned (convenor, 15 November). Every item ends with who the mistake falls on, who gains from it, or who the choice could be justified to (convenor, 26 October)
     - {label: "discussion 1, warm-up: the decision each student brought (the 7 -> 8 task) as arrows; one way the mediator judged fair could itself be shaped unfairly (fairmlbook p. 119); who says the route is fair", minutes: 8, mode: production, retrieves: [S6]}
     - {label: "from memory: what to hold fixed, for a total effect, a direct effect, a prediction; confounder, mediator, collider", minutes: 6, mode: production, retrieves: [S1]}
     - {label: "problem 1: a pay gap with an interaction; TE, NDE_0 with NIE_1, NDE_1 with NIE_0, the mixed pair; who chooses the reference world", minutes: 14, mode: production, core: CC-23, results: [R52, R57]}
     - {label: "feedback on problem 1", minutes: 2, mode: exposition}
-    - {label: "discussion 2: is the graph right? Box; two analysts, the same records, with and without driving for work; the path-specific premium differs, the counterfactually fair one does not; the regulator decides", minutes: 12, mode: production, retrieves: [S1, S3, S6], results: [R59]}
+    - {label: "discussion 2: is the graph right? Box; opener: two graphs for one sentence; each group a different scenario (football academy, emergency department, content moderation, music streaming, school discipline); disagreements sorted as arrow, direction, unrecorded common cause, fairness of a path; which matters for a decision; the students' own example (convenor, 19 November)", minutes: 15, mode: production, retrieves: [S1, S6]}
     - {label: "discussion 3: a framework and a criterion; the red car and ms4ds's deontological argument; EU law since 21 December 2012", minutes: 12, mode: production, retrieves: [S6], results: [R51]}
     - {label: "discussion 4: luck; the 2024 prompt; brute and option luck; who pays at equal revenue", minutes: 10, mode: production, retrieves: [S6]}
-    - {label: "slack: overrun, or the items under If there is time", minutes: 16, mode: exposition}
+    - {label: "slack: overrun, or the items under If there is time", minutes: 13, mode: exposition}
   history: []
   complications: []
   retrieves: [S1, S3, S6]
   lenses: [B, D, E, F]
   readings: [fairmlbook-ch5b, ms4ds-ch3]
-  results: [R50, R51, R52, R53, R54, R55, R56, R57, R59]   # R50, R51 in exercise 1; R52 in exercise 2 and problem 1; R53 to R55 in exercise 3; R56 in exercise 4; R57 in problem 1; R59 in discussion 2 and the coding
+  results: [R50, R51, R52, R53, R54, R55, R56, R57, R59]   # R50, R51 in exercise 1; R52 in exercise 2 and problem 1; R53 to R55 in exercise 3; R56 in exercise 4; R57 in problem 1; R59 in the coding
   assumes: [ST102]
   solutions: complete             # this file carries answers; the student file is generated
 # ---------------------------------------------------------------------------------
@@ -476,76 +476,112 @@ from either group's average experience.
 
 > "All models are wrong but some are useful." (Box, 1979)
 
-Take the lecture's mileage example: women ($A = 1$), mileage $M$ in
-thousands of miles a year, claims $Y$ in hundreds of pounds. Two
-analysts have the same records of gender, mileage and claims. The
-first draws the lecture's graph and fits it to the records by least
-squares. The second supposes that the graph is missing $Z$, a score for
-how much a person drives for work, which the insurer does not record.
-Each unit of $Z$ adds $4{,}000$ miles a year and, beyond what those
-miles add, £100 of claims. The second row is the world as it would be
-if the second analyst is right:
+To start, pick one sentence. Draw two graphs that both explain it and
+disagree about what is unfair.
 
-| | direct effect | through mileage | total |
-|:---|---:|---:|---:|
-| first analyst, fitted (no $Z$) | $-0.07$ | $-1.43$ | $-1.5$ |
-| second analyst, supposed (with $Z$) | $-0.5$ | $-1.0$ | $-1.5$ |
+- "Students who sit near the front in lectures get higher marks."
+- "Older applicants are invited to fewer job interviews."
+- "Women who return from parental leave are paid less than men with
+  the same experience."
 
-1. Under each row, find the path-specific premium, removing the direct
-   path, and the counterfactually fair premium, taken to be the
-   least-squares premium on $M + 4A$, the mileage a driver would have
-   had as a man. How far apart are women's and men's average premiums
-   under each? Which differ between the rows, and which do not?
-2. What evidence could tell the two graphs apart? Do the insurer's
-   records? The same question for problem 1: with only gender,
-   experience and pay, can the employer's data tell a direct effect
-   from a variable nobody measured that affects both experience and
-   pay?
-3. A regulator has to approve one pricing rule this year. Choose: wait
-   for better evidence; adopt one analyst's graph; or require the
-   counterfactually fair premium. Defend your choice against the
-   strongest objection to it. Who must the decision be justified to,
-   and who pays if the graph behind it is wrong?
+Then each group picks one of these scenarios, a different one from
+every other group. The first variable is the attribute $A$; the last
+is the outcome.
+
+- **Youth football academy.** Birth month within the school year,
+  height at age 10, coaching hours, selected for the academy, plays
+  professionally at 21.
+- **Emergency department.** The patient's sex, symptoms as described,
+  triage priority, waiting time, heart attack confirmed.
+- **Content moderation.** The author's dialect, the words used, user
+  reports, an automated toxicity score, post removed.
+- **Music streaming.** The artist's gender, genre, the label's
+  marketing budget, playlist placement, streams.
+- **School discipline.** The pupil's ethnicity, neighborhood, teacher
+  referrals, recorded behavior incidents, exclusion.
+
+1. On your own, draw a graph with the variables given. Mark the arrows
+   you are unsure of, and any unrecorded variable you think matters.
+2. Within your group, find some differences between your graphs. If
+   there is a lot of agreement, try to argue for a choice other than
+   the one you made.
+3. Is each difference about whether an arrow is there, which way it
+   points, something unrecorded, or whether a path is fair? Could
+   additional data help?
+4. Which paths from $A$ to the outcome are unfair?
+5. If a decision had to be made now, which disagreement would matter
+   most?
+6. Draw your own example: a graph you think is interesting or
+   important in the real world. Which part of it are you uncertain
+   about?
 
 ::: {.callout-note .answer title="Some directions" collapse="true"}
 The lesson: causal structure is very important for answering questions
 about fairness; the structure is usually uncertain; and a decision
 still has to be made.
 
-1. Path-specific: under the first row, $0.357\,M$ plus a constant, and
-   women pay £143 less than men on average. Under the second, $0.25\,M
-   + Z$ plus a constant, and women pay £100 less; that premium cannot
-   be charged without recording $Z$. Counterfactually fair: no gap
-   under either. The total, $-1.5$, is the same, so the raw gap does
-   not distinguish the rows. The counterfactually fair premium is the
-   same under both, slope $0.357$ on $M + 4A$. That holds here because
-   $Z$ does not depend on gender, so both graphs agree that $M + 4A$ is
-   not caused by gender and both get $\alpha = -4$ right. The
-   path-specific premium needs the split between direct and indirect,
-   and the split depends on $Z$.
-2. With $Z$ and the unrecorded noise normal, as in the coding below,
-   mileage and claims in the records are jointly normal for women and
-   for men, with the same variances and covariance for both. The first
-   analyst's graph has an arrow between every pair of recorded
-   variables, so it fits such records exactly: gender, mileage and
-   claims alone cannot tell the graphs apart. Evidence would have to
-   come from elsewhere: recording $Z$ (the insurer could ask), a
-   survey, telematics, a natural experiment in mileage. In problem 1,
-   no: hours, ambition or a manager's support could play $Z$'s part.
-   The employer's direct effect would then be off, in a direction set
-   by whether that variable pushes experience and pay the same way or
-   opposite ways, given that women have less experience.
-3. Waiting is a decision: the current premium stays in force, and
-   whoever it disadvantages pays meanwhile. Adopting a graph puts the
-   risk of error on the group the other graph favors. The
-   counterfactually fair premium is the same under both graphs, so it
-   is robust to this uncertainty, but it removes the path through
-   mileage too, which the regulator may judge fair. It also takes
-   gender as an input, which EU law has forbidden for an individual's
-   premium since 21 December 2012. "Some are useful": the question is
-   which model's errors the regulator can defend, to which drivers.
-   Leverage: what is held fixed, and is that realistic? Ownership: the
-   choice cannot be handed to the data.
+The opener. Front row: one graph has sitting at the front cause
+attention and so marks; another has something unrecorded, such as
+motivation, cause both, so moving people forward would change nothing.
+Unfairness enters if seating is not free: a long commute, caring duties
+or a disability can decide who gets the front, and a mark for
+participation would then reward those. Older applicants: a direct
+arrow from age to the recruiter's decision is the one most would call
+unfair; age → salary expected → invited, or age → years since
+training → invited, are paths people disagree about. Parental leave:
+leave → experience lost → pay against leave → what an employer
+infers → pay, and an unrecorded move into more flexible, lower-paid
+jobs, which may or may not count as a choice.
+
+Some graphs the scenarios lead to. None is the answer.
+
+- Football: birth month → height → selected → coaching hours → plays
+  professionally, against a graph in which skill at 10 drives selection
+  and birth month affects skill at 10 too. Selection brings coaching,
+  so drawn over time the arrows run both ways between skill and
+  selection. Parents' support is unrecorded and can drive coaching and
+  selection. If an early birth month helps at 10 and not at 21,
+  birth month → height → selection selects on something that does not
+  last; comparing children with others born in the same months removes
+  that path.
+- Emergency department: sex → symptoms described → priority, and
+  possibly sex → priority directly, through the nurse's judgment.
+  Severity is unrecorded and drives both symptoms and the outcome. The
+  outcome depends on the decision: a heart attack is confirmed only if
+  someone tests for one, so there is an arrow from priority to the
+  outcome as recorded. If symptoms present differently by sex, a rule
+  tuned to one group's symptoms treats sex → symptoms → priority as
+  fair when it is where the other group is missed.
+- Content moderation: dialect → words → score → removed, and dialect →
+  reports if readers report what is unfamiliar. The topic or community
+  is unrecorded and drives both the words and the reports. A score
+  trained on past removals adds an arrow from removal to future scores.
+  A word can be a slur in one community and ordinary in another, so
+  whether dialect → words → removal is fair depends on what the words
+  do, which the score does not see.
+- Music streaming: streams drive next week's placement and placement
+  drives streams, so drawn over time it is a loop. The label's budget
+  can be a common cause of placement and streams, or, if signing
+  decisions depend on gender, a mediator: the same variable, two
+  graphs. Whether gender → genre → placement is fair turns on whether
+  genre is the artist's choice or where the industry steers.
+- School discipline: ethnicity → neighborhood → school → exclusion,
+  and possibly ethnicity → referrals directly. Referrals can cause
+  recorded incidents, since an incident is recorded when someone refers
+  it, or the reverse. Poverty is unrecorded and can drive behavior and
+  neighborhood.
+
+On question 3: data can settle some differences and not others. Timing
+can show which came first; recording the missing variable, an
+experiment (blind applications, randomized placement) or comparisons
+within a group can test an arrow. Whether a path is fair is not settled
+by data. On question 5: the disagreement that matters most is the one
+that would change the rule, usually an arrow judged unfair, or an
+unrecorded common cause that turns a mediator judged fair into a
+stand-in for the attribute. On question 6: good examples have a
+decision attached; ask what could check the uncertain part, and who
+bears the error if it is wrong. Leverage: what is held fixed, and is
+that realistic? Ownership: the choice cannot be handed to the data.
 :::
 
 ### Discussion 3: a framework and a criterion
@@ -629,11 +665,12 @@ ethics or pragmatic ethics.
 
 ## If there is time
 
-### Coding: two analysts, simulated
+### Coding: a variable nobody recorded
 
-Base R is enough. The lecture's mileage example with $Z$, the score
-for how much a person drives for work from discussion 2, drawn from a
-normal distribution with mean $1/4$ and variance $3/16$. Mileage is in
+Base R is enough. The lecture's mileage example with $Z$, a score for
+how much a person drives for work, which the insurer does not record,
+drawn from a normal distribution with mean $1/4$ and variance $3/16$
+(the notes, "Two graphs, the same data"). Mileage is in
 thousands of miles a year and claims in hundreds of pounds. Each driver
 has two potential mileages, as a man and as a woman.
 
@@ -661,7 +698,7 @@ coef(lm(Y ~ A + M + Z))
 1. Complete the three lines and compute the TE, NDE and NIE. Does the
    direct effect differ between drivers? Why?
 2. Run the two regressions. Which coefficient on $A$ is the direct
-   effect, and which is the first analyst's from discussion 2?
+   effect, and which would an analyst without $Z$ report?
 3. An auditor has only $A$, $M$ and $Y$. Which of the numbers above
    could they compute, and which would they get wrong? Who gains if the
    auditor reports the first regression's coefficient as the direct
@@ -700,7 +737,7 @@ round(coef(lm(Y ~ A + M + Z)), 3)
    $\alpha\beta$, so the averages have no sampling error.
 2. With $Z$, the coefficient on $A$ is close to $-0.5$, the direct
    effect. Without $Z$ it is close to $-0.07$ and the coefficient on
-   mileage close to $0.357$: the first analyst's numbers. At equal
+   mileage close to $0.357$: an analyst without $Z$ reports these. At equal
    mileage, a woman tends to drive more for work than a man, which
    raises her claims and hides most of the direct effect.
 3. The TE, from the raw gap, because gender is independent of $Z$, $U_M$
