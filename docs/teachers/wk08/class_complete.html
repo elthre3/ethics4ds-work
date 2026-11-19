@@ -2369,7 +2369,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#if-there-is-time" id="toc-if-there-is-time" class="nav-link" data-scroll-target="#if-there-is-time">If there is time</a>
   <ul class="collapse">
-  <li><a href="#coding-two-analysts-simulated" id="toc-coding-two-analysts-simulated" class="nav-link" data-scroll-target="#coding-two-analysts-simulated">Coding: two analysts, simulated</a></li>
+  <li><a href="#coding-a-variable-nobody-recorded" id="toc-coding-a-variable-nobody-recorded" class="nav-link" data-scroll-target="#coding-a-variable-nobody-recorded">Coding: a variable nobody recorded</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -2879,35 +2879,27 @@ M(1)) - Y(0, M(0))] = 1 \times (8 - 10) = -2\)</span>. Sum <span class="math inl
 <blockquote class="blockquote">
 <p>“All models are wrong but some are useful.” (Box, 1979)</p>
 </blockquote>
-<p>Take the lecture’s mileage example: women (<span class="math inline">\(A = 1\)</span>), mileage <span class="math inline">\(M\)</span> in thousands of miles a year, claims <span class="math inline">\(Y\)</span> in hundreds of pounds. Two analysts have the same records of gender, mileage and claims. The first draws the lecture’s graph and fits it to the records by least squares. The second supposes that the graph is missing <span class="math inline">\(Z\)</span>, a score for how much a person drives for work, which the insurer does not record. Each unit of <span class="math inline">\(Z\)</span> adds <span class="math inline">\(4{,}000\)</span> miles a year and, beyond what those miles add, £100 of claims. The second row is the world as it would be if the second analyst is right:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">direct effect</th>
-<th style="text-align: right;">through mileage</th>
-<th style="text-align: right;">total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">first analyst, fitted (no <span class="math inline">\(Z\)</span>)</td>
-<td style="text-align: right;"><span class="math inline">\(-0.07\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.43\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">second analyst, supposed (with <span class="math inline">\(Z\)</span>)</td>
-<td style="text-align: right;"><span class="math inline">\(-0.5\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.0\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
-</tr>
-</tbody>
-</table>
+<p>To start, pick one sentence. Draw two graphs that both explain it and disagree about what is unfair.</p>
+<ul>
+<li>“Students who sit near the front in lectures get higher marks.”</li>
+<li>“Older applicants are invited to fewer job interviews.”</li>
+<li>“Women who return from parental leave are paid less than men with the same experience.”</li>
+</ul>
+<p>Then each group picks one of these scenarios, a different one from every other group. The first variable is the attribute <span class="math inline">\(A\)</span>; the last is the outcome.</p>
+<ul>
+<li><strong>Youth football academy.</strong> Birth month within the school year, height at age 10, coaching hours, selected for the academy, plays professionally at 21.</li>
+<li><strong>Emergency department.</strong> The patient’s sex, symptoms as described, triage priority, waiting time, heart attack confirmed.</li>
+<li><strong>Content moderation.</strong> The author’s dialect, the words used, user reports, an automated toxicity score, post removed.</li>
+<li><strong>Music streaming.</strong> The artist’s gender, genre, the label’s marketing budget, playlist placement, streams.</li>
+<li><strong>School discipline.</strong> The pupil’s ethnicity, neighborhood, teacher referrals, recorded behavior incidents, exclusion.</li>
+</ul>
 <ol type="1">
-<li>Under each row, find the path-specific premium, removing the direct path, and the counterfactually fair premium, taken to be the least-squares premium on <span class="math inline">\(M + 4A\)</span>, the mileage a driver would have had as a man. How far apart are women’s and men’s average premiums under each? Which differ between the rows, and which do not?</li>
-<li>What evidence could tell the two graphs apart? Do the insurer’s records? The same question for problem 1: with only gender, experience and pay, can the employer’s data tell a direct effect from a variable nobody measured that affects both experience and pay?</li>
-<li>A regulator has to approve one pricing rule this year. Choose: wait for better evidence; adopt one analyst’s graph; or require the counterfactually fair premium. Defend your choice against the strongest objection to it. Who must the decision be justified to, and who pays if the graph behind it is wrong?</li>
+<li>On your own, draw a graph with the variables given. Mark the arrows you are unsure of, and any unrecorded variable you think matters.</li>
+<li>Within your group, find some differences between your graphs. If there is a lot of agreement, try to argue for a choice other than the one you made.</li>
+<li>Is each difference about whether an arrow is there, which way it points, something unrecorded, or whether a path is fair? Could additional data help?</li>
+<li>Which paths from <span class="math inline">\(A\)</span> to the outcome are unfair?</li>
+<li>If a decision had to be made now, which disagreement would matter most?</li>
+<li>Draw your own example: a graph you think is interesting or important in the real world. Which part of it are you uncertain about?</li>
 </ol>
 <div class="answer callout callout-style-default callout-note callout-titled" title="Some directions">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
@@ -2922,12 +2914,16 @@ M(1)) - Y(0, M(0))] = 1 \times (8 - 10) = -2\)</span>. Sum <span class="math inl
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The lesson: causal structure is very important for answering questions about fairness; the structure is usually uncertain; and a decision still has to be made.</p>
-<ol type="1">
-<li>Path-specific: under the first row, <span class="math inline">\(0.357\,M\)</span> plus a constant, and women pay £143 less than men on average. Under the second, <span class="math inline">\(0.25\,M
-+ Z\)</span> plus a constant, and women pay £100 less; that premium cannot be charged without recording <span class="math inline">\(Z\)</span>. Counterfactually fair: no gap under either. The total, <span class="math inline">\(-1.5\)</span>, is the same, so the raw gap does not distinguish the rows. The counterfactually fair premium is the same under both, slope <span class="math inline">\(0.357\)</span> on <span class="math inline">\(M + 4A\)</span>. That holds here because <span class="math inline">\(Z\)</span> does not depend on gender, so both graphs agree that <span class="math inline">\(M + 4A\)</span> is not caused by gender and both get <span class="math inline">\(\alpha = -4\)</span> right. The path-specific premium needs the split between direct and indirect, and the split depends on <span class="math inline">\(Z\)</span>.</li>
-<li>With <span class="math inline">\(Z\)</span> and the unrecorded noise normal, as in the coding below, mileage and claims in the records are jointly normal for women and for men, with the same variances and covariance for both. The first analyst’s graph has an arrow between every pair of recorded variables, so it fits such records exactly: gender, mileage and claims alone cannot tell the graphs apart. Evidence would have to come from elsewhere: recording <span class="math inline">\(Z\)</span> (the insurer could ask), a survey, telematics, a natural experiment in mileage. In problem 1, no: hours, ambition or a manager’s support could play <span class="math inline">\(Z\)</span>’s part. The employer’s direct effect would then be off, in a direction set by whether that variable pushes experience and pay the same way or opposite ways, given that women have less experience.</li>
-<li>Waiting is a decision: the current premium stays in force, and whoever it disadvantages pays meanwhile. Adopting a graph puts the risk of error on the group the other graph favors. The counterfactually fair premium is the same under both graphs, so it is robust to this uncertainty, but it removes the path through mileage too, which the regulator may judge fair. It also takes gender as an input, which EU law has forbidden for an individual’s premium since 21 December 2012. “Some are useful”: the question is which model’s errors the regulator can defend, to which drivers. Leverage: what is held fixed, and is that realistic? Ownership: the choice cannot be handed to the data.</li>
-</ol>
+<p>The opener. Front row: one graph has sitting at the front cause attention and so marks; another has something unrecorded, such as motivation, cause both, so moving people forward would change nothing. Unfairness enters if seating is not free: a long commute, caring duties or a disability can decide who gets the front, and a mark for participation would then reward those. Older applicants: a direct arrow from age to the recruiter’s decision is the one most would call unfair; age → salary expected → invited, or age → years since training → invited, are paths people disagree about. Parental leave: leave → experience lost → pay against leave → what an employer infers → pay, and an unrecorded move into more flexible, lower-paid jobs, which may or may not count as a choice.</p>
+<p>Some graphs the scenarios lead to. None is the answer.</p>
+<ul>
+<li>Football: birth month → height → selected → coaching hours → plays professionally, against a graph in which skill at 10 drives selection and birth month affects skill at 10 too. Selection brings coaching, so drawn over time the arrows run both ways between skill and selection. Parents’ support is unrecorded and can drive coaching and selection. If an early birth month helps at 10 and not at 21, birth month → height → selection selects on something that does not last; comparing children with others born in the same months removes that path.</li>
+<li>Emergency department: sex → symptoms described → priority, and possibly sex → priority directly, through the nurse’s judgment. Severity is unrecorded and drives both symptoms and the outcome. The outcome depends on the decision: a heart attack is confirmed only if someone tests for one, so there is an arrow from priority to the outcome as recorded. If symptoms present differently by sex, a rule tuned to one group’s symptoms treats sex → symptoms → priority as fair when it is where the other group is missed.</li>
+<li>Content moderation: dialect → words → score → removed, and dialect → reports if readers report what is unfamiliar. The topic or community is unrecorded and drives both the words and the reports. A score trained on past removals adds an arrow from removal to future scores. A word can be a slur in one community and ordinary in another, so whether dialect → words → removal is fair depends on what the words do, which the score does not see.</li>
+<li>Music streaming: streams drive next week’s placement and placement drives streams, so drawn over time it is a loop. The label’s budget can be a common cause of placement and streams, or, if signing decisions depend on gender, a mediator: the same variable, two graphs. Whether gender → genre → placement is fair turns on whether genre is the artist’s choice or where the industry steers.</li>
+<li>School discipline: ethnicity → neighborhood → school → exclusion, and possibly ethnicity → referrals directly. Referrals can cause recorded incidents, since an incident is recorded when someone refers it, or the reverse. Poverty is unrecorded and can drive behavior and neighborhood.</li>
+</ul>
+<p>On question 3: data can settle some differences and not others. Timing can show which came first; recording the missing variable, an experiment (blind applications, randomized placement) or comparisons within a group can test an arrow. Whether a path is fair is not settled by data. On question 5: the disagreement that matters most is the one that would change the rule, usually an arrow judged unfair, or an unrecorded common cause that turns a mediator judged fair into a stand-in for the attribute. On question 6: good examples have a decision attached; ask what could check the uncertain part, and who bears the error if it is wrong. Leverage: what is held fixed, and is that realistic? Ownership: the choice cannot be handed to the data.</p>
 </div>
 </div>
 </div>
@@ -2998,9 +2994,9 @@ M(1)) - Y(0, M(0))] = 1 \times (8 - 10) = -2\)</span>. Sum <span class="math inl
 </section>
 <section id="if-there-is-time" class="level2">
 <h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
-<section id="coding-two-analysts-simulated" class="level3">
-<h3 class="anchored" data-anchor-id="coding-two-analysts-simulated">Coding: two analysts, simulated</h3>
-<p>Base R is enough. The lecture’s mileage example with <span class="math inline">\(Z\)</span>, the score for how much a person drives for work from discussion 2, drawn from a normal distribution with mean <span class="math inline">\(1/4\)</span> and variance <span class="math inline">\(3/16\)</span>. Mileage is in thousands of miles a year and claims in hundreds of pounds. Each driver has two potential mileages, as a man and as a woman.</p>
+<section id="coding-a-variable-nobody-recorded" class="level3">
+<h3 class="anchored" data-anchor-id="coding-a-variable-nobody-recorded">Coding: a variable nobody recorded</h3>
+<p>Base R is enough. The lecture’s mileage example with <span class="math inline">\(Z\)</span>, a score for how much a person drives for work, which the insurer does not record, drawn from a normal distribution with mean <span class="math inline">\(1/4\)</span> and variance <span class="math inline">\(3/16\)</span> (the notes, “Two graphs, the same data”). Mileage is in thousands of miles a year and claims in hundreds of pounds. Each driver has two potential mileages, as a man and as a woman.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>)                  <span class="co"># 1 for a woman</span></span>
@@ -3023,7 +3019,7 @@ M(1)) - Y(0, M(0))] = 1 \times (8 - 10) = -2\)</span>. Sum <span class="math inl
 </div>
 <ol type="1">
 <li>Complete the three lines and compute the TE, NDE and NIE. Does the direct effect differ between drivers? Why?</li>
-<li>Run the two regressions. Which coefficient on <span class="math inline">\(A\)</span> is the direct effect, and which is the first analyst’s from discussion 2?</li>
+<li>Run the two regressions. Which coefficient on <span class="math inline">\(A\)</span> is the direct effect, and which would an analyst without <span class="math inline">\(Z\)</span> report?</li>
 <li>An auditor has only <span class="math inline">\(A\)</span>, <span class="math inline">\(M\)</span> and <span class="math inline">\(Y\)</span>. Which of the numbers above could they compute, and which would they get wrong? Who gains if the auditor reports the first regression’s coefficient as the direct effect?</li>
 </ol>
 <div class="answer callout callout-style-default callout-tip callout-titled" title="Hint 1">
@@ -3088,7 +3084,7 @@ M(1)) - Y(0, M(0))] = 1 \times (8 - 10) = -2\)</span>. Sum <span class="math inl
 </div>
 <ol type="1">
 <li>TE <span class="math inline">\(-1.5\)</span>, NDE <span class="math inline">\(-0.5\)</span>, NIE <span class="math inline">\(-1\)</span>, exactly. The direct effect does not differ: in a linear model with no interaction, every driver’s direct effect is <span class="math inline">\(\gamma\)</span> and every driver’s indirect effect is <span class="math inline">\(\alpha\beta\)</span>, so the averages have no sampling error.</li>
-<li>With <span class="math inline">\(Z\)</span>, the coefficient on <span class="math inline">\(A\)</span> is close to <span class="math inline">\(-0.5\)</span>, the direct effect. Without <span class="math inline">\(Z\)</span> it is close to <span class="math inline">\(-0.07\)</span> and the coefficient on mileage close to <span class="math inline">\(0.357\)</span>: the first analyst’s numbers. At equal mileage, a woman tends to drive more for work than a man, which raises her claims and hides most of the direct effect.</li>
+<li>With <span class="math inline">\(Z\)</span>, the coefficient on <span class="math inline">\(A\)</span> is close to <span class="math inline">\(-0.5\)</span>, the direct effect. Without <span class="math inline">\(Z\)</span> it is close to <span class="math inline">\(-0.07\)</span> and the coefficient on mileage close to <span class="math inline">\(0.357\)</span>: an analyst without <span class="math inline">\(Z\)</span> reports these. At equal mileage, a woman tends to drive more for work than a man, which raises her claims and hides most of the direct effect.</li>
 <li>The TE, from the raw gap, because gender is independent of <span class="math inline">\(Z\)</span>, <span class="math inline">\(U_M\)</span> and <span class="math inline">\(U_Y\)</span>. Not the NDE or the NIE: the auditor’s like-for-like coefficient says the direct effect is almost zero, and moves most of it into the path through mileage. Suppose a regulator then requires the path-specific premium and computes it from the auditor’s fit, <span class="math inline">\(0.357\,M\)</span> plus a constant, instead of <span class="math inline">\(0.25\,M + Z\)</span> plus a constant. With both set to collect the average claim, women pay £21.43 less and men £21.43 more than under the path-specific premium with <span class="math inline">\(Z\)</span>. Here the error favors women, and men pay for it; the insurer collects the same in total.</li>
 </ol>
 </div>

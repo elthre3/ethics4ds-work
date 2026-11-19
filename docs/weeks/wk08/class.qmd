@@ -252,36 +252,44 @@ the choice be justified to?
 
 > "All models are wrong but some are useful." (Box, 1979)
 
-Take the lecture's mileage example: women ($A = 1$), mileage $M$ in
-thousands of miles a year, claims $Y$ in hundreds of pounds. Two
-analysts have the same records of gender, mileage and claims. The
-first draws the lecture's graph and fits it to the records by least
-squares. The second supposes that the graph is missing $Z$, a score for
-how much a person drives for work, which the insurer does not record.
-Each unit of $Z$ adds $4{,}000$ miles a year and, beyond what those
-miles add, £100 of claims. The second row is the world as it would be
-if the second analyst is right:
+To start, pick one sentence. Draw two graphs that both explain it and
+disagree about what is unfair.
 
-| | direct effect | through mileage | total |
-|:---|---:|---:|---:|
-| first analyst, fitted (no $Z$) | $-0.07$ | $-1.43$ | $-1.5$ |
-| second analyst, supposed (with $Z$) | $-0.5$ | $-1.0$ | $-1.5$ |
+- "Students who sit near the front in lectures get higher marks."
+- "Older applicants are invited to fewer job interviews."
+- "Women who return from parental leave are paid less than men with
+  the same experience."
 
-1. Under each row, find the path-specific premium, removing the direct
-   path, and the counterfactually fair premium, taken to be the
-   least-squares premium on $M + 4A$, the mileage a driver would have
-   had as a man. How far apart are women's and men's average premiums
-   under each? Which differ between the rows, and which do not?
-2. What evidence could tell the two graphs apart? Do the insurer's
-   records? The same question for problem 1: with only gender,
-   experience and pay, can the employer's data tell a direct effect
-   from a variable nobody measured that affects both experience and
-   pay?
-3. A regulator has to approve one pricing rule this year. Choose: wait
-   for better evidence; adopt one analyst's graph; or require the
-   counterfactually fair premium. Defend your choice against the
-   strongest objection to it. Who must the decision be justified to,
-   and who pays if the graph behind it is wrong?
+Then each group picks one of these scenarios, a different one from
+every other group. The first variable is the attribute $A$; the last
+is the outcome.
+
+- **Youth football academy.** Birth month within the school year,
+  height at age 10, coaching hours, selected for the academy, plays
+  professionally at 21.
+- **Emergency department.** The patient's sex, symptoms as described,
+  triage priority, waiting time, heart attack confirmed.
+- **Content moderation.** The author's dialect, the words used, user
+  reports, an automated toxicity score, post removed.
+- **Music streaming.** The artist's gender, genre, the label's
+  marketing budget, playlist placement, streams.
+- **School discipline.** The pupil's ethnicity, neighborhood, teacher
+  referrals, recorded behavior incidents, exclusion.
+
+1. On your own, draw a graph with the variables given. Mark the arrows
+   you are unsure of, and any unrecorded variable you think matters.
+2. Within your group, find some differences between your graphs. If
+   there is a lot of agreement, try to argue for a choice other than
+   the one you made.
+3. Is each difference about whether an arrow is there, which way it
+   points, something unrecorded, or whether a path is fair? Could
+   additional data help?
+4. Which paths from $A$ to the outcome are unfair?
+5. If a decision had to be made now, which disagreement would matter
+   most?
+6. Draw your own example: a graph you think is interesting or
+   important in the real world. Which part of it are you uncertain
+   about?
 
 ### Discussion 3: a framework and a criterion
 
@@ -316,11 +324,12 @@ ethics or pragmatic ethics.
 
 ## If there is time
 
-### Coding: two analysts, simulated
+### Coding: a variable nobody recorded
 
-Base R is enough. The lecture's mileage example with $Z$, the score
-for how much a person drives for work from discussion 2, drawn from a
-normal distribution with mean $1/4$ and variance $3/16$. Mileage is in
+Base R is enough. The lecture's mileage example with $Z$, a score for
+how much a person drives for work, which the insurer does not record,
+drawn from a normal distribution with mean $1/4$ and variance $3/16$
+(the notes, "Two graphs, the same data"). Mileage is in
 thousands of miles a year and claims in hundreds of pounds. Each driver
 has two potential mileages, as a man and as a woman.
 
@@ -348,7 +357,7 @@ coef(lm(Y ~ A + M + Z))
 1. Complete the three lines and compute the TE, NDE and NIE. Does the
    direct effect differ between drivers? Why?
 2. Run the two regressions. Which coefficient on $A$ is the direct
-   effect, and which is the first analyst's from discussion 2?
+   effect, and which would an analyst without $Z$ report?
 3. An auditor has only $A$, $M$ and $Y$. Which of the numbers above
    could they compute, and which would they get wrong? Who gains if the
    auditor reports the first regression's coefficient as the direct

@@ -236,7 +236,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#if-there-is-time" id="toc-if-there-is-time" class="nav-link" data-scroll-target="#if-there-is-time">If there is time</a>
   <ul class="collapse">
-  <li><a href="#coding-two-analysts-simulated" id="toc-coding-two-analysts-simulated" class="nav-link" data-scroll-target="#coding-two-analysts-simulated">Coding: two analysts, simulated</a></li>
+  <li><a href="#coding-a-variable-nobody-recorded" id="toc-coding-a-variable-nobody-recorded" class="nav-link" data-scroll-target="#coding-a-variable-nobody-recorded">Coding: a variable nobody recorded</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -531,35 +531,27 @@ M = 10 - 2A + U_M, \qquad Y = 20 - A + M - 0.2\,A M + U_Y ,
 <blockquote class="blockquote">
 <p>“All models are wrong but some are useful.” (Box, 1979)</p>
 </blockquote>
-<p>Take the lecture’s mileage example: women (<span class="math inline">\(A = 1\)</span>), mileage <span class="math inline">\(M\)</span> in thousands of miles a year, claims <span class="math inline">\(Y\)</span> in hundreds of pounds. Two analysts have the same records of gender, mileage and claims. The first draws the lecture’s graph and fits it to the records by least squares. The second supposes that the graph is missing <span class="math inline">\(Z\)</span>, a score for how much a person drives for work, which the insurer does not record. Each unit of <span class="math inline">\(Z\)</span> adds <span class="math inline">\(4{,}000\)</span> miles a year and, beyond what those miles add, £100 of claims. The second row is the world as it would be if the second analyst is right:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">direct effect</th>
-<th style="text-align: right;">through mileage</th>
-<th style="text-align: right;">total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">first analyst, fitted (no <span class="math inline">\(Z\)</span>)</td>
-<td style="text-align: right;"><span class="math inline">\(-0.07\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.43\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">second analyst, supposed (with <span class="math inline">\(Z\)</span>)</td>
-<td style="text-align: right;"><span class="math inline">\(-0.5\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.0\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1.5\)</span></td>
-</tr>
-</tbody>
-</table>
+<p>To start, pick one sentence. Draw two graphs that both explain it and disagree about what is unfair.</p>
+<ul>
+<li>“Students who sit near the front in lectures get higher marks.”</li>
+<li>“Older applicants are invited to fewer job interviews.”</li>
+<li>“Women who return from parental leave are paid less than men with the same experience.”</li>
+</ul>
+<p>Then each group picks one of these scenarios, a different one from every other group. The first variable is the attribute <span class="math inline">\(A\)</span>; the last is the outcome.</p>
+<ul>
+<li><strong>Youth football academy.</strong> Birth month within the school year, height at age 10, coaching hours, selected for the academy, plays professionally at 21.</li>
+<li><strong>Emergency department.</strong> The patient’s sex, symptoms as described, triage priority, waiting time, heart attack confirmed.</li>
+<li><strong>Content moderation.</strong> The author’s dialect, the words used, user reports, an automated toxicity score, post removed.</li>
+<li><strong>Music streaming.</strong> The artist’s gender, genre, the label’s marketing budget, playlist placement, streams.</li>
+<li><strong>School discipline.</strong> The pupil’s ethnicity, neighborhood, teacher referrals, recorded behavior incidents, exclusion.</li>
+</ul>
 <ol type="1">
-<li>Under each row, find the path-specific premium, removing the direct path, and the counterfactually fair premium, taken to be the least-squares premium on <span class="math inline">\(M + 4A\)</span>, the mileage a driver would have had as a man. How far apart are women’s and men’s average premiums under each? Which differ between the rows, and which do not?</li>
-<li>What evidence could tell the two graphs apart? Do the insurer’s records? The same question for problem 1: with only gender, experience and pay, can the employer’s data tell a direct effect from a variable nobody measured that affects both experience and pay?</li>
-<li>A regulator has to approve one pricing rule this year. Choose: wait for better evidence; adopt one analyst’s graph; or require the counterfactually fair premium. Defend your choice against the strongest objection to it. Who must the decision be justified to, and who pays if the graph behind it is wrong?</li>
+<li>On your own, draw a graph with the variables given. Mark the arrows you are unsure of, and any unrecorded variable you think matters.</li>
+<li>Within your group, find some differences between your graphs. If there is a lot of agreement, try to argue for a choice other than the one you made.</li>
+<li>Is each difference about whether an arrow is there, which way it points, something unrecorded, or whether a path is fair? Could additional data help?</li>
+<li>Which paths from <span class="math inline">\(A\)</span> to the outcome are unfair?</li>
+<li>If a decision had to be made now, which disagreement would matter most?</li>
+<li>Draw your own example: a graph you think is interesting or important in the real world. Which part of it are you uncertain about?</li>
 </ol>
 </section>
 <section id="discussion-3-a-framework-and-a-criterion" class="level3">
@@ -582,9 +574,9 @@ M = 10 - 2A + U_M, \qquad Y = 20 - A + M - 0.2\,A M + U_Y ,
 </section>
 <section id="if-there-is-time" class="level2">
 <h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
-<section id="coding-two-analysts-simulated" class="level3">
-<h3 class="anchored" data-anchor-id="coding-two-analysts-simulated">Coding: two analysts, simulated</h3>
-<p>Base R is enough. The lecture’s mileage example with <span class="math inline">\(Z\)</span>, the score for how much a person drives for work from discussion 2, drawn from a normal distribution with mean <span class="math inline">\(1/4\)</span> and variance <span class="math inline">\(3/16\)</span>. Mileage is in thousands of miles a year and claims in hundreds of pounds. Each driver has two potential mileages, as a man and as a woman.</p>
+<section id="coding-a-variable-nobody-recorded" class="level3">
+<h3 class="anchored" data-anchor-id="coding-a-variable-nobody-recorded">Coding: a variable nobody recorded</h3>
+<p>Base R is enough. The lecture’s mileage example with <span class="math inline">\(Z\)</span>, a score for how much a person drives for work, which the insurer does not record, drawn from a normal distribution with mean <span class="math inline">\(1/4\)</span> and variance <span class="math inline">\(3/16\)</span> (the notes, “Two graphs, the same data”). Mileage is in thousands of miles a year and claims in hundreds of pounds. Each driver has two potential mileages, as a man and as a woman.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>)                  <span class="co"># 1 for a woman</span></span>
@@ -607,7 +599,7 @@ M = 10 - 2A + U_M, \qquad Y = 20 - A + M - 0.2\,A M + U_Y ,
 </div>
 <ol type="1">
 <li>Complete the three lines and compute the TE, NDE and NIE. Does the direct effect differ between drivers? Why?</li>
-<li>Run the two regressions. Which coefficient on <span class="math inline">\(A\)</span> is the direct effect, and which is the first analyst’s from discussion 2?</li>
+<li>Run the two regressions. Which coefficient on <span class="math inline">\(A\)</span> is the direct effect, and which would an analyst without <span class="math inline">\(Z\)</span> report?</li>
 <li>An auditor has only <span class="math inline">\(A\)</span>, <span class="math inline">\(M\)</span> and <span class="math inline">\(Y\)</span>. Which of the numbers above could they compute, and which would they get wrong? Who gains if the auditor reports the first regression’s coefficient as the direct effect?</li>
 </ol>
 </section>
