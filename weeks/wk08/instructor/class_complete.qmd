@@ -439,8 +439,8 @@ E[Y(0, M(1)) - Y(0, M(0))]$. Is that a chain?
 :::
 
 ::: {.callout-note .answer title="Solution" collapse="true"}
-(a) $\text{TE} = E[Y(1, M(1)) - Y(0, M(0))] = (20 - 1 + 8 - 0.2 \times
-8) - (20 + 10) = -4.6$: £4,600.
+(a) $\text{TE} = E[Y(1, M(1)) - Y(0, M(0))]$
+$= (20 - 1 + 8 - 0.2 \times 8) - (20 + 10) = -4.6$: £4,600.
 
 (b) $\text{NDE}_0 = -1 - 0.2 \times 10 = -3$. $\text{NIE}_1 = E[Y(1,
 M(1)) - Y(1, M(0))] = (1 - 0.2)(8 - 10) = -1.6$. Sum $-4.6$.
