@@ -1,0 +1,448 @@
+---
+title: "AI: a survey of the evidence"
+---
+
+## Reading
+
+### Benchmark validity
+
+Bean et al. (2025) reviewed 445 benchmarks for large language models, drawn from 46,114 papers at leading machine learning and natural language processing conferences, and asked whether each one supports the claims made with its scores. Of the 445, 78.2% define the phenomenon they say they measure, but 47.8% of those definitions are contested. Fewer than 10% use complete real-world tasks, 53.4% give any evidence that the score measures the intended construct, and 32.4% compare models with a human baseline. In 21.1%, the scoring requires answers in a specific format, so the score also depends on whether a model follows the format. The review codes what each paper reports, so a missing justification does not show that a benchmark is invalid, and agreement between coders on the 46 papers coded twice was moderate (kappa 0.524).
+
+Construct validity, the social sciences' term for whether a measurement captures the concept it names, has been applied to measures of fairness (Jacobs and Wallach, 2021) and to evaluations of generative AI (Wallach et al., 2025). Raji et al. (2021) argue that a few benchmarks are treated as measures of general progress, which a finite set of tasks cannot support. Rebuilding the ImageNet test set by the original procedure lowered accuracy by 11 to 14 points but left the order of models almost unchanged (Recht et al., 2019), and much of the drop came from how the new images were selected (Engstrom et al., 2020). Test labels contain errors (Northcutt et al., 2021), and grading that gives no credit for abstaining rewards guessing (Kalai et al., 2025).
+
+### Uncertainty in evaluations and leaderboards
+
+Singh et al. (2025) audited Chatbot Arena, a public leaderboard that ranks chatbots by crowd votes between pairs of anonymous answers, using about 2 million votes on 243 models from 42 providers between January 2024 and April 2025. A few providers tested many private versions of their models before a release, 27 from Meta in one month before Llama 4, and could choose which results to make public. Google and OpenAI received an estimated 19.2% and 20.4% of all the voting data, and proprietary providers 61.4% in total, data that can be used to tune models to the leaderboard's prompts. Of the 243 public models, 205 were removed without notice, 64% of them open models. Several of the authors work at Cohere, a company that competes on the leaderboard, as the paper discloses.
+
+Few benchmarks report any uncertainty: 16.0% in Bean et al.'s (2025) review. Miller (2024; the author works at Anthropic) sets out standard errors, clustered errors for related questions and paired comparisons for evaluations. Intervals from the central limit theorem are too narrow for benchmarks with fewer than a few hundred items (Bowyer et al., 2025). Many comparisons in natural language processing are underpowered (Card et al., 2020). Scores also move when the task does not change: reformatting a prompt without changing its meaning moved accuracy by up to 76 points for one model (Sclar et al., 2024), and reordering answer options moved models up to eight places in a ranking (Alzahrani et al., 2024).
+
+### Labor behind training data
+
+Hara et al. (2018) measured what workers earned on Amazon Mechanical Turk, a platform for small paid online tasks such as labeling data, from the logs of 2,676 workers who installed a browser plugin, covering 3.8 million tasks. The median worker earned about $2 an hour, and only 4% earned more than $7.25 an hour, the US federal minimum wage. The estimates depend on what counts as working time, such as searching for tasks or work that is rejected. The workers chose to install the plugin, and the data come from one platform between 2014 and 2017.
+
+Counting unpaid time, mostly spent managing payments and watching for new tasks, lowers median pay further (Toxtli et al., 2021), and in surveys by the International Labour Organization (2021), half of the workers on online platforms earned under US$2 an hour. OpenAI's contracts with Sama, an outsourcing firm in Kenya, paid $12.50 an hour per worker, while the agents who labeled graphic text for them took home $1.32 to $1.44 an hour, figures that Sama disputed (Perrigo, 2023). A randomized evaluation run with Sama found that training combined with a job referral raised applicants' earnings by about 37 to 40% relative to applicants who were not offered them (Atkin et al., 2021), and fieldwork at three Sama centers in Kenya and Uganda found low wages, insecure work and tightly disciplined management (Muldoon et al., 2025). Clients' instructions fix the categories that workers must apply (Miceli and Posada, 2022).
+
+### Public knowledge, consent and claims on data
+
+A difference-in-differences study by del Rio-Chanona et al. (2024) compared posting on Stack Overflow, the main public question-and-answer site for programmers, before and after ChatGPT's release, with posting on Russian- and Chinese-language programming forums, where ChatGPT was harder to reach, and on mathematics forums, where it was less capable. Within six months, posting on Stack Overflow was about 25% lower than the comparison sites predict, which the authors treat as a lower bound, and weekly posts fell from about 60,000 to 40,000. Votes on posts did not change, so the drop was not confined to low-quality posts, and it appeared among new and experienced users. The authors discuss the site as a public good whose content now partly feeds privately owned models that substitute for it.
+
+A second study, using synthetic controls, found Stack Overflow's traffic about 12% lower and no decline in comparable Reddit communities (Burtch et al., 2024). Wikipedia's views and edits did not fall in aggregate (Reeves et al., 2025), though newly created, popular articles whose content overlaps with ChatGPT lost edits and views (Lyu et al., 2025). Websites are withdrawing consent to be crawled: in one year, the share of text in three large training corpora from sites that fully block at least one AI crawler rose from about 1% to between 5% and 7% (Longpre et al., 2024). Because one person's data reveal information about others, data are priced too low and too much is shared (Acemoglu et al., 2022), and Viljoen (2021) argues that individual consent cannot protect the interests at stake.
+
+### Productivity, jobs and pay
+
+Brynjolfsson, Li and Raymond (2025) studied a software firm and its subcontractors as they gave an AI assistant to 5,172 customer-support agents in stages, so that agents with and without access could be compared over the same period. Issues resolved per hour rose 15% on average and about 30% for less experienced or less skilled agents, while the most skilled agents gained little speed and lost a little quality. The assistant appears to spread the practices of the firm's best agents, and the authors raise the question of whether workers should be compensated for the data that trains such systems. The study covers one firm and one job, and the authors could not observe wages.
+
+In writing experiments, ChatGPT cut time by 40% and raised quality by 18% (Noy and Zhang, 2023), and field experiments with software developers found about 26% more completed tasks with a coding assistant (Cui et al., 2025). Gains depend on the task: consultants did worse with AI on a task outside the model's capabilities (Dell'Acqua et al., 2026), and experienced developers working on their own projects took 19% longer with AI while believing afterward that it had made them faster (Becker et al., 2025). Writing freelancers on an online platform lost jobs and earnings after ChatGPT's release relative to less exposed freelancers (Hui et al., 2024), and employment of young workers in exposed occupations fell relative to their peers in US payroll data (Brynjolfsson, Chandar and Chen, 2025), while Danish records show no change in earnings or hours for workers who adopted chatbots (Humlum and Vestergaard, 2025).
+
+### Responsibility for AI-assisted work
+
+Köbis et al. (2025) ran experiments in which people could earn more by reporting dishonestly, for example by misreporting die rolls, and could either report themselves or delegate the reporting to a machine or a human agent. Requests to cheat rose when people could induce dishonesty without spelling out what the machine should do, by training it on examples or giving it a high-level goal, and these effects held whether delegation was voluntary or mandatory. Given fully dishonest instructions in natural language, machine agents complied far more often than human agents did, and added guardrails reduced this compliance without removing it. The stakes in these games were small.
+
+AI-assisted professional work is common, and its errors are hard to see. At least 13.5% of biomedical abstracts published in 2024 show signs of processing by a language model (Kobak et al., 2025), and commercial legal research tools marketed as free of hallucinations gave false or misgrounded answers to 17% to 33% of test queries (Magesh et al., 2025). When something goes wrong, blame tends to fall on the person closest to the event, even one with little control over the system; Elish (2019) calls that person a moral crumple zone. Disclosing AI use lowers others' trust in the person who discloses (Schilke and Reimann, 2025), which gives people a reason not to disclose. Philosophers disagree about whether learning systems create a gap in which no one can fairly be held responsible (Matthias, 2004) or whether such gaps can be closed by design and institutions (Nissenbaum, 1996; Santoni de Sio and Mecacci, 2021).
+
+### Reliance, learning and deskilling
+
+Bastani et al. (2025) gave nearly 1,000 students at a high school in Turkey access to GPT-4 while they practiced mathematics, comparing a standard chatbot, a version designed as a tutor and no access. Practice grades rose 48% with the standard chatbot and 127% with the tutor. When access was removed, students who had used the standard chatbot scored 17% lower on exams than students who never had access, and the tutor version largely avoided this. The study covers one school and one subject over a short period, and a correction to the article has been published.
+
+Among 52 developers learning a new code library, those given AI help scored lower on a quiz afterward, with no significant gain in speed (Shen and Tamkin, 2026; the study was done at Anthropic). A structured design can help: physics students taught at home by a structured AI tutor learned more than students in an active-learning class (Kestin et al., 2025). In decisions, human--AI combinations did worse on average than the better of the two alone, in a meta-analysis of over 100 experiments (Vaccaro et al., 2024), and wrong advice misleads clinicians (Goddard et al., 2012), whether or not it is labeled as coming from an AI (Gaube et al., 2021). Whether experts lose skills they already had is unsettled: in one before-and-after study, the rate at which endoscopists detected adenomas without AI fell after AI was introduced (Budzyń et al., 2025), and a small prospective study found no clear change after AI was withdrawn (Pedersen et al., 2026).
+
+### Conversational AI and its users
+
+Hackenburg et al. (2025) ran three experiments with 76,977 participants in the UK, in which 19 language models, some trained specifically to persuade, discussed 707 political issues with participants; the authors then checked the factual accuracy of 466,769 claims the models made. Post-training raised persuasiveness by up to 51% and prompting by up to 27%, more than increasing model size or personalizing messages did, and where these methods made the models more persuasive, they also made their claims less accurate. The outcomes are attitudes reported in a research setting, not behavior.
+
+Models also flatter their users. In tests of 11 models, the models affirmed users' actions far more often than people did, and in experiments one conversation with a flattering model made people more convinced that they were right and less willing to repair a conflict, while they trusted it more (Cheng et al., 2026). In human preference data used to train assistants, responses that match the user's views are more likely to be preferred (Sharma et al., 2024; the authors work at Anthropic). Effects on wellbeing depend on the measure and the comparison: companion chats reduced loneliness in the moment (De Freitas et al., 2025), a purpose-built therapy chatbot reduced symptoms more than a waitlist did (Heinz et al., 2025), and heavier voluntary use of a general chatbot went with more loneliness, an association rather than a measured effect (Fang et al., 2025).
+
+### Environmental costs
+
+The International Energy Agency (2025) estimates that data centers used about 415 terawatt-hours of electricity in 2024, about 1.5% of the world's electricity, after growing about 12% a year for five years. In its base case their use more than doubles to about 945 terawatt-hours by 2030, just under 3% of global demand, with China and the United States accounting for nearly 80% of the growth; in the United States, data centers account for nearly half of the growth in electricity demand to 2030. These are scenarios with wide uncertainty.
+
+In the United States, data centers used 4.4% of electricity in 2023, projected to reach between 6.7% and 12% by 2028 (Shehabi et al., 2024), and earlier projections overstated growth because efficiency kept pace with demand through 2018 (Masanet et al., 2020). Figures per query depend on what is counted and who measures: Google reports 0.24 watt-hours for its median text prompt, excluding training and users' devices (Elsworth et al., 2025), while an outside estimate from public data exceeds 29 watt-hours for long prompts on the most energy-intensive models (Jegham et al., 2025). Cheaper use per query can raise total demand (Luccioni et al., 2025).
+
+## Supplemental findings
+
+### Benchmark validity
+
+- Bean et al. (2025) reviewed 445 benchmarks for large language models from 46,114 papers at six leading machine learning and natural language processing conferences. Of these, 78.2% define the phenomenon they measure, and 47.8% of those definitions are contested; fewer than 10% use complete real-world tasks; 53.4% give evidence of construct validity; 32.4% compare models with a human baseline; 21.1% require answers in a specific format; and 16.0% report uncertainty estimates or statistical tests. The review codes what papers report, not whether the benchmarks are valid, and agreement on the 46 papers coded twice was moderate (kappa 0.524). The authors' recommendations include defining the phenomenon, measuring only that phenomenon, building a representative dataset for the task, acknowledging the limits of reused datasets and preparing for contamination.
+- Jacobs and Wallach (2021) bring measurement modeling from the quantitative social sciences, with its notions of construct validity and reliability, to fairness. Wallach et al. (2025) separate the background concept, its systematized definition, the instrument and the scores of an evaluation of generative AI, and argue that validity should be tested at each step. Salaudeen et al. (2025) link each claim made from an evaluation to the evidence it needs. Mitchell (2023) lists contamination, sensitivity to rephrasing and shortcut learning as reasons that scores mislead, and suggests methods from cognitive science.
+- Raji et al. (2021) argue that a few benchmarks are treated as measures of general progress, which a finite set of tasks cannot support.
+- Burnell et al. (2023) argue that aggregate metrics hide where a system fails and that instance-by-instance results are rarely released, and propose publishing them.
+- In an assessment of 24 benchmarks against 46 criteria, most reported no statistical significance and were hard to replicate (Reuel et al., 2024). Of 3,765 benchmarks in computer vision and natural language processing, many saturate quickly or go unused (Ott et al., 2022).
+- A target chosen for convenience can do measurable harm. A widely used commercial risk score predicted health costs instead of illness, so at a given score Black patients were sicker than White patients, and correcting this would raise the share of Black patients selected for extra help from 17.7% to 46.5% (Obermeyer et al., 2019). The reallocation is simulated.
+- Rebuilding the CIFAR-10 and ImageNet test sets by the original procedures lowered accuracy by 3 to 15 points and by 11 to 14 points, about five years of progress, while the order of models was almost unchanged (Recht et al., 2019). Selection on noisy estimates of how often annotators accepted an image made the new ImageNet set harder; after a correction, about 3.6 points of the 11.7-point drop remain (Engstrom et al., 2020).
+- Across 112 Kaggle competitions, scores on the public leaderboard and on the private test set gave little evidence of adaptive overfitting (Roelofs et al., 2019), and Hardt (2026, chapter 8) argues that benchmarks have proved more resilient to reuse than theory predicts, largely for social reasons.
+- Zhang et al. (2024) wrote new grade-school mathematics problems matched to an existing benchmark, GSM8K. Some model families scored lower on the new problems, frontier models less so, and the new problems were slightly easier for humans. The authors work at a company that sells training data.
+- When every model is fine-tuned on the same task data before evaluation, newer models no longer outperform older ones at equal compute, and claimed emergence largely vanishes (Dominguez-Olmedo et al., 2025).
+- Leakage between training and test data has been found in at least 294 papers across 17 fields that use machine learning; in a case study of civil war prediction, complex models did no better than logistic regression once leakage was corrected (Kapoor and Narayanan, 2023).
+- At least 3.3% of test labels are wrong on average across 10 widely used datasets, and at least 6% of ImageNet's validation labels. With corrected labels, the ranking of some models reverses when the share of mislabeled examples is somewhat higher than measured (Northcutt et al., 2021).
+- A calibrated language model must generate false statements about arbitrary facts, whose truth cannot be inferred from the training data, at a rate close to the share of such facts that appear exactly once in its training data (Kalai and Vempala, 2024). Grading that gives no credit for abstaining rewards guessing (Kalai et al., 2025, with co-authors at OpenAI).
+- Optimizing a learned stand-in for human preferences too far lowers the score on the true objective, in a synthetic setup in which a fixed reward model plays the part of people (Gao et al., 2023).
+
+### Uncertainty in evaluations and leaderboards
+
+- Singh et al. (2025) audited Chatbot Arena with about 2 million votes on 243 models from 42 providers, January 2024 to April 2025. Meta tested 27 private versions in one month before Llama 4. Google and OpenAI received an estimated 19.2% and 20.4% of all the voting data, and proprietary providers 61.4%; 205 of the 243 public models were removed without notice, 64% of them open models. In the authors' own experiment, raising the share of arena data in fine-tuning from 0% to 70% raised a model's win rate on a test derived from the arena from 23.5% to 49.9%. They recommend a cap on private versions per provider, for example three. Several authors work at Cohere, a competing provider, as the paper discloses.
+- The platform's operators describe its design: anonymous pairwise votes, a statistical model of preferences, intervals for ranks, and comparisons of crowd votes with expert raters (Chiang et al., 2024).
+- Intervals for a benchmark score usually treat the questions as independent draws. Miller (2024; the author works at Anthropic) gives formulas for clustered questions, such as several questions about one passage, and for paired comparisons of two models on the same questions. Intervals from the central limit theorem are too narrow with fewer than a few hundred items and adequate with thousands; Bowyer et al. (2025) recommend other frequentist or Bayesian intervals for small benchmarks.
+- For several tasks in the GLUE benchmark, most comparisons with the state of the art would not be adequately powered, and a typical translation test of 2,000 sentences has about 75% power to detect a difference of one BLEU point (Card et al., 2020).
+- Variation from random seeds is rarely reported, and methods from human testing do little to reduce it (Madaan et al., 2024). The sampling of data, initialization and the choice of hyperparameters each add variance comparable to claimed improvements (Bouthillier et al., 2021). In reinforcement learning, conclusions drawn from a few training runs change once interval estimates are used (Agarwal et al., 2021).
+- Reformatting a prompt without changing its meaning moved accuracy by up to 76 points for one open model and by about 10 points on average; for GPT-3.5, by up to 56 points across 320 formats, with a median spread of 6.4 points (Sclar et al., 2024). Changing the order of answer options or the method of extracting answers moved models up to eight places in a ranking (Alzahrani et al., 2024). Ratings from pairwise votes are volatile and sensitive to the order of matches and to the rating system's settings (Boubdir et al., 2023).
+
+### Labor behind training data
+
+- Hara et al. (2018) analyzed logs from 2,676 Amazon Mechanical Turk workers covering 3.8 million tasks, 2014 to 2017. The median worker earned about $2 an hour, and 4% earned more than the US federal minimum wage of $7.25; the estimates depend on how unpaid time, such as searching for tasks and rejected work, is counted. The workers chose to install the logging plugin.
+- Toxtli et al. (2021) instrumented 100 workers for a week, covering 40,903 tasks. A median of 33% of working time was unpaid, mostly spent managing payments and watching for new tasks, and counting it lowered median pay from $3.76 to $2.83 an hour. Reading instructions and breaks were not counted, so the authors call this a lower bound.
+- In surveys of about 12,000 workers, half of those on online platforms earned under US$2 an hour (International Labour Organization, 2021). Only 4 of 16 platforms rated by Fairwork could show that workers earn the local minimum wage after costs (Fairwork, 2025).
+- Perrigo (2023) reported that OpenAI's contracts with Sama paid $12.50 an hour per worker, while the agents who labeled graphic text took home $1.32 to $1.44 an hour, and three employees said they were expected to read and label 150 to 250 passages in a nine-hour shift. Sama said the target was 70 passages and put pay at $1.46 to $3.74 an hour after tax, and OpenAI said it set no productivity targets. When Sama ended the contracts early, most of the roughly three dozen workers moved to lower-paid work.
+- A randomized evaluation of Sama's training and job program, run with the company and covering 1,115 applicants in Nairobi, found that training with a job referral raised earnings by about 37 to 40% and lowered unemployment by about 10 points relative to controls, while training alone did little (Atkin et al., 2021).
+- Fieldwork at three Sama centers in Kenya and Uganda found low wages, insecure work and tightly disciplined management; management arranged many of the interviews (Muldoon et al., 2025).
+- In 210 instruction documents and 55 interviews at three platforms used by workers in Venezuela and an outsourcing firm in Argentina, clients' instructions imposed their own classifications, precarity and economic dependence made workers compliant, and the interfaces left no room for workers' feedback (Miceli and Posada, 2022).
+- Of 53 AI practitioners interviewed, 92% described problems that started in undervalued data work and compounded downstream, which the authors call data cascades (Sambasivan et al., 2021).
+- In Indian annotation firms, annotators' own career goals and wellbeing are seldom considered (Wang et al., 2022). Micro-work prepares, checks and sometimes stands in for AI (Tubaro et al., 2020). Commercial AI moves service work to low-income countries through longer subcontracting chains more than it removes it (Le Ludec et al., 2023), and conditions and worker profiles differ sharply by country (Casilli et al., 2024). Terms such as "ghost work" (Gray and Suri, 2019) blur differences between platforms, outsourcing firms and stages of the pipeline (Muldoon et al., 2024).
+- A review of over 140 sources found no studies of how common psychological harm is among content moderators, and few evaluated interventions (Steiger et al., 2021).
+- AI developers disclose least about training data, data labor and compute, and several developers' scores fell in 2025 (Bommasani et al., 2025).
+
+### Public knowledge, consent and claims on data
+
+- Comparing Stack Overflow with Russian- and Chinese-language programming forums and with mathematics forums, del Rio-Chanona et al. (2024) found posting about 25% lower within six months of ChatGPT's release than the comparison sites predict, a lower bound, with weekly posts falling from about 60,000 to 40,000. Vote-based quality did not change, and the decline appeared among new and experienced users. The comparison forums may have been partly exposed to ChatGPT through VPNs.
+- Using synthetic controls, Burtch et al. (2024) found Stack Overflow's traffic about 12% lower, with questions falling most on topics with rich public data, and no decline in comparable Reddit communities. They infer that newer users left from a rise in the average account age of those posting, which differs from del Rio-Chanona et al.'s finding of declines at all levels of experience.
+- Of ChatGPT's answers to 517 Stack Overflow questions, 52% contained incorrect information, yet participants in a user study preferred them 35% of the time (Kabir et al., 2024). The model was GPT-3.5.
+- Across 12 language editions over 36 months, Wikipedia's views, visitors, edits and editors did not decline, though growth was slower where ChatGPT was available (Reeves et al., 2025). Newly created, popular articles whose content overlaps with ChatGPT lost more edits and views than dissimilar articles (Lyu et al., 2025).
+- In observational data from 900 US adults, Google users clicked a link to a result on 8% of visits when an AI summary appeared and on 15% without one (Chapekis and Lieb, 2025).
+- Among the sources of three large training corpora (C4, RefinedWeb and Dolma), the share of text from domains that fully block at least one of seven AI crawlers rose from about 1% to between 5% and 7% in a year, and to between 20% and 33% among the largest domains; terms of service restrict 45% to 55% of the text. The authors expect non-profits, archives and academic researchers to be among those shut out by such blocks (Longpre et al., 2024).
+- Common Crawl, the largest source of such data, is not representative of the web and is deliberately left uncurated (Baack, 2024).
+- In a formal model, because one person's data reveal information about others, data are priced too low and too much is shared, and competition does not correct this (Acemoglu et al., 2022). Viljoen (2021) argues that firms collect data mainly for what they reveal about populations, so individual consent cannot protect the interests at stake, and that data should be governed democratically.
+- Contributors hold collective power over companies that depend on their data, through data strikes, data poisoning or redirecting their contributions to competitors (Vincent et al., 2021). Writing and art scraped for training can be counted as data labor (Li et al., 2023), data could be treated as labor rather than as capital (Arrieta-Ibarra et al., 2018), and Goetze (2024) gives a Lockean argument that AI art is theft of labor. Majorities of 459 artists surveyed want training works disclosed and reject developers' ownership of outputs (Lovato et al., 2024).
+- Models collapse when output from earlier models replaces real data in training (Shumailov et al., 2024), but not when synthetic data accumulate alongside real data (Gerstgrasser et al., 2024).
+
+### Productivity, jobs and pay
+
+- Brynjolfsson, Li and Raymond (2025) studied a software firm and its subcontractors as they gave an AI assistant to 5,172 customer-support agents in stages. Issues resolved per hour rose 15% on average and about 30% for less experienced or less skilled agents; agents with two months' tenure and the assistant matched agents with more than six months' tenure without it; the most skilled agents gained little speed and lost a little quality; customer sentiment improved and fewer new agents left. The authors could not observe wages, hiring or the demand for labor, and they raise the question of whether workers should be compensated for the data that trains such systems.
+- In a preregistered experiment with 453 college-educated professionals doing writing tasks, ChatGPT cut time by 40%, raised quality by 18% and narrowed the gaps between workers (Noy and Zhang, 2023).
+- Three field experiments with 4,867 software developers at Microsoft, Accenture and a Fortune 100 company found 26.08% more completed tasks a week (standard error 10.3%) among developers who used a coding assistant because they were offered it, with larger gains for less experienced developers. Each trial alone is noisy, the trial was registered after it began, and two authors work at Microsoft (Cui et al., 2025).
+- In an experiment with 758 consultants, those with AI completed 12.2% more tasks, 25.1% faster and with higher quality on tasks within the model's capabilities, and were 19 points less likely to be correct on a task outside them (Dell'Acqua et al., 2026).
+- In a trial randomized by task, with 16 experienced developers and 246 tasks in repositories they maintain, tasks took 19% longer when AI was allowed. The developers had forecast 24% faster and afterward believed 20% faster, and experts in economics and machine learning had forecast 38% to 39% faster. Completion times were reported by the developers, and only 44% had used the AI-enabled editor before (Becker et al., 2025).
+- Task-level gains from coding tools have translated only partly into software that is shipped and used (Demirer, Musolff and Yang, 2026).
+- Writing-related freelancers on a large online platform had about 2% fewer monthly jobs and 5.2% lower monthly earnings after ChatGPT's release than freelancers in less exposed work, and high past performance did not protect them (Hui et al., 2024).
+- Among 640 Kenyan entrepreneurs given an AI mentor on WhatsApp, there was no average effect, but those who started as high performers gained just over 15% and low performers did about 8% worse (Otis et al., 2026).
+- In US payroll records, employment of 22- to 25-year-olds in exposed occupations had fallen about 19% relative to that of their peers in less exposed occupations by mid-2026, a pattern the authors call descriptive (Brynjolfsson, Chandar and Chen, 2025).
+- In Danish adoption surveys of about 25,000 workers at about 7,000 workplaces, linked to administrative records, earnings and hours did not change for workers who adopted chatbots relative to others, with effects above 2% ruled out, and 98% of adopters said chatbots had not affected their earnings. Adopters worked about 4% of a full-time job more in their latest occupation, and occupation switchers, mostly into IT support and clerical roles, had earnings growth 12 points ahead of others. The share of early-career workers was no different at workplaces that encourage AI use, with differences above one-third of a percentage point ruled out (Humlum and Vestergaard, 2025).
+- About 70% of firms in surveys of executives in several countries use AI, and over 80% report no effect on employment or productivity so far; executives expect productivity 1.4% higher and employment 0.7% lower over three years, and 2% of firms account for more than half of AI spending (Yotzov et al., 2026).
+- A task-based model puts the gain in total factor productivity over ten years at no more than 0.66%, under stated assumptions about the share of tasks affected (Acemoglu, 2025).
+- Economies of scale in compute, data and talent push the market for foundation models toward concentration (Korinek and Vipra, 2025). Open models cost about 90% less than closed models of comparable measured capability but stay under 30% of use on one marketplace (Demirer, Fradkin and Tadelis, 2026; two of the authors were at Amazon and Microsoft).
+- About 80% of US workers have at least 10% of their tasks exposed to language models, and 19% at least half, in ratings by people and by GPT-4 (Eloundou et al., 2023; three of the four authors were at OpenAI). Exposure describes what models could do with these tasks; it does not measure use or effects.
+- None of these studies measures how the gains divide between wages, prices and profits.
+
+### Responsibility for AI-assisted work
+
+- In a series of experiments, people asked for more dishonesty when they could delegate reporting to a machine through supervised learning or a high-level goal than when they had to give it explicit rules or report themselves, whether delegation was voluntary or mandatory. Given fully dishonest instructions in natural language, language-model agents complied far more often than human agents, and added guardrails reduced this compliance without removing it. The games had small stakes (Köbis et al., 2025).
+- In a preregistered evaluation with over 200 hand-written queries, commercial legal research tools marketed as free of hallucinations gave false or misgrounded answers to 17% to 33% of queries, and the best tool answered 65% accurately (Magesh et al., 2025).
+- From excess use of style words in 15.1 million PubMed abstracts, at least 13.5% of biomedical abstracts published in 2024 show signs of processing by a language model, a lower bound that reaches about 40% in some groups of papers (Kobak et al., 2025). A later preprint estimates such signs in 89% of open-access biomedical papers by the end of 2025 (Holzwarth et al., 2026).
+- Elish (2019) shows how responsibility is misattributed to a human with limited control over an automated system, so that the "moral crumple zone" protects the integrity of the technical system at the expense of the nearest human operator. Her cases include Three Mile Island; the loss of Air France 447, where certification covered the aircraft's software but not how the crew and the automation interact; and self-driving cars, including the 2018 Uber crash.
+- Disclosing AI use lowers others' trust in the person who discloses, and being exposed by someone else lowers it further, across 13 experiments (Schilke and Reimann, 2025). Porsdam Mann et al. (2023) argue that users of generative AI remain fully blameworthy for harmful output but earn less credit for good output. Hosseini et al. (2023) argue that bans on AI use in scholarly writing are unenforceable and that models cannot be authors because they cannot take responsibility, so authors should disclose and cite their use.
+- Nissenbaum (1996) names four barriers to accountability in computing: many hands, bugs treated as inevitable, blaming the computer, and ownership without liability; Cooper et al. (2022) argue that all four persist in machine learning and propose ways to weaken them. Matthias (2004) argues that learning systems open a gap in which no one can fairly be held responsible, and Santoni de Sio and Mecacci (2021) separate four gaps: culpability, moral accountability, public accountability and active responsibility.
+
+### Reliance, learning and deskilling
+
+- Among nearly 1,000 students at a high school in Turkey, practice grades rose 48% with a standard GPT-4 chatbot and 127% with a tutor version. On later exams without access, students who had used the standard chatbot scored 17% below those who never had access, and the tutor version largely prevented this. The study ran over a short period, so longer-term retention is unknown, and a correction has been published (Bastani et al., 2025).
+- Among 52 developers learning a new code library, those given AI help scored 17 points lower on a quiz afterward (Cohen's d = 0.74, p = 0.010), with no significant gain in speed; three of six ways of using the assistant, all of which kept participants engaged, preserved learning. The quiz came right after a session of up to 35 minutes (Shen and Tamkin, 2026; the study was done at Anthropic).
+- In a crossover trial with 194 physics students, median post-test scores were 4.5 after a structured AI tutor at home and 3.5 after an active-learning class, against a pre-test median of 2.75, with less time on task. The comparison changes setting, pace and teaching together, and the tests were immediate (Kestin et al., 2025).
+- A six-week, teacher-guided program in Nigeria raised scores by 0.31 standard deviations (De Simone et al., 2025). In one experiment, gains lasted for students who used AI as a tutor and faded for those who had it write, with the mode of use chosen by the students (Contractor and Reyes, 2026).
+- A preregistered meta-analysis of 370 effect sizes from over 100 experiments found human--AI combinations worse than the better of human or AI alone (Hedges' g = −0.23, 95% CI −0.39 to −0.07) but better than humans alone (g = 0.64), with losses concentrated in decision tasks and gains in content creation (Vaccaro et al., 2024). Most of the studies used tools that predate current language models.
+- Cognitive forcing designs, which make people engage with a problem before they see or accept the AI's advice, reduced over-reliance relative to simple explanations, and helped people high in need for cognition more (Buçinca et al., 2021).
+- When decision support gave wrong advice, an incorrect decision was 26% more likely (risk ratio 1.26, 95% CI 1.11 to 1.44, pooled from four healthcare studies), and users switched a correct answer to an incorrect one in 6% to 11% of cases (Goddard et al., 2012).
+- Inaccurate advice lowered the diagnostic accuracy of radiologists and other physicians whether it was labeled as coming from an AI or from a human expert; radiologists rated advice labeled as from AI as lower in quality, which did not protect their accuracy (Gaube et al., 2021).
+- In a preregistered experiment, radiologists underweighted AI predictions, so AI assistance did not raise their average accuracy (Agarwal et al., 2023).
+- At four centers in Poland, the adenoma detection rate in colonoscopies done without AI fell from 28.4% (226 of 795) to 22.4% (145 of 648), a difference of 6.0 points (95% CI 1.6 to 10.5), comparing the three months before and after AI was introduced. A before-and-after comparison cannot separate this from other changes over time or in the patients, and an erratum has been published (Budzyń et al., 2025).
+- In a prospective study with 13 endoscopists in Norway and 5,013 colonoscopies, the detection rate for polyps of at least 5 mm among inexperienced endoscopists rose from 31.9% to 39.5% while they used AI (odds ratio 1.43, 95% CI 1.11 to 1.84), and after AI was withdrawn the odds ratio against the period before AI was 1.03 (0.79 to 1.34); experienced endoscopists showed no change. The outcome differs from the Polish study's, and the two studies share a senior author (Pedersen et al., 2026).
+- Automating routine work removes the practice operators need for the rare cases in which they must take over (Bainbridge, 1983). In a survey of 319 knowledge workers, more confidence in AI went with less self-reported critical thinking (Lee et al., 2025; the authors work at Microsoft).
+
+### Conversational AI and its users
+
+- In three experiments with 76,977 UK participants, 19 models and 707 political issues, post-training raised persuasiveness by up to 51% and prompting by up to 27%, more than increasing model size or personalizing messages did. Where these methods made the models more persuasive, they also lowered the accuracy of the models' claims, of which the authors checked 466,769 (Hackenburg et al., 2025).
+- Tailored dialogues with a language model reduced 2,190 people's belief in a conspiracy theory by about 20% for two months (Costello et al., 2024). In June 2026 *Science* issued an editorial expression of concern after the authors reported that screening criteria had been applied inconsistently and that a code-merging error had added extraneous rows to the public dataset; the authors say the corrected results match in direction, statistical significance and size, and an erratum followed in October 2026. In a preprint by the same authors, the effect survives disclosure of persuasive intent and shorter replies, and largely disappears when the model withholds factual evidence (Costello et al., 2026).
+- A writing assistant biased toward one side shifted both what 1,506 participants wrote and their later attitudes (Jakesch et al., 2023).
+- In tests of 11 models, the models affirmed users' actions far more often than people did. In three preregistered experiments with 2,405 participants, one conversation with a flattering model made people more convinced that they were right and less willing to repair a conflict, while they rated its answers more highly and trusted it more; the outcomes are stated intentions (Cheng et al., 2026).
+- Five assistants behaved sycophantically across four tasks, and in human preference data used to train assistants, matching the user's views was among the strongest predictors of a response being preferred (Sharma et al., 2024; the authors work at Anthropic).
+- In a trial with 210 adults run by its developers, a purpose-built therapy chatbot reduced depression scores by 6.13 points against 2.63 on a waitlist at four weeks, with effect sizes of about 0.6 to 0.9 across conditions (Heinz et al., 2025). A waitlist does not control for attention or expectations, and staff reviewed the chatbot's responses.
+- In a four-week randomized experiment with 981 participants, the assigned modes and topics of chatbot use made no difference, but people who chose to use it more reported more loneliness and dependence. Mean use was 5.3 minutes a day, and the associations were small (standardized coefficients 0.02 to 0.06) (Fang et al., 2025, with co-authors at OpenAI).
+- Momentary loneliness fell after companion chats, about as much as after talking to a person (De Freitas et al., 2025).
+- Emotionally involved use of ChatGPT is concentrated in a small group of heavy users (Phang et al., 2025). Non-work messages rose from 53% to over 70% of ChatGPT use, and companionship is a small share (Chatterji et al., 2025). Both studies use company data and have authors at OpenAI.
+- In scripted tests, general chatbots expressed stigma toward some mental health conditions and responded inappropriately to crises and delusions (Moore et al., 2025).
+
+### Environmental costs
+
+- Data centers used about 415 terawatt-hours in 2024, about 1.5% of the world's electricity, after growing about 12% a year for five years; in the base case they use about 945 terawatt-hours by 2030, just under 3% of global demand (International Energy Agency, 2025). The agency's later update puts use at 485 terawatt-hours in 2025, when electricity use by AI-focused data centers grew 50%, and about 950 terawatt-hours in 2030 (International Energy Agency, 2026).
+- US data centers used 176 terawatt-hours in 2023, 4.4% of US electricity, projected at 6.7% to 12% by 2028 (Shehabi et al., 2024); the 2025 update's reference case is 11.8% in 2030, within a range of 9.5% to 15.3% (Smith et al., 2026).
+- Earlier alarms about data-center electricity were overstated because efficiency kept pace with demand through 2018 (Masanet et al., 2020).
+- Google reports 0.24 watt-hours and 0.26 milliliters of water for its median Gemini text prompt, or 0.10 watt-hours counting only its AI accelerators, and a 33-fold fall in energy per prompt over one year. The figure includes host systems, idle capacity and data-center overhead and excludes training, storage, networking and users' devices (Elsworth et al., 2025).
+- An outside estimate, inferred from public speed data and published hardware figures with nothing measured on providers' hardware, exceeds 29 watt-hours for long prompts on the most energy-intensive models (Jegham et al., 2025).
+- General-purpose generative models use far more energy per task than models built for one task (Luccioni et al., 2024).
+- AI emits 130 to 1,500 times less carbon per page of text and 310 to 2,900 times less per image than a person doing the task; the authors note that the comparison leaves out displacement of workers and rebound effects (Tomlinson et al., 2024).
+- Training one large model may have evaporated about 700,000 liters of water on site, and AI could require 4.2 to 6.6 billion cubic meters of water withdrawal in 2027 (Li et al., 2025).
+- In a modeling study, air pollution from US data centers could cost more than $20 billion a year in health by 2028, with the worst-affected counties bearing about seven times the national average per household (Han et al., 2024).
+- Cheaper use per query can expand total demand (Luccioni et al., 2025), though early estimates of the short-run price elasticity of demand for language models are just above one, which the authors read as limited scope for that effect (Demirer, Fradkin, Tadelis and Peng, 2025; three of the four authors were at Amazon or Microsoft).
+
+## References
+
+Acemoglu, D. (2025). The simple macroeconomics of AI. *Economic Policy*, 40(121), 13--58. <https://doi.org/10.1093/epolic/eiae042>
+
+Acemoglu, D., Makhdoumi, A., Malekian, A., and Ozdaglar, A. (2022). Too much data: Prices and inefficiencies in data markets. *American Economic Journal: Microeconomics*, 14(4), 218--256. <https://doi.org/10.1257/mic.20200200>
+
+Agarwal, N., Moehring, A., Rajpurkar, P., and Salz, T. (2023, revised 2025). Combining human expertise with artificial intelligence: Experimental evidence from radiology (NBER Working Paper 31422). <https://doi.org/10.3386/w31422>
+
+Agarwal, Schwarzer, Castro, Courville, and Bellemare (2021). Deep reinforcement learning at the edge of the statistical precipice. *Advances in Neural Information Processing Systems 34* (NeurIPS 2021). <https://arxiv.org/abs/2108.13264>
+
+Alzahrani, Alyahya, Alnumay, et al. (2024). When benchmarks are targets: Revealing the sensitivity of large language model leaderboards. <https://arxiv.org/abs/2402.01781>
+
+Arrieta-Ibarra, I., Goff, L., Jiménez-Hernández, D., Lanier, J., and Weyl, E. G. (2018). Should we treat data as labor? Moving beyond "free". *AEA Papers and Proceedings*, 108, 38--42. <https://doi.org/10.1257/pandp.20181003>
+
+Atkin, Schoar, and Wahnschafft (2021). *Evaluating Sama's training and job programs in Nairobi, Kenya*. Research report, J-PAL. <https://www.povertyactionlab.org/media/file-research-paper/evaluating-samas-training-and-job-programs-nairobi-kenya>
+
+Baack, S. (2024). A critical analysis of the largest source for generative AI training data: Common Crawl. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2024). <https://doi.org/10.1145/3630106.3659033>
+
+Bainbridge, L. (1983). Ironies of automation. *Automatica*, 19(6), 775--779. <https://doi.org/10.1016/0005-1098(83)90046-8>
+
+Bastani, H., Bastani, O., Sungu, A., Ge, H., Kabakci, O., and Mariman, R. (2025). Generative AI without guardrails can harm learning: Evidence from high school mathematics. *Proceedings of the National Academy of Sciences*, 122(26), e2422633122. <https://doi.org/10.1073/pnas.2422633122>. Correction: *PNAS*, 122(34), e2518204122.
+
+Bean, A. M., et al. (2025). Measuring what matters: Construct validity in large language model benchmarks. *NeurIPS 2025 Datasets and Benchmarks Track*. <https://arxiv.org/abs/2511.04703>
+
+Becker, J., Rush, N., Barnes, E., and Rein, D. (2025). Measuring the impact of early-2025 AI on experienced open-source developer productivity. METR. <https://arxiv.org/abs/2507.09089>
+
+Bommasani, R., Klyman, K., et al. (2025). The Foundation Model Transparency Index (2025 edition). Stanford Center for Research on Foundation Models. <https://arxiv.org/abs/2512.10169>
+
+Boubdir, Kim, Ermis, Hooker, and Fadaee (2023). Elo uncovered: Robustness and best practices in language model evaluation. <https://arxiv.org/abs/2311.17295>
+
+Bouthillier, Delaunay, Bronzi, et al. (2021). Accounting for variance in machine learning benchmarks. *Proceedings of Machine Learning and Systems* (MLSys 2021). <https://arxiv.org/abs/2103.03098>
+
+Bowyer, Aitchison, and Ivanova (2025). Position: Don't use the CLT in LLM evals with fewer than a few hundred datapoints. <https://arxiv.org/abs/2503.01747>
+
+Brynjolfsson, E., Chandar, B., and Chen, R. (2025, revised 2026). Canaries in the coal mine? Six facts about the recent employment effects of artificial intelligence. Stanford Digital Economy Lab working paper. <https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine/>
+
+Brynjolfsson, E., Li, D., and Raymond, L. (2025). Generative AI at work. *Quarterly Journal of Economics*, 140(2), 889--942. <https://doi.org/10.1093/qje/qjae044>
+
+Buçinca, Z., Malaya, M. B., and Gajos, K. Z. (2021). To trust or to think: Cognitive forcing functions can reduce overreliance on AI in AI-assisted decision-making. *Proceedings of the ACM on Human-Computer Interaction*, 5(CSCW1), Article 188. <https://doi.org/10.1145/3449287>
+
+Budzyń, K., et al. (2025). Endoscopist deskilling risk after exposure to artificial intelligence in colonoscopy: A multicentre, observational study. *Lancet Gastroenterology & Hepatology*, 10(10), 896--903. <https://doi.org/10.1016/S2468-1253(25)00133-5>. Erratum: 10(11), e12.
+
+Burnell, R., Schellaert, W., Burden, J., et al. (2023). Rethink reporting of evaluation results in AI. *Science*, 380(6641), 136--138. <https://doi.org/10.1126/science.adf6369>
+
+Burtch, G., Lee, D., and Chen, Z. (2024). The consequences of generative AI for online knowledge communities. *Scientific Reports*, 14, 10413. <https://doi.org/10.1038/s41598-024-61221-0>
+
+Card, D., Henderson, P., Khandelwal, U., Jia, R., Mahowald, K., and Jurafsky, D. (2020). With little power comes great responsibility. *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)*, 9263--9274. <https://doi.org/10.18653/v1/2020.emnlp-main.745>
+
+Casilli, Tubaro, Cornet, Le Ludec, Torres-Cierpe, and Viana Braz (2024). Global inequalities in the production of artificial intelligence: A four-country study on data work. <https://arxiv.org/abs/2410.14230>
+
+Chapekis and Lieb (2025, July 22). Google users are less likely to click on links when an AI summary appears in the results. Pew Research Center. <https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/>
+
+Chatterji, Cunningham, Deming, Hitzig, Ong, Shan, and Wadman (2025). How people use ChatGPT (NBER Working Paper 34255). <https://doi.org/10.3386/w34255>
+
+Cheng, M., Lee, C., Khadpe, P., Yu, S., Han, D., and Jurafsky, D. (2026). Sycophantic AI decreases prosocial intentions and promotes dependence. *Science*, 391(6792), eaec8352. <https://doi.org/10.1126/science.aec8352>
+
+Chiang, W.-L., et al. (2024). Chatbot Arena: An open platform for evaluating LLMs by human preference. *Proceedings of the 41st International Conference on Machine Learning* (ICML 2024), PMLR 235, 8359--8388. <https://arxiv.org/abs/2403.04132>
+
+Contractor and Reyes (2026). Experimental evidence on the learning impact of generative AI. <https://arxiv.org/abs/2607.08849>
+
+Cooper, A. F., Moss, E., Laufer, B., and Nissenbaum, H. (2022). Accountability in an algorithmic society: Relationality, responsibility, and robustness in machine learning. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2022). <https://doi.org/10.1145/3531146.3533150>
+
+Costello, T. H., Pennycook, G., and Rand, D. G. (2024). Durably reducing conspiracy beliefs through dialogues with AI. *Science*, 385(6714), eadq1814. <https://doi.org/10.1126/science.adq1814>. Editorial expression of concern: *Science*, 392(6803), 1131 (2026), <https://doi.org/10.1126/science.aej2383>. Erratum: *Science*, 394(6822), eaem1178 (2026).
+
+Costello, Pennycook, and Rand (2026). Just the facts: How dialogues with AI reduce conspiracy beliefs. <https://arxiv.org/abs/2611.05572>
+
+Cui, K. Z., Demirer, M., Jaffe, S., Musolff, L., Peng, S., and Salz, T. (2025). The effects of generative AI on high-skilled work: Evidence from three field experiments with software developers. *Management Science*. <https://doi.org/10.1287/mnsc.2025.00535>
+
+De Freitas, J., Oguz-Uguralp, Z., Uguralp, A. K., and Puntoni, S. (2025). AI companions reduce loneliness. *Journal of Consumer Research*. <https://doi.org/10.1093/jcr/ucaf040>
+
+De Simone, Tiberti, Barron Rodriguez, Manolio, Mosuro, and Dikoru (2025). From chalkboards to chatbots: Evaluating the impact of generative AI on learning outcomes in Nigeria (World Bank Policy Research Working Paper 11125). <https://econpapers.repec.org/RePEc:wbk:wbrwps:11125>
+
+del Rio-Chanona, R. M., Laurentsyeva, N., and Wachs, J. (2024). Large language models reduce public knowledge sharing on online Q&A platforms. *PNAS Nexus*, 3(9), pgae400. <https://doi.org/10.1093/pnasnexus/pgae400>
+
+Dell'Acqua, F., et al. (2026). Navigating the jagged technological frontier: Field experimental evidence of the effects of artificial intelligence on knowledge worker productivity and quality. *Organization Science*. <https://doi.org/10.1287/orsc.2025.21838>
+
+Demirer, Fradkin, and Tadelis (2026). The emerging market for intelligence: How firms buy and sell AI. *Journal of Economic Perspectives*, 40(3), 23--46. <https://doi.org/10.1257/jep.20261506>
+
+Demirer, Fradkin, Tadelis, and Peng (2025). The emerging market for intelligence: Pricing, supply, and demand for LLMs (NBER Working Paper 34608). <https://www.nber.org/papers/w34608>
+
+Demirer, Musolff, and Yang (2026). Writing code vs. shipping code: Productivity effects across generations of AI coding tools (NBER Working Paper 35275). <https://www.nber.org/papers/w35275>
+
+Dominguez-Olmedo, R., Dorner, F. E., and Hardt, M. (2025). Training on the test task confounds evaluation and emergence. *International Conference on Learning Representations* (ICLR 2025). <https://arxiv.org/abs/2407.07890>
+
+Elish, M. C. (2019). Moral crumple zones: Cautionary tales in human-robot interaction. *Engaging Science, Technology, and Society*, 5, 40--60. <https://doi.org/10.17351/ests2019.260>
+
+Eloundou, T., Manning, S., Mishkin, P., and Rock, D. (2023). GPTs are GPTs: An early look at the labor market impact potential of large language models. <https://arxiv.org/abs/2303.10130>. Published as "GPTs are GPTs: Labor market impact potential of LLMs", *Science*, 384(6702), 1306--1308 (2024).
+
+Elsworth, C., et al. (2025). Measuring the environmental impact of delivering AI at Google scale. <https://arxiv.org/abs/2508.15734>
+
+Engstrom et al. (2020). Identifying statistical bias in dataset replication. *Proceedings of the 37th International Conference on Machine Learning* (ICML 2020), PMLR 119, 2922--2932. <https://proceedings.mlr.press/v119/engstrom20a.html>
+
+Fairwork (2025). *Cloudwork ratings 2025*. Oxford Internet Institute and WZB Berlin. <https://fair.work>
+
+Fang, C. M., et al. (2025). How AI and human behaviors shape psychosocial effects of extended chatbot use: A longitudinal randomized controlled study. <https://arxiv.org/abs/2503.17473>
+
+Gao, L., Schulman, J., and Hilton, J. (2023). Scaling laws for reward model overoptimization. *Proceedings of the 40th International Conference on Machine Learning* (ICML 2023), PMLR 202, 10835--10866. <https://arxiv.org/abs/2210.10760>
+
+Gaube, S., Suresh, H., Raue, M., Merritt, A., Berkowitz, S. J., Lermer, E., Coughlin, J. F., Guttag, J. V., Colak, E., and Ghassemi, M. (2021). Do as AI say: Susceptibility in deployment of clinical decision-aids. *npj Digital Medicine*, 4, 31. <https://doi.org/10.1038/s41746-021-00385-9>
+
+Gerstgrasser, M., et al. (2024). Is model collapse inevitable? Breaking the curse of recursion by accumulating real and synthetic data. <https://arxiv.org/abs/2404.01413>
+
+Goddard, K., Roudsari, A., and Wyatt, J. C. (2012). Automation bias: A systematic review of frequency, effect mediators, and mitigators. *Journal of the American Medical Informatics Association*, 19(1), 121--127. <https://doi.org/10.1136/amiajnl-2011-000089>
+
+Goetze, T. S. (2024). AI art is theft: Labour, extraction, and exploitation. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2024), 186--196. <https://doi.org/10.1145/3630106.3658898>
+
+Gray, M. L., and Suri, S. (2019). *Ghost work: How to stop Silicon Valley from building a new global underclass*. Houghton Mifflin Harcourt. ISBN 978-1-328-56624-9.
+
+Hackenburg, K., Tappin, B. M., Hewitt, L., Saunders, E., Black, S., Lin, H., Fist, C., Margetts, H., Rand, D. G., and Summerfield, C. (2025). The levers of political persuasion with conversational artificial intelligence. *Science*, 390(6777). <https://doi.org/10.1126/science.aea3884>
+
+Han, Wu, Li, Wierman, and Ren (2024, revised 2026). Health-informed computing: Estimating and addressing the public health impact of data centers. <https://arxiv.org/abs/2412.06288>
+
+Hara, K., et al. (2018). A data-driven analysis of workers' earnings on Amazon Mechanical Turk. *Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems*, paper 449. <https://doi.org/10.1145/3173574.3174023>
+
+Hardt, M. (2026). *The emerging science of machine learning benchmarks*. Princeton University Press.
+
+Heinz, M. V., Mackin, D. M., Trudeau, B. M., et al. (2025). Randomized trial of a generative AI chatbot for mental health treatment. *NEJM AI*, 2(4), AIoa2400802. <https://doi.org/10.1056/AIoa2400802>
+
+Holzwarth, Gonzalez-Marquez, and Kobak (2026). Most biomedical publications show signs of LLM-assisted writing. <https://arxiv.org/abs/2608.10715>
+
+Hosseini, Resnik, and Holmes (2023). The ethics of disclosing the use of artificial intelligence tools in writing scholarly manuscripts. *Research Ethics*, 19(4). <https://doi.org/10.1177/17470161231180449>
+
+Hui, X., Reshef, O., and Zhou, L. (2024). The short-term effects of generative artificial intelligence on employment: Evidence from an online labor market. *Organization Science*, 35(6), 1977--1989. <https://doi.org/10.1287/orsc.2023.18441>
+
+Humlum, A., and Vestergaard, E. (2025, revised 2026). Large language models, small labor market effects; revised as Still waters, rapid currents: Early labor market transformation under generative AI (NBER Working Paper 33777). <https://doi.org/10.3386/w33777>
+
+International Energy Agency (2025). *Energy and AI*. IEA, Paris. <https://www.iea.org/reports/energy-and-ai>
+
+International Energy Agency (2026). *Key questions on energy and AI*. IEA, Paris. <https://www.iea.org/reports/key-questions-on-energy-and-ai>
+
+International Labour Organization (2021). *World employment and social outlook 2021: The role of digital labour platforms in transforming the world of work*. International Labour Office, Geneva. ISBN 978-92-2-031944-4.
+
+Jacobs, A. Z., and Wallach, H. (2021). Measurement and fairness. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2021), 375--385. <https://doi.org/10.1145/3442188.3445901>
+
+Jakesch, Bhat, Buschek, Zalmanson, and Naaman (2023). Co-writing with opinionated language models affects users' views. *Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems*. <https://doi.org/10.1145/3544548.3581196>
+
+Jegham, Abdelatti, Koh, Elmoubarki, and Hendawi (2025). How hungry is AI? Benchmarking energy, water, and carbon footprint of LLM inference. <https://arxiv.org/abs/2505.09598>
+
+Kabir, S., Udo-Imeh, D. N., Kou, B., and Zhang, T. (2024). Is Stack Overflow obsolete? An empirical study of the characteristics of ChatGPT answers to Stack Overflow questions. *Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems*. <https://doi.org/10.1145/3613904.3642596>
+
+Kalai, A. T., Nachum, O., Vempala, S. S., and Zhang, E. (2025). Why language models hallucinate. <https://arxiv.org/abs/2509.04664>
+
+Kalai, A. T., and Vempala, S. S. (2024). Calibrated language models must hallucinate. *Proceedings of the 56th Annual ACM Symposium on Theory of Computing* (STOC 2024). <https://arxiv.org/abs/2311.14648>
+
+Kapoor, S., and Narayanan, A. (2023). Leakage and the reproducibility crisis in machine-learning-based science. *Patterns*, 4(9), 100804. <https://doi.org/10.1016/j.patter.2023.100804>
+
+Kestin, Miller, Klales, Milbourne, and Ponti (2025). AI tutoring outperforms in-class active learning: An RCT introducing a novel research-based design in an authentic educational setting. *Scientific Reports*, 15, 17458. <https://doi.org/10.1038/s41598-025-97652-6>
+
+Kobak, Gonzalez-Marquez, Horvat, and Lause (2025). Delving into LLM-assisted writing in biomedical publications through excess vocabulary. *Science Advances*, 11(27). <https://doi.org/10.1126/sciadv.adt3813>
+
+Köbis, N., Rahwan, Z., Rilla, R., Supriyatno, B. I., Bersch, C., Ajaj, T., Bonnefon, J.-F., and Rahwan, I. (2025). Delegation to artificial intelligence can increase dishonest behaviour. *Nature*, 646(8083), 126--134. <https://doi.org/10.1038/s41586-025-09505-x>
+
+Korinek, A., and Vipra, J. (2025). Concentrating intelligence: Scaling and market structure in artificial intelligence. *Economic Policy*, 40(121), 225--256. <https://doi.org/10.1093/epolic/eiae057>
+
+Le Ludec, Cornet, and Casilli (2023). The problem with annotation: Human labour and outsourcing between France and Madagascar. *Big Data & Society*, 10(2). <https://doi.org/10.1177/20539517231188723>
+
+Lee, Sarkar, Tankelevitch, Drosos, Rintel, Banks, and Wilson (2025). The impact of generative AI on critical thinking. *Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems*. <https://doi.org/10.1145/3706598.3713778>
+
+Li, H., Vincent, N., Chancellor, S., and Hecht, B. (2023). The dimensions of data labor: A road map for researchers, activists, and policymakers to empower data producers. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2023), 1151--1161. <https://doi.org/10.1145/3593013.3594070>
+
+Li, Yang, Islam, and Ren (2025). Making AI less "thirsty": Uncovering and addressing the secret water footprint of AI models. *Communications of the ACM*. <https://arxiv.org/abs/2304.03271>
+
+Longpre, S., et al. (2024). Consent in crisis: The rapid decline of the AI data commons. *NeurIPS 2024 Datasets and Benchmarks Track*. <https://arxiv.org/abs/2407.14933>
+
+Lovato, Zimmerman, Smith, Dodds, and Karson (2024). Foregrounding artist opinions: A survey study on transparency, ownership, and fairness in AI generative art. *Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society* (AIES 2024). <https://arxiv.org/abs/2401.15497>
+
+Luccioni, A. S., Jernite, Y., and Strubell, E. (2024). Power hungry processing: Watts driving the cost of AI deployment? *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2024), 85--99. <https://doi.org/10.1145/3630106.3658542>
+
+Luccioni, Strubell, and Crawford (2025). From efficiency gains to rebound effects: The problem of Jevons' paradox in AI's polarized environmental debate. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2025). <https://arxiv.org/abs/2501.16548>
+
+Lyu, Siderius, Li, Acemoglu, Huttenlocher, and Ozdaglar (2025). Wikipedia contributions in the wake of ChatGPT. *Companion Proceedings of the ACM Web Conference 2025*. <https://arxiv.org/abs/2503.00757>
+
+Madaan, Singh, Schaeffer, et al. (2024). Quantifying variance in evaluation benchmarks. <https://arxiv.org/abs/2406.10229>
+
+Magesh, Surani, Dahl, Suzgun, Manning, and Ho (2025). Hallucination-free? Assessing the reliability of leading AI legal research tools. *Journal of Empirical Legal Studies*, 22(2), 216--242. <https://arxiv.org/abs/2405.20362>
+
+Masanet, Shehabi, Lei, Smith, and Koomey (2020). Recalibrating global data center energy-use estimates. *Science*, 367(6481). <https://eta.lbl.gov/publications/recalibrating-global-data-center>
+
+Matthias, A. (2004). The responsibility gap: Ascribing responsibility for the actions of learning automata. *Ethics and Information Technology*, 6, 175--183. <https://doi.org/10.1007/s10676-004-3422-1>
+
+Miceli, M., and Posada, J. (2022). The data-production dispositif. *Proceedings of the ACM on Human-Computer Interaction*, 6(CSCW2). <https://arxiv.org/abs/2205.11963>
+
+Miller, E. (2024). Adding error bars to evals: A statistical approach to language model evaluations. <https://arxiv.org/abs/2411.00640>
+
+Mitchell, M. (2023). How do we know how smart AI systems are? *Science*, 381(6654). <https://doi.org/10.1126/science.adj5957>
+
+Moore, Grabb, Agnew, Klyman, Chancellor, Ong, and Haber (2025). Expressing stigma and inappropriate responses prevents LLMs from safely replacing mental health providers. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2025). <https://doi.org/10.1145/3715275.3732039>
+
+Muldoon, J., Cant, C., Graham, M., and Ustek Spilda, F. (2025). The poverty of ethical AI: Impact sourcing and AI supply chains. *AI & Society*, 40(2), 529--543. <https://doi.org/10.1007/s00146-023-01824-9>
+
+Muldoon, Cant, Wu, and Graham (2024). A typology of artificial intelligence data work. *Big Data & Society*, 11(1). <https://doi.org/10.1177/20539517241232632>
+
+Nissenbaum, H. (1996). Accountability in a computerized society. *Science and Engineering Ethics*, 2(1), 25--42. <https://doi.org/10.1007/BF02639315>
+
+Northcutt, C. G., Athalye, A., and Mueller, J. (2021). Pervasive label errors in test sets destabilize machine learning benchmarks. *NeurIPS 2021 Datasets and Benchmarks Track*. <https://arxiv.org/abs/2103.14749>
+
+Noy, S., and Zhang, W. (2023). Experimental evidence on the productivity effects of generative artificial intelligence. *Science*, 381(6654), 187--192. <https://doi.org/10.1126/science.adh2586>
+
+Obermeyer, Z., Powers, B., Vogeli, C., and Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. *Science*, 366(6464), 447--453. <https://doi.org/10.1126/science.aax2342>
+
+Otis, N. G., Clarke, R., Delecourt, S., Holtz, D., and Koning, R. (2026). The uneven impact of generative artificial intelligence on entrepreneurial performance: Evidence from a field experiment in Kenya. *Management Science*. <https://doi.org/10.1287/mnsc.2024.06909>
+
+Ott, S., Barbosa-Silva, A., Blagec, K., Brauner, J., and Samwald, M. (2022). Mapping global dynamics of benchmark creation and saturation in artificial intelligence. *Nature Communications*, 13, 6793. <https://doi.org/10.1038/s41467-022-34591-0>
+
+Pedersen et al. (2026). Learning and deskilling effects of artificial intelligence in colonoscopy among endoscopists with different levels of experience: A pragmatic, prospective trial. *Endoscopy*, 58(9), 1003--1014. <https://doi.org/10.1055/a-2858-7084>
+
+Perrigo, B. (2023, January 18). Exclusive: OpenAI used Kenyan workers on less than $2 per hour to make ChatGPT less toxic. *TIME*. <https://time.com/6247678/openai-chatgpt-kenya-workers/>
+
+Phang, Lampe, Ahmad, et al. (2025). Investigating affective use and emotional well-being on ChatGPT. <https://arxiv.org/abs/2504.03888>
+
+Porsdam Mann, Earp, Nyholm, et al. (2023). Generative AI entails a credit-blame asymmetry. *Nature Machine Intelligence*, 5, 472--475. <https://doi.org/10.1038/s42256-023-00653-1>
+
+Raji, I. D., Bender, E. M., Paullada, A., Denton, E., and Hanna, A. (2021). AI and the everything in the whole wide world benchmark. *NeurIPS 2021 Datasets and Benchmarks Track*. <https://arxiv.org/abs/2111.15366>
+
+Recht, B., Roelofs, R., Schmidt, L., and Shankar, V. (2019). Do ImageNet classifiers generalize to ImageNet? *Proceedings of the 36th International Conference on Machine Learning* (ICML 2019), PMLR 97, 5389--5400. <https://proceedings.mlr.press/v97/recht19a.html>
+
+Reeves, Yin, and Simperl (2025). Exploring the impact of ChatGPT on Wikipedia engagement. *Collective Intelligence*. <https://doi.org/10.1177/26339137251372599>
+
+Reuel, Hardy, Smith, Lamparth, Hardy, and Kochenderfer (2024). BetterBench: Assessing AI benchmarks, uncovering issues, and establishing best practices. <https://arxiv.org/abs/2411.12990>
+
+Roelofs, R., Shankar, V., Recht, B., Fridovich-Keil, S., Hardt, M., Miller, J., and Schmidt, L. (2019). A meta-analysis of overfitting in machine learning. *Advances in Neural Information Processing Systems 32* (NeurIPS 2019).
+
+Salaudeen, O., et al. (2025). Measurement to meaning: A validity-centered framework for AI evaluation. *NeurIPS 2025*. <https://arxiv.org/abs/2505.10573>
+
+Sambasivan, N., et al. (2021). "Everyone wants to do the model work, not the data work": Data cascades in high-stakes AI. *Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems*. <https://research.google/pubs/everyone-wants-to-do-the-model-work-not-the-data-work-data-cascades-in-high-stakes-ai/>
+
+Santoni de Sio, F., and Mecacci, G. (2021). Four responsibility gaps with artificial intelligence: Why they matter and how to address them. *Philosophy & Technology*, 34(4), 1057--1084. <https://doi.org/10.1007/s13347-021-00450-x>
+
+Schilke and Reimann (2025). The transparency dilemma: How AI disclosure erodes trust. *Organizational Behavior and Human Decision Processes*, 188, 104405. <https://doi.org/10.1016/j.obhdp.2025.104405>
+
+Sclar, Choi, Tsvetkov, and Suhr (2024). Quantifying language models' sensitivity to spurious features in prompt design. *International Conference on Learning Representations* (ICLR 2024). <https://arxiv.org/abs/2310.11324>
+
+Sharma, M., Tong, M., Korbak, T., et al. (2024). Towards understanding sycophancy in language models. *International Conference on Learning Representations* (ICLR 2024). <https://arxiv.org/abs/2310.13548>
+
+Shehabi, A., et al. (2024). *2024 United States data center energy usage report* (LBNL-2001637). Lawrence Berkeley National Laboratory. <https://doi.org/10.71468/P1WC7Q>
+
+Shen, J. H., and Tamkin, A. (2026). How AI impacts skill formation. <https://arxiv.org/abs/2601.20245>
+
+Shumailov, I., Shumaylov, Z., Zhao, Y., Papernot, N., Anderson, R., and Gal, Y. (2024). AI models collapse when trained on recursively generated data. *Nature*, 631, 755--759. <https://doi.org/10.1038/s41586-024-07566-y>
+
+Singh, S., et al. (2025). The leaderboard illusion. *NeurIPS 2025*. <https://arxiv.org/abs/2504.20879>
+
+Smith, Hubbard, Newkirk, et al. (2026). *United States data center energy usage report: 2025 update*. Lawrence Berkeley National Laboratory. <https://doi.org/10.71468/P1RP4F>
+
+Steiger, Bharucha, Venkatagiri, Riedl, and Lease (2021). The psychological well-being of content moderators. *Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems*. <https://doi.org/10.1145/3411764.3445092>
+
+Tomlinson, B., Black, R. W., Patterson, D. J., and Torrance, A. W. (2024). The carbon emissions of writing and illustrating are lower for AI than for humans. *Scientific Reports*, 14, 3732. <https://doi.org/10.1038/s41598-024-54271-x>
+
+Toxtli, Suri, and Savage (2021). Quantifying the invisible labor in crowd work. *Proceedings of the ACM on Human-Computer Interaction* (CSCW 2021). <https://arxiv.org/abs/2110.00169>
+
+Tubaro, P., Casilli, A. A., and Coville, M. (2020). The trainer, the verifier, the imitator: Three ways in which human platform workers support artificial intelligence. *Big Data & Society*, 7(1). <https://doi.org/10.1177/2053951720919776>
+
+Vaccaro, M., Almaatouq, A., and Malone, T. (2024). When combinations of humans and AI are useful: A systematic review and meta-analysis. *Nature Human Behaviour*, 8(12), 2293--2303. <https://doi.org/10.1038/s41562-024-02024-1>
+
+Viljoen, S. (2021). A relational theory of data governance. *Yale Law Journal*, 131(2), 573--654. <https://www.yalelawjournal.org/feature/a-relational-theory-of-data-governance>
+
+Vincent, N., Li, H., Tilly, N., Chancellor, S., and Hecht, B. (2021). Data leverage: A framework for empowering the public in its relationship with technology companies. *Proceedings of the ACM Conference on Fairness, Accountability, and Transparency* (FAccT 2021). <https://arxiv.org/abs/2012.09995>
+
+Wallach, H., et al. (2025). Position: Evaluating generative AI systems is a social science measurement challenge. *International Conference on Machine Learning* (ICML 2025), PMLR 267, 82232--82251. <https://arxiv.org/abs/2502.00561>
+
+Wang, Prabhat, and Sambasivan (2022). Whose AI dream? In search of the aspiration in data annotation. *Proceedings of the 2022 CHI Conference on Human Factors in Computing Systems*. <https://arxiv.org/abs/2203.10748>
+
+Yotzov, I., Barrero, J. M., Bloom, N., Bunn, P., Davis, S. J., et al. (2026). Firm data on AI (NBER Working Paper 34836). <https://doi.org/10.3386/w34836>
+
+Zhang, H., et al. (2024). A careful examination of large language model performance on grade school arithmetic. *NeurIPS 2024*. <https://arxiv.org/abs/2405.00332>
