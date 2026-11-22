@@ -10,4 +10,4 @@ Since December 2012 an insurer in the European Union may not use gender to set a
 
 **Lecture:** [notes](weeks/wk08/notes.html) · [slides](weeks/wk08/slides.html)
 
-**Class:** [class sheet](weeks/wk08/class.html) ([.qmd](https://ethics4ds.com/weeks/wk08/class.qmd){download="class.qmd"})
+**Class:** [class sheet](weeks/wk08/class.html) ([.qmd](https://ethics4ds.com/weeks/wk08/class.qmd){download="class.qmd"}) · [class sheet with solutions](https://ethics4ds.com/solutions/wk08/class_solutions.html)
