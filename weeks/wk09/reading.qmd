@@ -2,10 +2,6 @@
 title: "AI: a survey of the evidence"
 ---
 
-This reading was drafted by Claude, an AI model made by Anthropic, from sources it searched for and checked; it was then audited against those sources in three independent reviews and revised following the course convenor's decisions. Anthropic makes some of the systems discussed below. The reading notes when a source's authors work for a company that makes or competes with the systems studied, and the same caution applies to this reading.
-
-Read the first part, Reading, before the lecture. The second part, Supplemental, gives more studies and detail on the same topics, for reference. Each section of the Reading ends with a one-sentence summary.
-
 ## Reading
 
 ### Benchmark validity
