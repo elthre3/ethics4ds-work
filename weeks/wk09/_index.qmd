@@ -1,0 +1,5 @@
+## Week 9: AI
+
+Claims about AI, from its makers, its critics and the press, rest on evidence that is often new, partial or produced by the companies that build the systems. The reading surveys what that evidence shows so far: what benchmark scores measure and how uncertain they are, the human work and public data behind the models, who has gained economically, how relying on AI changes learning and responsibility, and what conversational systems do to their users.
+
+**Required reading:** [AI: a survey of the evidence](weeks/wk09/reading.html), the first part, "Reading" (about 2,800 words). The second part, "Supplemental", has more studies on the same topics, for reference.
