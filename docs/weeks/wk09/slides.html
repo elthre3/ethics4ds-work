@@ -143,77 +143,38 @@ Joshua Loftus
 </div>
 </div>
 
-</section>
-<section id="the-lenses" class="slide level2" data-minutes="1">
-<h2>The lenses</h2>
-<ul>
-<li><strong>Goal selection.</strong> What are we optimizing or predicting?</li>
-<li><strong>Data selection.</strong> Who is in the data?</li>
-<li><strong>Honest reporting.</strong> Which comparison gets reported?</li>
-<li><strong>Justice.</strong> Who bears the error?</li>
-<li><strong>Ownership.</strong> You have to choose, so choose, and defend it.</li>
-<li><strong>Leverage.</strong> What can be changed, and how?</li>
-</ul>
-<p>Each ends with the same two words: <em>and why?</em></p>
+<div class="ask">
+<p>What are your top questions about the ethics of AI?</p>
+</div>
 </section>
 <section id="section" class="slide level2 inverse">
 <h2></h2>
 <h3 id="week-9">Week 9</h3>
-<p>Part 1: Where AI came from</p>
-<p>Part 2: What a benchmark measures</p>
-<p>Part 3: How sure, and which score</p>
-<p>Part 4: What it is made of</p>
-<p>Part 5: Who gets the payoff</p>
-</section>
-<section id="warm-up" class="slide level2" data-minutes="4">
-<h2>Warm-up</h2>
-<p>You were asked to bring your top questions about the ethics of AI.</p>
-<div class="ask">
-<p>Write down your top question. What evidence would help answer it?</p>
-</div>
+<p>Part 1: Historical context (abstract)</p>
+<p>Part 2: Benchmarks and “general intelligence”</p>
+<p>Part 3: What it is made of</p>
+<p>Part 4: Who benefits / <em>cui bono</em>?</p>
+<p>Part 5: Reliance, learning and deskilling</p>
+<p>Part 6: Conversational AI</p>
+<p>Part 7: Environmental costs</p>
 </section>
 <section>
-<section id="part-1-where-ai-came-from" class="title-slide slide level1 center">
-<h1>Part 1: Where AI came from</h1>
+<section id="part-1-historical-context-abstract" class="title-slide slide level1 center">
+<h1>Part 1: Historical context (abstract)</h1>
 
 </section>
-<section id="a-test-in-place-of-a-question" class="slide level2" data-minutes="3">
-<h2>A test in place of a question</h2>
-<p>Turing (1950) opens with a question:</p>
-<blockquote>
-<p>“I propose to consider the question, ‘Can machines think?’”</p>
-</blockquote>
-<p>He then replaces it with a test he can describe: can a machine, exchanging typed messages with a questioner, be mistaken for a person? He calls it the imitation game.</p>
-<div class="fragment">
-<p>In 1955 four researchers proposed “a 2 month, 10 man study” of artificial intelligence, to be held at Dartmouth College in the summer of 1956. They thought a selected group could make a significant advance on one or more of its problems in a summer.</p>
-<div class="source">
-<p>Turing (1950), “Computing Machinery and Intelligence,” <em>Mind</em> 59(236), 433–460, page 433. McCarthy, Minsky, Rochester and Shannon, “A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence,” 31 August 1955; reprinted in <em>AI Magazine</em> 27(4), 2006, 12–14, https://doi.org/10.1609/aimag.v27i4.1904.</p>
+<section id="a-short-history" class="slide level2" data-minutes="2">
+<h2>A short history</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/timeline-1.png" style="width:100.0%" alt="A timeline from 1950 to 2025. Turing's imitation game in 1950; ELIZA in 1966; two gray bands for the AI winters in the 1970s and late 1980s; a band for machine learning from the mid 1990s to 2011; deep learning at 2012; a band for large language models from 2017."></p>
+</figure>
 </div>
 </div>
-</section>
-<section id="eliza-and-the-lighthill-report" class="slide level2" data-minutes="2">
-<h2>ELIZA and the Lighthill report</h2>
-<p>ELIZA (Weizenbaum, 1966) answered typed sentences. It looked for a keyword, took the sentence apart by a rule attached to that keyword, and put a reply together by another rule. The rules were a script that a person wrote.</p>
-<p>Weizenbaum’s introduction: once a program’s workings are explained, “its magic crumbles away”.</p>
-<div class="fragment">
-<p>Lighthill (1973), for the UK’s Science Research Council, set results against claims. In no part of the field, he wrote, had discoveries “produced the major impact that was then promised”.</p>
-<div class="source">
-<p>Weizenbaum (1966), “ELIZA: A Computer Program for the Study of Natural Language Communication Between Man and Machine,” <em>Communications of the ACM</em> 9(1), 36–45, https://doi.org/10.1145/365153.365168, page 36. Lighthill (1973), “Artificial Intelligence: A General Survey,” in <em>Artificial Intelligence: a paper symposium</em>, Science Research Council, https://www.aiai.ed.ac.uk/events/lighthill1973/lighthill.pdf, the section “Past disappointments”.</p>
 </div>
-</div>
-</section>
-<section id="rules-fitted-to-data" class="slide level2" data-minutes="3">
-<h2>Rules fitted to data</h2>
-<p>2012: a neural network trained on labeled images wins the ImageNet competition, with a top-5 error of 15.3% against 26.2% for the next entry.</p>
-<p>2017: the transformer, “a new simple network architecture” for sequences of words.</p>
-<p>30 November 2022: ChatGPT is released as a free research preview.</p>
-<div class="fragment">
-<p>A language model is trained to predict the next word in text that people wrote. A chatbot is then tuned further, using people’s rankings of its answers.</p>
-<p>The rules are no longer written by a person. They are fitted to data that people produced.</p>
-<div class="source">
-<p>Krizhevsky, Sutskever and Hinton (2012), “ImageNet Classification with Deep Convolutional Neural Networks,” <em>Advances in Neural Information Processing Systems</em> 25, 1097–1105. Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin (2017), “Attention Is All You Need,” https://arxiv.org/abs/1706.03762. OpenAI, “Introducing ChatGPT,” 30 November 2022, https://openai.com/blog/chatgpt.</p>
-</div>
-</div>
+<p>A language model is trained to predict the next word in text people wrote, then tuned using people’s ratings of its answers.</p>
 </section>
 <section id="levels-of-abstraction" class="slide level2" data-minutes="3">
 <h2>Levels of abstraction</h2>
@@ -227,7 +188,7 @@ Joshua Loftus
 <tr class="header">
 <th style="text-align: left;">level</th>
 <th style="text-align: left;">the person writes</th>
-<th style="text-align: left;">the rest is filled in by</th>
+<th style="text-align: left;">filled in by</th>
 </tr>
 </thead>
 <tbody>
@@ -258,39 +219,46 @@ Joshua Loftus
 </tr>
 </tbody>
 </table>
-<p>At each level the person writes less and the machine fills in more. The computer is still executing instructions.</p>
-<div class="fragment">
-<p>An “agent” is a program that runs a model in a loop. Someone gave the instructions, and someone answers for them.</p>
-</div>
+<p>The computer is still executing instructions. An “agent” is a program that runs a model in a loop: someone gave the instructions, and someone answers for them.</p>
 <div class="fragment">
 <div class="leave">
-<p>Where the comparison stops: a compiler is specified and repeatable. A model is learned and sampled, so it has to be measured.</p>
-</div>
-<div class="source">
-<p>Backus, Beeber, Best, et al.&nbsp;(1957), “The FORTRAN automatic coding system,” <em>Proceedings of the Western Joint Computer Conference</em>, 188–198.</p>
+<p>A compiler is specified and repeatable. A model is learned and sampled, so it has to be measured.</p>
 </div>
 </div>
 </section></section>
 <section>
-<section id="part-2-what-a-benchmark-measures" class="title-slide slide level1 center">
-<h1>Part 2: What a benchmark measures</h1>
+<section id="part-2-benchmarks-and-general-intelligence" class="title-slide slide level1 center">
+<h1>Part 2: Benchmarks and “general intelligence”</h1>
 
 </section>
-<section id="a-higher-score" class="slide level2" data-minutes="2">
+<section id="a-higher-score" class="slide level2">
 <h2>A higher score</h2>
 <p>Model A scores higher than model B on a benchmark named for reasoning.</p>
 <div class="ask">
-<p>What do you need to know before you believe that A reasons better than B? Write down as much as you can in one minute.</p>
+<p>What do you need to know before you believe that A reasons better than B?</p>
 </div>
 </section>
-<section id="score-and-capability" class="slide level2" data-minutes="3">
+<section id="reliability-and-validity" class="slide level2">
+<h2>Reliability and validity</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/targets-1.png" style="width:100.0%" alt="Four targets. Reliable and valid: a tight cluster on the center. Reliable, not valid: a tight cluster off center. Not reliable, valid: a wide scatter around the center. Not reliable, not valid: a wide scatter off center."></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Reliability:</em> the same result when things that should not matter change (run, prompt, judge, items).</p>
+<p><em>Validity:</em> the score measures what it is named for. Construct: does it track “reasoning”? Content: do the items cover what the name claims? Predictive: does it predict performance in use?</p>
+</section>
+<section id="score-and-capability" class="slide level2">
 <h2>Score and capability</h2>
-<p><span class="math inline">\(Y\)</span>: the score, the share of items answered correctly. <span class="math inline">\(Y^*\)</span>: the capability the benchmark is named for.</p>
-<p>Bean et al.&nbsp;(2025) reviewed 445 benchmarks for language models:</p>
+<p><span class="math inline">\(Y\)</span>: the score. <span class="math inline">\(Y^*\)</span>: the capability the benchmark is named for. Of 445 benchmarks for language models (Bean et al., 2025):</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: left;">of the 445 benchmarks</th>
+<th style="text-align: left;"></th>
 <th style="text-align: right;">share</th>
 </tr>
 </thead>
@@ -304,90 +272,64 @@ Joshua Loftus
 <td style="text-align: right;">47.8%</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">give evidence that the score measures the intended construct</td>
+<td style="text-align: left;">give evidence the score measures the intended construct</td>
 <td style="text-align: right;">53.4%</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">compare models with a human baseline</td>
-<td style="text-align: right;">32.4%</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">use uncertainty estimates or statistical tests</td>
 <td style="text-align: right;">16.0%</td>
 </tr>
 </tbody>
 </table>
-<p>The review codes what each paper reports. On the first row, the papers coded twice got the same answer 53.7% of the time, little better than chance (Brennan–Prediger kappa 0.073).</p>
-<div class="source">
-<p>Bean, Kearns, Romanou, et al.&nbsp;(2025), “Measuring what matters: Construct validity in large language model benchmarks,” <em>NeurIPS 2025 Datasets and Benchmarks Track</em>, https://arxiv.org/abs/2511.04703.</p>
-</div>
+<p>On the first row, the review’s own coders agreed 53.7% of the time (kappa 0.073): low inter-rater reliability.</p>
 </section>
-<section id="new-items" class="slide level2" data-minutes="3">
-<h2>New items</h2>
-<p>A benchmark of grade-school mathematics problems is public. Researchers write new problems by the same recipe. People solve the new problems at about the same rate as the old ones.</p>
-<p>One model scores 8 points lower on the new problems.</p>
-<div class="ask">
-<p>Give two explanations for the 8 points. What would you measure to tell them apart?</p>
-</div>
-<div class="source">
-<p>Zhang, Da, Lee, et al.&nbsp;(2024), “A careful examination of large language model performance on grade school arithmetic,” <em>NeurIPS 2024</em>, https://arxiv.org/abs/2405.00332. The authors work at a company that sells training data.</p>
-</div>
-</section>
-<section id="the-gap-between-two-scores" class="slide level2" data-minutes="4">
-<h2>The gap between two scores</h2>
-<p>Old items: <span class="math inline">\(n_1\)</span> of them, share correct <span class="math inline">\(\hat p_1\)</span>. New items: <span class="math inline">\(n_2\)</span>, share correct <span class="math inline">\(\hat p_2\)</span>.</p>
-<p><span class="math display">\[
-\hat p_1 - \hat p_2, \qquad \text{standard error} \;\; \sqrt{\frac{\hat p_1 (1 - \hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}}
-\]</span></p>
-<p>With accuracy near 0.8 and 1,200 items in each set, the standard error is 1.6 points. A gap of 8 points is about 5 standard errors. A gap of 2 points is about 1.</p>
-<div class="fragment">
-<p>Zhang et al.: gaps of up to 8 points for some models, and little to no evidence of a gap for the frontier models. The gap is larger for models that more readily reproduce the old problems. The authors weigh this against indirect routes: developers collecting similar data, or choosing among versions of a model by the benchmark score.</p>
-<div class="source">
-<p>Zhang et al.&nbsp;(2024), as above.</p>
-</div>
-</div>
-</section>
-<section id="conditioning-or-intervening" class="slide level2 inverse" data-minutes="3">
-<h2>Conditioning or intervening</h2>
+<section id="reading-a-clock" class="slide level2">
+<h2>Reading a clock</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides_files/figure-revealjs/dag_score-1.png" style="width:100.0%" alt="A causal graph in boxes. Training choices point into capability and into exposure to the items. Capability and exposure to the items both point into the score."></p>
+<p><img data-src="slides_files/figure-revealjs/clock-1.png" style="width:100.0%" alt="An analog clock face showing ten past ten."></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="ask">
-<p>“A scores higher than B” compares two models as they are. Is that conditioning or intervening? In the new-items study, what was intervened on?</p>
+</div><div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/clockbench-1.png" style="width:100.0%" alt="Bar chart. September 2025: people 89.1 percent, best model 13.3 percent. November 2026: people 90.7 percent, best model 87.8 percent."></p>
+</figure>
 </div>
-</section></section>
-<section>
-<section id="part-3-how-sure-and-which-score" class="title-slide slide level1 center">
-<h1>Part 3: How sure, and which score</h1>
-
+</div>
+</div>
+</div></div>
+<p>A task that is easy for people, on <a href="https://clockbench.ai/">ClockBench</a>. What changed in a year?</p>
 </section>
-<section id="a-larger-benchmark" class="slide level2" data-minutes="2">
+<section id="a-larger-benchmark" class="slide level2">
 <h2>A larger benchmark</h2>
-<p>A benchmark reports a model’s score with a 95% interval, from the usual formula for a mean over <span class="math inline">\(n\)</span> items.</p>
-<p>Each answer is graded by another model: one prompt, one judge, one run.</p>
-<p>The benchmark grows from 25 items to 400. The interval is now four times narrower.</p>
+<p>A benchmark reports a model’s score with a 95% interval, from the usual formula for a mean over <span class="math inline">\(n\)</span> items. One prompt, one judge model, one run.</p>
+<p>The benchmark grows from 25 items to 400. The interval is four times narrower.</p>
 <div class="ask">
-<p>Does the interval now contain the truth more often, less often, or as often as before? Commit to one.</p>
+<p>Does the interval now contain the truth more often, less often, or as often as before?</p>
 </div>
 </section>
-<section id="hidden-error" class="slide level2" data-minutes="3">
-<h2>Hidden error</h2>
+<section id="fixed-or-random" class="slide level2" data-minutes="3">
+<h2>Fixed or random?</h2>
 <p><span class="math display">\[
 \text{score} = \theta + B + \bar\varepsilon, \qquad \mathrm{Var}(\bar\varepsilon) = \frac{\sigma^2}{n}, \qquad \mathrm{Var}(B) = \tau^2
 \]</span></p>
-<p><span class="math inline">\(B\)</span> is drawn once for the whole run and shared by every item: the prompt, the judge, the settings.</p>
-<p><span class="math display">\[
-\mathrm{Var}(\text{score}) = \frac{\sigma^2}{n} + \tau^2, \qquad \text{naive standard error:} \;\; \frac{\sigma}{\sqrt n}
-\]</span></p>
+<p><span class="math inline">\(B\)</span>: the prompt, the judge, the settings. Drawn once, shared by every item.</p>
+<ul>
+<li>Fixed: the target is <span class="math inline">\(\theta + B\)</span>, this model scored this way. The naive standard error <span class="math inline">\(\sigma / \sqrt n\)</span> is right.</li>
+<li>Random: the target is <span class="math inline">\(\theta\)</span>, over reasonable setups. The variance is <span class="math inline">\(\sigma^2 / n + \tau^2\)</span>.</li>
+</ul>
 <div class="fragment">
-<p>Let <span class="math inline">\(r\)</span> be the naive standard error divided by the true one. With normal errors, the naive 95% interval contains <span class="math inline">\(\theta\)</span> with probability <span class="math inline">\(2\,\Phi(1.96\, r) - 1\)</span>.</p>
-<p>If the naive standard error is half the true one, the coverage is 67%.</p>
+<p>The naive 95% interval covers <span class="math inline">\(\theta\)</span> with probability <span class="math inline">\(2\,\Phi(1.96\, r) - 1\)</span>, where <span class="math inline">\(r = 1 / \sqrt{1 + n\tau^2 / \sigma^2}\)</span>.</p>
+<p>In survey statistics, <span class="math inline">\(1 + n\tau^2/\sigma^2\)</span> is the design effect of a single interviewer.</p>
 </div>
 </section>
 <section id="coverage-and-the-number-of-items" class="slide level2" data-minutes="1">
@@ -396,29 +338,21 @@ Joshua Loftus
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides_files/figure-revealjs/coverage-1.png" style="width:100.0%" alt="Coverage of the naive 95 percent interval against the number of items, on a log scale from 5 to 2,000 items. The curve falls from about 71 percent at 5 items to about 5 percent at 2,000. Two points are marked: 42 percent at 25 items and 11 percent at 400. A dashed line marks 95 percent."></p>
+<p><img data-src="slides_files/figure-revealjs/coverage-1.png" style="width:100.0%" alt="Coverage of the naive 95 percent interval against the number of items, on a log scale. The curve falls from about 71 percent at 5 items to about 5 percent at 2,000. Marked: 42 percent at 25 items and 11 percent at 400. A dashed line at 95 percent."></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Messing (2026), simulating with variance estimates from a real benchmark: the naive interval contains the truth 42% of the time at 25 items and 11% at 400. The curve fixes <span class="math inline">\(\tau^2 / \sigma^2\)</span> by the 42%; it then gives the 11%.</p>
-<div class="source">
-<p>Messing (2026), “Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking,” preprint, https://arxiv.org/abs/2604.11581; the two figures are from his post of 17 November 2026, https://solomonmg.github.io/blog/hidden-measurement-error-llm-evals/. Not peer reviewed.</p>
-</div>
+<p>Messing (2026), with variance estimates from a real benchmark: the naive interval contains the truth 42% of the time at 25 items, 11% at 400.</p>
 </section>
-<section id="private-versions" class="slide level2" data-minutes="2">
+<section id="private-versions" class="slide level2">
 <h2>Private versions</h2>
-<p>On Chatbot Arena, a public leaderboard, a provider could test private versions of a model and publish one. Meta tested 27 in the month before one release.</p>
-<p>Two copies of the same model, entered as two separate models, scored 1052 and 1069. Four other models were ranked between them.</p>
+<p>On Chatbot Arena, a provider could test private versions and publish one. Meta tested 27 in the month before one release (Singh et al., 2025).</p>
 <div class="retrieval">
-<p>A provider tests <span class="math inline">\(K\)</span> private versions that are in truth equally good, and publishes the best score.</p>
-<p>By how much does the published score overstate, on average? What does it depend on?</p>
-</div>
-<div class="source">
-<p>Singh, Nan, Wang, et al.&nbsp;(2025), “The leaderboard illusion,” <em>NeurIPS 2025</em>, https://arxiv.org/abs/2504.20879, section 3.3 and Figure 9. Several of the authors work at Cohere, which competes on the leaderboard.</p>
+<p><span class="math inline">\(K\)</span> private versions, in truth equally good; the best score is published. By how much does it overstate, on average?</p>
 </div>
 </section>
-<section id="the-best-of-k" class="slide level2" data-minutes="4">
+<section id="the-best-of-k" class="slide level2" data-minutes="3">
 <h2>The best of <span class="math inline">\(K\)</span></h2>
 <p>Version <span class="math inline">\(k\)</span> scores <span class="math inline">\(\mu + \sigma Z_k\)</span>, with the <span class="math inline">\(Z_k\)</span> independent standard normals.</p>
 <div class="columns">
@@ -448,21 +382,71 @@ E\Big[\max_k \,(\mu + \sigma Z_k)\Big] = \mu + \sigma\, m_K
 </tbody>
 </table>
 </div></div>
-<p>With 27 equally good versions, the published score is <span class="math inline">\(2\sigma\)</span> above the truth on average.</p>
 <div class="fragment">
-<p>The overstatement depends on <span class="math inline">\(\sigma\)</span> and on <span class="math inline">\(K\)</span>. Fresh votes on the published version shrink it: the best of <span class="math inline">\(K\)</span> was partly lucky, and the luck is not in the new votes.</p>
-<p>The arena’s operators put the gain at “around +11 Elo after 50 tests and 3000 votes”, falling to zero with fresh votes.</p>
-<div class="source">
-<p>Arena Team, “Our Response to ‘The Leaderboard Illusion’ Writeup,” 9 May 2025, updated 13 June 2025, https://arena.ai/blog/our-response. Singh et al.&nbsp;(2025), as above.</p>
+<p>Fresh votes on the published version shrink the overstatement: the luck is not in the new votes. The arena’s operators put it at “around +11 Elo after 50 tests and 3000 votes”, falling to zero with fresh votes.</p>
+</div>
+</section>
+<section id="when-a-measure-becomes-a-target" class="slide level2">
+<h2>When a measure becomes a target</h2>
+<blockquote>
+<p>“When a measure becomes a target, it ceases to be a good measure.” Strathern (1997)</p>
+</blockquote>
+<div class="retrieval">
+<p>Earlier in the course, a rule added an arrow into the measure: effort on <span class="math inline">\(Y\)</span>. What is that arrow when the measure is a benchmark?</p>
+</div>
+</section>
+<section id="verifiable-domains" class="slide level2">
+<h2>Verifiable domains</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/verifiable-1.png" style="width:100.0%" alt="A line of tasks from those checked by a program to those that need judgment or years: arithmetic with an answer key, a sudoku, code with tests, a summary, the facts in an essay, a new diet's effect, what is fair."></p>
+</figure>
 </div>
 </div>
+</div>
+<p>“The ease of training AI to solve a task is proportional to how verifiable the task is.” (Wei, 2025)</p>
+<p>Tasks that are cheap to check are cheap to put in a benchmark. Which tasks does “general” then extrapolate to?</p>
+</section>
+<section id="paths-into-a-score" class="slide level2">
+<h2>Paths into a score</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/graph_q-1.png" style="width:100.0%" alt="A causal graph in boxes. Benchmark items, the setup (prompt, judge, settings) and tuning to the benchmark point into the score. Capability points into the score and into performance in use. Tasks in use point into performance in use. A dashed arrow from tuning to the benchmark into capability."></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="ask">
+<p>Between two versions, a model’s score rises 20 points. Which paths could carry the rise? Which would also raise performance in use?</p>
+</div>
+</section>
+<section id="three-ways-a-score-misleads" class="slide level2">
+<h2>Three ways a score misleads</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/graph_a-1.png" style="width:100.0%" alt="The same graph with three arrows in gold: setup into score, tuning to the benchmark into score, tasks in use into performance in use."></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Prompt, judge, settings → score: one run fixes them. Fixed or random?</li>
+<li>Tuning → score: Goodhart. Fresh, unseen items cut this arrow.</li>
+<li>Tasks in use → performance: the items are not the tasks in use. A shift in distribution.</li>
+</ul>
 </section></section>
 <section>
-<section id="part-4-what-it-is-made-of" class="title-slide slide level1 center">
-<h1>Part 4: What it is made of</h1>
+<section id="part-3-what-it-is-made-of" class="title-slide slide level1 center">
+<h1>Part 3: What it is made of</h1>
 
 </section>
-<section id="the-supply-chain" class="slide level2" data-minutes="3">
+<section id="the-supply-chain" class="slide level2">
 <h2>The supply chain</h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -477,57 +461,35 @@ E\Big[\max_k \,(\mu + \sigma Z_k)\Big] = \mu + \sigma\, m_K
 <p>Creating data takes resources. Someone pays to count, to record, and to keep.</p>
 </div>
 <p>Who benefited from this chain being invisible?</p>
-<div class="source">
-<p>Crawford and Joler (2018), “Anatomy of an AI System: The Amazon Echo as an anatomical map of human labor, data and planetary resources,” AI Now Institute and Share Lab, https://anatomyof.ai. Crawford (2021), <em>Atlas of AI: Power, Politics, and the Planetary Costs of Artificial Intelligence</em>, Yale University Press. Gray and Suri (2019), <em>Ghost Work: How to Stop Silicon Valley from Building a New Global Underclass</em>, Houghton Mifflin Harcourt.</p>
-</div>
 </section>
-<section id="text-as-a-commons" class="slide level2" data-minutes="3">
+<section id="text-as-a-commons" class="slide level2">
 <h2>Text as a commons</h2>
-<p>A model is trained on writing that people made public: forum answers, encyclopedia articles, code, news. Each piece is small; the collection is the resource.</p>
-<p>The collective frame: one person’s data reveal information about other people (Acemoglu et al., 2022), and individual consent cannot protect interests of that kind (Viljoen, 2021). What is a group of contributors owed, and who can speak for it?</p>
-<p>The individual frame: each author’s consent, credit or payment, for their own text.</p>
-<div class="leave">
-<p>The question here is what is fair. What the law says is a separate question.</p>
+<p>A model is trained on writing that people made public. Each piece is small; the collection is the resource.</p>
+<p><em>Collective frame:</em> one person’s data reveal information about other people (Acemoglu et al., 2022), and individual consent cannot protect that (Viljoen, 2021). What is a group of contributors owed, and who speaks for it?</p>
+<p><em>Individual frame:</em> each author’s consent, credit or payment.</p>
+</section>
+<section id="hours-of-writing" class="slide level2" data-minutes="3">
+<h2>Hours of writing</h2>
+<p>One open model, Llama 3: about 15 trillion tokens, about 11 trillion words. At 100 to 1,000 finished words per hour of work:</p>
+<p><span class="math display">\[
+\frac{1.1 \times 10^{13}}{1000} \approx 10^{10} \quad \text{to} \quad \frac{1.1 \times 10^{13}}{100} \approx 10^{11} \text{ hours}
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/hours-1.png" style="width:100.0%" alt="Hours on a log scale. All of Wikipedia in 2008: about 100 million. One year of all work in the UK: about 58 billion. The text in one training set: a range from about 11 billion to about 110 billion."></p>
+</figure>
 </div>
-<div class="source">
-<p>Acemoglu, Makhdoumi, Malekian, et al.&nbsp;(2022), “Too much data: Prices and inefficiencies in data markets,” <em>American Economic Journal: Microeconomics</em> 14(4), 218–256, https://doi.org/10.1257/mic.20200200. Viljoen (2021), “A relational theory of data governance,” <em>Yale Law Journal</em> 131(2), 573–654, https://www.yalelawjournal.org/feature/a-relational-theory-of-data-governance.</p>
+</div>
 </div>
 </section>
-<section id="stack-overflow-after-chatgpt" class="slide level2" data-minutes="3">
+<section id="stack-overflow-after-chatgpt" class="slide level2">
 <h2>Stack Overflow after ChatGPT</h2>
-<p>Stack Overflow is the main public question-and-answer site for programmers.</p>
-<p>Six months after ChatGPT’s release, posting on Stack Overflow was about 25% lower than the comparison sites predict. The comparison sites: Russian- and Chinese-language programming forums, where ChatGPT was harder to reach, and mathematics forums, where it was less capable.</p>
-<div class="ask">
-<p>What must be true of the comparison forums for 25% to be the effect of ChatGPT?</p>
-</div>
-<div class="source">
-<p>del Rio-Chanona, Laurentsyeva and Wachs (2024), “Large language models reduce public knowledge sharing on online Q&amp;A platforms,” <em>PNAS Nexus</em> 3(9), pgae400, https://doi.org/10.1093/pnasnexus/pgae400.</p>
-</div>
+<p>Six months after ChatGPT’s release, posting on Stack Overflow was about 25% lower than comparison forums predict: Russian- and Chinese-language programming forums, where ChatGPT was harder to reach, and mathematics forums (del Rio-Chanona et al., 2024).</p>
+<p>The longer view: <a href="https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/">Stack Overflow is almost dead</a> (Orosz, 2025).</p>
 </section>
-<section id="the-comparison-forums" class="slide level2" data-minutes="2">
-<h2>The comparison forums</h2>
-<p>The 25% is the effect of ChatGPT if</p>
-<ul>
-<li>without ChatGPT, posting on Stack Overflow would have changed as it did on the comparison forums, and</li>
-<li>the comparison forums were not themselves affected.</li>
-</ul>
-<div class="fragment">
-<p>Some users of the comparison forums could reach ChatGPT anyway. If their posting fell too, 25% is too small, and the authors treat it as a lower bound.</p>
-<p>The authors describe a public good whose content partly feeds privately owned models that substitute for it.</p>
-<div class="source">
-<p>del Rio-Chanona et al.&nbsp;(2024), as above.</p>
-</div>
-</div>
-</section>
-<section id="wikipedia" class="slide level2 inverse" data-minutes="1">
-<h2>Wikipedia</h2>
-<p>Wikipedia’s views and edits did not fall in aggregate (Reeves et al., 2025).</p>
-<p>Newly created, popular articles whose content overlaps with ChatGPT lost views (Lyu et al., 2025).</p>
-<div class="source">
-<p>Reeves, Yin and Simperl (2025), “Exploring the impact of ChatGPT on Wikipedia engagement,” <em>Collective Intelligence</em>, https://doi.org/10.1177/26339137251372599. Lyu, Siderius, Li, et al.&nbsp;(2025), “Wikipedia contributions in the wake of ChatGPT,” <em>Companion Proceedings of the ACM Web Conference 2025</em>, https://doi.org/10.1145/3701716.3715543.</p>
-</div>
-</section>
-<section id="owed-and-to-whom" class="slide level2" data-minutes="2">
+<section id="owed-and-to-whom" class="slide level2">
 <h2>Owed, and to whom</h2>
 <p>A question for the class this week:</p>
 <div class="leave">
@@ -536,127 +498,176 @@ E\Big[\max_k \,(\mu + \sigma Z_k)\Big] = \mu + \sigma\, m_K
 <p>The individual frame asks, author by author: consent, credit, payment, a way to opt out.</p>
 <p>The collective frame asks, for the group: support for the sites that hold the writing, a say in how the collection is used, a share of what is made from it.</p>
 </section>
-<section id="pay-for-labeling" class="slide level2" data-minutes="3">
+<section id="pay-for-labeling" class="slide level2">
 <h2>Pay for labeling</h2>
-<p>OpenAI’s contracts paid Sama, an outsourcing firm in Kenya, $12.50 an hour per worker to label graphic text. The labelers took home $1.32 to $1.44 an hour; Sama disputed the figures (Perrigo, 2023).</p>
-<p>In a randomized evaluation run with Sama, training with a job referral raised applicants’ earnings by about 37 to 40% over applicants not offered them (Atkin et al., 2021).</p>
+<p>TIME reported that OpenAI’s contracts paid Sama, an outsourcing firm in Kenya, $12.50 an hour per worker to label graphic text, and that the labelers took home $1.32 to $1.44 an hour (Perrigo, 2023).</p>
 <p>Fieldwork at three Sama centers in Kenya and Uganda found low wages, insecure work and tightly disciplined management (Muldoon et al., 2025).</p>
-<div class="ask">
-<p>Which of the three comparisons answers “is it fair”? Why?</p>
-</div>
-<div class="source">
-<p>Perrigo (2023), “Exclusive: OpenAI used Kenyan workers on less than $2 per hour to make ChatGPT less toxic,” <em>TIME</em>, 18 January 2023, https://time.com/6247678/openai-chatgpt-kenya-workers/. Atkin, Schoar and Wahnschafft (2021), <em>Evaluating Sama’s training and job programs in Nairobi, Kenya</em>, research report, J-PAL, https://www.povertyactionlab.org/media/file-research-paper/evaluating-samas-training-and-job-programs-nairobi-kenya. Muldoon, Cant, Graham, et al.&nbsp;(2025), “The poverty of ethical AI: Impact sourcing and AI supply chains,” <em>AI &amp; Society</em> 40(2), 529–543, https://doi.org/10.1007/s00146-023-01824-9.</p>
-</div>
-</section>
-<section id="requesters-and-workers" class="slide level2" data-minutes="2">
-<h2>Requesters and workers</h2>
-<p>Amazon Mechanical Turk is a platform for small paid online tasks, such as labeling data. Requesters post the tasks. From the logs of 2,676 workers and 3.8 million tasks:</p>
-<p>The average requester pays more than $11 an hour.</p>
-<p>The median worker earns about $2 an hour.</p>
-<div class="ask">
-<p>Both are true of the same data. How?</p>
-</div>
-<div class="source">
-<p>Hara, Adams, Milland, et al.&nbsp;(2018), “A data-driven analysis of workers’ earnings on Amazon Mechanical Turk,” <em>Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</em>, paper 449, https://doi.org/10.1145/3173574.3174023.</p>
-</div>
-</section>
-<section id="requesters-or-hours-of-work" class="slide level2" data-minutes="3">
-<h2>Requesters or hours of work</h2>
-<p>Invented numbers. Nine requesters pay $12 an hour and post 1 hour of work each. One requester pays $1 an hour and posts 91 hours.</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{average over requesters:} \quad &amp; \frac{9 \times 12 + 1 \times 1}{10} = 10.90 \\[4pt]
-\text{average over hours of work:} \quad &amp; \frac{9 \times 12 + 91 \times 1}{100} = 1.99
-\end{aligned}
-\]</span></p>
-<div class="fragment">
-<p>Hara et al.: “lower-paying requesters post much more work”.</p>
-<p>A worker’s hour also includes time that no requester pays for: searching for tasks, and work that is rejected.</p>
-<div class="leave">
-<p>An average answers a question about the units it is taken over.</p>
-</div>
-<div class="source">
-<p>Hara et al.&nbsp;(2018), as above.</p>
-</div>
-</div>
 </section></section>
 <section>
-<section id="part-5-who-gets-the-payoff" class="title-slide slide level1 center">
-<h1>Part 5: Who gets the payoff</h1>
+<section id="part-4-who-benefits-cui-bono" class="title-slide slide level1 center">
+<h1>Part 4: Who benefits / <em>cui bono</em>?</h1>
 
 </section>
 <section id="payoff-outside-the-tech-sector" class="slide level2" data-minutes="3">
 <h2>Payoff outside the tech sector</h2>
-<p>Slok (2026): revenue per worker and profit margins are rising for the “Magnificent 7” and flat for the other 493 firms in the S&amp;P 500.</p>
-<p>Nearly 9,000 executives in seven countries, summer 2026 (Yotzov et al.):</p>
+<p><a href="https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector">No Signs of AI Payoff Outside the Tech Sector</a> (Slok, 2026): revenue per worker and profit margins rising for the “Magnificent 7”, flat for the other 493 firms in the S&amp;P 500.</p>
+<p>Nearly 9,000 executives in seven countries, summer 2026 (Yotzov et al., 2026):</p>
 <ul>
-<li>78% of firms use AI, and 2% of firms account for over half of the spending;</li>
-<li>essentially no net effect on employment at their firms over three years;</li>
-<li>0.2% a year added to labor productivity growth, and 0.6% a year expected.</li>
+<li>78% of firms use AI; 2% of firms account for over half the spending;</li>
+<li>essentially no net effect on employment over three years;</li>
+<li>0.2% a year added to labor productivity growth, 0.6% expected.</li>
 </ul>
 <div class="fragment">
 <p>If there is a gain, who receives it?</p>
-<div class="source">
-<p>Slok (2026), “No Signs of AI Payoff Outside the Tech Sector,” <em>The Daily Spark</em>, Apollo, 24 October 2026, https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector. Yotzov, Barrero, Bloom, et al.&nbsp;(2026), “Firm Data on AI,” NBER Working Paper 34836, revised October 2026, https://doi.org/10.3386/w34836. Not peer reviewed.</p>
 </div>
-</div>
+</section></section>
+<section>
+<section id="part-5-reliance-learning-and-deskilling" class="title-slide slide level1 center">
+<h1>Part 5: Reliance, learning and deskilling</h1>
+
 </section>
-<section id="revenue-per-worker" class="slide level2" data-minutes="3">
-<h2>Revenue per worker</h2>
-<p><span class="math display">\[
-\text{revenue per worker} = \frac{R}{L}
-\]</span></p>
+<section id="deskilling" class="slide level2">
+<h2>Deskilling</h2>
+<p><em>Deskilling:</em> work redesigned so that it needs less skill, or a person’s skill fading because a tool does the task.</p>
 <div class="ask">
-<p>Give two ways <span class="math inline">\(R/L\)</span> can rise. In each, who receives the gain: customers, workers or owners? What would you look at to tell which one happened?</p>
+<p>With a chatbot, students’ practice grades rose 48%. Predict their exam scores once the chatbot is taken away.</p>
 </div>
 </section>
-<section id="one-firm-and-an-open-market" class="slide level2 inverse" data-minutes="3">
-<h2>One firm and an open market</h2>
-<p>Inside one firm (Brynjolfsson, Li and Raymond, 2025): 5,172 customer-support agents, with an AI assistant introduced in stages. Issues resolved per hour rose 15% on average and about 30% for less experienced agents. The most skilled agents gained little. The assistant appears to spread the practices of the firm’s best agents, and the authors ask whether workers should be compensated for the data that train such systems.</p>
-<p>On an open platform (Hui, Reshef and Zhou, 2024): writing freelancers had fewer jobs and lower earnings after ChatGPT’s release than freelancers in less exposed work.</p>
-<div class="source">
-<p>Brynjolfsson, Li and Raymond (2025), “Generative AI at work,” <em>Quarterly Journal of Economics</em> 140(2), 889–942, https://doi.org/10.1093/qje/qjae044. Hui, Reshef and Zhou (2024), “The short-term effects of generative artificial intelligence on employment: Evidence from an online labor market,” <em>Organization Science</em> 35(6), 1977–1989, https://doi.org/10.1287/orsc.2023.18441.</p>
+<section id="a-chatbot-in-a-maths-class" class="slide level2">
+<h2>A chatbot in a maths class</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/bastani-1.png" style="width:100.0%" alt="Bar chart. With the chatbot, practice grades rose 48 percent with a standard chatbot and 127 percent with a tutor version. On exams after the chatbot was taken away, students who had used the standard chatbot scored 17 percent lower; the tutor version largely avoided this."></p>
+</figure>
 </div>
-</section>
-<section id="who-paid-who-gains" class="slide level2" data-minutes="3">
-<h2>Who paid, who gains</h2>
-<div class="ask">
-<p>In pairs.</p>
-<p>If the payoff stays where it is now, who paid for it?</p>
-<p>If it spreads, who receives it? Do the people in Part 4, who wrote the text and labeled the data, receive any of it?</p>
 </div>
+</div>
+<p>Nearly 1,000 students at a high school in Turkey, against students with no access (Bastani et al., 2025).</p>
+</section></section>
+<section>
+<section id="part-6-conversational-ai" class="title-slide slide level1 center">
+<h1>Part 6: Conversational AI</h1>
+
 </section>
-<section id="a-report-with-errors" class="slide level2" data-minutes="3">
+<section id="sycophancy" class="slide level2">
+<h2>Sycophancy</h2>
+<p><em>Sycophancy:</em> telling users what they want to hear.</p>
+<p>In tests of 11 models, the models affirmed users’ actions far more often than people did. One conversation with a flattering model left people more sure they were right, less willing to repair a conflict, and more trusting of the model (Cheng et al., 2026).</p>
+<p>In data used to train assistants, people prefer answers that match their own views (Sharma et al., 2024).</p>
+</section>
+<section id="deepfakes-and-scams" class="slide level2">
+<h2>Deepfakes and scams</h2>
+<p><em>Deepfake:</em> a synthetic image, audio or video of a real person doing or saying something they did not.</p>
+<p>Of nearly 15 million Twitter profile pictures, 0.052% were AI-generated faces. Many of those accounts were created in bulk; many posted about giveaways and cryptocurrency (Ricker et al., 2024).</p>
+<p>125 Facebook Pages posting AI-generated images, some of them scams. At times the feed showed the images to users who did not follow the Pages and did not realize they were generated (DiResta and Goldstein, 2024).</p>
+</section>
+<section id="ai-in-the-2026-midterms" class="slide level2">
+<h2>AI in the 2026 midterms</h2>
+<p>Over $187 million on 289 AI-generated or AI-enhanced political ads, to 29 October (Wesleyan Media Project):</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/ads-1.png" style="width:100.0%" alt="A bar of the 289 ads by sponsor: Republican 82 percent, Democratic 13 percent, other 5 percent."></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Republican sponsors also accounted for just over 90% of the spending. By early October, 31% of the tracked ads disclosed the use of AI.</p>
+<p>The researchers: “almost surely lower than the actual level”, since many ads carry no disclaimer.</p>
+</section></section>
+<section>
+<section id="part-7-environmental-costs" class="title-slide slide level1 center">
+<h1>Part 7: Environmental costs</h1>
+
+</section>
+<section id="in-aggregate" class="slide level2">
+<h2>In aggregate</h2>
+<p>Data centers’ share of the world’s electricity (IEA, 2025):</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides_files/figure-revealjs/electricity-1.png" style="width:100.0%" alt="Two grids of 100 squares, each square one percent of the world's electricity. 2024: one and a half squares filled. 2030 in the base case: just under three squares filled."></p>
+</figure>
+</div>
+</div>
+</div>
+<p>About a tenth of the growth in demand to 2030: less than industrial motors or air conditioning.</p>
+</section>
+<section id="locally" class="slide level2">
+<h2>Locally</h2>
+<p>xAI’s Colossus 2 data center in Memphis is powered by a gas plant over the state line in Southaven, Mississippi.</p>
+<p>The NAACP alleges (April 2026) that 27 turbines, then 33, ran without air permits, with the potential to emit over 1,700 tons of nitrogen oxides a year, likely the largest industrial source of them in the Memphis area.</p>
+<p>xAI argued the turbines were exempt. In October 2026 the court denied its motion to dismiss.</p>
+</section></section>
+<section>
+<section id="a-report-with-a-signature" class="title-slide slide level1 center">
+<h1>A report with a signature</h1>
+
+</section>
+<section id="a-report-with-errors" class="slide level2">
 <h2>A report with errors</h2>
-<p>In 2025 Deloitte Australia delivered a 237-page report to a government department, for A$440,000.</p>
-<p>The report contained a fabricated quotation from a federal court judgment and references to research that does not exist. Deloitte agreed to repay the final installment of its fee. The revised report disclosed that a language model had been used in writing it.</p>
+<p>In 2025 Deloitte Australia delivered a 237-page report to a government department, for A$440,000. It contained a fabricated quotation from a court judgment and references to research that does not exist. Deloitte agreed to repay the final installment; the revised report disclosed that a language model had been used.</p>
 <div class="fragment">
 <div class="leave">
 <p>The tool executed instructions. People wrote the request, accepted the output and put the firm’s name on it.</p>
 </div>
-<div class="source">
-<p>McGuirk (2025), “Deloitte to partially refund Australian government for report with apparent AI-generated errors,” Associated Press, 7 October 2025, https://www.bnnbloomberg.ca/business/artificial-intelligence/2025/10/07/deloitte-to-partially-refund-australian-government-for-report-with-apparent-ai-generated-errors/. Dhanji (2025), “Deloitte to pay money back to Albanese government after using AI in $440,000 report,” <em>The Guardian</em>, 6 October 2025.</p>
-</div>
 </div>
 </section>
-<section id="you-sign-the-report" class="slide level2" data-minutes="5">
+<section id="you-sign-the-report" class="slide level2" data-minutes="4">
 <h2>You sign the report</h2>
 <p>You are an analyst. A tool chose the data cleaning steps and the model for an analysis, and wrote the first draft of the report. Your name goes on it.</p>
 <div class="ask">
-<p>Alone, in writing. What do you owe the reader before you sign? Say what you would check, what you would disclose, and why.</p>
+<p>Alone, in writing. What do you owe the reader before you sign? What would you check, what would you disclose, and why?</p>
 </div>
 </section>
-<section id="lenses-this-week" class="slide level2" data-minutes="2">
+<section id="lenses-this-week" class="slide level2">
 <h2>Lenses this week</h2>
 <ul>
-<li><strong>Goal selection.</strong> What are we optimizing or predicting? A benchmark’s name, and what its items measure.</li>
-<li><strong>Data selection.</strong> Who is in the data? Whose writing, whose labeling.</li>
-<li><strong>Honest reporting.</strong> Which comparison gets reported? The naive interval. The best of <span class="math inline">\(K\)</span>. The requester’s average or the worker’s.</li>
-<li><strong>Justice.</strong> Who bears the error? Labelers, freelancers.</li>
+<li><strong>Goal selection.</strong> What are we optimizing or predicting? A benchmark’s name, and the score that gets tuned.</li>
+<li><strong>Data selection.</strong> Who is in the data? Whose writing, whose labeling; which tasks get into benchmarks.</li>
+<li><strong>Honest reporting.</strong> Which comparison gets reported? Fixed or random; the best of <span class="math inline">\(K\)</span>; disclosing AI.</li>
+<li><strong>Justice.</strong> Who bears the error? Labelers; a gas plant’s neighbors.</li>
 <li><strong>Ownership.</strong> You have to choose, so choose, and defend it. You sign the report.</li>
-<li><strong>Leverage.</strong> What can be changed, and how? More items leave <span class="math inline">\(\tau^2\)</span> alone. Fresh votes remove the luck.</li>
+<li><strong>Leverage.</strong> What can be changed, and how? More setups, not more items; fresh items.</li>
 </ul>
-<p>Left to the reading: learning, chatbots, energy.</p>
+</section>
+<section id="references" class="slide level2 scrollable smaller" data-minutes="0">
+<h2>References</h2>
+<div class="source">
+<p>Acemoglu, Makhdoumi, Malekian, et al.&nbsp;(2022), “Too much data: Prices and inefficiencies in data markets,” <em>American Economic Journal: Microeconomics</em> 14(4), 218–256, https://doi.org/10.1257/mic.20200200.</p>
+<p>Arena Team (2025), “Our Response to ‘The Leaderboard Illusion’ Writeup,” 9 May 2025, updated 13 June 2025, https://arena.ai/blog/our-response.</p>
+<p>Bastani, Bastani, Sungu, et al.&nbsp;(2025), “Generative AI without guardrails can harm learning: Evidence from high school mathematics,” <em>PNAS</em> 122(26), e2422633122, https://doi.org/10.1073/pnas.2422633122.</p>
+<p>Bean, Kearns, Romanou, et al.&nbsp;(2025), “Measuring what matters: Construct validity in large language model benchmarks,” <em>NeurIPS 2025 Datasets and Benchmarks Track</em>, https://arxiv.org/abs/2511.04703.</p>
+<p>Cheng, Lee, Khadpe, et al.&nbsp;(2026), “Sycophantic AI decreases prosocial intentions and promotes dependence,” <em>Science</em> 391(6792), eaec8352, https://doi.org/10.1126/science.aec8352.</p>
+<p>Crawford (2021), <em>Atlas of AI</em>, Yale University Press. Crawford and Joler (2018), “Anatomy of an AI System,” AI Now Institute and Share Lab, https://anatomyof.ai.</p>
+<p>del Rio-Chanona, Laurentsyeva and Wachs (2024), “Large language models reduce public knowledge sharing on online Q&amp;A platforms,” <em>PNAS Nexus</em> 3(9), pgae400, https://doi.org/10.1093/pnasnexus/pgae400.</p>
+<p>DiResta and Goldstein (2024), “How spammers and scammers leverage AI-generated images on Facebook for audience growth,” <em>Harvard Kennedy School Misinformation Review</em> 5(4), https://doi.org/10.37016/mr-2020-151.</p>
+<p>Dubey et al.&nbsp;(2024), “The Llama 3 Herd of Models,” https://arxiv.org/abs/2407.21783.</p>
+<p>Gray and Suri (2019), <em>Ghost Work</em>, Houghton Mifflin Harcourt.</p>
+<p>International Energy Agency (2025), <em>Energy and AI</em>, IEA, Paris, https://www.iea.org/reports/energy-and-ai.</p>
+<p>McGuirk (2025), “Deloitte to partially refund Australian government for report with apparent AI-generated errors,” Associated Press, 7 October 2025.</p>
+<p>Messing (2026), “Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking,” preprint, https://arxiv.org/abs/2604.11581; and “Hidden error in LLM pipelines leads to benchmark hacking and undercoverage,” 17 November 2026, https://solomonmg.github.io/blog/hidden-measurement-error-llm-evals/.</p>
+<p>Muldoon, Cant, Graham, et al.&nbsp;(2025), “The poverty of ethical AI: Impact sourcing and AI supply chains,” <em>AI &amp; Society</em> 40(2), 529–543, https://doi.org/10.1007/s00146-023-01824-9.</p>
+<p>NAACP, complaint against xAI and MZX Tech, No.&nbsp;3:26-cv-00074 (N.D. Miss.), filed 14 April 2026, https://earthjustice.org/document/naacp-sues-xai-for-clean-air-act-violations-complaint. Earthjustice (2026), “NAACP Asks Court for Emergency Action to Stop Illegal Air Pollution from xAI’s Data Center Power Plant,” https://earthjustice.org/press/2026/naacp-asks-court-for-emergency-action-to-stop-illegal-air-pollution-from-xais-data-center-power-plant; “Court Denies xAI’s Motion to Dismiss,” 30 October 2026, https://www.earthjustice.org/press/2026/court-denies-xais-motion-to-dismiss-air-pollution-lawsuit-against-elon-musks-company.</p>
+<p>Office for National Statistics (2026), <em>Employment in the UK: August 2026</em>, total actual weekly hours worked, https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/employmentintheuk/august2026.</p>
+<p>Orosz (2025), “Stack Overflow is almost dead,” <em>The Pragmatic Engineer</em>, 15 May 2025, https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/.</p>
+<p>Perrigo (2023), “Exclusive: OpenAI used Kenyan workers on less than $2 per hour to make ChatGPT less toxic,” <em>TIME</em>, 18 January 2023, https://time.com/6247678/openai-chatgpt-kenya-workers/.</p>
+<p>Ricker, Assenmacher, Holz, Fischer and Quiring (2024), “AI-Generated Faces in the Real World: A Large-Scale Case Study of Twitter Profile Images,” <em>RAID 2024</em>, https://arxiv.org/abs/2404.14244.</p>
+<p>Safar (2025), “ClockBench,” 2 September 2025, https://clockbench.ai/ClockBench.pdf; leaderboard as listed in November 2026, https://clockbench.ai/.</p>
+<p>Sharma, Tong, Korbak, et al.&nbsp;(2024), “Towards understanding sycophancy in language models,” <em>ICLR 2024</em>, https://arxiv.org/abs/2310.13548.</p>
+<p>Shirky (2012), “Gin, Television, and Social Surplus,” chapter 16 in Mandiberg (ed.), <em>The Social Media Reader</em>, New York University Press, from p.&nbsp;236; a talk of 2008.</p>
+<p>Singh, Nan, Wang, et al.&nbsp;(2025), “The leaderboard illusion,” <em>NeurIPS 2025</em>, https://arxiv.org/abs/2504.20879.</p>
+<p>Slok (2026), “No Signs of AI Payoff Outside the Tech Sector,” <em>The Daily Spark</em>, Apollo, 24 October 2026.</p>
+<p>Strathern (1997), “‘Improving ratings’: audit in the British University system,” <em>European Review</em> 5(3), 305–321, p.&nbsp;308.</p>
+<p>Viljoen (2021), “A relational theory of data governance,” <em>Yale Law Journal</em> 131(2), 573–654.</p>
+<p>Wei (2025), “Asymmetry of verification and verifier’s law,” 15 July 2025, https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law.</p>
+<p>Wesleyan Media Project (2026), release of 29 October 2026, https://mediaproject.wesleyan.edu/releases-102926/; and researchers of the Wesleyan Media Project, “We’ve tracked $80M of spending on almost 170 AI-generated political ads this year,” <em>The Conversation</em>, republished by <em>Salon</em>, 6 October 2026, https://www.salon.com/2026/10/06/weve-tracked-80m-of-spending-on-almost-170-ai-generated-political-ads-this-year-its-weird-partner/.</p>
+<p>Yotzov, Barrero, Bloom, et al.&nbsp;(2026), “Firm Data on AI,” NBER Working Paper 34836, https://doi.org/10.3386/w34836.</p>
+</div>
 
 
 </section></section>

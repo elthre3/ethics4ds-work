@@ -1,12 +1,14 @@
 ---
 title: "Ethics of AI"
 author: "Joshua Loftus"
+title-ask: "What are your top questions about the ethics of AI?"
 format:
   revealjs:
     theme: [default, ../../theme/st313.scss]
     slide-number: c/t
     auto-stretch: false
     filters: [../../_build_env/strip_notes.lua]
+    template-partials: [title-slide.html]
     fig-width: 8
     fig-height: 4.5
     fig-align: center
@@ -23,50 +25,54 @@ st313:
   week: 09
   session: lecture
   register: 1
-  segments:                        # sums to 80: the lecture after cuts (1) to (4) of the title note, 78 of material and 2 of slack; production 32 (40%). The deck as built is estimated at 88 (title note); timing is not tuned, the convenor cuts after seeing the deck (21 November)
-    # opener: 5
-    - {label: "the six lenses by name and question", minutes: 1, mode: exposition}
-    - {label: "warm-up: the prep question, what are your top questions about the ethics of AI; a few collected from the room", minutes: 4, mode: production}
-    # part 1, where AI came from: 9
-    - {label: "claims and tests: Turing (1950), a test in place of can machines think; the Dartmouth proposal (1955); ELIZA (1966), a script of keyword rules; the Lighthill report (1973)", minutes: 5, mode: exposition}
-    - {label: "rules fitted to data: ImageNet 2012, the transformer 2017, ChatGPT 2022; a language model in two sentences (cut (4): the two sentences only)", minutes: 1, mode: exposition}
-    - {label: "levels of abstraction (the convenor's slide): machine code to a request in English; an agent is a program running a model in a loop that someone started; where the comparison stops", minutes: 3, mode: exposition}
-    # part 2, what a benchmark measures: 12 (the dark graph slide, conditioning or intervening, is cut (1) and has no minutes here)
-    - {label: "A scores higher than B on a reasoning benchmark: what do you need to know before believing A reasons better", minutes: 2, mode: production}
-    - {label: "score Y and capability Y*; Bean et al.'s counts, the coders' agreement beside the 78.2%", minutes: 3, mode: exposition}
-    - {label: "question before the idea: 8 points lower on newly written items; two explanations; what would separate them", minutes: 3, mode: production}
-    - {label: "the gap as a difference of two proportions with its standard error; Zhang et al.'s findings and the explanations they weigh", minutes: 4, mode: exposition, results: [R60]}
-    # part 3, how sure, and which score: 12
-    - {label: "question before the idea: the benchmark grows and the interval narrows; does coverage go up or down", minutes: 2, mode: production}
-    - {label: "hidden error: variance sigma^2/n + tau^2; coverage of the naive interval 2 Phi(1.96 r) - 1; r = 1/2 gives 67%; Messing's 42% and 11%", minutes: 4, mode: exposition, results: [R61]}
-    - {label: "retrieval, the largest of n: 27 private versions, the best published; what does the overstatement depend on", minutes: 2, mode: production}
-    - {label: "best of K: sigma m_K; the table of m_K; fresh votes; the arena operators' estimate", minutes: 4, mode: exposition, results: [R62]}
-    # part 4, what it is made of: 21
-    - {label: "the supply chain, drawn; who benefited from it being invisible (Crawford and Joler; Crawford; Gray and Suri)", minutes: 3, mode: exposition}
-    - {label: "text as a commons: the collective frame first (Acemoglu et al.; Viljoen); the individual frame in one line; an ethical question and not a legal one", minutes: 3, mode: exposition}
-    - {label: "question before the idea: Stack Overflow, about 25% lower than the comparison forums predict; what must be true of the comparison forums", minutes: 3, mode: production}
-    - {label: "the two conditions; a lower bound (cut (3): Wikipedia)", minutes: 2, mode: exposition}
-    - {label: "the question for the class, shown: is anything owed, and to whom; what each frame asks for", minutes: 2, mode: exposition}
-    - {label: "pay for labeling in Kenya against the client's rate, against what applicants would otherwise earn, and the conditions: which comparison answers is it fair", minutes: 3, mode: production}
-    - {label: "question before the idea: the average requester pays over $11 an hour, the median worker earns about $2; both are true; how", minutes: 2, mode: production}
-    - {label: "an average depends on what it is taken over: requesters or hours of work; invented numbers; Hara et al.", minutes: 3, mode: exposition, results: [R63]}
-    # part 5, who gets the payoff: 9 (the dark slide, one firm and an open market, is cut (2) and has no minutes here)
-    - {label: "Slok's claim in words; the executive survey beside it (Yotzov et al.)", minutes: 3, mode: exposition}
-    - {label: "two ways revenue per worker can rise; who receives the gain", minutes: 3, mode: production}
-    - {label: "pairs: if the payoff stays where it is, who paid; if it spreads, who receives it, and do Part 4's contributors", minutes: 3, mode: production}
-    # close: 10
-    - {label: "the Deloitte report; the abstraction slide again: the tool ran instructions, people signed", minutes: 3, mode: exposition}
-    - {label: "alone, in writing: you sign the report", minutes: 5, mode: production, item: W09-I1}
-    - {label: "lenses this week, the six; the warm-up's questions left to the reading", minutes: 2, mode: exposition}
-    # slack: 2
-    - {label: "slack: questions and overrun", minutes: 2, mode: exposition}
+  segments:                        # sums to 80: the deck as built, 79 by the progress bar, and 1 of slack; production 21 (26%). Timing not tuned: the convenor cuts after seeing the deck
+    - {label: "title slide: the prep question, what are your top questions about the ethics of AI; a few collected from the room", minutes: 2, mode: production}
+    # part 1, historical context (abstract): 6
+    - {label: "a timeline: Turing, ELIZA, AI winters, machine learning, deep learning, large language models; what a language model is; levels of abstraction (the convenor's slide)", minutes: 6, mode: exposition}
+    # part 2, benchmarks and general intelligence: 28
+    - {label: "A scores higher than B on a reasoning benchmark: what do you need to know", minutes: 2, mode: production}
+    - {label: "reliability and validity (construct, content, predictive), the target picture; Bean et al.'s counts and the coders' agreement", minutes: 5, mode: exposition, retrieves: [S2]}
+    - {label: "ClockBench: people and the best model, September 2025 and November 2026", minutes: 2, mode: exposition}
+    - {label: "question before the idea: the benchmark grows, the interval narrows; does coverage go up or down", minutes: 2, mode: production}
+    - {label: "fixed or random: variance sigma^2/n + tau^2; coverage 2 Phi(1.96 r) - 1; the design effect; Messing's 42% and 11%", minutes: 4, mode: exposition, results: [R60]}
+    - {label: "retrieval, the largest of n: 27 private versions, the best published", minutes: 2, mode: production, retrieves: [S3]}
+    - {label: "best of K: sigma m_K; fresh votes; the arena operators' estimate", minutes: 3, mode: exposition, results: [R61]}
+    - {label: "retrieval, Goodhart: which arrow appears when the measure is a benchmark", minutes: 2, mode: production}
+    - {label: "verifiable domains: tasks from checked by a program to needs judgment; Wei's verifier's law", minutes: 2, mode: exposition}
+    - {label: "question before the idea: a 20-point rise between versions; which paths carry it, which raise performance in use", minutes: 2, mode: production}
+    - {label: "three ways a score misleads: the setup (fixed or random), tuning (Goodhart), tasks in use (distribution shift)", minutes: 2, mode: exposition, retrieves: [S1]}
+    # part 3, what it is made of: 14
+    - {label: "the supply chain, drawn", minutes: 2, mode: exposition}
+    - {label: "who benefited from the chain being invisible: a few answers from the room", minutes: 1, mode: production}
+    - {label: "text as a commons: the collective frame first; the individual frame in one line", minutes: 2, mode: exposition}
+    - {label: "how many hours of writing: 10^10 to 10^11 hours against Wikipedia and a year of UK work", minutes: 3, mode: exposition}
+    - {label: "Stack Overflow, about 25% below the comparison forums; the longer decline", minutes: 2, mode: exposition}
+    - {label: "the question for the class, shown: is anything owed, and to whom", minutes: 2, mode: exposition}
+    - {label: "pay for labeling in Kenya, as TIME reported; fieldwork at Sama's centers", minutes: 2, mode: exposition}
+    # part 4, who benefits: 4
+    - {label: "Slok's claim with the link; the executive survey", minutes: 3, mode: exposition, retrieves: [S6]}
+    - {label: "if there is a gain, who receives it: a few answers from the room", minutes: 1, mode: production}
+    # part 5, reliance, learning and deskilling: 5
+    - {label: "deskilling defined; question before the reveal: predict exam scores once the chatbot is taken away", minutes: 3, mode: production}
+    - {label: "Bastani et al.: practice up 48% and 127%, exam down 17% for the standard chatbot", minutes: 2, mode: exposition}
+    # part 6, conversational AI: 7
+    - {label: "sycophancy (Cheng et al.; Sharma et al.)", minutes: 3, mode: exposition}
+    - {label: "deepfakes and scams: Ricker et al., DiResta and Goldstein", minutes: 2, mode: exposition}
+    - {label: "AI in the 2026 midterms: the Wesleyan Media Project's count, sponsors, disclosure, undercount", minutes: 2, mode: exposition}
+    # part 7, environmental costs: 5
+    - {label: "in aggregate: data centers' share of world electricity, 2024 and 2030", minutes: 3, mode: exposition}
+    - {label: "locally: the gas plant for xAI's Colossus 2; the NAACP's lawsuit", minutes: 2, mode: exposition}
+    # close: 9
+    - {label: "the Deloitte report; the tool ran instructions, people signed", minutes: 3, mode: exposition}
+    - {label: "alone, in writing: you sign the report", minutes: 4, mode: production, item: W09-I1}
+    - {label: "lenses this week, the six", minutes: 2, mode: exposition}
   history: []
   complications: []
-  retrieves: [S1, S2, S3, S4, S6]
+  retrieves: [S1, S2, S3, S6]
   introduces: []
   lenses: [A, B, C, D, E, F]
   readings: []                     # the published note (weeks/wk09/reading.qmd) has no id in readings.csv yet; added when the records are updated
-  results: [R60, R61, R62, R63]
+  results: [R60, R61]
   assumes: [ST102]
   figures: []
 # ---------------------------------------------------------------------------------
@@ -137,154 +143,60 @@ draw_dag <- function(nodes, edges, dashed = character(0), highlight = character(
                    linewidth = ifelse(e$col == "black", lw[["black"]], lw[["gold"]]), show.legend = FALSE) +
     scale_linetype_identity() + scale_color_identity()
 }
-
-# Numbers used on the slides, each checked where it is computed.
-# Hidden error: Var(score) = sigma^2/n + tau^2; the naive standard error is sigma/sqrt(n).
-# r = naive SE / true SE; a naive 95% interval covers with probability 2 pnorm(1.96 r) - 1.
-cover <- function(n, ratio) { r <- sqrt((1 / n) / (1 / n + ratio)); 2 * pnorm(1.96 * r) - 1 }
-ratio <- 0.462                     # tau^2 / sigma^2, chosen so that coverage at 25 items is 42%
-# Best of K: the expected largest of K independent standard normals.
-m_K <- function(K) integrate(function(x) x * K * dnorm(x) * pnorm(x)^(K - 1), -Inf, Inf)$value
-stopifnot(abs(cover(25, ratio) - 0.42) < 0.005, abs(cover(400, ratio) - 0.114) < 0.005,
-          abs(2 * pnorm(1.96 / 2) - 1 - 0.673) < 0.001,
-          all(abs(sapply(c(2, 10, 27, 50), m_K) - c(0.564, 1.539, 1.998, 2.249)) < 0.002),
-          abs(sqrt(2 * 0.8 * 0.2 / 1200) - 0.0163) < 1e-4,          # SE of a difference of two proportions
-          abs(0.08 / sqrt(2 * 0.8 * 0.2 / 1200) - 4.9) < 0.05,
-          abs((9 * 12 + 1 * 1) / 10 - 10.9) < 1e-9, abs((9 * 12 + 91 * 1) / 100 - 1.99) < 1e-9)
+source("_figures.R")
 ```
-
-## The lenses {minutes="1"}
-
-::: {.notes}
-This week: the six of them.
-:::
-
-- **Goal selection.** What are we optimizing or predicting?
-- **Data selection.** Who is in the data?
-- **Honest reporting.** Which comparison gets reported?
-- **Justice.** Who bears the error?
-- **Ownership.** You have to choose, so choose, and defend it.
-- **Leverage.** What can be changed, and how?
-
-Each ends with the same two words: *and why?*
 
 ## {.inverse}
 
 ::: {.notes}
-Deck estimate 88, over the 80 by 8: title 1, the lenses 1, warm-up 4, where AI came from 11, what a benchmark measures 15, how sure and which score 12, what it is made of 22, who gets the payoff 12, the report 3, you sign the report 5, lenses this week 2. Timing is not tuned. Cuts (1) to (4) bring it to 79. Dark = rush or skip.
+Deck estimate 79 (bar), against 80. The title slide's question is the warm-up: a few from the room, marked against the parts.
 
-Questions before the reveal: 8 points lower on new items (Part 2); the interval narrows (Part 3); the comparison forums (Part 4); requesters and workers (Part 4). Retrieval: the largest of n (Part 3).
+Questions before the reveal: "A larger benchmark" (Part 2), "Paths into a score" (Part 2), "Deskilling" (Part 5).
 
-Cut order: (1) "Conditioning or intervening"; (2) "One firm and an open market"; (3) "Wikipedia"; (4) "Rules fitted to data" to its last two lines. Do not cut the questions above, "Levels of abstraction", "Owed, and to whom", or "You sign the report".
+Cut order: (1) "Verifiable domains"; (2) "Private versions" said in a line, keeping "The best of K"; (3) "Deepfakes and scams" down to its definition and the Facebook finding. Do not cut "Levels of abstraction", "Paths into a score", "Hours of writing", "You sign the report".
 
-Pace: 0:06 Part 1; 0:17 Part 2; 0:32 Part 3; 0:44 Part 4; 1:06 Part 5; 1:18 the report; 1:21 you sign the report; 1:26 lenses; 1:28 end.
+Pace: 0:01 Part 1; 0:07 Part 2; 0:35 Part 3; 0:49 Part 4; 0:53 Part 5; 0:58 Part 6; 1:05 Part 7; 1:10 the report; 1:19 end.
 :::
 
 ### Week 9
 
-Part 1: Where AI came from
+Part 1: Historical context (abstract)
 
-Part 2: What a benchmark measures
+Part 2: Benchmarks and "general intelligence"
 
-Part 3: How sure, and which score
+Part 3: What it is made of
 
-Part 4: What it is made of
+Part 4: Who benefits / *cui bono*?
 
-Part 5: Who gets the payoff
+Part 5: Reliance, learning and deskilling
 
-## Warm-up {minutes="4"}
+Part 6: Conversational AI
 
-::: {.notes}
-QUESTION: your top question about the ethics of AI.
+Part 7: Environmental costs
 
-Five or six on the board. Mark the ones today covers: measurement, supply chain, payoff, responsibility. The rest come back on the last slide.
-:::
+# Part 1: Historical context (abstract)
 
-You were asked to bring your top questions about the ethics of AI.
-
-::: {.ask}
-Write down your top question. What evidence would help answer it?
-:::
-
-# Part 1: Where AI came from
-
-## A test in place of a question {minutes="3"}
+## A short history {minutes="2"}
 
 ::: {.notes}
-Turing's game in the version usually told: a questioner, typed messages, a person and a machine.
-
-Dartmouth: the name is in the proposal's title. Ten people, two months.
+Years only; no detail. Turing replaced "can machines think?" with a test. ELIZA: a script of keyword rules. Winters: claims outran results, funding fell.
 :::
 
-Turing (1950) opens with a question:
+```{r timeline, fig.height=3.3, fig.alt="A timeline from 1950 to 2025. Turing's imitation game in 1950; ELIZA in 1966; two gray bands for the AI winters in the 1970s and late 1980s; a band for machine learning from the mid 1990s to 2011; deep learning at 2012; a band for large language models from 2017."}
+fig_timeline(ts = 6)
+```
 
-> "I propose to consider the question, 'Can machines think?'"
-
-He then replaces it with a test he can describe: can a machine, exchanging typed messages with a questioner, be mistaken for a person? He calls it the imitation game.
-
-. . .
-
-In 1955 four researchers proposed "a 2 month, 10 man study" of artificial intelligence, to be held at Dartmouth College in the summer of 1956. They thought a selected group could make a significant advance on one or more of its problems in a summer.
-
-::: {.source}
-Turing (1950), "Computing Machinery and Intelligence," *Mind* 59(236), 433--460, page 433. McCarthy, Minsky, Rochester and Shannon, "A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence," 31 August 1955; reprinted in *AI Magazine* 27(4), 2006, 12--14, https://doi.org/10.1609/aimag.v27i4.1904.
-:::
-
-## ELIZA and the Lighthill report {minutes="2"}
-
-::: {.notes}
-ELIZA: keyword, decomposition rule, reassembly rule. A person wrote the script.
-
-Lighthill: commissioned by the Science Research Council, which was receiving more applications for AI research. A personal view, by his own account.
-:::
-
-ELIZA (Weizenbaum, 1966) answered typed sentences. It looked for a keyword, took the sentence apart by a rule attached to that keyword, and put a reply together by another rule. The rules were a script that a person wrote.
-
-Weizenbaum's introduction: once a program's workings are explained, "its magic crumbles away".
-
-. . .
-
-Lighthill (1973), for the UK's Science Research Council, set results against claims. In no part of the field, he wrote, had discoveries "produced the major impact that was then promised".
-
-::: {.source}
-Weizenbaum (1966), "ELIZA: A Computer Program for the Study of Natural Language Communication Between Man and Machine," *Communications of the ACM* 9(1), 36--45, https://doi.org/10.1145/365153.365168, page 36. Lighthill (1973), "Artificial Intelligence: A General Survey," in *Artificial Intelligence: a paper symposium*, Science Research Council, https://www.aiai.ed.ac.uk/events/lighthill1973/lighthill.pdf, the section "Past disappointments".
-:::
-
-## Rules fitted to data {minutes="3"}
-
-::: {.notes}
-Compress: the last two lines only.
-
-2012: a neural network trained on labeled images. People made the labels: Part 4.
-:::
-
-2012: a neural network trained on labeled images wins the ImageNet competition, with a top-5 error of 15.3% against 26.2% for the next entry.
-
-2017: the transformer, "a new simple network architecture" for sequences of words.
-
-30 November 2022: ChatGPT is released as a free research preview.
-
-. . .
-
-A language model is trained to predict the next word in text that people wrote. A chatbot is then tuned further, using people's rankings of its answers.
-
-The rules are no longer written by a person. They are fitted to data that people produced.
-
-::: {.source}
-Krizhevsky, Sutskever and Hinton (2012), "ImageNet Classification with Deep Convolutional Neural Networks," *Advances in Neural Information Processing Systems* 25, 1097--1105. Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin (2017), "Attention Is All You Need," https://arxiv.org/abs/1706.03762. OpenAI, "Introducing ChatGPT," 30 November 2022, https://openai.com/blog/chatgpt.
-:::
+A language model is trained to predict the next word in text people wrote, then tuned using people's ratings of its answers.
 
 ## Levels of abstraction {minutes="3"}
 
 ::: {.notes}
-The anchor for the lecture. Comes back at the close.
+The anchor for the lecture. Comes back at the end.
 
-Backus et al. called the first Fortran compiler an "automatic coding system". Each new level was described as the machine doing the programming.
-
-An agent: the model proposes a step, the program runs it and returns the result, until a stopping rule. Someone wrote the request, started the loop, set what it may touch.
+An agent: the model proposes a step, a program runs it and feeds back the result, until a stopping rule.
 :::
 
-| level | the person writes | the rest is filled in by |
+| level | the person writes | filled in by |
 |:---|:---|:---|
 | machine code | every instruction, as numbers | nothing |
 | assembly | every instruction, by name | an assembler |
@@ -292,232 +204,151 @@ An agent: the model proposes a step, the program runs it and returns the result,
 | libraries, scripting | calls to other people's code | interpreters, libraries |
 | a request in English | what is wanted | a language model |
 
-At each level the person writes less and the machine fills in more. The computer is still executing instructions.
-
-. . .
-
-An "agent" is a program that runs a model in a loop. Someone gave the instructions, and someone answers for them.
+The computer is still executing instructions. An "agent" is a program that runs a model in a loop: someone gave the instructions, and someone answers for them.
 
 . . .
 
 ::: {.leave}
-Where the comparison stops: a compiler is specified and repeatable. A model is learned and sampled, so it has to be measured.
+A compiler is specified and repeatable. A model is learned and sampled, so it has to be measured.
 :::
 
-::: {.source}
-Backus, Beeber, Best, et al. (1957), "The FORTRAN automatic coding system," *Proceedings of the Western Joint Computer Conference*, 188--198.
-:::
+# Part 2: Benchmarks and "general intelligence"
 
-# Part 2: What a benchmark measures
-
-## A higher score {minutes="2"}
+## A higher score
 
 ::: {.notes}
 QUESTION: what you need to know before believing A reasons better than B.
 
-One minute, written. Collect on the board. Keep the list: Parts 2 and 3 return to it.
+Collect on the board; keep the list for the rest of the part.
 :::
 
 Model A scores higher than model B on a benchmark named for reasoning.
 
 ::: {.ask}
-What do you need to know before you believe that A reasons better than B? Write down as much as you can in one minute.
+What do you need to know before you believe that A reasons better than B?
 :::
 
-## Score and capability {minutes="3"}
+## Reliability and validity
 
 ::: {.notes}
-Claims are about Y*. Data are about Y.
-
-The 78.2% is the item the two coders agreed on least: 53.7% raw agreement, kappa 0.073. Say it.
+Reliability recalls the earlier λ: share of the variance that is signal. The target picture is the usual one; strictly, low reliability also caps validity.
 :::
 
-$Y$: the score, the share of items answered correctly. $Y^*$: the capability the benchmark is named for.
+```{r targets, fig.height=1.9, fig.alt="Four targets. Reliable and valid: a tight cluster on the center. Reliable, not valid: a tight cluster off center. Not reliable, valid: a wide scatter around the center. Not reliable, not valid: a wide scatter off center."}
+fig_targets(ts = 5.5)
+```
 
-Bean et al. (2025) reviewed 445 benchmarks for language models:
+*Reliability:* the same result when things that should not matter change (run, prompt, judge, items).
 
-| of the 445 benchmarks | share |
+*Validity:* the score measures what it is named for. Construct: does it track "reasoning"? Content: do the items cover what the name claims? Predictive: does it predict performance in use?
+
+## Score and capability
+
+::: {.notes}
+Claims are about Y*; data are about Y. The coders' agreement is itself a reliability: low.
+:::
+
+$Y$: the score. $Y^*$: the capability the benchmark is named for. Of 445 benchmarks for language models (Bean et al., 2025):
+
+| | share |
 |:---|---:|
 | define the phenomenon they measure | 78.2% |
 | of those definitions, contested | 47.8% |
-| give evidence that the score measures the intended construct | 53.4% |
-| compare models with a human baseline | 32.4% |
+| give evidence the score measures the intended construct | 53.4% |
 | use uncertainty estimates or statistical tests | 16.0% |
 
-The review codes what each paper reports. On the first row, the papers coded twice got the same answer 53.7% of the time, little better than chance (Brennan--Prediger kappa 0.073).
+On the first row, the review's own coders agreed 53.7% of the time (kappa 0.073): low inter-rater reliability.
 
-::: {.source}
-Bean, Kearns, Romanou, et al. (2025), "Measuring what matters: Construct validity in large language model benchmarks," *NeurIPS 2025 Datasets and Benchmarks Track*, https://arxiv.org/abs/2511.04703.
-:::
-
-## New items {minutes="3"}
+## Reading a clock
 
 ::: {.notes}
-QUESTION: two explanations for the 8 points; what would you measure to tell them apart.
-
-Two minutes alone, one in pairs. Take both explanations from the room before moving on.
+ClockBench: 720 questions about analog clocks. The current leader is an Anthropic model. Which arrow carried the rise comes at the end of the part.
 :::
 
-A benchmark of grade-school mathematics problems is public. Researchers write new problems by the same recipe. People solve the new problems at about the same rate as the old ones.
-
-One model scores 8 points lower on the new problems.
-
-::: {.ask}
-Give two explanations for the 8 points. What would you measure to tell them apart?
-:::
-
-::: {.source}
-Zhang, Da, Lee, et al. (2024), "A careful examination of large language model performance on grade school arithmetic," *NeurIPS 2024*, https://arxiv.org/abs/2405.00332. The authors work at a company that sells training data.
-:::
-
-## The gap between two scores {minutes="4"}
-
-::: {.notes}
-Chance first, then cause.
-
-The standard error treats the items as independent draws and the two sets as separate samples.
-
-The sizes in the example are stated for the arithmetic. The new set has 1,205 problems.
-:::
-
-Old items: $n_1$ of them, share correct $\hat p_1$. New items: $n_2$, share correct $\hat p_2$.
-
-$$
-\hat p_1 - \hat p_2, \qquad \text{standard error} \;\; \sqrt{\frac{\hat p_1 (1 - \hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}}
-$$
-
-With accuracy near 0.8 and 1,200 items in each set, the standard error is 1.6 points. A gap of 8 points is about 5 standard errors. A gap of 2 points is about 1.
-
-. . .
-
-Zhang et al.: gaps of up to 8 points for some models, and little to no evidence of a gap for the frontier models. The gap is larger for models that more readily reproduce the old problems. The authors weigh this against indirect routes: developers collecting similar data, or choosing among versions of a model by the benchmark score.
-
-::: {.source}
-Zhang et al. (2024), as above.
-:::
-
-## Conditioning or intervening {.inverse minutes="3"}
-
-::: {.notes}
-QUESTION: is "A scores higher than B" conditioning or intervening; what the new-items study intervened on.
-
-Skip if behind.
-
-A and B differ in everything upstream. The new items change the test and hold the model fixed.
-:::
-
-```{r dag_score, fig.height=2.2, fig.alt="A causal graph in boxes. Training choices point into capability and into exposure to the items. Capability and exposure to the items both point into the score."}
-sc <- data.frame(name = c("training choices", "capability", "exposure to the items", "score"),
-                 x = c(0, 2, 2, 4), y = c(0.5, 1, 0, 0.5))
-draw_dag(sc, data.frame(from = c("training choices", "training choices", "capability", "exposure to the items"),
-                        to = c("capability", "exposure to the items", "score", "score")),
-         boxes = TRUE, text_size = 5.5, xlim = c(-0.9, 4.5), ylim = c(-0.3, 1.3))
+:::: {.columns}
+::: {.column width="30%"}
+```{r clock, fig.width=3, fig.height=3, fig.alt="An analog clock face showing ten past ten."}
+fig_clock()
 ```
-
-::: {.ask}
-"A scores higher than B" compares two models as they are. Is that conditioning or intervening? In the new-items study, what was intervened on?
 :::
+::: {.column width="70%"}
+```{r clockbench, fig.width=5.5, fig.height=3.8, fig.alt="Bar chart. September 2025: people 89.1 percent, best model 13.3 percent. November 2026: people 90.7 percent, best model 87.8 percent."}
+fig_clockbench(ts = 5.5)
+```
+:::
+::::
 
-# Part 3: How sure, and which score
+A task that is easy for people, on [ClockBench](https://clockbench.ai/). What changed in a year?
 
-## A larger benchmark {minutes="2"}
+## A larger benchmark
 
 ::: {.notes}
-QUESTION: does the interval contain the truth more often, less often, or as often.
+QUESTION: more often, less often, or as often.
 
 Hands for each. No discussion yet.
 :::
 
-A benchmark reports a model's score with a 95% interval, from the usual formula for a mean over $n$ items.
+A benchmark reports a model's score with a 95% interval, from the usual formula for a mean over $n$ items. One prompt, one judge model, one run.
 
-Each answer is graded by another model: one prompt, one judge, one run.
-
-The benchmark grows from 25 items to 400. The interval is now four times narrower.
+The benchmark grows from 25 items to 400. The interval is four times narrower.
 
 ::: {.ask}
-Does the interval now contain the truth more often, less often, or as often as before? Commit to one.
+Does the interval now contain the truth more often, less often, or as often as before?
 :::
 
-## Hidden error {minutes="3"}
+## Fixed or random? {minutes="3"}
 
 ::: {.notes}
-B is one draw for the whole run: this prompt, this judge, this temperature. Every item shares it.
+B is one draw for the whole run, shared by every item. More items shrink the first term only.
 
-More items shrink the first term only.
+Survey statistics: one interviewer for all respondents. Meta-analysis: τ² is between-study heterogeneity.
 :::
 
 $$
 \text{score} = \theta + B + \bar\varepsilon, \qquad \mathrm{Var}(\bar\varepsilon) = \frac{\sigma^2}{n}, \qquad \mathrm{Var}(B) = \tau^2
 $$
 
-$B$ is drawn once for the whole run and shared by every item: the prompt, the judge, the settings.
+$B$: the prompt, the judge, the settings. Drawn once, shared by every item.
 
-$$
-\mathrm{Var}(\text{score}) = \frac{\sigma^2}{n} + \tau^2, \qquad \text{naive standard error:} \;\; \frac{\sigma}{\sqrt n}
-$$
+- Fixed: the target is $\theta + B$, this model scored this way. The naive standard error $\sigma / \sqrt n$ is right.
+- Random: the target is $\theta$, over reasonable setups. The variance is $\sigma^2 / n + \tau^2$.
 
 . . .
 
-Let $r$ be the naive standard error divided by the true one. With normal errors, the naive 95% interval contains $\theta$ with probability $2\,\Phi(1.96\, r) - 1$.
+The naive 95% interval covers $\theta$ with probability $2\,\Phi(1.96\, r) - 1$, where $r = 1 / \sqrt{1 + n\tau^2 / \sigma^2}$.
 
-If the naive standard error is half the true one, the coverage is 67%.
+In survey statistics, $1 + n\tau^2/\sigma^2$ is the design effect of a single interviewer.
 
 ## Coverage and the number of items {minutes="1"}
 
 ::: {.notes}
-The curve is this lecture's two-variance model, not Messing's method. One number is fitted, the other is then reproduced.
+The curve is the two-variance model, fitted to Messing's 42%; it then gives his 11%. His method is a mixed model over items, prompts, judges, temperatures and reruns.
 :::
 
-```{r coverage, fig.height=2.6, fig.alt="Coverage of the naive 95 percent interval against the number of items, on a log scale from 5 to 2,000 items. The curve falls from about 71 percent at 5 items to about 5 percent at 2,000. Two points are marked: 42 percent at 25 items and 11 percent at 400. A dashed line marks 95 percent."}
-cv <- data.frame(n = 10^seq(log10(5), log10(2000), length.out = 200)) |> mutate(coverage = cover(n, ratio))
-pts <- data.frame(n = c(25, 400)) |>
-  mutate(coverage = cover(n, ratio), label = sprintf("%d items: %.0f%%", n, 100 * coverage))
-ggplot(cv, aes(n, coverage)) +
-  geom_hline(yintercept = 0.95, linetype = "dashed", color = cgray) +
-  geom_line(color = navy, linewidth = 1.2) +
-  geom_point(data = pts, color = gold, size = 4) +
-  geom_text(data = pts, aes(label = label), hjust = -0.12, vjust = -0.7, size = 6) +
-  scale_x_log10(breaks = c(5, 25, 100, 400, 2000)) +
-  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
-  labs(x = "items in the benchmark", y = "coverage")
+```{r coverage, fig.height=2.9, fig.alt="Coverage of the naive 95 percent interval against the number of items, on a log scale. The curve falls from about 71 percent at 5 items to about 5 percent at 2,000. Marked: 42 percent at 25 items and 11 percent at 400. A dashed line at 95 percent."}
+fig_coverage(ts = 6)
 ```
 
-Messing (2026), simulating with variance estimates from a real benchmark: the naive interval contains the truth 42% of the time at 25 items and 11% at 400. The curve fixes $\tau^2 / \sigma^2$ by the 42%; it then gives the 11%.
+Messing (2026), with variance estimates from a real benchmark: the naive interval contains the truth 42% of the time at 25 items, 11% at 400.
 
-::: {.source}
-Messing (2026), "Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking," preprint, https://arxiv.org/abs/2604.11581; the two figures are from his post of 17 November 2026, https://solomonmg.github.io/blog/hidden-measurement-error-llm-evals/. Not peer reviewed.
-:::
-
-## Private versions {minutes="2"}
+## Private versions
 
 ::: {.notes}
 QUESTION: by how much does the published score overstate; what does it depend on.
 
-Retrieval: the largest of n draws has its own distribution. Let them reach for it.
+Retrieval: the largest of n draws.
 :::
 
-On Chatbot Arena, a public leaderboard, a provider could test private versions of a model and publish one. Meta tested 27 in the month before one release.
-
-Two copies of the same model, entered as two separate models, scored 1052 and 1069. Four other models were ranked between them.
+On Chatbot Arena, a provider could test private versions and publish one. Meta tested 27 in the month before one release (Singh et al., 2025).
 
 ::: {.retrieval}
-A provider tests $K$ private versions that are in truth equally good, and publishes the best score.
-
-By how much does the published score overstate, on average? What does it depend on?
+$K$ private versions, in truth equally good; the best score is published. By how much does it overstate, on average?
 :::
 
-::: {.source}
-Singh, Nan, Wang, et al. (2025), "The leaderboard illusion," *NeurIPS 2025*, https://arxiv.org/abs/2504.20879, section 3.3 and Figure 9. Several of the authors work at Cohere, which competes on the leaderboard.
-:::
-
-## The best of $K$ {minutes="4"}
+## The best of $K$ {minutes="3"}
 
 ::: {.notes}
-Sigma is the noise in one version's score. m_K is the expected largest of K standard normals.
-
-If the versions do differ, part of the gain is real. The formula is for the case where none of it is.
-
-Operators' reply: about +11 Elo in their own estimate, and it goes to zero with fresh votes.
+σ: the noise in one version's score. If the versions differ, part of the lead is real.
 :::
 
 Version $k$ scores $\mu + \sigma Z_k$, with the $Z_k$ independent standard normals.
@@ -535,36 +366,78 @@ $$
 :::
 ::::
 
-With 27 equally good versions, the published score is $2\sigma$ above the truth on average.
-
 . . .
 
-The overstatement depends on $\sigma$ and on $K$. Fresh votes on the published version shrink it: the best of $K$ was partly lucky, and the luck is not in the new votes.
+Fresh votes on the published version shrink the overstatement: the luck is not in the new votes. The arena's operators put it at "around +11 Elo after 50 tests and 3000 votes", falling to zero with fresh votes.
 
-The arena's operators put the gain at "around +11 Elo after 50 tests and 3000 votes", falling to zero with fresh votes.
-
-::: {.source}
-Arena Team, "Our Response to 'The Leaderboard Illusion' Writeup," 9 May 2025, updated 13 June 2025, https://arena.ai/blog/our-response. Singh et al. (2025), as above.
-:::
-
-# Part 4: What it is made of
-
-## The supply chain {minutes="3"}
+## When a measure becomes a target
 
 ::: {.notes}
-Parts 4 and 5 follow the two boxes on the left of the model, then the product. Energy and water are in the reading.
+QUESTION: which arrow appears for a benchmark.
 
-"Ghost work": Gray and Suri's name for the human work hidden behind automated services.
+Answers: choosing the best of K; tuning on benchmark-like data; writing for the judge model.
+:::
+
+> "When a measure becomes a target, it ceases to be a good measure." Strathern (1997)
+
+::: {.retrieval}
+Earlier in the course, a rule added an arrow into the measure: effort on $Y$. What is that arrow when the measure is a benchmark?
+:::
+
+## Verifiable domains
+
+::: {.notes}
+Easy to check: train on attempts that pass. Needs judgment: a judge model, and more hidden error.
+:::
+
+```{r verifiable, fig.height=2.6, fig.alt="A line of tasks from those checked by a program to those that need judgment or years: arithmetic with an answer key, a sudoku, code with tests, a summary, the facts in an essay, a new diet's effect, what is fair."}
+fig_verifiable(ts = 5.5)
+```
+
+"The ease of training AI to solve a task is proportional to how verifiable the task is." (Wei, 2025)
+
+Tasks that are cheap to check are cheap to put in a benchmark. Which tasks does "general" then extrapolate to?
+
+## Paths into a score
+
+::: {.notes}
+QUESTION: which paths carry a 20-point rise; which also raise performance in use.
+
+Two minutes in pairs.
+:::
+
+```{r graph_q, fig.height=2.8, fig.alt="A causal graph in boxes. Benchmark items, the setup (prompt, judge, settings) and tuning to the benchmark point into the score. Capability points into the score and into performance in use. Tasks in use point into performance in use. A dashed arrow from tuning to the benchmark into capability."}
+fig_benchmark_graph(highlight = FALSE, ts = 5.2)
+```
+
+::: {.ask}
+Between two versions, a model's score rises 20 points. Which paths could carry the rise? Which would also raise performance in use?
+:::
+
+## Three ways a score misleads
+
+::: {.notes}
+Only capability reaches both sides, and only for the dimensions the tasks in use need.
+:::
+
+```{r graph_a, fig.height=2.8, fig.alt="The same graph with three arrows in gold: setup into score, tuning to the benchmark into score, tasks in use into performance in use."}
+fig_benchmark_graph(highlight = TRUE, ts = 5.2)
+```
+
+- Prompt, judge, settings → score: one run fixes them. Fixed or random?
+- Tuning → score: Goodhart. Fresh, unseen items cut this arrow.
+- Tasks in use → performance: the items are not the tasks in use. A shift in distribution.
+
+# Part 3: What it is made of
+
+## The supply chain
+
+::: {.notes}
+Crawford and Joler drew this for one voice assistant; Gray and Suri, "ghost work". Energy comes back in Part 7.
 :::
 
 ```{r dag_chain, fig.height=2.6, fig.alt="A chain in boxes. Minerals, energy and water point into chips and data centers, which point into the model. Public text and images point into the model. Labeling and rating point into the model. The model points into the product."}
-ch <- data.frame(name = c("minerals, energy, water", "chips, data centers", "public text and images",
-                          "labeling and rating", "model", "product"),
-                 x = c(0, 2.1, 1.05, 1.05, 3.7, 4.9), y = c(1.2, 1.2, 0.6, 0, 0.6, 0.6))
-draw_dag(ch, data.frame(from = c("minerals, energy, water", "chips, data centers", "public text and images",
-                                 "labeling and rating", "model"),
-                        to = c("chips, data centers", "model", "model", "model", "product")),
-         boxes = TRUE, text_size = 5, xlim = c(-1.1, 5.4), ylim = c(-0.3, 1.5))
+fig_chain(ts = 5)
 ```
 
 ::: {.recall}
@@ -573,92 +446,45 @@ Creating data takes resources. Someone pays to count, to record, and to keep.
 
 Who benefited from this chain being invisible?
 
-::: {.source}
-Crawford and Joler (2018), "Anatomy of an AI System: The Amazon Echo as an anatomical map of human labor, data and planetary resources," AI Now Institute and Share Lab, https://anatomyof.ai. Crawford (2021), *Atlas of AI: Power, Politics, and the Planetary Costs of Artificial Intelligence*, Yale University Press. Gray and Suri (2019), *Ghost Work: How to Stop Silicon Valley from Building a New Global Underclass*, Houghton Mifflin Harcourt.
-:::
-
-## Text as a commons {minutes="3"}
+## Text as a commons
 
 ::: {.notes}
-Collective frame first, and longer. The individual frame gets one line.
-
-Acemoglu et al.: a formal model in which people share too much and are paid too little for it.
-
-An ethical question. Not a question about what the law says.
+Collective frame first, and longer. An ethical question, not a legal one.
 :::
 
-A model is trained on writing that people made public: forum answers, encyclopedia articles, code, news. Each piece is small; the collection is the resource.
+A model is trained on writing that people made public. Each piece is small; the collection is the resource.
 
-The collective frame: one person's data reveal information about other people (Acemoglu et al., 2022), and individual consent cannot protect interests of that kind (Viljoen, 2021). What is a group of contributors owed, and who can speak for it?
+*Collective frame:* one person's data reveal information about other people (Acemoglu et al., 2022), and individual consent cannot protect that (Viljoen, 2021). What is a group of contributors owed, and who speaks for it?
 
-The individual frame: each author's consent, credit or payment, for their own text.
+*Individual frame:* each author's consent, credit or payment.
 
-::: {.leave}
-The question here is what is fair. What the law says is a separate question.
-:::
-
-::: {.source}
-Acemoglu, Makhdoumi, Malekian, et al. (2022), "Too much data: Prices and inefficiencies in data markets," *American Economic Journal: Microeconomics* 14(4), 218--256, https://doi.org/10.1257/mic.20200200. Viljoen (2021), "A relational theory of data governance," *Yale Law Journal* 131(2), 573--654, https://www.yalelawjournal.org/feature/a-relational-theory-of-data-governance.
-:::
-
-## Stack Overflow after ChatGPT {minutes="3"}
+## Hours of writing {minutes="3"}
 
 ::: {.notes}
-QUESTION: what must be true of the comparison forums for 25% to be the effect of ChatGPT.
-
-Two minutes, in writing. Take answers before the next slide.
+Assumptions: 0.75 words a token; 100 finished words an hour for news, books, Wikipedia; 1,000 for forum posts. At £15 an hour: £170 billion to £1.7 trillion. Machine-made text lowers it; quality filters raise it. The same text trains every major model.
 :::
 
-Stack Overflow is the main public question-and-answer site for programmers.
+One open model, Llama 3: about 15 trillion tokens, about 11 trillion words. At 100 to 1,000 finished words per hour of work:
 
-Six months after ChatGPT's release, posting on Stack Overflow was about 25% lower than the comparison sites predict. The comparison sites: Russian- and Chinese-language programming forums, where ChatGPT was harder to reach, and mathematics forums, where it was less capable.
+$$
+\frac{1.1 \times 10^{13}}{1000} \approx 10^{10} \quad \text{to} \quad \frac{1.1 \times 10^{13}}{100} \approx 10^{11} \text{ hours}
+$$
 
-::: {.ask}
-What must be true of the comparison forums for 25% to be the effect of ChatGPT?
-:::
+```{r hours, fig.height=2.2, fig.alt="Hours on a log scale. All of Wikipedia in 2008: about 100 million. One year of all work in the UK: about 58 billion. The text in one training set: a range from about 11 billion to about 110 billion."}
+fig_hours(ts = 5)
+```
 
-::: {.source}
-del Rio-Chanona, Laurentsyeva and Wachs (2024), "Large language models reduce public knowledge sharing on online Q&A platforms," *PNAS Nexus* 3(9), pgae400, https://doi.org/10.1093/pnasnexus/pgae400.
-:::
-
-## The comparison forums {minutes="2"}
+## Stack Overflow after ChatGPT
 
 ::: {.notes}
-Difference-in-differences: the change on Stack Overflow minus the change on the comparison forums.
-
-The second condition fails in a known direction, which is why the authors call 25% a lower bound.
+The site's decline began around 2014; the comparison forums are what separate ChatGPT from that.
 :::
 
-The 25% is the effect of ChatGPT if
+Six months after ChatGPT's release, posting on Stack Overflow was about 25% lower than comparison forums predict: Russian- and Chinese-language programming forums, where ChatGPT was harder to reach, and mathematics forums (del Rio-Chanona et al., 2024).
 
-- without ChatGPT, posting on Stack Overflow would have changed as it did on the comparison forums, and
-- the comparison forums were not themselves affected.
+The longer view: [Stack Overflow is almost dead](https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/) (Orosz, 2025).
 
-. . .
-
-Some users of the comparison forums could reach ChatGPT anyway. If their posting fell too, 25% is too small, and the authors treat it as a lower bound.
-
-The authors describe a public good whose content partly feeds privately owned models that substitute for it.
-
-::: {.source}
-del Rio-Chanona et al. (2024), as above.
-:::
-
-## Wikipedia {.inverse minutes="1"}
-
-::: {.notes}
-Skip if behind.
-:::
-
-Wikipedia's views and edits did not fall in aggregate (Reeves et al., 2025).
-
-Newly created, popular articles whose content overlaps with ChatGPT lost views (Lyu et al., 2025).
-
-::: {.source}
-Reeves, Yin and Simperl (2025), "Exploring the impact of ChatGPT on Wikipedia engagement," *Collective Intelligence*, https://doi.org/10.1177/26339137251372599. Lyu, Siderius, Li, et al. (2025), "Wikipedia contributions in the wake of ChatGPT," *Companion Proceedings of the ACM Web Conference 2025*, https://doi.org/10.1145/3701716.3715543.
-:::
-
-## Owed, and to whom {minutes="2"}
+## Owed, and to whom
 
 ::: {.notes}
 Shown, not argued. The class takes it, with sides assigned.
@@ -674,166 +500,143 @@ The individual frame asks, author by author: consent, credit, payment, a way to 
 
 The collective frame asks, for the group: support for the sites that hold the writing, a say in how the collection is used, a share of what is made from it.
 
-## Pay for labeling {minutes="3"}
+## Pay for labeling
 
 ::: {.notes}
-QUESTION: which comparison answers "is it fair", and why that one.
-
-Three comparisons: the client's rate, what applicants would otherwise earn, the conditions of the work.
+TIME's figures. Graphic text, labeled so the model would refuse it.
 :::
 
-OpenAI's contracts paid Sama, an outsourcing firm in Kenya, \$12.50 an hour per worker to label graphic text. The labelers took home \$1.32 to \$1.44 an hour; Sama disputed the figures (Perrigo, 2023).
-
-In a randomized evaluation run with Sama, training with a job referral raised applicants' earnings by about 37 to 40% over applicants not offered them (Atkin et al., 2021).
+TIME reported that OpenAI's contracts paid Sama, an outsourcing firm in Kenya, \$12.50 an hour per worker to label graphic text, and that the labelers took home \$1.32 to \$1.44 an hour (Perrigo, 2023).
 
 Fieldwork at three Sama centers in Kenya and Uganda found low wages, insecure work and tightly disciplined management (Muldoon et al., 2025).
 
-::: {.ask}
-Which of the three comparisons answers "is it fair"? Why?
-:::
-
-::: {.source}
-Perrigo (2023), "Exclusive: OpenAI used Kenyan workers on less than \$2 per hour to make ChatGPT less toxic," *TIME*, 18 January 2023, https://time.com/6247678/openai-chatgpt-kenya-workers/. Atkin, Schoar and Wahnschafft (2021), *Evaluating Sama's training and job programs in Nairobi, Kenya*, research report, J-PAL, https://www.povertyactionlab.org/media/file-research-paper/evaluating-samas-training-and-job-programs-nairobi-kenya. Muldoon, Cant, Graham, et al. (2025), "The poverty of ethical AI: Impact sourcing and AI supply chains," *AI & Society* 40(2), 529--543, https://doi.org/10.1007/s00146-023-01824-9.
-:::
-
-## Requesters and workers {minutes="2"}
-
-::: {.notes}
-QUESTION: both numbers are true of the same data; how.
-
-One minute, in pairs.
-:::
-
-Amazon Mechanical Turk is a platform for small paid online tasks, such as labeling data. Requesters post the tasks. From the logs of 2,676 workers and 3.8 million tasks:
-
-The average requester pays more than \$11 an hour.
-
-The median worker earns about \$2 an hour.
-
-::: {.ask}
-Both are true of the same data. How?
-:::
-
-::: {.source}
-Hara, Adams, Milland, et al. (2018), "A data-driven analysis of workers' earnings on Amazon Mechanical Turk," *Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems*, paper 449, https://doi.org/10.1145/3173574.3174023.
-:::
-
-## Requesters or hours of work {minutes="3"}
-
-::: {.notes}
-Invented numbers. Say so.
-
-"What do requesters pay?" and "What do workers earn?" are different questions.
-:::
-
-Invented numbers. Nine requesters pay \$12 an hour and post 1 hour of work each. One requester pays \$1 an hour and posts 91 hours.
-
-$$
-\begin{aligned}
-\text{average over requesters:} \quad & \frac{9 \times 12 + 1 \times 1}{10} = 10.90 \\[4pt]
-\text{average over hours of work:} \quad & \frac{9 \times 12 + 91 \times 1}{100} = 1.99
-\end{aligned}
-$$
-
-. . .
-
-Hara et al.: "lower-paying requesters post much more work".
-
-A worker's hour also includes time that no requester pays for: searching for tasks, and work that is rejected.
-
-::: {.leave}
-An average answers a question about the units it is taken over.
-:::
-
-::: {.source}
-Hara et al. (2018), as above.
-:::
-
-# Part 5: Who gets the payoff
+# Part 4: Who benefits / *cui bono*?
 
 ## Payoff outside the tech sector {minutes="3"}
 
 ::: {.notes}
-Slok is chief economist at Apollo, an asset manager. A short note with charts, not a study. The "Magnificent 7" are seven large technology firms.
-
-The survey is of executives, about their own firms.
+Slok is chief economist at Apollo, an asset manager: a note with charts, not a study. The survey is executives on their own firms.
 :::
 
-Slok (2026): revenue per worker and profit margins are rising for the "Magnificent 7" and flat for the other 493 firms in the S&P 500.
+[No Signs of AI Payoff Outside the Tech Sector](https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector) (Slok, 2026): revenue per worker and profit margins rising for the "Magnificent 7", flat for the other 493 firms in the S&P 500.
 
-Nearly 9,000 executives in seven countries, summer 2026 (Yotzov et al.):
+Nearly 9,000 executives in seven countries, summer 2026 (Yotzov et al., 2026):
 
-- 78% of firms use AI, and 2% of firms account for over half of the spending;
-- essentially no net effect on employment at their firms over three years;
-- 0.2% a year added to labor productivity growth, and 0.6% a year expected.
+- 78% of firms use AI; 2% of firms account for over half the spending;
+- essentially no net effect on employment over three years;
+- 0.2% a year added to labor productivity growth, 0.6% expected.
 
 . . .
 
 If there is a gain, who receives it?
 
-::: {.source}
-Slok (2026), "No Signs of AI Payoff Outside the Tech Sector," *The Daily Spark*, Apollo, 24 October 2026, https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector. Yotzov, Barrero, Bloom, et al. (2026), "Firm Data on AI," NBER Working Paper 34836, revised October 2026, https://doi.org/10.3386/w34836. Not peer reviewed.
-:::
+# Part 5: Reliance, learning and deskilling
 
-## Revenue per worker {minutes="3"}
+## Deskilling
 
 ::: {.notes}
-QUESTION: two ways R/L can rise; who receives the gain in each; what you would look at.
+QUESTION: exam scores once the chatbot is taken away.
 
-Two minutes alone. Then two or three from the room.
+Two senses: jobs redesigned to need less skill; a person's own skill fading.
 :::
 
-$$
-\text{revenue per worker} = \frac{R}{L}
-$$
+*Deskilling:* work redesigned so that it needs less skill, or a person's skill fading because a tool does the task.
 
 ::: {.ask}
-Give two ways $R/L$ can rise. In each, who receives the gain: customers, workers or owners? What would you look at to tell which one happened?
+With a chatbot, students' practice grades rose 48%. Predict their exam scores once the chatbot is taken away.
 :::
 
-## One firm and an open market {.inverse minutes="3"}
+## A chatbot in a maths class
 
 ::: {.notes}
-Skip if behind.
-
-Inside the firm the gain went to novices, using what the best agents had done. The authors could not observe wages.
+One school, one subject, a short period. The reading has more: coding, clinicians, endoscopists.
 :::
 
-Inside one firm (Brynjolfsson, Li and Raymond, 2025): 5,172 customer-support agents, with an AI assistant introduced in stages. Issues resolved per hour rose 15% on average and about 30% for less experienced agents. The most skilled agents gained little. The assistant appears to spread the practices of the firm's best agents, and the authors ask whether workers should be compensated for the data that train such systems.
+```{r bastani, fig.height=3.4, fig.alt="Bar chart. With the chatbot, practice grades rose 48 percent with a standard chatbot and 127 percent with a tutor version. On exams after the chatbot was taken away, students who had used the standard chatbot scored 17 percent lower; the tutor version largely avoided this."}
+fig_bastani(ts = 5.5)
+```
 
-On an open platform (Hui, Reshef and Zhou, 2024): writing freelancers had fewer jobs and lower earnings after ChatGPT's release than freelancers in less exposed work.
+Nearly 1,000 students at a high school in Turkey, against students with no access (Bastani et al., 2025).
 
-::: {.source}
-Brynjolfsson, Li and Raymond (2025), "Generative AI at work," *Quarterly Journal of Economics* 140(2), 889--942, https://doi.org/10.1093/qje/qjae044. Hui, Reshef and Zhou (2024), "The short-term effects of generative artificial intelligence on employment: Evidence from an online labor market," *Organization Science* 35(6), 1977--1989, https://doi.org/10.1287/orsc.2023.18441.
-:::
+# Part 6: Conversational AI
 
-## Who paid, who gains {minutes="3"}
+## Sycophancy
 
 ::: {.notes}
-QUESTION: if the payoff stays where it is, who paid; if it spreads, who receives it, and do Part 4's contributors.
-
-Pairs, two minutes. One pair for each half.
+Both studies are in the reading.
 :::
 
-::: {.ask}
-In pairs.
+*Sycophancy:* telling users what they want to hear.
 
-If the payoff stays where it is now, who paid for it?
+In tests of 11 models, the models affirmed users' actions far more often than people did. One conversation with a flattering model left people more sure they were right, less willing to repair a conflict, and more trusting of the model (Cheng et al., 2026).
 
-If it spreads, who receives it? Do the people in Part 4, who wrote the text and labeled the data, receive any of it?
-:::
+In data used to train assistants, people prefer answers that match their own views (Sharma et al., 2024).
 
-## A report with errors {minutes="3"}
+## Deepfakes and scams
 
 ::: {.notes}
-The report reviewed a welfare compliance system. The department said its recommendations did not change.
+Third in the cut order: keep the definition and the Facebook finding.
+:::
 
+*Deepfake:* a synthetic image, audio or video of a real person doing or saying something they did not.
+
+Of nearly 15 million Twitter profile pictures, 0.052% were AI-generated faces. Many of those accounts were created in bulk; many posted about giveaways and cryptocurrency (Ricker et al., 2024).
+
+125 Facebook Pages posting AI-generated images, some of them scams. At times the feed showed the images to users who did not follow the Pages and did not realize they were generated (DiResta and Goldstein, 2024).
+
+## AI in the 2026 midterms
+
+::: {.notes}
+Counts, not motives. The researchers call it an undercount.
+:::
+
+Over \$187 million on 289 AI-generated or AI-enhanced political ads, to 29 October (Wesleyan Media Project):
+
+```{r ads, fig.height=1.1, fig.alt="A bar of the 289 ads by sponsor: Republican 82 percent, Democratic 13 percent, other 5 percent."}
+fig_ads(ts = 6)
+```
+
+Republican sponsors also accounted for just over 90% of the spending. By early October, 31% of the tracked ads disclosed the use of AI.
+
+The researchers: "almost surely lower than the actual level", since many ads carry no disclaimer.
+
+# Part 7: Environmental costs
+
+## In aggregate
+
+::: {.notes}
+Small in aggregate, growing fast, concentrated in places.
+:::
+
+Data centers' share of the world's electricity (IEA, 2025):
+
+```{r electricity, fig.height=3.2, fig.alt="Two grids of 100 squares, each square one percent of the world's electricity. 2024: one and a half squares filled. 2030 in the base case: just under three squares filled."}
+fig_electricity(ts = 5)
+```
+
+About a tenth of the growth in demand to 2030: less than industrial motors or air conditioning.
+
+## Locally
+
+::: {.notes}
+Allegations in a lawsuit; no ruling yet on the merits. xAI argued the turbines were exempt.
+:::
+
+xAI's Colossus 2 data center in Memphis is powered by a gas plant over the state line in Southaven, Mississippi.
+
+The NAACP alleges (April 2026) that 27 turbines, then 33, ran without air permits, with the potential to emit over 1,700 tons of nitrogen oxides a year, likely the largest industrial source of them in the Memphis area.
+
+xAI argued the turbines were exempt. In October 2026 the court denied its motion to dismiss.
+
+# A report with a signature
+
+## A report with errors
+
+::: {.notes}
 Back to the abstraction slide: instructions in, output out, and a signature.
 :::
 
-In 2025 Deloitte Australia delivered a 237-page report to a government department, for A\$440,000.
-
-The report contained a fabricated quotation from a federal court judgment and references to research that does not exist. Deloitte agreed to repay the final installment of its fee. The revised report disclosed that a language model had been used in writing it.
+In 2025 Deloitte Australia delivered a 237-page report to a government department, for A\$440,000. It contained a fabricated quotation from a court judgment and references to research that does not exist. Deloitte agreed to repay the final installment; the revised report disclosed that a language model had been used.
 
 . . .
 
@@ -841,35 +644,95 @@ The report contained a fabricated quotation from a federal court judgment and re
 The tool executed instructions. People wrote the request, accepted the output and put the firm's name on it.
 :::
 
-::: {.source}
-McGuirk (2025), "Deloitte to partially refund Australian government for report with apparent AI-generated errors," Associated Press, 7 October 2025, https://www.bnnbloomberg.ca/business/artificial-intelligence/2025/10/07/deloitte-to-partially-refund-australian-government-for-report-with-apparent-ai-generated-errors/. Dhanji (2025), "Deloitte to pay money back to Albanese government after using AI in \$440,000 report," *The Guardian*, 6 October 2025.
-:::
-
-## You sign the report {minutes="5"}
+## You sign the report {minutes="4"}
 
 ::: {.notes}
 QUESTION: what you owe the reader before you sign.
 
-Alone, in writing, four minutes. No discussion: it goes to the class.
+Alone, in writing. It goes to the class.
 :::
 
 You are an analyst. A tool chose the data cleaning steps and the model for an analysis, and wrote the first draft of the report. Your name goes on it.
 
 ::: {.ask}
-Alone, in writing. What do you owe the reader before you sign? Say what you would check, what you would disclose, and why.
+Alone, in writing. What do you owe the reader before you sign? What would you check, what would you disclose, and why?
 :::
 
-## Lenses this week {minutes="2"}
+## Lenses this week
 
 ::: {.notes}
-Each lens, what it referred to this week. Then the warm-up questions today did not reach.
+Then the title slide's questions that today did not reach.
 :::
 
-- **Goal selection.** What are we optimizing or predicting? A benchmark's name, and what its items measure.
-- **Data selection.** Who is in the data? Whose writing, whose labeling.
-- **Honest reporting.** Which comparison gets reported? The naive interval. The best of $K$. The requester's average or the worker's.
-- **Justice.** Who bears the error? Labelers, freelancers.
+- **Goal selection.** What are we optimizing or predicting? A benchmark's name, and the score that gets tuned.
+- **Data selection.** Who is in the data? Whose writing, whose labeling; which tasks get into benchmarks.
+- **Honest reporting.** Which comparison gets reported? Fixed or random; the best of $K$; disclosing AI.
+- **Justice.** Who bears the error? Labelers; a gas plant's neighbors.
 - **Ownership.** You have to choose, so choose, and defend it. You sign the report.
-- **Leverage.** What can be changed, and how? More items leave $\tau^2$ alone. Fresh votes remove the luck.
+- **Leverage.** What can be changed, and how? More setups, not more items; fresh items.
 
-Left to the reading: learning, chatbots, energy.
+## References {.scrollable .smaller minutes="0"}
+
+::: {.notes}
+Not presented.
+:::
+
+::: {.source}
+Acemoglu, Makhdoumi, Malekian, et al. (2022), "Too much data: Prices and inefficiencies in data markets," *American Economic Journal: Microeconomics* 14(4), 218--256, https://doi.org/10.1257/mic.20200200.
+
+Arena Team (2025), "Our Response to 'The Leaderboard Illusion' Writeup," 9 May 2025, updated 13 June 2025, https://arena.ai/blog/our-response.
+
+Bastani, Bastani, Sungu, et al. (2025), "Generative AI without guardrails can harm learning: Evidence from high school mathematics," *PNAS* 122(26), e2422633122, https://doi.org/10.1073/pnas.2422633122.
+
+Bean, Kearns, Romanou, et al. (2025), "Measuring what matters: Construct validity in large language model benchmarks," *NeurIPS 2025 Datasets and Benchmarks Track*, https://arxiv.org/abs/2511.04703.
+
+Cheng, Lee, Khadpe, et al. (2026), "Sycophantic AI decreases prosocial intentions and promotes dependence," *Science* 391(6792), eaec8352, https://doi.org/10.1126/science.aec8352.
+
+Crawford (2021), *Atlas of AI*, Yale University Press. Crawford and Joler (2018), "Anatomy of an AI System," AI Now Institute and Share Lab, https://anatomyof.ai.
+
+del Rio-Chanona, Laurentsyeva and Wachs (2024), "Large language models reduce public knowledge sharing on online Q&A platforms," *PNAS Nexus* 3(9), pgae400, https://doi.org/10.1093/pnasnexus/pgae400.
+
+DiResta and Goldstein (2024), "How spammers and scammers leverage AI-generated images on Facebook for audience growth," *Harvard Kennedy School Misinformation Review* 5(4), https://doi.org/10.37016/mr-2020-151.
+
+Dubey et al. (2024), "The Llama 3 Herd of Models," https://arxiv.org/abs/2407.21783.
+
+Gray and Suri (2019), *Ghost Work*, Houghton Mifflin Harcourt.
+
+International Energy Agency (2025), *Energy and AI*, IEA, Paris, https://www.iea.org/reports/energy-and-ai.
+
+McGuirk (2025), "Deloitte to partially refund Australian government for report with apparent AI-generated errors," Associated Press, 7 October 2025.
+
+Messing (2026), "Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking," preprint, https://arxiv.org/abs/2604.11581; and "Hidden error in LLM pipelines leads to benchmark hacking and undercoverage," 17 November 2026, https://solomonmg.github.io/blog/hidden-measurement-error-llm-evals/.
+
+Muldoon, Cant, Graham, et al. (2025), "The poverty of ethical AI: Impact sourcing and AI supply chains," *AI & Society* 40(2), 529--543, https://doi.org/10.1007/s00146-023-01824-9.
+
+NAACP, complaint against xAI and MZX Tech, No. 3:26-cv-00074 (N.D. Miss.), filed 14 April 2026, https://earthjustice.org/document/naacp-sues-xai-for-clean-air-act-violations-complaint. Earthjustice (2026), "NAACP Asks Court for Emergency Action to Stop Illegal Air Pollution from xAI's Data Center Power Plant," https://earthjustice.org/press/2026/naacp-asks-court-for-emergency-action-to-stop-illegal-air-pollution-from-xais-data-center-power-plant; "Court Denies xAI's Motion to Dismiss," 30 October 2026, https://www.earthjustice.org/press/2026/court-denies-xais-motion-to-dismiss-air-pollution-lawsuit-against-elon-musks-company.
+
+Office for National Statistics (2026), *Employment in the UK: August 2026*, total actual weekly hours worked, https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/employmentintheuk/august2026.
+
+Orosz (2025), "Stack Overflow is almost dead," *The Pragmatic Engineer*, 15 May 2025, https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/.
+
+Perrigo (2023), "Exclusive: OpenAI used Kenyan workers on less than \$2 per hour to make ChatGPT less toxic," *TIME*, 18 January 2023, https://time.com/6247678/openai-chatgpt-kenya-workers/.
+
+Ricker, Assenmacher, Holz, Fischer and Quiring (2024), "AI-Generated Faces in the Real World: A Large-Scale Case Study of Twitter Profile Images," *RAID 2024*, https://arxiv.org/abs/2404.14244.
+
+Safar (2025), "ClockBench," 2 September 2025, https://clockbench.ai/ClockBench.pdf; leaderboard as listed in November 2026, https://clockbench.ai/.
+
+Sharma, Tong, Korbak, et al. (2024), "Towards understanding sycophancy in language models," *ICLR 2024*, https://arxiv.org/abs/2310.13548.
+
+Shirky (2012), "Gin, Television, and Social Surplus," chapter 16 in Mandiberg (ed.), *The Social Media Reader*, New York University Press, from p. 236; a talk of 2008.
+
+Singh, Nan, Wang, et al. (2025), "The leaderboard illusion," *NeurIPS 2025*, https://arxiv.org/abs/2504.20879.
+
+Slok (2026), "No Signs of AI Payoff Outside the Tech Sector," *The Daily Spark*, Apollo, 24 October 2026.
+
+Strathern (1997), "'Improving ratings': audit in the British University system," *European Review* 5(3), 305--321, p. 308.
+
+Viljoen (2021), "A relational theory of data governance," *Yale Law Journal* 131(2), 573--654.
+
+Wei (2025), "Asymmetry of verification and verifier's law," 15 July 2025, https://www.jasonwei.net/blog/asymmetry-of-verification-and-verifiers-law.
+
+Wesleyan Media Project (2026), release of 29 October 2026, https://mediaproject.wesleyan.edu/releases-102926/; and researchers of the Wesleyan Media Project, "We've tracked \$80M of spending on almost 170 AI-generated political ads this year," *The Conversation*, republished by *Salon*, 6 October 2026, https://www.salon.com/2026/10/06/weve-tracked-80m-of-spending-on-almost-170-ai-generated-political-ads-this-year-its-weird-partner/.
+
+Yotzov, Barrero, Bloom, et al. (2026), "Firm Data on AI," NBER Working Paper 34836, https://doi.org/10.3386/w34836.
+:::
