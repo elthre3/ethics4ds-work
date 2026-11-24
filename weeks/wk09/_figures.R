@@ -130,7 +130,7 @@ benchmark_nodes <- data.frame(
   name = c("benchmark items", "prompt, judge, settings", "tuning to the benchmark",
            "score", "capability", "performance in use", "tasks in use"),
   x = c(0, 0, 0, 3.3, 4.7, 6.1, 8.4),
-  y = c(1.8, 0.9, 0, 0.9, 2.0, 0.9, 1.8))
+  y = c(0, 0.9, 1.8, 0.9, 2.0, 0.9, 1.8))
 benchmark_edges <- data.frame(
   from = c("benchmark items", "prompt, judge, settings", "tuning to the benchmark",
            "capability", "capability", "tasks in use", "tuning to the benchmark"),
@@ -209,7 +209,7 @@ fig_ads <- function(ts = 5) {
                                    levels = c("other", "Democratic", "Republican")),
                   pct = c(82, 13, 5))
   ggplot(d, aes(x = "ads", y = pct, fill = sponsor)) +
-    geom_col(width = 0.5) +
+    geom_col(width = 0.9) +
     geom_text(data = subset(d, pct >= 10), aes(label = paste0(sponsor, "\n", pct, "%")),
               position = position_stack(vjust = 0.5), color = "white", size = ts, lineheight = 0.9) +
     coord_flip() +
