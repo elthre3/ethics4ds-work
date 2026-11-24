@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ethics4ds.com/weeks/wk09/reading.html</loc>
+    <loc>https://ethics4ds.com/weeks/wk09/slides.html</loc>
+  </url>
+  <url>
+    <loc>https://ethics4ds.com/weeks/wk09/notes.html</loc>
   </url>
   <url>
     <loc>https://ethics4ds.com/weeks/wk08/notes.html</loc>
@@ -71,5 +74,8 @@
   </url>
   <url>
     <loc>https://ethics4ds.com/weeks/wk08/slides.html</loc>
+  </url>
+  <url>
+    <loc>https://ethics4ds.com/weeks/wk09/reading.html</loc>
   </url>
 </urlset>
