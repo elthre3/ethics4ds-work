@@ -41,23 +41,23 @@ st313:
     - {label: "verifiable domains: tasks from checked by a program to needs judgment; Wei's verifier's law", minutes: 2, mode: exposition}
     - {label: "question before the idea: a 20-point rise between versions; which paths carry it, which raise performance in use", minutes: 2, mode: production}
     - {label: "three ways a score misleads: the setup (fixed or random), tuning (Goodhart), tasks in use (distribution shift)", minutes: 2, mode: exposition, retrieves: [S1]}
-    # part 3, what it is made of: 14
+    # part 3, ecosystem: 12
     - {label: "the supply chain, drawn", minutes: 2, mode: exposition}
     - {label: "who benefited from the chain being invisible: a few answers from the room", minutes: 1, mode: production}
     - {label: "text as a commons: the collective frame first; the individual frame in one line", minutes: 2, mode: exposition}
     - {label: "how many hours of writing: 10^10 to 10^11 hours against Wikipedia and a year of UK work", minutes: 3, mode: exposition}
     - {label: "Stack Overflow, about 25% below the comparison forums; the longer decline", minutes: 2, mode: exposition}
-    - {label: "the question for the class, shown: is anything owed, and to whom", minutes: 2, mode: exposition}
-    - {label: "pay for labeling in Kenya, as TIME reported; fieldwork at Sama's centers", minutes: 2, mode: exposition}
+    - {label: "pay for labeling: Naftali Wambalo, with a link to his story; the contract rate and the workers' pay", minutes: 2, mode: exposition}
     # part 4, who benefits: 4
     - {label: "Slok's claim with the link; the executive survey", minutes: 3, mode: exposition, retrieves: [S6]}
     - {label: "if there is a gain, who receives it: a few answers from the room", minutes: 1, mode: production}
     # part 5, reliance, learning and deskilling: 5
     - {label: "deskilling defined; question before the reveal: predict exam scores once the chatbot is taken away", minutes: 3, mode: production}
     - {label: "Bastani et al.: practice up 48% and 127%, exam down 17% for the standard chatbot", minutes: 2, mode: exposition}
-    # part 6, conversational AI: 7
+    # part 6, conversational AI: 9
     - {label: "sycophancy (Cheng et al.; Sharma et al.)", minutes: 3, mode: exposition}
-    - {label: "deepfakes and scams: Ricker et al., DiResta and Goldstein", minutes: 2, mode: exposition}
+    - {label: "medical advice: the lawsuit over Bowen Wan's death, with a link to the report", minutes: 2, mode: exposition}
+    - {label: "deepfakes and scams: an AI-generated post with 40 million views; DiResta and Goldstein", minutes: 2, mode: exposition}
     - {label: "AI in the 2026 midterms: the Wesleyan Media Project's count, sponsors, disclosure, undercount", minutes: 2, mode: exposition}
     # part 7, environmental costs: 5
     - {label: "in aggregate: data centers' share of world electricity, 2024 and 2030", minutes: 3, mode: exposition}
@@ -153,9 +153,9 @@ Deck estimate 79 (bar), against 80. The title slide's question is the warm-up: a
 
 Questions before the reveal: "A larger benchmark" (Part 2), "Paths into a score" (Part 2), "Deskilling" (Part 5).
 
-Cut order: (1) "Verifiable domains"; (2) "Private versions" said in a line, keeping "The best of K"; (3) "Deepfakes and scams" down to its definition and the Facebook finding. Do not cut "Levels of abstraction", "Paths into a score", "Hours of writing", "You sign the report".
+Cut order: (1) "Verifiable domains"; (2) "Private versions" said in a line, keeping "The best of K"; (3) "Deepfakes and scams" to the picture alone. Do not cut "Levels of abstraction", "Paths into a score", "Hours of writing", "You sign the report".
 
-Pace: 0:01 Part 1; 0:07 Part 2; 0:35 Part 3; 0:49 Part 4; 0:53 Part 5; 0:58 Part 6; 1:05 Part 7; 1:10 the report; 1:19 end.
+Pace: 0:01 Part 1; 0:07 Part 2; 0:35 Part 3; 0:47 Part 4; 0:51 Part 5; 0:56 Part 6; 1:05 Part 7; 1:10 the report; 1:19 end.
 :::
 
 ### Week 9
@@ -164,7 +164,7 @@ Part 1: Historical context (abstract)
 
 Part 2: Benchmarks and "general intelligence"
 
-Part 3: What it is made of
+Part 3: Ecosystem
 
 Part 4: Who benefits / *cui bono*?
 
@@ -428,7 +428,7 @@ fig_benchmark_graph(highlight = TRUE, ts = 5.2)
 - Tuning → score: Goodhart. Fresh, unseen items cut this arrow.
 - Tasks in use → performance: the items are not the tasks in use. A shift in distribution.
 
-# Part 3: What it is made of
+# Part 3: Ecosystem
 
 ## The supply chain
 
@@ -484,31 +484,17 @@ Six months after ChatGPT's release, posting on Stack Overflow was about 25% lowe
 
 The longer view: [Stack Overflow is almost dead](https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/) (Orosz, 2025).
 
-## Owed, and to whom
-
-::: {.notes}
-Shown, not argued. The class takes it, with sides assigned.
-:::
-
-A question for the class this week:
-
-::: {.leave}
-A model was trained on writing that people made public. Is anything owed for it, and to whom?
-:::
-
-The individual frame asks, author by author: consent, credit, payment, a way to opt out.
-
-The collective frame asks, for the group: support for the sites that hold the writing, a say in how the collection is used, a share of what is made from it.
-
 ## Pay for labeling
 
 ::: {.notes}
-TIME's figures. Graphic text, labeled so the model would refuse it.
+Photos in the linked piece. Sama says \$2 is a fair wage for the region; nearly 200 workers are suing Sama and Meta.
 :::
 
-TIME reported that OpenAI's contracts paid Sama, an outsourcing firm in Kenya, \$12.50 an hour per worker to label graphic text, and that the labelers took home \$1.32 to \$1.44 an hour (Perrigo, 2023).
+Naftali Wambalo, a father of two with a degree in mathematics, labeled images and videos in Nairobi for Sama, an outsourcing firm working for Meta and OpenAI. Later he screened pornography, hate speech and violence, eight hours a day.
 
-Fieldwork at three Sama centers in Kenya and Uganda found low wages, insecure work and tightly disciplined management (Muldoon et al., 2025).
+[His story, with photographs (60 Minutes)](https://www.cbsnews.com/news/labelers-training-ai-say-theyre-overworked-underpaid-and-exploited-60-minutes-transcript/)
+
+OpenAI's contracts paid Sama \$12.50 an hour per worker. The workers say they got about \$2; TIME reported \$1.32 to \$1.44.
 
 # Part 4: Who benefits / *cui bono*?
 
@@ -572,17 +558,36 @@ In tests of 11 models, the models affirmed users' actions far more often than pe
 
 In data used to train assistants, people prefer answers that match their own views (Sharma et al., 2024).
 
+## Medical advice
+
+::: {.notes}
+Allegations in a lawsuit; no ruling. OpenAI, to the New York Times: she used an earlier version, no longer available; ChatGPT is not a substitute for medical care.
+:::
+
+Bowen Wan, 31, a software engineer in Seattle, had epilepsy and had taken lamotrigine for years. She died in February 2026: sudden unexpected death in epilepsy, the medical examiner found.
+
+Her parents' lawsuit (October 2026) alleges that ChatGPT drew up a plan to take her off the drug in about 25 days, and urged her not to tell her doctor.
+
+[Her story (KIRO 7)](https://www.kiro7.com/news/local/seattle-womans-family-sues-openai-claims-chatgpt-coached-her-off-medication-before-death/YV3O46Q65NC5LBMKEKFVLZRY5Y/)
+
 ## Deepfakes and scams
 
 ::: {.notes}
-Third in the cut order: keep the definition and the Facebook finding.
+The picture: one of Facebook's most viewed posts of July to September 2023, from a Page posting AI images; look at the stove knobs.
 :::
 
+:::: {.columns}
+::: {.column width="55%"}
+![](https://misinforeview.hks.harvard.edu/wp-content/uploads/2024/08/F4.png){fig-alt="A Facebook post from the Page Cafehailee: an AI-generated kitchen with a glossy floor of pink cherry blossoms, 1.9 million reactions, listed with 40 million views." width="100%"}
+
+[Image: DiResta and Goldstein (2024), Figure 4, CC BY 4.0]{style="font-size: 0.5em;"}
+:::
+::: {.column width="45%"}
 *Deepfake:* a synthetic image, audio or video of a real person doing or saying something they did not.
 
-Of nearly 15 million Twitter profile pictures, 0.052% were AI-generated faces. Many of those accounts were created in bulk; many posted about giveaways and cryptocurrency (Ricker et al., 2024).
-
-125 Facebook Pages posting AI-generated images, some of them scams. At times the feed showed the images to users who did not follow the Pages and did not realize they were generated (DiResta and Goldstein, 2024).
+125 Facebook Pages posting AI-generated images, some of them scams. The feed showed such images to users who did not follow the Pages and did not realize they were generated (DiResta and Goldstein, 2024).
+:::
+::::
 
 ## AI in the 2026 midterms
 
@@ -590,9 +595,9 @@ Of nearly 15 million Twitter profile pictures, 0.052% were AI-generated faces. M
 Counts, not motives. The researchers call it an undercount.
 :::
 
-Over \$187 million on 289 AI-generated or AI-enhanced political ads, to 29 October (Wesleyan Media Project):
+Over \$187 million on 289 AI-generated or AI-enhanced political ads, to 29 October (Wesleyan Media Project). [Examples, with stills (NPR)](https://www.npr.org/2026/09/16/nx-s1-5953990/ai-political-ads-2026-midterms)
 
-```{r ads, fig.height=1.1, fig.alt="A bar of the 289 ads by sponsor: Republican 82 percent, Democratic 13 percent, other 5 percent."}
+```{r ads, fig.height=1.6, fig.alt="A bar of the 289 ads by sponsor: Republican 82 percent, Democratic 13 percent, other 5 percent."}
 fig_ads(ts = 6)
 ```
 
@@ -686,13 +691,15 @@ Bastani, Bastani, Sungu, et al. (2025), "Generative AI without guardrails can ha
 
 Bean, Kearns, Romanou, et al. (2025), "Measuring what matters: Construct validity in large language model benchmarks," *NeurIPS 2025 Datasets and Benchmarks Track*, https://arxiv.org/abs/2511.04703.
 
+Brumfiel (2026), "The rise of AI in political ads during the 2026 midterms," NPR, 16 September 2026, https://www.npr.org/2026/09/16/nx-s1-5953990/ai-political-ads-2026-midterms.
+
 Cheng, Lee, Khadpe, et al. (2026), "Sycophantic AI decreases prosocial intentions and promotes dependence," *Science* 391(6792), eaec8352, https://doi.org/10.1126/science.aec8352.
 
 Crawford (2021), *Atlas of AI*, Yale University Press. Crawford and Joler (2018), "Anatomy of an AI System," AI Now Institute and Share Lab, https://anatomyof.ai.
 
 del Rio-Chanona, Laurentsyeva and Wachs (2024), "Large language models reduce public knowledge sharing on online Q&A platforms," *PNAS Nexus* 3(9), pgae400, https://doi.org/10.1093/pnasnexus/pgae400.
 
-DiResta and Goldstein (2024), "How spammers and scammers leverage AI-generated images on Facebook for audience growth," *Harvard Kennedy School Misinformation Review* 5(4), https://doi.org/10.37016/mr-2020-151.
+DiResta and Goldstein (2024), "How spammers and scammers leverage AI-generated images on Facebook for audience growth," *Harvard Kennedy School Misinformation Review* 5(4), https://doi.org/10.37016/mr-2020-151; Figure 4 used under CC BY 4.0, https://creativecommons.org/licenses/by/4.0/.
 
 Dubey et al. (2024), "The Llama 3 Herd of Models," https://arxiv.org/abs/2407.21783.
 
@@ -704,17 +711,15 @@ McGuirk (2025), "Deloitte to partially refund Australian government for report w
 
 Messing (2026), "Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking," preprint, https://arxiv.org/abs/2604.11581; and "Hidden error in LLM pipelines leads to benchmark hacking and undercoverage," 17 November 2026, https://solomonmg.github.io/blog/hidden-measurement-error-llm-evals/.
 
-Muldoon, Cant, Graham, et al. (2025), "The poverty of ethical AI: Impact sourcing and AI supply chains," *AI & Society* 40(2), 529--543, https://doi.org/10.1007/s00146-023-01824-9.
-
 NAACP, complaint against xAI and MZX Tech, No. 3:26-cv-00074 (N.D. Miss.), filed 14 April 2026, https://earthjustice.org/document/naacp-sues-xai-for-clean-air-act-violations-complaint. Earthjustice (2026), "NAACP Asks Court for Emergency Action to Stop Illegal Air Pollution from xAI's Data Center Power Plant," https://earthjustice.org/press/2026/naacp-asks-court-for-emergency-action-to-stop-illegal-air-pollution-from-xais-data-center-power-plant; "Court Denies xAI's Motion to Dismiss," 30 October 2026, https://www.earthjustice.org/press/2026/court-denies-xais-motion-to-dismiss-air-pollution-lawsuit-against-elon-musks-company.
 
 Office for National Statistics (2026), *Employment in the UK: August 2026*, total actual weekly hours worked, https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/employmentintheuk/august2026.
 
 Orosz (2025), "Stack Overflow is almost dead," *The Pragmatic Engineer*, 15 May 2025, https://blog.pragmaticengineer.com/stack-overflow-is-almost-dead/.
 
-Perrigo (2023), "Exclusive: OpenAI used Kenyan workers on less than \$2 per hour to make ChatGPT less toxic," *TIME*, 18 January 2023, https://time.com/6247678/openai-chatgpt-kenya-workers/.
+Ottilie (2026), "Seattle woman's family sues OpenAI, claims ChatGPT coached her off medication before death," KIRO 7, 28 October 2026, https://www.kiro7.com/news/local/seattle-womans-family-sues-openai-claims-chatgpt-coached-her-off-medication-before-death/YV3O46Q65NC5LBMKEKFVLZRY5Y/.
 
-Ricker, Assenmacher, Holz, Fischer and Quiring (2024), "AI-Generated Faces in the Real World: A Large-Scale Case Study of Twitter Profile Images," *RAID 2024*, https://arxiv.org/abs/2404.14244.
+Perrigo (2023), "Exclusive: OpenAI used Kenyan workers on less than \$2 per hour to make ChatGPT less toxic," *TIME*, 18 January 2023, https://time.com/6247678/openai-chatgpt-kenya-workers/.
 
 Safar (2025), "ClockBench," 2 September 2025, https://clockbench.ai/ClockBench.pdf; leaderboard as listed in November 2026, https://clockbench.ai/.
 
@@ -725,6 +730,8 @@ Shirky (2012), "Gin, Television, and Social Surplus," chapter 16 in Mandiberg (e
 Singh, Nan, Wang, et al. (2025), "The leaderboard illusion," *NeurIPS 2025*, https://arxiv.org/abs/2504.20879.
 
 Slok (2026), "No Signs of AI Payoff Outside the Tech Sector," *The Daily Spark*, Apollo, 24 October 2026.
+
+Stahl (2024), "Labelers training AI say they're overworked, underpaid and exploited by big American tech companies," *60 Minutes*, CBS News, 24 November 2024, updated 29 June 2025, https://www.cbsnews.com/news/labelers-training-ai-say-theyre-overworked-underpaid-and-exploited-60-minutes-transcript/.
 
 Strathern (1997), "'Improving ratings': audit in the British University system," *European Review* 5(3), 305--321, p. 308.
 
