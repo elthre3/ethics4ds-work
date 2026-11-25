@@ -1,0 +1,287 @@
+---
+title: "Ethics of AI"
+subtitle: "Class"
+author: "Joshua Loftus"
+format:
+  html:
+    toc: true
+execute:
+  message: false
+  warning: false
+---
+
+::: {.callout-note}
+This is the student version of the class sheet. The exercises are for your own time; the class works through everything under "In class". Answers are revealed in class.
+:::
+
+## How this sheet works
+
+Exercises rederive or apply the lecture's results. Do them on your own
+time; they are not worked in class.
+
+The class starts open. Discussion 1 is about what you are interested in
+or worried about, and nobody is asked how they use AI themselves.
+Discussion 2 turns to what could be done: each group is an ethics
+committee writing guidelines for the use of AI in one setting, using
+ideas from the course. The items under "If there is time" are more
+structured, and a class may take one of them up.
+
+A guideline decides who checks, who is told, and who pays when
+something goes wrong. So each item ends by asking who bears the cost,
+who gains, or who the choice could be justified to.
+
+Notation as in the lecture. A benchmark score is
+$\theta + B + \bar\varepsilon$: $\theta$ is what the benchmark is
+after, $B$ is the effect of the prompt, judge and settings of one run,
+with variance $\tau^2$, and $\bar\varepsilon$ is the average noise over
+$n$ items, with variance $\sigma^2 / n$. $\Phi$ is the standard normal
+distribution function, and $m_K$ is the expected largest of $K$
+independent standard normals.
+
+## Exercises
+
+Attempt each part before you open a hint.
+
+::: {.callout-warning title="Hints"}
+Do not open a hint unless you have been stuck for at least a few
+minutes, and open them in order.
+:::
+
+### Exercise 1. Fixed or random
+
+A benchmark has $n$ items, and a model answers about 80% of them
+correctly, so $\sigma^2 = 0.8 \times 0.2 = 0.16$. Each run uses one
+prompt and one judge, and the choice of these moves the score with
+standard deviation $\tau = 0.03$, that is, 3 points.
+
+(a) With $n = 100$, find the naive standard error, the true standard
+error when the target is $\theta$, and the probability that the naive
+95% interval contains $\theta$.
+
+(b) Repeat for $n = 400$.
+
+(c) A lab runs the 400 items under $J$ different, equally reasonable
+setups and averages the $J$ scores. How large must $J$ be for the
+standard error of the average to be at most 2 points?
+
+(d) A lab can publish the interval from (b) or the one from (c). Who
+gains from the narrower one being published, and who is misled by it?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a): the naive standard error is $\sigma / \sqrt n$, the true one
+$\sqrt{\sigma^2 / n + \tau^2}$, and the coverage is
+$2\,\Phi(1.96\, r) - 1$ with $r$ their ratio.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+For (c): each setup draws its own $B$, so the average of $J$ runs has
+variance $(\sigma^2 / n + \tau^2) / J$.
+:::
+
+### Exercise 2. The best of $K$
+
+On a leaderboard, the score of one version of a model has noise with
+standard deviation $\sigma = 8$ Elo. Use $m_{10} = 1.54$.
+
+(a) A lab tests 10 private versions that are in truth equally good and
+publishes the best. By how much does the published score overstate, on
+average?
+
+(b) Lab A tests 27 equally good versions and publishes the best. Lab B
+tests one. The two labs' models are in truth equally good, with the
+same noise. Find the probability that A's published score is above
+B's.
+
+(c) After publication, three fresh votes arrive for each vote from the
+testing period. Treating the score as an average over votes, how much
+of the overstatement in (a) remains?
+
+(d) Who pays for the rank in (b)?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (b): there are 28 scores with the same distribution. Which one is
+the largest?
+:::
+
+### Exercise 3. New items
+
+Invented numbers. A model answers 86% of the 1,200 problems in a public
+benchmark correctly. Researchers write 1,200 new problems by the same
+recipe, and people find them as hard as the old ones. The model answers
+78% of the new problems correctly.
+
+(a) Find the difference, its standard error and a 95% interval.
+Could chance explain the difference?
+
+(b) Give two explanations other than chance. What would you measure to
+tell them apart?
+
+(c) In the lecture's graph of the paths into a score, which arrow does
+the difference estimate?
+
+(d) Who gains when 86% is the number reported?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a): the two sets of problems are separate samples, so the
+variances of the two proportions add.
+:::
+
+### Exercise 4. Two averages
+
+Requesters post paid tasks on a platform, and workers do them. Invented
+numbers: nine requesters pay \$12 an hour and post 1 hour of work each;
+one requester pays \$1 an hour and posts 91 hours.
+
+(a) Find the average hourly rate over requesters, and the average over
+hours of work.
+
+(b) Hara et al. (2018) found, in the logs of 2,676 workers on Amazon
+Mechanical Turk, that the average requester paid more than \$11 an hour
+and the median worker earned about \$2 an hour. Give two reasons the
+numbers can both be right.
+
+(c) Which average would the platform quote, and whose experience does
+each one describe?
+
+## In class
+
+### Discussion 1: open floor
+
+What about AI are you most interested in, or most worried about?
+
+Nobody is asked how they use AI themselves.
+
+1. Alone, for a minute: write down one thing.
+2. In pairs, for two minutes: what did each of you write, and why that
+   one?
+3. With the room: what are the themes?
+4. For one theme: who bears the cost if the worry comes true, and who
+   is in a position to prevent it?
+
+### Discussion 2: an ethics committee
+
+First, for two or three of the themes: what would have to be true for
+this worry to be smaller? Who could make it true?
+
+Then each group is the ethics committee of one of these, a different
+one from every other group:
+
+- a university, for teaching and assessment;
+- an employer, such as a bank or a consultancy;
+- a government department that decides on benefits or visas;
+- a hospital;
+- a newsroom.
+
+The committee has been asked for guidelines on the use of AI. Write at
+most five. Each should be a condition that someone could check.
+
+Your guidelines should answer these:
+
+1. What is the AI for here, and how would you know it works in this
+   setting, and not only on a benchmark?
+2. Who checks its output, and who signs?
+3. What is disclosed, and to whom?
+4. Who bears the errors? Whose work was it built from?
+5. Once the guideline exists, how will people get around it?
+6. Who can say no?
+
+Then swap with another committee. Read their guidelines as someone the
+guidelines would hurt, or as someone who wants to get around them.
+Which guideline fails first, and who does the failure fall on?
+
+Last, each committee keeps one guideline. Who would it have to be
+justified to?
+
+## If there is time
+
+### Problem 1. Did AI deskill the endoscopists?
+
+In a colonoscopy, the adenoma detection rate is the share of procedures
+in which the doctor finds at least one precancerous growth. At four
+centers in Poland, AI assistance was introduced for some procedures.
+Among procedures done without AI, doctors found an adenoma in 226 of
+795 in the three months before AI was introduced, and in 145 of 648 in
+the three months after (Budzyń et al., 2025).
+
+(a) Find the two detection rates, their difference and a 95% interval
+for it.
+
+(b) Draw a graph with the period (before or after), the doctors' skill
+and detection, and add whatever else could differ between the two
+periods. Which paths from period to detection do not go through
+skill?
+
+(c) In Norway, doctors used AI for a period and it was then withdrawn,
+by design. Among inexperienced doctors, the odds ratio for detection
+after withdrawal against the period before AI was 1.03, with a 95%
+interval from 0.79 to 1.34 (Pedersen et al., 2026). What does this
+design hold fixed that the first does not? Does the study show that
+there is no deskilling?
+
+(d) A hospital has to decide now whether to keep the AI. Who bears the
+error if it keeps the AI and deskilling is real? Who bears it if it
+withdraws the AI and deskilling is not real?
+
+### Discussion 3: who answers for it?
+
+In the lecture: the computer is executing instructions; someone gave
+them, and someone answers for them. Each group takes a different case.
+
+- A consulting firm delivers a report to a government department with
+  a fabricated quotation and references to research that does not
+  exist (McGuirk, 2025).
+- A woman with epilepsy stops her medication on a schedule that, her
+  parents' lawsuit alleges, a chatbot drew up, and dies (Ottilie,
+  2026).
+- A campaign runs an ad with an AI-generated video of its opponent
+  (Brumfiel, 2026).
+- Workers at an outsourcing firm label violent and sexual content for
+  an AI company, for about \$2 an hour (Stahl, 2024).
+
+1. Who gave the instructions?
+2. Who could have checked, and did they have the time and the skill?
+3. Who was harmed?
+4. Who is likely to be blamed? Is that the person who had control?
+
+### Discussion 4: you sign the report
+
+In the lecture you wrote, alone, what you owe the reader before you
+sign a report whose data cleaning, model and first draft a tool chose.
+
+1. Compare what you wrote. What did someone else have that you did
+   not?
+2. Write a disclosure for the report, in at most three sentences.
+3. One group reads theirs. What could a reader still not know?
+4. What do you owe the reader, and why?
+
+## References
+
+- Brumfiel, Geoff, "The rise of AI in political ads during the 2026
+  midterms," NPR, 16 September 2026,
+  <https://www.npr.org/2026/09/16/nx-s1-5953990/ai-political-ads-2026-midterms>.
+- Budzyń, Krzysztof, Marcin Romańczyk, Diana Kitala, et al.,
+  "Endoscopist deskilling risk after exposure to artificial
+  intelligence in colonoscopy: A multicentre, observational study,"
+  *Lancet Gastroenterology & Hepatology* 10(10), 2025, 896--903,
+  <https://doi.org/10.1016/S2468-1253(25)00133-5>; erratum, 10(11),
+  e12.
+- Hara, Kotaro, Abigail Adams, Kristy Milland, et al., "A data-driven
+  analysis of workers' earnings on Amazon Mechanical Turk,"
+  *Proceedings of the 2018 CHI Conference on Human Factors in Computing
+  Systems*, paper 449, <https://doi.org/10.1145/3173574.3174023>.
+- McGuirk, Rod, "Deloitte to partially refund Australian government
+  for report with apparent AI-generated errors," Associated Press,
+  7 October 2025.
+- Ottilie, Madeline, "Seattle woman's family sues OpenAI, claims
+  ChatGPT coached her off medication before death," KIRO 7, 28 October
+  2026,
+  <https://www.kiro7.com/news/local/seattle-womans-family-sues-openai-claims-chatgpt-coached-her-off-medication-before-death/YV3O46Q65NC5LBMKEKFVLZRY5Y/>.
+- Pedersen, T. A., Y. Mori, et al., "Learning and deskilling effects
+  of artificial intelligence in colonoscopy among endoscopists with
+  different levels of experience: A pragmatic, prospective trial,"
+  *Endoscopy* 58(9), 2026, 1003--1014,
+  <https://doi.org/10.1055/a-2858-7084>.
+- Stahl, Lesley, "Labelers training AI say they're overworked,
+  underpaid and exploited by big American tech companies," *60
+  Minutes*, CBS News, 24 November 2024, updated 29 June 2025,
+  <https://www.cbsnews.com/news/labelers-training-ai-say-theyre-overworked-underpaid-and-exploited-60-minutes-transcript/>.
