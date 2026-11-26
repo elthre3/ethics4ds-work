@@ -7,3 +7,5 @@ Claims about AI, from its makers, its critics and the press, rest on evidence th
 **Bring to the lecture:** your top questions about the ethics of AI.
 
 **Lecture:** [notes](weeks/wk09/notes.html) · [slides](weeks/wk09/slides.html)
+
+**Class:** [class sheet](weeks/wk09/class.html) ([.qmd](https://ethics4ds.com/weeks/wk09/class.qmd){download="class.qmd"})

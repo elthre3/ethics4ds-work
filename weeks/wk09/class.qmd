@@ -1,0 +1,242 @@
+---
+title: "Ethics of AI"
+subtitle: "Class"
+author: "Joshua Loftus"
+format:
+  html:
+    toc: true
+execute:
+  message: false
+  warning: false
+---
+
+::: {.callout-note}
+This is the student version of the class sheet. The exercises are for your own time; the class works through everything under "In class". Answers are revealed in class.
+:::
+
+## How this sheet works
+
+Exercises rederive or apply the lecture's results. Do them on your own
+time; they are not worked in class.
+
+The class starts open. Discussion 1 is about what you are interested in
+or worried about.
+Discussion 2 turns to what could be done: each group is an ethics
+committee writing guidelines for the use of AI in one setting, using
+ideas from the course. The items under "If there is time" are more
+structured, and a class may take one of them up.
+
+A guideline decides who checks, who is told, and who pays when
+something goes wrong. So each item ends by asking who bears the cost,
+who gains, or who the choice could be justified to.
+
+Notation as in the lecture. A benchmark score is
+$\theta + B + \bar\varepsilon$: $\theta$ is what the benchmark is
+after, $B$ is the effect of the prompt, judge and settings of one run,
+with variance $\tau^2$, and $\bar\varepsilon$ is the average noise over
+$n$ items, with variance $\sigma^2 / n$. $\Phi$ is the standard normal
+distribution function, and $m_K$ is the expected largest of $K$
+independent standard normals.
+
+## Exercises
+
+Attempt each part before you open a hint.
+
+::: {.callout-warning title="Hints"}
+Do not open a hint unless you have been stuck for at least a few
+minutes, and open them in order.
+:::
+
+### Exercise 1. Fixed or random
+
+A benchmark has $n$ items, and a model answers about 80% of them
+correctly, so $\sigma^2 = 0.8 \times 0.2 = 0.16$. Each run uses one
+prompt and one judge, and the choice of these moves the score with
+standard deviation $\tau = 0.03$, that is, 3 points.
+
+(a) With $n = 100$, find the naive standard error, the true standard
+error when the target is $\theta$, and the probability that the naive
+95% interval contains $\theta$.
+
+(b) Repeat for $n = 400$.
+
+(c) A lab runs the 400 items under $J$ different, equally reasonable
+setups and averages the $J$ scores. How large must $J$ be for the
+standard error of the average to be at most 2 points?
+
+(d) A lab can publish the interval from (b) or the one from (c). Who
+gains from the narrower one being published, and who is misled by it?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a): the naive standard error is $\sigma / \sqrt n$, the true one
+$\sqrt{\sigma^2 / n + \tau^2}$, and the coverage is
+$2\,\Phi(1.96\, r) - 1$ with $r$ their ratio.
+:::
+
+::: {.callout-tip collapse="true" title="Hint 2"}
+For (c): each setup draws its own $B$, so the average of $J$ runs has
+variance $(\sigma^2 / n + \tau^2) / J$.
+:::
+
+### Exercise 2. The best of $K$
+
+On a leaderboard, the score of one version of a model has noise with
+standard deviation $\sigma = 8$ Elo. Use $m_{10} = 1.54$.
+
+(a) A lab tests 10 private versions that are in truth equally good and
+publishes the best. By how much does the published score overstate, on
+average?
+
+(b) Lab A tests 27 equally good versions and publishes the best. Lab B
+tests one. The two labs' models are in truth equally good, with the
+same noise. Find the probability that A's published score is above
+B's.
+
+(c) After publication, three fresh votes arrive for each vote from the
+testing period. Treating the score as an average over votes, how much
+of the overstatement in (a) remains?
+
+(d) Who pays for the rank in (b)?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (b): there are 28 scores with the same distribution. Which one is
+the largest?
+:::
+
+### Exercise 3. New items
+
+Invented numbers. A model answers 86% of the 1,200 problems in a public
+benchmark correctly. Researchers write 1,200 new problems by the same
+recipe, and people find them as hard as the old ones. The model answers
+78% of the new problems correctly.
+
+(a) Find the difference, its standard error and a 95% interval.
+Could chance explain the difference?
+
+(b) Give two explanations other than chance. Which does the fact that
+people find the new problems as hard as the old ones support?
+
+(c) In the lecture's graph of the paths into a score, which arrow does
+the difference estimate?
+
+(d) Who gains when 86% is the number reported?
+
+::: {.callout-tip collapse="true" title="Hint 1"}
+For (a): the two sets of problems are separate samples, so the
+variances of the two proportions add.
+:::
+
+### Exercise 4. Two averages
+
+Requesters post paid tasks on a platform, and workers do them. Invented
+numbers: nine requesters pay \$12 an hour and post 1 hour of work each;
+one requester pays \$1 an hour and posts 91 hours.
+
+(a) Find the average hourly rate over requesters, and the average over
+hours of work.
+
+(b) A study of a real platform found that the average requester paid
+more than \$11 an hour, and that the typical worker earned about \$2 an
+hour (Hara et al., 2018). How can both be right?
+
+(c) Which average would the platform quote, and whose experience does
+each one describe?
+
+## In class
+
+### Discussion 1: open floor
+
+What about AI are you most interested in, or most worried about?
+
+1. First, think by yourself; and why do you think that? (~1 min)
+2. Discuss in small groups (~5 min)
+3. Share with class, find themes (~5-10 min)
+4. Class: who benefits, who might be harmed, and who can change this?
+   (~2 min)
+
+### Discussion 2: an ethics committee
+
+First, for two or three of the themes: what would have to be true for
+this worry to be smaller? Who could make it true?
+
+Then each group is the ethics committee of one of these, a different
+one from every other group:
+
+- a university, for teaching and assessment;
+- an employer, such as a bank or a consultancy;
+- a government department that decides on benefits or visas;
+- a hospital;
+- a newsroom.
+
+The committee has been asked for guidelines on the use of AI, and to
+design the conditions around its use. Write at most five points. Be
+specific.
+
+Then swap with another committee. Read their guidelines as someone the
+guidelines would hurt, or as someone who wants to get around them.
+Which point fails first, and who does the failure fall on?
+
+## If there is time
+
+### Discussion 3: deskilling
+
+*Deskilling:* work redesigned so that it needs less skill, or a
+person's skill fading because a tool does the task.
+
+1. Think of a skill that a tool now does for most people: mental
+   arithmetic, spelling, finding your way, writing code. Has anything
+   been lost? Does it matter?
+2. Which skills should people keep even when a tool does them better?
+   Who decides?
+3. In the lecture, students who practiced mathematics with a chatbot
+   did better on the practice problems and worse on the exam without
+   it. If you ran the course, what would you do?
+4. Who gains when a skill fades, and who bears the cost?
+
+### Discussion 4: the lecture's topics
+
+The lecture covered:
+
+- a short history, and AI as another level of abstraction in
+  programming;
+- benchmarks: reliability and validity, hidden error, the best of
+  several private versions, Goodhart's law, verifiable domains;
+- what AI is built from: public writing, labeling work, Stack
+  Overflow;
+- who benefits from it;
+- reliance, learning and deskilling;
+- conversational AI: sycophancy, medical advice, deepfakes and scams,
+  political ads;
+- environmental costs;
+- a report with errors, and who signs.
+
+Do you have any more questions or thoughts about any of these?
+
+### Discussion 5: you sign the report
+
+You are an analyst. A tool chose the data cleaning steps and the model
+for an analysis, and wrote the first draft of the report. Your name
+goes on it.
+
+1. Alone, for a minute: what do you owe the reader before you sign?
+2. In groups: write a disclosure for the report, in at most three
+   sentences.
+3. One group reads theirs. What could a reader still not know?
+4. Who is misled if the disclosure leaves that out?
+
+## References
+
+- Bainbridge, Lisanne, "Ironies of automation," *Automatica* 19(6),
+  1983, 775--779, <https://doi.org/10.1016/0005-1098(83)90046-8>.
+- Bastani, Hamsa, Osbert Bastani, Alp Sungu, et al., "Generative AI
+  without guardrails can harm learning: Evidence from high school
+  mathematics," *Proceedings of the National Academy of Sciences*
+  122(26), 2025, e2422633122,
+  <https://doi.org/10.1073/pnas.2422633122>.
+- Hara, Kotaro, Abigail Adams, Kristy Milland, et al., "A data-driven
+  analysis of workers' earnings on Amazon Mechanical Turk,"
+  *Proceedings of the 2018 CHI Conference on Human Factors in Computing
+  Systems*, paper 449, <https://doi.org/10.1145/3173574.3174023>.
+- McGuirk, Rod, "Deloitte to partially refund Australian government
+  for report with apparent AI-generated errors," Associated Press,
+  7 October 2025.
