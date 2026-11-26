@@ -197,9 +197,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#if-there-is-time" id="toc-if-there-is-time" class="nav-link" data-scroll-target="#if-there-is-time">If there is time</a>
   <ul class="collapse">
-  <li><a href="#problem-1.-did-ai-deskill-the-endoscopists" id="toc-problem-1.-did-ai-deskill-the-endoscopists" class="nav-link" data-scroll-target="#problem-1.-did-ai-deskill-the-endoscopists">Problem 1. Did AI deskill the endoscopists?</a></li>
-  <li><a href="#discussion-3-who-answers-for-it" id="toc-discussion-3-who-answers-for-it" class="nav-link" data-scroll-target="#discussion-3-who-answers-for-it">Discussion 3: who answers for it?</a></li>
-  <li><a href="#discussion-4-you-sign-the-report" id="toc-discussion-4-you-sign-the-report" class="nav-link" data-scroll-target="#discussion-4-you-sign-the-report">Discussion 4: you sign the report</a></li>
+  <li><a href="#discussion-3-deskilling" id="toc-discussion-3-deskilling" class="nav-link" data-scroll-target="#discussion-3-deskilling">Discussion 3: deskilling</a></li>
+  <li><a href="#discussion-4-the-lectures-topics" id="toc-discussion-4-the-lectures-topics" class="nav-link" data-scroll-target="#discussion-4-the-lectures-topics">Discussion 4: the lecture’s topics</a></li>
+  <li><a href="#discussion-5-you-sign-the-report" id="toc-discussion-5-you-sign-the-report" class="nav-link" data-scroll-target="#discussion-5-you-sign-the-report">Discussion 5: you sign the report</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -250,7 +250,7 @@ Note
 <section id="how-this-sheet-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-this-sheet-works">How this sheet works</h2>
 <p>Exercises rederive or apply the lecture’s results. Do them on your own time; they are not worked in class.</p>
-<p>The class starts open. Discussion 1 is about what you are interested in or worried about, and nobody is asked how they use AI themselves. Discussion 2 turns to what could be done: each group is an ethics committee writing guidelines for the use of AI in one setting, using ideas from the course. The items under “If there is time” are more structured, and a class may take one of them up.</p>
+<p>The class starts open. Discussion 1 is about what you are interested in or worried about. Discussion 2 turns to what could be done: each group is an ethics committee writing guidelines for the use of AI in one setting, using ideas from the course. The items under “If there is time” are more structured, and a class may take one of them up.</p>
 <p>A guideline decides who checks, who is told, and who pays when something goes wrong. So each item ends by asking who bears the cost, who gains, or who the choice could be justified to.</p>
 <p>Notation as in the lecture. A benchmark score is <span class="math inline">\(\theta + B + \bar\varepsilon\)</span>: <span class="math inline">\(\theta\)</span> is what the benchmark is after, <span class="math inline">\(B\)</span> is the effect of the prompt, judge and settings of one run, with variance <span class="math inline">\(\tau^2\)</span>, and <span class="math inline">\(\bar\varepsilon\)</span> is the average noise over <span class="math inline">\(n\)</span> items, with variance <span class="math inline">\(\sigma^2 / n\)</span>. <span class="math inline">\(\Phi\)</span> is the standard normal distribution function, and <span class="math inline">\(m_K\)</span> is the expected largest of <span class="math inline">\(K\)</span> independent standard normals.</p>
 </section>
@@ -343,7 +343,7 @@ Note
 <p>Invented numbers. A model answers 86% of the 1,200 problems in a public benchmark correctly. Researchers write 1,200 new problems by the same recipe, and people find them as hard as the old ones. The model answers 78% of the new problems correctly.</p>
 <ol type="a">
 <li><p>Find the difference, its standard error and a 95% interval. Could chance explain the difference?</p></li>
-<li><p>Give two explanations other than chance. What would you measure to tell them apart?</p></li>
+<li><p>Give two explanations other than chance. Which does the fact that people find the new problems as hard as the old ones support?</p></li>
 <li><p>In the lecture’s graph of the paths into a score, which arrow does the difference estimate?</p></li>
 <li><p>Who gains when 86% is the number reported?</p></li>
 </ol>
@@ -369,7 +369,7 @@ Note
 <p>Requesters post paid tasks on a platform, and workers do them. Invented numbers: nine requesters pay $12 an hour and post 1 hour of work each; one requester pays $1 an hour and posts 91 hours.</p>
 <ol type="a">
 <li><p>Find the average hourly rate over requesters, and the average over hours of work.</p></li>
-<li><p>Hara et al.&nbsp;(2018) found, in the logs of 2,676 workers on Amazon Mechanical Turk, that the average requester paid more than $11 an hour and the median worker earned about $2 an hour. Give two reasons the numbers can both be right.</p></li>
+<li><p>A study of a real platform found that the average requester paid more than $11 an hour, and that the typical worker earned about $2 an hour (Hara et al., 2018). How can both be right?</p></li>
 <li><p>Which average would the platform quote, and whose experience does each one describe?</p></li>
 </ol>
 </section>
@@ -379,12 +379,11 @@ Note
 <section id="discussion-1-open-floor" class="level3">
 <h3 class="anchored" data-anchor-id="discussion-1-open-floor">Discussion 1: open floor</h3>
 <p>What about AI are you most interested in, or most worried about?</p>
-<p>Nobody is asked how they use AI themselves.</p>
 <ol type="1">
-<li>Alone, for a minute: write down one thing.</li>
-<li>In pairs, for two minutes: what did each of you write, and why that one?</li>
-<li>With the room: what are the themes?</li>
-<li>For one theme: who bears the cost if the worry comes true, and who is in a position to prevent it?</li>
+<li>First, think by yourself; and why do you think that? (~1 min)</li>
+<li>Discuss in small groups (~5 min)</li>
+<li>Share with class, find themes (~5-10 min)</li>
+<li>Class: who benefits, who might be harmed, and who can change this? (~2 min)</li>
 </ol>
 </section>
 <section id="discussion-2-an-ethics-committee" class="level3">
@@ -398,69 +397,55 @@ Note
 <li>a hospital;</li>
 <li>a newsroom.</li>
 </ul>
-<p>The committee has been asked for guidelines on the use of AI. Write at most five. Each should be a condition that someone could check.</p>
-<p>Your guidelines should answer these:</p>
-<ol type="1">
-<li>What is the AI for here, and how would you know it works in this setting, and not only on a benchmark?</li>
-<li>Who checks its output, and who signs?</li>
-<li>What is disclosed, and to whom?</li>
-<li>Who bears the errors? Whose work was it built from?</li>
-<li>Once the guideline exists, how will people get around it?</li>
-<li>Who can say no?</li>
-</ol>
-<p>Then swap with another committee. Read their guidelines as someone the guidelines would hurt, or as someone who wants to get around them. Which guideline fails first, and who does the failure fall on?</p>
-<p>Last, each committee keeps one guideline. Who would it have to be justified to?</p>
+<p>The committee has been asked for guidelines on the use of AI, and to design the conditions around its use. Write at most five points. Be specific.</p>
+<p>Then swap with another committee. Read their guidelines as someone the guidelines would hurt, or as someone who wants to get around them. Which point fails first, and who does the failure fall on?</p>
 </section>
 </section>
 <section id="if-there-is-time" class="level2">
 <h2 class="anchored" data-anchor-id="if-there-is-time">If there is time</h2>
-<section id="problem-1.-did-ai-deskill-the-endoscopists" class="level3">
-<h3 class="anchored" data-anchor-id="problem-1.-did-ai-deskill-the-endoscopists">Problem 1. Did AI deskill the endoscopists?</h3>
-<p>In a colonoscopy, the adenoma detection rate is the share of procedures in which the doctor finds at least one precancerous growth. At four centers in Poland, AI assistance was introduced for some procedures. Among procedures done without AI, doctors found an adenoma in 226 of 795 in the three months before AI was introduced, and in 145 of 648 in the three months after (Budzyń et al., 2025).</p>
-<ol type="a">
-<li><p>Find the two detection rates, their difference and a 95% interval for it.</p></li>
-<li><p>Draw a graph with the period (before or after), the doctors’ skill and detection, and add whatever else could differ between the two periods. Which paths from period to detection do not go through skill?</p></li>
-<li><p>In Norway, doctors used AI for a period and it was then withdrawn, by design. Among inexperienced doctors, the odds ratio for detection after withdrawal against the period before AI was 1.03, with a 95% interval from 0.79 to 1.34 (Pedersen et al., 2026). What does this design hold fixed that the first does not? Does the study show that there is no deskilling?</p></li>
-<li><p>A hospital has to decide now whether to keep the AI. Who bears the error if it keeps the AI and deskilling is real? Who bears it if it withdraws the AI and deskilling is not real?</p></li>
+<section id="discussion-3-deskilling" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-3-deskilling">Discussion 3: deskilling</h3>
+<p><em>Deskilling:</em> work redesigned so that it needs less skill, or a person’s skill fading because a tool does the task.</p>
+<ol type="1">
+<li>Think of a skill that a tool now does for most people: mental arithmetic, spelling, finding your way, writing code. Has anything been lost? Does it matter?</li>
+<li>Which skills should people keep even when a tool does them better? Who decides?</li>
+<li>In the lecture, students who practiced mathematics with a chatbot did better on the practice problems and worse on the exam without it. If you ran the course, what would you do?</li>
+<li>Who gains when a skill fades, and who bears the cost?</li>
 </ol>
 </section>
-<section id="discussion-3-who-answers-for-it" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-3-who-answers-for-it">Discussion 3: who answers for it?</h3>
-<p>In the lecture: the computer is executing instructions; someone gave them, and someone answers for them. Each group takes a different case.</p>
+<section id="discussion-4-the-lectures-topics" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-4-the-lectures-topics">Discussion 4: the lecture’s topics</h3>
+<p>The lecture covered:</p>
 <ul>
-<li>A consulting firm delivers a report to a government department with a fabricated quotation and references to research that does not exist (McGuirk, 2025).</li>
-<li>A woman with epilepsy stops her medication on a schedule that, her parents’ lawsuit alleges, a chatbot drew up, and dies (Ottilie, 2026).</li>
-<li>A campaign runs an ad with an AI-generated video of its opponent (Brumfiel, 2026).</li>
-<li>Workers at an outsourcing firm label violent and sexual content for an AI company, for about $2 an hour (Stahl, 2024).</li>
+<li>a short history, and AI as another level of abstraction in programming;</li>
+<li>benchmarks: reliability and validity, hidden error, the best of several private versions, Goodhart’s law, verifiable domains;</li>
+<li>what AI is built from: public writing, labeling work, Stack Overflow;</li>
+<li>who benefits from it;</li>
+<li>reliance, learning and deskilling;</li>
+<li>conversational AI: sycophancy, medical advice, deepfakes and scams, political ads;</li>
+<li>environmental costs;</li>
+<li>a report with errors, and who signs.</li>
 </ul>
-<ol type="1">
-<li>Who gave the instructions?</li>
-<li>Who could have checked, and did they have the time and the skill?</li>
-<li>Who was harmed?</li>
-<li>Who is likely to be blamed? Is that the person who had control?</li>
-</ol>
+<p>Do you have any more questions or thoughts about any of these?</p>
 </section>
-<section id="discussion-4-you-sign-the-report" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-4-you-sign-the-report">Discussion 4: you sign the report</h3>
-<p>In the lecture you wrote, alone, what you owe the reader before you sign a report whose data cleaning, model and first draft a tool chose.</p>
+<section id="discussion-5-you-sign-the-report" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-5-you-sign-the-report">Discussion 5: you sign the report</h3>
+<p>You are an analyst. A tool chose the data cleaning steps and the model for an analysis, and wrote the first draft of the report. Your name goes on it.</p>
 <ol type="1">
-<li>Compare what you wrote. What did someone else have that you did not?</li>
-<li>Write a disclosure for the report, in at most three sentences.</li>
+<li>Alone, for a minute: what do you owe the reader before you sign?</li>
+<li>In groups: write a disclosure for the report, in at most three sentences.</li>
 <li>One group reads theirs. What could a reader still not know?</li>
-<li>What do you owe the reader, and why?</li>
+<li>Who is misled if the disclosure leaves that out?</li>
 </ol>
 </section>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>Brumfiel, Geoff, “The rise of AI in political ads during the 2026 midterms,” NPR, 16 September 2026, <a href="https://www.npr.org/2026/09/16/nx-s1-5953990/ai-political-ads-2026-midterms" class="uri">https://www.npr.org/2026/09/16/nx-s1-5953990/ai-political-ads-2026-midterms</a>.</li>
-<li>Budzyń, Krzysztof, Marcin Romańczyk, Diana Kitala, et al., “Endoscopist deskilling risk after exposure to artificial intelligence in colonoscopy: A multicentre, observational study,” <em>Lancet Gastroenterology &amp; Hepatology</em> 10(10), 2025, 896–903, <a href="https://doi.org/10.1016/S2468-1253(25)00133-5" class="uri">https://doi.org/10.1016/S2468-1253(25)00133-5</a>; erratum, 10(11), e12.</li>
+<li>Bainbridge, Lisanne, “Ironies of automation,” <em>Automatica</em> 19(6), 1983, 775–779, <a href="https://doi.org/10.1016/0005-1098(83)90046-8" class="uri">https://doi.org/10.1016/0005-1098(83)90046-8</a>.</li>
+<li>Bastani, Hamsa, Osbert Bastani, Alp Sungu, et al., “Generative AI without guardrails can harm learning: Evidence from high school mathematics,” <em>Proceedings of the National Academy of Sciences</em> 122(26), 2025, e2422633122, <a href="https://doi.org/10.1073/pnas.2422633122" class="uri">https://doi.org/10.1073/pnas.2422633122</a>.</li>
 <li>Hara, Kotaro, Abigail Adams, Kristy Milland, et al., “A data-driven analysis of workers’ earnings on Amazon Mechanical Turk,” <em>Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</em>, paper 449, <a href="https://doi.org/10.1145/3173574.3174023" class="uri">https://doi.org/10.1145/3173574.3174023</a>.</li>
 <li>McGuirk, Rod, “Deloitte to partially refund Australian government for report with apparent AI-generated errors,” Associated Press, 7 October 2025.</li>
-<li>Ottilie, Madeline, “Seattle woman’s family sues OpenAI, claims ChatGPT coached her off medication before death,” KIRO 7, 28 October 2026, <a href="https://www.kiro7.com/news/local/seattle-womans-family-sues-openai-claims-chatgpt-coached-her-off-medication-before-death/YV3O46Q65NC5LBMKEKFVLZRY5Y/" class="uri">https://www.kiro7.com/news/local/seattle-womans-family-sues-openai-claims-chatgpt-coached-her-off-medication-before-death/YV3O46Q65NC5LBMKEKFVLZRY5Y/</a>.</li>
-<li>Pedersen, T. A., Y. Mori, et al., “Learning and deskilling effects of artificial intelligence in colonoscopy among endoscopists with different levels of experience: A pragmatic, prospective trial,” <em>Endoscopy</em> 58(9), 2026, 1003–1014, <a href="https://doi.org/10.1055/a-2858-7084" class="uri">https://doi.org/10.1055/a-2858-7084</a>.</li>
-<li>Stahl, Lesley, “Labelers training AI say they’re overworked, underpaid and exploited by big American tech companies,” <em>60 Minutes</em>, CBS News, 24 November 2024, updated 29 June 2025, <a href="https://www.cbsnews.com/news/labelers-training-ai-say-theyre-overworked-underpaid-and-exploited-60-minutes-transcript/" class="uri">https://www.cbsnews.com/news/labelers-training-ai-say-theyre-overworked-underpaid-and-exploited-60-minutes-transcript/</a>.</li>
 </ul>
 
 

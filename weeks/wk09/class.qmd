@@ -20,7 +20,7 @@ Exercises rederive or apply the lecture's results. Do them on your own
 time; they are not worked in class.
 
 The class starts open. Discussion 1 is about what you are interested in
-or worried about, and nobody is asked how they use AI themselves.
+or worried about.
 Discussion 2 turns to what could be done: each group is an ethics
 committee writing guidelines for the use of AI in one setting, using
 ideas from the course. The items under "If there is time" are more
@@ -113,8 +113,8 @@ recipe, and people find them as hard as the old ones. The model answers
 (a) Find the difference, its standard error and a 95% interval.
 Could chance explain the difference?
 
-(b) Give two explanations other than chance. What would you measure to
-tell them apart?
+(b) Give two explanations other than chance. Which does the fact that
+people find the new problems as hard as the old ones support?
 
 (c) In the lecture's graph of the paths into a score, which arrow does
 the difference estimate?
@@ -135,10 +135,9 @@ one requester pays \$1 an hour and posts 91 hours.
 (a) Find the average hourly rate over requesters, and the average over
 hours of work.
 
-(b) Hara et al. (2018) found, in the logs of 2,676 workers on Amazon
-Mechanical Turk, that the average requester paid more than \$11 an hour
-and the median worker earned about \$2 an hour. Give two reasons the
-numbers can both be right.
+(b) A study of a real platform found that the average requester paid
+more than \$11 an hour, and that the typical worker earned about \$2 an
+hour (Hara et al., 2018). How can both be right?
 
 (c) Which average would the platform quote, and whose experience does
 each one describe?
@@ -149,14 +148,11 @@ each one describe?
 
 What about AI are you most interested in, or most worried about?
 
-Nobody is asked how they use AI themselves.
-
-1. Alone, for a minute: write down one thing.
-2. In pairs, for two minutes: what did each of you write, and why that
-   one?
-3. With the room: what are the themes?
-4. For one theme: who bears the cost if the worry comes true, and who
-   is in a position to prevent it?
+1. First, think by yourself; and why do you think that? (~1 min)
+2. Discuss in small groups (~5 min)
+3. Share with class, find themes (~5-10 min)
+4. Class: who benefits, who might be harmed, and who can change this?
+   (~2 min)
 
 ### Discussion 2: an ethics committee
 
@@ -172,99 +168,71 @@ one from every other group:
 - a hospital;
 - a newsroom.
 
-The committee has been asked for guidelines on the use of AI. Write at
-most five. Each should be a condition that someone could check.
-
-Your guidelines should answer these:
-
-1. What is the AI for here, and how would you know it works in this
-   setting, and not only on a benchmark?
-2. Who checks its output, and who signs?
-3. What is disclosed, and to whom?
-4. Who bears the errors? Whose work was it built from?
-5. Once the guideline exists, how will people get around it?
-6. Who can say no?
+The committee has been asked for guidelines on the use of AI, and to
+design the conditions around its use. Write at most five points. Be
+specific.
 
 Then swap with another committee. Read their guidelines as someone the
 guidelines would hurt, or as someone who wants to get around them.
-Which guideline fails first, and who does the failure fall on?
-
-Last, each committee keeps one guideline. Who would it have to be
-justified to?
+Which point fails first, and who does the failure fall on?
 
 ## If there is time
 
-### Problem 1. Did AI deskill the endoscopists?
+### Discussion 3: deskilling
 
-In a colonoscopy, the adenoma detection rate is the share of procedures
-in which the doctor finds at least one precancerous growth. At four
-centers in Poland, AI assistance was introduced for some procedures.
-Among procedures done without AI, doctors found an adenoma in 226 of
-795 in the three months before AI was introduced, and in 145 of 648 in
-the three months after (Budzyń et al., 2025).
+*Deskilling:* work redesigned so that it needs less skill, or a
+person's skill fading because a tool does the task.
 
-(a) Find the two detection rates, their difference and a 95% interval
-for it.
+1. Think of a skill that a tool now does for most people: mental
+   arithmetic, spelling, finding your way, writing code. Has anything
+   been lost? Does it matter?
+2. Which skills should people keep even when a tool does them better?
+   Who decides?
+3. In the lecture, students who practiced mathematics with a chatbot
+   did better on the practice problems and worse on the exam without
+   it. If you ran the course, what would you do?
+4. Who gains when a skill fades, and who bears the cost?
 
-(b) Draw a graph with the period (before or after), the doctors' skill
-and detection, and add whatever else could differ between the two
-periods. Which paths from period to detection do not go through
-skill?
+### Discussion 4: the lecture's topics
 
-(c) In Norway, doctors used AI for a period and it was then withdrawn,
-by design. Among inexperienced doctors, the odds ratio for detection
-after withdrawal against the period before AI was 1.03, with a 95%
-interval from 0.79 to 1.34 (Pedersen et al., 2026). What does this
-design hold fixed that the first does not? Does the study show that
-there is no deskilling?
+The lecture covered:
 
-(d) A hospital has to decide now whether to keep the AI. Who bears the
-error if it keeps the AI and deskilling is real? Who bears it if it
-withdraws the AI and deskilling is not real?
+- a short history, and AI as another level of abstraction in
+  programming;
+- benchmarks: reliability and validity, hidden error, the best of
+  several private versions, Goodhart's law, verifiable domains;
+- what AI is built from: public writing, labeling work, Stack
+  Overflow;
+- who benefits from it;
+- reliance, learning and deskilling;
+- conversational AI: sycophancy, medical advice, deepfakes and scams,
+  political ads;
+- environmental costs;
+- a report with errors, and who signs.
 
-### Discussion 3: who answers for it?
+Do you have any more questions or thoughts about any of these?
 
-In the lecture: the computer is executing instructions; someone gave
-them, and someone answers for them. Each group takes a different case.
+### Discussion 5: you sign the report
 
-- A consulting firm delivers a report to a government department with
-  a fabricated quotation and references to research that does not
-  exist (McGuirk, 2025).
-- A woman with epilepsy stops her medication on a schedule that, her
-  parents' lawsuit alleges, a chatbot drew up, and dies (Ottilie,
-  2026).
-- A campaign runs an ad with an AI-generated video of its opponent
-  (Brumfiel, 2026).
-- Workers at an outsourcing firm label violent and sexual content for
-  an AI company, for about \$2 an hour (Stahl, 2024).
+You are an analyst. A tool chose the data cleaning steps and the model
+for an analysis, and wrote the first draft of the report. Your name
+goes on it.
 
-1. Who gave the instructions?
-2. Who could have checked, and did they have the time and the skill?
-3. Who was harmed?
-4. Who is likely to be blamed? Is that the person who had control?
-
-### Discussion 4: you sign the report
-
-In the lecture you wrote, alone, what you owe the reader before you
-sign a report whose data cleaning, model and first draft a tool chose.
-
-1. Compare what you wrote. What did someone else have that you did
-   not?
-2. Write a disclosure for the report, in at most three sentences.
+1. Alone, for a minute: what do you owe the reader before you sign?
+2. In groups: write a disclosure for the report, in at most three
+   sentences.
 3. One group reads theirs. What could a reader still not know?
-4. What do you owe the reader, and why?
+4. Who is misled if the disclosure leaves that out?
 
 ## References
 
-- Brumfiel, Geoff, "The rise of AI in political ads during the 2026
-  midterms," NPR, 16 September 2026,
-  <https://www.npr.org/2026/09/16/nx-s1-5953990/ai-political-ads-2026-midterms>.
-- Budzyń, Krzysztof, Marcin Romańczyk, Diana Kitala, et al.,
-  "Endoscopist deskilling risk after exposure to artificial
-  intelligence in colonoscopy: A multicentre, observational study,"
-  *Lancet Gastroenterology & Hepatology* 10(10), 2025, 896--903,
-  <https://doi.org/10.1016/S2468-1253(25)00133-5>; erratum, 10(11),
-  e12.
+- Bainbridge, Lisanne, "Ironies of automation," *Automatica* 19(6),
+  1983, 775--779, <https://doi.org/10.1016/0005-1098(83)90046-8>.
+- Bastani, Hamsa, Osbert Bastani, Alp Sungu, et al., "Generative AI
+  without guardrails can harm learning: Evidence from high school
+  mathematics," *Proceedings of the National Academy of Sciences*
+  122(26), 2025, e2422633122,
+  <https://doi.org/10.1073/pnas.2422633122>.
 - Hara, Kotaro, Abigail Adams, Kristy Milland, et al., "A data-driven
   analysis of workers' earnings on Amazon Mechanical Turk,"
   *Proceedings of the 2018 CHI Conference on Human Factors in Computing
@@ -272,16 +240,3 @@ sign a report whose data cleaning, model and first draft a tool chose.
 - McGuirk, Rod, "Deloitte to partially refund Australian government
   for report with apparent AI-generated errors," Associated Press,
   7 October 2025.
-- Ottilie, Madeline, "Seattle woman's family sues OpenAI, claims
-  ChatGPT coached her off medication before death," KIRO 7, 28 October
-  2026,
-  <https://www.kiro7.com/news/local/seattle-womans-family-sues-openai-claims-chatgpt-coached-her-off-medication-before-death/YV3O46Q65NC5LBMKEKFVLZRY5Y/>.
-- Pedersen, T. A., Y. Mori, et al., "Learning and deskilling effects
-  of artificial intelligence in colonoscopy among endoscopists with
-  different levels of experience: A pragmatic, prospective trial,"
-  *Endoscopy* 58(9), 2026, 1003--1014,
-  <https://doi.org/10.1055/a-2858-7084>.
-- Stahl, Lesley, "Labelers training AI say they're overworked,
-  underpaid and exploited by big American tech companies," *60
-  Minutes*, CBS News, 24 November 2024, updated 29 June 2025,
-  <https://www.cbsnews.com/news/labelers-training-ai-say-theyre-overworked-underpaid-and-exploited-60-minutes-transcript/>.
