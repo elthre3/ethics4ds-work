@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Joshua Loftus">
+
+<title>Value pluralism, utility, and justice – ethics 4 data science</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bb5ce4f09c3d713477d34b1921f208f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><i class="fa-solid fa-chart-simple fa-large" aria-label="chart-simple"></i> ethics 4 data science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-references" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">references</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-references">    
+        <li>
+    <a class="dropdown-item" href="https://www.bitbybitbook.com/en/1st-ed/ethics/">
+ <span class="dropdown-text">Bit by Bit</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://fairmlbook.org/">
+ <span class="dropdown-text">Fairness and Machine Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://data-feminism.mitpress.mit.edu/">
+ <span class="dropdown-text">Data Feminism</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf">
+ <span class="dropdown-text">RSS Guidelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice">
+ <span class="dropdown-text">ASA Guidelines</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://www.acm.org/code-of-ethics">
+ <span class="dropdown-text">ACM Guidelines</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text"><i class="fa-solid fa-house fa-large" aria-label="house"></i> content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text"><i class="fa-solid fa-user fa-large" aria-label="user"></i> about</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#warm-up" id="toc-warm-up" class="nav-link" data-scroll-target="#warm-up">Warm-up</a></li>
+  <li><a href="#values" id="toc-values" class="nav-link" data-scroll-target="#values">Values</a>
+  <ul class="collapse">
+  <li><a href="#intrinsic-and-instrumental-value" id="toc-intrinsic-and-instrumental-value" class="nav-link" data-scroll-target="#intrinsic-and-instrumental-value">Intrinsic and instrumental value</a></li>
+  <li><a href="#one-value-or-many" id="toc-one-value-or-many" class="nav-link" data-scroll-target="#one-value-or-many">One value or many</a></li>
+  </ul></li>
+  <li><a href="#a-score-is-an-order" id="toc-a-score-is-an-order" class="nav-link" data-scroll-target="#a-score-is-an-order">A score is an order</a>
+  <ul class="collapse">
+  <li><a href="#dominance-and-weights" id="toc-dominance-and-weights" class="nav-link" data-scroll-target="#dominance-and-weights">Dominance and weights</a></li>
+  <li><a href="#when-a-number-exists" id="toc-when-a-number-exists" class="nav-link" data-scroll-target="#when-a-number-exists">When a number exists</a></li>
+  </ul></li>
+  <li><a href="#utility-risk-and-probability" id="toc-utility-risk-and-probability" class="nav-link" data-scroll-target="#utility-risk-and-probability">Utility, risk and probability</a>
+  <ul class="collapse">
+  <li><a href="#three-rules-for-three-people" id="toc-three-rules-for-three-people" class="nav-link" data-scroll-target="#three-rules-for-three-people">Three rules for three people</a></li>
+  <li><a href="#expected-utility" id="toc-expected-utility" class="nav-link" data-scroll-target="#expected-utility">Expected utility</a></li>
+  <li><a href="#missing-probabilities" id="toc-missing-probabilities" class="nav-link" data-scroll-target="#missing-probabilities">Missing probabilities</a></li>
+  <li><a href="#behind-the-veil" id="toc-behind-the-veil" class="nav-link" data-scroll-target="#behind-the-veil">Behind the veil</a></li>
+  <li><a href="#longtermism" id="toc-longtermism" class="nav-link" data-scroll-target="#longtermism">Longtermism</a></li>
+  </ul></li>
+  <li><a href="#who-is-helped" id="toc-who-is-helped" class="nav-link" data-scroll-target="#who-is-helped">Who is helped</a>
+  <ul class="collapse">
+  <li><a href="#four-kinds-of-patient" id="toc-four-kinds-of-patient" class="nav-link" data-scroll-target="#four-kinds-of-patient">Four kinds of patient</a></li>
+  <li><a href="#bounds" id="toc-bounds" class="nav-link" data-scroll-target="#bounds">Bounds</a></li>
+  <li><a href="#a-utility-for-each-type" id="toc-a-utility-for-each-type" class="nav-link" data-scroll-target="#a-utility-for-each-type">A utility for each type</a></li>
+  <li><a href="#unit-selection" id="toc-unit-selection" class="nav-link" data-scroll-target="#unit-selection">Unit selection</a></li>
+  <li><a href="#narrowing-the-bounds" id="toc-narrowing-the-bounds" class="nav-link" data-scroll-target="#narrowing-the-bounds">Narrowing the bounds</a></li>
+  <li><a href="#risk-or-benefit" id="toc-risk-or-benefit" class="nav-link" data-scroll-target="#risk-or-benefit">Risk or benefit</a></li>
+  </ul></li>
+  <li><a href="#distributive-justice" id="toc-distributive-justice" class="nav-link" data-scroll-target="#distributive-justice">Distributive justice</a></li>
+  <li><a href="#lenses" id="toc-lenses" class="nav-link" data-scroll-target="#lenses">Lenses</a></li>
+  <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a>
+  <ul class="collapse">
+  <li><a href="#required" id="toc-required" class="nav-link" data-scroll-target="#required">Required</a></li>
+  <li><a href="#cited-in-the-text-and-not-assigned" id="toc-cited-in-the-text-and-not-assigned" class="nav-link" data-scroll-target="#cited-in-the-text-and-not-assigned">Cited in the text and not assigned</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Value pluralism, utility, and justice</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Joshua Loftus </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Important note:</strong> this week is about what we value, how a single number stands in for several values, and how much a probability model is asked to carry when choices are made by expected utility. The mathematics below is not contested. Which values are intrinsic, whether several values can be reduced to one, and which principle of distribution is right are contested, and my view is one view. A well-argued position I think is wrong can still get full marks.</p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Many of the course’s problems have the same shape: something valued for what it brings about, such as cost, reward, engagement or a benchmark score, was optimized as if it were the end. Value pluralism holds that there are several ultimate values, not one. A score that combines several values ranks every pair of options, including pairs the values themselves leave open, and its weights are an exchange rate someone chose.</p>
+<p>Expected utility combines outcomes across uncertain states with a probability measure, and in the standard theory the utility scale itself is defined through probabilities. When there is no list of outcomes, no grounds for the probabilities, or an expectation decided by a tiny probability times an enormous value, the calculation has less behind it than its precision suggests. Longtermism is one example of a general problem.</p>
+<p>A randomized trial identifies average effects. It does not identify how many people a treatment harms, and so it cannot settle whether a treatment is good on balance when harm counts more than a benefit withheld. Observational data from the same population, or a covariate, can narrow the answer. Principles of distribution, from the utilitarian sum to sufficiency and desert, differ in what they need to know about whom.</p>
+</section>
+<section id="warm-up" class="level2">
+<h2 class="anchored" data-anchor-id="warm-up">Warm-up</h2>
+<p>The task was to bring one case where something scarce went to some people and not others by a rule, a score or a queue, with what it ranked people on and who you think it ranked wrongly. Every such rule ranks people on something. The questions this week are what that something is valued for, and what the ranking had to assume to put everyone in one order.</p>
+</section>
+<section id="values" class="level2">
+<h2 class="anchored" data-anchor-id="values">Values</h2>
+<section id="intrinsic-and-instrumental-value" class="level3">
+<h3 class="anchored" data-anchor-id="intrinsic-and-instrumental-value">Intrinsic and instrumental value</h3>
+<p>Something has <strong>instrumental value</strong> when it is valued for what it brings about, and <strong>intrinsic value</strong> when it is valued for its own sake. Money is the usual example of the first, happiness, health and dignity of the second. One thing can be both: health is wanted for itself and for what it lets a person do.</p>
+<p>The course has met the gap between the two many times. A hospital’s risk score predicted health-care cost and was used to find patients with the greatest need (Obermeyer et al., 2019): cost was valued as a sign of need. A reinforcement learner maximizes a reward <span class="math inline">\(R\)</span> that someone wrote down in place of a utility <span class="math inline">\(U\)</span>. A benchmark score is valued as a sign of capability, engagement as a sign that users find a service worth their time. Goodhart’s law describes what happens when the instrumental value is optimized as if it were the end: it can come apart from what it was for.</p>
+<p>People disagree about which values are intrinsic, and the disagreement changes what counts as a loss. If privacy is valued only as protection against what others could do with information, a breach that harms nobody costs nothing; if it is valued for itself, the breach is a loss whatever follows.</p>
+</section>
+<section id="one-value-or-many" class="level3">
+<h3 class="anchored" data-anchor-id="one-value-or-many">One value or many</h3>
+<p>Value <strong>monism</strong> holds that there is one ultimate value, which every other value serves or is part of; value <strong>pluralism</strong> holds that there are several, none reducible to another or to a single higher value (Mason, 2023). A utilitarian who counts only well-being is the clearest monist.</p>
+<p>One argument for pluralism that Mason sets out is regret that remains after a correct choice. A hospital gives its last bed to the patient who will benefit most and turns away a patient who has waited longest. If that was right, a monist can say that the loss was a smaller amount of the one good; many people feel instead that something of a different kind was given up. Monists reply that the regret can be explained in other ways, for instance by who bears the loss.</p>
+<p>Pluralism raises the question of how to choose when values conflict, and Mason (2023, section 4) separates two claims. Two values are <strong>incommensurable</strong> if there is no common unit in which to measure them exactly. Two options are <strong>incomparable</strong> if none of “better than”, “worse than” and “equally good” holds between them. The first does not imply the second: a person can judge one job offer better than another without a unit that converts pay into interest.</p>
+</section>
+</section>
+<section id="a-score-is-an-order" class="level2">
+<h2 class="anchored" data-anchor-id="a-score-is-an-order">A score is an order</h2>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Four patients are described by their need and by how much a program would benefit them: patient 1 (0.8, 0.2), patient 2 (0.6, 0.2), patient 3 (0.4, 0.3), patient 4 (0.2, 0.1). Say one patient should come before another when they are at least as high on both. Which pairs can you order this way, and which can you not?</p>
+</div>
+</div>
+<section id="dominance-and-weights" class="level3">
+<h3 class="anchored" data-anchor-id="dominance-and-weights">Dominance and weights</h3>
+<p>Patient 1 is at least as high as patient 2 on both, and patients 1, 2 and 3 are all above patient 4 on both: four of the six pairs are ordered. Patient 3 has less need than patients 1 and 2 and more benefit, so 3 against 1 and 3 against 2 are left open. This relation, “at least as high on every value”, is a <strong>partial order</strong>: some pairs compare and others do not.</p>
+<p>A score <span class="math inline">\(s = w \cdot \text{need} + (1 - w) \cdot \text{benefit}\)</span> with <span class="math inline">\(0 &lt; w &lt; 1\)</span> ranks every pair. It keeps the four comparisons dominance makes, and the weight decides the other two. Patient 3 ranks above patient 1 when <span class="math inline">\(0.4 w + 0.3 (1 - w) &gt; 0.8 w + 0.2 (1 - w)\)</span>, that is when <span class="math inline">\(w &lt; 1/5\)</span>, and above patient 2 when <span class="math inline">\(w &lt; 1/3\)</span>. So with <span class="math inline">\(w = 1/2\)</span> the order is 1, 2, 3, 4; with <span class="math inline">\(w = 1/4\)</span> it is 1, 3, 2, 4; with <span class="math inline">\(w = 1/10\)</span> it is 3, 1, 2, 4. The weights are an exchange rate: the score is unchanged when need rises by one unit and benefit falls by <span class="math inline">\(w / (1 - w)\)</span> units.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="notes_files/figure-html/patients-1.png" class="img-fluid figure-img" alt="The four patients plotted with need on the horizontal axis and benefit on the vertical. Two lines pass through patient 3: with equal weights, patients 1 and 2 lie above the line; with weight 0.1 on need, both lie below it." width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A patient above the line through patient 3 ranks above patient 3 under that line’s weights. Whatever the score is said to measure, it has ranked everyone against everyone, and for the pairs the values leave open the ranking came from the weights. Someone chose them.</p>
+</section>
+<section id="when-a-number-exists" class="level3">
+<h3 class="anchored" data-anchor-id="when-a-number-exists">When a number exists</h3>
+<p>A <strong>preference relation</strong> <span class="math inline">\(\succsim\)</span> (“at least as good as”) is <strong>complete</strong> if any two options compare, <span class="math inline">\(x \succsim y\)</span> or <span class="math inline">\(y \succsim x\)</span>, and <strong>transitive</strong> if <span class="math inline">\(x \succsim y\)</span> and <span class="math inline">\(y \succsim z\)</span> imply <span class="math inline">\(x \succsim z\)</span>. A <strong>utility representation</strong> is a function <span class="math inline">\(u\)</span> with <span class="math inline">\(x \succsim y\)</span> if and only if <span class="math inline">\(u(x) \ge u(y)\)</span>. If <span class="math inline">\(u\)</span> exists, <span class="math inline">\(\succsim\)</span> is complete and transitive, because any two numbers compare and <span class="math inline">\(\ge\)</span> is transitive. So a score assumes both: in particular, it assumes that no two options are incomparable.</p>
+<p>On a finite or countable set the converse holds. List the options as <span class="math inline">\(x_1, x_2, \ldots\)</span> and set <span class="math display">\[
+u(x) = \sum_{k:\; x \succsim x_k} 2^{-k} .
+\]</span> If <span class="math inline">\(x \succsim y\)</span>, every <span class="math inline">\(x_k\)</span> that <span class="math inline">\(y\)</span> is at least as good as is, by transitivity, one that <span class="math inline">\(x\)</span> is at least as good as, so <span class="math inline">\(u(x) \ge u(y)\)</span>. If <span class="math inline">\(x \succsim y\)</span> fails then, by completeness, <span class="math inline">\(y\)</span> is strictly better than <span class="math inline">\(x\)</span>; <span class="math inline">\(y\)</span>’s sum has every term of <span class="math inline">\(x\)</span>’s and also the term for <span class="math inline">\(y\)</span> itself, which <span class="math inline">\(x\)</span>’s lacks, so <span class="math inline">\(u(y) &gt; u(x)\)</span>. On a finite or countable set, <strong><span class="math inline">\(\succsim\)</span> has a utility representation if and only if it is complete and transitive.</strong></p>
+</section>
+</section>
+<section id="utility-risk-and-probability" class="level2">
+<h2 class="anchored" data-anchor-id="utility-risk-and-probability">Utility, risk and probability</h2>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Three policies give three people these amounts of a good: policy P gives (4, 4, 4), policy M gives (9, 9, 1), policy T gives (25, 0, 0). Which policy is best? What did you have to assume to say so?</p>
+</div>
+</div>
+<section id="three-rules-for-three-people" class="level3">
+<h3 class="anchored" data-anchor-id="three-rules-for-three-people">Three rules for three people</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Rule</th>
+<th style="text-align: center;">P</th>
+<th style="text-align: center;">M</th>
+<th style="text-align: center;">T</th>
+<th style="text-align: center;">Picks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sum of square roots</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">M</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Minimum</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">P</td>
+</tr>
+</tbody>
+</table>
+<p>No policy is at least as good as another for every person: M is better than P for persons 1 and 2 and worse for person 3, and so on for every pair. So the Pareto relation, “better for someone and worse for no one”, leaves all three pairs open, and each rule completes it differently. The sum counts total good. The sum of square roots, a concave function, counts a unit more the less the person has, which can be read as priority to the worse off or as diminishing returns of the good to each person; the table cannot tell the two readings apart. The minimum counts only the position of the worst off. Each rule is a value.</p>
+</section>
+<section id="expected-utility" class="level3">
+<h3 class="anchored" data-anchor-id="expected-utility">Expected utility</h3>
+<p>Under uncertainty, an option <span class="math inline">\(a\)</span> leads to the outcome <span class="math inline">\(o(a, \omega)\)</span> in the state of the world <span class="math inline">\(\omega\)</span>, and expected utility ranks options by <span class="math display">\[
+E_P\big[u(o(a, \omega))\big] = \sum_{\omega \in \Omega} P(\omega)\, u\big(o(a, \omega)\big).
+\]</span> This needs a sample space <span class="math inline">\(\Omega\)</span>, a probability measure <span class="math inline">\(P\)</span> on it, and a utility <span class="math inline">\(u\)</span> on a scale where differences mean something, since the formula adds utilities weighted by probabilities.</p>
+<p>In von Neumann and Morgenstern’s theory, as Briggs (2023, section 2.2) presents it, a person ranks lotteries whose probabilities are given; if the ranking satisfies the theory’s axioms there is a <span class="math inline">\(u\)</span> such that lotteries are ranked by expected utility, unique up to <span class="math inline">\(a u + c\)</span> with <span class="math inline">\(a &gt; 0\)</span>. The scale is defined by the probabilities: an outcome <span class="math inline">\(B\)</span> is halfway in utility between <span class="math inline">\(A\)</span> and <span class="math inline">\(C\)</span> when the person is indifferent between <span class="math inline">\(B\)</span> for sure and an even chance of <span class="math inline">\(A\)</span> or <span class="math inline">\(C\)</span>. Probability is used twice, to weight the states and to define the scale.</p>
+<p>The uniqueness clause also says what adding utility across people assumes. Each person’s utility can be rescaled by its own <span class="math inline">\(a &gt; 0\)</span> without changing anything about that person’s choices. Multiply the third person’s utility by 10 in the three policies above, and the sum becomes 48 for P, 28 for M and 25 for T: it now picks P. No axiom about any one person’s choices fixes the scales that a sum across people needs.</p>
+<p>Savage’s theory does not take probabilities as given. He takes preferences over acts as primitive and derives from them both a probability over events and a utility over outcomes, the utility unique up to a positive linear transformation (Briggs, 2023, section 2.2.3). So a subjective Bayesian can say that a probability is always available: whatever coherent preferences reveal. What it assumes instead concerns the agent. Savage assumes that each act and state together determine a unique outcome (Briggs, 2023, section 1.1), and critics, as Briggs reports, have found the domain of acts the theorem needs implausibly rich.</p>
+</section>
+<section id="missing-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="missing-probabilities">Missing probabilities</h3>
+<p>Knight (1921, part III, chapter VIII, paragraph 1) separated “the measurable uncertainty and an unmeasurable one”, calling the first risk. Games of chance and randomized trials are on the measurable side: the measure comes from the symmetry of a die, or from the coin that assigned each person’s treatment. Elsewhere an application can lack what expected utility needs in three ways.</p>
+<ol type="1">
+<li><strong>No sample space.</strong> The outcomes cannot be listed in advance, so there is nothing for <span class="math inline">\(P(\Omega) = 1\)</span> to refer to.</li>
+<li><strong>A sample space but no grounded measure.</strong> Numbers satisfying the axioms can be written down, but nothing ties them to frequencies, a design or a symmetry. In Ellsberg’s urn (Ellsberg, 1961, as Briggs, 2023, section 3.2, presents it), 30 balls are red and 60 are white or yellow in unknown proportion. Many people prefer betting on red to betting on white, and on white-or-yellow to red-or-yellow; the first preference means <span class="math inline">\(P(\text{red}) &gt; P(\text{white})\)</span> for an expected-utility maximizer, and the second means <span class="math inline">\(P(\text{white}) &gt; P(\text{red})\)</span>. No single probability measure fits both.</li>
+<li><strong>A measure but no expectation.</strong> A game paying <span class="math inline">\(2^k\)</span> pounds with probability <span class="math inline">\(2^{-k}\)</span>, for <span class="math inline">\(k = 1, 2, \ldots\)</span>, has expected payoff <span class="math inline">\(1 + 1 + \cdots\)</span>. More often the expectation exists but is decided by a tiny probability multiplied by an enormous value.</li>
+</ol>
+</section>
+<section id="behind-the-veil" class="level3">
+<h3 class="anchored" data-anchor-id="behind-the-veil">Behind the veil</h3>
+<p>Rawls asked what principles people would choose behind a veil of ignorance, not knowing which position in society they would occupy. Freeman (2023, section 6.2) sets out the dispute with Harsanyi. Harsanyi argued that the parties should give themselves an equal chance of being anyone, and so maximize average utility; on the three policies above, the average picks T. Rawls held that the parties have no basis, or only a very insecure one, for such probabilities, and that the choice is grave and cannot be repeated; under those conditions it is rational to choose as if by maximin, which picks P. The disagreement is over where the probabilities come from.</p>
+</section>
+<section id="longtermism" class="level3">
+<h3 class="anchored" data-anchor-id="longtermism">Longtermism</h3>
+<p>Greaves and MacAskill (2021) argue that in the most important decisions facing agents today, the best options are near-best for the far future. Their main estimate of the expected number of future beings is <span class="math inline">\(10^{24}\)</span>, with a restricted estimate of <span class="math inline">\(10^{14}\)</span> (section 3). On the restricted estimate, cutting the near-term risk of extinction by <span class="math inline">\(10^{-8}\)</span> (one millionth of one percentage point) is worth <span class="math inline">\(10^{14} \times 10^{-8} = 10^6\)</span> lives (section 4.2). They suggest that $1 billion spent on the safety of artificial superintelligence would cut existential risk by at least <span class="math inline">\(10^{-5}\)</span>, which on the main estimate is worth a trillion lives for every $100 (section 4.3).</p>
+<p>Each of the three questions applies. What is the sample space: histories of the next billion years, listed how? What grounds a probability of <span class="math inline">\(10^{-5}\)</span> for the effect of a billion dollars? And the result is decided by the size of the future multiplied by that probability. The authors discuss these objections themselves, as cluelessness, imprecise probabilities, ambiguity aversion and fanaticism, and argue that their conclusion survives each (sections 7 and 8). A Bayesian has a general reply: declining to state a probability does not avoid a choice.</p>
+<p>Longtermism is one illustrative example, not singled out as a particularly weak utilitarian argument. Any application of expected utility theory rests on a probability model, and that model is often left under-specified and untested, with no attempt to falsify it, and it may be unfalsifiable.</p>
+</section>
+</section>
+<section id="who-is-helped" class="level2">
+<h2 class="anchored" data-anchor-id="who-is-helped">Who is helped</h2>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A care program is tested in a randomized trial. Without the program, 40% of patients do well; with it, 60% do. What share of patients did the program help? Could it have harmed anyone?</p>
+</div>
+</div>
+<section id="four-kinds-of-patient" class="level3">
+<h3 class="anchored" data-anchor-id="four-kinds-of-patient">Four kinds of patient</h3>
+<p>Write <span class="math inline">\(Y(1)\)</span> and <span class="math inline">\(Y(0)\)</span> for whether a patient does well with and without the program (<span class="math inline">\(1\)</span> for well). Each patient is one of four types:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: center;"><span class="math inline">\(Y(0)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y(1)\)</span></th>
+<th style="text-align: center;">World 1</th>
+<th style="text-align: center;">World 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Helped</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20%</td>
+<td style="text-align: center;">60%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hurt</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0%</td>
+<td style="text-align: center;">40%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Well either way</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">40%</td>
+<td style="text-align: center;">0%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Badly either way</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">40%</td>
+<td style="text-align: center;">0%</td>
+</tr>
+</tbody>
+</table>
+<p>Both worlds give <span class="math inline">\(p_0 = P(Y(0) = 1) = 0.4\)</span> and <span class="math inline">\(p_1 = P(Y(1) = 1) = 0.6\)</span>, and a randomized trial estimates only these two numbers. It never sees a patient both with and without the program.</p>
+</section>
+<section id="bounds" class="level3">
+<h3 class="anchored" data-anchor-id="bounds">Bounds</h3>
+<p>A patient does well without the program if they are well either way or hurt, and with it if they are well either way or helped: <span class="math display">\[
+p_0 = P(\text{well either way}) + P(\text{hurt}), \qquad
+p_1 = P(\text{well either way}) + P(\text{helped}) .
+\]</span> Subtracting, <span class="math inline">\(P(\text{helped}) - P(\text{hurt}) = p_1 - p_0\)</span> in every joint distribution compatible with the trial. The share well either way can be anything from <span class="math inline">\(\max\{0, p_0 + p_1 - 1\}\)</span> to <span class="math inline">\(\min\{p_0, p_1\}\)</span>, here from 0 to 0.4, and the other shares follow: <span class="math display">\[
+\max\{0, p_1 - p_0\} \le P(\text{helped}) \le \min\{p_1, 1 - p_0\}, \qquad
+\max\{0, p_0 - p_1\} \le P(\text{hurt}) \le \min\{p_0, 1 - p_1\} .
+\]</span> Here the program helped between 20% and 60% of patients and hurt between 0% and 40%. A larger trial estimates <span class="math inline">\(p_0\)</span> and <span class="math inline">\(p_1\)</span> more precisely and narrows neither interval: the uncertainty is about something the design cannot observe.</p>
+<div class="ask callout callout-style-default callout-note no-icon callout-titled" title="Before reading on, try this">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Before reading on, try this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose harming a patient counts twice as much as failing to help one. Is giving the program to everyone good on balance?</p>
+</div>
+</div>
+</section>
+<section id="a-utility-for-each-type" class="level3">
+<h3 class="anchored" data-anchor-id="a-utility-for-each-type">A utility for each type</h3>
+<p>Give each type a utility for being given the program, relative to not being given it: <span class="math inline">\(u_h\)</span> for the helped, <span class="math inline">\(u_d\)</span> for the hurt, <span class="math inline">\(u_a\)</span> for those well either way, <span class="math inline">\(u_n\)</span> for those badly either way. With <span class="math inline">\(P(\text{helped}) = p_1 - p_0 + P(\text{hurt})\)</span>, <span class="math inline">\(P(\text{well either way}) = p_0 - P(\text{hurt})\)</span> and <span class="math inline">\(P(\text{badly either way}) = 1 - p_1 - P(\text{hurt})\)</span>, the average utility of giving the program to everyone is <span class="math display">\[
+W = u_h (p_1 - p_0) + u_a p_0 + u_n (1 - p_1) + P(\text{hurt})\,(u_h + u_d - u_a - u_n).
+\]</span> The trial identifies <span class="math inline">\(W\)</span> only when the bracket is zero, the condition Li and Pearl (2019) call gain equality. The usual utility, the change in the outcome, has <span class="math inline">\(u_h = 1\)</span>, <span class="math inline">\(u_d = -1\)</span> and <span class="math inline">\(u_a = u_n = 0\)</span>, the bracket is zero and <span class="math inline">\(W = p_1 - p_0 = 0.2\)</span>. Counting harm twice, <span class="math inline">\(u_d = -2\)</span>, the bracket is <span class="math inline">\(-1\)</span> and <span class="math inline">\(W = 0.2 - P(\text{hurt})\)</span>, anywhere from <span class="math inline">\(-0.2\)</span> to <span class="math inline">\(0.2\)</span>. The trial cannot say whether the program is good on balance. Ben-Michael, Imai and Jiang (2024) call such utilities asymmetric, with the Hippocratic “do no harm” as their example, and show that the expected utility they imply is in general not identified from data.</p>
+<p>A principle that counts harm done as worse than help withheld is a value judgment many people hold. It is also one a trial cannot evaluate on its own.</p>
+</section>
+<section id="unit-selection" class="level3">
+<h3 class="anchored" data-anchor-id="unit-selection">Unit selection</h3>
+<p>Suppose there is also an observational study of the same population, in which people chose for themselves: half took the program, 90% of those who took it did well, and 20% of those who declined did well. The 90 against 20 is not the effect of the program, since the people who chose it may differ from those who did not. It still tells us something. A hurt patient who took the program did badly, and a hurt patient who declined did well, so <span class="math display">\[
+P(\text{hurt}) \le P(\text{took, did badly}) + P(\text{declined, did well}) = 0.05 + 0.10 = 0.15 .
+\]</span> This is one term of the bound of Tian and Pearl (2000, equation 15) on the probability that the treatment is necessary and sufficient for the outcome, applied to the hurt; Li and Pearl (2019) use these bounds to choose whom to treat. It needs two things: the trial and the study describe the same people, and a person’s outcome under the choice they made is their outcome under that treatment. With the bound, helped is between 0.20 and 0.35, and counting harm twice <span class="math inline">\(W\)</span> is between <span class="math inline">\(0.05\)</span> and <span class="math inline">\(0.2\)</span>: the program is good on balance.</p>
+</section>
+<section id="narrowing-the-bounds" class="level3">
+<h3 class="anchored" data-anchor-id="narrowing-the-bounds">Narrowing the bounds</h3>
+<p>An assumption can: if nobody is hurt (<strong>monotonicity</strong>), then <span class="math inline">\(P(\text{helped}) = p_1 - p_0 = 0.2\)</span> exactly. So can a covariate. Split the patients into two equal groups, one going from 10% to 90% with the program and the other from 70% to 30%; overall it is still 40% to 60%. In the second group the program lowers the share doing well by 40 points, so at least 40% of that group are hurt, and at least 20% overall. Giving the program to the first group only would have 80% doing well.</p>
+</section>
+<section id="risk-or-benefit" class="level3">
+<h3 class="anchored" data-anchor-id="risk-or-benefit">Risk or benefit</h3>
+<p>Ranking patients by <strong>risk</strong>, how likely they are to do badly without the program, uses a conditional probability, which data on untreated patients can estimate. Ranking by <strong>benefit</strong> asks who would be helped, an effect of an intervention, which for any single person is never observed. The two can pick different people, and a rule that ranks by risk in the name of benefit is conditioning where the question is about intervening.</p>
+<p>The same holds for an A/B test of a chatbot feature that raises the share of users who finish a task from 40% to 60%. Some users may be worse off with the feature, and the test cannot say how many.</p>
+</section>
+</section>
+<section id="distributive-justice" class="level2">
+<h2 class="anchored" data-anchor-id="distributive-justice">Distributive justice</h2>
+<p>The reading’s supplement sets out the standard principles. In brief: welfare-based principles prefer the largest total (Lamont and Favor, 2017, section 5); prioritarianism counts a benefit more the worse off its recipient (Axelsen, 2025, section 6.1); the difference principle permits inequalities only when they work to the greatest benefit of the least advantaged (Lamont and Favor, 2017, section 3); sufficientarianism asks that everyone have enough (Axelsen, 2025, section 6.2); luck egalitarianism compensates brute luck and not choices (Lamont and Favor, 2017, section 4; the distinction between option and brute luck is in Lippert-Rasmussen, 2023, section 7). Desert looks back at work already done (Lamont and Favor, 2017, section 6). Merit, on the incentive view Sen (2000) describes, judges actions by the good they do for an objective someone chose, so rewarding merit is instrumental.</p>
+<p>The three rules for the three policies are the sum, a prioritarian sum and maximin. The care program shows what each needs to know. A sum of changes in outcomes needs only averages, which a trial supplies. A principle that gives priority to those the program harms, or that counts harm done more than help withheld, needs the share hurt, which no trial supplies.</p>
+</section>
+<section id="lenses" class="level2">
+<h2 class="anchored" data-anchor-id="lenses">Lenses</h2>
+<p><strong>Goal selection.</strong> What are we optimizing or predicting? Cost in place of need, reward in place of utility, a score in place of capability: an instrumental value optimized as an end.</p>
+<p><strong>Data selection.</strong> Who is in the data? The trial and the observational study narrow the share hurt only if they describe the same people.</p>
+<p><strong>Honest reporting.</strong> Which comparison gets reported? An average effect of 20 points is compatible with harming no one and with harming 40% of patients.</p>
+<p><strong>Justice.</strong> Who bears the error? The hurt, whom no trial counts.</p>
+<p><strong>Ownership.</strong> You have to choose, so choose, and defend it. The weights in a score, the rule across people, the utility of harm.</p>
+<p><strong>Leverage.</strong> What can be changed, and how? Ranking by risk conditions; ranking by benefit intervenes.</p>
+<p>And why? Who chose the weights, the rule across people, the probability model and the utility of harm, and could anyone they affect check them?</p>
+</section>
+<section id="readings" class="level2">
+<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<section id="required" class="level3">
+<h3 class="anchored" data-anchor-id="required">Required</h3>
+<ul>
+<li><a href="reading.html">Values, utility and probability</a>, the reading written for this week: the part headed “Reading”. The part headed “Supplemental”, on principles of distribution, is for reference.</li>
+</ul>
+</section>
+<section id="cited-in-the-text-and-not-assigned" class="level3">
+<h3 class="anchored" data-anchor-id="cited-in-the-text-and-not-assigned">Cited in the text and not assigned</h3>
+<ul>
+<li>Axelsen, <a href="https://plato.stanford.edu/entries/egalitarianism/">Egalitarianism</a>, <em>The Stanford Encyclopedia of Philosophy</em>, first published 12 March 2025: sections 6.1 and 6.2.</li>
+<li>Ben-Michael, Imai and Jiang, <a href="https://doi.org/10.1080/01621459.2023.2300507">Policy Learning with Asymmetric Counterfactual Utilities</a>, <em>Journal of the American Statistical Association</em> 119(548), 2024, 3045–3058.</li>
+<li>Briggs, <a href="https://plato.stanford.edu/entries/rationality-normative-utility/">Normative Theories of Rational Choice: Expected Utility</a>, <em>The Stanford Encyclopedia of Philosophy</em>, first published 8 August 2014, substantive revision 18 September 2023: sections 2.2 and 3.2.</li>
+<li>Ellsberg, <a href="https://doi.org/10.2307/1884324">Risk, Ambiguity, and the Savage Axioms</a>, <em>The Quarterly Journal of Economics</em> 75(4), 1961, 643–669, as Briggs presents it.</li>
+<li>Freeman, <a href="https://plato.stanford.edu/entries/original-position/">Original Position</a>, <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 December 2008, substantive revision 24 October 2023: section 6.2.</li>
+<li>Greaves and MacAskill, <a href="https://globalprioritiesinstitute.org/wp-content/uploads/The-Case-for-Strong-Longtermism-GPI-Working-Paper-June-2021-2-2.pdf">The Case for Strong Longtermism</a>, GPI Working Paper No.&nbsp;5-2021, Global Priorities Institute, University of Oxford, 2021: sections 3, 4.2, 4.3, 7 and 8.</li>
+<li>Harsanyi, <a href="https://doi.org/10.2307/1959090">Can the Maximin Principle Serve as a Basis for Morality? A Critique of John Rawls’s Theory</a>, <em>American Political Science Review</em> 69(2), 1975, 594–606, as Freeman presents it.</li>
+<li>Knight, <a href="https://www.econlib.org/library/Knight/knRUP.html">Risk, Uncertainty, and Profit</a>, Houghton Mifflin, 1921: part III, chapter VIII, paragraph 1.</li>
+<li>Lamont and Favor, <a href="https://plato.stanford.edu/entries/justice-distributive/">Distributive Justice</a>, <em>The Stanford Encyclopedia of Philosophy</em>, first published 22 September 1996, substantive revision 26 September 2017: sections 3 to 6.</li>
+<li>Li and Pearl, <a href="https://doi.org/10.24963/ijcai.2019/248">Unit Selection Based on Counterfactual Logic</a>, <em>Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence</em>, 2019, 1793–1799.</li>
+<li>Lippert-Rasmussen, <a href="https://plato.stanford.edu/entries/justice-bad-luck/">Justice and Bad Luck</a>, <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2005, substantive revision 2 February 2023: section 7.</li>
+<li>Mason, <a href="https://plato.stanford.edu/entries/value-pluralism/">Value Pluralism</a>, <em>The Stanford Encyclopedia of Philosophy</em>, first published 20 June 2006, substantive revision 4 June 2023: the introduction and sections 2.2 and 4.</li>
+<li>Obermeyer, Powers, Vogeli and Mullainathan, <a href="https://doi.org/10.1126/science.aax2342">Dissecting racial bias in an algorithm used to manage the health of populations</a>, <em>Science</em> 366(6464), 2019, 447–453.</li>
+<li>Rawls, <em>A Theory of Justice</em>, Harvard University Press, 1971, as Freeman presents it.</li>
+<li>Sen, Merit and Justice, in Arrow, Bowles and Durlauf (eds), <em>Meritocracy and Economic Inequality</em>, Princeton University Press, 2000, 5–16.</li>
+<li>Tian and Pearl, <a href="https://arxiv.org/abs/1301.3898">Probabilities of Causation: Bounds and Identification</a>, <em>Proceedings of the Sixteenth Conference on Uncertainty in Artificial Intelligence (UAI 2000)</em>, 589–598: equation (15).</li>
+<li>Von Neumann and Morgenstern, <em>Theory of Games and Economic Behavior</em>, 2nd ed., Princeton University Press, 1947, as Briggs presents it.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ethics4ds\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

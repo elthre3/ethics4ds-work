@@ -1,0 +1,533 @@
+---
+title: "Value pluralism, utility, and justice"
+author: "Joshua Loftus"
+format:
+  revealjs:
+    theme: [default, ../../theme/st313.scss]
+    slide-number: c/t
+    auto-stretch: false
+    filters: [../../_build_env/strip_notes.lua]
+    fig-width: 8
+    fig-height: 4.5
+    fig-align: center
+execute:
+  echo: false
+  message: false
+  warning: false
+knitr:
+  opts_chunk:
+    out.width: "100%"
+# ---- instructor-side front matter (CONTRACT.md), nested under st313: so that Quarto
+# ---- ignores it (Quarto reserves top-level keys such as `history`); stripped from output
+st313:
+  week: 10
+  session: lecture
+  register: 1
+  segments:                        # sums to 80, no slack; production 22 (28%). Plan: plans-2026-27/wk10-lecture.r2.md
+    - {label: "warm-up: the 9 -> 10 task restated; what did the rule rank on", minutes: 3, mode: production}
+    # part 1, what we value: 10
+    - {label: "intrinsic and instrumental value; the course's own pairs (cost and need, reward and utility, score and capability); Goodhart", minutes: 4, mode: exposition}
+    - {label: "sort seven things into valued for itself or for what it brings", minutes: 2, mode: production}
+    - {label: "monism and pluralism (Mason); rational regret; incommensurable is not incomparable", minutes: 4, mode: exposition}
+    # part 2, a score is an order: 6
+    - {label: "question before the idea: four patients, need and benefit; which pairs compare", minutes: 3, mode: production}
+    - {label: "dominance leaves two pairs open; a weighted score ranks them, its weights an exchange rate", minutes: 3, mode: exposition, results: [R70]}
+    # part 3, utility, risk and probability: 18
+    - {label: "question before the idea: three policies for three people; which is best, and what did you assume", minutes: 3, mode: production}
+    - {label: "the sum, the sum of square roots and the minimum pick T, M and P; no Pareto dominance", minutes: 3, mode: exposition, results: [R71]}
+    - {label: "expected utility: a sample space, a measure, a cardinal utility; the scale comes from lotteries (von Neumann and Morgenstern, via Briggs)", minutes: 2, mode: exposition, results: [R72]}
+    - {label: "the axioms of probability from the room; where does the measure come from", minutes: 2, mode: production}
+    - {label: "no sample space; no grounded measure (Ellsberg's urn); no expectation", minutes: 2, mode: exposition, results: [R72]}
+    - {label: "the veil: Harsanyi's equal chances against Rawls's maximin (Freeman)", minutes: 3, mode: exposition}
+    - {label: "longtermism and AI risk (Greaves and MacAskill); their replies; the Bayesian reply; one example of a general point", minutes: 3, mode: exposition}
+    # part 4, who is helped: 25
+    - {label: "question before the idea: a trial, 40% to 60%; what share did it help, could it have harmed anyone", minutes: 3, mode: production}
+    - {label: "two tables of response types with the same margins", minutes: 2, mode: exposition}
+    - {label: "the bounds; helped minus hurt is the average effect; a larger trial narrows nothing", minutes: 4, mode: exposition, results: [R73]}
+    - {label: "question before the idea: harm counted twice; good on balance", minutes: 2, mode: production}
+    - {label: "a utility per type; identified only when the bracket is zero (Li and Pearl); asymmetric utilities (Ben-Michael, Imai and Jiang)", minutes: 4, mode: exposition, results: [R74]}
+    - {label: "dark: unit selection with observational data; P(hurt) <= P(took, did badly) + P(declined, did well) (Tian and Pearl)", minutes: 5, mode: exposition, results: [R75]}
+    - {label: "dark: what else narrows it: no one hurt, or a covariate", minutes: 3, mode: exposition, results: [R76]}
+    - {label: "ranking by risk is conditioning, by benefit is intervening; an A/B test of a chatbot feature", minutes: 2, mode: exposition, retrieves: [S1]}
+    # part 5, distributive justice: 5
+    - {label: "principles of distribution side by side; desert and merit (Sen); luck egalitarianism recalled", minutes: 5, mode: exposition}
+    # close: 13
+    - {label: "recap: the course as value conflicts, lens by lens", minutes: 3, mode: exposition, retrieves: [S2, S4, S6]}
+    - {label: "course survey", minutes: 6, mode: production}
+    - {label: "alone, in writing: a rule for choosing who gets the program; the standing question", minutes: 4, mode: production, retrieves: [S6]}
+  history: []
+  complications: []
+  retrieves: [S1, S2, S4, S6]
+  lenses: [A, B, C, D, E, F]
+  readings: []
+  results: [R70, R71, R72, R73, R74, R75, R76]
+  assumes: [ST102]
+  figures: []
+# ---------------------------------------------------------------------------------
+---
+
+```{r setup}
+library(ggplot2)
+theme_set(theme_minimal(base_size = 18))
+set.seed(313)
+# cividis: navy, slate, gray, khaki, gold, yellow (viridisLite::cividis(9)[c(1, 3, 5, 6, 7, 9)])
+navy <- "#00204D"; slate <- "#414D6B"; cgray <- "#7C7B78"; khaki <- "#9B9477"; gold <- "#BCAF6F"; yellow <- "#FFEA46"
+
+# Four patients: need and benefit.
+pts <- data.frame(patient = c("1", "2", "3", "4"), need = c(0.8, 0.6, 0.4, 0.2), benefit = c(0.2, 0.2, 0.3, 0.1))
+score <- function(w) w * pts$need + (1 - w) * pts$benefit
+stopifnot(identical(order(-score(0.5)), c(1L, 2L, 3L, 4L)), identical(order(-score(0.1)), c(3L, 1L, 2L, 4L)))
+
+# Three policies for three people.
+pol <- list(P = c(4, 4, 4), M = c(9, 9, 1), T = c(25, 0, 0))
+stopifnot(sapply(pol, sum) == c(12, 19, 25), sapply(pol, \(v) sum(sqrt(v))) == c(6, 7, 5),
+          sapply(pol, min) == c(4, 1, 0), sapply(pol, \(v) v[1] + v[2] + 10 * v[3]) == c(48, 28, 25))
+
+# Response types. Trial: P(Y(0) = 1) = 0.4, P(Y(1) = 1) = 0.6.
+p0 <- 0.4; p1 <- 0.6
+stopifnot(all.equal(c(max(0, p1 - p0), min(p1, 1 - p0), max(0, p0 - p1), min(p0, 1 - p1)), c(0.2, 0.6, 0, 0.4)))
+# Observational study: half take the program; 90% of takers and 20% of decliners do well.
+obs <- c(took_well = 0.45, took_badly = 0.05, declined_well = 0.10, declined_badly = 0.40)
+stopifnot(all.equal(unname(obs["took_badly"] + obs["declined_well"]), 0.15),
+          all.equal(p1 - p0 - (2 - 1) * c(0.15, 0), c(0.05, 0.2)))
+# Two equal strata: 10% -> 90% and 70% -> 30%.
+stopifnot(all.equal(c(mean(c(0.1, 0.7)), mean(c(0.9, 0.3))), c(0.4, 0.6)),
+          all.equal(0.5 * max(0, 0.7 - 0.3), 0.2))
+```
+
+## {.inverse}
+
+::: {.notes}
+Deck estimate 80: this slide 1; warm-up 3; Part 1, 9; Part 2, 7; Part 3, 19; Part 4, 24; Part 5, 4; recap 3, survey 6, closing item 4. Dark = rush or skip.
+
+Questions before the reveal: the four patients; the three policies; who the program helped; harm counted twice.
+
+Cut order: (1) "Unit selection" (falls back to the trial alone; frees 5); (2) "Narrowing the bounds"; (3) "Longtermism" to its first line. Do not cut the survey, the closing item, or Part 4 up to "A utility for each type".
+
+Pace: 0:04 Part 1; 0:13 Part 2; 0:20 Part 3; 0:39 Part 4; 1:03 Part 5; 1:07 recap; 1:10 survey; 1:16 closing item; 1:20 end.
+:::
+
+### Week 10
+
+Part 1: Values
+
+Part 2: A score is an order
+
+Part 3: Utility, risk and probability
+
+Part 4: Who is helped
+
+Part 5: Distributive justice
+
+## Warm-up {minutes="3"}
+
+::: {.notes}
+QUESTION: what did your rule rank people on, and what did it leave out?
+
+Two or three from the room. Keep one that ranks by need and one that ranks by something else.
+:::
+
+You were asked to bring one case where something scarce went to some people and not others by a rule, a score or a queue, with what it ranked people on and who you think it ranked wrongly.
+
+::: {.ask}
+What did your rule rank people on? What did it leave out that someone else would have counted?
+:::
+
+# Part 1: Values
+
+## Intrinsic and instrumental value {minutes="1"}
+
+::: {.notes}
+Health is both. Ask for one more example of each from the room if time.
+:::
+
+- **Instrumental value**: valued for what it brings about. Money.
+- **Intrinsic value**: valued for its own sake. Happiness, health, dignity.
+
+One thing can be both: health is wanted for itself and for what it lets a person do.
+
+## The course's own pairs
+
+::: {.notes}
+Each pair: the left is instrumental, valued as a sign of the right. Goodhart: optimize the left as if it were the end.
+:::
+
+| Measured | Valued as a sign of |
+|:---|:---|
+| Health-care cost | Need |
+| Reward $R$ | Utility $U$ |
+| A benchmark score | Capability |
+| Engagement | A user who finds the service worth their time |
+
+When an instrumental value is pursued as if it were the end, it can come apart from what it was for (Goodhart).
+
+::: {.source}
+Cost and need: Obermeyer, Powers, Vogeli and Mullainathan (2019), "Dissecting racial bias in an algorithm used to manage the health of populations," *Science* 366(6464), 447--453, https://doi.org/10.1126/science.aax2342.
+:::
+
+## For itself, or for what it brings? {minutes="2"}
+
+::: {.notes}
+QUESTION: sort seven things into intrinsic or instrumental; where do you disagree?
+
+Two minutes in pairs. Collect the disagreements, not the agreements. Privacy and fairness usually split the room.
+:::
+
+::: {.ask}
+Accuracy, health, money, fairness, engagement, privacy, truth. Which are valued for themselves, and which for what they bring? Where do you and your neighbor disagree?
+:::
+
+## One value or many {minutes="3"}
+
+::: {.notes}
+Monist example: a utilitarian with well-being. Regret: the bed goes to the patient who benefits most; something of a different kind was given up.
+:::
+
+- **Monism**: one ultimate value, which every other serves. A utilitarian who counts only well-being.
+- **Pluralism**: several values, none reducible to another or to a single higher value.
+
+A correct choice can still leave regret: the last bed goes to the patient who will benefit most, and the patient who waited longest is turned away.
+
+. . .
+
+**Incommensurable**: no common unit. **Incomparable**: none of better, worse, equally good. The first does not imply the second.
+
+::: {.source}
+Mason (2023), "Value Pluralism," *The Stanford Encyclopedia of Philosophy*, substantive revision 4 June 2023, https://plato.stanford.edu/entries/value-pluralism/, the introduction and sections 2.2 and 4.
+:::
+
+# Part 2: A score is an order
+
+## Four patients {minutes="3"}
+
+::: {.notes}
+QUESTION: which pairs can be compared without choosing weights?
+
+Two minutes, alone. Answer on the next slide.
+:::
+
+| Patient | Need | Benefit from the program |
+|:---:|:---:|:---:|
+| 1 | 0.8 | 0.2 |
+| 2 | 0.6 | 0.2 |
+| 3 | 0.4 | 0.3 |
+| 4 | 0.2 | 0.1 |
+
+::: {.ask}
+Say one patient should come before another when they are at least as high on both. Which pairs can you order this way? Which can you not?
+:::
+
+## Weights are an exchange rate {minutes="3"}
+
+::: {.notes}
+Dominance orders 4 of the 6 pairs; 3 against 1 and 3 against 2 are open. Need weight above 1/3 puts 3 third; below 1/5 puts 3 first.
+:::
+
+```{r patients, fig.height=3.6, fig.alt="The four patients plotted with need on the horizontal axis and benefit on the vertical. Two lines pass through patient 3: with equal weights, patients 1 and 2 lie above the line; with weight 0.1 on need, both lie below it."}
+lines <- data.frame(w = c(0.5, 0.1), label = c("equal weights", "weight 0.1 on need"))
+lines$s3 <- lines$w * 0.4 + (1 - lines$w) * 0.3
+lines$intercept <- lines$s3 / (1 - lines$w); lines$slope <- -lines$w / (1 - lines$w)
+ggplot(pts, aes(need, benefit)) +
+  geom_abline(data = lines, aes(intercept = intercept, slope = slope, linetype = label), color = cgray) +
+  geom_point(size = 4, color = navy) +
+  geom_text(aes(label = patient), nudge_y = 0.03, size = 6) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 0.45)) +
+  labs(x = "Need", y = "Benefit", linetype = NULL) +
+  theme(legend.position = "bottom")
+```
+
+Dominance orders four of the six pairs. A score $w \cdot \text{need} + (1 - w) \cdot \text{benefit}$ orders the other two, and $w$ decides how: a point above the line through patient 3 ranks above patient 3. One unit of need is worth $w / (1 - w)$ units of benefit.
+
+# Part 3: Utility, risk and probability
+
+## Three policies {minutes="3"}
+
+::: {.notes}
+QUESTION: which policy is best, and what did you assume to say so?
+
+Two minutes, alone, then hands for P, M, T. Answer on the next slide.
+:::
+
+Units of a good, for three people:
+
+| Policy | Person 1 | Person 2 | Person 3 |
+|:---:|:---:|:---:|:---:|
+| P | 4 | 4 | 4 |
+| M | 9 | 9 | 1 |
+| T | 25 | 0 | 0 |
+
+::: {.ask}
+Which policy is best? What did you have to assume to say so?
+:::
+
+## Three answers {minutes="3"}
+
+::: {.notes}
+None is Pareto-better than another: each pair has someone who loses. Concave transform: priority to the worse off (or diminishing returns; the table cannot tell which).
+:::
+
+| | P | M | T | Picks |
+|:---|:---:|:---:|:---:|:---:|
+| Sum | 12 | 19 | 25 | T |
+| Sum of square roots | 6 | 7 | 5 | M |
+| Minimum | 4 | 1 | 0 | P |
+
+No policy is at least as good as another for every person. Each rule is a value: total good, priority to the worse off, the position of the worst off.
+
+## Expected utility {minutes="2"}
+
+::: {.notes}
+Halfway: B for sure against an even chance of A or C. The scale is defined by the probabilities.
+:::
+
+$$
+E_P\big[u(o(a, \omega))\big] = \sum_{\omega \in \Omega} P(\omega)\, u\big(o(a, \omega)\big)
+$$
+
+Needs a sample space $\Omega$, a probability measure $P$, and a utility $u$ whose differences mean something.
+
+In von Neumann and Morgenstern's theory the scale of $u$ is built from choices among lotteries whose probabilities are given, and it is unique up to $a u + c$, $a > 0$. A ranking of sure outcomes gives only an order.
+
+::: {.source}
+Briggs (2023), "Normative Theories of Rational Choice: Expected Utility," *The Stanford Encyclopedia of Philosophy*, substantive revision 18 September 2023, https://plato.stanford.edu/entries/rationality-normative-utility/, section 2.2. Von Neumann and Morgenstern (1947), *Theory of Games and Economic Behavior*, 2nd ed., Princeton University Press.
+:::
+
+## Where does $P$ come from? {minutes="2"}
+
+::: {.notes}
+QUESTION: the axioms of probability; and where does the measure come from in each case?
+
+From the room: nonnegative, total one, additive. Casino: symmetry. Trial: the coin. Veil and far future: next two slides.
+:::
+
+::: {.ask}
+What are the axioms a probability measure satisfies? Where does the measure come from in each case: a casino, a randomized trial, the veil of ignorance, the value of the far future?
+:::
+
+## Missing probabilities
+
+::: {.notes}
+Knight: risk is measurable uncertainty. The three labels are ours.
+:::
+
+1. **No sample space.** The outcomes cannot be listed, so $P(\Omega) = 1$ refers to nothing.
+2. **No grounded measure.** Ellsberg's urn: 30 red, 60 white or yellow in unknown proportion. Preferring red to white, and white-or-yellow to red-or-yellow, fits no single $P$.
+3. **No expectation.** Pay $2^k$ with probability $2^{-k}$: the expected payoff is $1 + 1 + \cdots$.
+
+::: {.source}
+Knight (1921), *Risk, Uncertainty, and Profit*, Houghton Mifflin, part III, chapter VIII, paragraph 1, https://www.econlib.org/library/Knight/knRUP.html. Ellsberg (1961), "Risk, Ambiguity, and the Savage Axioms," *The Quarterly Journal of Economics* 75(4), 643--669, https://doi.org/10.2307/1884324, as Briggs (2023), section 3.2, presents it.
+:::
+
+## Behind the veil {minutes="3"}
+
+::: {.notes}
+Average utility on the three policies picks T; maximin picks P. Rawls's conditions: no secure basis for probabilities; the guaranteed minimum acceptable; the alternatives risk unacceptable outcomes.
+:::
+
+Choose a policy without knowing which person you will be.
+
+- **Harsanyi**: give yourself an equal chance of being anyone, and maximize average utility.
+- **Rawls**: there is no basis, or only a very insecure one, for such probabilities, and the choice is grave and cannot be repeated; choose as if by maximin.
+
+The disagreement is over where the probabilities come from.
+
+::: {.source}
+Freeman (2023), "Original Position," *The Stanford Encyclopedia of Philosophy*, substantive revision 24 October 2023, https://plato.stanford.edu/entries/original-position/, section 6.2. Harsanyi (1975), "Can the Maximin Principle Serve as a Basis for Morality? A Critique of John Rawls's Theory," *American Political Science Review* 69(2), 594--606, https://doi.org/10.2307/1959090. Rawls (1971), *A Theory of Justice*, Harvard University Press.
+:::
+
+## Longtermism {minutes="3"}
+
+::: {.notes}
+Compress: "an expected-value case for the far future, decided by its least grounded number."
+One example of a general point, not singled out as a weak argument.
+:::
+
+Expected future beings: $10^{24}$ (restricted estimate $10^{14}$). Cutting extinction risk by $10^{-8}$ is worth $10^{14} \times 10^{-8} = 10^6$ lives. \$1 billion on AI safety, cutting existential risk by $10^{-5}$: a trillion lives per \$100.
+
+What is $\Omega$? What grounds $10^{-5}$? The authors reply on cluelessness, imprecise probabilities and fanaticism; a Bayesian replies that declining to state a probability does not avoid a choice.
+
+Every application of expected utility rests on a probability model, often under-specified, untested, and possibly unfalsifiable.
+
+::: {.source}
+Greaves and MacAskill (2021), "The Case for Strong Longtermism," GPI Working Paper No. 5-2021, Global Priorities Institute, University of Oxford, sections 3, 4.2, 4.3, 7 and 8, https://globalprioritiesinstitute.org/wp-content/uploads/The-Case-for-Strong-Longtermism-GPI-Working-Paper-June-2021-2-2.pdf.
+:::
+
+# Part 4: Who is helped
+
+## A trial {minutes="3"}
+
+::: {.notes}
+QUESTION: what share did the program help? Could it have harmed anyone?
+
+Two minutes, alone. Write a number or a range. Answer on the next two slides.
+:::
+
+A care program is tested in a randomized trial.
+
+- Without the program, 40% of patients do well.
+- With the program, 60% do well.
+
+::: {.ask}
+What share of patients did the program help? Could it have harmed anyone?
+:::
+
+## Four kinds of patient {minutes="2"}
+
+::: {.notes}
+Both tables give 40% and 60%. The trial sees only the margins.
+:::
+
+| | Does well without | Does well with | World 1 | World 2 |
+|:---|:---:|:---:|:---:|:---:|
+| Helped | no | yes | 20% | 60% |
+| Hurt | yes | no | 0% | 40% |
+| Well either way | yes | yes | 40% | 0% |
+| Badly either way | no | no | 40% | 0% |
+
+Both worlds give 40% without and 60% with.
+
+## Bounds {minutes="3"}
+
+::: {.notes}
+Derivation: Y(0) = 1 is well-either-way or hurt; Y(1) = 1 is well-either-way or helped. Subtract. The well-either-way share can be anything from 0 to 0.4.
+:::
+
+With $p_0 = P(Y(0) = 1)$ and $p_1 = P(Y(1) = 1)$:
+
+$$
+p_0 = P(\text{well either way}) + P(\text{hurt}), \qquad p_1 = P(\text{well either way}) + P(\text{helped})
+$$
+
+. . .
+
+So $P(\text{helped}) - P(\text{hurt}) = p_1 - p_0 = 0.2$ in every world, and
+
+$$
+0.2 \le P(\text{helped}) \le 0.6, \qquad 0 \le P(\text{hurt}) \le 0.4 .
+$$
+
+A larger trial pins down $p_0$ and $p_1$, and narrows nothing else.
+
+## Counting harm twice {minutes="2"}
+
+::: {.notes}
+QUESTION: if causing harm counts twice withholding a benefit, is the program good on balance?
+
+One minute, alone. Answer on the next slide.
+:::
+
+::: {.ask}
+Suppose harming a patient counts twice as much as failing to help one. Is giving the program to everyone good on balance?
+:::
+
+## A utility for each type {minutes="3"}
+
+::: {.notes}
+Harm twice: W = P(helped) - 2 P(hurt) = 0.2 - P(hurt), from -0.2 to 0.2. The trial settles W only when the bracket is zero, Li and Pearl's gain equality.
+:::
+
+Give each type a utility for being treated: $u_h$ helped, $u_d$ hurt, $u_a$ well either way, $u_n$ badly either way. Then
+
+$$
+W = u_h (p_1 - p_0) + u_a p_0 + u_n (1 - p_1) + P(\text{hurt}) \, (u_h + u_d - u_a - u_n).
+$$
+
+The trial settles $W$ only when the bracket is zero. Counting harm twice, $W = 0.2 - P(\text{hurt})$: anywhere from $-0.2$ to $0.2$.
+
+A "do no harm" utility is not identified from a trial.
+
+::: {.source}
+Li and Pearl (2019), "Unit Selection Based on Counterfactual Logic," *Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence*, 1793--1799, https://doi.org/10.24963/ijcai.2019/248. Ben-Michael, Imai and Jiang (2024), "Policy Learning with Asymmetric Counterfactual Utilities," *Journal of the American Statistical Association* 119(548), 3045--3058, https://doi.org/10.1080/01621459.2023.2300507.
+:::
+
+## Unit selection {.inverse minutes="5"}
+
+::: {.notes}
+Skip if behind: the trial alone leaves the harm question open.
+The observational 90 against 20 is confounded; it is used only through the two cells below.
+:::
+
+An observational study of the same population: half chose the program; 90% of those who took it did well, 20% of those who declined.
+
+A hurt patient who took it did badly; a hurt patient who declined did well. So
+
+$$
+P(\text{hurt}) \le P(\text{took, did badly}) + P(\text{declined, did well}) = 0.05 + 0.10 = 0.15 .
+$$
+
+Counting harm twice, $W$ is now between $0.05$ and $0.2$: good on balance. This needs the two studies to describe the same people.
+
+::: {.source}
+Tian and Pearl (2000), "Probabilities of Causation: Bounds and Identification," *Proceedings of the Sixteenth Conference on Uncertainty in Artificial Intelligence (UAI 2000)*, 589--598, https://arxiv.org/abs/1301.3898, equation (15); as used by Li and Pearl (2019).
+:::
+
+## Narrowing the bounds {.inverse minutes="3"}
+
+::: {.notes}
+Skip if behind.
+:::
+
+- **An assumption**: nobody is hurt. Then $P(\text{helped}) = 0.2$ exactly.
+- **A covariate**: two equal groups, one going from 10% to 90%, the other from 70% to 30%. Overall still 40% to 60%. In the second group at least 40% are hurt, so at least 20% overall.
+
+## Risk or benefit {minutes="2"}
+
+::: {.notes}
+Lens: Leverage. Risk is a conditional probability among the untreated; benefit is an effect of an intervention.
+:::
+
+- **Rank by risk**: who does badly without the program. A conditional probability.
+- **Rank by benefit**: who would be helped. An intervention, and for any one person never observed.
+
+A chatbot feature raises the share of users who finish a task from 40% to 60% in an A/B test. Some users may be worse off with it, and the test cannot say how many.
+
+# Part 5: Distributive justice
+
+## Principles of distribution {minutes="3"}
+
+::: {.notes}
+Luck egalitarianism recalled from causal fairness. Merit and desert: backward against forward.
+:::
+
+- **Welfare**: the largest total. **Priority**: benefits count more for the worse off. **Maximin**: the difference principle.
+- **Sufficiency**: enough for everyone. **Luck egalitarianism**: compensate brute luck, not choices.
+- **Desert**: for work already done. **Merit** (Sen): actions judged by the good they do for a chosen objective; rewarding it is instrumental.
+
+::: {.source}
+Lamont and Favor (2017), "Distributive Justice," *The Stanford Encyclopedia of Philosophy*, sections 3 to 6, https://plato.stanford.edu/entries/justice-distributive/. Axelsen (2025), "Egalitarianism," *The Stanford Encyclopedia of Philosophy*, sections 6.1 and 6.2, https://plato.stanford.edu/entries/egalitarianism/. Sen (2000), "Merit and Justice," in Arrow, Bowles and Durlauf (eds), *Meritocracy and Economic Inequality*, Princeton University Press, 5--16.
+:::
+
+## The course as value conflicts {minutes="3"}
+
+::: {.notes}
+One line per lens. Ask which conflict they would add.
+:::
+
+- **Goal selection.** What are we optimizing or predicting? Cost and need; engagement and an informed user; a score and capability.
+- **Data selection.** Who is in the data? The trial and the observational study, the same people or not.
+- **Honest reporting.** Which comparison gets reported? Novelty and truth.
+- **Justice.** Who bears the error? Accuracy and equal error rates; the hurt, whom no trial counts.
+- **Ownership.** You have to choose, so choose, and defend it. The weights, the welfare rule, the utility for harm.
+- **Leverage.** What can be changed, and how? Ranking by risk or by benefit.
+
+## Course survey {minutes="6"}
+
+::: {.notes}
+Link or QR code to be added by the convenor.
+:::
+
+Please take a few minutes now to fill in the course survey.
+
+## Your rule {minutes="4"}
+
+::: {.notes}
+QUESTION: a rule for 100 of 200; its values; who objects?
+
+Alone, in writing. Then the standing question.
+:::
+
+::: {.ask}
+A clinic can offer the program to 100 of its 200 patients. Write down a rule for choosing them, the value or values it serves, and one person who could object to it, and why.
+:::
+
+> **Who benefited from that choice being invisible? And would a more competent analyst have chosen differently?**
